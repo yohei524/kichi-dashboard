@@ -3,6 +3,7 @@ export interface DailyFortune {
   date: string;
   kanshi: string;      // 干支
   mainStar: string;    // 主星
+  bodyStar: string;    // 身星
   aspects: string[];   // 位相法
   isTenchu: boolean;   // 天中殺か
   advice: string;
@@ -72,11 +73,12 @@ export function getTodayFortune(): DailyFortune {
   if (month === 2 && day === 3) {
     return {
       date: '2/3',
-      kanshi: '甲辰',
-      mainStar: '天印星',
-      aspects: ['干合', '半会'],
+      kanshi: '戊申',
+      mainStar: '牽牛星',
+      bodyStar: '天極星',
+      aspects: ['日柱：干合', '月柱：半会'],
       isTenchu: false,
-      advice: '発信・告知に良い日。月天中殺前最後の日。準備完了したものを出せ。',
+      advice: '決断・契約に向く日（牽牛星）。エネルギー低め（天極星）だが月天中殺前最後の日。準備完了したものを出せ。',
       rating: 'good',
     };
   }
@@ -87,6 +89,7 @@ export function getTodayFortune(): DailyFortune {
       date: `2/${day}`,
       kanshi: '庚寅月',
       mainStar: '玉堂星',
+      bodyStar: '-',
       aspects: ['月天中殺'],
       isTenchu: true,
       advice: '新規立ち上げ禁止。継続活動のみ。学び・準備に集中。',
@@ -99,6 +102,7 @@ export function getTodayFortune(): DailyFortune {
     date: `${month}/${day}`,
     kanshi: '計算中',
     mainStar: '-',
+    bodyStar: '-',
     aspects: [],
     isTenchu: false,
     advice: '日運データを更新してください',

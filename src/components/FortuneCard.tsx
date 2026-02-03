@@ -6,8 +6,8 @@ export default function FortuneCard() {
   const today = getTodayFortune();
   const tenchuDays = getDaysUntilTenchuEnd();
 
-  // 現在の月運を取得
-  const currentMonth = monthlyFortunes[1]; // 2/4〜3/4
+  // 現在の月運を取得（2/3までは己丑月）
+  const currentMonth = monthlyFortunes[0]; // 1/5〜2/3
 
   const ratingColors = {
     excellent: 'text-emerald-400 bg-emerald-500/20',
@@ -42,7 +42,7 @@ export default function FortuneCard() {
             <span className="text-slate-400 text-sm">日運</span>
             <span className="font-mono text-lg">{today.date}</span>
           </div>
-          <div className="grid grid-cols-2 gap-2 text-sm mb-2">
+          <div className="grid grid-cols-3 gap-2 text-sm mb-2">
             <div>
               <span className="text-slate-500">干支:</span>
               <span className="ml-1">{today.kanshi}</span>
@@ -50,6 +50,10 @@ export default function FortuneCard() {
             <div>
               <span className="text-slate-500">主星:</span>
               <span className="ml-1">{today.mainStar}</span>
+            </div>
+            <div>
+              <span className="text-slate-500">身星:</span>
+              <span className="ml-1">{today.bodyStar}</span>
             </div>
           </div>
           <div className="flex flex-wrap gap-1 mb-2">
