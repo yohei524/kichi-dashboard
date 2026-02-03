@@ -1,71 +1,47 @@
 import FortuneCard from '@/components/FortuneCard';
-import ProjectCard from '@/components/ProjectCard';
 import TodoList from '@/components/TodoList';
-import FinanceCard from '@/components/FinanceCard';
-import { projects } from '@/data/projects';
 
 export default function Home() {
-  // プロジェクトを宿命適合度でソート
-  const sortedProjects = [...projects].sort((a, b) => {
-    const order = { good: 0, warning: 1, bad: 2 };
-    return order[a.fateMatch] - order[b.fateMatch];
-  });
-
-  // 発信中のプロジェクト
-  const broadcastingProjects = sortedProjects.filter(p => p.broadcasting);
-  // その他のプロジェクト
-  const otherProjects = sortedProjects.filter(p => !p.broadcasting);
-
   return (
-    <main className="min-h-screen p-4 md:p-8">
+    <main className="min-h-screen">
       {/* ヘッダー */}
-      <header className="mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold mb-2">
-          㐂 司令塔ダッシュボード
+      <header className="text-center py-8 px-4">
+        <p className="text-xs text-[#C4A574] tracking-widest mb-2">― Your Fortune Guide ―</p>
+        <h1 className="text-xl font-medium text-[#5C4A3A] mb-1">
+          㐂びの暦
         </h1>
-        <p className="text-slate-400 text-sm">
-          本当の目的: しんくん・たっくんと暮らす
+        <p className="text-xs text-[#8B7355]">
+          宿命のエネルギーを味方に
         </p>
       </header>
 
-      {/* 上部: 運気・TODO・資金 */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      {/* メインコンテンツ */}
+      <div className="max-w-md mx-auto px-4 pb-8 space-y-6">
+        {/* 運気カード */}
         <FortuneCard />
+
+        {/* 今日のお導き */}
         <TodoList />
-        <FinanceCard />
+
+        {/* 目標セクション */}
+        <div className="frame">
+          <p className="text-xs text-[#8B7355] text-center mb-3">あなたの願い</p>
+          <p className="text-center text-sm font-medium text-[#5C4A3A]">
+            しんくん・たっくんと暮らす
+          </p>
+          <div className="divider" />
+          <p className="text-xs text-[#8B7355] text-center leading-relaxed">
+            そのために、経済的に復活する。<br />
+            発信し続け、1対多で届ける。
+          </p>
+        </div>
       </div>
 
-      {/* プロジェクト一覧 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-          <span>📡</span>
-          <span>発信中プロジェクト</span>
-          <span className="badge badge-success">{broadcastingProjects.length}</span>
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {broadcastingProjects.map(project => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
-      </section>
-
-      <section>
-        <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-          <span>📁</span>
-          <span>その他のプロジェクト</span>
-          <span className="badge badge-info">{otherProjects.length}</span>
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {otherProjects.map(project => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
-      </section>
-
       {/* フッター */}
-      <footer className="mt-12 pt-4 border-t border-slate-700/50 text-center text-slate-500 text-sm">
-        <p>勝ち筋: 発信し続ける / 1対多 / CTAを出して待つ</p>
-        <p className="mt-1">負けパターン: 高単価1対1 / 発信を止める / 家にこもる</p>
+      <footer className="text-center py-6 border-t border-[#F5EDE4]">
+        <p className="text-xs text-[#C4A574]">
+          ― 運気の流れに乗り、㐂びの人生へ ―
+        </p>
       </footer>
     </main>
   );

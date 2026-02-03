@@ -3,56 +3,52 @@
 import { todayTodos, winPatterns, losePatterns } from '@/data/todos';
 
 export default function TodoList() {
-  const priorityColors = {
-    1: 'border-l-red-500 bg-red-500/5',
-    2: 'border-l-amber-500 bg-amber-500/5',
-    3: 'border-l-slate-500 bg-slate-500/5',
-  };
-
   return (
-    <div className="card">
+    <div className="card animate-fade-in">
       <div className="card-header">
-        <span>📋</span>
-        <span>今日やるべきこと</span>
+        <span className="text-[#C4A574]">◇</span>
+        <span>本日のお導き</span>
       </div>
 
-      <div className="space-y-2 mb-4">
-        {todayTodos.map((todo) => (
+      <div className="space-y-3 mb-6">
+        {todayTodos.map((todo, index) => (
           <div
             key={todo.id}
-            className={`border-l-4 ${priorityColors[todo.priority]} rounded-r p-3`}
+            className={`task-item ${todo.priority === 1 ? 'priority-high' : 'priority-normal'}`}
           >
-            <div className="flex items-start justify-between">
-              <span className="font-medium">{todo.task}</span>
+            <div className="flex items-start justify-between mb-1">
+              <span className="text-sm font-medium">{todo.task}</span>
               {todo.deadline && (
-                <span className="badge badge-danger text-xs">{todo.deadline}</span>
+                <span className="badge badge-warning text-xs">{todo.deadline}</span>
               )}
             </div>
-            <p className="text-xs text-slate-400 mt-1">{todo.reason}</p>
+            <p className="text-xs text-[#8B7355]">{todo.reason}</p>
           </div>
         ))}
       </div>
 
-      {/* 勝ちパターン・負けパターン */}
-      <div className="grid grid-cols-2 gap-3 mt-4 pt-4 border-t border-slate-700/50">
+      <div className="divider" />
+
+      {/* 心がけ */}
+      <div className="grid grid-cols-2 gap-4">
         <div>
-          <h4 className="text-xs text-emerald-400 font-medium mb-2">勝ちパターン</h4>
-          <ul className="space-y-1">
+          <p className="text-xs text-[#6B7A62] text-center mb-3">大切にすること</p>
+          <ul className="space-y-2">
             {winPatterns.slice(0, 3).map((pattern, i) => (
-              <li key={i} className="text-xs text-slate-400 flex items-center gap-1">
-                <span className="text-emerald-400">✓</span>
-                {pattern}
+              <li key={i} className="text-xs text-[#5C4A3A] flex items-start gap-2">
+                <span className="text-[#A8B5A0] mt-0.5">○</span>
+                <span>{pattern}</span>
               </li>
             ))}
           </ul>
         </div>
         <div>
-          <h4 className="text-xs text-red-400 font-medium mb-2">負けパターン</h4>
-          <ul className="space-y-1">
+          <p className="text-xs text-[#A67878] text-center mb-3">気をつけること</p>
+          <ul className="space-y-2">
             {losePatterns.slice(0, 3).map((pattern, i) => (
-              <li key={i} className="text-xs text-slate-400 flex items-center gap-1">
-                <span className="text-red-400">✕</span>
-                {pattern}
+              <li key={i} className="text-xs text-[#5C4A3A] flex items-start gap-2">
+                <span className="text-[#D4A5A5] mt-0.5">×</span>
+                <span>{pattern}</span>
               </li>
             ))}
           </ul>

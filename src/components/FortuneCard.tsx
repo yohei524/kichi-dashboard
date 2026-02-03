@@ -9,95 +9,105 @@ export default function FortuneCard() {
   // 現在の月運を取得（2/3までは己丑月）
   const currentMonth = monthlyFortunes[0]; // 1/5〜2/3
 
-  const ratingColors = {
-    excellent: 'text-emerald-400 bg-emerald-500/20',
-    good: 'text-blue-400 bg-blue-500/20',
-    neutral: 'text-slate-400 bg-slate-500/20',
-    caution: 'text-amber-400 bg-amber-500/20',
-    danger: 'text-red-400 bg-red-500/20',
+  const ratingLabels = {
+    excellent: '大吉',
+    good: '吉',
+    neutral: '平',
+    caution: '注意',
+    danger: '凶',
   };
 
-  const ratingLabels = {
-    excellent: '最高',
-    good: '良好',
-    neutral: '普通',
-    caution: '注意',
-    danger: '危険',
+  const ratingColors = {
+    excellent: 'text-[#6B7A62]',
+    good: 'text-[#6B7A62]',
+    neutral: 'text-[#8B7355]',
+    caution: 'text-[#A67878]',
+    danger: 'text-[#8B5A5A]',
   };
 
   return (
-    <div className="card">
-      <div className="card-header">
-        <span>📅</span>
-        <span>今日の運気</span>
-        <span className={`badge ${ratingColors[today.rating]}`}>
+    <div className="card animate-fade-in">
+      {/* 日付 */}
+      <div className="text-center mb-6">
+        <p className="text-xs text-[#8B7355] mb-1">令和八年</p>
+        <p className="date-display">
+          <span className="month">二月</span>
+          <span className="mx-2">三日</span>
+        </p>
+        <p className="text-sm text-[#8B7355] mt-1">{today.kanshi}</p>
+      </div>
+
+      <div className="divider" />
+
+      {/* 今日の運気 */}
+      <div className="text-center mb-6">
+        <p className="text-xs text-[#8B7355] mb-2">本日の運気</p>
+        <span className={`text-2xl font-medium ${ratingColors[today.rating]}`}>
           {ratingLabels[today.rating]}
         </span>
       </div>
 
-      <div className="space-y-4">
-        {/* 日運 */}
-        <div className="bg-slate-900/50 rounded-lg p-3">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-slate-400 text-sm">日運</span>
-            <span className="font-mono text-lg">{today.date}</span>
-          </div>
-          <div className="grid grid-cols-3 gap-2 text-sm mb-2">
-            <div>
-              <span className="text-slate-500">干支:</span>
-              <span className="ml-1">{today.kanshi}</span>
-            </div>
-            <div>
-              <span className="text-slate-500">主星:</span>
-              <span className="ml-1">{today.mainStar}</span>
-            </div>
-            <div>
-              <span className="text-slate-500">身星:</span>
-              <span className="ml-1">{today.bodyStar}</span>
-            </div>
-          </div>
-          <div className="flex flex-wrap gap-1 mb-2">
-            {today.aspects.map((aspect, i) => (
-              <span
-                key={i}
-                className={`badge ${today.isTenchu ? 'badge-danger' : 'badge-info'}`}
-              >
-                {aspect}
-              </span>
-            ))}
-          </div>
-          <p className="text-sm text-slate-300">{today.advice}</p>
+      {/* 星の情報 */}
+      <div className="grid grid-cols-2 gap-3 mb-4">
+        <div className="text-center p-3 bg-[#FDF8F3] rounded">
+          <p className="text-xs text-[#8B7355] mb-1">主星</p>
+          <p className="text-sm font-medium">{today.mainStar}</p>
         </div>
-
-        {/* 月運 */}
-        <div className="bg-slate-900/50 rounded-lg p-3">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-slate-400 text-sm">月運</span>
-            <span className="font-mono">{currentMonth.period}</span>
-          </div>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-slate-500 text-sm">主星:</span>
-            <span>{currentMonth.mainStar}</span>
-            {currentMonth.isTenchu && (
-              <span className="badge badge-danger">月天中殺</span>
-            )}
-          </div>
-          <p className="text-sm text-slate-300">{currentMonth.advice}</p>
+        <div className="text-center p-3 bg-[#FDF8F3] rounded">
+          <p className="text-xs text-[#8B7355] mb-1">身星</p>
+          <p className="text-sm font-medium">{today.bodyStar}</p>
         </div>
-
-        {/* 月天中殺カウントダウン */}
-        {tenchuDays > 0 && (
-          <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
-            <div className="flex items-center justify-between">
-              <span className="text-amber-400 text-sm">月天中殺終了まで</span>
-              <span className="text-2xl font-bold text-amber-400">{tenchuDays}日</span>
-            </div>
-            <p className="text-xs text-amber-300/70 mt-1">
-              新規事業立ち上げは4/5以降に
-            </p>
-          </div>
-        )}
       </div>
+
+      {/* 位相法 */}
+      <div className="flex flex-wrap justify-center gap-2 mb-4">
+        {today.aspects.map((aspect, i) => (
+          <span
+            key={i}
+            className={`badge ${today.isTenchu ? 'badge-danger' : 'badge-info'}`}
+          >
+            {aspect}
+          </span>
+        ))}
+      </div>
+
+      {/* メッセージ */}
+      <div className="message-box">
+        <p className="text-sm leading-relaxed pl-4">
+          {today.advice}
+        </p>
+      </div>
+
+      <div className="divider" />
+
+      {/* 月運 */}
+      <div className="mb-4">
+        <p className="text-xs text-[#8B7355] text-center mb-2">今月の流れ</p>
+        <div className="text-center">
+          <p className="text-sm mb-1">
+            <span className="text-[#8B7355]">{currentMonth.period}</span>
+            <span className="mx-2">|</span>
+            <span>{currentMonth.mainStar}</span>
+          </p>
+          {currentMonth.isTenchu && (
+            <span className="badge badge-danger">月天中殺</span>
+          )}
+        </div>
+        <p className="text-xs text-[#8B7355] text-center mt-2">
+          {currentMonth.advice}
+        </p>
+      </div>
+
+      {/* 月天中殺カウントダウン */}
+      {tenchuDays > 0 && (
+        <div className="bg-[#F0E0E0] border border-[#D4A5A5]/30 rounded p-4 text-center">
+          <p className="text-xs text-[#A67878] mb-1">月天中殺終了まで</p>
+          <p className="text-2xl font-light text-[#8B5A5A]">{tenchuDays}<span className="text-sm ml-1">日</span></p>
+          <p className="text-xs text-[#A67878] mt-1">
+            新しいことは四月五日から
+          </p>
+        </div>
+      )}
     </div>
   );
 }
