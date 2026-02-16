@@ -662,6 +662,40 @@ function getTodayFortune(m, d) {
 
 // ========== 描画 ==========
 
+function buildCalendarHTML(m, d) {
+  return dailyFortunes.map(function(f, i) {
+    var isToday = f.date === (m + '/' + d);
+    var cardClass = isToday ? 'today' : f.isTenchu ? 'tenchu' : f.eval === 'great' ? 'great-day' : '';
+    var evalClass = f.eval === 'great' ? 'eval-great' : f.eval === 'good' ? 'eval-good' : f.eval === 'warn' ? 'eval-warn' : 'eval-normal';
+    var aspectBadges = '';
+    if (f.aspects !== '-') {
+      aspectBadges = f.aspects.split('、').map(function(a) {
+        var cls = 'badge-info';
+        if (a.indexOf('天中殺') >= 0 || a.indexOf('天剋') >= 0 || a.indexOf('害') >= 0 || a.indexOf('対冲') >= 0 || a.indexOf('自刑') >= 0) cls = 'badge-danger';
+        else if (a.indexOf('干合') >= 0 || a.indexOf('支合') >= 0 || a.indexOf('半会') >= 0 || a.indexOf('大半会') >= 0) cls = 'badge-success';
+        return '<span class="badge ' + cls + '" style="font-size:0.625rem;padding:0.125rem 0.5rem">' + a + '</span>';
+      }).join('');
+    }
+    var html = '<div class="day-card ' + cardClass + '" onclick="toggleDay(' + i + ')" id="day-' + i + '">';
+    html += '<div class="day-summary"><div class="date-col">';
+    html += '<span class="date-text">' + f.date + (isToday ? ' 今日' : '') + '</span>';
+    html += '<span class="star-text">' + f.mainStar + '</span>';
+    if (f.isTenchu) html += '<span class="badge badge-danger" style="font-size:0.625rem;padding:0.125rem 0.5rem">天中殺</span>';
+    html += '</div><span class="eval-badge ' + evalClass + '">' + f.evalText + '</span></div>';
+    html += '<div class="day-detail" id="detail-' + i + '">';
+    html += '<div class="detail-section"><p class="detail-label">主星の意味</p><p class="detail-text">' + f.starAdvice + '</p></div>';
+    if (f.aspects !== '-') {
+      html += '<div class="detail-section"><p class="detail-label">位相法</p><div class="detail-aspects">' + aspectBadges + '</div>';
+      html += '<p class="detail-text" style="margin-top:0.25rem">' + f.aspectNote + '</p></div>';
+    }
+    if (f.isTenchu) html += '<div class="detail-section"><div class="detail-tenchu">' + f.warn + '</div></div>';
+    html += '<div class="detail-section"><p class="detail-label">おすすめの行動</p><div class="detail-recommend">' + f.recommend + '</div></div>';
+    if (!f.isTenchu && f.warn) html += '<div class="detail-section"><div class="detail-warn">' + f.warn + '</div></div>';
+    html += '</div></div>';
+    return html;
+  }).join('');
+}
+
 function render() {
   const { month: m, day: d } = getToday();
   const jpDate = getJapaneseDate(m, d);
@@ -797,53 +831,7 @@ function render() {
         <span>日運カレンダー</span>
         <span style="font-size:0.625rem;color:var(--color-brown);margin-left:auto">タップで詳細</span>
       </div>
-      ${dailyFortunes.map((f, i) => {
-        const isToday = f.date === \`\${m}/\${d}\`;
-        const cardClass = isToday ? 'today' : f.isTenchu ? 'tenchu' : f.eval === 'great' ? 'great-day' : '';
-        const evalClass = f.eval === 'great' ? 'eval-great' : f.eval === 'good' ? 'eval-good' : f.eval === 'warn' ? 'eval-warn' : 'eval-normal';
-        const evalLabels = { great: '◎', good: '○', normal: '△', warn: '⚠' };
-        return \`
-        <div class="day-card \${cardClass}" onclick="toggleDay(\${i})" id="day-\${i}">
-          <div class="day-summary">
-            <div class="date-col">
-              <span class="date-text">\${f.date}\${isToday ? ' 今日' : ''}</span>
-              <span class="star-text">\${f.mainStar}</span>
-              \${f.isTenchu ? '<span class="badge badge-danger" style="font-size:0.625rem;padding:0.125rem 0.5rem">天中殺</span>' : ''}
-            </div>
-            <span class="eval-badge \${evalClass}">\${f.evalText}</span>
-          </div>
-          <div class="day-detail" id="detail-\${i}"\>
-            <div class="detail-section">
-              <p class="detail-label">主星の意味</p>
-              <p class="detail-text">\${f.starAdvice}</p>
-            </div>
-            \${f.aspects !== '-' ? \`
-            <div class="detail-section">
-              <p class="detail-label">位相法</p>
-              <div class="detail-aspects">
-                \${f.aspects.split('、').map(a => \`<span class="badge \${a.includes('天中殺') || a.includes('天剋') || a.includes('害') || a.includes('対冲') || a.includes('自刑') ? 'badge-danger' : a.includes('干合') || a.includes('支合') || a.includes('半会') || a.includes('大半会') ? 'badge-success' : 'badge-info'}" style="font-size:0.625rem;padding:0.125rem 0.5rem">\${a}</span>\`).join('')}
-              </div>
-              <p class="detail-text" style="margin-top:0.25rem">\${f.aspectNote}</p>
-            </div>
-            \` : ''}
-            \${f.isTenchu ? \`
-            <div class="detail-section">
-              <div class="detail-tenchu">\${f.warn}</div>
-            </div>
-            \` : ''}
-            <div class="detail-section">
-              <p class="detail-label">おすすめの行動</p>
-              <div class="detail-recommend">\${f.recommend}</div>
-            </div>
-            \${!f.isTenchu && f.warn ? \`
-            <div class="detail-section">
-              <div class="detail-warn">\${f.warn}</div>
-            </div>
-            \` : ''}
-          </div>
-        </div>
-        \`;
-      }).join('')}
+      ${buildCalendarHTML(m, d)}
     </div>
 
     <!-- プロジェクト -->
