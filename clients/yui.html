@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>㐂びの暦 - 由依</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --color-cream: #FDF8F3;
+  --color-warm-white: #FFFBF7;
+  --color-beige: #F5EDE4;
+  --color-gold: #C4A574;
+  --color-gold-light: #D4BC94;
+  --color-brown: #8B7355;
+  --color-brown-dark: #5C4A3A;
+  --color-rose: #D4A5A5;
+  --color-rose-light: #F0E0E0;
+  --color-sage: #A8B5A0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Serif JP', serif;
+  background: linear-gradient(180deg, var(--color-warm-white) 0%, var(--color-cream) 100%);
+  color: var(--color-brown-dark);
+  min-height: 100vh;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+}
+
+.container { max-width: 28rem; margin: 0 auto; padding: 0 1rem 2rem; }
+
+header { text-align: center; padding: 2rem 1rem; }
+header .sub { font-size: 0.75rem; color: var(--color-gold); letter-spacing: 0.2em; margin-bottom: 0.5rem; }
+header h1 { font-size: 1.25rem; font-weight: 500; color: var(--color-brown-dark); margin-bottom: 0.25rem; }
+header .tagline { font-size: 0.75rem; color: var(--color-brown); }
+
+.card {
+  background: var(--color-warm-white);
+  border: 1px solid var(--color-beige);
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 12px rgba(139, 115, 85, 0.06);
+  margin-bottom: 1.5rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.card-header {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-brown);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-beige);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold-light), transparent);
+  margin: 1.5rem 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  border-radius: 100px;
+  font-weight: 400;
+}
+.badge-info { background: rgba(196, 165, 116, 0.15); color: var(--color-brown); border: 1px solid rgba(196, 165, 116, 0.3); }
+.badge-danger { background: rgba(180, 100, 100, 0.15); color: #8B5A5A; border: 1px solid rgba(180, 100, 100, 0.3); }
+.badge-warning { background: rgba(212, 165, 165, 0.2); color: #A67878; border: 1px solid rgba(212, 165, 165, 0.4); }
+.badge-success { background: rgba(168, 181, 160, 0.2); color: #6B7A62; border: 1px solid rgba(168, 181, 160, 0.4); }
+
+.message-box {
+  background: var(--color-cream);
+  border: 1px solid var(--color-beige);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  position: relative;
+}
+.message-box::before {
+  content: '\201C';
+  position: absolute;
+  top: -0.25rem;
+  left: 0.75rem;
+  font-size: 2rem;
+  color: var(--color-gold-light);
+  font-family: serif;
+}
+
+.task-item {
+  padding: 1rem;
+  background: var(--color-cream);
+  border-left: 3px solid var(--color-gold);
+  margin-bottom: 0.75rem;
+  border-radius: 0 4px 4px 0;
+}
+.task-item.priority-high { border-left-color: var(--color-rose); }
+.task-item.priority-normal { border-left-color: var(--color-sage); }
+
+.task-header { display: flex; align-items: start; justify-content: space-between; margin-bottom: 0.25rem; }
+.task-title { font-size: 0.875rem; font-weight: 500; }
+.task-reason { font-size: 0.75rem; color: var(--color-brown); }
+
+.star-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
+.star-box { text-align: center; padding: 0.75rem; background: var(--color-cream); border-radius: 4px; }
+.star-label { font-size: 0.75rem; color: var(--color-brown); margin-bottom: 0.25rem; }
+.star-value { font-size: 0.875rem; font-weight: 500; }
+
+.aspects { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-bottom: 1rem; }
+
+.tenchu-box {
+  background: var(--color-rose-light);
+  border: 1px solid rgba(212, 165, 165, 0.3);
+  border-radius: 4px;
+  padding: 1rem;
+  text-align: center;
+}
+.tenchu-label { font-size: 0.75rem; color: #A67878; margin-bottom: 0.25rem; }
+.tenchu-days { font-size: 2rem; font-weight: 300; color: #8B5A5A; }
+.tenchu-days span { font-size: 0.875rem; margin-left: 0.25rem; }
+.tenchu-note { font-size: 0.75rem; color: #A67878; margin-top: 0.25rem; }
+
+.patterns { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.pattern-title { font-size: 0.75rem; text-align: center; margin-bottom: 0.75rem; }
+.pattern-title.win { color: #6B7A62; }
+.pattern-title.lose { color: #A67878; }
+.pattern-list { list-style: none; }
+.pattern-list li { font-size: 0.75rem; color: var(--color-brown-dark); display: flex; align-items: start; gap: 0.5rem; margin-bottom: 0.5rem; }
+.dot-win { color: var(--color-sage); margin-top: 2px; }
+.dot-lose { color: var(--color-rose); margin-top: 2px; }
+
+.frame {
+  position: relative;
+  padding: 1.5rem;
+  background: var(--color-warm-white);
+  border: 1px solid var(--color-beige);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(139, 115, 85, 0.08);
+  margin-bottom: 1.5rem;
+}
+.frame::before {
+  content: '';
+  position: absolute;
+  top: 8px; left: 8px; right: 8px; bottom: 8px;
+  border: 1px solid var(--color-gold-light);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.meishiki-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-beige);
+}
+.meishiki-item:last-child { border-bottom: none; }
+.meishiki-label { font-size: 0.75rem; color: var(--color-brown); }
+.meishiki-value { font-size: 0.875rem; font-weight: 500; }
+
+.project-item {
+  padding: 1rem;
+  background: var(--color-cream);
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--color-beige);
+}
+.project-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+.project-name { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; font-weight: 500; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; }
+.status-dot.active { background: #6B7A62; }
+.status-dot.paused { background: var(--color-gold); }
+.project-status { font-size: 0.75rem; color: var(--color-brown); }
+.project-action { font-size: 0.75rem; color: var(--color-brown-dark); background: var(--color-warm-white); padding: 0.5rem; border-radius: 4px; }
+.project-action-label { font-size: 0.625rem; color: var(--color-brown); }
+.project-note { font-size: 0.75rem; color: var(--color-brown); margin-top: 0.5rem; }
+
+/* 日運カレンダー */
+.day-card {
+  border: 1px solid var(--color-beige);
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+.day-card:hover { box-shadow: 0 2px 8px rgba(139, 115, 85, 0.1); }
+.day-card.today { border-color: var(--color-gold); box-shadow: 0 2px 12px rgba(196, 165, 116, 0.2); }
+.day-card.tenchu { border-left: 3px solid #A67878; }
+.day-card.great-day { border-left: 3px solid #6B7A62; }
+
+.day-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: var(--color-cream);
+}
+.day-summary .date-col { display: flex; align-items: center; gap: 0.5rem; }
+.day-summary .date-text { font-size: 0.875rem; font-weight: 500; }
+.day-summary .star-text { font-size: 0.75rem; color: var(--color-brown); }
+.day-summary .eval-badge { font-size: 0.875rem; font-weight: 500; }
+
+.day-detail {
+  display: none;
+  padding: 1rem;
+  background: var(--color-warm-white);
+  border-top: 1px solid var(--color-beige);
+}
+.day-detail.open { display: block; }
+
+.detail-section { margin-bottom: 0.75rem; }
+.detail-section:last-child { margin-bottom: 0; }
+.detail-label { font-size: 0.625rem; color: var(--color-brown); letter-spacing: 0.1em; margin-bottom: 0.25rem; text-transform: uppercase; }
+.detail-text { font-size: 0.75rem; line-height: 1.7; color: var(--color-brown-dark); }
+.detail-recommend {
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: #6B7A62;
+  background: rgba(168, 181, 160, 0.1);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  border-left: 2px solid var(--color-sage);
+}
+.detail-warn {
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: #A67878;
+  background: rgba(212, 165, 165, 0.1);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  border-left: 2px solid var(--color-rose);
+}
+.detail-tenchu {
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: #8B5A5A;
+  background: rgba(180, 100, 100, 0.08);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  border-left: 2px solid #8B5A5A;
+}
+.detail-aspects { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.25rem; }
+
+.eval-good { color: #6B7A62; font-weight: 500; }
+.eval-great { color: #6B7A62; font-weight: 600; }
+.eval-warn { color: #A67878; font-weight: 500; }
+.eval-normal { color: var(--color-brown); }
+
+.text-center { text-align: center; }
+.text-xs { font-size: 0.75rem; }
+.text-sm { font-size: 0.875rem; }
+.text-2xl { font-size: 1.5rem; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.font-medium { font-weight: 500; }
+.font-light { font-weight: 300; }
+
+.date-display { font-size: 1.5rem; font-weight: 300; color: var(--color-brown-dark); letter-spacing: 0.1em; }
+.date-month { font-size: 0.875rem; color: var(--color-brown); }
+
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  border-top: 1px solid var(--color-beige);
+}
+footer p { font-size: 0.75rem; color: var(--color-gold); }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--color-cream); }
+::-webkit-scrollbar-thumb { background: var(--color-gold-light); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="sub">― Your Fortune Guide ―</p>
+  <h1>㐂びの暦</h1>
+  <p class="tagline">宿命のエネルギーを味方に</p>
+</header>
+
+<div class="container" id="app"></div>
+
+<footer>
+  <p>― 運気の流れに乗り、㐂びの人生へ ―</p>
+</footer>
+
+<script>
+// ========== 由依さんのデータ ==========
+
+const client = {
+  name: '由依',
+  dayStem: '丙',
+  dayStemReading: 'ひのえ',
+  element: '火（太陽）',
+  elementNote: '午前8〜10時の春の太陽。明るく照らし、人を惹きつける。六秀の干支＝才能の塊。自分のためではなく、世のため人のために動くことで真の幸せを手にする。',
+  tenchu: '子丑天中殺',
+  tenchuNote: '北方欠け。家庭や精神世界が不安定になりやすい。社会に出て輝くことで安定する',
+  mainStar: '車騎星',
+  mainStarNote: '一本気、反発、勝負運。型を習得するのが得意。素晴らしい恩師との出会いが鍵',
+  specialStructure: '丙辛干合',
+  specialNote: '美意識と実行力が合わさる時、本領発揮',
+};
+
+const monthlyFortunes = [
+  { period: '2/4〜3/4', kanshi: '庚寅', mainStar: '禄存星', aspects: '日柱：天剋地冲', isTenchu: false, advice: '月天中殺明け。エネルギーが戻る。ただし天剋地冲で衝突注意。ゆっくり立ち上がる月' },
+  { period: '3/5〜4/4', kanshi: '辛卯', mainStar: '司禄星', aspects: '日柱：害、年柱：対冲', isTenchu: false, advice: '堅実に準備する月。コツコツ積み上げる司禄星の力を使う。大きな決断は避ける' },
+  { period: '4/5〜5/4', kanshi: '壬辰', mainStar: '車騎星', aspects: '日柱：自刑', isTenchu: false, advice: '行動の月。車騎星（核の星）が巡り、本領発揮。ピラティスの集客を動かす時' },
+  { period: '5/5〜6/5', kanshi: '癸巳', mainStar: '牽牛星', aspects: '月柱：対冲', isTenchu: false, advice: '責任感の月。誰かのために動くと吉。人間関係の衝突に注意' },
+];
+
+// 日運データ（2/16〜3/31 全日分）
+// 各日に: 主星の意味 / 位相法の解説 / 天中殺の注意 / おすすめ行動
+const dailyFortunes = [
+  // --- 2月 ---
+  { date:'2/16', kanshi:'辛酉', mainStar:'司禄星', jyusei:'天極星', eval:'great', evalText:'◎', aspects:'日柱：干合・支合、年柱：自刑',
+    isTenchu: false,
+    starAdvice: '司禄星＝コツコツ積み上げる力。日常の延長にある堅実な行動が吉',
+    aspectNote: '干合＝結びつき・決断に向く。支合＝人との調和が取れる。自刑＝自分を責めすぎないこと',
+    recommend: '予約を入れる、契約する、人と約束する。今月ベストの行動日',
+    warn: '自刑あり。「もっとちゃんとしなきゃ」と追い込まないで' },
+  { date:'2/17', kanshi:'壬戌', mainStar:'車騎星', jyusei:'天庫星', eval:'warn', evalText:'⚠',  aspects:'日柱：天剋地冲、年柱：害',
+    isTenchu: false,
+    starAdvice: '車騎星＝行動力の星。でも今日は使う方向が逆に出やすい',
+    aspectNote: '天剋地冲＝天も地もぶつかる最強の衝突。害＝すれ違い。ダブルで要注意',
+    recommend: 'おとなしく過ごす。激しい運動や重い話し合いは避ける。体を休める日',
+    warn: 'ケンカ・事故に注意。イライラしても衝動的に動かない。明日には落ち着く' },
+  { date:'2/18', kanshi:'癸亥', mainStar:'牽牛星', jyusei:'天馳星', eval:'normal', evalText:'△', aspects:'月柱：自刑・律音',
+    isTenchu: false,
+    starAdvice: '牽牛星＝責任感・プライドの星。誰かのために動きたくなる日',
+    aspectNote: '律音＝原点回帰。今の自分の立ち位置を確認する日。自刑＝自分を追い込みすぎ注意',
+    recommend: '「なんのためにやってるんだっけ？」を思い出す日。初心に帰る。日記を書くのも◎',
+    warn: '天馳星（エネルギー1）の日。体力が底をつきやすい。無理しない' },
+  { date:'2/19', kanshi:'甲子', mainStar:'龍高星', jyusei:'天報星', eval:'warn', evalText:'⚠',  aspects:'天中殺、日柱：半会',
+    isTenchu: true,
+    starAdvice: '龍高星＝好奇心・アイデアの星。普段なら新しいことを始めたい日だが…',
+    aspectNote: '半会＝拡大のエネルギーがあるが、天中殺中なので空回りしやすい',
+    recommend: 'アイデアはメモだけして実行しない。インプット・調べ物に集中。いつも通り過ごす',
+    warn: '日天中殺（子の日）。新規の約束・契約はNG。中殺現象＝判断が狂いやすい。「いいかも」と思ったことほど危ない' },
+  { date:'2/20', kanshi:'乙丑', mainStar:'玉堂星', jyusei:'天印星', eval:'warn', evalText:'⚠',  aspects:'天中殺、年柱：半会',
+    isTenchu: true,
+    starAdvice: '玉堂星＝学びの星。天中殺中の学びは実はOK。知識を吸収する日',
+    aspectNote: '半会＝広がるエネルギー。天中殺×半会＝学びの範囲を広げるのは吉',
+    recommend: '本を読む、動画で勉強する、ピラティスの技術を復習する。インプットの日',
+    warn: '日天中殺（丑の日）。学ぶのはいいが、学んだことを即実行しない。温めておく' },
+  { date:'2/21', kanshi:'丙寅', mainStar:'貫索星', jyusei:'天貴星', eval:'good', evalText:'○', aspects:'月柱：支合',
+    isTenchu: false,
+    starAdvice: '貫索星＝自分らしさ・独立の星。マイペースでいい日',
+    aspectNote: '支合＝人との自然な調和。無理せず人と過ごせる',
+    recommend: '自分のペースで過ごす。やりたいことをやる。人と会うなら気の合う相手と',
+    warn: '' },
+  { date:'2/22', kanshi:'丁卯', mainStar:'石門星', jyusei:'天恍星', eval:'warn', evalText:'⚠',  aspects:'日柱：害、月柱：半会、年柱：天剋地冲',
+    isTenchu: false,
+    starAdvice: '石門星＝協調・仲間の星。人と関わりたくなるが、今日はトラブルになりやすい',
+    aspectNote: '害＝すれ違い。天剋地冲＝衝突。半会＝広がる。広がるエネルギーが衝突に使われる危険',
+    recommend: '大事な話し合いは別の日に。SNSの投稿も攻撃的にならないよう注意。穏やかに過ごす',
+    warn: '人間関係のトラブルが起きやすい日。言った一言が大きな問題になりがち。「今日は黙っとこ」が正解' },
+  { date:'2/23', kanshi:'戊辰', mainStar:'鳳閣星', jyusei:'天南星', eval:'normal', evalText:'△', aspects:'日柱：自刑、月柱：干合、年柱：干合・支合',
+    isTenchu: false,
+    starAdvice: '鳳閣星＝表現・食・楽しみの星。楽しむことで整う日',
+    aspectNote: '干合ダブル＝変化・結びつきの力が強い。自刑＝自分を追い込みがち',
+    recommend: '美味しいものを食べる。楽しいことをする。SNS投稿にも向く（鳳閣星＝伝達）',
+    warn: '自刑あり。「こんなことしてていいのかな」と罪悪感が出やすい。楽しんでOK' },
+  { date:'2/24', kanshi:'己巳', mainStar:'調舒星', jyusei:'天禄星', eval:'normal', evalText:'△', aspects:'月柱：天剋地冲、年柱：半会',
+    isTenchu: false,
+    starAdvice: '調舒星＝繊細・クリエイティブの星。感性が鋭くなるが精神的に揺れやすい',
+    aspectNote: '天剋地冲＝月柱との衝突で感情が不安定に。半会＝拡大するが方向が定まらない',
+    recommend: '一人の時間を大切に。日記を書く、音楽を聴く、アートに触れる。感性を満たす',
+    warn: '精神的に不安定になりやすい日。イライラしたら美味しいもの食べて（鳳閣星的ケア）' },
+  { date:'2/25', kanshi:'庚午', mainStar:'禄存星', jyusei:'天将星', eval:'good', evalText:'○', aspects:'-',
+    isTenchu: false,
+    starAdvice: '禄存星＝魅力・引力の星。人を惹きつける力がある日',
+    aspectNote: '位相なし＝穏やかな日。これが由依さんの素の状態',
+    recommend: '穏やかに過ごす。自然体でいるだけで魅力が出る日。人と会うのも◎',
+    warn: '' },
+  { date:'2/26', kanshi:'辛未', mainStar:'司禄星', jyusei:'天堂星', eval:'great', evalText:'◎', aspects:'日柱：干合、月柱：半会',
+    isTenchu: false,
+    starAdvice: '司禄星＝堅実・蓄積の星。コツコツやることが大きな成果に',
+    aspectNote: '干合＝決断に向く。半会＝拡大。決断したことが広がっていく最高の組み合わせ',
+    recommend: 'ピラティスの予約受付、Instagram投稿、告知。「やります」と宣言する日。2月後半のベスト日',
+    warn: '' },
+  { date:'2/27', kanshi:'壬申', mainStar:'車騎星', jyusei:'天胡星', eval:'normal', evalText:'△', aspects:'日柱：半会、月柱：害',
+    isTenchu: false,
+    starAdvice: '車騎星＝行動力・瞬発力の星。動きたくなるが害があるので摩擦も',
+    aspectNote: '半会＝拡大のエネルギー。害＝すれ違い。行動は吉だが人との調整は丁寧に',
+    recommend: '一人でできる作業に集中。人とのやり取りは翌日に回す',
+    warn: '害あり。「なんでわかってくれないの」が出やすい。相手も悪気はない' },
+  { date:'2/28', kanshi:'癸酉', mainStar:'牽牛星', jyusei:'天極星', eval:'normal', evalText:'△', aspects:'日柱：支合、年柱：自刑・律音',
+    isTenchu: false,
+    starAdvice: '牽牛星＝責任感の星。誰かの役に立ちたくなる日',
+    aspectNote: '支合＝調和。律音＝原点回帰。自刑＝自分を責める。調和と自責が同居する日',
+    recommend: '2月の振り返り。来月に向けて気持ちを整える。「よくやった」と自分を褒める',
+    warn: '天極星（エネルギー2）。体力注意。自刑あり。「まだ足りない」と思わなくていい' },
+  // --- 3月 ---
+  { date:'3/1', kanshi:'甲戌', mainStar:'龍高星', jyusei:'天庫星', eval:'warn', evalText:'⚠', aspects:'日柱：対冲、年柱：害',
+    isTenchu: false,
+    starAdvice: '龍高星＝アイデア・冒険の星。新しいことを試したくなるが…',
+    aspectNote: '対冲＝真正面からぶつかる。害＝すれ違い。ダブルで対人トラブル注意',
+    recommend: 'アイデアはメモだけ。実行は別の日に。一人で過ごすのが安全',
+    warn: '対冲＋害。人とぶつかりやすい日。特にパートナーとの口論に注意' },
+  { date:'3/2', kanshi:'乙亥', mainStar:'玉堂星', jyusei:'天馳星', eval:'normal', evalText:'△', aspects:'月柱：自刑',
+    isTenchu: false,
+    starAdvice: '玉堂星＝学びの星。知識を整理する日',
+    aspectNote: '自刑＝自分を追い込みやすい',
+    recommend: '勉強・リサーチに向く。ピラティスの技術を調べる。無理せずマイペースに',
+    warn: '天馳星（エネルギー1）。体力の底。早めに休む' },
+  { date:'3/3', kanshi:'丙子', mainStar:'貫索星', jyusei:'天報星', eval:'warn', evalText:'⚠', aspects:'天中殺、日柱：大半会',
+    isTenchu: true,
+    starAdvice: '貫索星＝自分らしさの星。天中殺中は自分が見えなくなりやすい',
+    aspectNote: '大半会＝大きな拡大のエネルギー。でも天中殺中なので拡大が裏目に出る',
+    recommend: '大きな決断はしない。いつも通り過ごす。「今日は守りの日」と決める',
+    warn: '日天中殺（子の日）。大半会の拡大エネルギーに釣られて大きなことを始めたくなるが、中殺現象で判断が狂う。我慢の日' },
+  { date:'3/4', kanshi:'丁丑', mainStar:'石門星', jyusei:'天印星', eval:'warn', evalText:'⚠', aspects:'天中殺、年柱：半会',
+    isTenchu: true,
+    starAdvice: '石門星＝協調の星。人と関わりたくなるが天中殺中は誤解が生じやすい',
+    aspectNote: '半会＝人間関係の広がり。天中殺×半会＝広がった先でトラブルが起きやすい',
+    recommend: 'いつもの人と、いつも通りに過ごす。新しい人間関係は作らない',
+    warn: '日天中殺（丑の日）。「この人いいかも」で始めた関係が後でこじれやすい。温かい飲み物飲んで落ち着く' },
+  { date:'3/5', kanshi:'戊寅', mainStar:'鳳閣星', jyusei:'天貴星', eval:'great', evalText:'◎', aspects:'月柱：干合・支合、年柱：干合',
+    isTenchu: false,
+    starAdvice: '鳳閣星＝表現・発信・食の星。伝えることに最高のエネルギー',
+    aspectNote: '干合ダブル＋支合＝結びつき・調和・変化。2〜3月で最強の日',
+    recommend: '告知する、投稿する、人に会う、新しいことを始める。★今月のベスト日★ ピラティスの集客アクションに最適',
+    warn: '' },
+  { date:'3/6', kanshi:'己卯', mainStar:'調舒星', jyusei:'天恍星', eval:'warn', evalText:'⚠', aspects:'日柱：害、月柱：半会、年柱：天剋地冲',
+    isTenchu: false,
+    starAdvice: '調舒星＝繊細・感性の星。感情が揺れやすい',
+    aspectNote: '害＋天剋地冲＝すれ違いと衝突。昨日のいい流れの反動が来やすい',
+    recommend: '昨日頑張った分、今日は休む。一人時間を確保。クリエイティブなことに没頭する',
+    warn: '人間関係のストレスが溜まりやすい。言葉が刺さりやすい日。距離を置くのが吉' },
+  { date:'3/7', kanshi:'庚辰', mainStar:'禄存星', jyusei:'天南星', eval:'normal', evalText:'△', aspects:'日柱：自刑、年柱：支合',
+    isTenchu: false,
+    starAdvice: '禄存星＝魅力の星。人を引き寄せる力がある',
+    aspectNote: '自刑＝自分を責めやすい。支合＝人との調和は取れる',
+    recommend: '人と穏やかに過ごす。自分を責めそうになったら「十分やってる」と声に出す',
+    warn: '自刑日。完璧じゃなくていい' },
+  { date:'3/8', kanshi:'辛巳', mainStar:'司禄星', jyusei:'天禄星', eval:'normal', evalText:'△', aspects:'日柱：干合、月柱：対冲、年柱：半会',
+    isTenchu: false,
+    starAdvice: '司禄星＝堅実の星。コツコツ作業に向く',
+    aspectNote: '干合＝決断力あり。対冲＝衝突。半会＝広がり。混在する日',
+    recommend: '一人でできる事務作業・準備作業に集中。人とのやり取りは穏やかに',
+    warn: '対冲あり。議論が白熱しやすい。「正しさ」より「穏やかさ」を優先' },
+  { date:'3/9', kanshi:'壬午', mainStar:'車騎星', jyusei:'天将星', eval:'good', evalText:'○', aspects:'-',
+    isTenchu: false,
+    starAdvice: '車騎星＝行動力の星。体を動かすと気持ちいい日',
+    aspectNote: '位相なし＝穏やかな日。純粋に車騎星のエネルギーを使える',
+    recommend: '運動する、外に出る、行動する。ピラティスの練習にも◎。体を動かして整う日',
+    warn: '' },
+  { date:'3/10', kanshi:'癸未', mainStar:'牽牛星', jyusei:'天堂星', eval:'great', evalText:'◎', aspects:'月柱：大半会',
+    isTenchu: false,
+    starAdvice: '牽牛星＝責任感・名誉の星。誰かのために全力で動ける日',
+    aspectNote: '大半会＝大きな拡大。牽牛星×大半会＝信頼を得て大きく広がる',
+    recommend: 'お客さんのため、誰かのために動く日。告知・発信にも◎。「あなたのために」が響く日',
+    warn: '' },
+  { date:'3/11', kanshi:'甲申', mainStar:'龍高星', jyusei:'天胡星', eval:'normal', evalText:'△', aspects:'日柱：半会、月柱：害',
+    isTenchu: false,
+    starAdvice: '龍高星＝好奇心の星。新しいものに目が行く',
+    aspectNote: '半会＝広がる。害＝すれ違い。広がりたいけど摩擦もある',
+    recommend: 'リサーチ、情報収集に向く。ただし即決はしない。一晩寝かせる',
+    warn: '害あり。衝動買い・衝動的な決断に注意' },
+  { date:'3/12', kanshi:'乙酉', mainStar:'玉堂星', jyusei:'天極星', eval:'good', evalText:'○', aspects:'日柱：支合、年柱：自刑',
+    isTenchu: false,
+    starAdvice: '玉堂星＝学びの星。知識が入りやすい日',
+    aspectNote: '支合＝調和。学んだことが自然に身につく',
+    recommend: 'ピラティスの勉強、資格の勉強、本を読む。先生に教わるのにも向く日',
+    warn: '天極星（エネルギー2）。体力注意。勉強は短時間集中で' },
+  { date:'3/13', kanshi:'丙戌', mainStar:'貫索星', jyusei:'天庫星', eval:'normal', evalText:'△', aspects:'日柱：納音、年柱：害',
+    isTenchu: false,
+    starAdvice: '貫索星＝自分らしさの星。自分のペースを大切に',
+    aspectNote: '納音＝終わりと始まり。害＝すれ違い',
+    recommend: '何かを整理する、片付ける。古いものを手放す日',
+    warn: '害あり。人間関係のすれ違いに注意だが、大きな問題にはなりにくい' },
+  { date:'3/14', kanshi:'丁亥', mainStar:'石門星', jyusei:'天馳星', eval:'normal', evalText:'△', aspects:'月柱：自刑',
+    isTenchu: false,
+    starAdvice: '石門星＝仲間・協調の星。誰かと一緒にいたくなる日',
+    aspectNote: '自刑＝自分を責めやすい',
+    recommend: '気の合う友達と過ごす。ぱやさんとお茶するのも◎。一人で考え込まない',
+    warn: '天馳星（エネルギー1）。体力底。人と過ごすなら座ってゆっくり系で' },
+  { date:'3/15', kanshi:'戊子', mainStar:'鳳閣星', jyusei:'天報星', eval:'warn', evalText:'⚠', aspects:'天中殺、日柱：半会、月柱：干合、年柱：干合',
+    isTenchu: true,
+    starAdvice: '鳳閣星＝表現の星。伝えたい気持ちが湧くが天中殺で空回りしやすい',
+    aspectNote: '干合ダブル＋半会で本来なら最高の日。しかし天中殺が全てを裏返す',
+    recommend: 'SNS投稿は下書きに留める。発信したくなっても一晩寝かせる。食べて整える',
+    warn: '日天中殺（子の日）。中殺現象＝「今日投稿したい！」の衝動が特に危険。エネルギーは高いが方向が狂う。確実に翌日以降に回す' },
+  { date:'3/16', kanshi:'己丑', mainStar:'調舒星', jyusei:'天印星', eval:'warn', evalText:'⚠', aspects:'天中殺、年柱：半会',
+    isTenchu: true,
+    starAdvice: '調舒星＝繊細の星。天中殺中は感情の波が大きくなる',
+    aspectNote: '半会＝広がるが天中殺で不安が広がる方向に使われやすい',
+    recommend: '一人でゆっくり過ごす。音楽・映画・アロマなど感覚を満たすことを。何も決めない',
+    warn: '日天中殺（丑の日）。精神的に揺れやすい。「ダメだ」と感じても運気のせい。明日には変わる' },
+  { date:'3/17', kanshi:'庚寅', mainStar:'禄存星', jyusei:'天貴星', eval:'good', evalText:'○', aspects:'月柱：支合',
+    isTenchu: false,
+    starAdvice: '禄存星＝魅力の星。天中殺明けで自然な魅力が戻る',
+    aspectNote: '支合＝人との調和。穏やかな人間関係が作れる',
+    recommend: '人に会う、連絡する。天中殺明けの回復日。自然体でいるだけで◎',
+    warn: '' },
+  { date:'3/18', kanshi:'辛卯', mainStar:'司禄星', jyusei:'天恍星', eval:'normal', evalText:'△', aspects:'日柱：干合・害、月柱：半会、年柱：対冲',
+    isTenchu: false,
+    starAdvice: '司禄星＝堅実の星。地道な作業に向く',
+    aspectNote: '干合＝決断力あるが害・対冲も。決めたことに横やりが入りやすい',
+    recommend: '一人で黙々と準備作業。人との調整ごとは避ける',
+    warn: '害＋対冲あり。決めたことに反対されても動揺しない。自分のペースで' },
+  { date:'3/19', kanshi:'壬辰', mainStar:'車騎星', jyusei:'天南星', eval:'normal', evalText:'△', aspects:'日柱：自刑、年柱：支合',
+    isTenchu: false,
+    starAdvice: '車騎星＝行動の星。体を動かしたくなる日',
+    aspectNote: '自刑＝自分を責めやすい。支合＝人との調和',
+    recommend: '運動・散歩・ピラティス練習。体を動かして気分転換',
+    warn: '自刑あり。「もっとできるはず」と追い込まないで。動けてるだけで◎' },
+  { date:'3/20', kanshi:'癸巳', mainStar:'牽牛星', jyusei:'天禄星', eval:'great', evalText:'◎', aspects:'月柱：納音、年柱：大半会',
+    isTenchu: false,
+    starAdvice: '牽牛星＝責任・名誉の星。信頼される日',
+    aspectNote: '大半会＝最大の拡大エネルギー。納音＝リセット＆再スタート。新しいステージの始まり',
+    recommend: '大きな告知、新メニュー発表、「やります宣言」に最適。★3月のベスト日の一つ★',
+    warn: '' },
+  { date:'3/21', kanshi:'甲午', mainStar:'龍高星', jyusei:'天将星', eval:'good', evalText:'○', aspects:'-',
+    isTenchu: false,
+    starAdvice: '龍高星＝好奇心・冒険の星。新しいことを始められる日',
+    aspectNote: '位相なし＝穏やか。龍高星のエネルギーを純粋に使える',
+    recommend: '新しいことを試す、行ったことない場所に行く、いつもと違うことをする',
+    warn: '' },
+  { date:'3/22', kanshi:'乙未', mainStar:'玉堂星', jyusei:'天堂星', eval:'good', evalText:'○', aspects:'月柱：半会',
+    isTenchu: false,
+    starAdvice: '玉堂星＝学びの星。知識がスッと入る日',
+    aspectNote: '半会＝広がり。学びの範囲を広げるのに向く',
+    recommend: '新しい分野を勉強する。ピラティス以外のボディワークを調べるのも◎',
+    warn: '' },
+  { date:'3/23', kanshi:'丙申', mainStar:'貫索星', jyusei:'天胡星', eval:'great', evalText:'◎', aspects:'日柱：大半会、月柱：害',
+    isTenchu: false,
+    starAdvice: '貫索星＝自分らしさの星。大半会で自分の世界が大きく広がる',
+    aspectNote: '大半会＝最大拡大。害＝一部すれ違い。広がりの方が圧倒的に強い',
+    recommend: '自分の名前で発信する、ブランディングに動く。「私はこういう人です」を出す日。★おすすめ日★',
+    warn: '害あり。一部の人には響かないかもしれないが、気にしない。多くの人に届く' },
+  { date:'3/24', kanshi:'丁酉', mainStar:'石門星', jyusei:'天極星', eval:'good', evalText:'○', aspects:'日柱：支合、年柱：自刑',
+    isTenchu: false,
+    starAdvice: '石門星＝仲間の星。人と協力すると成果が出る日',
+    aspectNote: '支合＝調和。人との関係がスムーズ',
+    recommend: '誰かと一緒に作業する、相談する、チームで動く。ぱやさんとの打ち合わせに◎',
+    warn: '天極星（エネルギー2）。体力注意。短時間で集中して済ませる' },
+  { date:'3/25', kanshi:'戊戌', mainStar:'鳳閣星', jyusei:'天庫星', eval:'warn', evalText:'⚠', aspects:'日柱：対冲、月柱：干合、年柱：干合・害',
+    isTenchu: false,
+    starAdvice: '鳳閣星＝表現の星。発信したくなるが対冲で裏目に出やすい',
+    aspectNote: '対冲＝正面衝突。干合＝変化。害＝すれ違い。激しいエネルギーの日',
+    recommend: 'おとなしく過ごす。発信は下書きに。美味しいもの食べて鳳閣星を満たす',
+    warn: '対冲＋害。SNSで炎上しやすいタイプの日。投稿は一晩寝かせる' },
+  { date:'3/26', kanshi:'己亥', mainStar:'調舒星', jyusei:'天馳星', eval:'normal', evalText:'△', aspects:'月柱：自刑',
+    isTenchu: false,
+    starAdvice: '調舒星＝繊細の星。感情が動きやすい',
+    aspectNote: '自刑＝自分を責める傾向',
+    recommend: '一人の時間を確保。創作活動に向く。日記、スケッチ、写真など',
+    warn: '天馳星（エネルギー1）。体力の底。早く寝る' },
+  { date:'3/27', kanshi:'庚子', mainStar:'禄存星', jyusei:'天報星', eval:'warn', evalText:'⚠', aspects:'天中殺、日柱：半会',
+    isTenchu: true,
+    starAdvice: '禄存星＝魅力の星。人を惹きつける力はあるが天中殺で空回り',
+    aspectNote: '半会＝広がるが天中殺で方向が狂う',
+    recommend: 'いつもの人と、いつも通りに。新しい出会いは避ける。おとなしく過ごす',
+    warn: '日天中殺（子の日）。「この人と繋がりたい」の直感が裏目に出やすい。新規の人間関係はNG' },
+  { date:'3/28', kanshi:'辛丑', mainStar:'司禄星', jyusei:'天印星', eval:'warn', evalText:'⚠', aspects:'天中殺、日柱：干合、年柱：半会',
+    isTenchu: true,
+    starAdvice: '司禄星＝堅実の星。天中殺中でもコツコツ作業はOK',
+    aspectNote: '干合＝本来なら決断に向くが天中殺で判断が狂う。半会＝広がりも裏目',
+    recommend: '家の片付け、書類整理など地味な作業。決断・契約は絶対にしない',
+    warn: '日天中殺（丑の日）。干合があるので「今決めたい」衝動が来るが我慢。明後日以降に' },
+  { date:'3/29', kanshi:'壬寅', mainStar:'車騎星', jyusei:'天貴星', eval:'good', evalText:'○', aspects:'月柱：支合',
+    isTenchu: false,
+    starAdvice: '車騎星＝行動の星。天中殺明けで行動力が戻る',
+    aspectNote: '支合＝人との調和。動いた先で人と繋がれる',
+    recommend: '天中殺明け。溜めていたことを実行に移す。外に出る、人に会う、動く',
+    warn: '' },
+  { date:'3/30', kanshi:'癸卯', mainStar:'牽牛星', jyusei:'天恍星', eval:'normal', evalText:'△', aspects:'日柱：害、月柱：大半会、年柱：納音',
+    isTenchu: false,
+    starAdvice: '牽牛星＝責任感の星。誰かのために動きたくなる',
+    aspectNote: '大半会＝大きな広がり。害＝すれ違い。納音＝リセット。複雑だが広がりが強い',
+    recommend: '大きな方向性は良い。ただし細部で行き違いが起きやすいので確認を丁寧に',
+    warn: '害あり。言ったことが相手に違う意味で伝わりやすい。大事なことはテキストで' },
+  { date:'3/31', kanshi:'甲辰', mainStar:'龍高星', jyusei:'天南星', eval:'normal', evalText:'△', aspects:'日柱：自刑、年柱：支合',
+    isTenchu: false,
+    starAdvice: '龍高星＝好奇心の星。4月に向けてアイデアが湧く日',
+    aspectNote: '自刑＝自分を追い込みやすい。支合＝人との調和',
+    recommend: '3月の振り返りと4月の計画を立てる。アイデアをメモする。来月に向けた種まき',
+    warn: '自刑あり。「3月何もできなかった」と責めない。準備した分は4月に花開く' },
+];
+
+const winPatterns = [
+  '人前に出る（太陽は照らしてこそ）',
+  '「型」を学ぶ（車騎星＝お手本があると強い）',
+  '忙しくする（天馳星＝多忙で安定）',
+  '世のため人のために動く',
+  '美味しいものを食べる（鳳閣星のストレス発散）',
+];
+
+const losePatterns = [
+  '家にこもる（太陽が隠れる）',
+  '自分の利益だけを追う',
+  '完璧を求めすぎる',
+  '暇にする（天馳星は止まると不安定に）',
+];
+
+const todos = [
+  { task: 'ぱやさんに連絡する', priority: 1, deadline: null, reason: '車騎星＝恩師との出会いが鍵。ぱやさんは今の恩師。繋がりを絶やさない' },
+  { task: 'ピラティスの写真を1枚撮る', priority: 2, deadline: null, reason: '丙＝太陽。見える場所に出ることで輝く。まず1枚から' },
+  { task: '美味しいものを食べる', priority: 2, deadline: null, reason: '鳳閣星（家庭・見守り星）のストレス発散法。食べることで整う' },
+];
+
+const projects = [
+  { name: 'ピラティス「天 -ten-」', status: 'active', nextAction: 'ぱやさんと空き時間の確認、集客方法の相談', note: 'フェーズ0：アロネイル内、家賃2万円。恵まれたスタート条件' },
+  { name: 'Instagram発信', status: 'paused', nextAction: '写真1枚撮影。完璧じゃなくていい', note: '太陽は照らしてこそ。まず出すこと' },
+];
+
+const goal = {
+  main: '山の上のリトリート',
+  sub: 'まずは石橋阪大前で始める。\n一歩ずつ、階段を昇るように。',
+};
+
+// ========== ロジック ==========
+
+function getToday() {
+  const now = new Date();
+  return { month: now.getMonth() + 1, day: now.getDate() };
+}
+
+function getJapaneseDate(m, d) {
+  const months = ['','一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+  const nums = {1:'一',2:'二',3:'三',4:'四',5:'五',6:'六',7:'七',8:'八',9:'九',10:'十',
+    11:'十一',12:'十二',13:'十三',14:'十四',15:'十五',16:'十六',17:'十七',18:'十八',19:'十九',20:'二十',
+    21:'二十一',22:'二十二',23:'二十三',24:'二十四',25:'二十五',26:'二十六',27:'二十七',28:'二十八',29:'二十九',30:'三十',31:'三十一'};
+  return { month: months[m], day: nums[d] + '日' };
+}
+
+function getCurrentMonthFortune(m, d) {
+  for (const f of monthlyFortunes) {
+    const match = f.period.match(/(\d+)\/(\d+)〜(\d+)\/(\d+)/);
+    if (!match) continue;
+    const [, sm, sd, em, ed] = match.map(Number);
+    const today = m * 100 + d;
+    if (today >= sm * 100 + sd && today <= em * 100 + ed) return f;
+  }
+  return monthlyFortunes[0];
+}
+
+function getTodayFortune(m, d) {
+  const key = `${m}/${d}`;
+  return dailyFortunes.find(f => f.date === key) || null;
+}
+
+// ========== 描画 ==========
+
+function render() {
+  const { month: m, day: d } = getToday();
+  const jpDate = getJapaneseDate(m, d);
+  const currentMonth = getCurrentMonthFortune(m, d);
+  const todayFortune = getTodayFortune(m, d);
+  const statusLabels = { active: '進行中', paused: '準備中' };
+
+  const app = document.getElementById('app');
+  app.innerHTML = `
+
+    <!-- 日付と命式 -->
+    <div class="card">
+      <div class="text-center mb-6">
+        <p class="text-xs" style="color:var(--color-brown)">令和八年</p>
+        <p class="date-display">
+          <span class="date-month">${jpDate.month}</span>
+          <span style="margin:0 0.5rem">${jpDate.day}</span>
+        </p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="card-header" style="border:none;padding-bottom:0">
+        <span style="color:var(--color-gold)">◇</span>
+        <span>${client.name}さんの宿命</span>
+      </div>
+
+      <div class="meishiki-item">
+        <span class="meishiki-label">日干</span>
+        <span class="meishiki-value">${client.dayStem}（${client.dayStemReading}）= ${client.element}</span>
+      </div>
+      <div class="meishiki-item">
+        <span class="meishiki-label">核の星</span>
+        <span class="meishiki-value">${client.mainStar}</span>
+      </div>
+      <div class="meishiki-item">
+        <span class="meishiki-label">天中殺</span>
+        <span class="meishiki-value">${client.tenchu}</span>
+      </div>
+
+      <div class="message-box" style="margin-top:1rem">
+        <p class="text-sm" style="padding-left:1rem;line-height:1.8">${client.elementNote}</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- 今日の日運 -->
+      ${todayFortune ? `
+      <div class="mb-4">
+        <p class="text-xs text-center mb-2" style="color:var(--color-brown)">今日の運気</p>
+        <div class="text-center mb-2">
+          <span class="text-2xl font-medium ${todayFortune.eval === 'great' ? 'eval-great' : todayFortune.eval === 'good' ? 'eval-good' : todayFortune.eval === 'warn' ? 'eval-warn' : 'eval-normal'}">${todayFortune.evalText}</span>
+        </div>
+        <div class="star-grid">
+          <div class="star-box">
+            <p class="star-label">主星</p>
+            <p class="star-value">${todayFortune.mainStar}</p>
+          </div>
+          <div class="star-box">
+            <p class="star-label">干支</p>
+            <p class="star-value">${todayFortune.kanshi}</p>
+          </div>
+        </div>
+        <div class="aspects">
+          ${todayFortune.aspects.split('、').map(a => `<span class="badge ${a.includes('天中殺') || a.includes('天剋') || a.includes('害') || a.includes('対冲') ? 'badge-danger' : a.includes('干合') || a.includes('支合') || a.includes('半会') || a.includes('大半会') ? 'badge-success' : 'badge-info'}">${a}</span>`).join('')}
+        </div>
+        <div class="message-box">
+          <p class="text-sm" style="padding-left:1rem;line-height:1.8">${todayFortune.note}</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      ` : ''}
+
+      <!-- 月運 -->
+      ${currentMonth ? `
+      <div class="mb-4">
+        <p class="text-xs text-center mb-2" style="color:var(--color-brown)">今月の流れ</p>
+        <div class="text-center">
+          <p class="text-sm mb-1">
+            <span style="color:var(--color-brown)">${currentMonth.period}</span>
+            <span style="margin:0 0.5rem">|</span>
+            <span>${currentMonth.mainStar}</span>
+          </p>
+          ${currentMonth.isTenchu ? '<span class="badge badge-danger">月天中殺</span>' : ''}
+        </div>
+        <p class="text-xs text-center mt-2" style="color:var(--color-brown)">${currentMonth.advice}</p>
+      </div>
+      ` : ''}
+    </div>
+
+    <!-- 本日のお導き -->
+    <div class="card">
+      <div class="card-header">
+        <span style="color:var(--color-gold)">◇</span>
+        <span>本日のお導き</span>
+      </div>
+
+      <div class="mb-6">
+        ${todos.map(t => `
+          <div class="task-item ${t.priority === 1 ? 'priority-high' : 'priority-normal'}">
+            <div class="task-header">
+              <span class="task-title">${t.task}</span>
+              ${t.deadline ? `<span class="badge badge-warning">${t.deadline}</span>` : ''}
+            </div>
+            <p class="task-reason">${t.reason}</p>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="patterns">
+        <div>
+          <p class="pattern-title win">大切にすること</p>
+          <ul class="pattern-list">
+            ${winPatterns.slice(0, 4).map(p => `<li><span class="dot-win">○</span><span>${p}</span></li>`).join('')}
+          </ul>
+        </div>
+        <div>
+          <p class="pattern-title lose">気をつけること</p>
+          <ul class="pattern-list">
+            ${losePatterns.map(p => `<li><span class="dot-lose">×</span><span>${p}</span></li>`).join('')}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 日運カレンダー -->
+    <div class="card">
+      <div class="card-header">
+        <span style="color:var(--color-gold)">◇</span>
+        <span>日運カレンダー</span>
+        <span style="font-size:0.625rem;color:var(--color-brown);margin-left:auto">タップで詳細</span>
+      </div>
+      ${dailyFortunes.map((f, i) => {
+        const isToday = f.date === \`\${m}/\${d}\`;
+        const cardClass = isToday ? 'today' : f.isTenchu ? 'tenchu' : f.eval === 'great' ? 'great-day' : '';
+        const evalClass = f.eval === 'great' ? 'eval-great' : f.eval === 'good' ? 'eval-good' : f.eval === 'warn' ? 'eval-warn' : 'eval-normal';
+        const evalLabels = { great: '◎', good: '○', normal: '△', warn: '⚠' };
+        return \`
+        <div class="day-card \${cardClass}" onclick="toggleDay(\${i})" id="day-\${i}">
+          <div class="day-summary">
+            <div class="date-col">
+              <span class="date-text">\${f.date}\${isToday ? ' 今日' : ''}</span>
+              <span class="star-text">\${f.mainStar}</span>
+              \${f.isTenchu ? '<span class="badge badge-danger" style="font-size:0.625rem;padding:0.125rem 0.5rem">天中殺</span>' : ''}
+            </div>
+            <span class="eval-badge \${evalClass}">\${f.evalText}</span>
+          </div>
+          <div class="day-detail" id="detail-\${i}"\>
+            <div class="detail-section">
+              <p class="detail-label">主星の意味</p>
+              <p class="detail-text">\${f.starAdvice}</p>
+            </div>
+            \${f.aspects !== '-' ? \`
+            <div class="detail-section">
+              <p class="detail-label">位相法</p>
+              <div class="detail-aspects">
+                \${f.aspects.split('、').map(a => \`<span class="badge \${a.includes('天中殺') || a.includes('天剋') || a.includes('害') || a.includes('対冲') || a.includes('自刑') ? 'badge-danger' : a.includes('干合') || a.includes('支合') || a.includes('半会') || a.includes('大半会') ? 'badge-success' : 'badge-info'}" style="font-size:0.625rem;padding:0.125rem 0.5rem">\${a}</span>\`).join('')}
+              </div>
+              <p class="detail-text" style="margin-top:0.25rem">\${f.aspectNote}</p>
+            </div>
+            \` : ''}
+            \${f.isTenchu ? \`
+            <div class="detail-section">
+              <div class="detail-tenchu">\${f.warn}</div>
+            </div>
+            \` : ''}
+            <div class="detail-section">
+              <p class="detail-label">おすすめの行動</p>
+              <div class="detail-recommend">\${f.recommend}</div>
+            </div>
+            \${!f.isTenchu && f.warn ? \`
+            <div class="detail-section">
+              <div class="detail-warn">\${f.warn}</div>
+            </div>
+            \` : ''}
+          </div>
+        </div>
+        \`;
+      }).join('')}
+    </div>
+
+    <!-- プロジェクト -->
+    <div class="card">
+      <div class="card-header">
+        <span style="color:var(--color-gold)">◇</span>
+        <span>プロジェクト</span>
+      </div>
+      ${projects.map(p => `
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-name">
+              <div class="status-dot ${p.status}"></div>
+              ${p.name}
+            </div>
+            <span class="project-status">${statusLabels[p.status]}</span>
+          </div>
+          <div class="project-action">
+            <p class="project-action-label">次のアクション</p>
+            <p>${p.nextAction}</p>
+          </div>
+          ${p.note ? `<p class="project-note">${p.note}</p>` : ''}
+        </div>
+      `).join('')}
+    </div>
+
+    <!-- 願い -->
+    <div class="frame">
+      <p class="text-xs text-center mb-3" style="color:var(--color-brown)">あなたの願い</p>
+      <p class="text-center text-sm font-medium" style="color:var(--color-brown-dark)">${goal.main}</p>
+      <div class="divider"></div>
+      <p class="text-xs text-center" style="color:var(--color-brown);line-height:1.8">
+        ${goal.sub.replace(/\n/g, '<br>')}
+      </p>
+    </div>
+  `;
+}
+
+render();
+
+// 今日のカードをデフォルトで開く
+const { month: tm, day: td } = getToday();
+const todayKey = `${tm}/${td}`;
+const todayIdx = dailyFortunes.findIndex(f => f.date === todayKey);
+if (todayIdx >= 0) {
+  const el = document.getElementById(`detail-${todayIdx}`);
+  if (el) el.classList.add('open');
+}
+
+function toggleDay(i) {
+  const el = document.getElementById(`detail-${i}`);
+  if (el) el.classList.toggle('open');
+}
+</script>
+</body>
+</html>

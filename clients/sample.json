@@ -1,0 +1,114 @@
+{
+  "client": {
+    "name": "田中さん",
+    "dayStem": "丙",
+    "dayStemReading": "ひのえ",
+    "element": "火",
+    "elementNote": "太陽。明るく照らす存在。人を惹きつけるカリスマ性",
+    "tenchu": "午未天中殺",
+    "tenchuNote": "家庭運天中殺。家庭より社会で輝く",
+    "specialStructure": "丙辛干合",
+    "specialNote": "美意識と実行力が合わさる時、本領発揮"
+  },
+  "goal": {
+    "main": "自分のサロンを持つ",
+    "sub": "そのために、まず集客の仕組みを作る。\nSNS発信を継続し、ファンを増やす。"
+  },
+  "winPatterns": [
+    "人前に出る（太陽は照らしてこそ）",
+    "明るく堂々と振る舞う",
+    "後輩や部下を育てる",
+    "大きなビジョンを語る"
+  ],
+  "losePatterns": [
+    "裏方に徹する",
+    "自信をなくして引きこもる",
+    "細かい事務作業ばかりやる",
+    "他人と自分を比べる"
+  ],
+  "monthlyFortunes": [
+    {
+      "period": "2/4〜3/4",
+      "kanshi": "庚寅",
+      "mainStar": "車騎星",
+      "aspects": "年柱：支合",
+      "isTenchu": false,
+      "advice": "行動力が高まる月。新しいことを始めるチャンス"
+    },
+    {
+      "period": "3/5〜4/4",
+      "kanshi": "辛卯",
+      "mainStar": "牽牛星",
+      "aspects": "月柱：半会",
+      "isTenchu": false,
+      "advice": "責任ある仕事に向く。決断の月"
+    },
+    {
+      "period": "4/5〜5/4",
+      "kanshi": "壬辰",
+      "mainStar": "龍高星",
+      "aspects": "日柱：害",
+      "isTenchu": false,
+      "advice": "アイデアは出るが人間関係に注意"
+    },
+    {
+      "period": "5/5〜6/5",
+      "kanshi": "癸巳",
+      "mainStar": "玉堂星",
+      "aspects": "年柱：干合",
+      "isTenchu": false,
+      "advice": "学びの月。資格取得や勉強に最適"
+    }
+  ],
+  "monthlyTenchuPeriod": null,
+  "todos": [
+    {
+      "task": "Instagram投稿（リール1本）",
+      "priority": 1,
+      "deadline": null,
+      "reason": "太陽は照らしてこそ。毎日の発信が集客の土台"
+    },
+    {
+      "task": "サロン物件リサーチ",
+      "priority": 2,
+      "deadline": null,
+      "reason": "ビジョンを具体化する。大きな絵を描く"
+    },
+    {
+      "task": "既存クライアントへのフォローDM",
+      "priority": 2,
+      "deadline": null,
+      "reason": "人を育てる・支える＝丙の本領"
+    }
+  ],
+  "finance": {
+    "showFinance": false
+  },
+  "projects": [
+    {
+      "name": "Instagram発信",
+      "status": "active",
+      "broadcasting": true,
+      "oneToMany": true,
+      "fateMatch": "good",
+      "nextAction": "リール投稿ルーティン化",
+      "note": "週3→毎日を目標"
+    },
+    {
+      "name": "サロン開業準備",
+      "status": "active",
+      "broadcasting": false,
+      "oneToMany": false,
+      "fateMatch": "good",
+      "nextAction": "物件調査・事業計画",
+      "note": "半年以内に目標"
+    }
+  ],
+  "design": {
+    "accentColor": "#C4A574",
+    "headerSub": "― Your Fortune Guide ―",
+    "headerTitle": "㐂びの暦",
+    "headerTagline": "宿命のエネルギーを味方に",
+    "footerText": "― 運気の流れに乗り、㐂びの人生へ ―"
+  }
+}
