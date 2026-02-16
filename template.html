@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>㐂びの暦</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --color-cream: #FDF8F3;
+  --color-warm-white: #FFFBF7;
+  --color-beige: #F5EDE4;
+  --color-gold: #C4A574;
+  --color-gold-light: #D4BC94;
+  --color-brown: #8B7355;
+  --color-brown-dark: #5C4A3A;
+  --color-rose: #D4A5A5;
+  --color-rose-light: #F0E0E0;
+  --color-sage: #A8B5A0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Serif JP', serif;
+  background: linear-gradient(180deg, var(--color-warm-white) 0%, var(--color-cream) 100%);
+  color: var(--color-brown-dark);
+  min-height: 100vh;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+}
+
+.container { max-width: 28rem; margin: 0 auto; padding: 0 1rem 2rem; }
+
+header { text-align: center; padding: 2rem 1rem; }
+header .sub { font-size: 0.75rem; color: var(--color-gold); letter-spacing: 0.2em; margin-bottom: 0.5rem; }
+header h1 { font-size: 1.25rem; font-weight: 500; color: var(--color-brown-dark); margin-bottom: 0.25rem; }
+header .tagline { font-size: 0.75rem; color: var(--color-brown); }
+
+.card {
+  background: var(--color-warm-white);
+  border: 1px solid var(--color-beige);
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 12px rgba(139, 115, 85, 0.06);
+  margin-bottom: 1.5rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.card-header {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-brown);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-beige);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold-light), transparent);
+  margin: 1.5rem 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  border-radius: 100px;
+  font-weight: 400;
+}
+.badge-info { background: rgba(196, 165, 116, 0.15); color: var(--color-brown); border: 1px solid rgba(196, 165, 116, 0.3); }
+.badge-danger { background: rgba(180, 100, 100, 0.15); color: #8B5A5A; border: 1px solid rgba(180, 100, 100, 0.3); }
+.badge-warning { background: rgba(212, 165, 165, 0.2); color: #A67878; border: 1px solid rgba(212, 165, 165, 0.4); }
+.badge-success { background: rgba(168, 181, 160, 0.2); color: #6B7A62; border: 1px solid rgba(168, 181, 160, 0.4); }
+
+.message-box {
+  background: var(--color-cream);
+  border: 1px solid var(--color-beige);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  position: relative;
+}
+.message-box::before {
+  content: '\201C';
+  position: absolute;
+  top: -0.25rem;
+  left: 0.75rem;
+  font-size: 2rem;
+  color: var(--color-gold-light);
+  font-family: serif;
+}
+
+.task-item {
+  padding: 1rem;
+  background: var(--color-cream);
+  border-left: 3px solid var(--color-gold);
+  margin-bottom: 0.75rem;
+  border-radius: 0 4px 4px 0;
+}
+.task-item.priority-high { border-left-color: var(--color-rose); }
+.task-item.priority-normal { border-left-color: var(--color-sage); }
+
+.task-header { display: flex; align-items: start; justify-content: space-between; margin-bottom: 0.25rem; }
+.task-title { font-size: 0.875rem; font-weight: 500; }
+.task-reason { font-size: 0.75rem; color: var(--color-brown); }
+
+.star-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
+.star-box { text-align: center; padding: 0.75rem; background: var(--color-cream); border-radius: 4px; }
+.star-label { font-size: 0.75rem; color: var(--color-brown); margin-bottom: 0.25rem; }
+.star-value { font-size: 0.875rem; font-weight: 500; }
+
+.aspects { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-bottom: 1rem; }
+
+.tenchu-box {
+  background: var(--color-rose-light);
+  border: 1px solid rgba(212, 165, 165, 0.3);
+  border-radius: 4px;
+  padding: 1rem;
+  text-align: center;
+}
+.tenchu-label { font-size: 0.75rem; color: #A67878; margin-bottom: 0.25rem; }
+.tenchu-days { font-size: 2rem; font-weight: 300; color: #8B5A5A; }
+.tenchu-days span { font-size: 0.875rem; margin-left: 0.25rem; }
+.tenchu-note { font-size: 0.75rem; color: #A67878; margin-top: 0.25rem; }
+
+.patterns { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.pattern-title { font-size: 0.75rem; text-align: center; margin-bottom: 0.75rem; }
+.pattern-title.win { color: #6B7A62; }
+.pattern-title.lose { color: #A67878; }
+.pattern-list { list-style: none; }
+.pattern-list li { font-size: 0.75rem; color: var(--color-brown-dark); display: flex; align-items: start; gap: 0.5rem; margin-bottom: 0.5rem; }
+.dot-win { color: var(--color-sage); margin-top: 2px; }
+.dot-lose { color: var(--color-rose); margin-top: 2px; }
+
+.frame {
+  position: relative;
+  padding: 1.5rem;
+  background: var(--color-warm-white);
+  border: 1px solid var(--color-beige);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(139, 115, 85, 0.08);
+  margin-bottom: 1.5rem;
+}
+.frame::before {
+  content: '';
+  position: absolute;
+  top: 8px; left: 8px; right: 8px; bottom: 8px;
+  border: 1px solid var(--color-gold-light);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+/* 命式カード */
+.meishiki-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-beige);
+}
+.meishiki-item:last-child { border-bottom: none; }
+.meishiki-label { font-size: 0.75rem; color: var(--color-brown); }
+.meishiki-value { font-size: 0.875rem; font-weight: 500; }
+
+/* Finance Card */
+.finance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
+.finance-box { padding: 0.75rem; border-radius: 4px; }
+.finance-box.income { background: rgba(168, 181, 160, 0.15); }
+.finance-box.expense { background: rgba(212, 165, 165, 0.15); }
+.finance-box .label { font-size: 0.75rem; }
+.finance-box.income .label { color: #6B7A62; }
+.finance-box.expense .label { color: #A67878; }
+.finance-box .amount { font-size: 1.125rem; font-weight: 500; }
+.finance-box.income .amount { color: #6B7A62; }
+.finance-box.expense .amount { color: #A67878; }
+.finance-box .sub { font-size: 0.75rem; color: var(--color-brown); }
+
+/* Project section */
+.project-item {
+  padding: 1rem;
+  background: var(--color-cream);
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--color-beige);
+}
+.project-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+.project-name { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; font-weight: 500; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; }
+.status-dot.active { background: #6B7A62; }
+.status-dot.paused { background: var(--color-gold); }
+.status-dot.completed { background: #7B9BC4; }
+.status-dot.blocked { background: #A67878; }
+.project-status { font-size: 0.75rem; color: var(--color-brown); }
+.project-badges { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-bottom: 0.5rem; }
+.project-badges .badge { font-size: 0.625rem; padding: 0.125rem 0.5rem; }
+.project-action { font-size: 0.75rem; color: var(--color-brown-dark); background: var(--color-warm-white); padding: 0.5rem; border-radius: 4px; }
+.project-action-label { font-size: 0.625rem; color: var(--color-brown); }
+.project-note { font-size: 0.75rem; color: var(--color-brown); margin-top: 0.5rem; }
+
+.text-center { text-align: center; }
+.text-xs { font-size: 0.75rem; }
+.text-sm { font-size: 0.875rem; }
+.text-2xl { font-size: 1.5rem; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.font-medium { font-weight: 500; }
+.font-light { font-weight: 300; }
+
+.date-display { font-size: 1.5rem; font-weight: 300; color: var(--color-brown-dark); letter-spacing: 0.1em; }
+.date-month { font-size: 0.875rem; color: var(--color-brown); }
+
+.rating-caution { color: #A67878; }
+.rating-good { color: #6B7A62; }
+.rating-neutral { color: var(--color-brown); }
+
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  border-top: 1px solid var(--color-beige);
+}
+footer p { font-size: 0.75rem; color: var(--color-gold); }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--color-cream); }
+::-webkit-scrollbar-thumb { background: var(--color-gold-light); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<header id="header"></header>
+<div class="container" id="app">
+  <p class="text-center text-sm" style="color:var(--color-brown);padding:2rem 0">データを読み込み中...</p>
+</div>
+<footer id="footer"></footer>
+
+<script>
+// ========== クライアントデータ（ここを差し替える） ==========
+// Vercelデプロイ時はfetchでJSONを読み込む形に変更可能
+const CLIENT_DATA = /*__CLIENT_DATA__*/
+{
+  "client": {
+    "name": "田中さん",
+    "dayStem": "丙",
+    "dayStemReading": "ひのえ",
+    "element": "火",
+    "elementNote": "太陽。明るく照らす存在。人を惹きつけるカリスマ性",
+    "tenchu": "午未天中殺",
+    "tenchuNote": "家庭運天中殺。家庭より社会で輝く",
+    "specialStructure": "丙辛干合",
+    "specialNote": "美意識と実行力が合わさる時、本領発揮"
+  },
+  "goal": {
+    "main": "自分のサロンを持つ",
+    "sub": "そのために、まず集客の仕組みを作る。\nSNS発信を継続し、ファンを増やす。"
+  },
+  "winPatterns": [
+    "人前に出る（太陽は照らしてこそ）",
+    "明るく堂々と振る舞う",
+    "後輩や部下を育てる",
+    "大きなビジョンを語る"
+  ],
+  "losePatterns": [
+    "裏方に徹する",
+    "自信をなくして引きこもる",
+    "細かい事務作業ばかりやる",
+    "他人と自分を比べる"
+  ],
+  "monthlyFortunes": [
+    {
+      "period": "2/4〜3/4",
+      "kanshi": "庚寅",
+      "mainStar": "車騎星",
+      "aspects": "年柱：支合",
+      "isTenchu": false,
+      "advice": "行動力が高まる月。新しいことを始めるチャンス"
+    },
+    {
+      "period": "3/5〜4/4",
+      "kanshi": "辛卯",
+      "mainStar": "牽牛星",
+      "aspects": "月柱：半会",
+      "isTenchu": false,
+      "advice": "責任ある仕事に向く。決断の月"
+    },
+    {
+      "period": "4/5〜5/4",
+      "kanshi": "壬辰",
+      "mainStar": "龍高星",
+      "aspects": "日柱：害",
+      "isTenchu": false,
+      "advice": "アイデアは出るが人間関係に注意"
+    },
+    {
+      "period": "5/5〜6/5",
+      "kanshi": "癸巳",
+      "mainStar": "玉堂星",
+      "aspects": "年柱：干合",
+      "isTenchu": false,
+      "advice": "学びの月。資格取得や勉強に最適"
+    }
+  ],
+  "monthlyTenchuPeriod": null,
+  "todos": [
+    {
+      "task": "Instagram投稿（リール1本）",
+      "priority": 1,
+      "deadline": null,
+      "reason": "太陽は照らしてこそ。毎日の発信が集客の土台"
+    },
+    {
+      "task": "サロン物件リサーチ",
+      "priority": 2,
+      "deadline": null,
+      "reason": "ビジョンを具体化する。大きな絵を描く"
+    },
+    {
+      "task": "既存クライアントへのフォローDM",
+      "priority": 2,
+      "deadline": null,
+      "reason": "人を育てる・支える＝丙の本領"
+    }
+  ],
+  "finance": {
+    "showFinance": false
+  },
+  "projects": [
+    {
+      "name": "Instagram発信",
+      "status": "active",
+      "broadcasting": true,
+      "oneToMany": true,
+      "fateMatch": "good",
+      "nextAction": "リール投稿ルーティン化",
+      "note": "週3→毎日を目標"
+    },
+    {
+      "name": "サロン開業準備",
+      "status": "active",
+      "broadcasting": false,
+      "oneToMany": false,
+      "fateMatch": "good",
+      "nextAction": "物件調査・事業計画",
+      "note": "半年以内に目標"
+    }
+  ],
+  "design": {
+    "accentColor": "#C4A574",
+    "headerSub": "― Your Fortune Guide ―",
+    "headerTitle": "㐂びの暦",
+    "headerTagline": "宿命のエネルギーを味方に",
+    "footerText": "― 運気の流れに乗り、㐂びの人生へ ―"
+  }
+}
+/*__END_CLIENT_DATA__*/;
+
+// ========== ロジック ==========
+
+const D = CLIENT_DATA;
+
+function getToday() {
+  const now = new Date();
+  return { month: now.getMonth() + 1, day: now.getDate(), year: now.getFullYear() };
+}
+
+function getJapaneseDate(m, d) {
+  const months = ['','一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+  const nums = {1:'一',2:'二',3:'三',4:'四',5:'五',6:'六',7:'七',8:'八',9:'九',10:'十',
+    11:'十一',12:'十二',13:'十三',14:'十四',15:'十五',16:'十六',17:'十七',18:'十八',19:'十九',20:'二十',
+    21:'二十一',22:'二十二',23:'二十三',24:'二十四',25:'二十五',26:'二十六',27:'二十七',28:'二十八',29:'二十九',30:'三十',31:'三十一'};
+  return { month: months[m], day: nums[d] + '日' };
+}
+
+function getCurrentMonthFortune(m, d) {
+  const forts = D.monthlyFortunes;
+  for (const f of forts) {
+    const match = f.period.match(/(\d+)\/(\d+)〜(\d+)\/(\d+)/);
+    if (!match) continue;
+    const [, sm, sd, em, ed] = match.map(Number);
+    const today = m * 100 + d;
+    const start = sm * 100 + sd;
+    const end = em * 100 + ed;
+    if (today >= start && today <= end) return f;
+  }
+  return forts[0] || null;
+}
+
+function isInTenchuPeriod(m, d) {
+  if (!D.monthlyTenchuPeriod) return false;
+  const { startMonth, startDay, endMonth, endDay } = D.monthlyTenchuPeriod;
+  const today = m * 100 + d;
+  const start = startMonth * 100 + startDay;
+  const end = endMonth * 100 + endDay;
+  return today >= start && today <= end;
+}
+
+function getDaysUntil(year, month, day) {
+  const now = new Date(); now.setHours(0,0,0,0);
+  const target = new Date(year, month - 1, day);
+  const diff = Math.ceil((target - now) / (1000*60*60*24));
+  return diff > 0 ? diff : 0;
+}
+
+// ========== 描画 ==========
+
+function render() {
+  const { month: m, day: d } = getToday();
+  const jpDate = getJapaneseDate(m, d);
+  const currentMonth = getCurrentMonthFortune(m, d);
+  const inTenchu = isInTenchuPeriod(m, d);
+  const statusLabels = { active: '進行中', paused: '保留', completed: '完了', blocked: '停滞' };
+
+  // ヘッダー
+  document.getElementById('header').innerHTML = `
+    <p class="sub">${D.design.headerSub}</p>
+    <h1>${D.design.headerTitle}</h1>
+    <p class="tagline">${D.design.headerTagline}</p>
+  `;
+
+  // フッター
+  document.getElementById('footer').innerHTML = `<p>${D.design.footerText}</p>`;
+
+  // メイン
+  const app = document.getElementById('app');
+  app.innerHTML = `
+
+    <!-- 日付と命式 -->
+    <div class="card">
+      <div class="text-center mb-6">
+        <p class="text-xs" style="color:var(--color-brown)">令和八年</p>
+        <p class="date-display">
+          <span class="date-month">${jpDate.month}</span>
+          <span style="margin:0 0.5rem">${jpDate.day}</span>
+        </p>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- 命式サマリー -->
+      <div class="card-header" style="border:none;padding-bottom:0">
+        <span style="color:var(--color-gold)">◇</span>
+        <span>${D.client.name}の宿命</span>
+      </div>
+
+      <div class="meishiki-item">
+        <span class="meishiki-label">日干</span>
+        <span class="meishiki-value">${D.client.dayStem}（${D.client.dayStemReading}）= ${D.client.element}</span>
+      </div>
+      <div class="meishiki-item">
+        <span class="meishiki-label">天中殺</span>
+        <span class="meishiki-value">${D.client.tenchu}</span>
+      </div>
+      ${D.client.specialStructure ? `
+      <div class="meishiki-item">
+        <span class="meishiki-label">特殊構造</span>
+        <span class="meishiki-value">${D.client.specialStructure}</span>
+      </div>
+      ` : ''}
+
+      <div class="message-box" style="margin-top:1rem">
+        <p class="text-sm" style="padding-left:1rem;line-height:1.8">${D.client.elementNote}</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- 月運 -->
+      ${currentMonth ? `
+      <div class="mb-4">
+        <p class="text-xs text-center mb-2" style="color:var(--color-brown)">今月の流れ</p>
+        <div class="text-center">
+          <p class="text-sm mb-1">
+            <span style="color:var(--color-brown)">${currentMonth.period}</span>
+            <span style="margin:0 0.5rem">|</span>
+            <span>${currentMonth.mainStar}</span>
+          </p>
+          ${currentMonth.isTenchu ? '<span class="badge badge-danger">月天中殺</span>' : ''}
+        </div>
+        <p class="text-xs text-center mt-2" style="color:var(--color-brown)">${currentMonth.advice}</p>
+      </div>
+      ` : ''}
+
+      ${inTenchu && D.monthlyTenchuPeriod ? `
+      <div class="tenchu-box">
+        <p class="tenchu-label">月天中殺終了まで</p>
+        <p class="tenchu-days">${getDaysUntil(D.monthlyTenchuPeriod.endYear, D.monthlyTenchuPeriod.endMonth, D.monthlyTenchuPeriod.endDay + 1)}<span>日</span></p>
+        <p class="tenchu-note">${D.monthlyTenchuPeriod.endMonth}月${D.monthlyTenchuPeriod.endDay + 1}日から動き出せる</p>
+      </div>
+      ` : ''}
+    </div>
+
+    <!-- 本日のお導き -->
+    <div class="card">
+      <div class="card-header">
+        <span style="color:var(--color-gold)">◇</span>
+        <span>本日のお導き</span>
+      </div>
+
+      <div class="mb-6">
+        ${D.todos.map(t => `
+          <div class="task-item ${t.priority === 1 ? 'priority-high' : 'priority-normal'}">
+            <div class="task-header">
+              <span class="task-title">${t.task}</span>
+              ${t.deadline ? `<span class="badge badge-warning">${t.deadline}</span>` : ''}
+            </div>
+            <p class="task-reason">${t.reason}</p>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="patterns">
+        <div>
+          <p class="pattern-title win">大切にすること</p>
+          <ul class="pattern-list">
+            ${D.winPatterns.slice(0, 4).map(p => `<li><span class="dot-win">○</span><span>${p}</span></li>`).join('')}
+          </ul>
+        </div>
+        <div>
+          <p class="pattern-title lose">気をつけること</p>
+          <ul class="pattern-list">
+            ${D.losePatterns.slice(0, 4).map(p => `<li><span class="dot-lose">×</span><span>${p}</span></li>`).join('')}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- プロジェクト -->
+    ${D.projects && D.projects.length > 0 ? `
+    <div class="card">
+      <div class="card-header">
+        <span style="color:var(--color-gold)">◇</span>
+        <span>プロジェクト状況</span>
+      </div>
+      ${D.projects.map(p => `
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-name">
+              <div class="status-dot ${p.status}"></div>
+              ${p.name}
+            </div>
+            <span class="project-status">${statusLabels[p.status]}</span>
+          </div>
+          <div class="project-badges">
+            ${p.broadcasting ? '<span class="badge badge-success">発信</span>' : ''}
+            ${p.oneToMany ? '<span class="badge badge-info">1対多</span>' : ''}
+          </div>
+          <div class="project-action">
+            <p class="project-action-label">次のアクション</p>
+            <p>${p.nextAction}</p>
+          </div>
+          ${p.note ? `<p class="project-note">${p.note}</p>` : ''}
+        </div>
+      `).join('')}
+    </div>
+    ` : ''}
+
+    <!-- 願い -->
+    <div class="frame">
+      <p class="text-xs text-center mb-3" style="color:var(--color-brown)">あなたの願い</p>
+      <p class="text-center text-sm font-medium" style="color:var(--color-brown-dark)">${D.goal.main}</p>
+      <div class="divider"></div>
+      <p class="text-xs text-center" style="color:var(--color-brown);line-height:1.8">
+        ${D.goal.sub.replace(/\n/g, '<br>')}
+      </p>
+    </div>
+  `;
+}
+
+render();
+</script>
+</body>
+</html>
