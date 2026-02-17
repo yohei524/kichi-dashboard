@@ -3,20 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>㐂びの暦 - 由依</title>
+<title>由依の暦</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --color-cream: #FDF8F3;
-  --color-warm-white: #FFFBF7;
-  --color-beige: #F5EDE4;
-  --color-gold: #C4A574;
-  --color-gold-light: #D4BC94;
-  --color-brown: #8B7355;
-  --color-brown-dark: #5C4A3A;
-  --color-rose: #D4A5A5;
-  --color-rose-light: #F0E0E0;
-  --color-sage: #A8B5A0;
+  --color-cream: #FAF7F5;
+  --color-warm-white: #FDFBF9;
+  --color-beige: #EDE6DF;
+  --color-gold: #B8A088;
+  --color-gold-light: #C8B8A4;
+  --color-brown: #7A6E62;
+  --color-brown-dark: #4A3F36;
+  --color-rose: #C9A0A0;
+  --color-rose-light: #F0E4E4;
+  --color-sage: #9AAF92;
+  /* 由依用の和色アクセント */
+  --color-fuji: #B8A0C8;       /* 藤色 */
+  --color-fuji-light: #D8CDE4; /* 薄藤 */
+  --color-sakura: #E8C4C4;     /* 桜鼠 */
+  --color-wakakusa: #A0B89A;   /* 若草色 */
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,7 +38,7 @@ body {
 .container { max-width: 28rem; margin: 0 auto; padding: 0 1rem 2rem; }
 
 header { text-align: center; padding: 2rem 1rem; }
-header .sub { font-size: 0.75rem; color: var(--color-gold); letter-spacing: 0.2em; margin-bottom: 0.5rem; }
+header .sub { font-size: 0.75rem; color: var(--color-fuji); letter-spacing: 0.2em; margin-bottom: 0.5rem; }
 header h1 { font-size: 1.25rem; font-weight: 500; color: var(--color-brown-dark); margin-bottom: 0.25rem; }
 header .tagline { font-size: 0.75rem; color: var(--color-brown); }
 
@@ -61,7 +66,7 @@ header .tagline { font-size: 0.75rem; color: var(--color-brown); }
 
 .divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-gold-light), transparent);
+  background: linear-gradient(90deg, transparent, var(--color-fuji-light), transparent);
   margin: 1.5rem 0;
 }
 
@@ -73,10 +78,10 @@ header .tagline { font-size: 0.75rem; color: var(--color-brown); }
   border-radius: 100px;
   font-weight: 400;
 }
-.badge-info { background: rgba(196, 165, 116, 0.15); color: var(--color-brown); border: 1px solid rgba(196, 165, 116, 0.3); }
+.badge-info { background: rgba(184, 160, 200, 0.15); color: var(--color-brown); border: 1px solid rgba(184, 160, 200, 0.3); }
 .badge-danger { background: rgba(180, 100, 100, 0.15); color: #8B5A5A; border: 1px solid rgba(180, 100, 100, 0.3); }
 .badge-warning { background: rgba(212, 165, 165, 0.2); color: #A67878; border: 1px solid rgba(212, 165, 165, 0.4); }
-.badge-success { background: rgba(168, 181, 160, 0.2); color: #6B7A62; border: 1px solid rgba(168, 181, 160, 0.4); }
+.badge-success { background: rgba(160, 184, 154, 0.2); color: #5C7A54; border: 1px solid rgba(160, 184, 154, 0.4); }
 
 .message-box {
   background: var(--color-cream);
@@ -91,25 +96,25 @@ header .tagline { font-size: 0.75rem; color: var(--color-brown); }
   top: -0.25rem;
   left: 0.75rem;
   font-size: 2rem;
-  color: var(--color-gold-light);
+  color: var(--color-fuji-light);
   font-family: serif;
 }
 
 .task-item {
   padding: 1rem;
   background: var(--color-cream);
-  border-left: 3px solid var(--color-gold);
+  border-left: 3px solid var(--color-fuji);
   margin-bottom: 0.75rem;
   border-radius: 0 4px 4px 0;
 }
-.task-item.priority-high { border-left-color: var(--color-rose); }
-.task-item.priority-normal { border-left-color: var(--color-sage); }
+.task-item.priority-high { border-left-color: var(--color-sakura); }
+.task-item.priority-normal { border-left-color: var(--color-wakakusa); }
 
 .task-header { display: flex; align-items: start; justify-content: space-between; margin-bottom: 0.25rem; }
 .task-title { font-size: 0.875rem; font-weight: 500; }
 .task-reason { font-size: 0.75rem; color: var(--color-brown); }
 
-.star-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
+.star-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
 .star-box { text-align: center; padding: 0.75rem; background: var(--color-cream); border-radius: 4px; }
 .star-label { font-size: 0.75rem; color: var(--color-brown); margin-bottom: 0.25rem; }
 .star-value { font-size: 0.875rem; font-weight: 500; }
@@ -130,12 +135,12 @@ header .tagline { font-size: 0.75rem; color: var(--color-brown); }
 
 .patterns { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .pattern-title { font-size: 0.75rem; text-align: center; margin-bottom: 0.75rem; }
-.pattern-title.win { color: #6B7A62; }
+.pattern-title.win { color: #5C7A54; }
 .pattern-title.lose { color: #A67878; }
 .pattern-list { list-style: none; }
 .pattern-list li { font-size: 0.75rem; color: var(--color-brown-dark); display: flex; align-items: start; gap: 0.5rem; margin-bottom: 0.5rem; }
-.dot-win { color: var(--color-sage); margin-top: 2px; }
-.dot-lose { color: var(--color-rose); margin-top: 2px; }
+.dot-win { color: var(--color-wakakusa); margin-top: 2px; }
+.dot-lose { color: var(--color-sakura); margin-top: 2px; }
 
 .frame {
   position: relative;
@@ -150,7 +155,7 @@ header .tagline { font-size: 0.75rem; color: var(--color-brown); }
   content: '';
   position: absolute;
   top: 8px; left: 8px; right: 8px; bottom: 8px;
-  border: 1px solid var(--color-gold-light);
+  border: 1px solid var(--color-fuji-light);
   border-radius: 2px;
   pointer-events: none;
 }
@@ -176,8 +181,8 @@ header .tagline { font-size: 0.75rem; color: var(--color-brown); }
 .project-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
 .project-name { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; font-weight: 500; }
 .status-dot { width: 8px; height: 8px; border-radius: 50%; }
-.status-dot.active { background: #6B7A62; }
-.status-dot.paused { background: var(--color-gold); }
+.status-dot.active { background: var(--color-wakakusa); }
+.status-dot.paused { background: var(--color-fuji); }
 .project-status { font-size: 0.75rem; color: var(--color-brown); }
 .project-action { font-size: 0.75rem; color: var(--color-brown-dark); background: var(--color-warm-white); padding: 0.5rem; border-radius: 4px; }
 .project-action-label { font-size: 0.625rem; color: var(--color-brown); }
@@ -193,9 +198,9 @@ header .tagline { font-size: 0.75rem; color: var(--color-brown); }
   transition: box-shadow 0.2s;
 }
 .day-card:hover { box-shadow: 0 2px 8px rgba(139, 115, 85, 0.1); }
-.day-card.today { border-color: var(--color-gold); box-shadow: 0 2px 12px rgba(196, 165, 116, 0.2); }
+.day-card.today { border-color: var(--color-fuji); box-shadow: 0 2px 12px rgba(184, 160, 200, 0.2); }
 .day-card.tenchu { border-left: 3px solid #A67878; }
-.day-card.great-day { border-left: 3px solid #6B7A62; }
+.day-card.great-day { border-left: 3px solid var(--color-wakakusa); }
 
 .day-summary {
   display: flex;
@@ -204,7 +209,7 @@ header .tagline { font-size: 0.75rem; color: var(--color-brown); }
   padding: 0.75rem 1rem;
   background: var(--color-cream);
 }
-.day-summary .date-col { display: flex; align-items: center; gap: 0.5rem; }
+.day-summary .date-col { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
 .day-summary .date-text { font-size: 0.875rem; font-weight: 500; }
 .day-summary .star-text { font-size: 0.75rem; color: var(--color-brown); }
 .day-summary .eval-badge { font-size: 0.875rem; font-weight: 500; }
@@ -224,11 +229,11 @@ header .tagline { font-size: 0.75rem; color: var(--color-brown); }
 .detail-recommend {
   font-size: 0.75rem;
   line-height: 1.7;
-  color: #6B7A62;
+  color: #5C7A54;
   background: rgba(168, 181, 160, 0.1);
   padding: 0.5rem 0.75rem;
   border-radius: 4px;
-  border-left: 2px solid var(--color-sage);
+  border-left: 2px solid var(--color-wakakusa);
 }
 .detail-warn {
   font-size: 0.75rem;
@@ -237,7 +242,7 @@ header .tagline { font-size: 0.75rem; color: var(--color-brown); }
   background: rgba(212, 165, 165, 0.1);
   padding: 0.5rem 0.75rem;
   border-radius: 4px;
-  border-left: 2px solid var(--color-rose);
+  border-left: 2px solid var(--color-sakura);
 }
 .detail-tenchu {
   font-size: 0.75rem;
@@ -250,8 +255,36 @@ header .tagline { font-size: 0.75rem; color: var(--color-brown); }
 }
 .detail-aspects { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.25rem; }
 
-.eval-good { color: #6B7A62; font-weight: 500; }
-.eval-great { color: #6B7A62; font-weight: 600; }
+/* 今日の運気カード強調 */
+.today-fortune-card {
+  background: linear-gradient(135deg, var(--color-warm-white) 0%, rgba(184, 160, 200, 0.06) 100%);
+  border: 1px solid var(--color-fuji-light);
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 16px rgba(184, 160, 200, 0.1);
+  margin-bottom: 1.5rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.today-advice {
+  font-size: 0.8rem;
+  line-height: 1.8;
+  color: var(--color-brown-dark);
+  padding: 0.75rem 1rem;
+  background: var(--color-cream);
+  border-radius: 4px;
+  border-left: 3px solid var(--color-fuji);
+}
+
+.jyusei-info {
+  font-size: 0.75rem;
+  color: var(--color-brown);
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.eval-good { color: #5C7A54; font-weight: 500; }
+.eval-great { color: #5C7A54; font-weight: 600; }
 .eval-warn { color: #A67878; font-weight: 500; }
 .eval-normal { color: var(--color-brown); }
 
@@ -277,7 +310,7 @@ footer {
   padding: 1.5rem;
   border-top: 1px solid var(--color-beige);
 }
-footer p { font-size: 0.75rem; color: var(--color-gold); }
+footer p { font-size: 0.75rem; color: var(--color-fuji); }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
@@ -286,27 +319,27 @@ footer p { font-size: 0.75rem; color: var(--color-gold); }
 
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--color-cream); }
-::-webkit-scrollbar-thumb { background: var(--color-gold-light); border-radius: 2px; }
+::-webkit-scrollbar-thumb { background: var(--color-fuji-light); border-radius: 2px; }
 </style>
 </head>
 <body>
 
 <header>
-  <p class="sub">― Your Fortune Guide ―</p>
-  <h1>㐂びの暦</h1>
-  <p class="tagline">宿命のエネルギーを味方に</p>
+  <p class="sub">― Yui Ozaki Fortune Guide ―</p>
+  <h1>由依の暦</h1>
+  <p class="tagline">生まれ持ったエネルギーで、毎日を心地よく</p>
 </header>
 
 <div class="container" id="app"></div>
 
 <footer>
-  <p>― 運気の流れに乗り、㐂びの人生へ ―</p>
+  <p>― 㐂びの暦 ―</p>
 </footer>
 
 <script>
 // ========== 由依さんのデータ ==========
 
-const client = {
+var client = {
   name: '由依',
   dayStem: '丙',
   dayStemReading: 'ひのえ',
@@ -320,16 +353,31 @@ const client = {
   specialNote: '美意識と実行力が合わさる時、本領発揮',
 };
 
-const monthlyFortunes = [
-  { period: '2/4〜3/4', kanshi: '庚寅', mainStar: '禄存星', aspects: '日柱：天剋地冲', isTenchu: false, advice: '月天中殺明け。エネルギーが戻る。ただし天剋地冲で衝突注意。ゆっくり立ち上がる月' },
-  { period: '3/5〜4/4', kanshi: '辛卯', mainStar: '司禄星', aspects: '日柱：害、年柱：対冲', isTenchu: false, advice: '堅実に準備する月。コツコツ積み上げる司禄星の力を使う。大きな決断は避ける' },
-  { period: '4/5〜5/4', kanshi: '壬辰', mainStar: '車騎星', aspects: '日柱：自刑', isTenchu: false, advice: '行動の月。車騎星（核の星）が巡り、本領発揮。ピラティスの集客を動かす時' },
+var monthlyFortunes = [
+  { period: '2/4〜3/4', kanshi: '庚寅', mainStar: '禄存星', aspects: '日柱：天剋地冲', isTenchu: false, advice: '月天中殺明け。エネルギーが戻ってくる月。ただし天剋地冲で衝突注意。焦らずゆっくり立ち上がる' },
+  { period: '3/5〜4/4', kanshi: '辛卯', mainStar: '司禄星', aspects: '日柱：害、年柱：対冲', isTenchu: false, advice: '堅実に準備する月。コツコツ積み上げる。大きな決断は避け、地盤を固める' },
+  { period: '4/5〜5/4', kanshi: '壬辰', mainStar: '車騎星', aspects: '日柱：自刑', isTenchu: false, advice: '行動の月。核の星・車騎星が巡り、本領発揮。ピラティスの集客を動かす時' },
   { period: '5/5〜6/5', kanshi: '癸巳', mainStar: '牽牛星', aspects: '月柱：対冲', isTenchu: false, advice: '責任感の月。誰かのために動くと吉。人間関係の衝突に注意' },
 ];
 
+// 従星の説明マップ
+var jyuseiDescriptions = {
+  '天報星': 'エネルギー3。変化の星。多芸多才だが飽きっぽい面も。いろいろ試す日',
+  '天印星': 'エネルギー6。赤ちゃんの星。素直さ・可愛げが武器。甘えていい日',
+  '天貴星': 'エネルギー9。品格の星。プライドを大切に。きちんとした場所が似合う日',
+  '天恍星': 'エネルギー7。青春の星。夢見がち、ロマンチック。直感を信じていい日',
+  '天南星': 'エネルギー10。情熱の星。エネルギー満タン。ガンガン動ける日',
+  '天禄星': 'エネルギー11。安定の星。現実的な判断ができる日。堅実に動くと吉',
+  '天将星': 'エネルギー12。最強の星。リーダーシップ全開。大きな決断に向く日',
+  '天堂星': 'エネルギー8。老人の星。落ち着いて物事を見れる日。経験者のアドバイスが活きる',
+  '天胡星': 'エネルギー4。霊感の星。感性が鋭くなる日。芸術・美に触れると吉',
+  '天極星': 'エネルギー2。死の星（悪い意味ではない）。体力注意。無理せず省エネで',
+  '天庫星': 'エネルギー5。入墓の星。片付け・整理に向く日。コレクション運あり',
+  '天馳星': 'エネルギー1。あの世の星。体力の底。スピリチュアルな感性が高まる。早く寝る',
+};
+
 // 日運データ（2/16〜3/31 全日分）
-// 各日に: 主星の意味 / 位相法の解説 / 天中殺の注意 / おすすめ行動
-const dailyFortunes = [
+var dailyFortunes = [
   // --- 2月 ---
   { date:'2/16', kanshi:'辛酉', mainStar:'司禄星', jyusei:'天極星', eval:'great', evalText:'◎', aspects:'日柱：干合・支合、年柱：自刑',
     isTenchu: false,
@@ -354,7 +402,7 @@ const dailyFortunes = [
     starAdvice: '龍高星＝好奇心・アイデアの星。普段なら新しいことを始めたい日だが…',
     aspectNote: '半会＝拡大のエネルギーがあるが、天中殺中なので空回りしやすい',
     recommend: 'アイデアはメモだけして実行しない。インプット・調べ物に集中。いつも通り過ごす',
-    warn: '日天中殺（子の日）。新規の約束・契約はNG。中殺現象＝判断が狂いやすい。「いいかも」と思ったことほど危ない' },
+    warn: '日天中殺（子の日）。新規の約束・契約はNG。判断が狂いやすい。「いいかも」と思ったことほど危ない' },
   { date:'2/20', kanshi:'乙丑', mainStar:'玉堂星', jyusei:'天印星', eval:'warn', evalText:'⚠',  aspects:'天中殺、年柱：半会',
     isTenchu: true,
     starAdvice: '玉堂星＝学びの星。天中殺中の学びは実はOK。知識を吸収する日',
@@ -384,7 +432,7 @@ const dailyFortunes = [
     starAdvice: '調舒星＝繊細・クリエイティブの星。感性が鋭くなるが精神的に揺れやすい',
     aspectNote: '天剋地冲＝月柱との衝突で感情が不安定に。半会＝拡大するが方向が定まらない',
     recommend: '一人の時間を大切に。日記を書く、音楽を聴く、アートに触れる。感性を満たす',
-    warn: '精神的に不安定になりやすい日。イライラしたら美味しいもの食べて（鳳閣星的ケア）' },
+    warn: '精神的に不安定になりやすい日。イライラしたら美味しいもの食べて' },
   { date:'2/25', kanshi:'庚午', mainStar:'禄存星', jyusei:'天将星', eval:'good', evalText:'○', aspects:'-',
     isTenchu: false,
     starAdvice: '禄存星＝魅力・引力の星。人を惹きつける力がある日',
@@ -427,7 +475,7 @@ const dailyFortunes = [
     starAdvice: '貫索星＝自分らしさの星。天中殺中は自分が見えなくなりやすい',
     aspectNote: '大半会＝大きな拡大のエネルギー。でも天中殺中なので拡大が裏目に出る',
     recommend: '大きな決断はしない。いつも通り過ごす。「今日は守りの日」と決める',
-    warn: '日天中殺（子の日）。大半会の拡大エネルギーに釣られて大きなことを始めたくなるが、中殺現象で判断が狂う。我慢の日' },
+    warn: '日天中殺（子の日）。大半会の拡大エネルギーに釣られて大きなことを始めたくなるが、判断が狂う。我慢の日' },
   { date:'3/4', kanshi:'丁丑', mainStar:'石門星', jyusei:'天印星', eval:'warn', evalText:'⚠', aspects:'天中殺、年柱：半会',
     isTenchu: true,
     starAdvice: '石門星＝協調の星。人と関わりたくなるが天中殺中は誤解が生じやすい',
@@ -499,7 +547,7 @@ const dailyFortunes = [
     starAdvice: '鳳閣星＝表現の星。伝えたい気持ちが湧くが天中殺で空回りしやすい',
     aspectNote: '干合ダブル＋半会で本来なら最高の日。しかし天中殺が全てを裏返す',
     recommend: 'SNS投稿は下書きに留める。発信したくなっても一晩寝かせる。食べて整える',
-    warn: '日天中殺（子の日）。中殺現象＝「今日投稿したい！」の衝動が特に危険。エネルギーは高いが方向が狂う。確実に翌日以降に回す' },
+    warn: '日天中殺（子の日）。「今日投稿したい！」の衝動が特に危険。エネルギーは高いが方向が狂う。翌日以降に回す' },
   { date:'3/16', kanshi:'己丑', mainStar:'調舒星', jyusei:'天印星', eval:'warn', evalText:'⚠', aspects:'天中殺、年柱：半会',
     isTenchu: true,
     starAdvice: '調舒星＝繊細の星。天中殺中は感情の波が大きくなる',
@@ -598,33 +646,33 @@ const dailyFortunes = [
     warn: '自刑あり。「3月何もできなかった」と責めない。準備した分は4月に花開く' },
 ];
 
-const winPatterns = [
+var winPatterns = [
   '人前に出る（太陽は照らしてこそ）',
-  '「型」を学ぶ（車騎星＝お手本があると強い）',
-  '忙しくする（天馳星＝多忙で安定）',
+  '「型」を学ぶ（お手本があると強い）',
+  '忙しくする（多忙で安定するタイプ）',
   '世のため人のために動く',
-  '美味しいものを食べる（鳳閣星のストレス発散）',
+  '美味しいものを食べる（食べて整う）',
 ];
 
-const losePatterns = [
+var losePatterns = [
   '家にこもる（太陽が隠れる）',
   '自分の利益だけを追う',
   '完璧を求めすぎる',
-  '暇にする（天馳星は止まると不安定に）',
+  '暇にする（止まると不安定に）',
 ];
 
-const todos = [
-  { task: 'ぱやさんに連絡する', priority: 1, deadline: null, reason: '車騎星＝恩師との出会いが鍵。ぱやさんは今の恩師。繋がりを絶やさない' },
-  { task: 'ピラティスの写真を1枚撮る', priority: 2, deadline: null, reason: '丙＝太陽。見える場所に出ることで輝く。まず1枚から' },
-  { task: '美味しいものを食べる', priority: 2, deadline: null, reason: '鳳閣星（家庭・見守り星）のストレス発散法。食べることで整う' },
+var todos = [
+  { task: 'ぱやさんに連絡する', priority: 1, deadline: null, reason: '恩師との繋がりが鍵。ぱやさんは今の恩師。定期的に繋がりを持つ' },
+  { task: 'ピラティスの写真を1枚撮る', priority: 2, deadline: null, reason: '太陽は見える場所に出ることで輝く。完璧じゃなくていい、まず1枚から' },
+  { task: '美味しいものを食べる', priority: 2, deadline: null, reason: '食べることで気持ちが整う。これも大事なセルフケア' },
 ];
 
-const projects = [
-  { name: 'ピラティス「天 -ten-」', status: 'active', nextAction: 'ぱやさんと空き時間の確認、集客方法の相談', note: 'フェーズ0：アロネイル内、家賃2万円。恵まれたスタート条件' },
-  { name: 'Instagram発信', status: 'paused', nextAction: '写真1枚撮影。完璧じゃなくていい', note: '太陽は照らしてこそ。まず出すこと' },
+var projects = [
+  { name: 'ピラティス「天 -ten-」', status: 'active', nextAction: 'ぱやさんと空き時間の確認、集客方法の相談', note: 'アロネイル内、家賃2万円。恵まれたスタート条件を活かす' },
+  { name: 'Instagram発信', status: 'paused', nextAction: '写真1枚撮影。完璧じゃなくていい', note: '太陽は照らしてこそ。まず出すことが大事' },
 ];
 
-const goal = {
+var goal = {
   main: '山の上のリトリート',
   sub: 'まずは石橋阪大前で始める。\n一歩ずつ、階段を昇るように。',
 };
@@ -632,257 +680,307 @@ const goal = {
 // ========== ロジック ==========
 
 function getToday() {
-  const now = new Date();
+  var now = new Date();
   return { month: now.getMonth() + 1, day: now.getDate() };
 }
 
 function getJapaneseDate(m, d) {
-  const months = ['','一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
-  const nums = {1:'一',2:'二',3:'三',4:'四',5:'五',6:'六',7:'七',8:'八',9:'九',10:'十',
+  var months = ['','一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+  var nums = {1:'一',2:'二',3:'三',4:'四',5:'五',6:'六',7:'七',8:'八',9:'九',10:'十',
     11:'十一',12:'十二',13:'十三',14:'十四',15:'十五',16:'十六',17:'十七',18:'十八',19:'十九',20:'二十',
     21:'二十一',22:'二十二',23:'二十三',24:'二十四',25:'二十五',26:'二十六',27:'二十七',28:'二十八',29:'二十九',30:'三十',31:'三十一'};
   return { month: months[m], day: nums[d] + '日' };
 }
 
 function getCurrentMonthFortune(m, d) {
-  for (const f of monthlyFortunes) {
-    const match = f.period.match(/(\d+)\/(\d+)〜(\d+)\/(\d+)/);
+  for (var i = 0; i < monthlyFortunes.length; i++) {
+    var f = monthlyFortunes[i];
+    var match = f.period.match(/(\d+)\/(\d+)〜(\d+)\/(\d+)/);
     if (!match) continue;
-    const [, sm, sd, em, ed] = match.map(Number);
-    const today = m * 100 + d;
+    var sm = Number(match[1]), sd = Number(match[2]), em = Number(match[3]), ed = Number(match[4]);
+    var today = m * 100 + d;
     if (today >= sm * 100 + sd && today <= em * 100 + ed) return f;
   }
   return monthlyFortunes[0];
 }
 
 function getTodayFortune(m, d) {
-  const key = `${m}/${d}`;
-  return dailyFortunes.find(f => f.date === key) || null;
+  var key = m + '/' + d;
+  for (var i = 0; i < dailyFortunes.length; i++) {
+    if (dailyFortunes[i].date === key) return dailyFortunes[i];
+  }
+  return null;
+}
+
+function getWeekFortunes(m, d) {
+  var key = m + '/' + d;
+  var todayIdx = -1;
+  for (var i = 0; i < dailyFortunes.length; i++) {
+    if (dailyFortunes[i].date === key) { todayIdx = i; break; }
+  }
+  if (todayIdx < 0) todayIdx = 0;
+  // 今日から7日分
+  return dailyFortunes.slice(todayIdx, todayIdx + 7);
 }
 
 // ========== 描画 ==========
 
-function buildCalendarHTML(m, d) {
-  return dailyFortunes.map(function(f, i) {
+function buildAspectBadges(aspects) {
+  if (aspects === '-') return '';
+  return aspects.split('、').map(function(a) {
+    var cls = 'badge-info';
+    if (a.indexOf('天中殺') >= 0 || a.indexOf('天剋') >= 0 || a.indexOf('害') >= 0 || a.indexOf('対冲') >= 0 || a.indexOf('自刑') >= 0) cls = 'badge-danger';
+    else if (a.indexOf('干合') >= 0 || a.indexOf('支合') >= 0 || a.indexOf('半会') >= 0 || a.indexOf('大半会') >= 0) cls = 'badge-success';
+    return '<span class="badge ' + cls + '" style="font-size:0.625rem;padding:0.125rem 0.5rem">' + a + '</span>';
+  }).join(' ');
+}
+
+function getEvalClass(ev) {
+  if (ev === 'great') return 'eval-great';
+  if (ev === 'good') return 'eval-good';
+  if (ev === 'warn') return 'eval-warn';
+  return 'eval-normal';
+}
+
+function buildCalendarHTML(weekFortunes, m, d) {
+  return weekFortunes.map(function(f, i) {
     var isToday = f.date === (m + '/' + d);
     var cardClass = isToday ? 'today' : f.isTenchu ? 'tenchu' : f.eval === 'great' ? 'great-day' : '';
-    var evalClass = f.eval === 'great' ? 'eval-great' : f.eval === 'good' ? 'eval-good' : f.eval === 'warn' ? 'eval-warn' : 'eval-normal';
-    var aspectBadges = '';
-    if (f.aspects !== '-') {
-      aspectBadges = f.aspects.split('、').map(function(a) {
-        var cls = 'badge-info';
-        if (a.indexOf('天中殺') >= 0 || a.indexOf('天剋') >= 0 || a.indexOf('害') >= 0 || a.indexOf('対冲') >= 0 || a.indexOf('自刑') >= 0) cls = 'badge-danger';
-        else if (a.indexOf('干合') >= 0 || a.indexOf('支合') >= 0 || a.indexOf('半会') >= 0 || a.indexOf('大半会') >= 0) cls = 'badge-success';
-        return '<span class="badge ' + cls + '" style="font-size:0.625rem;padding:0.125rem 0.5rem">' + a + '</span>';
-      }).join('');
-    }
+    var evalClass = getEvalClass(f.eval);
+    var aspectBadges = buildAspectBadges(f.aspects);
+    var jyuseiDesc = jyuseiDescriptions[f.jyusei] || '';
+
     var html = '<div class="day-card ' + cardClass + '" onclick="toggleDay(' + i + ')" id="day-' + i + '">';
     html += '<div class="day-summary"><div class="date-col">';
     html += '<span class="date-text">' + f.date + (isToday ? ' 今日' : '') + '</span>';
-    html += '<span class="star-text">' + f.mainStar + '</span>';
+    html += '<span class="star-text">' + f.mainStar + '・' + f.jyusei + '</span>';
     if (f.isTenchu) html += '<span class="badge badge-danger" style="font-size:0.625rem;padding:0.125rem 0.5rem">天中殺</span>';
     html += '</div><span class="eval-badge ' + evalClass + '">' + f.evalText + '</span></div>';
     html += '<div class="day-detail" id="detail-' + i + '">';
+
+    // 従星の説明
+    if (jyuseiDesc) {
+      html += '<div class="detail-section"><p class="detail-label">今日のエネルギー（' + f.jyusei + '）</p>';
+      html += '<p class="detail-text">' + jyuseiDesc + '</p></div>';
+    }
+
+    // 主星の意味
     html += '<div class="detail-section"><p class="detail-label">主星の意味</p><p class="detail-text">' + f.starAdvice + '</p></div>';
+
+    // 位相法
     if (f.aspects !== '-') {
       html += '<div class="detail-section"><p class="detail-label">位相法</p><div class="detail-aspects">' + aspectBadges + '</div>';
       html += '<p class="detail-text" style="margin-top:0.25rem">' + f.aspectNote + '</p></div>';
     }
+
+    // 天中殺の注意
     if (f.isTenchu) html += '<div class="detail-section"><div class="detail-tenchu">' + f.warn + '</div></div>';
-    html += '<div class="detail-section"><p class="detail-label">おすすめの行動</p><div class="detail-recommend">' + f.recommend + '</div></div>';
+
+    // おすすめ行動
+    html += '<div class="detail-section"><p class="detail-label">おすすめの過ごし方</p><div class="detail-recommend">' + f.recommend + '</div></div>';
+
+    // 注意点（天中殺でない場合）
     if (!f.isTenchu && f.warn) html += '<div class="detail-section"><div class="detail-warn">' + f.warn + '</div></div>';
+
     html += '</div></div>';
     return html;
   }).join('');
 }
 
 function render() {
-  const { month: m, day: d } = getToday();
-  const jpDate = getJapaneseDate(m, d);
-  const currentMonth = getCurrentMonthFortune(m, d);
-  const todayFortune = getTodayFortune(m, d);
-  const statusLabels = { active: '進行中', paused: '準備中' };
+  var today = getToday();
+  var m = today.month, d = today.day;
+  var jpDate = getJapaneseDate(m, d);
+  var currentMonth = getCurrentMonthFortune(m, d);
+  var todayFortune = getTodayFortune(m, d);
+  var weekFortunes = getWeekFortunes(m, d);
+  var statusLabels = { active: '進行中', paused: '準備中' };
 
-  const app = document.getElementById('app');
-  app.innerHTML = `
+  var app = document.getElementById('app');
 
-    <!-- 日付と命式 -->
-    <div class="card">
-      <div class="text-center mb-6">
-        <p class="text-xs" style="color:var(--color-brown)">令和八年</p>
-        <p class="date-display">
-          <span class="date-month">${jpDate.month}</span>
-          <span style="margin:0 0.5rem">${jpDate.day}</span>
-        </p>
-      </div>
+  // ======= 今日の日付 =======
+  var dateHTML = '';
+  dateHTML += '<div class="text-center mb-4" style="padding-top:0.5rem">';
+  dateHTML += '<p class="text-xs" style="color:var(--color-brown)">令和八年</p>';
+  dateHTML += '<p class="date-display">';
+  dateHTML += '<span class="date-month">' + jpDate.month + '</span>';
+  dateHTML += '<span style="margin:0 0.5rem">' + jpDate.day + '</span>';
+  dateHTML += '</p>';
+  dateHTML += '</div>';
 
-      <div class="divider"></div>
+  // ======= 今日の運気（メインカード） =======
+  var todayHTML = '';
+  if (todayFortune) {
+    var evalClass = getEvalClass(todayFortune.eval);
+    var jyuseiDesc = jyuseiDescriptions[todayFortune.jyusei] || '';
 
-      <div class="card-header" style="border:none;padding-bottom:0">
-        <span style="color:var(--color-gold)">◇</span>
-        <span>${client.name}さんの宿命</span>
-      </div>
+    todayHTML += '<div class="today-fortune-card">';
+    todayHTML += '<div class="card-header" style="border:none;padding-bottom:0.5rem">';
+    todayHTML += '<span style="color:var(--color-fuji)">◇</span>';
+    todayHTML += '<span>今日の運気</span>';
+    todayHTML += '</div>';
 
-      <div class="meishiki-item">
-        <span class="meishiki-label">日干</span>
-        <span class="meishiki-value">${client.dayStem}（${client.dayStemReading}）= ${client.element}</span>
-      </div>
-      <div class="meishiki-item">
-        <span class="meishiki-label">核の星</span>
-        <span class="meishiki-value">${client.mainStar}</span>
-      </div>
-      <div class="meishiki-item">
-        <span class="meishiki-label">天中殺</span>
-        <span class="meishiki-value">${client.tenchu}</span>
-      </div>
+    // 評価マーク
+    todayHTML += '<div class="text-center mb-3">';
+    todayHTML += '<span class="text-2xl font-medium ' + evalClass + '">' + todayFortune.evalText + '</span>';
+    todayHTML += '</div>';
 
-      <div class="message-box" style="margin-top:1rem">
-        <p class="text-sm" style="padding-left:1rem;line-height:1.8">${client.elementNote}</p>
-      </div>
+    // 主星・従星・干支の3列グリッド
+    todayHTML += '<div class="star-grid">';
+    todayHTML += '<div class="star-box"><p class="star-label">主星</p><p class="star-value">' + todayFortune.mainStar + '</p></div>';
+    todayHTML += '<div class="star-box"><p class="star-label">従星</p><p class="star-value">' + todayFortune.jyusei + '</p></div>';
+    todayHTML += '<div class="star-box"><p class="star-label">干支</p><p class="star-value">' + todayFortune.kanshi + '</p></div>';
+    todayHTML += '</div>';
 
-      <div class="divider"></div>
+    // 従星の意味
+    if (jyuseiDesc) {
+      todayHTML += '<p class="jyusei-info">' + jyuseiDesc + '</p>';
+    }
 
-      <!-- 今日の日運 -->
-      ${todayFortune ? `
-      <div class="mb-4">
-        <p class="text-xs text-center mb-2" style="color:var(--color-brown)">今日の運気</p>
-        <div class="text-center mb-2">
-          <span class="text-2xl font-medium ${todayFortune.eval === 'great' ? 'eval-great' : todayFortune.eval === 'good' ? 'eval-good' : todayFortune.eval === 'warn' ? 'eval-warn' : 'eval-normal'}">${todayFortune.evalText}</span>
-        </div>
-        <div class="star-grid">
-          <div class="star-box">
-            <p class="star-label">主星</p>
-            <p class="star-value">${todayFortune.mainStar}</p>
-          </div>
-          <div class="star-box">
-            <p class="star-label">干支</p>
-            <p class="star-value">${todayFortune.kanshi}</p>
-          </div>
-        </div>
-        <div class="aspects">
-          ${todayFortune.aspects.split('、').map(a => `<span class="badge ${a.includes('天中殺') || a.includes('天剋') || a.includes('害') || a.includes('対冲') ? 'badge-danger' : a.includes('干合') || a.includes('支合') || a.includes('半会') || a.includes('大半会') ? 'badge-success' : 'badge-info'}">${a}</span>`).join('')}
-        </div>
-        <div class="message-box">
-          <p class="text-sm" style="padding-left:1rem;line-height:1.8">${todayFortune.note}</p>
-        </div>
-      </div>
+    // 位相バッジ
+    if (todayFortune.aspects !== '-') {
+      todayHTML += '<div class="aspects">' + buildAspectBadges(todayFortune.aspects) + '</div>';
+    }
 
-      <div class="divider"></div>
-      ` : ''}
+    // 今日のおすすめ行動
+    todayHTML += '<div class="today-advice">';
+    todayHTML += '<p style="font-size:0.625rem;color:var(--color-brown);margin-bottom:0.25rem;letter-spacing:0.1em">今日のおすすめ</p>';
+    todayHTML += todayFortune.recommend;
+    todayHTML += '</div>';
 
-      <!-- 月運 -->
-      ${currentMonth ? `
-      <div class="mb-4">
-        <p class="text-xs text-center mb-2" style="color:var(--color-brown)">今月の流れ</p>
-        <div class="text-center">
-          <p class="text-sm mb-1">
-            <span style="color:var(--color-brown)">${currentMonth.period}</span>
-            <span style="margin:0 0.5rem">|</span>
-            <span>${currentMonth.mainStar}</span>
-          </p>
-          ${currentMonth.isTenchu ? '<span class="badge badge-danger">月天中殺</span>' : ''}
-        </div>
-        <p class="text-xs text-center mt-2" style="color:var(--color-brown)">${currentMonth.advice}</p>
-      </div>
-      ` : ''}
-    </div>
+    // 注意点があれば
+    if (todayFortune.warn) {
+      todayHTML += '<div class="detail-warn" style="margin-top:0.75rem">';
+      todayHTML += todayFortune.warn;
+      todayHTML += '</div>';
+    }
 
-    <!-- 本日のお導き -->
-    <div class="card">
-      <div class="card-header">
-        <span style="color:var(--color-gold)">◇</span>
-        <span>本日のお導き</span>
-      </div>
+    todayHTML += '</div>';
+  }
 
-      <div class="mb-6">
-        ${todos.map(t => `
-          <div class="task-item ${t.priority === 1 ? 'priority-high' : 'priority-normal'}">
-            <div class="task-header">
-              <span class="task-title">${t.task}</span>
-              ${t.deadline ? `<span class="badge badge-warning">${t.deadline}</span>` : ''}
-            </div>
-            <p class="task-reason">${t.reason}</p>
-          </div>
-        `).join('')}
-      </div>
+  // ======= 月運 =======
+  var monthHTML = '';
+  if (currentMonth) {
+    monthHTML += '<div class="card">';
+    monthHTML += '<div class="card-header"><span style="color:var(--color-fuji)">◇</span><span>今月の流れ</span></div>';
+    monthHTML += '<div class="text-center">';
+    monthHTML += '<p class="text-sm mb-1">';
+    monthHTML += '<span style="color:var(--color-brown)">' + currentMonth.period + '</span>';
+    monthHTML += '<span style="margin:0 0.5rem">|</span>';
+    monthHTML += '<span>' + currentMonth.mainStar + '</span>';
+    monthHTML += '</p>';
+    if (currentMonth.isTenchu) monthHTML += '<span class="badge badge-danger">月天中殺</span>';
+    monthHTML += '</div>';
+    monthHTML += '<p class="text-xs text-center mt-2" style="color:var(--color-brown);line-height:1.8">' + currentMonth.advice + '</p>';
+    monthHTML += '</div>';
+  }
 
-      <div class="divider"></div>
+  // ======= やること =======
+  var todoHTML = '';
+  todoHTML += '<div class="card">';
+  todoHTML += '<div class="card-header"><span style="color:var(--color-fuji)">◇</span><span>やること</span></div>';
+  todoHTML += '<div class="mb-6">';
+  for (var i = 0; i < todos.length; i++) {
+    var t = todos[i];
+    todoHTML += '<div class="task-item ' + (t.priority === 1 ? 'priority-high' : 'priority-normal') + '">';
+    todoHTML += '<div class="task-header"><span class="task-title">' + t.task + '</span>';
+    if (t.deadline) todoHTML += '<span class="badge badge-warning">' + t.deadline + '</span>';
+    todoHTML += '</div>';
+    todoHTML += '<p class="task-reason">' + t.reason + '</p>';
+    todoHTML += '</div>';
+  }
+  todoHTML += '</div>';
+  todoHTML += '<div class="divider"></div>';
+  todoHTML += '<div class="patterns"><div>';
+  todoHTML += '<p class="pattern-title win">大切にすること</p>';
+  todoHTML += '<ul class="pattern-list">';
+  for (var i = 0; i < winPatterns.length && i < 4; i++) {
+    todoHTML += '<li><span class="dot-win">○</span><span>' + winPatterns[i] + '</span></li>';
+  }
+  todoHTML += '</ul></div><div>';
+  todoHTML += '<p class="pattern-title lose">気をつけること</p>';
+  todoHTML += '<ul class="pattern-list">';
+  for (var i = 0; i < losePatterns.length; i++) {
+    todoHTML += '<li><span class="dot-lose">×</span><span>' + losePatterns[i] + '</span></li>';
+  }
+  todoHTML += '</ul></div></div>';
+  todoHTML += '</div>';
 
-      <div class="patterns">
-        <div>
-          <p class="pattern-title win">大切にすること</p>
-          <ul class="pattern-list">
-            ${winPatterns.slice(0, 4).map(p => `<li><span class="dot-win">○</span><span>${p}</span></li>`).join('')}
-          </ul>
-        </div>
-        <div>
-          <p class="pattern-title lose">気をつけること</p>
-          <ul class="pattern-list">
-            ${losePatterns.map(p => `<li><span class="dot-lose">×</span><span>${p}</span></li>`).join('')}
-          </ul>
-        </div>
-      </div>
-    </div>
+  // ======= 1週間カレンダー =======
+  var calendarHTML = '';
+  calendarHTML += '<div class="card">';
+  calendarHTML += '<div class="card-header">';
+  calendarHTML += '<span style="color:var(--color-fuji)">◇</span>';
+  calendarHTML += '<span>この先1週間</span>';
+  calendarHTML += '<span style="font-size:0.625rem;color:var(--color-brown);margin-left:auto">タップで詳細</span>';
+  calendarHTML += '</div>';
+  calendarHTML += buildCalendarHTML(weekFortunes, m, d);
+  calendarHTML += '</div>';
 
-    <!-- 日運カレンダー -->
-    <div class="card">
-      <div class="card-header">
-        <span style="color:var(--color-gold)">◇</span>
-        <span>日運カレンダー</span>
-        <span style="font-size:0.625rem;color:var(--color-brown);margin-left:auto">タップで詳細</span>
-      </div>
-      ${buildCalendarHTML(m, d)}
-    </div>
+  // ======= プロジェクト =======
+  var projectHTML = '';
+  projectHTML += '<div class="card">';
+  projectHTML += '<div class="card-header"><span style="color:var(--color-fuji)">◇</span><span>プロジェクト</span></div>';
+  for (var i = 0; i < projects.length; i++) {
+    var p = projects[i];
+    projectHTML += '<div class="project-item">';
+    projectHTML += '<div class="project-header">';
+    projectHTML += '<div class="project-name"><div class="status-dot ' + p.status + '"></div>' + p.name + '</div>';
+    projectHTML += '<span class="project-status">' + statusLabels[p.status] + '</span>';
+    projectHTML += '</div>';
+    projectHTML += '<div class="project-action">';
+    projectHTML += '<p class="project-action-label">次のアクション</p>';
+    projectHTML += '<p>' + p.nextAction + '</p>';
+    projectHTML += '</div>';
+    if (p.note) projectHTML += '<p class="project-note">' + p.note + '</p>';
+    projectHTML += '</div>';
+  }
+  projectHTML += '</div>';
 
-    <!-- プロジェクト -->
-    <div class="card">
-      <div class="card-header">
-        <span style="color:var(--color-gold)">◇</span>
-        <span>プロジェクト</span>
-      </div>
-      ${projects.map(p => `
-        <div class="project-item">
-          <div class="project-header">
-            <div class="project-name">
-              <div class="status-dot ${p.status}"></div>
-              ${p.name}
-            </div>
-            <span class="project-status">${statusLabels[p.status]}</span>
-          </div>
-          <div class="project-action">
-            <p class="project-action-label">次のアクション</p>
-            <p>${p.nextAction}</p>
-          </div>
-          ${p.note ? `<p class="project-note">${p.note}</p>` : ''}
-        </div>
-      `).join('')}
-    </div>
+  // ======= 宿命（下に移動） =======
+  var destinyHTML = '';
+  destinyHTML += '<div class="card">';
+  destinyHTML += '<div class="card-header"><span style="color:var(--color-fuji)">◇</span><span>' + client.name + 'さんの宿命</span></div>';
+  destinyHTML += '<div class="meishiki-item"><span class="meishiki-label">日干</span>';
+  destinyHTML += '<span class="meishiki-value">' + client.dayStem + '（' + client.dayStemReading + '）= ' + client.element + '</span></div>';
+  destinyHTML += '<div class="meishiki-item"><span class="meishiki-label">核の星</span>';
+  destinyHTML += '<span class="meishiki-value">' + client.mainStar + '</span></div>';
+  destinyHTML += '<div class="meishiki-item"><span class="meishiki-label">天中殺</span>';
+  destinyHTML += '<span class="meishiki-value">' + client.tenchu + '</span></div>';
+  destinyHTML += '<div class="message-box" style="margin-top:1rem">';
+  destinyHTML += '<p class="text-sm" style="padding-left:1rem;line-height:1.8">' + client.elementNote + '</p>';
+  destinyHTML += '</div>';
+  destinyHTML += '</div>';
 
-    <!-- 願い -->
-    <div class="frame">
-      <p class="text-xs text-center mb-3" style="color:var(--color-brown)">あなたの願い</p>
-      <p class="text-center text-sm font-medium" style="color:var(--color-brown-dark)">${goal.main}</p>
-      <div class="divider"></div>
-      <p class="text-xs text-center" style="color:var(--color-brown);line-height:1.8">
-        ${goal.sub.replace(/\n/g, '<br>')}
-      </p>
-    </div>
-  `;
+  // ======= 願い =======
+  var goalHTML = '';
+  goalHTML += '<div class="frame">';
+  goalHTML += '<p class="text-xs text-center mb-3" style="color:var(--color-brown)">あなたの願い</p>';
+  goalHTML += '<p class="text-center text-sm font-medium" style="color:var(--color-brown-dark)">' + goal.main + '</p>';
+  goalHTML += '<div class="divider"></div>';
+  goalHTML += '<p class="text-xs text-center" style="color:var(--color-brown);line-height:1.8">' + goal.sub.replace(/\n/g, '<br>') + '</p>';
+  goalHTML += '</div>';
+
+  // ======= 組み立て =======
+  app.innerHTML = dateHTML + todayHTML + monthHTML + todoHTML + calendarHTML + projectHTML + destinyHTML + goalHTML;
 }
 
 render();
 
-// 今日のカードをデフォルトで開く
-const { month: tm, day: td } = getToday();
-const todayKey = `${tm}/${td}`;
-const todayIdx = dailyFortunes.findIndex(f => f.date === todayKey);
-if (todayIdx >= 0) {
-  const el = document.getElementById(`detail-${todayIdx}`);
-  if (el) el.classList.add('open');
+// 今日のカレンダーカードをデフォルトで開く
+var todayInfo = getToday();
+var todayKey = todayInfo.month + '/' + todayInfo.day;
+var weekData = getWeekFortunes(todayInfo.month, todayInfo.day);
+for (var i = 0; i < weekData.length; i++) {
+  if (weekData[i].date === todayKey) {
+    var el = document.getElementById('detail-' + i);
+    if (el) el.classList.add('open');
+    break;
+  }
 }
 
 function toggleDay(i) {
-  const el = document.getElementById(`detail-${i}`);
+  var el = document.getElementById('detail-' + i);
   if (el) el.classList.toggle('open');
 }
 </script>
