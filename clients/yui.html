@@ -7,22 +7,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --color-cream: #FAF7F5;
-  --color-warm-white: #FDFBF9;
-  --color-beige: #EDE6DF;
-  --color-gold: #B8A088;
-  --color-gold-light: #C8B8A4;
+  --color-cream: #FFF6EE;          /* 練色ベース（温かみ） */
+  --color-warm-white: #FEF4F4;     /* 桜色（火の淡色背景） */
+  --color-beige: #F0E0D4;          /* 洗柿の淡色 */
+  --color-gold: #C89932;           /* 山吹茶（土の金色） */
+  --color-gold-light: #D0AF4C;     /* 芥子色（土） */
   --color-brown: #7A6E62;
   --color-brown-dark: #4A3F36;
-  --color-rose: #C9A0A0;
-  --color-rose-light: #F0E4E4;
+  --color-rose: #E09E87;           /* ときがら茶（火） */
+  --color-rose-light: #F5E0D6;     /* ときがら茶の淡色 */
   --color-sage: #9AAF92;
-  /* 由依専用の和色 */
-  --color-accent: #CCA6BF;        /* 紅藤色 */
-  --color-accent-light: #D3CFD9;   /* 暁鼠 */
-  --color-accent-pale: #E8DFE5;    /* 紅藤色の淡色 */
-  --color-accent-deep: #A88BA0;    /* 紅藤色の深色 */
-  --color-sakura: #E8C4C4;         /* 桜鼠 */
+  /* 由依専用の開運色（丙・火土不足を補う） */
+  --color-accent: #F5B1AA;         /* 珊瑚色（火を補う） */
+  --color-accent-light: #F4DDA5;   /* 砥粉色（土を補う） */
+  --color-accent-pale: #FDEFF2;    /* 薄桜（火の最淡色） */
+  --color-accent-deep: #A86965;    /* 蘇芳香（火の深色） */
+  --color-sakura: #F2C9AC;         /* 洗柿（火＋土） */
   --color-wakakusa: #A0B89A;       /* 若草色 */
 }
 
@@ -30,7 +30,7 @@
 
 body {
   font-family: 'Noto Serif JP', serif;
-  background: linear-gradient(180deg, var(--color-warm-white) 0%, var(--color-cream) 100%);
+  background: linear-gradient(180deg, var(--color-warm-white) 0%, var(--color-cream) 50%, #FFF1CF 100%); /* 桜色→練色→鳥の子色 */
   color: var(--color-brown-dark);
   min-height: 100vh;
   line-height: 1.8;
@@ -80,7 +80,7 @@ header .tagline { font-size: 0.75rem; color: var(--color-brown); }
   border-radius: 100px;
   font-weight: 400;
 }
-.badge-info { background: rgba(204, 166, 191, 0.15); color: var(--color-brown); border: 1px solid rgba(204, 166, 191, 0.3); }
+.badge-info { background: rgba(245, 177, 170, 0.15); color: var(--color-brown); border: 1px solid rgba(245, 177, 170, 0.3); }
 .badge-danger { background: rgba(180, 100, 100, 0.15); color: #8B5A5A; border: 1px solid rgba(180, 100, 100, 0.3); }
 .badge-warning { background: rgba(212, 165, 165, 0.2); color: #A67878; border: 1px solid rgba(212, 165, 165, 0.4); }
 .badge-success { background: rgba(160, 184, 154, 0.2); color: #5C7A54; border: 1px solid rgba(160, 184, 154, 0.4); }
@@ -192,11 +192,11 @@ header .tagline { font-size: 0.75rem; color: var(--color-brown); }
 
 /* 今日の運気カード強調 */
 .today-fortune-card {
-  background: linear-gradient(135deg, var(--color-warm-white) 0%, rgba(204, 166, 191, 0.06) 100%);
+  background: linear-gradient(135deg, var(--color-warm-white) 0%, rgba(245, 177, 170, 0.06) 100%);
   border: 1px solid var(--color-accent-light);
   border-radius: 8px;
   padding: 1.25rem;
-  box-shadow: 0 2px 16px rgba(204, 166, 191, 0.1);
+  box-shadow: 0 2px 16px rgba(245, 177, 170, 0.1);
   margin-bottom: 1.5rem;
   animation: fadeIn 0.5s ease-out;
 }
@@ -222,7 +222,7 @@ header .tagline { font-size: 0.75rem; color: var(--color-brown); }
   font-size: 0.75rem;
   line-height: 1.7;
   color: var(--color-accent-deep);
-  background: linear-gradient(135deg, rgba(204, 166, 191, 0.08) 0%, rgba(232, 196, 196, 0.08) 100%);
+  background: linear-gradient(135deg, rgba(245, 177, 170, 0.08) 0%, rgba(232, 196, 196, 0.08) 100%);
   padding: 0.75rem 1rem;
   border-radius: 4px;
   border-left: 3px solid var(--color-accent);
@@ -313,7 +313,7 @@ header .tagline { font-size: 0.75rem; color: var(--color-brown); }
 }
 .cal-cell.today {
   border: 2px solid var(--color-accent);
-  box-shadow: 0 2px 8px rgba(204, 166, 191, 0.25);
+  box-shadow: 0 2px 8px rgba(245, 177, 170, 0.25);
 }
 .cal-cell.tenchu-day {
   border-left: 2px solid #A67878;
@@ -370,7 +370,7 @@ header .tagline { font-size: 0.75rem; color: var(--color-brown); }
 }
 .detail-day.highlight {
   border-color: var(--color-accent);
-  box-shadow: 0 2px 12px rgba(204, 166, 191, 0.2);
+  box-shadow: 0 2px 12px rgba(245, 177, 170, 0.2);
 }
 .detail-day-header {
   display: flex;
@@ -426,7 +426,7 @@ header .tagline { font-size: 0.75rem; color: var(--color-brown); }
   font-size: 0.75rem;
   line-height: 1.7;
   padding: 0.5rem 0.75rem;
-  background: rgba(204, 166, 191, 0.08);
+  background: rgba(245, 177, 170, 0.08);
   border-radius: 4px;
   border-left: 3px solid var(--color-accent);
 }
