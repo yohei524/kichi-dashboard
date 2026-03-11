@@ -1,0 +1,17 @@
+{
+  "name": "㐂びの暦",
+  "short_name": "㐂の暦",
+  "description": "㐂さん専用・運気カレンダー",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FDF8F3",
+  "theme_color": "#C4A574",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23FDF8F3'/><text x='50' y='68' font-size='50' text-anchor='middle' font-family='serif'>㐂</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
