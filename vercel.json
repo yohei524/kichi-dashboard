@@ -3,6 +3,17 @@
   "outputDirectory": ".",
   "framework": null,
   "rewrites": [
-    { "source": "/yui", "destination": "/clients/yui.html" }
+    {
+      "source": "/yui",
+      "destination": "/clients/yui.html"
+    },
+    {
+      "source": "/nanafushi",
+      "destination": "/clients/nanafushi.html"
+    },
+    {
+      "source": "/yoko",
+      "destination": "/clients/yoko.html"
+    }
   ]
 }
