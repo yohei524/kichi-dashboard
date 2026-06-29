@@ -14,6 +14,26 @@
     {
       "source": "/yoko",
       "destination": "/clients/yoko.html"
+    },
+    {
+      "source": "/ayumi",
+      "destination": "/clients/ayumi.html"
+    },
+    {
+      "source": "/hiromi",
+      "destination": "/clients/hiromi.html"
+    },
+    {
+      "source": "/asuka",
+      "destination": "/clients/asuka.html"
+    },
+    {
+      "source": "/y-ayumi",
+      "destination": "/clients/y-ayumi.html"
+    },
+    {
+      "source": "/syuko",
+      "destination": "/clients/syuko.html"
     }
   ]
 }
