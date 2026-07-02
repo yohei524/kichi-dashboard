@@ -7,30 +7,116 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
+  /* 乙亥・龍高星・水性 ─ 青緑・深水・静寂 */
   --color-cream: #F0F7F9;
   --color-warm-white: #F5FAFB;
   --color-beige: #E0F0F5;
-  --color-accent: #1E7A7A;
-  --color-accent-light: #2D9B9B;
-  --color-accent-soft: #7ABFBF;
-  --color-gold: #4A8C8C;
+  --color-accent: #1E7A7A;        /* 青緑（深い水） */
+  --color-accent-light: #2D9B9B;  /* 明るい青緑 */
+  --color-accent-soft: #7ABFBF;   /* 淡い青緑 */
+  --color-gold: #4A8C8C;          /* スレートブルー */
   --color-brown: #456B6B;
   --color-brown-dark: #1F4949;
+  --color-rose: #2D6B7E;
   --color-rose-light: #D6F0F0;
+  --color-sage: #5A7A8C;
   --color-water: #1E6B7E;
 }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Noto Serif JP', serif; background: linear-gradient(180deg, var(--color-warm-white) 0%, var(--color-cream) 60%, #EEF7F9 100%); color: var(--color-brown-dark); min-height: 100vh; line-height: 1.8; letter-spacing: 0.05em; }
+
+body {
+  font-family: 'Noto Serif JP', serif;
+  background: linear-gradient(180deg, var(--color-warm-white) 0%, var(--color-cream) 60%, #EEF7F9 100%);
+  color: var(--color-brown-dark);
+  min-height: 100vh;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+}
+
 .container { max-width: 28rem; margin: 0 auto; padding: 0 1rem 2rem; }
+
 header { text-align: center; padding: 2rem 1rem 1rem; }
 header .sub { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.2em; margin-bottom: 0.5rem; }
 header h1 { font-size: 1.35rem; font-weight: 500; color: var(--color-brown-dark); margin-bottom: 0.25rem; }
 header .tagline { font-size: 0.8rem; color: var(--color-brown); }
-.card { background: var(--color-warm-white); border: 1px solid var(--color-beige); border-radius: 8px; padding: 1.25rem; box-shadow: 0 2px 16px rgba(30, 122, 122, 0.08); margin-bottom: 1.5rem; animation: fadeIn 0.5s ease-out; }
-.card-header { font-size: 0.875rem; font-weight: 500; color: var(--color-brown-dark); margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--color-beige); display: flex; align-items: center; gap: 0.5rem; }
-.divider { height: 1px; background: linear-gradient(90deg, transparent, var(--color-accent-light), transparent); margin: 1.5rem 0; }
-.message-box { background: var(--color-cream); border: 1px solid var(--color-beige); border-radius: 4px; padding: 1rem 1.25rem; position: relative; }
-.message-box::before { content: '\201C'; position: absolute; top: -0.25rem; left: 0.75rem; font-size: 2rem; color: var(--color-accent-soft); font-family: serif; }
+
+.card {
+  background: var(--color-warm-white);
+  border: 1px solid var(--color-beige);
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 16px rgba(30, 122, 122, 0.08);
+  margin-bottom: 1.5rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.card-header {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-brown-dark);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-beige);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent-light), transparent);
+  margin: 1.5rem 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.7rem;
+  border-radius: 100px;
+  font-weight: 400;
+}
+.badge-info { background: rgba(74, 140, 140, 0.18); color: var(--color-gold); border: 1px solid rgba(74, 140, 140, 0.35); }
+.badge-danger { background: rgba(30, 107, 126, 0.18); color: #1E6B7E; border: 1px solid rgba(30, 107, 126, 0.4); }
+.badge-warning { background: rgba(45, 155, 155, 0.2); color: #2D7A8C; border: 1px solid rgba(45, 155, 155, 0.4); }
+.badge-success { background: rgba(90, 122, 140, 0.2); color: #4A6B7A; border: 1px solid rgba(90, 122, 140, 0.4); }
+.badge-tenchu { background: rgba(58, 107, 140, 0.18); color: var(--color-water); border: 1px solid rgba(58, 107, 140, 0.4); }
+
+.message-box {
+  background: var(--color-cream);
+  border: 1px solid var(--color-beige);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  position: relative;
+}
+.message-box::before {
+  content: '\201C';
+  position: absolute;
+  top: -0.25rem;
+  left: 0.75rem;
+  font-size: 2rem;
+  color: var(--color-accent-soft);
+  font-family: serif;
+}
+
+.star-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
+.star-box { text-align: center; padding: 0.75rem; background: var(--color-cream); border-radius: 4px; }
+.star-label { font-size: 0.7rem; color: var(--color-brown); margin-bottom: 0.25rem; }
+.star-value { font-size: 0.95rem; font-weight: 500; color: var(--color-accent); }
+
+.tenchu-box {
+  background: var(--color-rose-light);
+  border: 1px solid rgba(30, 107, 126, 0.3);
+  border-radius: 4px;
+  padding: 1rem;
+  text-align: center;
+}
+.tenchu-label { font-size: 0.75rem; color: #1E6B7E; margin-bottom: 0.25rem; }
+.tenchu-days { font-size: 2rem; font-weight: 300; color: #1E6B7E; }
+.tenchu-days span { font-size: 0.875rem; margin-left: 0.25rem; }
+.tenchu-note { font-size: 0.75rem; color: #1E6B7E; margin-top: 0.25rem; }
+
 .patterns { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .pattern-title { font-size: 0.75rem; text-align: center; margin-bottom: 0.75rem; letter-spacing: 0.1em; }
 .pattern-title.win { color: var(--color-accent); }
@@ -39,16 +125,108 @@ header .tagline { font-size: 0.8rem; color: var(--color-brown); }
 .pattern-list li { font-size: 0.75rem; color: var(--color-brown-dark); display: flex; align-items: start; gap: 0.5rem; margin-bottom: 0.5rem; line-height: 1.6; }
 .dot-win { color: var(--color-accent); margin-top: 2px; }
 .dot-lose { color: var(--color-water); margin-top: 2px; }
-.meishiki-item { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--color-beige); }
+
+.frame {
+  position: relative;
+  padding: 1.5rem;
+  background: var(--color-warm-white);
+  border: 1px solid var(--color-beige);
+  border-radius: 4px;
+  box-shadow: 0 2px 12px rgba(30, 122, 122, 0.1);
+  margin-bottom: 1.5rem;
+}
+.frame::before {
+  content: '';
+  position: absolute;
+  top: 8px; left: 8px; right: 8px; bottom: 8px;
+  border: 1px solid var(--color-accent-soft);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.meishiki-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-beige);
+}
 .meishiki-item:last-child { border-bottom: none; }
 .meishiki-label { font-size: 0.75rem; color: var(--color-brown); }
 .meishiki-value { font-size: 0.875rem; font-weight: 500; }
-.year-tenchu-box { background: linear-gradient(135deg, rgba(30,122,122,0.10), rgba(30,122,122,0.07)); border: 1px solid rgba(30, 122, 122, 0.25); border-radius: 4px; padding: 1rem; text-align: center; margin-bottom: 1rem; }
+
+.cal-grid {
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin-bottom: 0.5rem;
+}
+.cal-header { text-align: center; font-size: 0.65rem; color: var(--color-brown); padding: 0.25rem 0; }
+.cal-cell {
+  text-align: center; padding: 0.35rem 0.1rem; font-size: 0.75rem;
+  border-radius: 4px; cursor: pointer; min-height: 2.6rem;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  border: 1px solid transparent; position: relative;
+  background: var(--color-warm-white);
+}
+.cal-cell:hover { border-color: var(--color-accent-light); }
+.cal-cell.today { border: 2px solid var(--color-accent); font-weight: 600; box-shadow: 0 0 8px rgba(30, 122, 122, 0.3); }
+.cal-cell.empty { cursor: default; background: transparent; }
+.cal-cell.empty:hover { border-color: transparent; }
+.cal-cell .cal-day { font-size: 0.78rem; }
+.cal-cell .cal-aspect { font-size: 0.55rem; margin-top: 1px; }
+.cal-cell.tenchu-day { border-left: 2px solid #1E6B7E; }
+
+.cal-legend { display: flex; justify-content: center; gap: 0.75rem; font-size: 0.65rem; color: var(--color-brown); flex-wrap: wrap; margin-top: 0.5rem; }
+.cal-month-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+.cal-month-tab {
+  flex: 1; text-align: center; padding: 0.5rem; font-size: 0.75rem;
+  background: var(--color-cream); border-radius: 4px; cursor: pointer;
+  color: var(--color-brown); border: 1px solid var(--color-beige);
+}
+.cal-month-tab.active { background: var(--color-accent); color: #fff; border-color: var(--color-accent); }
+
+.detail-modal {
+  display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(31, 73, 73, 0.5); z-index: 100; align-items: center; justify-content: center;
+  padding: 1rem;
+}
+.detail-modal.active { display: flex; }
+.detail-content {
+  background: var(--color-warm-white); border-radius: 8px; padding: 1.5rem;
+  max-width: 26rem; width: 100%; max-height: 85vh; overflow-y: auto;
+  border: 1px solid var(--color-beige); box-shadow: 0 8px 32px rgba(30, 122, 122, 0.25);
+}
+.detail-close {
+  background: none; border: none; font-size: 1.5rem; color: var(--color-brown);
+  cursor: pointer; float: right; padding: 0; line-height: 1;
+}
+.detail-date-stars { font-size: 0.95rem; font-weight: 500; color: var(--color-brown-dark); }
+.detail-day-stars { font-size: 0.8rem; color: var(--color-accent); margin-left: 0.5rem; }
+.detail-section { margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px dashed var(--color-beige); }
+.detail-label { font-size: 0.7rem; color: var(--color-accent); letter-spacing: 0.1em; margin-bottom: 0.25rem; }
+.detail-text { font-size: 0.8rem; color: var(--color-brown-dark); line-height: 1.7; }
+
+.year-tenchu-box {
+  background: linear-gradient(135deg, rgba(58,107,140,0.10), rgba(30,122,122,0.07));
+  border: 1px solid rgba(30, 122, 122, 0.25);
+  border-radius: 4px;
+  padding: 1rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
 .year-tenchu-label { font-size: 0.7rem; color: var(--color-water); letter-spacing: 0.15em; margin-bottom: 0.25rem; }
 .year-tenchu-body { font-size: 0.8rem; color: var(--color-brown-dark); line-height: 1.7; }
-footer { text-align: center; padding: 1.5rem; border-top: 1px solid var(--color-beige); }
+
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  border-top: 1px solid var(--color-beige);
+}
 footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15em; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .text-center { text-align: center; }
 .text-xs { font-size: 0.75rem; }
 .text-sm { font-size: 0.875rem; }
@@ -59,8 +237,14 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
 .mb-6 { margin-bottom: 1.5rem; }
 .mt-2 { margin-top: 0.5rem; }
 .mt-3 { margin-top: 0.75rem; }
+.font-medium { font-weight: 500; }
+
 .date-display { font-size: 1.5rem; font-weight: 300; color: var(--color-brown-dark); letter-spacing: 0.1em; }
 .date-month { font-size: 0.9rem; color: var(--color-accent); }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--color-cream); }
+::-webkit-scrollbar-thumb { background: var(--color-accent-light); border-radius: 2px; }
 </style>
 </head>
 <body>
@@ -71,7 +255,12 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
 </div>
 <footer id="footer"></footer>
 
+<div class="detail-modal" id="detailModal" onclick="if(event.target===this)closeDetail()">
+  <div class="detail-content" id="detailContent"></div>
+</div>
+
 <script>
+// ========== クライアントデータ ==========
 const CLIENT_DATA = {
   "client": {
     "name": "さゆりさん",
@@ -85,7 +274,7 @@ const CLIENT_DATA = {
     "specialNote": "親の援助なしで独立すると陽転。家系を離れて生きることで、本来の力が発揮される。在宅で、細く長く、好きなことをやる。それが許されている命式。",
     "stars": "中心:龍高星 / 東:牽牛星 / 北:司禄星 / 南:石門星 / 西:玉堂星 / 伴:龍高星",
     "starsNote": "改革と冒険の中心（龍高星）。責任と社会的役割（牽牛星）。人を集める力（石門星）。教え・伝える役割（玉堂星）。火性ゼロで発信困難だが、水89（学習力）が本領。",
-    "chukuseiNote": "現在は禄存星の時期（人を惹きつける10年）。2026年は調舒星年運で個性を磨く年。2028-2029年は年天中殺への準備期間。目立たない活動が開花する時期。",
+    "chukuseiNote": "現在は禄存星の時期（人を惹きつける10年）。2026年は調舒星年運で個性を磨く年。2026年7月〜2027年6月は使命が最も光る時期。2027年後半から陰影に入る。",
     "guardianNote": "第一守護神は存在しない（火性ゼロ）。だからこそ『何もしない』が守護神の取り方。来たものだけを受け取る。無理して動かない。それが最大のパワー。"
   },
   "yearTenchuNote": "2026年7月〜2027年6月は、申酉天中殺の使命が最も光る時期。特に2027年3月（龍高星月運・天禄星）は申し分ない。この時期に『古いものと新しいものを繋ぐ活動』を具体化させておくと、2028-2029年の年天中殺中も軸がぶれない。陰影に入る2027年後半までに『これだけは続ける』を決めておく。",
@@ -116,6 +305,14 @@ const CLIENT_DATA = {
     {"key": "【肆】課題視点", "body": "生年天中殺（親の援助なしで初めて力が出る）＋ 日座天中殺（家系を離れて初めて独立）＋ 西方欠け（結婚・パートナーシップにトラブル）。三重苦に見えるが、陽転の方法は明確。『一人で完結する活動』を選ぶこと。在宅・独立・好きなことに集中——これが逆に最大の強みになる。火性ゼロで『やらなきゃ』という焦燥感がないから、持続力が圧倒的。20年・30年かけてやる仕事が向く。2028-2029年の年天中殺中は『新規拡大せず、深掘り』。それまでに『これだけは続ける』を決めておく。"},
     {"key": "【伍】使命視点", "body": "申酉天中殺は『古いものと新しいものを繋ぐ』使命。伴星龍高星は『ご先祖の革新的な営み』を受け継ぐこと。5つの視点が同じ方向を向いてる。今、2026年7月〜2027年6月は、この使命が最も光る時期。特に2027年3月（龍高星月運・天禄星）は申し分ない配置。この時期に『古いものと新しいものを繋ぐ活動』を具体化させておくと、2028-2029年の年天中殺中も軸がぶれない。火性ゼロから来る『発信できない』は弱みじゃなく、特殊な才能配置。龍高星の改革は、派手な形では起きない。水を流すように、知らない間に形が変わってる——その時間設計が今、最高に機能してる。"}
   ],
+  "monthlyFortunes": [
+    { "period":"7/2〜8/1",  "kanshi":"丁未・丙申", "mainStar":"鳳閣星・調舒星", "jyusei":"天印星・天報星", "aspects":"月柱：対冲 / 大半会", "isTenchu":false,  "advice":"7月は調舒星月運。個性を磨く月。新しい視点で古いものを見る。才能が出やすい時期。でも新規拡大はしない。あくまで『今やってることを深める』が正解。" },
+    { "period":"8/2〜9/1",  "kanshi":"戊申・丁酉", "mainStar":"司禄星・鳳閣星", "jyusei":"天報星・天馳星", "aspects":"年天中殺継続継続なし", "isTenchu":false, "advice":"8-9月は年天中殺の只中。でも司禄星（才能星）が戻ってくる配置。来たものを受け取る姿勢で。9月は月天中殺。新しい決断は保留。" }
+  ],
+  "monthlyTenchuPeriod": {
+    "startMonth": 8, "startDay": 1, "endMonth": 9, "endDay": 30, "endYear": 2026
+  },
+  "todos": [],
   "design": {
     "accentColor": "#1E7A7A",
     "headerSub": "― 乙亥・龍高星の暦 ―",
@@ -124,6 +321,134 @@ const CLIENT_DATA = {
     "footerText": "― 火がなくても、結ぶことで火は生まれる ―"
   }
 };
+
+// ========== 自動計算エンジン ==========
+// 日干支:乙亥(1,11) / 月柱:甲子(0,0) / 年柱:戊申(4,8) / 天中殺:申酉(8,9)
+var MY = { ds:1, db:11, ms:0, mb:0, ys:4, yb:8, tc:[8,9] };
+var STEMS = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+var BRANCHES = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+var WX = [0,0,1,1,2,2,3,3,4,4];
+var MSN = ['貫索星','石門星','鳳閣星','調舒星','禄存星','司禄星','車騎星','牽牛星','龍高星','玉堂星'];
+var BSA = ['天報星','天印星','天貴星','天恍星','天南星','天禄星','天将星','天堂星','天胡星','天極星','天庫星','天馳星'];
+var BSM = [2,3,4,5,6,7,8,9,10,11,0,1];
+var J12 = [
+  [1,2,3,4,5,6,7,8,9,10,11,0],
+  [6,5,4,3,2,1,0,11,10,9,8,7],
+  [10,11,0,1,2,3,4,5,6,7,8,9],
+  [9,8,7,6,5,4,3,2,1,0,11,10],
+  [10,11,0,1,2,3,4,5,6,7,8,9],
+  [9,8,7,6,5,4,3,2,1,0,11,10],
+  [7,8,9,10,11,0,1,2,3,4,5,6],
+  [0,11,10,9,8,7,6,5,4,3,2,1],
+  [4,5,6,7,8,9,10,11,0,1,2,3],
+  [3,2,1,0,11,10,9,8,7,6,5,4]
+];
+var GN = {0:1,1:2,2:3,3:4,4:0};
+var CL = {0:2,1:3,2:4,3:0,4:1};
+
+function _kidx(y,m,d){var r=Date.UTC(2000,0,1);var t=Date.UTC(y,m-1,d);return((Math.round((t-r)/864e5)%60)+60+54)%60}
+function _ms(myStem,os){var a=WX[myStem],b=WX[os],s=(myStem%2===os%2);if(a===b)return MSN[s?0:1];if(GN[a]===b)return MSN[s?2:3];if(CL[a]===b)return MSN[s?4:5];if(CL[b]===a)return MSN[s?6:7];if(GN[b]===a)return MSN[s?8:9];return MSN[0]}
+function _bs(myStem,br){return BSA[BSM[J12[myStem][br]]]}
+function _asp(s,b){
+  var a=[],ps=[{s:MY.ds,b:MY.db,n:'日柱'},{s:MY.ms,b:MY.mb,n:'月柱'},{s:MY.ys,b:MY.yb,n:'年柱'}];
+  var go=[[0,5],[1,6],[2,7],[3,8],[4,9]],sg=[[0,1],[2,11],[3,10],[4,9],[5,8],[6,7]];
+  var hk=[[2,6,10],[5,9,1],[8,0,4],[11,3,7]];
+  var dh=[[0,4],[4,8],[8,0],[1,5],[5,9],[9,1],[2,6],[6,10],[10,2],[3,7],[7,11],[11,3]];
+  var tc=[[0,6],[1,7],[2,8],[3,9],[4,10],[5,11]],ga=[[0,7],[1,6],[2,5],[3,4],[8,11],[9,10]];
+  var jk=[4,6,9,11],kk=[1,4,7,10];
+  for(var i=0;i<ps.length;i++){var p=ps[i];
+    if(s===p.s&&b===p.b)a.push(p.n+'：律音');
+    var aw=WX[s],pw=WX[p.s];
+    if(CL[aw]===pw||CL[pw]===aw){for(var t=0;t<tc.length;t++){if((b===tc[t][0]&&p.b===tc[t][1])||(b===tc[t][1]&&p.b===tc[t][0])){a.push(p.n+'：天剋地冲');break}}}
+    for(var g=0;g<go.length;g++){if((s===go[g][0]&&p.s===go[g][1])||(s===go[g][1]&&p.s===go[g][0])){a.push(p.n+'：干合');break}}
+    for(var x=0;x<sg.length;x++){if((b===sg[x][0]&&p.b===sg[x][1])||(b===sg[x][1]&&p.b===sg[x][0])){a.push(p.n+'：支合');break}}
+    for(var h=0;h<hk.length;h++){if(hk[h].indexOf(b)>=0&&hk[h].indexOf(p.b)>=0&&b!==p.b){a.push(p.n+'：半会');break}}
+    for(var d2=0;d2<dh.length;d2++){if((b===dh[d2][0]&&p.b===dh[d2][1])||(b===dh[d2][1]&&p.b===dh[d2][0])){a.push(p.n+'：大半会');break}}
+    for(var t2=0;t2<tc.length;t2++){if((b===tc[t2][0]&&p.b===tc[t2][1])||(b===tc[t2][1]&&p.b===tc[t2][0])){a.push(p.n+'：対冲');break}}
+    for(var j=0;j<ga.length;j++){if((b===ga[j][0]&&p.b===ga[j][1])||(b===ga[j][1]&&p.b===ga[j][0])){a.push(p.n+'：害');break}}
+    if(jk.indexOf(b)>=0&&b===p.b)a.push(p.n+'：自刑');
+    if(kk.indexOf(b)>=0&&kk.indexOf(p.b)>=0&&b!==p.b)a.push(p.n+'：庫刑');
+    var sk=[2,5,8];if(sk.indexOf(b)>=0&&sk.indexOf(p.b)>=0&&b!==p.b)a.push(p.n+'：生刑');
+    if((b===0&&p.b===3)||(b===3&&p.b===0))a.push(p.n+'：旺刑');
+    if(s!==p.s&&b===p.b){var sum1=(s+b)%10,sum2=(p.s+p.b)%10;if(sum1===sum2)a.push(p.n+'：納音')}
+  }
+  if(MY.tc.indexOf(b)>=0)a.push('日天中殺');
+  return a;
+}
+
+function computeFortune(y,m,d){
+  var idx=_kidx(y,m,d),si=idx%10,bi=idx%12;
+  var k=STEMS[si]+BRANCHES[bi],ms=_ms(MY.ds,si),bs=_bs(MY.ds,bi);
+  var asp=_asp(si,bi);
+  var isTenchu=(MY.tc.indexOf(bi)>=0);
+  if(isTenchu){var has=false;for(var i=0;i<asp.length;i++)if(asp[i]==='日天中殺')has=true;if(!has)asp.push('日天中殺')}
+  return{date:m+'/'+d, kanshi:k, mainStar:ms, jyusei:bs, aspects:asp, isTenchu:isTenchu};
+}
+
+var jyuseiDesc = {
+  '天報星': '転生の星(エネルギー3)。多芸多才。色んな方向に動ける日や。',
+  '天印星': '赤ちゃんの星(6)。素直さと愛嬌が武器。甘えてええ日。',
+  '天貴星': '品格の星(9)。プライドが力になる。堂々と立つ日や。',
+  '天恍星': '青春の星(7)。ロマンチックで感性が冴える日。',
+  '天南星': '前進の星(10)。勢いがある日。積極的に動いてええ。',
+  '天禄星': '壮年の星(11)。実力発揮。責任ある仕事に向く日。',
+  '天将星': '王様の星(12)。最大エネルギー。決断の日や。',
+  '天堂星': '老人の星(8)。経験値で勝負。穏やかに過ごす日。',
+  '天胡星': '霊感の星(4)。感性が鋭い。美や芸術に触れるとええ。',
+  '天極星': '死の星(2)。体力低め。省エネで過ごす日。',
+  '天庫星': '入墓の星(5)。片付け・整理に向く。内省の日。',
+  '天馳星': 'あの世の星(1)。体力の底。スピ感性が高まる。早く寝る日や。'
+};
+
+var dailyAdvice = {
+  '7/2':  { advice:'調舒星年運・個性を磨く月がスタート。新しい視点で古いものを見てみる。' },
+  '7/3':  { advice:'思考が冴える日。記録に残す。来月以降に活かす。' },
+  '7/4':  { advice:'学びに向く日。水89の本領。一人で深掘りする。' },
+  '7/5':  { advice:'感性が高まる日。美しいものに触れる。芸術・工芸に反応する。' },
+  '7/6':  { advice:'内省の日。今月の気づきを整理する。' },
+  '7/7':  { advice:'龍高星月運・天禄星。責任ある決定に向く。でも新規拡大は慎重に。' },
+  '7/8':  { advice:'動きが出る日。でも無理は禁物。自分のペースを守る。' },
+  '7/9':  { advice:'人との繋がりが温かい日。来た人間関係を大切に。' },
+  '7/10': { advice:'体力低めの日。早めに寝る。思考は続ける。' },
+  '8/1':  { advice:'8月入り。鳳閣星月運。火性が少し入る。でも焦らない。' },
+  '8/2':  { advice:'調舒星月運明け。丁酉月。感性がまだ冴えてる。最後の個性磨き。' },
+  '8/3':  { advice:'月天中殺開始。新規拡大は保留。来たものを受け取る姿勢で。' },
+  '8/4':  { advice:'月天中殺の只中。深掘りだけ。広げない。' },
+  '8/5':  { advice:'考える。書く。記録に残す。' },
+  '8/6':  { advice:'月天中殺継続。9月まで。焦らずに。' },
+  '8/7':  { advice:'月天中殺継続。でも司禄星（才能星）と関係。深掘りが才能を引き出す。' },
+  '8/8':  { advice:'月天中殺継続。内省の時間を大切に。' },
+  '9/1':  { advice:'9月入り。月天中殺明け間近。最後の整理の月。' },
+  '9/7':  { advice:'月天中殺最後の日々。10月からリセット。準備しとく。' }
+};
+
+function getFortuneByDate(month, day, year) {
+  if (!year) year = (month >= 6 && month <= 12) ? 2026 : 2027;
+  var calc = computeFortune(year, month, day);
+  var key = month + '/' + day;
+  var adv = (dailyAdvice[key] && dailyAdvice[key].advice) ? dailyAdvice[key].advice : '';
+  var aspEmo = [];
+  for (var i = 0; i < calc.aspects.length; i++) {
+    var a = calc.aspects[i];
+    var emoji = '';
+    if (a.indexOf('天中殺') >= 0) emoji = '🌀';
+    else if (a.indexOf('天剋地冲') >= 0) emoji = '🌊';
+    else if (a.indexOf('干合') >= 0) emoji = '🔗';
+    else if (a.indexOf('支合') >= 0) emoji = '🤝';
+    else if (a.indexOf('半会') >= 0 || a.indexOf('大半会') >= 0) emoji = '🌼';
+    else if (a.indexOf('対冲') >= 0) emoji = '🌊';
+    else if (a.indexOf('害') >= 0) emoji = '💫';
+    else if (a.indexOf('刑') >= 0) emoji = '⚡';
+    else if (a.indexOf('律音') >= 0) emoji = '🎵';
+    else if (a.indexOf('納音') >= 0) emoji = '🔔';
+    aspEmo.push(a + (emoji ? emoji : ''));
+  }
+  return {
+    date: calc.date, kanshi: calc.kanshi, mainStar: calc.mainStar, jyusei: calc.jyusei,
+    aspects: aspEmo.length > 0 ? aspEmo.join(' ') : '-',
+    isTenchu: calc.isTenchu, advice: adv
+  };
+}
 
 const D = CLIENT_DATA;
 
@@ -134,14 +459,135 @@ function getToday() {
 
 function getJapaneseDate(m, d) {
   var ms = ['','一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
-  var ds = {1:'一',2:'二',3:'三',4:'四',5:'五',6:'六',7:'七',8:'八',9:'九',10:'十',11:'十一',12:'十二',13:'十三',14:'十四',15:'十五',16:'十六',17:'十七',18:'十八',19:'十九',20:'二十',21:'二十一',22:'二十二',23:'二十三',24:'二十四',25:'二十五',26:'二十六',27:'二十七',28:'二十八',29:'二十九',30:'三十',31:'三十一'};
+  var ds = {1:'一',2:'二',3:'三',4:'四',5:'五',6:'六',7:'七',8:'八',9:'九',10:'十',
+    11:'十一',12:'十二',13:'十三',14:'十四',15:'十五',16:'十六',17:'十七',18:'十八',19:'十九',20:'二十',
+    21:'二十一',22:'二十二',23:'二十三',24:'二十四',25:'二十五',26:'二十六',27:'二十七',28:'二十八',29:'二十九',30:'三十',31:'三十一'};
   return { month: ms[m] || (m+'月'), day: (ds[d] || (d+'日')) + (ds[d]?'日':'') };
+}
+
+function getCurrentMonthFortune(m, d, y) {
+  var today;
+  if (y === 2026) today = m * 100 + d;
+  else if (y === 2027) today = 1200 + m * 100 + d;
+  else return D.monthlyFortunes[0];
+  for (var i = 0; i < D.monthlyFortunes.length; i++) {
+    var f = D.monthlyFortunes[i];
+    var match = f.period.match(/(?:(\d{4})\/)?(\d+)\/(\d+)〜(?:(\d{4})\/)?(\d+)\/(\d+)/);
+    if (!match) continue;
+    var sY = match[1] ? +match[1] : 2026, sM = +match[2], sD = +match[3];
+    var eY = match[4] ? +match[4] : sY, eM = +match[5], eD = +match[6];
+    if (eY < sY) eY = sY;
+    var sKey = (sY === 2027 ? 1200 : 0) + sM * 100 + sD;
+    var eKey = (eY === 2027 ? 1200 : 0) + eM * 100 + eD;
+    if (today >= sKey && today <= eKey) return f;
+  }
+  return D.monthlyFortunes[0];
+}
+
+function isInTenchuPeriod(m, d, y) {
+  if (!D.monthlyTenchuPeriod) return false;
+  if (y !== D.monthlyTenchuPeriod.endYear) return false;
+  var p = D.monthlyTenchuPeriod;
+  var today = m * 100 + d;
+  return today >= p.startMonth * 100 + p.startDay && today <= p.endMonth * 100 + p.endDay;
+}
+
+function getDaysUntil(year, month, day) {
+  var now = new Date(); now.setHours(0,0,0,0);
+  var target = new Date(year, month - 1, day);
+  var diff = Math.ceil((target - now) / (1000*60*60*24));
+  return diff > 0 ? diff : 0;
+}
+
+var calMonths = [
+  { y: 2026, m: 7, label: '7月' },
+  { y: 2026, m: 8, label: '8月' },
+  { y: 2026, m: 9, label: '9月' }
+];
+var currentCalIdx = 0;
+
+function buildMonthGridHTML(year, month, todayM, todayD, todayY) {
+  var firstDay = new Date(year, month - 1, 1).getDay();
+  var startOffset = (firstDay === 0) ? 6 : firstDay - 1;
+  var daysInMonth = new Date(year, month, 0).getDate();
+  var html = '<div class="cal-grid">';
+  var days = ['月','火','水','木','金','土','日'];
+  for (var i = 0; i < 7; i++) html += '<div class="cal-header">' + days[i] + '</div>';
+  for (var i = 0; i < startOffset; i++) html += '<div class="cal-cell empty"></div>';
+  for (var d = 1; d <= daysInMonth; d++) {
+    var f = getFortuneByDate(month, d, year);
+    var isToday = (month === todayM && d === todayD && year === todayY);
+    var cls = 'cal-cell';
+    if (isToday) cls += ' today';
+    if (f && f.isTenchu) cls += ' tenchu-day';
+    var bg = '';
+    if (f) {
+      if (f.aspects.indexOf('律音') >= 0) bg = 'background:rgba(45,155,155,0.15);';
+      else if (f.aspects.indexOf('天剋地冲') >= 0) bg = 'background:rgba(30,107,126,0.15);';
+      else if (f.isTenchu) bg = 'background:rgba(58,107,140,0.10);';
+      else if (f.aspects.indexOf('干合') >= 0 || f.aspects.indexOf('支合') >= 0) bg = 'background:rgba(30,122,122,0.10);';
+      else if (f.aspects.indexOf('半会') >= 0 || f.aspects.indexOf('大半会') >= 0) bg = 'background:rgba(122,191,191,0.20);';
+    }
+    html += '<div class="' + cls + '" style="' + bg + '" onclick="openDetail(' + year + ',' + month + ',' + d + ')">';
+    html += '<span class="cal-day">' + d + '</span>';
+    if (f) {
+      var shortAspect = '';
+      if (f.aspects.indexOf('律音') >= 0) shortAspect = '🎵';
+      else if (f.aspects.indexOf('天剋地冲') >= 0) shortAspect = '🌊';
+      else if (f.isTenchu) shortAspect = '🌀';
+      else if (f.aspects.indexOf('干合') >= 0 && f.aspects.indexOf('支合') >= 0) shortAspect = '🔗🤝';
+      else if (f.aspects.indexOf('干合') >= 0) shortAspect = '🔗';
+      else if (f.aspects.indexOf('支合') >= 0) shortAspect = '🤝';
+      else if (f.aspects.indexOf('半会') >= 0 || f.aspects.indexOf('大半会') >= 0) shortAspect = '🌼';
+      else if (f.aspects.indexOf('害') >= 0) shortAspect = '💫';
+      else if (f.aspects.indexOf('刑') >= 0) shortAspect = '⚡';
+      if (shortAspect) html += '<span class="cal-aspect">' + shortAspect + '</span>';
+    }
+    html += '</div>';
+  }
+  html += '</div>';
+  return html;
+}
+
+function switchCalMonth(idx) {
+  currentCalIdx = idx;
+  for (var i = 0; i < calMonths.length; i++) {
+    var el = document.getElementById('cal-grid-' + i);
+    if (el) el.style.display = (i === idx) ? '' : 'none';
+    var tab = document.getElementById('cal-tab-' + i);
+    if (tab) tab.className = 'cal-month-tab' + (i === idx ? ' active' : '');
+  }
+}
+
+function openDetail(year, month, day) {
+  var f = getFortuneByDate(month, day, year);
+  var jdesc = jyuseiDesc[f.jyusei] || '';
+  var html = '<button class="detail-close" onclick="closeDetail()">×</button>';
+  html += '<p class="detail-date-stars">' + year + '年' + month + '月' + day + '日<span class="detail-day-stars"> ' + f.kanshi + ' / ' + f.mainStar + '・' + f.jyusei + '</span></p>';
+  if (f.aspects && f.aspects !== '-') {
+    html += '<div class="detail-section"><p class="detail-label">位相法</p><p class="detail-text">' + f.aspects + '</p></div>';
+  }
+  if (jdesc) {
+    html += '<div class="detail-section"><p class="detail-label">今日のエネルギー(' + f.jyusei + ')</p><p class="detail-text">' + jdesc + '</p></div>';
+  }
+  if (f.advice) {
+    html += '<div class="detail-section"><p class="detail-label">㐂からの一言</p><p class="detail-text">' + f.advice + '</p></div>';
+  }
+  document.getElementById('detailContent').innerHTML = html;
+  document.getElementById('detailModal').classList.add('active');
+}
+
+function closeDetail() {
+  document.getElementById('detailModal').classList.remove('active');
 }
 
 function render() {
   var t = getToday();
   var m = t.month, d = t.day, y = t.year;
   var jpDate = getJapaneseDate(m, d);
+  var currentMonth = getCurrentMonthFortune(m, d, y);
+  var inTenchu = isInTenchuPeriod(m, d, y);
+  var todayF = getFortuneByDate(m, d, y);
 
   document.getElementById('header').innerHTML =
     '<p class="sub">' + D.design.headerSub + '</p>' +
@@ -153,6 +599,7 @@ function render() {
   var app = document.getElementById('app');
   var html = '';
 
+  // 日付と命式
   html += '<div class="card">';
   html += '<div class="text-center mb-6">';
   html += '<p class="text-xs" style="color:var(--color-brown)">令和八年</p>';
@@ -168,25 +615,96 @@ function render() {
 
   html += '<div class="message-box" style="margin-top:1rem"><p class="text-sm" style="padding-left:1rem;line-height:1.8">' + D.client.elementNote + '</p></div>';
 
-  if (D.client.starsNote) html += '<p class="text-xs mt-3" style="color:var(--color-brown);line-height:1.7">' + D.client.starsNote + '</p>';
+  if (D.client.starsNote) {
+    html += '<p class="text-xs mt-3" style="color:var(--color-brown);line-height:1.7">' + D.client.starsNote + '</p>';
+  }
   if (D.client.chukuseiNote) {
-    html += '<div class="message-box" style="margin-top:0.75rem;background:rgba(30,122,122,0.08);border-color:var(--color-accent-soft)">';
+    html += '<div class="message-box" style="margin-top:0.75rem;background:rgba(74,140,140,0.08);border-color:var(--color-accent-soft)">';
     html += '<p class="text-xs" style="padding-left:1rem;line-height:1.75;color:var(--color-brown-dark)">' + D.client.chukuseiNote + '</p>';
     html += '</div>';
   }
-  if (D.client.guardianNote) html += '<p class="text-xs mt-3" style="color:var(--color-accent);line-height:1.7;font-style:italic;text-align:center">' + D.client.guardianNote + '</p>';
+  if (D.client.guardianNote) {
+    html += '<p class="text-xs mt-3" style="color:var(--color-accent);line-height:1.7;font-style:italic;text-align:center">' + D.client.guardianNote + '</p>';
+  }
 
   html += '<div class="divider"></div>';
 
+  // 年天中殺
   html += '<div class="year-tenchu-box">';
-  html += '<p class="year-tenchu-label">🌀 2028〜2030年 年天中殺について</p>';
+  html += '<p class="year-tenchu-label">🌀 2026〜2029年 年天中殺について</p>';
   html += '<p class="year-tenchu-body">' + D.yearTenchuNote + '</p>';
   html += '</div>';
 
+  // 今月の流れ
+  if (currentMonth) {
+    html += '<div class="mb-4">';
+    html += '<p class="text-xs text-center mb-2" style="color:var(--color-brown);letter-spacing:0.15em">今月の流れ</p>';
+    html += '<div class="text-center">';
+    html += '<p class="text-sm mb-1"><span style="color:var(--color-brown)">' + currentMonth.period + '</span><span style="margin:0 0.5rem">|</span><span style="color:var(--color-accent);font-weight:500">' + currentMonth.kanshi + ' ' + currentMonth.mainStar + '</span></p>';
+    if (currentMonth.aspects && currentMonth.aspects !== '-') html += '<p class="text-xs" style="color:var(--color-brown)">' + currentMonth.aspects + '</p>';
+    if (currentMonth.isTenchu) html += '<span class="badge badge-tenchu">月天中殺</span>';
+    html += '</div>';
+    html += '<p class="text-xs text-center mt-2" style="color:var(--color-brown-dark);line-height:1.7">' + currentMonth.advice + '</p>';
+    html += '</div>';
+  }
+
+  if (inTenchu && D.monthlyTenchuPeriod) {
+    html += '<div class="tenchu-box">';
+    html += '<p class="tenchu-label">月天中殺終了まで</p>';
+    var endD = D.monthlyTenchuPeriod.endDay + 1;
+    html += '<p class="tenchu-days">' + getDaysUntil(D.monthlyTenchuPeriod.endYear, D.monthlyTenchuPeriod.endMonth, endD) + '<span>日</span></p>';
+    html += '<p class="tenchu-note">' + D.monthlyTenchuPeriod.endMonth + '月' + endD + '日から動き出せる</p>';
+    html += '</div>';
+  }
   html += '</div>';
 
+  // 今日の運気
+  if (todayF) {
+    var jdesc = jyuseiDesc[todayF.jyusei] || '';
+    html += '<div class="card">';
+    html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>本日の運気</span></div>';
+    html += '<div class="star-grid">';
+    html += '<div class="star-box"><p class="star-label">主星</p><p class="star-value">' + todayF.mainStar + '</p></div>';
+    html += '<div class="star-box"><p class="star-label">従星</p><p class="star-value">' + todayF.jyusei + '</p></div>';
+    html += '</div>';
+    if (todayF.aspects && todayF.aspects !== '-') {
+      html += '<p class="text-xs text-center mb-3" style="color:var(--color-brown)">' + todayF.aspects + '</p>';
+    }
+    if (jdesc) html += '<p class="text-xs" style="background:var(--color-cream);padding:0.6rem;border-radius:4px;color:var(--color-brown-dark);line-height:1.7">' + jdesc + '</p>';
+    if (todayF.advice) html += '<p class="text-xs mt-2" style="color:var(--color-accent);line-height:1.7;font-weight:500">' + todayF.advice + '</p>';
+    html += '</div>';
+  }
+
+  // 日運カレンダー
   html += '<div class="card">';
-  html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>さゆりさんの 陽・陰パターン</span></div>';
+  html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>日運カレンダー</span></div>';
+  html += '<div class="cal-month-tabs">';
+  for (var i = 0; i < calMonths.length; i++) {
+    html += '<div id="cal-tab-' + i + '" class="cal-month-tab' + (i === currentCalIdx ? ' active' : '') + '" onclick="switchCalMonth(' + i + ')">' + calMonths[i].label + '</div>';
+  }
+  html += '</div>';
+  for (var i = 0; i < calMonths.length; i++) {
+    var cm = calMonths[i];
+    html += '<div id="cal-grid-' + i + '" style="' + (i === currentCalIdx ? '' : 'display:none') + '">';
+    html += buildMonthGridHTML(cm.y, cm.m, m, d, y);
+    html += '</div>';
+  }
+  html += '<div class="cal-legend">';
+  html += '<span>🎵 律音</span>';
+  html += '<span>🔗 干合</span>';
+  html += '<span>🤝 支合</span>';
+  html += '<span>🌼 半会</span>';
+  html += '<span>💫 害</span>';
+  html += '<span>⚡ 刑</span>';
+  html += '<span>🌊 冲</span>';
+  html += '<span>🌀 天中殺</span>';
+  html += '</div>';
+  html += '<p class="text-xs text-center mt-2" style="color:var(--color-brown);font-size:0.65rem">日付をタップで詳細</p>';
+  html += '</div>';
+
+  // 陽転・陰転パターン
+  html += '<div class="card">';
+  html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>さゆりさんの 陽転・陰転パターン</span></div>';
   html += '<div class="patterns">';
   html += '<div><p class="pattern-title win">陽</p><ul class="pattern-list">';
   for (var i = 0; i < D.yotenPatterns.length; i++) html += '<li><span class="dot-win">◇</span><span>' + D.yotenPatterns[i] + '</span></li>';
@@ -197,10 +715,11 @@ function render() {
   html += '</div>';
   html += '</div>';
 
+  // 五つの視点
   if (D.fiveViews && D.fiveViews.length > 0) {
     html += '<div class="card">';
     html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>- in depth -　５つの視点</span></div>';
-    html += '<p class="text-xs mb-3" style="color:var(--color-brown);line-height:1.7">同じ命式を 複数の角度で読み解く。</p>';
+    html += '<p class="text-xs mb-3" style="color:var(--color-brown);line-height:1.7">同じ命式を 五人の算命学者が読むと こうなる。</p>';
     for (var i = 0; i < D.fiveViews.length; i++) {
       var v = D.fiveViews[i];
       html += '<div style="margin-bottom:0.85rem;padding:0.7rem 0.9rem;background:var(--color-cream);border-left:3px solid var(--color-accent-light);border-radius:0 4px 4px 0">';
