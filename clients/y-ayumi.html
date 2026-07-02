@@ -625,6 +625,8 @@ function closeDetail() {
 }
 
 function render() {
+  var app = document.getElementById('app');
+  if (!app) return;
   var t = getToday();
   var m = t.month, d = t.day, y = t.year;
   var jpDate = getJapaneseDate(m, d);
