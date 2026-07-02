@@ -34,6 +34,10 @@
     {
       "source": "/syuko",
       "destination": "/clients/syuko.html"
+    },
+    {
+      "source": "/sayuri",
+      "destination": "/clients/sayuri.html"
     }
   ]
 }
