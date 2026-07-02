@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>さゆりさんの暦</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* 乙亥（木×水）─ 緑・深青・清涼感 */
+  --color-cream: #F5FBFB;
+  --color-warm-white: #FAFCFC;
+  --color-beige: #E8F2F4;
+  --color-accent: #1E7A7A;        /* 深青緑（水の深さ） */
+  --color-accent-light: #2E9B9B;  /* 青緑 */
+  --color-accent-soft: #5AACAC;   /* 淡青緑 */
+  --color-gold: #3A8C7E;          /* 翡翠色（木性） */
+  --color-gold-light: #6DB3AA;
+  --color-brown: #1F4A4A;
+  --color-brown-dark: #0F2A2A;
+  --color-rose: #2A7A7A;
+  --color-rose-light: #D4E8E8;
+  --color-sage: #4A7A6F;          /* 深緑（木性） */
+  --color-water: #2B5A7F;         /* 深水（水性） */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Serif JP', serif;
+  background: linear-gradient(180deg, var(--color-warm-white) 0%, var(--color-cream) 60%, #F0F8F8 100%);
+  color: var(--color-brown-dark);
+  min-height: 100vh;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+}
+
+.container { max-width: 28rem; margin: 0 auto; padding: 0 1rem 2rem; }
+
+header { text-align: center; padding: 2rem 1rem 1rem; }
+header .sub { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.2em; margin-bottom: 0.5rem; }
+header h1 { font-size: 1.35rem; font-weight: 500; color: var(--color-brown-dark); margin-bottom: 0.25rem; }
+header .tagline { font-size: 0.8rem; color: var(--color-brown); }
+
+.card {
+  background: var(--color-warm-white);
+  border: 1px solid var(--color-beige);
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 16px rgba(30, 122, 122, 0.08);
+  margin-bottom: 1.5rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.card-header {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-brown-dark);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-beige);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent-light), transparent);
+  margin: 1.5rem 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.7rem;
+  border-radius: 100px;
+  font-weight: 400;
+}
+.badge-info { background: rgba(58, 140, 126, 0.18); color: var(--color-gold); border: 1px solid rgba(58, 140, 126, 0.35); }
+.badge-danger { background: rgba(42, 122, 122, 0.18); color: #154A4A; border: 1px solid rgba(42, 122, 122, 0.4); }
+.badge-warning { background: rgba(46, 155, 155, 0.2); color: #106666; border: 1px solid rgba(46, 155, 155, 0.4); }
+.badge-success { background: rgba(74, 122, 111, 0.2); color: #2A5A4A; border: 1px solid rgba(74, 122, 111, 0.4); }
+.badge-tenchu { background: rgba(43, 90, 127, 0.18); color: var(--color-water); border: 1px solid rgba(43, 90, 127, 0.4); }
+
+.message-box {
+  background: var(--color-cream);
+  border: 1px solid var(--color-beige);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  position: relative;
+}
+.message-box::before {
+  content: '\201C';
+  position: absolute;
+  top: -0.25rem;
+  left: 0.75rem;
+  font-size: 2rem;
+  color: var(--color-accent-soft);
+  opacity: 0.3;
+}
+
+.message-box p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--color-brown);
+}
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.grid-single { grid-column: 1 / -1; }
+
+.stat-box {
+  background: var(--color-cream);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+.stat-label { font-size: 0.7rem; color: var(--color-accent); font-weight: 500; letter-spacing: 0.1em; }
+.stat-value { font-size: 1.1rem; font-weight: 500; color: var(--color-brown-dark); margin-top: 0.25rem; }
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  margin: 1.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--color-accent-soft);
+}
+
+.insight-list { list-style: none; }
+.insight-list li {
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+  color: var(--color-brown);
+}
+.insight-list li::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+}
+
+.timeline {
+  position: relative;
+  padding: 1rem 0;
+}
+.timeline-item {
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 0.35rem;
+  top: 0.2rem;
+  width: 0.9rem;
+  height: 0.9rem;
+  background: var(--color-accent);
+  border-radius: 50%;
+  border: 2px solid var(--color-warm-white);
+}
+.timeline-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 0.8rem;
+  top: 1.2rem;
+  width: 2px;
+  height: calc(100% + 0.3rem);
+  background: var(--color-accent-soft);
+}
+.timeline-year { font-weight: 500; color: var(--color-accent); font-size: 0.85rem; }
+.timeline-content { color: var(--color-brown); margin-top: 0.25rem; }
+
+.pattern-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.pattern-box {
+  background: var(--color-cream);
+  border-radius: 6px;
+  padding: 1rem;
+  border-left: 3px solid var(--color-accent);
+}
+.pattern-box h4 {
+  font-size: 0.8rem;
+  color: var(--color-accent);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+.pattern-box p {
+  font-size: 0.8rem;
+  color: var(--color-brown);
+  line-height: 1.6;
+}
+
+.footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.75rem;
+  color: var(--color-accent);
+  border-top: 1px solid var(--color-beige);
+  margin-top: 2rem;
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-cream: #0F2A2A;
+    --color-warm-white: #142E2E;
+    --color-beige: #1A3D3D;
+    --color-brown: #B0D4D4;
+    --color-brown-dark: #E8FCFC;
+  }
+  body { background: linear-gradient(180deg, #0F2A2A 0%, #0D2626 100%); }
+  .card { box-shadow: 0 2px 16px rgba(30, 122, 122, 0.2); }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+  <div class="sub">― 乙亥・龍高星の時代 ―</div>
+  <h1>さゆりの暦</h1>
+  <div class="tagline">古いものと新しいものを繋ぐ人</div>
+</header>
+
+<div class="card">
+  <div class="grid">
+    <div class="stat-box">
+      <div class="stat-label">生年月日</div>
+      <div class="stat-value">1968.12.31</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">現在の大運</div>
+      <div class="stat-value">己未（48-57歳）</div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="stat-box">
+      <div class="stat-label">2026年の年運</div>
+      <div class="stat-value">丙午</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">天中殺</div>
+      <div class="stat-value">申酉</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2 class="section-title">あなたの本質</h2>
+  <div class="message-box">
+    <p>「水上寄生の木」—しなやかな草花が水に浮かぶ。固い土に根を張らず、流れに身を任せながら生きる性質。普通の枠では生きられない特殊な宿命を持つあなたは、在宅で、自分のペースで、自分らしく生きることで陽転する。</p>
+  </div>
+  <ul class="insight-list">
+    <li>常に「新しい道を」という衝動を持つ改革者</li>
+    <li>立ち上げ（スターター）の才能が強い</li>
+    <li>野生的な直感と知的好奇心が冴えわたる</li>
+    <li>古いものと新しいものの「接続点」に立つ使命を持つ</li>
+    <li>関わる人の運まで変える強い力（天聖の性質）</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2 class="section-title">五つの視点</h2>
+
+  <div style="margin-bottom: 1.5rem;">
+    <h3 style="font-size: 0.9rem; color: var(--color-accent); margin-bottom: 0.5rem;">【壱】中心の力—龍高星</h3>
+    <p style="font-size: 0.85rem; color: var(--color-brown); line-height: 1.7;">あなたは異常な局面で斬新なアイデアをひらめく知識人。グローバルな視点で物事を考え、立体思考の持ち主。冒険心から未開の地にも足を踏み入れる。一つの場所にとどまると勢いを失うため、動き続けることでこそ力を最大限に発揮できる。</p>
+  </div>
+
+  <div style="margin-bottom: 1.5rem;">
+    <h3 style="font-size: 0.9rem; color: var(--color-accent); margin-bottom: 0.5rem;">【弐】目上との関係—司禄星</h3>
+    <p style="font-size: 0.85rem; color: var(--color-brown); line-height: 1.7;">誠実で堅実な印象を持たれ、与えられた仕事を着実にこなす。金銭管理もしっかりでき、信頼して任せられると高く評価される。親しみやすく庶民的。準備を怠らず、コツコツ継続することが大事。</p>
+  </div>
+
+  <div style="margin-bottom: 1.5rem;">
+    <h3 style="font-size: 0.9rem; color: var(--color-accent); margin-bottom: 0.5rem;">【参】社会での役割—牽牛星</h3>
+    <p style="font-size: 0.85rem; color: var(--color-brown); line-height: 1.7;">組織単位で物事を考える戦略家。派閥が存在する環境が得意で、組織の土台がしっかりしている環境を好む。理想が高く上昇志向が強い。本物のプライドを持ち、必要な時には頭を下げられる謙虚さが金運を引き寄せる。</p>
+  </div>
+
+  <div style="margin-bottom: 1.5rem;">
+    <h3 style="font-size: 0.9rem; color: var(--color-accent); margin-bottom: 0.5rem;">【肆】人を集める力—石門星</h3>
+    <p style="font-size: 0.85rem; color: var(--color-brown); line-height: 1.7;">とても社交的で誰に対しても偏見を持たない。交友関係は幅広く、さまざまなジャンルの人とつながれる。大勢の人をまとめる統率力があり、自然とリーダーシップを発揮する。周囲から頼られる兄貴・姉貴的な存在。30人はすぐに集まってしまう人脈の持ち主。</p>
+  </div>
+
+  <div>
+    <h3 style="font-size: 0.9rem; color: var(--color-accent); margin-bottom: 0.5rem;">【伍】パートナーとの関係—玉堂星</h3>
+    <p style="font-size: 0.85rem; color: var(--color-brown); line-height: 1.7;">歴史を愛し先人の知恵を大切にする落ち着いた人。知的で分析力に優れ、自分と同じレベルで会話を楽しめる相手や尊敬できる相手に惹かれる。自分の中に蓄えた知識や考えを人に伝えることが好き。話をじっくり聞いてくれる相手に好感を抱く。</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2 class="section-title">今の時期（2026年）</h2>
+  <div class="message-box">
+    <p>年運「丙午」—調舒星・天貴星。あなたの五行バランスで火性がゼロだったのに、初めて年運で火性エネルギーがやってくる時期。「自分の個性・美意識を磨く時期」であり、「自分の色を表現する」「発信する」のに最適な時期。いろんなことをやってみて、「何が本当に好きか」を見つめるプロセスが重要。焦らず、試行錯誤する。</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2 class="section-title">運気の波（2026-2030年）</h2>
+  <p style="font-size: 0.85rem; color: var(--color-brown); margin-bottom: 1rem; text-align: center;">※申酉天中殺のグラフより</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">2026年～2027年（上昇）</div>
+      <div class="timeline-content">運気が上昇し続ける「磨く時期」「確認する時期」「基盤を作る時期」。あなたの色をはっきりさせ、いろんなことを試行錯誤する。2027年がピーク。</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2028年2月～2029年2月（蛹の時期）</div>
+      <div class="timeline-content">年天中殺に入る。派手な拡大を避ける時期。代わりに「質を深める」「基盤を作る」に振る。複数の活動の中から「ほんまに大事なもの」を選び抜き、「これだけは絶対続けたい」という軸を決める。この決断が次の段階の土台になる。</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2030年2月以降（花開く）</div>
+      <div class="timeline-content">大運が切り替わり、新しい段階へ。2028年～2029年で見つけた「ほんまに大事なもの」の基盤の上で、「好きなものに囲まれた暮らし」が現実化していく時期。</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2 class="section-title">陽転・陰転パターン</h2>
+
+  <div class="pattern-grid">
+    <div class="pattern-box">
+      <h4>陽転（開く時期）</h4>
+      <ul style="font-size: 0.8rem; list-style: none; padding: 0;">
+        <li style="margin-bottom: 0.4rem;">✓ 古い知識と新しい媒体を繋ぐ活動</li>
+        <li style="margin-bottom: 0.4rem;">✓ 在宅で自分のペースで進める</li>
+        <li style="margin-bottom: 0.4rem;">✓ 人脈を大切にし繋がりを深める</li>
+        <li style="margin-bottom: 0.4rem;">✓ 「来たもの」を受け取る動き方</li>
+        <li>✓ 試行錯誤・小さく丁寧に</li>
+      </ul>
+    </div>
+
+    <div class="pattern-box">
+      <h4>陰転（停滞する時期）</h4>
+      <ul style="font-size: 0.8rem; list-style: none; padding: 0;">
+        <li style="margin-bottom: 0.4rem;">✗ 新しい分野を「探して」始める</li>
+        <li style="margin-bottom: 0.4rem;">✗ 現実欲（お金）を強く出す</li>
+        <li style="margin-bottom: 0.4rem;">✗ 新規事業を無理に進める</li>
+        <li style="margin-bottom: 0.4rem;">✗ 大きな決断（転職・別居等）</li>
+        <li>✗ 焦って拡大を求める</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2 class="section-title">あなたの天命</h2>
+  <div class="message-box">
+    <p>「古いものと新しいものを繋ぐ人」—それがあなたの使命。占い（伝統）とAI×SNS（革新）をつなぎ、人々に気づきと希望をもたらす活動。在宅で、自分のペースで、好きな人たちと繋がって、好きなことをしながら生きる。その願いは命式上「2030年以降に現実化する設計」になっています。あと3年は準備期間。焦らず、丁寧に。</p>
+  </div>
+</div>
+
+<div class="footer">
+  <p>占い鑑定：ナナフシ（㐂）2026年6月20日</p>
+  <p style="margin-top: 0.5rem; opacity: 0.7;">このページはあなたの暦を示すものです。</p>
+</div>
+
+</div>
+
+</body>
+</html>
