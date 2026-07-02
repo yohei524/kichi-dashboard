@@ -794,7 +794,7 @@ function render() {
   // やること(todos)
   if (D.todos && D.todos.length > 0) {
     html += '<div class="card">';
-    html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>本日のお導き</span></div>';
+    html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>今日の一歩👣</span></div>';
     for (var i = 0; i < D.todos.length; i++) {
       var t = D.todos[i];
       var pcls = (t.priority === 1) ? 'priority-high' : 'priority-normal';
@@ -805,7 +805,7 @@ function render() {
     html += '</div>';
   } else {
     html += '<div class="card">';
-    html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>本日のお導き</span></div>';
+    html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>今日の一歩👣</span></div>';
     html += '<p class="text-xs text-center" style="color:var(--color-brown);padding:0.5rem 0;line-height:1.8">ここには yokoさんの「今やること」を入れていく場所や。<br>次のやり取りで決めていこ。</p>';
     html += '</div>';
   }

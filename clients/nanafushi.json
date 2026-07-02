@@ -1,0 +1,158 @@
+{
+  "client": {
+    "name": "ナナフシ㐂",
+    "dayStem": "癸",
+    "dayStemReading": "みずのと",
+    "element": "水",
+    "elementNote": "溝渠の水。動くことで万物の役に立つ。止まると凍る。",
+    "tenchu": "寅卯天中殺",
+    "tenchuNote": "既存の枠を受け継ぎ守り抜く型。一人より誰かと組む方が強い。",
+    "specialStructure": "戊癸干合",
+    "specialNote": "発信すると冷静な水が情熱の火に変化。発信止めると凍る ← 命式の最重要構造"
+  },
+  "goal": {
+    "main": "@hossoiossan 1日100人ペース復帰・AI×SNSコンサル収益化",
+    "sub": "1対多モデルで月収60万円へ。発信し続けることが天命起動スイッチ。\n土性過多の「尽くしすぎ」を仕組みで防ぐ。金性不足の「値付けできない」はClaudeに担わせる。"
+  },
+  "winPatterns": [
+    "発信し続ける（戊癸干合が発動する）",
+    "1対多モデルで動く（コミュニティ・LP・自動化）",
+    "CTAを出して待つ・追わない",
+    "誰かと組む（寅卯天中殺は一人では動けない）",
+    "全部出す・素直に生きる（害を持つ者の鉄則）"
+  ],
+  "losePatterns": [
+    "高単価1対1の深い伴走を量産する",
+    "発信止めて家にこもる（凍る）",
+    "1クライアントに1ヶ月かけ続ける（土性過多）",
+    "完璧主義で投稿を止める",
+    "値付け・人切りを一人で悩む（金性不足）"
+  ],
+  "monthlyFortunes": [
+    {
+      "period": "5/5〜6/5",
+      "kanshi": "癸巳",
+      "mainStar": "貫索星",
+      "aspects": "日柱：大半会",
+      "isTenchu": false,
+      "advice": "2026年で最強クラスの追い風。自分軸がバシッと立つ月。発信・決断・新しいことを始めるなら今。"
+    },
+    {
+      "period": "6/6〜7/6",
+      "kanshi": "甲午",
+      "mainStar": "調舒星",
+      "aspects": "日柱：害、年柱：自刑",
+      "isTenchu": false,
+      "advice": "本音を飲み込みやすくなる月。モヤモヤが溜まりやすい。素直に生きることを意識。"
+    },
+    {
+      "period": "7/7〜8/6",
+      "kanshi": "乙未",
+      "mainStar": "鳳閣星",
+      "aspects": "日柱：対冲・庫刑、年柱：支合",
+      "isTenchu": false,
+      "advice": "大きな変化が来る月。衝突もあるが、支合で何かとしっくりハマる出会いもある。"
+    },
+    {
+      "period": "8/7〜9/6",
+      "kanshi": "丙申",
+      "mainStar": "司禄星",
+      "aspects": "月柱：大半会",
+      "isTenchu": false,
+      "advice": "蓄積・堅実な動きが吉。最強の追い風が吹く月。コツコツやってきたことが形になる。"
+    },
+    {
+      "period": "9/7〜10/7",
+      "kanshi": "丁酉",
+      "mainStar": "禄存星",
+      "aspects": "日柱：半会、月柱：支合",
+      "isTenchu": false,
+      "advice": "人気・魅力が高まる月。広がる感覚。人間関係が豊かになる。"
+    }
+  ],
+  "monthlyTenchuPeriod": "2026/2/4〜2026/4/4（月天中殺・終了済み）",
+  "todos": [
+    {
+      "task": "@hossoiossan 投稿3本/日ペースに戻す",
+      "priority": 1,
+      "deadline": "継続",
+      "reason": "発信=戊癸干合の発動スイッチ。止めると凍る。1日100人ペース復帰の核心。"
+    },
+    {
+      "task": "青色申告承認申請書の提出",
+      "priority": 1,
+      "deadline": "2026/6/1",
+      "reason": "逃すと2026年分65万円控除不可。直近で最も期限が迫ったタスク。"
+    },
+    {
+      "task": "cocozion陽介君用コナナフシ作成",
+      "priority": 2,
+      "deadline": null,
+      "reason": "クライアント6名の管理効率化。テンプレ流用でOK。"
+    },
+    {
+      "task": "AI×SNS LP タイトル修正",
+      "priority": 2,
+      "deadline": null,
+      "reason": "「名無しのトラックドライバー」表記が古い（3月末降車済み）"
+    },
+    {
+      "task": "GENさんへの提案・見積もり",
+      "priority": 2,
+      "deadline": null,
+      "reason": "10名展開の見込み。ライトコース¥60,000で対応設計を固める。"
+    }
+  ],
+  "finance": {
+    "showFinance": true,
+    "monthlyTarget": 600000,
+    "currentMonthly": 300000,
+    "label": "月収目標",
+    "note": "コンサル×発信の1対多モデルで届く数字"
+  },
+  "projects": [
+    {
+      "name": "@hossoiossan発信",
+      "status": "active",
+      "broadcasting": true,
+      "oneToMany": true,
+      "fateMatch": "good",
+      "nextAction": "1日3本ペースに戻す・自動生成パイプライン再起動",
+      "note": "2026/05/25時点26,000人。エンゲージメント率10.7%。"
+    },
+    {
+      "name": "AI×SNSコンサル",
+      "status": "active",
+      "broadcasting": false,
+      "oneToMany": true,
+      "fateMatch": "good",
+      "nextAction": "LP導線整備・コナナフシ自走設計強化",
+      "note": "現6名・見込みGEN10名。土性過多対策として仕組み化を優先。"
+    },
+    {
+      "name": "基地ダッシュボード（自分用）",
+      "status": "active",
+      "broadcasting": false,
+      "oneToMany": false,
+      "fateMatch": "good",
+      "nextAction": "Google Calendar連携・スマホで使える状態にする",
+      "note": "クライアントには使えているが自分には使えていなかった。今日から自分用に作る。"
+    },
+    {
+      "name": "ひつじぃ（LINE占い）",
+      "status": "active",
+      "broadcasting": false,
+      "oneToMany": false,
+      "fateMatch": "good",
+      "nextAction": "コミュニティ化・月額モデルへの移行",
+      "note": "1対1は土性過多で消耗。1対多のコミュニティへ移行が宿命に合う。"
+    }
+  ],
+  "design": {
+    "accentColor": "#4A7C9E",
+    "headerSub": "― 癸丑・龍高星の時代 ―",
+    "headerTitle": "㐂の基地",
+    "headerTagline": "動くことで万物の役に立つ",
+    "footerText": "― 発信が天命起動スイッチ ―"
+  }
+}
