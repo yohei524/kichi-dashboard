@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>yokoさんの暦</title>
+<title>Y★あゆみさんの暦</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -319,8 +319,9 @@ const CLIENT_DATA = {
     {"key":"[伍] 2028年への準備","body":"今は蓄える時間。経済的自立の土台を作る時期。2028年から全部が出る。50代の自分への一番の贈り物は、今年来年の『決める』『動く』『学ぶ』にかかってる。"}
   ],
   "monthlyFortunes": [
-    { "period":"6/6〜8/6", "kanshi":"甲午・乙未", "mainStar":"禄存星・司禄星", "jyusei":"天恍星・天南星", "aspects":"月天中殺（6月〜7月）/ 年柱：半会 月柱：支合・干合", "isTenchu":true, "advice":"月天中殺の2ヶ月。蓄えと整理の時間に使う。6月は禄存星で経済が動く月。7月から月柱律音で根が戻ってくる。7月7日以降、新しい発信・学習をスタートするとええ。" },
-    { "period":"8/7〜9/6", "kanshi":"丙申", "mainStar":"車騎星", "jyusei":"天禄星", "aspects":"年柱：大半会 日柱：生刑、天剋地冲", "isTenchu":false, "advice":"勢いが出やすい月。車騎星で行動派のエネルギー。責任ある仕事に向く。決めたことを動かす時期。ただし無理は禁物。体調管理を。" }
+    { "period":"6/6〜7/6", "kanshi":"甲午", "mainStar":"禄存星", "jyusei":"天恍星", "aspects":"月天中殺 / 年柱：半会 / 日柱：半会", "isTenchu":true, "advice":"月天中殺の月。6月は蓄えと整理の時間に使う。禄存星で経済が動く月や。新しいことを始めず、今あるものを整える。" },
+    { "period":"7/7〜8/6", "kanshi":"乙未", "mainStar":"司禄星", "jyusei":"天南星", "aspects":"月天中殺 / 月柱：律音 / 日柱：干合", "isTenchu":true, "advice":"7月7日から月天中殺明け。月柱律音で自分の根っこが戻ってくる。乙未で司禄星、経済と学びが結びつく月。天南星で前進のエネルギーが出始める。新しい発信・学習をスタートするのに最適な時期。" },
+    { "period":"8/7〜9/6", "kanshi":"丙申", "mainStar":"車騎星", "jyusei":"天禄星", "aspects":"年柱：大半会 / 日柱：生刑、天剋地冲", "isTenchu":false, "advice":"勢いが出やすい月。車騎星で行動派のエネルギー。責任ある仕事に向く。決めたことを動かす時期。ただし無理は禁物。体調管理を。" }
   ],
   "monthlyTenchuPeriod": {
     "startMonth": 6, "startDay": 6, "endMonth": 8, "endDay": 6, "endYear": 2026
@@ -473,7 +474,8 @@ var dailyAdvice = {
   '7/27': { advice:'学びの日。知識を吸う時間を取る。' },
   '7/28': { advice:'感情の揺れあり。流す。' },
   '7/29': { advice:'集中の日。一つに絞る。' },
-  '7/30': { advice:'7月のテーマを 振り返ってな。' }
+  '7/30': { advice:'7月のテーマを 振り返ってな。' },
+  '7/31': { advice:'7月最終日。月末に向けて 整理をしてな。' }
 };
 
 function getFortuneByDate(month, day, year) {
@@ -755,7 +757,7 @@ function render() {
 
   // 大切にすること・気をつけること
   html += '<div class="card">';
-  html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>yokoさんの 勝ち筋・避け筋</span></div>';
+  html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>Y★あゆみさんの 勝ち筋・避け筋</span></div>';
   html += '<div class="patterns">';
   html += '<div><p class="pattern-title win">大切にすること</p><ul class="pattern-list">';
   for (var i = 0; i < D.winPatterns.length; i++) html += '<li><span class="dot-win">◇</span><span>' + D.winPatterns[i] + '</span></li>';
@@ -770,7 +772,7 @@ function render() {
   if (D.fiveViews && D.fiveViews.length > 0) {
     html += '<div class="card">';
     html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>五つの視点 ─ ぐるりと見る</span></div>';
-    html += '<p class="text-xs mb-3" style="color:var(--color-brown);line-height:1.7">同じ命式を 違う角度から見たメモや。 yokoさんの動き方を 五方向から確かめる。</p>';
+    html += '<p class="text-xs mb-3" style="color:var(--color-brown);line-height:1.7">同じ命式を 違う角度から見たメモや。 Y★あゆみさんの動き方を 五方向から確かめる。</p>';
     for (var i = 0; i < D.fiveViews.length; i++) {
       var v = D.fiveViews[i];
       html += '<div style="margin-bottom:0.85rem;padding:0.7rem 0.9rem;background:var(--color-cream);border-left:3px solid var(--color-accent-light);border-radius:0 4px 4px 0">';
@@ -796,7 +798,7 @@ function render() {
   } else {
     html += '<div class="card">';
     html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>今日の一歩👣</span></div>';
-    html += '<p class="text-xs text-center" style="color:var(--color-brown);padding:0.5rem 0;line-height:1.8">ここには yokoさんの「今やること」を入れていく場所や。<br>次のやり取りで決めていこ。</p>';
+    html += '<p class="text-xs text-center" style="color:var(--color-brown);padding:0.5rem 0;line-height:1.8">ここには Y★あゆみさんの「今やること」を入れていく場所や。<br>次のやり取りで決めていこ。</p>';
     html += '</div>';
   }
 
