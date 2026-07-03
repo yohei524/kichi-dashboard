@@ -38,6 +38,10 @@
     {
       "source": "/sayuri",
       "destination": "/clients/sayuri.html"
+    },
+    {
+      "source": "/hidetoh",
+      "destination": "/clients/hidetoh.html"
     }
   ]
 }
