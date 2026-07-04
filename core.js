@@ -94,29 +94,41 @@ function computeFortune(y,m,d){
 // ---------- 12段階旅フロー（無料版天中殺チェッカー相当） ----------
 var TRAVEL_STAGES=[
   {emoji:"🧳",name:"荷造り",sub:"準備",
-    hint:"新しい何かを始めるのに向いた日"},
+    hint:"新しい何かを始めるのに向いた日",
+    longHint:"新しい何かを始めるのに向いた日。派手な動きより、小さな種をまくくらいのイメージで。今日始めたことは1〜2ヶ月後に芽が出やすい時期です。"},
   {emoji:"🚶",name:"旅の出発",sub:"移動",
-    hint:"始めたことが育ちやすい日"},
+    hint:"始めたことが育ちやすい日",
+    longHint:"始めたことが育ちやすい日。前向きな話・新しい人との会話・学びに向きます。少し勇気を出して踏み出すと、風が味方してくれる感覚があるはず。"},
   {emoji:"🌅",name:"目的地到着",sub:"成功",
-    hint:"「決める」に向いた日"},
+    hint:"「決める」に向いた日",
+    longHint:"「決める」に向いた日。大事な連絡・プレゼン・契約サインなど、勝負どころに立つのに強い日。積み重ねてきた人ほど成果が見えます。"},
   {emoji:"⏳",name:"休憩",sub:"ブレーキ",
-    hint:"体と心が疲れやすい日"},
+    hint:"体と心が疲れやすい日",
+    longHint:"体と心が疲れやすい日。頑張りすぎず、体調管理を優先。「今日は無理しない」と決めるだけで乗り切れます。大きな決断は明日以降に回すのが吉。"},
   {emoji:"🎉",name:"旅のハイライト",sub:"最高の瞬間",
-    hint:"12日で一番エネルギーが高い日"},
+    hint:"12日で一番エネルギーが高い日",
+    longHint:"12日で一番エネルギーが高い日。願いや目標が形になりやすい。「今日やっとこう」と思ってたことに集中すると、想像以上の結果がついてくることも。"},
   {emoji:"🌪️",name:"道中のトラブル",sub:"試練",
-    hint:"感情がざわつきやすい日"},
+    hint:"感情がざわつきやすい日",
+    longHint:"感情がざわつく・小さなトラブルが起きやすい日。人に反応しすぎず、深呼吸してから返事するのがおすすめ。大きな契約・投資は明日以降に。"},
   {emoji:"🛤️",name:"ルート変更",sub:"選択の時",
-    hint:"昔の縁が動き出しやすい日"},
+    hint:"昔の縁が動き出しやすい日",
+    longHint:"昔の縁が動き出す日。懐かしい人からの連絡・過去のプロジェクトの再開・やり直したかった何かに手を伸ばす、そんな日。"},
   {emoji:"🛍️",name:"お土産購入",sub:"収穫",
-    hint:"実りが返ってくる日"},
+    hint:"実りが返ってくる日",
+    longHint:"実りが返ってくる日。お金・成果・評価が動きやすい。臨時収入や嬉しい依頼が来ることも。ここまで頑張ってきた自分にご褒美をあげてもいい日。"},
   {emoji:"🏠",name:"帰路につく",sub:"次の準備",
-    hint:"穏やかで落ち着ける日"},
+    hint:"穏やかで落ち着ける日",
+    longHint:"穏やかで落ち着ける日。派手なことより、日常を整える・大切な人とゆっくり過ごすのに向きます。「安定」を感じ、次のサイクルへの土台を作る日。"},
   {emoji:"🛌",name:"休息",sub:"充電期間",
-    hint:"少し内側にこもる日"},
+    hint:"少し内側にこもる日",
+    longHint:"少し内側にこもる日。孤独を感じやすいけど、それは充電の合図。目立たない場所で自分の中身を整える時間として使うと、次のサイクルに活きます。"},
   {emoji:"🚧",name:"旅の終わり",sub:"低迷期",
-    hint:"12日サイクルの底・日天中殺"},
+    hint:"12日サイクルの底・日天中殺",
+    longHint:"12日サイクルの底。物事が停滞しやすく、無気力になりがち。焦らず休むのが正解。ここで動きたい気持ちを抑えられると、次のサイクルが軽くなります。"},
   {emoji:"🔄",name:"次の旅の計画",sub:"再スタート",
-    hint:"次のサイクルの入口・日天中殺"}
+    hint:"次のサイクルの入口・日天中殺",
+    longHint:"12日サイクルの終わり=次のサイクルの入口。エネルギーが少ない中で、静かに次を思い描く日。無理して動かず、内側を整えましょう。"}
 ];
 var BRANCH_ORDER=["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"];
 
@@ -125,6 +137,58 @@ function getTravelStage(tenchuBr, todayDshi) {
   var todayIdx = BRANCH_ORDER.indexOf(todayDshi);
   var stage = ((todayIdx - startIdx + 10) % 12);
   return TRAVEL_STAGES[stage];
+}
+
+// ---------- 主星の意味（月単位の指針づくりに使う） ----------
+var mainStarDesc = {
+  '貫索星': '自分のペースを守る力が強まる時期。単独で動く・自分の軸を固める動きが合います。',
+  '石門星': '人との繋がり・仲間作りの力が強まる時期。人に会う・輪を広げる動きが合います。',
+  '鳳閣星': '表現・発信の力が強まる時期。自然体で伝える・楽しむ動きが合います。',
+  '調舒星': '感性・創造の力が強まる時期。一人で集中する・作品や個性を磨く動きが合います。',
+  '禄存星': '人に尽くす・愛情を注ぐ力が強まる時期。人のために動く・奉仕する動きが合います。',
+  '司禄星': '蓄積・堅実さの力が強まる時期。貯める・家庭を整える動きが合います。',
+  '車騎星': '行動力・前進力が強まる時期。動きながら考える・素早く動く動きが合います。',
+  '牽牛星': '責任感・名誉を求める力が強まる時期。役割を果たす・肩書きを意識した動きが合います。',
+  '龍高星': '改革・変化を求める力が強まる時期。新しいことに挑戦する・環境を変える動きが合います。',
+  '玉堂星': '学び・伝統を重んじる力が強まる時期。学ぶ・じっくり考える動きが合います。'
+};
+
+// 月単位のガイダンス（天中殺・位相法・主星を統合した「今月どう動くか」）
+function buildMonthGuidance(monthF) {
+  var lines = [];
+  var aspKeys = getAspectKeys(monthF.aspects || '');
+  var hasCaution = false, hasGood = false;
+
+  if (monthF.isTenchu) {
+    lines.push('🌀 今月は月天中殺。' + ASPECT_ACTION['天中殺'].monthText.replace(/^今月は/, ''));
+    hasCaution = true;
+  }
+  for (var i = 0; i < aspKeys.length; i++) {
+    var k = aspKeys[i];
+    if (k === '天中殺') continue;
+    var a = ASPECT_ACTION[k];
+    lines.push((a.tone === 'good' ? '🌼 ' : a.tone === 'caution' ? '⚡ ' : '🔔 ') + k + '：' + a.monthText);
+    if (a.tone === 'caution') hasCaution = true;
+    if (a.tone === 'good') hasGood = true;
+  }
+  var msDesc = mainStarDesc[monthF.mainStar];
+  if (msDesc) lines.push('⭐ ' + msDesc);
+
+  var summary;
+  if (monthF.isTenchu) {
+    summary = '総合すると、今月は新しく大きく動くより、既にあるものを整える月にすると無理がありません。';
+  } else if (hasCaution && hasGood) {
+    summary = '総合すると、伸びる流れと注意すべき流れが両方来ている月。的を絞って動くと結果が出やすいです。';
+  } else if (hasCaution) {
+    summary = '総合すると、今月は慎重に構えるのが吉な月。大きな決断は来月以降に回すのも一つの手です。';
+  } else if (hasGood) {
+    summary = '総合すると、今月は動くと結果が出やすい月。気になっていたことを一つ、今月中に進めてみてください。';
+  } else {
+    summary = '総合すると、今月は特別な追い風も向かい風もない、いつも通りのペースで過ごせる月です。';
+  }
+  lines.push('👉 ' + summary);
+
+  return lines;
 }
 
 // ---------- 従星の意味 ----------
@@ -142,6 +206,116 @@ var jyuseiDesc = {
   '天庫星': '入墓の星(5)。片付け・整理に向く。内省の日。',
   '天馳星': 'あの世の星(1)。体力の底。スピ感性が高まる。早く寝る日や。'
 };
+
+// ---------- 位相法の意味（今日のアドバイス生成に使う） ----------
+// 各位相法が「日柱・月柱・年柱」のどこに付いても使える、行動レベルの一言。
+var ASPECT_ACTION = {
+  '天中殺':   { tone:'caution',
+    text:'今日は新しい決断・大きな契約は避けて、今あるものを整える日にすると無理がありません。',
+    monthText:'今月は新しい決断・大きな契約は避けて、今あるものを整える月にすると無理がありません。' },
+  '天剋地冲': { tone:'caution',
+    text:'衝撃的な変化が起きやすい日。表面はいつも通りでも内側で葛藤が動きやすいので、大きな判断は一呼吸置いてから。',
+    monthText:'衝撃的な変化が起きやすい月。表面はいつも通りでも内側で葛藤が動きやすいので、大きな判断は一呼吸置いてから。' },
+  '対冲':     { tone:'caution',
+    text:'物事がぶつかりやすい日。結果に固執せず、進んだり戻ったりを繰り返す前提でいると気持ちが楽になります。',
+    monthText:'物事がぶつかりやすい月。結果に固執せず、進んだり戻ったりを繰り返す前提でいると気持ちが楽になります。' },
+  '害':       { tone:'caution',
+    text:'本音を飲み込みやすく、モヤモヤが溜まりやすい日。無理に丸く収めようとせず、言いたいことは小出しにしておくのがコツ。',
+    monthText:'本音を飲み込みやすく、モヤモヤが溜まりやすい月。無理に丸く収めようとせず、言いたいことは小出しにしておくのがコツ。' },
+  '刑':       { tone:'caution',
+    text:'「やらなあかん」に追われやすい日。自分を縛りすぎず、期限より先にペースを緩める判断をしても大丈夫です。',
+    monthText:'「やらなあかん」に追われやすい月。自分を縛りすぎず、期限より先にペースを緩める判断をしても大丈夫です。' },
+  '旺刑':     { tone:'caution',
+    text:'身近な人とのすれ違いが出やすい日。感情的な言い合いより、少し距離を置いて様子を見るのが吉。',
+    monthText:'身近な人とのすれ違いが出やすい月。感情的な言い合いより、少し距離を置いて様子を見るのが吉。' },
+  '自刑':     { tone:'caution',
+    text:'自分で自分を追い込みやすい日。頭の中でグルグル考えすぎず、体を動かして気分を切り替えるのがおすすめ。',
+    monthText:'自分で自分を追い込みやすい月。頭の中でグルグル考えすぎず、体を動かして気分を切り替えるのがおすすめ。' },
+  '庫刑':     { tone:'caution',
+    text:'目上・上の立場の人からのプレッシャーを感じやすい日。無理に張り合わず、聞き役に回ると波風が立ちません。',
+    monthText:'目上・上の立場の人からのプレッシャーを感じやすい月。無理に張り合わず、聞き役に回ると波風が立ちません。' },
+  '生刑':     { tone:'caution',
+    text:'下の立場の人・子供との間で摩擦が出やすい日。指示より対話を意識すると収まりやすい日です。',
+    monthText:'下の立場の人・子供との間で摩擦が出やすい月。指示より対話を意識すると収まりやすい月です。' },
+  '半会':     { tone:'good',
+    text:'物事が広がりやすい、追い風の日。気になっていたことに一歩踏み出すのに向いています。',
+    monthText:'物事が広がりやすい、追い風の月。気になっていたことに一歩踏み出すのに向いています。' },
+  '大半会':   { tone:'good',
+    text:'今日は最強クラスの追い風。ここぞという決断・発信・行動は、思い切って今日に合わせるのが吉。',
+    monthText:'今月は最強クラスの追い風。ここぞという決断・発信・行動は、思い切って今月に合わせるのが吉。' },
+  '支合':     { tone:'good',
+    text:'人や物事としっくり噛み合いやすい日。人に会う・相談する・繋がりを作るのに向いています。',
+    monthText:'人や物事としっくり噛み合いやすい月。人に会う・相談する・繋がりを作るのに向いています。' },
+  '干合':     { tone:'good',
+    text:'内側と深く繋がりやすい日。本音で話す・自分の考えを言葉にするのに向いた日です。',
+    monthText:'内側と深く繋がりやすい月。本音で話す・自分の考えを言葉にするのに向いた月です。' },
+  '方三位':   { tone:'good',
+    text:'一つのことに力が結集しやすい日。一業専念・専門性を深める動きが噛み合いやすいです。',
+    monthText:'一つのことに力が結集しやすい月。一業専念・専門性を深める動きが噛み合いやすいです。' },
+  '律音':     { tone:'neutral',
+    text:'一区切りがつきやすい日。新しく仕切り直すのにも、過去を振り返るのにも向いています。',
+    monthText:'一区切りがつきやすい月。新しく仕切り直すのにも、過去を振り返るのにも向いています。' },
+  '納音':     { tone:'neutral',
+    text:'何かが終わり、次が始まる節目の日。無理に引き延ばさず、区切りをつける方向で動くと楽になります。',
+    monthText:'何かが終わり、次が始まる節目の月。無理に引き延ばさず、区切りをつける方向で動くと楽になります。' }
+};
+
+function getAspectKeys(aspectsText) {
+  // aspectsText は「日柱：半会🌼 年柱：対冲🌊」のような絵文字付き文字列
+  var keys = Object.keys(ASPECT_ACTION);
+  var found = [];
+  for (var i = 0; i < keys.length; i++) {
+    if (aspectsText.indexOf(keys[i]) >= 0 && found.indexOf(keys[i]) < 0) found.push(keys[i]);
+  }
+  // 長い名称（大半会・天剋地冲等）を優先し、部分一致による重複（半会 と 大半会 の共存等）を整理
+  if (found.indexOf('大半会') >= 0) found = found.filter(function(k){ return k !== '半会'; });
+  return found;
+}
+
+// 天中殺・位相法・12段階旅フローを統合して「今日どう動くか」の一言を作る
+function buildTodayGuidance(todayF, stg, isTenchuDay) {
+  var lines = [];
+  var aspKeys = getAspectKeys(todayF.aspects || '');
+  var hasCaution = false, hasGood = false;
+
+  // ①天中殺（最優先で伝える）
+  if (isTenchuDay || todayF.isTenchu) {
+    lines.push('🌀 今日は日天中殺。' + ASPECT_ACTION['天中殺'].text.replace(/^今日は/, ''));
+    hasCaution = true;
+  }
+
+  // ②位相法（天中殺以外）
+  for (var i = 0; i < aspKeys.length; i++) {
+    var k = aspKeys[i];
+    if (k === '天中殺') continue;
+    var a = ASPECT_ACTION[k];
+    lines.push((a.tone === 'good' ? '🌼 ' : a.tone === 'caution' ? '⚡ ' : '🔔 ') + k + '：' + a.text);
+    if (a.tone === 'caution') hasCaution = true;
+    if (a.tone === 'good') hasGood = true;
+  }
+
+  // ③12段階旅フロー（longHintで締める）
+  if (stg && stg.longHint) {
+    lines.push('🧭 ' + stg.longHint);
+  }
+
+  // ④総合の一言（吉日か注意日かをまとめて明示）
+  var summary;
+  if (isTenchuDay || todayF.isTenchu) {
+    summary = '総合すると、今日は「動く」より「整える」に向いた日です。';
+  } else if (hasCaution && hasGood) {
+    summary = '総合すると、良い流れと注意すべき流れが両方来ている日。無理に全部を進めようとせず、一つに絞って動くと吉です。';
+  } else if (hasCaution) {
+    summary = '総合すると、今日は慎重に構えるのが吉。大きな決断は避けて、様子を見る日にしましょう。';
+  } else if (hasGood) {
+    summary = '総合すると、今日は動くと結果が出やすい日。気になっていたことを一つ、今日進めてみてください。';
+  } else {
+    summary = '総合すると、今日は特別な追い風も向かい風もない、いつも通りのペースで過ごせる日です。';
+  }
+  lines.push('👉 ' + summary);
+
+  return lines;
+}
 
 // ---------- 位相法の絵文字装飾 ----------
 function emojiForAspects(aspStr) {
@@ -364,6 +538,8 @@ function render() {
     var imgKey = D.client.travelImgKey || '';
     var imgExt = (D.travelImgExt && D.travelImgExt[imgKey + '_' + stageNum]) || 'webp';
 
+    var guidance = buildTodayGuidance(todayF, stg, isTenchuDay);
+
     html += '<div class="card">';
     html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>本日の運気</span></div>';
     html += '<div class="star-grid">';
@@ -375,6 +551,15 @@ function render() {
     }
     if (jdesc) html += '<p class="text-xs" style="background:var(--color-cream);padding:0.6rem;border-radius:4px;color:var(--color-brown-dark);line-height:1.7">' + jdesc + '</p>';
     if (todayF.advice) html += '<p class="text-xs mt-2" style="color:var(--color-accent);line-height:1.7;font-weight:500">' + todayF.advice + '</p>';
+
+    // 今日どう動くか（天中殺・位相法・12段階を統合した具体的な指針）
+    html += '<div class="today-guidance">';
+    html += '<p class="today-guidance-lbl">今日どう動くか</p>';
+    for (var gi = 0; gi < guidance.length; gi++) {
+      var isLast = (gi === guidance.length - 1);
+      html += '<p class="today-guidance-line' + (isLast ? ' today-guidance-summary' : '') + '">' + guidance[gi] + '</p>';
+    }
+    html += '</div>';
 
     html += '<div class="k-flow">';
     html += '<div class="k-flow-lbl">今日の運気（12段階）</div>';
@@ -430,14 +615,21 @@ function render() {
 
   // 今月の流れ
   if (currentMonth) {
+    var monthGuidance = buildMonthGuidance(currentMonth);
     html += '<div class="mb-4">';
     html += '<p class="text-xs text-center mb-2" style="color:var(--color-brown);letter-spacing:0.15em">今月の流れ</p>';
     html += '<div class="text-center">';
     html += '<p class="text-sm mb-1"><span style="color:var(--color-brown)">' + currentMonth.period + '</span><span style="margin:0 0.5rem">|</span><span style="color:var(--color-accent);font-weight:500">' + currentMonth.kanshi + ' ' + currentMonth.mainStar + '</span></p>';
-    if (currentMonth.aspects && currentMonth.aspects !== '-') html += '<p class="text-xs" style="color:var(--color-brown)">' + currentMonth.aspects + '</p>';
     if (currentMonth.isTenchu) html += '<span class="badge badge-tenchu">月天中殺</span>';
     html += '</div>';
-    html += '<p class="text-xs text-center mt-2" style="color:var(--color-brown-dark);line-height:1.7">' + currentMonth.advice + '</p>';
+    html += '<div class="today-guidance" style="margin-top:0.75rem">';
+    html += '<p class="today-guidance-lbl">今月どう動くか</p>';
+    for (var mgi = 0; mgi < monthGuidance.length; mgi++) {
+      var mIsLast = (mgi === monthGuidance.length - 1);
+      html += '<p class="today-guidance-line' + (mIsLast ? ' today-guidance-summary' : '') + '">' + monthGuidance[mgi] + '</p>';
+    }
+    html += '</div>';
+    if (currentMonth.advice) html += '<p class="text-xs text-center mt-2" style="color:var(--color-brown-dark);line-height:1.7">' + currentMonth.advice + '</p>';
     html += '</div>';
   }
 
