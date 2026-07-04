@@ -329,10 +329,10 @@ const CLIENT_DATA = {
     {"key":"2028年","body":"年天中殺が明けると、運気がまた大きく盛り上がっていく10年が始まる。天中殺の間に大きな決断をすると、その決断が影として残りやすい。今は決断しないことが、2028年からの10年を守ることに繋がる。"}
   ],
   "monthlyFortunes": [
-    // ★ 月運は㐂さんが確認・入力してから追加する
-    // mainStar・jyusei・aspects は手書き入力。間違い防止のため未入力のまま残す。
-    // 追加フォーマット例：
-    // { "period":"7/7〜8/6", "kanshi":"乙未", "mainStar":"（入力）", "jyusei":"（入力）", "aspects":"（入力）", "isTenchu":false, "advice":"（入力）" }
+    { "period":"7/1〜7/31", "kanshi":"乙未", "mainStar":"禄存星", "jyusei":"天堂星", "aspects":"月天中殺 / 日柱：半会", "isTenchu":true, "advice":"" },
+    { "period":"8/1〜8/31", "kanshi":"丙申", "mainStar":"牽牛星", "jyusei":"天将星", "aspects":"年柱：対冲，生刑，納音 / 月柱：大半会 / 日柱：干合", "isTenchu":false, "advice":"" }
+    // ★ advice（一言）は㐂さんが確認・入力してから追加する
+    // 9月以降は追って確定データが届き次第追加
   ],
   "monthlyTenchuPeriod": null,
   "todos": [],
@@ -376,17 +376,23 @@ function _asp(s,b){
   var a=[],ps=[{s:MY.ds,b:MY.db,n:'日柱'},{s:MY.ms,b:MY.mb,n:'月柱'},{s:MY.ys,b:MY.yb,n:'年柱'}];
   var go=[[0,5],[1,6],[2,7],[3,8],[4,9]],sg=[[0,1],[2,11],[3,10],[4,9],[5,8],[6,7]];
   var hk=[[2,6,10],[5,9,1],[8,0,4],[11,3,7]];
-  var dh=[[0,4],[4,8],[8,0],[1,5],[5,9],[9,1],[2,6],[6,10],[10,2],[3,7],[7,11],[11,3]];
   var tc=[[0,6],[1,7],[2,8],[3,9],[4,10],[5,11]],ga=[[0,7],[1,6],[2,5],[3,4],[8,11],[9,10]];
   var jk=[4,6,9,11],kk=[1,4,7,10];
+  var hoSanI=[2,3,4]; // 方三位（東方木＝寅卯辰）判定用サンプル。年月日の3支が同一三合内で連続する場合は別途fiveViews等で扱う
   for(var i=0;i<ps.length;i++){var p=ps[i];
     if(s===p.s&&b===p.b)a.push(p.n+'：律音');
     var aw=WX[s],pw=WX[p.s];
     if(CL[aw]===pw||CL[pw]===aw){for(var t=0;t<tc.length;t++){if((b===tc[t][0]&&p.b===tc[t][1])||(b===tc[t][1]&&p.b===tc[t][0])){a.push(p.n+'：天剋地冲');break}}}
     for(var g=0;g<go.length;g++){if((s===go[g][0]&&p.s===go[g][1])||(s===go[g][1]&&p.s===go[g][0])){a.push(p.n+'：干合');break}}
     for(var x=0;x<sg.length;x++){if((b===sg[x][0]&&p.b===sg[x][1])||(b===sg[x][1]&&p.b===sg[x][0])){a.push(p.n+'：支合');break}}
-    for(var h=0;h<hk.length;h++){if(hk[h].indexOf(b)>=0&&hk[h].indexOf(p.b)>=0&&b!==p.b){a.push(p.n+'：半会');break}}
-    for(var d2=0;d2<dh.length;d2++){if((b===dh[d2][0]&&p.b===dh[d2][1])||(b===dh[d2][1]&&p.b===dh[d2][0])){a.push(p.n+'：大半会');break}}
+    // 半会・大半会：同一三合グループ内での支の距離で判定（距離4=半会／距離8=大半会）。重複判定を防ぐため同一ループ内で排他処理
+    var sanGoHit=false;
+    for(var h=0;h<hk.length&&!sanGoHit;h++){
+      if(hk[h].indexOf(b)>=0&&hk[h].indexOf(p.b)>=0&&b!==p.b){
+        var diff=((b-p.b)%12+12)%12;
+        if(diff===4||diff===8){a.push(p.n+'：'+(diff===4?'半会':'大半会'));sanGoHit=true;}
+      }
+    }
     for(var t2=0;t2<tc.length;t2++){if((b===tc[t2][0]&&p.b===tc[t2][1])||(b===tc[t2][1]&&p.b===tc[t2][0])){a.push(p.n+'：対冲');break}}
     for(var j=0;j<ga.length;j++){if((b===ga[j][0]&&p.b===ga[j][1])||(b===ga[j][1]&&p.b===ga[j][0])){a.push(p.n+'：害');break}}
     if(jk.indexOf(b)>=0&&b===p.b)a.push(p.n+'：自刑');
@@ -394,6 +400,24 @@ function _asp(s,b){
     var sk=[2,5,8];if(sk.indexOf(b)>=0&&sk.indexOf(p.b)>=0&&b!==p.b)a.push(p.n+'：生刑');
     if((b===0&&p.b===3)||(b===3&&p.b===0))a.push(p.n+'：旺刑');
     if(s!==p.s&&b===p.b){var sum1=(s+b)%10,sum2=(p.s+p.b)%10;if(sum1===sum2)a.push(p.n+'：納音')}
+  }
+  // 方三位：日運の支＋命式の月支・年支が同一の方合三支（東方木＝寅卯辰／南方火＝巳午未／西方金＝申酉戌／北方水＝亥子丑）に揃う場合
+  var hoSanGroups=[[2,3,4],[5,6,7],[8,9,10],[11,0,1]];
+  for(var hg=0;hg<hoSanGroups.length;hg++){
+    var grp=hoSanGroups[hg];
+    if(grp.indexOf(b)>=0){
+      var hasDay=(grp.indexOf(MY.db)>=0), hasMonth=(grp.indexOf(MY.mb)>=0), hasYear=(grp.indexOf(MY.yb)>=0);
+      var members=[];
+      if(hasDay&&MY.db!==b)members.push('日柱');
+      if(hasMonth&&MY.mb!==b)members.push('月柱');
+      if(hasYear&&MY.yb!==b)members.push('年柱');
+      // 日運支自体が命式のいずれかの支と同じ場合はその柱を含める
+      if(MY.db===b&&members.indexOf('日柱')<0&&hasDay)members.push('日柱');
+      if(MY.mb===b&&members.indexOf('月柱')<0&&hasMonth)members.push('月柱');
+      if(MY.yb===b&&members.indexOf('年柱')<0&&hasYear)members.push('年柱');
+      if(members.length>=2){a.push(members.join('+')+' 方三位');}
+      break;
+    }
   }
   if(MY.tc.indexOf(b)>=0)a.push('日天中殺');
   return a;
@@ -424,18 +448,74 @@ var jyuseiDesc = {
 };
 
 var dailyAdvice = {
-  // ★ 日運は㐂さんが確認・入力してから追加する。AIが命式から推測して書かない。
+  // ★ advice（一言）は㐂さんが確認・入力してから追加する。AIが命式から推測して書かない。
+  // aspects・isTenchu は260704受領の確定データ（7/4〜8/31）をそのまま反映。
+  '7/4':  { advice:'', aspects:'月柱：害 月柱+年柱+日柱 方三位', isTenchu:false },
+  '7/5':  { advice:'', aspects:'日柱：害 月柱：自刑 日柱+年柱+月柱 方三位', isTenchu:false },
+  '7/6':  { advice:'', aspects:'年柱：干合 年柱：生刑 年柱：害', isTenchu:false },
+  '7/7':  { advice:'', aspects:'年柱：半会', isTenchu:true },
+  '7/8':  { advice:'', aspects:'日柱：半会', isTenchu:true },
+  '7/9':  { advice:'', aspects:'月柱：半会 年柱：対冲 年柱：生刑', isTenchu:false },
+  '7/10': { advice:'', aspects:'日柱：天剋地冲 月柱：支合', isTenchu:false },
+  '7/11': { advice:'', aspects:'日柱：干合 日柱：支合 月柱：天剋地冲 年柱：大半会', isTenchu:false },
+  '7/12': { advice:'', aspects:'日柱：半会 月柱：干合 年柱：支合', isTenchu:false },
+  '7/13': { advice:'', aspects:'日柱：旺刑 月柱：半会', isTenchu:false },
+  '7/14': { advice:'', aspects:'', isTenchu:false },
+  '7/15': { advice:'', aspects:'日柱+月柱 方三位', isTenchu:false },
+  '7/16': { advice:'', aspects:'日柱：律音 月柱+年柱 方三位 年柱：干合', isTenchu:false },
+  '7/17': { advice:'', aspects:'日柱+年柱 方三位 月柱：自刑 月柱：律音', isTenchu:false },
+  '7/18': { advice:'', aspects:'年柱：生刑 年柱：害', isTenchu:false },
+  '7/19': { advice:'', aspects:'年柱：半会', isTenchu:true },
+  '7/20': { advice:'', aspects:'日柱：半会', isTenchu:true },
+  '7/21': { advice:'', aspects:'日柱：干合 月柱：半会 年柱：生刑 年柱：納音', isTenchu:false },
+  '7/22': { advice:'', aspects:'日柱：天剋地冲 月柱：干合 月柱：支合', isTenchu:false },
+  '7/23': { advice:'', aspects:'日柱：支合 月柱：天剋地冲 年柱：半会', isTenchu:false },
+  '7/24': { advice:'', aspects:'日柱：半会 年柱：支合', isTenchu:false },
+  '7/25': { advice:'', aspects:'日柱：旺刑 月柱：半会', isTenchu:false },
+  '7/26': { advice:'', aspects:'年柱：干合', isTenchu:false },
+  '7/27': { advice:'', aspects:'日柱+月柱 方三位', isTenchu:false },
+  '7/28': { advice:'', aspects:'月柱+年柱 方三位 月柱：害', isTenchu:false },
+  '7/29': { advice:'', aspects:'日柱+年柱 方三位 月柱：自刑', isTenchu:false },
+  '7/30': { advice:'', aspects:'年柱：生刑 年柱：害', isTenchu:false },
+  '7/31': { advice:'', aspects:'日柱：干合 年柱：大半会', isTenchu:true },
+  '8/1':  { advice:'', aspects:'日柱：半会 月柱：干合', isTenchu:true },
+  '8/2':  { advice:'', aspects:'月柱：半会 年柱：対冲 年柱：生刑', isTenchu:false },
+  '8/3':  { advice:'', aspects:'日柱：対冲 月柱：支合', isTenchu:false },
+  '8/4':  { advice:'', aspects:'日柱：支合 月柱：対冲 年柱：半会', isTenchu:false },
+  '8/5':  { advice:'', aspects:'日柱：大半会 年柱：干合 年柱：支合', isTenchu:false },
+  '8/6':  { advice:'', aspects:'日柱：旺刑 月柱：大半会', isTenchu:false },
+  '8/7':  { advice:'', aspects:'', isTenchu:false },
+  '8/8':  { advice:'', aspects:'日柱+月柱 方三位', isTenchu:false },
+  '8/9':  { advice:'', aspects:'月柱+年柱 方三位 月柱：害', isTenchu:false },
+  '8/10': { advice:'', aspects:'日柱：干合 日柱+年柱 方三位 月柱：自刑 月柱：害', isTenchu:false },
+  '8/11': { advice:'', aspects:'月柱：干合 年柱：生刑 年柱：害', isTenchu:false },
+  '8/12': { advice:'', aspects:'年柱：半会', isTenchu:true },
+  '8/13': { advice:'', aspects:'日柱：半会', isTenchu:true },
+  '8/14': { advice:'', aspects:'月柱：半会 年柱：生刑 年柱：天剋地冲', isTenchu:false },
+  '8/15': { advice:'', aspects:'日柱：納音 月柱：支合 年柱：干合', isTenchu:false },
+  '8/16': { advice:'', aspects:'日柱：支合 月柱：納音 年柱：半会', isTenchu:false },
+  '8/17': { advice:'', aspects:'日柱：半会 年柱：支合', isTenchu:false },
+  '8/18': { advice:'', aspects:'日柱：旺刑 月柱：半会', isTenchu:false },
+  '8/19': { advice:'', aspects:'', isTenchu:false },
+  '8/20': { advice:'', aspects:'日柱：干合 日柱+月柱 方三位 年柱：律音', isTenchu:false },
+  '8/21': { advice:'', aspects:'月柱：干合 月柱+年柱 方三位 月柱：害', isTenchu:false },
+  '8/22': { advice:'', aspects:'日柱+年柱 方三位 月柱：自刑', isTenchu:false },
+  '8/23': { advice:'', aspects:'年柱：生刑 年柱：害', isTenchu:false },
+  '8/24': { advice:'', aspects:'年柱：半会', isTenchu:true },
+  '8/25': { advice:'', aspects:'日柱：大半会 年柱：干合', isTenchu:true },
+  '8/26': { advice:'', aspects:'月柱：大半会 年柱：生刑 年柱：天剋地冲', isTenchu:false },
+  '8/27': { advice:'', aspects:'日柱：対冲 月柱：支合', isTenchu:false },
+  '8/28': { advice:'', aspects:'日柱：支合 月柱：対冲 年柱：半会', isTenchu:false },
+  '8/29': { advice:'', aspects:'日柱：半会 年柱：支合', isTenchu:false },
+  '8/30': { advice:'', aspects:'日柱：干合 日柱：旺刑 月柱：半会', isTenchu:false },
+  '8/31': { advice:'', aspects:'月柱：干合', isTenchu:false }
 };
 
-function getFortuneByDate(month, day, year) {
-  if (!year) year = (month >= 6 && month <= 12) ? 2026 : 2027;
-  var calc = computeFortune(year, month, day);
-  var key = month + '/' + day;
-  var adv = (dailyAdvice[key] && dailyAdvice[key].advice) ? dailyAdvice[key].advice : '';
-  var aspEmo = [];
-  for (var i = 0; i < calc.aspects.length; i++) {
-    var a = calc.aspects[i];
-    var emoji = '';
+function emojiForAspects(aspStr) {
+  var parts = aspStr.split(/[\s,、，]+/).filter(function(x){return x;});
+  var out = [];
+  for (var i = 0; i < parts.length; i++) {
+    var a = parts[i], emoji = '';
     if (a.indexOf('天中殺') >= 0) emoji = '🌀';
     else if (a.indexOf('天剋地冲') >= 0) emoji = '🌊';
     else if (a.indexOf('干合') >= 0) emoji = '🔗';
@@ -446,12 +526,32 @@ function getFortuneByDate(month, day, year) {
     else if (a.indexOf('刑') >= 0) emoji = '⚡';
     else if (a.indexOf('律音') >= 0) emoji = '🎵';
     else if (a.indexOf('納音') >= 0) emoji = '🔔';
-    aspEmo.push(a + (emoji ? emoji : ''));
+    else if (a.indexOf('方三位') >= 0) emoji = '🧭';
+    out.push(a + (emoji ? emoji : ''));
+  }
+  return out;
+}
+
+function getFortuneByDate(month, day, year) {
+  if (!year) year = (month >= 6 && month <= 12) ? 2026 : 2027;
+  var calc = computeFortune(year, month, day);
+  var key = month + '/' + day;
+  var manual = dailyAdvice[key];
+  var adv = (manual && manual.advice) ? manual.advice : '';
+  var aspectsText, isTenchu;
+  if (manual && typeof manual.aspects === 'string') {
+    // 手入力の確定データを優先する
+    aspectsText = manual.aspects.trim() ? emojiForAspects(manual.aspects).join(' ') : '-';
+    isTenchu = (typeof manual.isTenchu === 'boolean') ? manual.isTenchu : calc.isTenchu;
+  } else {
+    var aspEmo = emojiForAspects(calc.aspects.join(' '));
+    aspectsText = aspEmo.length > 0 ? aspEmo.join(' ') : '-';
+    isTenchu = calc.isTenchu;
   }
   return {
     date: calc.date, kanshi: calc.kanshi, mainStar: calc.mainStar, jyusei: calc.jyusei,
-    aspects: aspEmo.length > 0 ? aspEmo.join(' ') : '-',
-    isTenchu: calc.isTenchu, advice: adv
+    aspects: aspectsText,
+    isTenchu: isTenchu, advice: adv
   };
 }
 
