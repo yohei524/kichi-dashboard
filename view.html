@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>㐂の暦</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="core.css">
+</head>
+<body>
+
+<header id="header"></header>
+<div class="container" id="app">
+  <p class="text-center text-sm" style="color:var(--color-brown);padding:2rem 0">読み込み中…</p>
+</div>
+<footer id="footer"></footer>
+
+<div class="detail-modal" id="detailModal" onclick="if(event.target===this)closeDetail()">
+  <div class="detail-content" id="detailContent"></div>
+</div>
+
+<script src="core.js"></script>
+<script>
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var client = params.get('client');
+  var app = document.getElementById('app');
+  if (!client) {
+    app.innerHTML = '<p class="text-center text-sm" style="color:var(--color-brown);padding:2rem 0">クライアント指定がありません（?client=名前 が必要です）</p>';
+    return;
+  }
+  fetch('clients/' + client + '.json')
+    .then(function (res) {
+      if (!res.ok) throw new Error('データが見つかりません: ' + client);
+      return res.json();
+    })
+    .then(function (data) {
+      // 画像パスはクライアントごとのフォルダを見に行く（images/はclients/images/を指す）
+      initDashboard(data);
+    })
+    .catch(function (err) {
+      app.innerHTML = '<p class="text-center text-sm" style="color:var(--color-brown);padding:2rem 0">' + err.message + '</p>';
+    });
+})();
+</script>
+</body>
+</html>

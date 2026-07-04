@@ -41,7 +41,7 @@
     },
     {
       "source": "/hidetoh",
-      "destination": "/clients/hidetoh.html"
+      "destination": "/view.html?client=hidetoh"
     }
   ]
 }
