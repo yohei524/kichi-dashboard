@@ -173,7 +173,9 @@ function buildMonthGuidance(monthF) {
   var hasCaution = false, hasGood = false;
 
   if (monthF.isTenchu) {
-    phaseLines.push('🌀 月天中殺：' + ASPECT_ACTION['天中殺'].monthText.replace(/^今月は/, ''));
+    var tc = ASPECT_ACTION['天中殺'];
+    phaseLines.push('🌀 月天中殺：' + tc.monthText.replace(/^今月は/, ''));
+    if (tc.why) phaseLines.push('　└ なぜ：' + tc.why);
     hasCaution = true;
   }
   for (var i = 0; i < aspKeys.length; i++) {
@@ -181,6 +183,7 @@ function buildMonthGuidance(monthF) {
     if (k === '天中殺') continue;
     var a = ASPECT_ACTION[k];
     phaseLines.push((a.tone === 'good' ? '🌼 ' : a.tone === 'caution' ? '⚡ ' : '🔔 ') + k + '：' + a.monthText);
+    if (a.why) phaseLines.push('　└ なぜ：' + a.why);
     if (a.tone === 'caution') hasCaution = true;
     if (a.tone === 'good') hasGood = true;
   }
@@ -227,52 +230,84 @@ var jyuseiDesc = {
 // 各位相法が「日柱・月柱・年柱」のどこに付いても使える、行動レベルの一言。
 var ASPECT_ACTION = {
   '天中殺':   { tone:'caution',
+    why:'十干の力が及ばない「気の欠ける」干支が巡ってくる日。普段のセルフイメージという枠が外れて、上にも下にも振れやすくなる。',
     text:'今日は新しい決断・大きな契約は避けて、今あるものを整える日にすると無理がありません。',
+    action:'新規の契約書にサインする・大きな買い物を決める、といった「後戻りしにくい決断」を今日に置かない。今日やるなら、今持っているものの整理・見直し・掃除が向いている。',
     monthText:'今月は新しい決断・大きな契約は避けて、今あるものを整える月にすると無理がありません。' },
   '天剋地冲': { tone:'caution',
+    why:'「天に剋され、地に破壊される」構造。命式の中で最も強い位相法の一つで、表面と内面のギャップが一気に表れる。',
     text:'衝撃的な変化が起きやすい日。表面はいつも通りでも内側で葛藤が動きやすいので、大きな判断は一呼吸置いてから。',
+    action:'急な感情の揺れや思わぬ出来事があっても、その場で結論を出さない。一晩置いてから返事をする、契約や約束は翌日以降に回す。',
     monthText:'衝撃的な変化が起きやすい月。表面はいつも通りでも内側で葛藤が動きやすいので、大きな判断は一呼吸置いてから。' },
   '対冲':     { tone:'caution',
+    why:'干支が真反対の位置でぶつかる配置。前進と後退が交互に現れやすく、結果に固執すると余計にこじれる。',
     text:'物事がぶつかりやすい日。結果に固執せず、進んだり戻ったりを繰り返す前提でいると気持ちが楽になります。',
+    action:'相手と意見が食い違っても、その場で決着をつけようとしない。「今日は結論を出さない」と決めておくだけで衝突が和らぐ。',
     monthText:'物事がぶつかりやすい月。結果に固執せず、進んだり戻ったりを繰り返す前提でいると気持ちが楽になります。' },
   '害':       { tone:'caution',
     text:'本音を飲み込みやすく、モヤモヤが溜まりやすい日。無理に丸く収めようとせず、言いたいことは小出しにしておくのがコツ。',
+    why:'干支同士の不自然な組み合わせ。我慢や言えなさが蓄積しやすく、精神世界や一人の時間で発散する方が合う。',
+    action:'全部を一度に言おうとせず、伝えたいことは一つだけ小さく口に出す。日記やメモに書き出すだけでも溜め込みが減る。',
     monthText:'本音を飲み込みやすく、モヤモヤが溜まりやすい月。無理に丸く収めようとせず、言いたいことは小出しにしておくのがコツ。' },
   '刑':       { tone:'caution',
+    why:'「争い」の位相法。「やらなあかん」という自分を縛る感覚が強まりやすい配置。',
     text:'「やらなあかん」に追われやすい日。自分を縛りすぎず、期限より先にペースを緩める判断をしても大丈夫です。',
+    action:'締め切りやノルマを一つ、今日だけ緩めてみる。全部時間通りにやろうとせず、優先順位の低いものは翌日に回す。',
     monthText:'「やらなあかん」に追われやすい月。自分を縛りすぎず、期限より先にペースを緩める判断をしても大丈夫です。' },
   '旺刑':     { tone:'caution',
+    why:'身近な人（夫婦・親子・友人・恋人）との間で起きやすい刑。感情的な衝突が体調（胃痛・食欲不振）に出やすいとされる。',
     text:'身近な人とのすれ違いが出やすい日。感情的な言い合いより、少し距離を置いて様子を見るのが吉。',
+    action:'家族や近しい人と衝突しそうになったら、その場を一度離れる。「今は答えない」と伝えるだけでも十分。',
     monthText:'身近な人とのすれ違いが出やすい月。感情的な言い合いより、少し距離を置いて様子を見るのが吉。' },
   '自刑':     { tone:'caution',
+    why:'自分自身との内的葛藤が強まる配置。頭痛・不眠・自律神経の乱れとして体に出やすいとされる。',
     text:'自分で自分を追い込みやすい日。頭の中でグルグル考えすぎず、体を動かして気分を切り替えるのがおすすめ。',
+    action:'考え込みそうになったら、散歩や軽い運動で一度頭を切り替える。一人で抱え込まず、誰かに話すだけでも軽くなる。',
     monthText:'自分で自分を追い込みやすい月。頭の中でグルグル考えすぎず、体を動かして気分を切り替えるのがおすすめ。' },
   '庫刑':     { tone:'caution',
+    why:'目上・権力関係で起きやすい刑。上からのプレッシャーが強まりやすく、腰痛や高血圧など体の張りに出やすいとされる。',
     text:'目上・上の立場の人からのプレッシャーを感じやすい日。無理に張り合わず、聞き役に回ると波風が立ちません。',
+    action:'上司や年長者との会話では、まず聞く姿勢に徹する。反論したくなっても、一旦受け止めてから話すと衝突を避けやすい。',
     monthText:'目上・上の立場の人からのプレッシャーを感じやすい月。無理に張り合わず、聞き役に回ると波風が立ちません。' },
   '生刑':     { tone:'caution',
+    why:'部下・子供など目下との立場の上下関係で起きやすい刑。指示的な態度が余計に摩擦を生みやすい。',
     text:'下の立場の人・子供との間で摩擦が出やすい日。指示より対話を意識すると収まりやすい日です。',
+    action:'子供や部下に何かを伝える時、命令形ではなく「どう思う？」と問いかける形にする。今日は指導より傾聴を優先する。',
     monthText:'下の立場の人・子供との間で摩擦が出やすい月。指示より対話を意識すると収まりやすい月です。' },
   '半会':     { tone:'good',
+    why:'異次元融合・広がりの位相法。目標に向かう前進力や、アイデア・人脈が広がる追い風の配置。',
     text:'物事が広がりやすい、追い風の日。気になっていたことに一歩踏み出すのに向いています。',
+    action:'先延ばしにしていた連絡・相談・申し込みを一つ、今日実行してみる。小さな一歩が広がりやすいタイミング。',
     monthText:'物事が広がりやすい、追い風の月。気になっていたことに一歩踏み出すのに向いています。' },
   '大半会':   { tone:'good',
+    why:'半会よりさらに強い、命式の中でも最強クラスの拡大の配置。ただし片方が踏み台、片方が飛躍する構造も持つため人間関係では注意も要る。',
     text:'今日は最強クラスの追い風。ここぞという決断・発信・行動は、思い切って今日に合わせるのが吉。',
+    action:'温めていた計画・伝えたかったこと・出したかった発信を、今日にぶつけてみる。ただし人間関係では「自分ばかり」という感覚が出ていないか一度振り返る。',
     monthText:'今月は最強クラスの追い風。ここぞという決断・発信・行動は、思い切って今月に合わせるのが吉。' },
   '支合':     { tone:'good',
+    why:'同次元融合・二人三脚の位相法。人や物事としっくり噛み合いやすく、判断基準が「好き嫌い」で一致しやすい。',
     text:'人や物事としっくり噛み合いやすい日。人に会う・相談する・繋がりを作るのに向いています。',
+    action:'誰かに会う約束、相談ごとの持ちかけ、新しい人との接点づくりを今日に置くとスムーズに進みやすい。',
     monthText:'人や物事としっくり噛み合いやすい月。人に会う・相談する・繋がりを作るのに向いています。' },
   '干合':     { tone:'good',
+    why:'十干同士が結びつき、化合先の性質に変化する配置。内側の本音と外向きの行動が繋がりやすい。',
     text:'内側と深く繋がりやすい日。本音で話す・自分の考えを言葉にするのに向いた日です。',
+    action:'言いにくかったことを言葉にしてみる、自分の考えを文章や会話でまとめてみる。今日出した言葉は相手に届きやすい。',
     monthText:'内側と深く繋がりやすい月。本音で話す・自分の考えを言葉にするのに向いた月です。' },
   '方三位':   { tone:'good',
+    why:'寅卯辰・巳午未など三支が揃う配置。守備本能が突出し、専門性・一業専念に力が結集しやすい。',
     text:'一つのことに力が結集しやすい日。一業専念・専門性を深める動きが噛み合いやすいです。',
+    action:'色々なことに手を出すより、今一番大事な一つのことに時間を割く。専門性を深める勉強・作業に向いている。',
     monthText:'一つのことに力が結集しやすい月。一業専念・専門性を深める動きが噛み合いやすいです。' },
   '律音':     { tone:'neutral',
+    why:'人生が2分される「開始・二面性・分岐」の配置。同じ干支が巡ることで、原点回帰や仕切り直しが起きやすい。',
     text:'一区切りがつきやすい日。新しく仕切り直すのにも、過去を振り返るのにも向いています。',
+    action:'区切りをつけたいことを一つ決める。過去の出来事を振り返って気持ちを整理するのにも向いた日。',
     monthText:'一区切りがつきやすい月。新しく仕切り直すのにも、過去を振り返るのにも向いています。' },
   '納音':     { tone:'neutral',
+    why:'因縁解脱・折り返しの配置。人生の折り返し地点として、古いものと決別し次に向かう節目になりやすい。',
     text:'何かが終わり、次が始まる節目の日。無理に引き延ばさず、区切りをつける方向で動くと楽になります。',
+    action:'続けるかやめるか迷っていることがあれば、今日「終わらせる」方向で動いてみる。無理に引き延ばすと逆に長引きやすい。',
     monthText:'何かが終わり、次が始まる節目の月。無理に引き延ばさず、区切りをつける方向で動くと楽になります。' }
 };
 
@@ -305,10 +340,13 @@ function buildTodayGuidance(todayF, stg, isTenchuDay) {
   if (jdesc) starLines.push('🌟 ' + todayF.jyusei + '：' + jdesc);
   if (starLines.length > 0) groups.push({ label:'巡ってきてる星', lines:starLines });
 
-  // ②位相法の観点（天中殺含む）
+  // ②位相法の観点（天中殺含む）。技法の由来（why）→今日の意味（text）→具体的な動き方（action）の3段で深掘りする
   var phaseLines = [];
   if (isTenchuDay || todayF.isTenchu) {
-    phaseLines.push('🌀 日天中殺：' + ASPECT_ACTION['天中殺'].text.replace(/^今日は/, ''));
+    var tc = ASPECT_ACTION['天中殺'];
+    phaseLines.push('🌀 日天中殺：' + tc.text.replace(/^今日は/, ''));
+    if (tc.why) phaseLines.push('　└ なぜ：' + tc.why);
+    if (tc.action) phaseLines.push('　└ 今日の動き方：' + tc.action);
     hasCaution = true;
   }
   for (var i = 0; i < aspKeys.length; i++) {
@@ -316,6 +354,8 @@ function buildTodayGuidance(todayF, stg, isTenchuDay) {
     if (k === '天中殺') continue;
     var a = ASPECT_ACTION[k];
     phaseLines.push((a.tone === 'good' ? '🌼 ' : a.tone === 'caution' ? '⚡ ' : '🔔 ') + k + '：' + a.text);
+    if (a.why) phaseLines.push('　└ なぜ：' + a.why);
+    if (a.action) phaseLines.push('　└ 今日の動き方：' + a.action);
     if (a.tone === 'caution') hasCaution = true;
     if (a.tone === 'good') hasGood = true;
   }
@@ -323,7 +363,10 @@ function buildTodayGuidance(todayF, stg, isTenchuDay) {
 
   // ③天中殺サイクル（12段階旅フロー）※日天中殺かどうかとは別の、12日周期の技法
   if (stg && stg.longHint) {
-    groups.push({ label:'天中殺サイクル（12段階の' + (stg.name) + '）', lines:['🧭 ' + stg.longHint] });
+    var cycleLines = ['🧭 ' + stg.longHint];
+    if (stg.hint) cycleLines.push('　└ 今日のヒント：' + stg.hint);
+    cycleLines.push('　└ 全12段階中の位置：' + (TRAVEL_STAGES.indexOf(stg) + 1) + '段階目・運気レベル' + stg.level);
+    groups.push({ label:'天中殺サイクル（12段階の' + (stg.name) + '）', lines:cycleLines });
   }
 
   // ③総合の一言（吉日か注意日かをまとめて明示。ここだけは2つの技法をまたいだ㐂の判断として出す）
@@ -347,7 +390,7 @@ function buildTodayGuidance(todayF, stg, isTenchuDay) {
 // 明示したHTMLに組み立てる。技法の由来が違う結論を並べる時は必ず見出しで区切る。
 function renderGuidanceHTML(label, guidance) {
   var html = '<div class="today-guidance">';
-  html += '<p class="today-guidance-lbl">' + label + '</p>';
+  if (label) html += '<p class="today-guidance-lbl">' + label + '</p>';
   for (var gi = 0; gi < guidance.groups.length; gi++) {
     var grp = guidance.groups[gi];
     html += '<p class="today-guidance-group-lbl">' + grp.label + '</p>';
@@ -507,7 +550,7 @@ function buildMonthGridHTML(year, month, todayM, todayD, todayY) {
       var dDshi = f.kanshi.charAt(1);
       var dStg = getTravelStage(D.client.tenchuBranches || ['子','丑'], dDshi);
       var dStageNum = TRAVEL_STAGES.indexOf(dStg) + 1;
-      html += '<span class="cal-stage">' + dStageNum + '/12</span>';
+      html += '<span class="cal-stage">' + dStageNum + '段</span>';
     }
     html += '</div>';
   }
@@ -541,8 +584,8 @@ function openDetail(year, month, day) {
   if (jdesc) {
     html += '<div class="detail-section"><p class="detail-label">今日のエネルギー(' + f.jyusei + ')</p><p class="detail-text">' + jdesc + '</p></div>';
   }
-  html += '<div class="detail-section"><p class="detail-label">天中殺サイクル（12日中の' + dStageNum + '日目）</p>';
-  html += '<p class="detail-text">' + renderLevelDots(dStg.level) + ' 運気レベル ' + dStg.level + '/12' + (dIsTenchuDay ? '（日天中殺）' : '') + '<br>' + dStg.emoji + ' ' + dStg.name + '（' + dStg.sub + '）：' + dStg.hint + '</p></div>';
+  html += '<div class="detail-section"><p class="detail-label">天中殺サイクル（全12段階中の' + dStageNum + '段階目）</p>';
+  html += '<p class="detail-text">' + renderLevelDots(dStg.level) + ' 運気レベル ' + dStg.level + '（12段階中）' + (dIsTenchuDay ? '（日天中殺）' : '') + '<br>' + dStg.emoji + ' ' + dStg.name + '（' + dStg.sub + '）：' + dStg.hint + '</p></div>';
   if (f.advice) {
     html += '<div class="detail-section"><p class="detail-label">㐂からの一言</p><p class="detail-text">' + f.advice + '</p></div>';
   }
@@ -592,17 +635,18 @@ function render() {
   html += '</div>';
   html += '</div>';
 
-  // ②今日の運気（位相法・天中殺・12段階旅フロー＋カードめくり）※時事セクションの筆頭
+  // ②本日の運気（簡易版：主星・従星・位相法の一言・カードめくりのみ。詳細解説はカレンダーの後ろに回す）
+  var stg, stageNum, isTenchuDay, guidance;
   if (todayF) {
     var jdesc = jyuseiDesc[todayF.jyusei] || '';
     var todayDshi = todayF.kanshi.charAt(1);
-    var stg = getTravelStage(D.client.tenchuBranches || ['子','丑'], todayDshi);
-    var stageNum = TRAVEL_STAGES.indexOf(stg) + 1;
-    var isTenchuDay = (stageNum === 11 || stageNum === 12);
+    stg = getTravelStage(D.client.tenchuBranches || ['子','丑'], todayDshi);
+    stageNum = TRAVEL_STAGES.indexOf(stg) + 1;
+    isTenchuDay = (stageNum === 11 || stageNum === 12);
     var imgKey = D.client.travelImgKey || '';
     var imgExt = (D.travelImgExt && D.travelImgExt[imgKey + '_' + stageNum]) || 'webp';
 
-    var guidance = buildTodayGuidance(todayF, stg, isTenchuDay);
+    guidance = buildTodayGuidance(todayF, stg, isTenchuDay);
 
     html += '<div class="card">';
     html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>本日の運気</span></div>';
@@ -614,21 +658,18 @@ function render() {
       html += '<p class="text-xs text-center mb-3" style="color:var(--color-brown)">' + todayF.aspects + '</p>';
     }
     if (jdesc) html += '<p class="text-xs" style="background:var(--color-cream);padding:0.6rem;border-radius:4px;color:var(--color-brown-dark);line-height:1.7">' + jdesc + '</p>';
-    if (todayF.advice) html += '<p class="text-xs mt-2" style="color:var(--color-accent);line-height:1.7;font-weight:500">' + todayF.advice + '</p>';
-
-    // 今日どう動くか（位相法の観点・天中殺サイクルを見出しで分けて提示）
-    html += renderGuidanceHTML('今日どう動くか', guidance);
+    if (guidance && guidance.summary) html += '<p class="text-xs mt-2" style="color:var(--color-accent);line-height:1.7;font-weight:500">' + guidance.summary + '</p>';
 
     html += '<div class="k-flow">';
-    html += '<div class="k-flow-lbl">今日の運気（12日サイクルの' + stageNum + '日目）</div>';
-    html += '<div class="k-flow-stage"><span class="k-flow-num">' + stageNum + '/12</span>' + stg.emoji + ' ' + stg.name + '（' + stg.sub + '）' + (isTenchuDay ? '<span class="k-flow-tag">日天中殺</span>' : '') + '</div>';
-    html += '<div class="k-flow-level"><span class="k-flow-level-dots">' + renderLevelDots(stg.level) + '</span><span class="k-flow-level-num">運気レベル ' + stg.level + '/12</span></div>';
+    html += '<div class="k-flow-lbl">天中殺サイクル（全12段階中の' + stageNum + '段階目）</div>';
+    html += '<div class="k-flow-stage">' + stg.emoji + ' ' + stg.name + '（' + stg.sub + '）' + (isTenchuDay ? '<span class="k-flow-tag">日天中殺</span>' : '') + '</div>';
+    html += '<div class="k-flow-level"><span class="k-flow-level-dots">' + renderLevelDots(stg.level) + '</span><span class="k-flow-level-num">運気レベル ' + stg.level + '（12段階中）</span></div>';
     html += '<div class="k-flow-hint">' + stg.hint + '</div>';
     if (imgKey) {
       html += '<div class="k-card-wrap"><div class="k-card" id="k-card" onclick="this.classList.toggle(\'flipping\')">';
       html += '<div class="k-card-face k-card-front"><div class="k-card-front-inner"><div class="kf-marker">㐂</div><div class="kf-label">TAP TO REVEAL</div></div></div>';
       html += '<div class="k-card-face k-card-back"><img src="clients/images/' + imgKey + '_' + stageNum + '.' + imgExt + '" alt="旅の段階' + stageNum + '">';
-      html += '<div class="k-card-caption"><span class="kc-num">' + stageNum + '/12</span>' + stg.emoji + ' ' + stg.name + '<br><span style="font-size:0.7rem;opacity:0.8">' + stg.sub + '・運気レベル' + stg.level + '</span>' + (isTenchuDay ? '<span class="kc-tag">日天中殺</span>' : '') + '</div></div>';
+      html += '<div class="k-card-caption">' + stg.emoji + ' ' + stg.name + '<br><span style="font-size:0.7rem;opacity:0.8">' + stg.sub + '・運気レベル' + stg.level + '</span>' + (isTenchuDay ? '<span class="kc-tag">日天中殺</span>' : '') + '</div></div>';
       html += '</div></div>';
     }
     html += '</div>';
@@ -684,18 +725,39 @@ function render() {
   html += '<p class="text-xs text-center mt-2" style="color:var(--color-brown);font-size:0.65rem">日付をタップで詳細</p>';
   html += '</div>';
 
+  // 今日どう動くか（詳細版。巡ってきてる星・位相法の観点・天中殺サイクルを見出しで分けて深掘り）
+  if (todayF && guidance) {
+    html += '<div class="card">';
+    html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>今日どう動くか</span></div>';
+    html += renderGuidanceHTML('', guidance);
+    html += '</div>';
+  }
+
   // ここから下は「宿命」セクション（変わらないエネルギー・方針・土台）
   html += '<p class="text-center text-xs mb-2" style="color:var(--color-accent);letter-spacing:0.3em;opacity:0.7">─── ' + D.client.name + 'の宿命 ───</p>';
 
-  // 宿命（日干支・中心星・年天中殺の説明）
+  // 宿命（日柱・中心星・年天中殺の説明）
   html += '<div class="card">';
   html += '<div class="card-header" style="border:none;padding-bottom:0"><span style="color:var(--color-accent)">◆</span><span>' + D.client.name + 'の宿命</span></div>';
-  html += '<div class="meishiki-item"><span class="meishiki-label">日干</span><span class="meishiki-value">' + D.client.dayStem + '(' + D.client.dayStemReading + ') = ' + D.client.element + '性</span></div>';
+  var dp = D.client.dayPillar;
+  html += '<div class="meishiki-item"><span class="meishiki-label">日柱</span><span class="meishiki-value">' + (dp ? dp.kanshi : D.client.dayStem) + '(' + D.client.dayStemReading + ') = ' + D.client.element + '性</span></div>';
   html += '<div class="meishiki-item"><span class="meishiki-label">天中殺</span><span class="meishiki-value">' + D.client.tenchu + '</span></div>';
   if (D.client.specialStructure) html += '<div class="meishiki-item"><span class="meishiki-label">特殊構造</span><span class="meishiki-value" style="font-size:0.8rem">' + D.client.specialStructure + '</span></div>';
   if (D.client.stars) html += '<div class="meishiki-item"><span class="meishiki-label">主星配置</span><span class="meishiki-value" style="font-size:0.68rem;text-align:right;line-height:1.6">' + D.client.stars + '</span></div>';
 
-  html += '<div class="message-box" style="margin-top:1rem"><p class="text-sm" style="padding-left:1rem;line-height:1.8">' + D.client.elementNote + '</p></div>';
+  // 日柱の詳細（本質鑑定・中級相当）
+  if (dp) {
+    html += '<div class="message-box" style="margin-top:1rem">';
+    html += '<p class="text-sm" style="padding-left:1rem;line-height:1.8;font-weight:500">No.' + dp.no + ' ' + dp.kanshi + '「' + dp.name + '」' + (dp.bessho ? '・' + dp.bessho : '') + '</p>';
+    html += '<p class="text-xs" style="padding-left:1rem;margin-top:0.4rem;color:var(--color-brown)">' + (dp.tenSei ? '別名：' + dp.tenSei : '') + (dp.alt ? '（' + dp.alt + '）' : '') + (dp.nacchin ? '　納音：' + dp.nacchin : '') + '</p>';
+    html += '</div>';
+    html += '<p class="text-xs mt-3" style="color:var(--color-brown-dark);line-height:1.8"><span style="color:var(--color-accent);font-weight:500">本質：</span>' + dp.essence + '</p>';
+    html += '<p class="text-xs mt-2" style="color:var(--color-brown-dark);line-height:1.8"><span style="color:var(--color-accent);font-weight:500">性格：</span>' + dp.personality + '</p>';
+    if (dp.warning) html += '<p class="text-xs mt-2" style="color:var(--color-brown);line-height:1.8"><span style="color:#a83a2c;font-weight:500">警句：</span>' + dp.warning + '</p>';
+    if (dp.fullText) html += '<div class="message-box" style="margin-top:0.75rem"><p class="text-xs" style="padding-left:1rem;line-height:1.8;white-space:pre-line">' + dp.fullText + '</p></div>';
+  } else {
+    html += '<div class="message-box" style="margin-top:1rem"><p class="text-sm" style="padding-left:1rem;line-height:1.8">' + D.client.elementNote + '</p></div>';
+  }
 
   if (D.client.starsNote) {
     html += '<p class="text-xs mt-3" style="color:var(--color-brown);line-height:1.7">' + D.client.starsNote + '</p>';
