@@ -717,7 +717,7 @@ function render() {
   // 5視点（ベーシック・占術家名なし）
   if (D.fiveViews && D.fiveViews.length > 0) {
     html += '<div class="card">';
-    html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>- in depth - ５つの視点</span></div>';
+    html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>五つの視点 ─ ぐるりと見る</span></div>';
     html += '<p class="text-xs mb-3" style="color:var(--color-brown);line-height:1.7">命式を 違う角度から見たメモや。</p>';
     for (var i = 0; i < D.fiveViews.length; i++) {
       var v = D.fiveViews[i];
@@ -732,7 +732,7 @@ function render() {
   // 5人の占術家視点（上級コンテンツ・別セクション。CLAUDE.md ルール6準拠）
   if (D.fiveOccultists && D.fiveOccultists.length > 0) {
     html += '<div class="card">';
-    html += '<div class="card-header"><span style="color:var(--color-gold)">◆</span><span>5人の占術家の視点</span></div>';
+    html += '<div class="card-header"><span style="color:var(--color-gold)">◆</span><span>- in depth - ５つの視点</span></div>';
     html += '<p class="text-xs mb-3" style="color:var(--color-brown);line-height:1.7">同じ命式を、5人それぞれの視点で読んだもの。</p>';
     for (var i = 0; i < D.fiveOccultists.length; i++) {
       var o = D.fiveOccultists[i];
