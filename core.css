@@ -190,6 +190,7 @@ header .tagline { font-size: 0.8rem; color: var(--color-brown); }
 .cal-cell.empty:hover { border-color: transparent; }
 .cal-cell .cal-day { font-size: 0.78rem; }
 .cal-cell .cal-aspect { font-size: 0.55rem; margin-top: 1px; }
+.cal-cell .cal-stage { font-size: 0.5rem; color: var(--color-gold); margin-top: 1px; letter-spacing: 0; }
 .cal-cell.tenchu-day { border-left: 2px solid var(--color-water); }
 
 .cal-legend { display: flex; justify-content: center; gap: 0.75rem; font-size: 0.65rem; color: var(--color-brown); flex-wrap: wrap; margin-top: 0.5rem; }

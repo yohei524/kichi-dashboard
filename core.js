@@ -503,6 +503,11 @@ function buildMonthGridHTML(year, month, todayM, todayD, todayY) {
       else if (f.aspects.indexOf('害') >= 0) shortAspect = '💫';
       else if (f.aspects.indexOf('刑') >= 0) shortAspect = '⚡';
       if (shortAspect) html += '<span class="cal-aspect">' + shortAspect + '</span>';
+      // 天中殺サイクル（12段階）の何日目かを小さく併記
+      var dDshi = f.kanshi.charAt(1);
+      var dStg = getTravelStage(D.client.tenchuBranches || ['子','丑'], dDshi);
+      var dStageNum = TRAVEL_STAGES.indexOf(dStg) + 1;
+      html += '<span class="cal-stage">' + dStageNum + '/12</span>';
     }
     html += '</div>';
   }
@@ -523,6 +528,11 @@ function switchCalMonth(idx) {
 function openDetail(year, month, day) {
   var f = getFortuneByDate(month, day, year);
   var jdesc = jyuseiDesc[f.jyusei] || '';
+  var dDshi = f.kanshi.charAt(1);
+  var dStg = getTravelStage(D.client.tenchuBranches || ['子','丑'], dDshi);
+  var dStageNum = TRAVEL_STAGES.indexOf(dStg) + 1;
+  var dIsTenchuDay = (dStageNum === 11 || dStageNum === 12);
+
   var html = '<button class="detail-close" onclick="closeDetail()">×</button>';
   html += '<p class="detail-date-stars">' + year + '年' + month + '月' + day + '日<span class="detail-day-stars"> ' + f.kanshi + ' / ' + f.mainStar + '・' + f.jyusei + '</span></p>';
   if (f.aspects && f.aspects !== '-') {
@@ -531,6 +541,8 @@ function openDetail(year, month, day) {
   if (jdesc) {
     html += '<div class="detail-section"><p class="detail-label">今日のエネルギー(' + f.jyusei + ')</p><p class="detail-text">' + jdesc + '</p></div>';
   }
+  html += '<div class="detail-section"><p class="detail-label">天中殺サイクル（12日中の' + dStageNum + '日目）</p>';
+  html += '<p class="detail-text">' + renderLevelDots(dStg.level) + ' 運気レベル ' + dStg.level + '/12' + (dIsTenchuDay ? '（日天中殺）' : '') + '<br>' + dStg.emoji + ' ' + dStg.name + '（' + dStg.sub + '）：' + dStg.hint + '</p></div>';
   if (f.advice) {
     html += '<div class="detail-section"><p class="detail-label">㐂からの一言</p><p class="detail-text">' + f.advice + '</p></div>';
   }
@@ -571,7 +583,16 @@ function render() {
   var app = document.getElementById('app');
   var html = '';
 
-  // 今日の運気（位相法・天中殺・12段階旅フロー＋カードめくり）※最上部に配置
+  // ①日付表示（単独カード。時事セクションの入り口）
+  html += '<div class="card">';
+  html += '<div class="text-center">';
+  html += '<p class="text-xs" style="color:var(--color-brown)">' + (D.design.eraLabel || '') + '</p>';
+  html += '<p class="date-display"><span class="date-month">' + jpDate.month + '</span><span style="margin:0 0.5rem">' + jpDate.day + '</span></p>';
+  html += '<p class="text-xs" style="color:var(--color-accent);margin-top:0.25rem">' + (todayF ? todayF.kanshi : '') + '</p>';
+  html += '</div>';
+  html += '</div>';
+
+  // ②今日の運気（位相法・天中殺・12段階旅フロー＋カードめくり）※時事セクションの筆頭
   if (todayF) {
     var jdesc = jyuseiDesc[todayF.jyusei] || '';
     var todayDshi = todayF.kanshi.charAt(1);
@@ -615,64 +636,26 @@ function render() {
     html += '</div>';
   }
 
-  // 日付と命式
-  html += '<div class="card">';
-  html += '<div class="text-center mb-6">';
-  html += '<p class="text-xs" style="color:var(--color-brown)">' + (D.design.eraLabel || '') + '</p>';
-  html += '<p class="date-display"><span class="date-month">' + jpDate.month + '</span><span style="margin:0 0.5rem">' + jpDate.day + '</span></p>';
-  html += '</div>';
-  html += '<div class="divider"></div>';
-
-  html += '<div class="card-header" style="border:none;padding-bottom:0"><span style="color:var(--color-accent)">◆</span><span>' + D.client.name + 'の宿命</span></div>';
-  html += '<div class="meishiki-item"><span class="meishiki-label">日干</span><span class="meishiki-value">' + D.client.dayStem + '(' + D.client.dayStemReading + ') = ' + D.client.element + '性</span></div>';
-  html += '<div class="meishiki-item"><span class="meishiki-label">天中殺</span><span class="meishiki-value">' + D.client.tenchu + '</span></div>';
-  if (D.client.specialStructure) html += '<div class="meishiki-item"><span class="meishiki-label">特殊構造</span><span class="meishiki-value" style="font-size:0.8rem">' + D.client.specialStructure + '</span></div>';
-  if (D.client.stars) html += '<div class="meishiki-item"><span class="meishiki-label">主星配置</span><span class="meishiki-value" style="font-size:0.68rem;text-align:right;line-height:1.6">' + D.client.stars + '</span></div>';
-
-  html += '<div class="message-box" style="margin-top:1rem"><p class="text-sm" style="padding-left:1rem;line-height:1.8">' + D.client.elementNote + '</p></div>';
-
-  if (D.client.starsNote) {
-    html += '<p class="text-xs mt-3" style="color:var(--color-brown);line-height:1.7">' + D.client.starsNote + '</p>';
-  }
-  if (D.client.chukuseiNote) {
-    html += '<div class="message-box" style="margin-top:0.75rem;background:rgba(58,107,71,0.07);border-color:var(--color-accent-soft)">';
-    html += '<p class="text-xs" style="padding-left:1rem;line-height:1.75;color:var(--color-brown-dark)">' + D.client.chukuseiNote + '</p>';
-    html += '</div>';
-  }
-  if (D.client.guardianNote) {
-    html += '<p class="text-xs mt-3" style="color:var(--color-accent);line-height:1.7;font-style:italic;text-align:center">' + D.client.guardianNote + '</p>';
-  }
-
-  html += '<div class="divider"></div>';
-
-  // 年天中殺の説明
-  html += '<div class="year-tenchu-box">';
-  html += '<p class="year-tenchu-label">🌀 年天中殺について</p>';
-  html += '<p class="year-tenchu-body">' + D.yearTenchuNote + '</p>';
-  html += '</div>';
-
-  // 今月の流れ
+  // ③今月の流れ（時事セクション）
   if (currentMonth) {
     var monthGuidance = buildMonthGuidance(currentMonth);
-    html += '<div class="mb-4">';
-    html += '<p class="text-xs text-center mb-2" style="color:var(--color-brown);letter-spacing:0.15em">今月の流れ</p>';
+    html += '<div class="card">';
+    html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>今月の流れ</span></div>';
     html += '<div class="text-center">';
     html += '<p class="text-sm mb-1"><span style="color:var(--color-brown)">' + currentMonth.period + '</span><span style="margin:0 0.5rem">|</span><span style="color:var(--color-accent);font-weight:500">' + currentMonth.kanshi + ' ' + currentMonth.mainStar + '</span></p>';
     if (currentMonth.isTenchu) html += '<span class="badge badge-tenchu">月天中殺</span>';
     html += '</div>';
     html += renderGuidanceHTML('今月どう動くか', monthGuidance);
     if (currentMonth.advice) html += '<p class="text-xs text-center mt-2" style="color:var(--color-brown-dark);line-height:1.7">' + currentMonth.advice + '</p>';
+    if (inTenchu && D.monthlyTenchuPeriod) {
+      html += '<div class="tenchu-box" style="margin-top:0.75rem">';
+      html += '<p class="tenchu-label">月天中殺終了まで</p>';
+      html += '<p class="tenchu-days">' + getDaysUntil(D.monthlyTenchuPeriod.endYear, D.monthlyTenchuPeriod.endMonth, D.monthlyTenchuPeriod.endDay + 1) + '<span>日</span></p>';
+      html += '<p class="tenchu-note">' + D.monthlyTenchuPeriod.endMonth + '月' + (D.monthlyTenchuPeriod.endDay + 1) + '日から動き出せる</p>';
+      html += '</div>';
+    }
     html += '</div>';
   }
-
-  if (inTenchu && D.monthlyTenchuPeriod) {
-    html += '<div class="tenchu-box">';
-    html += '<p class="tenchu-label">月天中殺終了まで</p>';
-    html += '<p class="tenchu-days">' + getDaysUntil(D.monthlyTenchuPeriod.endYear, D.monthlyTenchuPeriod.endMonth, D.monthlyTenchuPeriod.endDay + 1) + '<span>日</span></p>';
-    html += '<p class="tenchu-note">' + D.monthlyTenchuPeriod.endMonth + '月' + (D.monthlyTenchuPeriod.endDay + 1) + '日から動き出せる</p>';
-    html += '</div>';
-  }
-  html += '</div>';
 
   // 日運カレンダー
   html += '<div class="card">';
@@ -699,6 +682,39 @@ function render() {
   html += '<span>🌀 天中殺</span>';
   html += '</div>';
   html += '<p class="text-xs text-center mt-2" style="color:var(--color-brown);font-size:0.65rem">日付をタップで詳細</p>';
+  html += '</div>';
+
+  // ここから下は「宿命」セクション（変わらないエネルギー・方針・土台）
+  html += '<p class="text-center text-xs mb-2" style="color:var(--color-accent);letter-spacing:0.3em;opacity:0.7">─── ' + D.client.name + 'の宿命 ───</p>';
+
+  // 宿命（日干支・中心星・年天中殺の説明）
+  html += '<div class="card">';
+  html += '<div class="card-header" style="border:none;padding-bottom:0"><span style="color:var(--color-accent)">◆</span><span>' + D.client.name + 'の宿命</span></div>';
+  html += '<div class="meishiki-item"><span class="meishiki-label">日干</span><span class="meishiki-value">' + D.client.dayStem + '(' + D.client.dayStemReading + ') = ' + D.client.element + '性</span></div>';
+  html += '<div class="meishiki-item"><span class="meishiki-label">天中殺</span><span class="meishiki-value">' + D.client.tenchu + '</span></div>';
+  if (D.client.specialStructure) html += '<div class="meishiki-item"><span class="meishiki-label">特殊構造</span><span class="meishiki-value" style="font-size:0.8rem">' + D.client.specialStructure + '</span></div>';
+  if (D.client.stars) html += '<div class="meishiki-item"><span class="meishiki-label">主星配置</span><span class="meishiki-value" style="font-size:0.68rem;text-align:right;line-height:1.6">' + D.client.stars + '</span></div>';
+
+  html += '<div class="message-box" style="margin-top:1rem"><p class="text-sm" style="padding-left:1rem;line-height:1.8">' + D.client.elementNote + '</p></div>';
+
+  if (D.client.starsNote) {
+    html += '<p class="text-xs mt-3" style="color:var(--color-brown);line-height:1.7">' + D.client.starsNote + '</p>';
+  }
+  if (D.client.chukuseiNote) {
+    html += '<div class="message-box" style="margin-top:0.75rem;background:rgba(58,107,71,0.07);border-color:var(--color-accent-soft)">';
+    html += '<p class="text-xs" style="padding-left:1rem;line-height:1.75;color:var(--color-brown-dark)">' + D.client.chukuseiNote + '</p>';
+    html += '</div>';
+  }
+  if (D.client.guardianNote) {
+    html += '<p class="text-xs mt-3" style="color:var(--color-accent);line-height:1.7;font-style:italic;text-align:center">' + D.client.guardianNote + '</p>';
+  }
+
+  html += '<div class="divider"></div>';
+
+  html += '<div class="year-tenchu-box">';
+  html += '<p class="year-tenchu-label">🌀 年天中殺について</p>';
+  html += '<p class="year-tenchu-body">' + D.yearTenchuNote + '</p>';
+  html += '</div>';
   html += '</div>';
 
   // 陽転・陰転
