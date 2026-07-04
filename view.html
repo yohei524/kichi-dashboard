@@ -37,6 +37,8 @@
     app.innerHTML = '<p class="text-center text-sm" style="color:var(--color-brown);padding:2rem 0">クライアント指定がありません（?client=名前 が必要です）</p>';
     return;
   }
+  var isPreview = (client === 'demo') || (params.get('preview') === '1');
+
   fetch('clients/' + client + '.json')
     .then(function (res) {
       if (!res.ok) throw new Error('データが見つかりません: ' + client);
@@ -45,10 +47,34 @@
     .then(function (data) {
       // 画像パスはクライアントごとのフォルダを見に行く（images/はclients/images/を指す）
       initDashboard(data);
+      if (isPreview) applyPreviewLock();
     })
     .catch(function (err) {
       app.innerHTML = '<p class="text-center text-sm" style="color:var(--color-brown);padding:2rem 0">' + err.message + '</p>';
     });
+
+  // デモページ用：画面の途中から下をぼかして隠し、申し込み導線のオーバーレイを重ねる
+  function applyPreviewLock() {
+    var cards = app.querySelectorAll('.card');
+    if (cards.length === 0) return;
+    var lockFrom = Math.ceil(cards.length / 2);
+    var wrap = document.createElement('div');
+    wrap.className = 'preview-lock-wrap';
+    var firstLocked = cards[lockFrom];
+    if (!firstLocked) return;
+    firstLocked.parentNode.insertBefore(wrap, firstLocked);
+    for (var i = lockFrom; i < cards.length; i++) {
+      wrap.appendChild(cards[i]);
+    }
+    var overlay = document.createElement('div');
+    overlay.className = 'preview-lock-overlay';
+    overlay.innerHTML =
+      '<p class="preview-lock-title">ここから先は本鑑定でお渡しする内容です</p>' +
+      '<p class="preview-lock-body">宿命の詳細解説・5つの視点・5人の占術家視点・陽転陰転パターンなど、<br>' +
+      'あなた専用のページとして毎日見返せる形でお渡ししています。</p>' +
+      '<a href="https://sensenkyokyo.stores.jp/" target="_blank" rel="noopener" class="preview-lock-button">▶ 鑑定を申し込む(㐂のstores)</a>';
+    wrap.appendChild(overlay);
+  }
 })();
 </script>
 </body>
