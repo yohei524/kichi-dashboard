@@ -42,6 +42,10 @@
     {
       "source": "/hidetoh",
       "destination": "/view.html?client=hidetoh"
+    },
+    {
+      "source": "/demo",
+      "destination": "/view.html?client=demo&preview=1"
     }
   ]
 }
