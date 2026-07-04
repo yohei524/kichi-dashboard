@@ -264,6 +264,28 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
 }
 .year-tenchu-label { font-size: 0.7rem; color: var(--color-water); letter-spacing: 0.15em; margin-bottom: 0.25rem; }
 .year-tenchu-body { font-size: 0.8rem; color: var(--color-brown-dark); line-height: 1.7; }
+
+/* 12段階旅フロー＋カードめくり（無料版天中殺チェッカー相当・強化） */
+.k-flow { margin-bottom: 1rem; padding: 0.9rem 1rem; background: rgba(184,150,79,0.06); border: 1px solid rgba(184,150,79,0.25); border-radius: 4px; }
+.k-flow-lbl { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--color-brown); margin-bottom: 0.5rem; }
+.k-flow-stage { font-size: 0.9rem; color: var(--color-brown-dark); letter-spacing: 0.05em; line-height: 1.6; }
+.k-flow-stage .k-flow-num { color: var(--color-gold); font-size: 0.8rem; margin-right: 0.4rem; }
+.k-flow-stage .k-flow-tag { display: inline-block; font-size: 0.6rem; color: #a83a2c; border: 1px solid #a83a2c; padding: 1px 6px; border-radius: 2px; margin-left: 0.4rem; letter-spacing: 0.05em; vertical-align: middle; }
+.k-flow-hint { font-size: 0.7rem; color: var(--color-brown); margin-top: 0.5rem; line-height: 1.7; }
+.k-card-wrap { margin-top: 0.75rem; perspective: 1200px; -webkit-perspective: 1200px; }
+.k-card { position: relative; width: 100%; aspect-ratio: 1/1; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transition: transform 1s cubic-bezier(0.4,0,0.2,1); cursor: pointer; }
+.k-card.flipping { transform: rotateY(180deg); }
+.k-card-face { position: absolute; top: 0; left: 0; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 6px; overflow: hidden; box-shadow: 0 8px 24px rgba(51,45,37,0.3), 0 2px 8px rgba(184,150,79,0.15); }
+.k-card-front { background: linear-gradient(135deg,var(--color-brown-dark),var(--color-brown)); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(184,150,79,0.3); }
+.k-card-front::before { content:""; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 60%; height: 60%; border: 1px solid rgba(184,150,79,0.2); border-radius: 50%; }
+.k-card-front-inner { position: relative; text-align: center; color: var(--color-gold); }
+.k-card-front-inner .kf-marker { font-size: 3rem; font-weight: 200; margin-bottom: 0.5rem; }
+.k-card-front-inner .kf-label { font-size: 0.7rem; letter-spacing: 0.3em; color: var(--color-accent-soft); }
+.k-card-back { background: #000; transform: rotateY(180deg); -webkit-transform: rotateY(180deg); }
+.k-card-back img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.k-card-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 0.75rem 0.85rem; background: linear-gradient(to top, rgba(51,45,37,0.9), transparent); color: #fff; font-size: 0.85rem; line-height: 1.5; letter-spacing: 0.05em; }
+.k-card-caption .kc-num { color: var(--color-gold); font-size: 0.7rem; margin-right: 0.35rem; }
+.k-card-caption .kc-tag { display: inline-block; font-size: 0.6rem; color: #f0a0a0; border: 1px solid #a83a2c; padding: 1px 5px; border-radius: 2px; margin-left: 0.35rem; letter-spacing: 0.05em; vertical-align: middle; }
 </style>
 </head>
 <body>
@@ -288,6 +310,7 @@ const CLIENT_DATA = {
     "element": "金",
     "elementNote": "日干支は辛卯「箱に入れられた宝石」。辛はまだ磨かれていない小石、卯はまだ掘り出されていない根っこ。中に本物の宝石が一個だけ入っている状態や。一流品好みやけど、それを揃えるバランスが取りにくい。改良方法は「誰かにコーディネートしてもらうこと」と言われとる。",
     "tenchu": "午未天中殺",
+    "tenchuBranches": ["午","未"],
     "tenchuNote": "「流れを断ち切る使命」を持つ天中殺や。家庭・愛情がテーマになる。古い流れを断って、新しい形を作る時に運が開く。天からの後押しを受けやすいのは「悪い流れを断ち切る・後始末をする」こと。",
     "specialStructure": "",
     "specialNote": "",
@@ -430,6 +453,56 @@ function computeFortune(y,m,d){
   var isTenchu=(MY.tc.indexOf(bi)>=0);
   if(isTenchu){var has=false;for(var i=0;i<asp.length;i++)if(asp[i]==='日天中殺')has=true;if(!has)asp.push('日天中殺')}
   return{date:m+'/'+d, kanshi:k, mainStar:ms, jyusei:bs, aspects:asp, isTenchu:isTenchu};
+}
+
+// ========== 12段階旅フロー（無料版天中殺チェッカー相当・強化） ==========
+// 天中殺の2支を基準に、今日の日支が12段階の何番目かを計算する
+var TRAVEL_STAGES=[
+  {emoji:"🧳",name:"荷造り",sub:"準備",
+    hint:"新しい何かを始めるのに向いた日",
+    longHint:"新しい何かを始めるのに向いた日。派手な動きより、小さな種をまくくらいのイメージで。今日始めたことは1〜2ヶ月後に芽が出やすい時期です"},
+  {emoji:"🚶",name:"旅の出発",sub:"移動",
+    hint:"始めたことが育ちやすい日",
+    longHint:"始めたことが育ちやすい日。前向きな話・新しい人との会話・学びに向きます。少し勇気を出して踏み出すと、風が味方してくれる感覚があるはず"},
+  {emoji:"🌅",name:"目的地到着",sub:"成功",
+    hint:"「決める」に向いた日",
+    longHint:"「決める」に向いた日。大事な連絡・プレゼン・契約サインなど、勝負どころに立つのに強い日。積み重ねてきた人ほど成果が見えます"},
+  {emoji:"⏳",name:"休憩",sub:"ブレーキ",
+    hint:"体と心が疲れやすい日",
+    longHint:"体と心が疲れやすい日。頑張りすぎず、体調管理を優先。「今日は無理しない」と決めるだけで乗り切れます。大きな決断は明日以降に回すのが吉"},
+  {emoji:"🎉",name:"旅のハイライト",sub:"最高の瞬間",
+    hint:"12日で一番エネルギーが高い日",
+    longHint:"12日で一番エネルギーが高い日。願いや目標が形になりやすい。「今日やっとこう」と思ってたことに集中すると、想像以上の結果がついてくることも"},
+  {emoji:"🌪️",name:"道中のトラブル",sub:"試練",
+    hint:"感情がざわつきやすい日",
+    longHint:"感情がざわつく・小さなトラブルが起きやすい日。人に反応しすぎず、深呼吸してから返事するのがおすすめ。大きな契約・投資は明日以降に"},
+  {emoji:"🛤️",name:"ルート変更",sub:"選択の時",
+    hint:"昔の縁が動き出しやすい日",
+    longHint:"昔の縁が動き出す日。懐かしい人からの連絡・過去のプロジェクトの再開・やり直したかった何かに手を伸ばす、そんな日"},
+  {emoji:"🛍️",name:"お土産購入",sub:"収穫",
+    hint:"実りが返ってくる日",
+    longHint:"実りが返ってくる日。お金・成果・評価が動きやすい。臨時収入や嬉しい依頼が来ることも。ここまで頑張ってきた自分にご褒美をあげてもいい日"},
+  {emoji:"🏠",name:"帰路につく",sub:"次の準備",
+    hint:"穏やかで落ち着ける日",
+    longHint:"穏やかで落ち着ける日。派手なことより、日常を整える・大切な人とゆっくり過ごすのに向きます。「安定」を感じ、次のサイクルへの土台を作る日"},
+  {emoji:"🛌",name:"休息",sub:"充電期間",
+    hint:"少し内側にこもる日",
+    longHint:"少し内側にこもる日。孤独を感じやすいけど、それは充電の合図。目立たない場所で自分の中身を整える時間として使うと、次のサイクルに活きます"},
+  {emoji:"🚧",name:"旅の終わり",sub:"低迷期",
+    hint:"12日サイクルの底・日天中殺",
+    longHint:"日天中殺。12日サイクルの底。物事が停滞しやすく、無気力になりがち。焦らず休むのが正解。ここで動きたい気持ちを抑えられると、次のサイクルが軽くなる"},
+  {emoji:"🔄",name:"次の旅の計画",sub:"再スタート",
+    hint:"次のサイクルの入口・日天中殺",
+    longHint:"日天中殺。12日サイクルの終わり=次のサイクルの入口。エネルギーが少ない中で、静かに次を思い描く日。無理して動かず、内側を整える"}
+];
+var BRANCH_ORDER=["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"];
+var TRAVEL_IMG_KEY = "gohitsuji"; // Hidetohさん＝午未天中殺の旅フロー画像セット
+
+function getTravelStage(tenchuBr, todayDshi) {
+  var startIdx = BRANCH_ORDER.indexOf(tenchuBr[0]);
+  var todayIdx = BRANCH_ORDER.indexOf(todayDshi);
+  var stage = ((todayIdx - startIdx + 10) % 12);
+  return TRAVEL_STAGES[stage];
 }
 
 var jyuseiDesc = {
@@ -704,6 +777,42 @@ function render() {
   var app = document.getElementById('app');
   var html = '';
 
+  // 今日の運気（位相法・天中殺・12段階旅フロー＋カードめくり）※最上部に配置
+  if (todayF) {
+    var jdesc = jyuseiDesc[todayF.jyusei] || '';
+    var todayDshi = todayF.kanshi.charAt(1);
+    var stg = getTravelStage(D.client.tenchuBranches || ['午','未'], todayDshi);
+    var stageNum = TRAVEL_STAGES.indexOf(stg) + 1;
+    var isTenchuDay = (stageNum === 11 || stageNum === 12);
+    var imgExt = 'webp';
+
+    html += '<div class="card">';
+    html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>本日の運気</span></div>';
+    html += '<div class="star-grid">';
+    html += '<div class="star-box"><p class="star-label">主星</p><p class="star-value">' + todayF.mainStar + '</p></div>';
+    html += '<div class="star-box"><p class="star-label">従星</p><p class="star-value">' + todayF.jyusei + '</p></div>';
+    html += '</div>';
+    if (todayF.aspects && todayF.aspects !== '-') {
+      html += '<p class="text-xs text-center mb-3" style="color:var(--color-brown)">' + todayF.aspects + '</p>';
+    }
+    if (jdesc) html += '<p class="text-xs" style="background:var(--color-cream);padding:0.6rem;border-radius:4px;color:var(--color-brown-dark);line-height:1.7">' + jdesc + '</p>';
+    if (todayF.advice) html += '<p class="text-xs mt-2" style="color:var(--color-accent);line-height:1.7;font-weight:500">' + todayF.advice + '</p>';
+
+    // 12段階旅フロー
+    html += '<div class="k-flow">';
+    html += '<div class="k-flow-lbl">今日の運気（12段階）</div>';
+    html += '<div class="k-flow-stage"><span class="k-flow-num">' + stageNum + '</span>' + stg.emoji + ' ' + stg.name + '（' + stg.sub + '）' + (isTenchuDay ? '<span class="k-flow-tag">日天中殺</span>' : '') + '</div>';
+    html += '<div class="k-flow-hint">' + stg.hint + '</div>';
+    html += '<div class="k-card-wrap"><div class="k-card" id="k-card" onclick="this.classList.toggle(\'flipping\')">';
+    html += '<div class="k-card-face k-card-front"><div class="k-card-front-inner"><div class="kf-marker">㐂</div><div class="kf-label">TAP TO REVEAL</div></div></div>';
+    html += '<div class="k-card-face k-card-back"><img src="images/' + TRAVEL_IMG_KEY + '_' + stageNum + '.' + imgExt + '" alt="旅の段階' + stageNum + '">';
+    html += '<div class="k-card-caption"><span class="kc-num">' + stageNum + '</span>' + stg.emoji + ' ' + stg.name + '<br><span style="font-size:0.7rem;opacity:0.8">' + stg.sub + '</span>' + (isTenchuDay ? '<span class="kc-tag">日天中殺</span>' : '') + '</div></div>';
+    html += '</div></div>';
+    html += '</div>';
+
+    html += '</div>';
+  }
+
   // 日付と命式
   html += '<div class="card">';
   html += '<div class="text-center mb-6">';
@@ -761,23 +870,6 @@ function render() {
     html += '</div>';
   }
   html += '</div>';
-
-  // 今日の運気
-  if (todayF) {
-    var jdesc = jyuseiDesc[todayF.jyusei] || '';
-    html += '<div class="card">';
-    html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>本日の運気</span></div>';
-    html += '<div class="star-grid">';
-    html += '<div class="star-box"><p class="star-label">主星</p><p class="star-value">' + todayF.mainStar + '</p></div>';
-    html += '<div class="star-box"><p class="star-label">従星</p><p class="star-value">' + todayF.jyusei + '</p></div>';
-    html += '</div>';
-    if (todayF.aspects && todayF.aspects !== '-') {
-      html += '<p class="text-xs text-center mb-3" style="color:var(--color-brown)">' + todayF.aspects + '</p>';
-    }
-    if (jdesc) html += '<p class="text-xs" style="background:var(--color-cream);padding:0.6rem;border-radius:4px;color:var(--color-brown-dark);line-height:1.7">' + jdesc + '</p>';
-    if (todayF.advice) html += '<p class="text-xs mt-2" style="color:var(--color-accent);line-height:1.7;font-weight:500">' + todayF.advice + '</p>';
-    html += '</div>';
-  }
 
   // 日運カレンダー
   html += '<div class="card">';
