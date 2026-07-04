@@ -154,25 +154,30 @@ var mainStarDesc = {
 };
 
 // 月単位のガイダンス（天中殺・位相法・主星を統合した「今月どう動くか」）
+// 戻り値は buildTodayGuidance と同じ { groups, summary } 構造。
 function buildMonthGuidance(monthF) {
-  var lines = [];
+  var phaseLines = [];
   var aspKeys = getAspectKeys(monthF.aspects || '');
   var hasCaution = false, hasGood = false;
 
   if (monthF.isTenchu) {
-    lines.push('🌀 今月は月天中殺。' + ASPECT_ACTION['天中殺'].monthText.replace(/^今月は/, ''));
+    phaseLines.push('🌀 月天中殺：' + ASPECT_ACTION['天中殺'].monthText.replace(/^今月は/, ''));
     hasCaution = true;
   }
   for (var i = 0; i < aspKeys.length; i++) {
     var k = aspKeys[i];
     if (k === '天中殺') continue;
     var a = ASPECT_ACTION[k];
-    lines.push((a.tone === 'good' ? '🌼 ' : a.tone === 'caution' ? '⚡ ' : '🔔 ') + k + '：' + a.monthText);
+    phaseLines.push((a.tone === 'good' ? '🌼 ' : a.tone === 'caution' ? '⚡ ' : '🔔 ') + k + '：' + a.monthText);
     if (a.tone === 'caution') hasCaution = true;
     if (a.tone === 'good') hasGood = true;
   }
+
+  var groups = [];
+  if (phaseLines.length > 0) groups.push({ label:'位相法の観点', lines:phaseLines });
+
   var msDesc = mainStarDesc[monthF.mainStar];
-  if (msDesc) lines.push('⭐ ' + msDesc);
+  if (msDesc) groups.push({ label:'今月の主星（' + monthF.mainStar + '）', lines:['⭐ ' + msDesc] });
 
   var summary;
   if (monthF.isTenchu) {
@@ -186,9 +191,8 @@ function buildMonthGuidance(monthF) {
   } else {
     summary = '総合すると、今月は特別な追い風も向かい風もない、いつも通りのペースで過ごせる月です。';
   }
-  lines.push('👉 ' + summary);
 
-  return lines;
+  return { groups: groups, summary: summary };
 }
 
 // ---------- 従星の意味 ----------
@@ -273,33 +277,36 @@ function getAspectKeys(aspectsText) {
 }
 
 // 天中殺・位相法・12段階旅フローを統合して「今日どう動くか」の一言を作る
+// 戻り値は { groups: [{label, lines:[]}], summary: '' } の構造。
+// 「位相法の観点」と「天中殺サイクル（12段階）」は由来が違う技法なので、
+// 見出しを分けて出典を明示する（同じ日でも別技法の結論が一見矛盾して見える対策）。
 function buildTodayGuidance(todayF, stg, isTenchuDay) {
-  var lines = [];
+  var groups = [];
   var aspKeys = getAspectKeys(todayF.aspects || '');
   var hasCaution = false, hasGood = false;
 
-  // ①天中殺（最優先で伝える）
+  // ①位相法の観点（天中殺含む）
+  var phaseLines = [];
   if (isTenchuDay || todayF.isTenchu) {
-    lines.push('🌀 今日は日天中殺。' + ASPECT_ACTION['天中殺'].text.replace(/^今日は/, ''));
+    phaseLines.push('🌀 日天中殺：' + ASPECT_ACTION['天中殺'].text.replace(/^今日は/, ''));
     hasCaution = true;
   }
-
-  // ②位相法（天中殺以外）
   for (var i = 0; i < aspKeys.length; i++) {
     var k = aspKeys[i];
     if (k === '天中殺') continue;
     var a = ASPECT_ACTION[k];
-    lines.push((a.tone === 'good' ? '🌼 ' : a.tone === 'caution' ? '⚡ ' : '🔔 ') + k + '：' + a.text);
+    phaseLines.push((a.tone === 'good' ? '🌼 ' : a.tone === 'caution' ? '⚡ ' : '🔔 ') + k + '：' + a.text);
     if (a.tone === 'caution') hasCaution = true;
     if (a.tone === 'good') hasGood = true;
   }
+  if (phaseLines.length > 0) groups.push({ label:'位相法の観点', lines:phaseLines });
 
-  // ③12段階旅フロー（longHintで締める）
+  // ②天中殺サイクル（12段階旅フロー）※日天中殺かどうかとは別の、12日周期の技法
   if (stg && stg.longHint) {
-    lines.push('🧭 ' + stg.longHint);
+    groups.push({ label:'天中殺サイクル（12段階の' + (stg.name) + '）', lines:['🧭 ' + stg.longHint] });
   }
 
-  // ④総合の一言（吉日か注意日かをまとめて明示）
+  // ③総合の一言（吉日か注意日かをまとめて明示。ここだけは2つの技法をまたいだ㐂の判断として出す）
   var summary;
   if (isTenchuDay || todayF.isTenchu) {
     summary = '総合すると、今日は「動く」より「整える」に向いた日です。';
@@ -312,9 +319,25 @@ function buildTodayGuidance(todayF, stg, isTenchuDay) {
   } else {
     summary = '総合すると、今日は特別な追い風も向かい風もない、いつも通りのペースで過ごせる日です。';
   }
-  lines.push('👉 ' + summary);
 
-  return lines;
+  return { groups: groups, summary: summary };
+}
+
+// { groups, summary } 構造を、出典（位相法／天中殺サイクル等）を見出しとして
+// 明示したHTMLに組み立てる。技法の由来が違う結論を並べる時は必ず見出しで区切る。
+function renderGuidanceHTML(label, guidance) {
+  var html = '<div class="today-guidance">';
+  html += '<p class="today-guidance-lbl">' + label + '</p>';
+  for (var gi = 0; gi < guidance.groups.length; gi++) {
+    var grp = guidance.groups[gi];
+    html += '<p class="today-guidance-group-lbl">' + grp.label + '</p>';
+    for (var li = 0; li < grp.lines.length; li++) {
+      html += '<p class="today-guidance-line">' + grp.lines[li] + '</p>';
+    }
+  }
+  html += '<p class="today-guidance-line today-guidance-summary">👉 ' + guidance.summary + '</p>';
+  html += '</div>';
+  return html;
 }
 
 // ---------- 位相法の絵文字装飾 ----------
@@ -552,14 +575,8 @@ function render() {
     if (jdesc) html += '<p class="text-xs" style="background:var(--color-cream);padding:0.6rem;border-radius:4px;color:var(--color-brown-dark);line-height:1.7">' + jdesc + '</p>';
     if (todayF.advice) html += '<p class="text-xs mt-2" style="color:var(--color-accent);line-height:1.7;font-weight:500">' + todayF.advice + '</p>';
 
-    // 今日どう動くか（天中殺・位相法・12段階を統合した具体的な指針）
-    html += '<div class="today-guidance">';
-    html += '<p class="today-guidance-lbl">今日どう動くか</p>';
-    for (var gi = 0; gi < guidance.length; gi++) {
-      var isLast = (gi === guidance.length - 1);
-      html += '<p class="today-guidance-line' + (isLast ? ' today-guidance-summary' : '') + '">' + guidance[gi] + '</p>';
-    }
-    html += '</div>';
+    // 今日どう動くか（位相法の観点・天中殺サイクルを見出しで分けて提示）
+    html += renderGuidanceHTML('今日どう動くか', guidance);
 
     html += '<div class="k-flow">';
     html += '<div class="k-flow-lbl">今日の運気（12段階）</div>';
@@ -622,13 +639,7 @@ function render() {
     html += '<p class="text-sm mb-1"><span style="color:var(--color-brown)">' + currentMonth.period + '</span><span style="margin:0 0.5rem">|</span><span style="color:var(--color-accent);font-weight:500">' + currentMonth.kanshi + ' ' + currentMonth.mainStar + '</span></p>';
     if (currentMonth.isTenchu) html += '<span class="badge badge-tenchu">月天中殺</span>';
     html += '</div>';
-    html += '<div class="today-guidance" style="margin-top:0.75rem">';
-    html += '<p class="today-guidance-lbl">今月どう動くか</p>';
-    for (var mgi = 0; mgi < monthGuidance.length; mgi++) {
-      var mIsLast = (mgi === monthGuidance.length - 1);
-      html += '<p class="today-guidance-line' + (mIsLast ? ' today-guidance-summary' : '') + '">' + monthGuidance[mgi] + '</p>';
-    }
-    html += '</div>';
+    html += renderGuidanceHTML('今月どう動くか', monthGuidance);
     if (currentMonth.advice) html += '<p class="text-xs text-center mt-2" style="color:var(--color-brown-dark);line-height:1.7">' + currentMonth.advice + '</p>';
     html += '</div>';
   }

@@ -268,9 +268,11 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
 /* 今日どう動くか（天中殺・位相法・12段階を統合した具体的な指針） */
 .today-guidance { margin: 0.75rem 0 1rem; padding: 0.9rem 1rem; background: var(--color-warm-white); border: 1px solid var(--color-beige); border-left: 3px solid var(--color-accent); border-radius: 0 4px 4px 0; }
 .today-guidance-lbl { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--color-accent); margin-bottom: 0.6rem; font-weight: 500; }
+.today-guidance-group-lbl { font-size: 0.6rem; letter-spacing: 0.1em; color: var(--color-brown); margin: 0.7rem 0 0.35rem; opacity: 0.75; }
+.today-guidance-group-lbl:first-of-type { margin-top: 0; }
 .today-guidance-line { font-size: 0.8rem; color: var(--color-brown-dark); line-height: 1.8; margin-bottom: 0.55rem; }
 .today-guidance-line:last-child { margin-bottom: 0; }
-.today-guidance-summary { font-weight: 500; color: var(--color-brown-dark); padding-top: 0.5rem; border-top: 1px dashed var(--color-beige); }
+.today-guidance-summary { font-weight: 500; color: var(--color-brown-dark); padding-top: 0.65rem; margin-top: 0.35rem; border-top: 1px dashed var(--color-beige); }
 
 /* 12段階旅フロー＋カードめくり（無料版天中殺チェッカー相当・強化） */
 .k-flow { margin-bottom: 1rem; padding: 0.9rem 1rem; background: rgba(184,150,79,0.06); border: 1px solid rgba(184,150,79,0.25); border-radius: 4px; }
