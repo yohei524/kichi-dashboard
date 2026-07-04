@@ -281,6 +281,9 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
 .k-flow-stage .k-flow-num { color: var(--color-gold); font-size: 0.8rem; margin-right: 0.4rem; }
 .k-flow-stage .k-flow-tag { display: inline-block; font-size: 0.6rem; color: #a83a2c; border: 1px solid #a83a2c; padding: 1px 6px; border-radius: 2px; margin-left: 0.4rem; letter-spacing: 0.05em; vertical-align: middle; }
 .k-flow-hint { font-size: 0.7rem; color: var(--color-brown); margin-top: 0.5rem; line-height: 1.7; }
+.k-flow-level { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; flex-wrap: wrap; }
+.k-flow-level-dots { font-size: 0.7rem; letter-spacing: 1px; color: var(--color-gold); }
+.k-flow-level-num { font-size: 0.65rem; color: var(--color-brown); }
 .k-card-wrap { margin-top: 0.75rem; perspective: 1200px; -webkit-perspective: 1200px; }
 .k-card { position: relative; width: 100%; aspect-ratio: 1/1; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transition: transform 1s cubic-bezier(0.4,0,0.2,1); cursor: pointer; }
 .k-card.flipping { transform: rotateY(180deg); }

@@ -92,45 +92,57 @@ function computeFortune(y,m,d){
 }
 
 // ---------- 12段階旅フロー（無料版天中殺チェッカー相当） ----------
+// level: 運気の強さ（12=最強〜1=最弱）。六星占術の12運気（種子→緑生→立花→健弱→
+// 達成→乱気→再会→財成→安定→陰影→停止→減退）の強弱順を踏まえて割り当てている。
+// 11・12（停止・減退）が天中殺（日天中殺）にあたる、サイクル全体で最も弱い2日。
 var TRAVEL_STAGES=[
-  {emoji:"🧳",name:"荷造り",sub:"準備",
+  {emoji:"🧳",name:"荷造り",sub:"準備",level:5,
     hint:"新しい何かを始めるのに向いた日",
     longHint:"新しい何かを始めるのに向いた日。派手な動きより、小さな種をまくくらいのイメージで。今日始めたことは1〜2ヶ月後に芽が出やすい時期です。"},
-  {emoji:"🚶",name:"旅の出発",sub:"移動",
+  {emoji:"🚶",name:"旅の出発",sub:"移動",level:8,
     hint:"始めたことが育ちやすい日",
     longHint:"始めたことが育ちやすい日。前向きな話・新しい人との会話・学びに向きます。少し勇気を出して踏み出すと、風が味方してくれる感覚があるはず。"},
-  {emoji:"🌅",name:"目的地到着",sub:"成功",
+  {emoji:"🌅",name:"目的地到着",sub:"成功",level:10,
     hint:"「決める」に向いた日",
     longHint:"「決める」に向いた日。大事な連絡・プレゼン・契約サインなど、勝負どころに立つのに強い日。積み重ねてきた人ほど成果が見えます。"},
-  {emoji:"⏳",name:"休憩",sub:"ブレーキ",
+  {emoji:"⏳",name:"休憩",sub:"ブレーキ",level:6,
     hint:"体と心が疲れやすい日",
     longHint:"体と心が疲れやすい日。頑張りすぎず、体調管理を優先。「今日は無理しない」と決めるだけで乗り切れます。大きな決断は明日以降に回すのが吉。"},
-  {emoji:"🎉",name:"旅のハイライト",sub:"最高の瞬間",
+  {emoji:"🎉",name:"旅のハイライト",sub:"最高の瞬間",level:12,
     hint:"12日で一番エネルギーが高い日",
     longHint:"12日で一番エネルギーが高い日。願いや目標が形になりやすい。「今日やっとこう」と思ってたことに集中すると、想像以上の結果がついてくることも。"},
-  {emoji:"🌪️",name:"道中のトラブル",sub:"試練",
+  {emoji:"🌪️",name:"道中のトラブル",sub:"試練",level:4,
     hint:"感情がざわつきやすい日",
     longHint:"感情がざわつく・小さなトラブルが起きやすい日。人に反応しすぎず、深呼吸してから返事するのがおすすめ。大きな契約・投資は明日以降に。"},
-  {emoji:"🛤️",name:"ルート変更",sub:"選択の時",
+  {emoji:"🛤️",name:"ルート変更",sub:"選択の時",level:7,
     hint:"昔の縁が動き出しやすい日",
     longHint:"昔の縁が動き出す日。懐かしい人からの連絡・過去のプロジェクトの再開・やり直したかった何かに手を伸ばす、そんな日。"},
-  {emoji:"🛍️",name:"お土産購入",sub:"収穫",
+  {emoji:"🛍️",name:"お土産購入",sub:"収穫",level:9,
     hint:"実りが返ってくる日",
     longHint:"実りが返ってくる日。お金・成果・評価が動きやすい。臨時収入や嬉しい依頼が来ることも。ここまで頑張ってきた自分にご褒美をあげてもいい日。"},
-  {emoji:"🏠",name:"帰路につく",sub:"次の準備",
+  {emoji:"🏠",name:"帰路につく",sub:"次の準備",level:6,
     hint:"穏やかで落ち着ける日",
     longHint:"穏やかで落ち着ける日。派手なことより、日常を整える・大切な人とゆっくり過ごすのに向きます。「安定」を感じ、次のサイクルへの土台を作る日。"},
-  {emoji:"🛌",name:"休息",sub:"充電期間",
+  {emoji:"🛌",name:"休息",sub:"充電期間",level:3,
     hint:"少し内側にこもる日",
     longHint:"少し内側にこもる日。孤独を感じやすいけど、それは充電の合図。目立たない場所で自分の中身を整える時間として使うと、次のサイクルに活きます。"},
-  {emoji:"🚧",name:"旅の終わり",sub:"低迷期",
+  {emoji:"🚧",name:"旅の終わり",sub:"低迷期",level:1,
     hint:"12日サイクルの底・日天中殺",
     longHint:"12日サイクルの底。物事が停滞しやすく、無気力になりがち。焦らず休むのが正解。ここで動きたい気持ちを抑えられると、次のサイクルが軽くなります。"},
-  {emoji:"🔄",name:"次の旅の計画",sub:"再スタート",
+  {emoji:"🔄",name:"次の旅の計画",sub:"再スタート",level:2,
     hint:"次のサイクルの入口・日天中殺",
     longHint:"12日サイクルの終わり=次のサイクルの入口。エネルギーが少ない中で、静かに次を思い描く日。無理して動かず、内側を整えましょう。"}
 ];
 var BRANCH_ORDER=["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"];
+
+// 運気レベル(1-12)を●○のドットで可視化する（12段階中どのくらいの強さか一目でわかるように）
+function renderLevelDots(level) {
+  var dots = '';
+  for (var i = 1; i <= 12; i++) {
+    dots += (i <= level) ? '●' : '○';
+  }
+  return dots;
+}
 
 function getTravelStage(tenchuBr, todayDshi) {
   var startIdx = BRANCH_ORDER.indexOf(tenchuBr[0]);
@@ -285,7 +297,15 @@ function buildTodayGuidance(todayF, stg, isTenchuDay) {
   var aspKeys = getAspectKeys(todayF.aspects || '');
   var hasCaution = false, hasGood = false;
 
-  // ①位相法の観点（天中殺含む）
+  // ①巡ってきてる星（十大主星・十二大従星）※位相法・天中殺サイクルとは別の技法
+  var starLines = [];
+  var msDesc = mainStarDesc[todayF.mainStar];
+  if (msDesc) starLines.push('⭐ ' + todayF.mainStar + '：' + msDesc);
+  var jdesc = jyuseiDesc[todayF.jyusei] || '';
+  if (jdesc) starLines.push('🌟 ' + todayF.jyusei + '：' + jdesc);
+  if (starLines.length > 0) groups.push({ label:'巡ってきてる星', lines:starLines });
+
+  // ②位相法の観点（天中殺含む）
   var phaseLines = [];
   if (isTenchuDay || todayF.isTenchu) {
     phaseLines.push('🌀 日天中殺：' + ASPECT_ACTION['天中殺'].text.replace(/^今日は/, ''));
@@ -301,7 +321,7 @@ function buildTodayGuidance(todayF, stg, isTenchuDay) {
   }
   if (phaseLines.length > 0) groups.push({ label:'位相法の観点', lines:phaseLines });
 
-  // ②天中殺サイクル（12段階旅フロー）※日天中殺かどうかとは別の、12日周期の技法
+  // ③天中殺サイクル（12段階旅フロー）※日天中殺かどうかとは別の、12日周期の技法
   if (stg && stg.longHint) {
     groups.push({ label:'天中殺サイクル（12段階の' + (stg.name) + '）', lines:['🧭 ' + stg.longHint] });
   }
@@ -579,14 +599,15 @@ function render() {
     html += renderGuidanceHTML('今日どう動くか', guidance);
 
     html += '<div class="k-flow">';
-    html += '<div class="k-flow-lbl">今日の運気（12段階）</div>';
-    html += '<div class="k-flow-stage"><span class="k-flow-num">' + stageNum + '</span>' + stg.emoji + ' ' + stg.name + '（' + stg.sub + '）' + (isTenchuDay ? '<span class="k-flow-tag">日天中殺</span>' : '') + '</div>';
+    html += '<div class="k-flow-lbl">今日の運気（12日サイクルの' + stageNum + '日目）</div>';
+    html += '<div class="k-flow-stage"><span class="k-flow-num">' + stageNum + '/12</span>' + stg.emoji + ' ' + stg.name + '（' + stg.sub + '）' + (isTenchuDay ? '<span class="k-flow-tag">日天中殺</span>' : '') + '</div>';
+    html += '<div class="k-flow-level"><span class="k-flow-level-dots">' + renderLevelDots(stg.level) + '</span><span class="k-flow-level-num">運気レベル ' + stg.level + '/12</span></div>';
     html += '<div class="k-flow-hint">' + stg.hint + '</div>';
     if (imgKey) {
       html += '<div class="k-card-wrap"><div class="k-card" id="k-card" onclick="this.classList.toggle(\'flipping\')">';
       html += '<div class="k-card-face k-card-front"><div class="k-card-front-inner"><div class="kf-marker">㐂</div><div class="kf-label">TAP TO REVEAL</div></div></div>';
       html += '<div class="k-card-face k-card-back"><img src="clients/images/' + imgKey + '_' + stageNum + '.' + imgExt + '" alt="旅の段階' + stageNum + '">';
-      html += '<div class="k-card-caption"><span class="kc-num">' + stageNum + '</span>' + stg.emoji + ' ' + stg.name + '<br><span style="font-size:0.7rem;opacity:0.8">' + stg.sub + '</span>' + (isTenchuDay ? '<span class="kc-tag">日天中殺</span>' : '') + '</div></div>';
+      html += '<div class="k-card-caption"><span class="kc-num">' + stageNum + '/12</span>' + stg.emoji + ' ' + stg.name + '<br><span style="font-size:0.7rem;opacity:0.8">' + stg.sub + '・運気レベル' + stg.level + '</span>' + (isTenchuDay ? '<span class="kc-tag">日天中殺</span>' : '') + '</div></div>';
       html += '</div></div>';
     }
     html += '</div>';
