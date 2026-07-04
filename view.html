@@ -24,6 +24,14 @@
 (function () {
   var params = new URLSearchParams(window.location.search);
   var client = params.get('client');
+  // Vercelのrewritesはサーバー内部の書き換えのため、ブラウザのURL・
+  // location.searchには反映されない。/view.html自体への直接アクセス以外は
+  // 常にURLパスの末尾セグメントから読み取る（例：/hidetoh → "hidetoh"）。
+  if (!client) {
+    var path = window.location.pathname.replace(/\/+$/, '');
+    var seg = path.split('/').pop();
+    if (seg && seg !== 'view.html' && seg !== '') client = seg;
+  }
   var app = document.getElementById('app');
   if (!client) {
     app.innerHTML = '<p class="text-center text-sm" style="color:var(--color-brown);padding:2rem 0">クライアント指定がありません（?client=名前 が必要です）</p>';
