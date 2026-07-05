@@ -127,6 +127,73 @@
     "headerSub": "― 戊辰・牽牛星の暦 ―",
     "headerTitle": "見本さんの暦",
     "headerTagline": "山のように動じず 積み上げていく",
-    "footerText": "― 焦らず 淡々と ―"
+    "footerText": "― 焦らず 淡々と ―",
+    "palettes": [
+      {
+        "label": "ベージュ・ゴールド",
+        "swatch": "#B8964F",
+        "colors": {
+          "cream": "#F5F3EF", "warm-white": "#FAF8F5", "beige": "#E0D9CC",
+          "accent": "#6B5B4D", "accent-light": "#9C8A73", "accent-soft": "#C9BBA3",
+          "gold": "#B8964F", "gold-light": "#D4B876",
+          "brown": "#5C5347", "brown-dark": "#332D25",
+          "rose": "#B8964F", "rose-light": "#EFE4CC",
+          "sage": "#C9BBA3", "water": "#7A8B94", "fire": "#C4703F",
+          "bg-gradient-end": "#EDE7DC"
+        }
+      },
+      {
+        "label": "深緑・和",
+        "swatch": "#3A6B47",
+        "colors": {
+          "cream": "#F4F7F2", "warm-white": "#FAFBF8", "beige": "#DCE5D8",
+          "accent": "#3A6B47", "accent-light": "#5B8F66", "accent-soft": "#9DC4A0",
+          "gold": "#7A9E7E", "gold-light": "#A8C5A2",
+          "brown": "#41493E", "brown-dark": "#2A3D28",
+          "rose": "#7A9E7E", "rose-light": "#E4EDE2",
+          "sage": "#9DC4A0", "water": "#6E8C93", "fire": "#B5713F",
+          "bg-gradient-end": "#E6EEE3"
+        }
+      },
+      {
+        "label": "ローズ・上品",
+        "swatch": "#B06B7A",
+        "colors": {
+          "cream": "#F8F1F2", "warm-white": "#FCF7F8", "beige": "#EAD9DC",
+          "accent": "#8C4F5A", "accent-light": "#B06B7A", "accent-soft": "#D9AEB5",
+          "gold": "#C79A6B", "gold-light": "#DDBB94",
+          "brown": "#5C4547", "brown-dark": "#3A2A2C",
+          "rose": "#B06B7A", "rose-light": "#F1DEE1",
+          "sage": "#C7B6A8", "water": "#8592A0", "fire": "#C15C4E",
+          "bg-gradient-end": "#F0DFE1"
+        }
+      },
+      {
+        "label": "藍・静",
+        "swatch": "#3E5C76",
+        "colors": {
+          "cream": "#F1F4F7", "warm-white": "#F8FAFB", "beige": "#D9E0E8",
+          "accent": "#2F4A63", "accent-light": "#3E5C76", "accent-soft": "#9FB6C9",
+          "gold": "#A98F5D", "gold-light": "#C7B183",
+          "brown": "#3A424B", "brown-dark": "#242A30",
+          "rose": "#7C8FA3", "rose-light": "#E1E8EF",
+          "sage": "#9FB6C9", "water": "#4C7A93", "fire": "#B06A45",
+          "bg-gradient-end": "#DEE7EE"
+        }
+      },
+      {
+        "label": "墨・重厚",
+        "swatch": "#8A6D3B",
+        "colors": {
+          "cream": "#F2EFE9", "warm-white": "#F9F7F2", "beige": "#DED5C1",
+          "accent": "#5B4A2E", "accent-light": "#8A6D3B", "accent-soft": "#C4AF80",
+          "gold": "#A9843F", "gold-light": "#CBA765",
+          "brown": "#4A4237", "brown-dark": "#2B2620",
+          "rose": "#A9843F", "rose-light": "#EAE0C9",
+          "sage": "#B7AD8E", "water": "#6E7A6E", "fire": "#9E5A32",
+          "bg-gradient-end": "#E4D9C4"
+        }
+      }
+    ]
   }
 }
