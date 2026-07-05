@@ -47,31 +47,82 @@
     .then(function (data) {
       // 画像パスはクライアントごとのフォルダを見に行く（images/はclients/images/を指す）
       initDashboard(data);
-      if (isPreview) applyPreviewLock();
+      if (isPreview) {
+        applyPreviewLock();
+        if (data.design && data.design.palettes && data.design.palettes.length > 0) {
+          insertPaletteBar(data.design.palettes, 0);
+        }
+      }
     })
     .catch(function (err) {
       app.innerHTML = '<p class="text-center text-sm" style="color:var(--color-brown);padding:2rem 0">' + err.message + '</p>';
     });
 
-  // デモページ用：画面の途中から下をぼかして隠し、申し込み導線のオーバーレイを重ねる
+  // デモページ用：同一ページ内で5色の配色見本を切り替えられるタブバーを先頭に挿入する
+  function insertPaletteBar(palettes, activeIdx) {
+    var old = document.getElementById('demo-palette-bar');
+    if (old) old.parentNode.removeChild(old);
+    var bar = document.createElement('div');
+    bar.id = 'demo-palette-bar';
+    bar.className = 'demo-palette-bar';
+    for (var i = 0; i < palettes.length; i++) {
+      var p = palettes[i];
+      var sw = document.createElement('div');
+      sw.className = 'demo-palette-swatch' + (i === activeIdx ? ' active' : '');
+      sw.innerHTML = '<span class="demo-palette-dot" style="background:' + p.swatch + '"></span>' + p.label;
+      (function (idx) {
+        sw.onclick = function () {
+          applyDesignColors({ colors: palettes[idx].colors });
+          insertPaletteBar(palettes, idx);
+        };
+      })(i);
+      bar.appendChild(sw);
+    }
+    app.insertBefore(bar, app.firstChild);
+  }
+
+  // デモページ用：画面の途中から下は「見出し（目次）だけ見える・本文はぼかす」形にして、
+  // 何が入っているかは伝わるが中身は読めない状態にする。申し込み導線のオーバーレイも重ねる。
   function applyPreviewLock() {
     var cards = app.querySelectorAll('.card');
     if (cards.length === 0) return;
     var lockFrom = Math.ceil(cards.length / 2);
-    var wrap = document.createElement('div');
-    wrap.className = 'preview-lock-wrap';
     var firstLocked = cards[lockFrom];
     if (!firstLocked) return;
+
+    var wrap = document.createElement('div');
+    wrap.className = 'preview-lock-wrap';
     firstLocked.parentNode.insertBefore(wrap, firstLocked);
+
+    var toc = document.createElement('div');
+    toc.className = 'preview-lock-toc';
+    var tocTitle = document.createElement('p');
+    tocTitle.className = 'preview-lock-toc-title';
+    tocTitle.textContent = 'この続きに入っている内容';
+    toc.appendChild(tocTitle);
+
     for (var i = lockFrom; i < cards.length; i++) {
-      wrap.appendChild(cards[i]);
+      var card = cards[i];
+      var headerEl = card.querySelector('.card-header');
+      if (headerEl) {
+        var tocLine = document.createElement('p');
+        tocLine.className = 'preview-lock-toc-item';
+        tocLine.textContent = '◆ ' + headerEl.textContent.replace(/^◆/, '').trim();
+        toc.appendChild(tocLine);
+      }
+      var body = document.createElement('div');
+      body.className = 'preview-lock-body-blur';
+      while (card.firstChild) body.appendChild(card.firstChild);
+      card.appendChild(body);
+      wrap.appendChild(card);
     }
+    wrap.insertBefore(toc, wrap.firstChild);
+
     var overlay = document.createElement('div');
     overlay.className = 'preview-lock-overlay';
     overlay.innerHTML =
       '<p class="preview-lock-title">ここから先は本鑑定でお渡しする内容です</p>' +
-      '<p class="preview-lock-body">宿命の詳細解説・5つの視点・5人の占術家視点・陽転陰転パターンなど、<br>' +
-      'あなた専用のページとして毎日見返せる形でお渡ししています。</p>' +
+      '<p class="preview-lock-cta-body">あなた専用のページとして毎日見返せる形でお渡ししています。</p>' +
       '<a href="https://sensenkyokyo.stores.jp/" target="_blank" rel="noopener" class="preview-lock-button">▶ 鑑定を申し込む(㐂のstores)</a>';
     wrap.appendChild(overlay);
   }
