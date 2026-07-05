@@ -377,37 +377,15 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
   box-shadow: 0 4px 14px rgba(58,107,71,0.35);
 }
 
-/* デモページ専用：5色の配色見本切り替えタブ */
-.demo-palette-bar {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  padding: 0.75rem 1rem;
-  margin-bottom: 0.9rem;
-  background: var(--color-warm-white);
-  border-radius: 8px;
-  border: 1px solid var(--color-accent-soft);
-}
-.demo-palette-swatch {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.35rem 0.7rem;
-  border-radius: 999px;
-  border: 1.5px solid transparent;
-  background: rgba(255,255,255,0.6);
-  cursor: pointer;
+/* デモページ専用：配色は命式ごとに調整している、という一言メモ */
+.demo-palette-note {
+  text-align: center;
   font-size: 0.68rem;
-  color: var(--color-brown-dark);
+  color: var(--color-accent);
   letter-spacing: 0.02em;
-  transition: border-color 0.15s;
-}
-.demo-palette-swatch.active { border-color: var(--color-accent); font-weight: 500; }
-.demo-palette-dot {
-  width: 0.85rem;
-  height: 0.85rem;
-  border-radius: 50%;
-  border: 1px solid rgba(0,0,0,0.1);
-  flex-shrink: 0;
+  margin-bottom: 0.9rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--color-warm-white);
+  border-radius: 6px;
+  border: 1px dashed var(--color-accent-soft);
 }
