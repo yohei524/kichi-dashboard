@@ -288,8 +288,8 @@ const CLIENT_DATA = {
     "fireNeedNote": "金性は 火がないと動けん。刺激と火剋金で初めて働く。動きの中・人と関わる中・叩かれる経験の中に 命の炎がある。"
   },
   "goal": {
-    "main": "自立 ─ 外で立つ",
-    "sub": "※これは仮で入れています。\\nzoomで話した「外で立つ」を一旦置いとくね。\\nyokoさんの言葉で書き直してOKや。"
+    "main": "手の平セラピー × SNS発信 × 商売化",
+    "sub": "秘書を軸にしながら、手の平セラピー＆レイキで「人を元気にする」ことが本業へ。\\nAI×SNS講座で発信の仕組みを作り、手の平セラピーを世に広める。"
   },
   "winPatterns": [
     "親元・身内から離れた場所に立つ(庚午=天春。鍛えられる場所で初めて陽転する)",
@@ -816,6 +816,12 @@ function render() {
   html += '<p class="text-center text-sm font-medium" style="color:var(--color-brown-dark)">' + D.goal.main + '</p>';
   html += '<div class="divider"></div>';
   html += '<p class="text-xs text-center" style="color:var(--color-brown);line-height:1.8">' + D.goal.sub.replace(/\\n/g, '<br>').replace(/\n/g, '<br>') + '</p>';
+  html += '</div>';
+
+  // 鑑定メニュー
+  html += '<div class="card" style="text-align:center">';
+  html += '<p class="text-xs" style="color:var(--color-brown);margin-bottom:0.75rem;line-height:1.7">ナナフシ占いの<br>全鑑定メニューはこちら</p>';
+  html += '<a href="/menu.html" style="display:inline-block;background:var(--color-accent);color:var(--color-cream);padding:0.75rem 1.5rem;border-radius:4px;text-decoration:none;font-size:0.9rem;font-weight:500;letter-spacing:0.1em;transition:background 0.3s">鑑定メニューを見る</a>';
   html += '</div>';
 
   app.innerHTML = html;

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鑑定メニュー｜ナナフシ占い</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --color-cream: #FFF6EE;
+  --color-warm-white: #FFFAF3;
+  --color-beige: #F5E2CE;
+  --color-accent: #C2491F;
+  --color-accent-light: #E07A4A;
+  --color-accent-soft: #F0B690;
+  --color-gold: #B8862C;
+  --color-gold-light: #D4A85F;
+  --color-brown: #8B5A3C;
+  --color-brown-dark: #4B2D1F;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Serif JP', serif;
+  background: linear-gradient(180deg, var(--color-warm-white) 0%, var(--color-cream) 60%, #FCE9D6 100%);
+  color: var(--color-brown-dark);
+  min-height: 100vh;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+}
+
+.container { max-width: 32rem; margin: 0 auto; padding: 0 1rem 2rem; }
+
+header { text-align: center; padding: 2rem 1rem 1rem; }
+header .sub { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.2em; margin-bottom: 0.5rem; }
+header h1 { font-size: 1.35rem; font-weight: 500; color: var(--color-brown-dark); margin-bottom: 0.25rem; }
+header .tagline { font-size: 0.8rem; color: var(--color-brown); }
+
+footer { text-align: center; padding: 2rem 1rem; font-size: 0.8rem; color: var(--color-brown); }
+
+.card {
+  background: var(--color-warm-white);
+  border: 1px solid var(--color-beige);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 16px rgba(194, 73, 31, 0.08);
+  margin-bottom: 1.5rem;
+}
+
+.card-header {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-brown-dark);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-beige);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent-light), transparent);
+  margin: 1.5rem 0;
+}
+
+.menu-item {
+  margin-bottom: 1.25rem;
+}
+
+.menu-item-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-brown-dark);
+  margin-bottom: 0.25rem;
+}
+
+.menu-item-price {
+  font-size: 0.9rem;
+  color: var(--color-accent);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.menu-item-description {
+  font-size: 0.8rem;
+  color: var(--color-brown);
+  line-height: 1.6;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-brown-dark);
+  margin-top: 1.25rem;
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
+  border-left: 3px solid var(--color-accent);
+}
+
+.cta-box {
+  background: rgba(194, 73, 31, 0.08);
+  border: 1px solid var(--color-accent-soft);
+  border-radius: 6px;
+  padding: 1.25rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.cta-box p {
+  font-size: 0.9rem;
+  color: var(--color-brown-dark);
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
+}
+
+.cta-button {
+  display: inline-block;
+  background: var(--color-accent);
+  color: var(--color-cream);
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  transition: background 0.3s;
+}
+
+.cta-button:hover {
+  background: var(--color-accent-light);
+}
+
+.note {
+  font-size: 0.75rem;
+  color: var(--color-brown);
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(139, 90, 60, 0.04);
+  border-radius: 4px;
+  line-height: 1.6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-cream: #1a1410;
+    --color-warm-white: #2a241a;
+    --color-beige: #3a3228;
+    --color-brown-dark: #e8dcc8;
+    --color-brown: #c9b89f;
+  }
+  body { background: linear-gradient(180deg, #2a241a 0%, #1f1915 100%); }
+  .card { background: var(--color-warm-white); border-color: var(--color-beige); }
+  .cta-box { background: rgba(194, 73, 31, 0.15); }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <p class="sub">── 鑑定メニュー ──</p>
+  <h1>ナナフシ占い</h1>
+  <p class="tagline">宿命を知り、道を選ぶ</p>
+</header>
+
+<div class="container">
+
+  <!-- 単一鑑定 -->
+  <div class="card">
+    <div class="card-header">
+      <span style="color:var(--color-accent)">◆</span>
+      <span>単一鑑定</span>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-item-title">手相鑑定</div>
+      <div class="menu-item-price">¥5,000</div>
+      <div class="menu-item-description">西谷式手相で、あなたの対人関係・運勢・特性を読み解きます。</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="menu-item">
+      <div class="menu-item-title">タロット鑑定（3枚引き）</div>
+      <div class="menu-item-price">¥5,000</div>
+      <div class="menu-item-description">シンプルな3枚展開で、今のあなたに必要なメッセージを引き出します。</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-item-title">タロット鑑定（ケルト十字・10枚引き）</div>
+      <div class="menu-item-price">¥10,000</div>
+      <div class="menu-item-description">詳細な10枚展開で、状況・背景・対策・未来まで多角的に読み解きます。</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="menu-item">
+      <div class="menu-item-title">命式鑑定（紡の席）</div>
+      <div class="menu-item-price">¥20,000</div>
+      <div class="menu-item-description">算命学で、あなたの宿命・大運・年運から人生の全体像を読み解きます。1時間程度。</div>
+    </div>
+
+  </div>
+
+  <!-- 相手を含める鑑定 -->
+  <div class="card">
+    <div class="card-header">
+      <span style="color:var(--color-accent)">◆</span>
+      <span>相手を含める鑑定</span>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-item-title">相性鑑定プラス</div>
+      <div class="menu-item-price">¥10,000 / 1人追加</div>
+      <div class="menu-item-description">あの人との相性・関係の位相・今後の展開を読み解きます。</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-item-title">親子鑑定</div>
+      <div class="menu-item-price">¥10,000</div>
+      <div class="menu-item-description">親子関係の宿命的背景・今の課題・乗り越え方を読み解きます。</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-item-title">気になるあの人の攻略鑑定</div>
+      <div class="menu-item-price">¥10,000</div>
+      <div class="menu-item-description">相手の宿命・性質から、あなたがどう接するべきかの指針を得られます。</div>
+    </div>
+
+  </div>
+
+  <!-- 特殊鑑定 -->
+  <div class="card">
+    <div class="card-header">
+      <span style="color:var(--color-accent)">◆</span>
+      <span>特殊鑑定</span>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-item-title">適職天命鑑定</div>
+      <div class="menu-item-price">¥10,000</div>
+      <div class="menu-item-description">算命学から、あなたの天命に合った職業・働き方の方向性を導き出します。</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-item-title">五行波動調律鑑定</div>
+      <div class="menu-item-price">¥5,000</div>
+      <div class="menu-item-description">あなたに不足している五行エネルギーを診断し、補う方法をお伝えします。</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-item-title">オーダーメイドジュエリー（五行鑑定付き）</div>
+      <div class="menu-item-price">¥25,000 ～ ¥100,000</div>
+      <div class="menu-item-description">あなたの五行バランスに基づいて、最適な石・デザインのジュエリーをオーダーメイド。五行鑑定込み。</div>
+    </div>
+
+  </div>
+
+  <!-- セット鑑定 -->
+  <div class="card">
+    <div class="card-header">
+      <span style="color:var(--color-accent)">◆</span>
+      <span>セット鑑定</span>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-item-title">手相 × タロット × 命式鑑定（セット）</div>
+      <div class="menu-item-price">¥30,000</div>
+      <div class="menu-item-description">手相・タロット・命式の3つを組み合わせた、最も詳細な総合鑑定。あなたの過去・現在・未来を多角的に読み解きます。1.5時間程度。</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-item-title">リピーター鑑定（90分）</div>
+      <div class="menu-item-price">¥15,000</div>
+      <div class="menu-item-description">以前鑑定を受けた方向け。手相・タロット・命式など、必要な方法で深く掘り下げます。</div>
+    </div>
+
+  </div>
+
+  <!-- AI×SNS講座 -->
+  <div class="card">
+    <div class="card-header">
+      <span style="color:var(--color-accent)">◆</span>
+      <span>講座</span>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-item-title">AI × SNS コース</div>
+      <div class="menu-item-price">¥300,000</div>
+      <div class="menu-item-description">SNS運用を自動化し、あなたの発信を加速させる。企画〜台本〜投稿〜販売まで全て。3ヶ月・週1回のMeet + LINEサポート。</div>
+    </div>
+
+  </div>
+
+  <!-- 申し込み -->
+  <div class="cta-box">
+    <p style="font-weight:500;font-size:0.95rem">ご質問・申し込みは</p>
+    <p style="font-size:0.85rem;color:var(--color-brown)">お気軽にLINEまでお問い合わせください</p>
+    <a href="https://line.me/R/ti/p/@hossoiossan" class="cta-button">LINEで相談する</a>
+    <p class="note">※ LINEが難しい場合はメール（mails5244@gmail.com）でもお受けしています。</p>
+  </div>
+
+</div>
+
+<footer>
+  <p>── 運命は自ら変えられる ──</p>
+  <p style="margin-top:0.5rem;font-size:0.75rem">ナナフシ占い</p>
+</footer>
+
+</body>
+</html>
