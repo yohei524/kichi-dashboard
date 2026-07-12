@@ -13,7 +13,7 @@
     },
     {
       "source": "/yoko",
-      "destination": "/clients/yoko.html"
+      "destination": "/view.html?client=yoko"
     },
     {
       "source": "/ayumi",
