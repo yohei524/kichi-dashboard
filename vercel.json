@@ -17,7 +17,7 @@
     },
     {
       "source": "/ayumi",
-      "destination": "/clients/ayumi.html"
+      "destination": "/view.html?client=ayumi"
     },
     {
       "source": "/hiromi",
