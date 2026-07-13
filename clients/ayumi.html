@@ -705,6 +705,23 @@ function render() {
   var app = document.getElementById('app');
   var html = '';
 
+  // 今日の運気
+  if (todayF) {
+    var jdesc = jyuseiDesc[todayF.jyusei] || '';
+    html += '<div class="card">';
+    html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>本日の運気</span></div>';
+    html += '<div class="star-grid">';
+    html += '<div class="star-box"><p class="star-label">主星</p><p class="star-value">' + todayF.mainStar + '</p></div>';
+    html += '<div class="star-box"><p class="star-label">従星</p><p class="star-value">' + todayF.jyusei + '</p></div>';
+    html += '</div>';
+    if (todayF.aspects && todayF.aspects !== '-') {
+      html += '<p class="text-xs text-center mb-3" style="color:var(--color-brown)">' + todayF.aspects + '</p>';
+    }
+    if (jdesc) html += '<p class="text-xs" style="background:var(--color-cream);padding:0.6rem;border-radius:4px;color:var(--color-brown-dark);line-height:1.7">' + jdesc + '</p>';
+    if (todayF.advice) html += '<p class="text-xs mt-2" style="color:var(--color-accent);line-height:1.7;font-weight:500">' + todayF.advice + '</p>';
+    html += '</div>';
+  }
+
   // 日付と命式
   html += '<div class="card">';
   html += '<div class="text-center mb-6">';
@@ -762,23 +779,6 @@ function render() {
     html += '</div>';
   }
   html += '</div>';
-
-  // 今日の運気
-  if (todayF) {
-    var jdesc = jyuseiDesc[todayF.jyusei] || '';
-    html += '<div class="card">';
-    html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>本日の運気</span></div>';
-    html += '<div class="star-grid">';
-    html += '<div class="star-box"><p class="star-label">主星</p><p class="star-value">' + todayF.mainStar + '</p></div>';
-    html += '<div class="star-box"><p class="star-label">従星</p><p class="star-value">' + todayF.jyusei + '</p></div>';
-    html += '</div>';
-    if (todayF.aspects && todayF.aspects !== '-') {
-      html += '<p class="text-xs text-center mb-3" style="color:var(--color-brown)">' + todayF.aspects + '</p>';
-    }
-    if (jdesc) html += '<p class="text-xs" style="background:var(--color-cream);padding:0.6rem;border-radius:4px;color:var(--color-brown-dark);line-height:1.7">' + jdesc + '</p>';
-    if (todayF.advice) html += '<p class="text-xs mt-2" style="color:var(--color-accent);line-height:1.7;font-weight:500">' + todayF.advice + '</p>';
-    html += '</div>';
-  }
 
   // 日運カレンダー
   html += '<div class="card">';
