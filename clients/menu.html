@@ -70,24 +70,53 @@ footer { text-align: center; padding: 2rem 1rem; font-size: 0.8rem; color: var(-
   margin-bottom: 1.25rem;
 }
 
+.menu-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
 .menu-item-title {
   font-size: 0.95rem;
   font-weight: 500;
   color: var(--color-brown-dark);
-  margin-bottom: 0.25rem;
 }
 
 .menu-item-price {
   font-size: 0.9rem;
   color: var(--color-accent);
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  white-space: nowrap;
 }
 
 .menu-item-description {
   font-size: 0.8rem;
   color: var(--color-brown);
   line-height: 1.6;
+}
+
+.card-lead {
+  font-size: 0.78rem;
+  color: var(--color-brown);
+  margin: -0.5rem 0 1rem;
+}
+
+.featured {
+  border: 1px solid var(--color-accent-soft);
+  box-shadow: 0 2px 20px rgba(194, 73, 31, 0.14);
+}
+
+.featured-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  color: var(--color-cream);
+  background: var(--color-accent);
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.75rem;
 }
 
 .section-title {
@@ -167,119 +196,138 @@ footer { text-align: center; padding: 2rem 1rem; font-size: 0.8rem; color: var(-
 
 <div class="container">
 
-  <!-- 単一鑑定 -->
-  <div class="card">
-    <div class="card-header">
-      <span style="color:var(--color-accent)">◆</span>
-      <span>単一鑑定</span>
-    </div>
+  <!-- 迷ったらこれ -->
+  <div class="card featured">
+    <span class="featured-badge">迷ったらこれ</span>
 
     <div class="menu-item">
-      <div class="menu-item-title">手相鑑定</div>
-      <div class="menu-item-price">¥5,000</div>
-      <div class="menu-item-description">西谷式手相で、あなたの対人関係・運勢・特性を読み解きます。</div>
+      <div class="menu-item-row">
+        <div class="menu-item-title">命式鑑定「紡の席」</div>
+        <div class="menu-item-price">¥20,000</div>
+      </div>
+      <div class="menu-item-description">算命学で、あなたの宿命・大運・年運から人生の全体像を読み解きます。1時間程度。一番ご依頼の多い、㐂占の看板鑑定です。</div>
     </div>
 
     <div class="divider"></div>
 
+    <div class="menu-item" style="margin-bottom:0">
+      <div class="menu-item-row">
+        <div class="menu-item-title">総合鑑定（手相 × タロット × 命式）</div>
+        <div class="menu-item-price">¥30,000</div>
+      </div>
+      <div class="menu-item-description">3つの占術を重ねて、過去・現在・未来を多角的に読み解く一番詳しい鑑定。1.5時間程度。</div>
+    </div>
+
+  </div>
+
+  <!-- まずは軽く -->
+  <div class="card">
+    <div class="card-header">
+      <span style="color:var(--color-accent)">◆</span>
+      <span>まずは軽く受けてみたい方へ</span>
+    </div>
+
     <div class="menu-item">
-      <div class="menu-item-title">タロット鑑定（3枚引き）</div>
-      <div class="menu-item-price">¥5,000</div>
+      <div class="menu-item-row">
+        <div class="menu-item-title">手相鑑定</div>
+        <div class="menu-item-price">¥5,000</div>
+      </div>
+      <div class="menu-item-description">手のひらに刻まれた線から、対人関係・運勢・特性を読み解きます。</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-item-row">
+        <div class="menu-item-title">タロット鑑定（3枚引き）</div>
+        <div class="menu-item-price">¥5,000</div>
+      </div>
       <div class="menu-item-description">シンプルな3枚展開で、今のあなたに必要なメッセージを引き出します。</div>
     </div>
 
     <div class="menu-item">
-      <div class="menu-item-title">タロット鑑定（ケルト十字・10枚引き）</div>
-      <div class="menu-item-price">¥10,000</div>
-      <div class="menu-item-description">詳細な10枚展開で、状況・背景・対策・未来まで多角的に読み解きます。</div>
+      <div class="menu-item-row">
+        <div class="menu-item-title">タロット鑑定（ケルト十字・10枚引き）</div>
+        <div class="menu-item-price">¥10,000</div>
+      </div>
+      <div class="menu-item-description">詳細な10枚展開で、状況・背景・対策・未来まで読み解きます。</div>
     </div>
 
-    <div class="divider"></div>
-
     <div class="menu-item">
-      <div class="menu-item-title">命式鑑定（紡の席）</div>
-      <div class="menu-item-price">¥20,000</div>
-      <div class="menu-item-description">算命学で、あなたの宿命・大運・年運から人生の全体像を読み解きます。1時間程度。</div>
+      <div class="menu-item-row">
+        <div class="menu-item-title">五行波動調律鑑定</div>
+        <div class="menu-item-price">¥5,000</div>
+      </div>
+      <div class="menu-item-description">あなたに不足している五行エネルギーを診断し、補う方法をお伝えします。</div>
     </div>
 
   </div>
 
-  <!-- 相手を含める鑑定 -->
+  <!-- 知りたいことが決まっている方へ -->
   <div class="card">
     <div class="card-header">
       <span style="color:var(--color-accent)">◆</span>
-      <span>相手を含める鑑定</span>
+      <span>知りたいことが決まっている方へ</span>
     </div>
 
     <div class="menu-item">
-      <div class="menu-item-title">相性鑑定プラス</div>
-      <div class="menu-item-price">¥10,000 / 1人追加</div>
-      <div class="menu-item-description">あの人との相性・関係の位相・今後の展開を読み解きます。</div>
+      <div class="menu-item-row">
+        <div class="menu-item-title">相性鑑定（1人追加）</div>
+        <div class="menu-item-price">¥10,000</div>
+      </div>
+      <div class="menu-item-description">あの人との相性・関係の位相・今後の展開を読み解きます。命式鑑定への追加オプションです。</div>
     </div>
 
     <div class="menu-item">
-      <div class="menu-item-title">親子鑑定</div>
-      <div class="menu-item-price">¥10,000</div>
+      <div class="menu-item-row">
+        <div class="menu-item-title">親子鑑定</div>
+        <div class="menu-item-price">¥10,000</div>
+      </div>
       <div class="menu-item-description">親子関係の宿命的背景・今の課題・乗り越え方を読み解きます。</div>
     </div>
 
     <div class="menu-item">
-      <div class="menu-item-title">気になるあの人の攻略鑑定</div>
-      <div class="menu-item-price">¥10,000</div>
+      <div class="menu-item-row">
+        <div class="menu-item-title">気になるあの人の攻略鑑定</div>
+        <div class="menu-item-price">¥10,000</div>
+      </div>
       <div class="menu-item-description">相手の宿命・性質から、あなたがどう接するべきかの指針を得られます。</div>
     </div>
 
-  </div>
-
-  <!-- 特殊鑑定 -->
-  <div class="card">
-    <div class="card-header">
-      <span style="color:var(--color-accent)">◆</span>
-      <span>特殊鑑定</span>
-    </div>
-
     <div class="menu-item">
-      <div class="menu-item-title">適職天命鑑定</div>
-      <div class="menu-item-price">¥10,000</div>
+      <div class="menu-item-row">
+        <div class="menu-item-title">適職天命鑑定</div>
+        <div class="menu-item-price">¥10,000</div>
+      </div>
       <div class="menu-item-description">算命学から、あなたの天命に合った職業・働き方の方向性を導き出します。</div>
     </div>
 
-    <div class="menu-item">
-      <div class="menu-item-title">五行波動調律鑑定</div>
-      <div class="menu-item-price">¥5,000</div>
-      <div class="menu-item-description">あなたに不足している五行エネルギーを診断し、補う方法をお伝えします。</div>
-    </div>
-
-    <div class="menu-item">
-      <div class="menu-item-title">オーダーメイドジュエリー（五行鑑定付き）</div>
-      <div class="menu-item-price">¥25,000 ～ ¥100,000</div>
-      <div class="menu-item-description">あなたの五行バランスに基づいて、最適な石・デザインのジュエリーをオーダーメイド。五行鑑定込み。</div>
-    </div>
-
   </div>
 
-  <!-- セット鑑定 -->
+  <!-- 2回目以降・その他 -->
   <div class="card">
     <div class="card-header">
       <span style="color:var(--color-accent)">◆</span>
-      <span>セット鑑定</span>
+      <span>2回目以降の方・その他</span>
     </div>
 
     <div class="menu-item">
-      <div class="menu-item-title">手相 × タロット × 命式鑑定（セット）</div>
-      <div class="menu-item-price">¥30,000</div>
-      <div class="menu-item-description">手相・タロット・命式の3つを組み合わせた、最も詳細な総合鑑定。あなたの過去・現在・未来を多角的に読み解きます。1.5時間程度。</div>
-    </div>
-
-    <div class="menu-item">
-      <div class="menu-item-title">リピーター鑑定（90分）</div>
-      <div class="menu-item-price">¥15,000</div>
+      <div class="menu-item-row">
+        <div class="menu-item-title">リピーター鑑定（90分）</div>
+        <div class="menu-item-price">¥15,000</div>
+      </div>
       <div class="menu-item-description">以前鑑定を受けた方向け。手相・タロット・命式など、必要な方法で深く掘り下げます。</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-item-row">
+        <div class="menu-item-title">オーダーメイドジュエリー（五行鑑定付き）</div>
+        <div class="menu-item-price">¥25,000〜</div>
+      </div>
+      <div class="menu-item-description">あなたの五行バランスに基づいて、最適な石・デザインのジュエリーをオーダーメイド（〜¥100,000）。五行鑑定込み。</div>
     </div>
 
   </div>
 
-  <!-- AI×SNS講座 -->
+  <!-- 講座 -->
   <div class="card">
     <div class="card-header">
       <span style="color:var(--color-accent)">◆</span>
@@ -287,8 +335,10 @@ footer { text-align: center; padding: 2rem 1rem; font-size: 0.8rem; color: var(-
     </div>
 
     <div class="menu-item">
-      <div class="menu-item-title">AI × SNS コース</div>
-      <div class="menu-item-price">¥300,000</div>
+      <div class="menu-item-row">
+        <div class="menu-item-title">AI × SNS コース</div>
+        <div class="menu-item-price">¥300,000</div>
+      </div>
       <div class="menu-item-description">SNS運用を自動化し、あなたの発信を加速させる。企画〜台本〜投稿〜販売まで全て。3ヶ月・週1回のMeet + LINEサポート。</div>
     </div>
 

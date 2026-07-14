@@ -6,30 +6,44 @@
    ======================================== */
 
 :root {
-  /* デフォルト配色（design未指定時のフォールバック） */
-  --color-cream: #F4F7F2;
-  --color-warm-white: #F9FBF8;
-  --color-beige: #D8E4D4;
-  --color-accent: #3A6B47;
-  --color-accent-light: #5B8F66;
-  --color-accent-soft: #9DC4A0;
-  --color-gold: #7A9E7E;
-  --color-gold-light: #A8C5A2;
-  --color-brown: #4A6741;
-  --color-brown-dark: #2A3D28;
-  --color-rose: #6B9E7A;
-  --color-rose-light: #D4EBD8;
-  --color-sage: #8FB896;
-  --color-water: #4A7B8E;
-  --color-fire: #C47A40;
-  --color-bg-gradient-end: #E8F2E8;
+  /* ダーク（夜空）基調。260713にMoonly準拠で全面変更。
+     変数名は旧来のまま（cream / warm-white / brown 等）だが、中身は夜の値。
+     名前を変えると全セクションのCSSを書き換える必要があるため、意味だけ移した。
+       warm-white → カードの面（夜のパネル）
+       cream      → 一段沈んだ面
+       beige      → 罫線
+       brown      → 弱い文字（旧：茶）
+       brown-dark → 主たる文字（＝ほぼ白）
+       accent     → その人の五行の色（唯一の“光”。JSONから上書きされる）
+  */
+  --color-night: #0B0F1A;          /* 最も深い夜 */
+  --color-night-2: #131A28;        /* 夜の面 */
+  --color-cream: #171F30;          /* 一段沈んだ面 */
+  --color-warm-white: #1B2334;     /* カードの面 */
+  --color-beige: #2A3346;          /* 罫線 */
+  --color-accent: #8FA9D8;         /* 五行の光（デフォルト：月白の青） */
+  --color-accent-light: #A9BFE4;
+  --color-accent-soft: #6B80AB;
+  --color-gold: #C9A24A;           /* 金：強調・従星 */
+  --color-gold-light: #E0BE6C;
+  --color-brown: #8A96AC;          /* 弱い文字 */
+  --color-brown-dark: #ECEAE4;     /* 主たる文字（月の白） */
+  --color-rose: #C9A24A;
+  --color-rose-light: #2A3346;
+  --color-sage: #6B80AB;
+  --color-water: #6E9BC4;
+  --color-fire: #D08A5A;
+  --color-bg-gradient-end: #080B14;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   font-family: 'Noto Serif JP', serif;
-  background: linear-gradient(180deg, var(--color-warm-white) 0%, var(--color-cream) 60%, var(--color-bg-gradient-end) 100%);
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(143, 169, 216, 0.10), transparent 60%),
+    linear-gradient(180deg, var(--color-night) 0%, #0D1220 45%, var(--color-bg-gradient-end) 100%);
+  background-attachment: fixed;
   color: var(--color-brown-dark);
   min-height: 100vh;
   line-height: 1.8;
@@ -38,23 +52,29 @@ body {
 
 .container { max-width: 28rem; margin: 0 auto; padding: 0 1rem 2rem; }
 
-header { text-align: center; padding: 2rem 1rem 1rem; }
-header .sub { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.2em; margin-bottom: 0.5rem; }
-header h1 { font-size: 1.35rem; font-weight: 500; color: var(--color-brown-dark); margin-bottom: 0.25rem; }
-header .tagline { font-size: 0.8rem; color: var(--color-brown); }
+header { text-align: center; padding: 2.5rem 1rem 1.25rem; }
+header .sub { font-size: 0.7rem; color: var(--color-accent); letter-spacing: 0.28em; margin-bottom: 0.7rem; opacity: 0.9; }
+header h1 {
+  font-size: 1.85rem;
+  font-weight: 500;
+  color: var(--color-brown-dark);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.06em;
+}
+header .tagline { font-size: 0.78rem; color: var(--color-brown); letter-spacing: 0.08em; }
 
 .card {
   background: var(--color-warm-white);
   border: 1px solid var(--color-beige);
-  border-radius: 8px;
-  padding: 1.25rem;
-  box-shadow: 0 2px 16px rgba(58, 107, 71, 0.08);
-  margin-bottom: 1.5rem;
+  border-radius: 18px;
+  padding: 1.4rem 1.25rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.32);
+  margin-bottom: 1.1rem;
   animation: fadeIn 0.5s ease-out;
 }
 
 .card-header {
-  font-size: 0.875rem;
+  font-size: 0.82rem;
   font-weight: 500;
   color: var(--color-brown-dark);
   margin-bottom: 1rem;
@@ -63,6 +83,7 @@ header .tagline { font-size: 0.8rem; color: var(--color-brown); }
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  letter-spacing: 0.1em;
 }
 
 .divider {
@@ -389,3 +410,427 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
   border-radius: 6px;
   border: 1px dashed var(--color-accent-soft);
 }
+
+/* ===== 閲覧期限のお知らせ ===== */
+/* 期限が遠いうちは core.js 側で出さない。残り30日を切ってから静かに現れる */
+.expiry-box {
+  padding: 1.25rem;
+  background: var(--color-warm-white);
+  border: 1px solid var(--color-beige);
+  border-left: 3px solid var(--color-accent-soft);
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.expiry-title {
+  font-size: 0.7rem;
+  color: var(--color-brown);
+  letter-spacing: 0.15em;
+  margin-bottom: 0.4rem;
+}
+.expiry-days {
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--color-accent);
+  line-height: 1.2;
+}
+.expiry-days span {
+  font-size: 0.85rem;
+  margin-left: 0.2rem;
+  color: var(--color-brown);
+}
+.expiry-body {
+  font-size: 0.72rem;
+  color: var(--color-brown);
+  line-height: 1.8;
+  margin-top: 0.5rem;
+}
+.expiry-over {
+  border-left-color: var(--color-gold);
+}
+
+/* ===== 一番下の扉 ===== */
+/* ページ最下部にひっそり置く。押し売りにしない。開くとお品書きへ */
+.door {
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  padding: 2.5rem 0 3rem;
+  margin-top: 1rem;
+  border-top: 1px solid var(--color-beige);
+}
+.door-frame {
+  width: 88px;
+  height: 116px;
+  margin: 0 auto 0.9rem;
+  padding: 6px;
+  background: var(--color-beige);
+  border-radius: 46px 46px 3px 3px;
+  box-shadow: 0 3px 14px rgba(58, 107, 71, 0.16);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.door-panel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(170deg, var(--color-accent-light) 0%, var(--color-accent) 100%);
+  border-radius: 40px 40px 2px 2px;
+  overflow: hidden;
+}
+/* 扉の縦の彫り */
+.door-arch {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 74px;
+  border: 1px solid rgba(249, 251, 248, 0.35);
+  border-radius: 22px 22px 2px 2px;
+}
+/* 取っ手 */
+.door-knob {
+  position: absolute;
+  top: 62px;
+  right: 13px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-cream);
+  box-shadow: 0 0 0 2px rgba(249, 251, 248, 0.25);
+}
+.door-label {
+  font-size: 0.9rem;
+  color: var(--color-accent);
+  letter-spacing: 0.2em;
+  font-weight: 500;
+}
+.door-note {
+  font-size: 0.68rem;
+  color: var(--color-brown);
+  line-height: 1.8;
+  margin-top: 0.35rem;
+}
+/* 触れると、扉がわずかに開く */
+.door:hover .door-frame,
+.door:active .door-frame {
+  transform: perspective(600px) rotateY(-16deg) translateX(-3px);
+  box-shadow: 6px 5px 20px rgba(58, 107, 71, 0.24);
+}
+
+/* ===== 人体星図（9マスの曼荼羅） ===== */
+/* テキスト1行では読めないので3×3で描く。中心＝その人の核、角の3つ＝十二大従星 */
+.starchart-wrap {
+  margin-top: 1rem;
+}
+.starchart-title {
+  font-size: 0.7rem;
+  color: var(--color-brown);
+  letter-spacing: 0.2em;
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+.starchart {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  max-width: 306px;
+  margin: 0 auto;
+}
+.sc-cell {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  padding: 4px;
+  background: var(--color-warm-white);
+  border: 1px solid var(--color-beige);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.sc-cell:active {
+  transform: scale(0.96);
+}
+.sc-pos {
+  font-size: 0.56rem;
+  color: var(--color-brown);
+  letter-spacing: 0.06em;
+  opacity: 0.85;
+}
+.sc-star {
+  font-size: 1.02rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+}
+.sc-sub {
+  font-size: 0.5rem;
+  color: var(--color-brown);
+  opacity: 0.6;
+}
+/* 中心＝この人の核。一番濃く見せる */
+.sc-center {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.16);
+}
+.sc-center .sc-star {
+  color: var(--color-warm-white);
+  font-size: 1.14rem;
+  font-weight: 600;
+}
+.sc-center .sc-pos,
+.sc-center .sc-sub {
+  color: var(--color-warm-white);
+  opacity: 0.78;
+}
+/* 十二大従星（初年・中年・晩年）＝エネルギー量。主星と区別する */
+.sc-jyusei {
+  background: var(--color-cream);
+  border-style: dashed;
+}
+.sc-jyusei .sc-star {
+  color: var(--color-gold);
+  font-size: 0.94rem;
+}
+.sc-empty {
+  background: transparent;
+  border: 1px dashed var(--color-beige);
+  cursor: default;
+}
+.starchart-note {
+  font-size: 0.6rem;
+  color: var(--color-brown);
+  text-align: center;
+  margin-top: 0.6rem;
+  opacity: 0.7;
+}
+
+/* ===== 月齢ストリップ（Moonly風） ===== */
+/* 今日を中心に前後3日。各日に実際の月相をSVGで描く */
+.moon-strip {
+  display: flex;
+  justify-content: space-between;
+  gap: 2px;
+  margin-top: 1rem;
+  padding: 0.7rem 0.35rem 0.5rem;
+  background: linear-gradient(165deg, #1a2233 0%, #0e1420 100%);
+  border-radius: 12px;
+}
+.ms-day {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 2px 5px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.ms-day:active { background: rgba(255,255,255,0.06); }
+/* 今日だけ枠で囲む */
+.ms-today {
+  border-color: rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.05);
+}
+.ms-w {
+  font-size: 0.56rem;
+  color: rgba(240, 237, 230, 0.5);
+  letter-spacing: 0.04em;
+}
+.ms-today .ms-w { color: rgba(240, 237, 230, 0.85); }
+.ms-d {
+  font-size: 0.72rem;
+  color: rgba(240, 237, 230, 0.72);
+  font-weight: 400;
+}
+.ms-today .ms-d {
+  color: #F0EDE6;
+  font-weight: 600;
+}
+/* 日天中殺の日に点を打つ */
+.ms-dot {
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: transparent;
+}
+.ms-dot-on { background: #C9A24A; }
+
+/* 月そのもの（SVG） */
+.moon-disc {
+  display: inline-block;
+  line-height: 0;
+  filter: drop-shadow(0 0 5px rgba(255, 250, 235, 0.16));
+}
+.moon-dark {
+  fill: #2b3245;
+}
+.moon-lit {
+  fill: #F2EDE0;
+}
+.moon-today {
+  text-align: center;
+  font-size: 0.62rem;
+  color: var(--color-brown);
+  letter-spacing: 0.12em;
+  margin-top: 0.5rem;
+  opacity: 0.85;
+}
+
+/* ===== ダーク化に伴う微調整（260713） ===== */
+/* 白背景前提だった箇所を夜空用に補正する */
+
+/* 天中殺サイクルの枠：金の膜を夜に馴染ませる */
+.k-flow {
+  background: rgba(201, 162, 74, 0.07);
+  border-color: rgba(201, 162, 74, 0.28);
+  border-radius: 12px;
+}
+/* 「日天中殺」タグ：暗い赤は夜に沈むので、明るい朱に */
+.k-flow-stage .k-flow-tag,
+.kc-tag {
+  color: #E8825F;
+  border-color: rgba(232, 130, 95, 0.65);
+  background: rgba(232, 130, 95, 0.10);
+}
+/* 主星・従星の枠 */
+.star-box {
+  background: var(--color-cream);
+  border: 1px solid var(--color-beige);
+  border-radius: 12px;
+  padding: 0.9rem 0.75rem;
+}
+.star-value { font-size: 1.05rem; }
+
+/* モーダル：夜の面に */
+.detail-modal { background: rgba(4, 7, 14, 0.78); }
+.detail-content {
+  background: var(--color-warm-white);
+  border-color: var(--color-beige);
+  border-radius: 18px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+}
+
+/* 願いの枠 */
+.frame {
+  background: var(--color-warm-white);
+  border-color: var(--color-beige);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* 曼荼羅：夜の面に馴染ませる */
+.sc-cell {
+  background: var(--color-cream);
+  border-color: var(--color-beige);
+  border-radius: 10px;
+}
+.sc-center {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 22px rgba(0, 0, 0, 0.45);
+}
+.sc-center .sc-star { color: #0B0F1A; }
+.sc-center .sc-pos,
+.sc-center .sc-sub { color: rgba(11, 15, 26, 0.72); }
+.sc-jyusei { background: rgba(201, 162, 74, 0.06); }
+
+/* 扉：夜に浮かぶ光の扉に */
+.door { border-top-color: var(--color-beige); }
+.door-frame {
+  background: var(--color-beige);
+  box-shadow: 0 4px 26px rgba(0, 0, 0, 0.5);
+}
+.door-panel {
+  background: linear-gradient(170deg, var(--color-accent) 0%, var(--color-accent-soft) 100%);
+}
+.door-arch { border-color: rgba(11, 15, 26, 0.32); }
+.door-knob {
+  background: #0B0F1A;
+  box-shadow: 0 0 0 2px rgba(11, 15, 26, 0.25);
+}
+
+/* 期限のお知らせ */
+.expiry-box {
+  background: var(--color-cream);
+  border-color: var(--color-beige);
+  border-left-color: var(--color-accent);
+  border-radius: 12px;
+}
+
+/* カレンダーの月タブ
+   【260714修正】ダーク化の際に文字色だけアクセント色にしたため、
+   元からある「背景もアクセント色」と重なって、選択中の月（例：7月）が
+   背景と同化して読めなくなっていた。塗りつぶしをやめ、
+   夜に馴染む「淡い面＋アクセントの下線」で選択状態を示す。 */
+.cal-month-tab {
+  background: var(--color-cream);
+  border-color: var(--color-beige);
+  color: var(--color-brown);
+  border-radius: 10px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.cal-month-tab.active {
+  background: var(--color-cream);
+  color: var(--color-brown-dark);
+  font-weight: 600;
+  border-color: var(--color-accent);
+  box-shadow: inset 0 -2px 0 var(--color-accent);
+}
+
+/* バッジ類：暗い文字色がハードコードされていて夜空で読めないので補正 */
+.badge-info    { background: rgba(143,169,216,0.14); color: var(--color-accent); border-color: rgba(143,169,216,0.35); }
+.badge-danger  { background: rgba(232,130,95,0.14);  color: #E8825F; border-color: rgba(232,130,95,0.4); }
+.badge-warning { background: rgba(208,138,90,0.16);  color: #E3A56F; border-color: rgba(208,138,90,0.42); }
+.badge-success { background: rgba(143,184,150,0.16); color: #9FCBA6; border-color: rgba(143,184,150,0.4); }
+.badge-tenchu  { background: rgba(201,162,74,0.14);  color: var(--color-gold-light); border-color: rgba(201,162,74,0.45); }
+
+/* 天中殺ボックス：暗緑の文字を金に */
+.tenchu-box {
+  background: rgba(201,162,74,0.08);
+  border: 1px solid rgba(201,162,74,0.3);
+  border-radius: 12px;
+}
+.tenchu-label,
+.tenchu-note { color: var(--color-brown); }
+.tenchu-days { color: var(--color-gold-light); }
+
+/* 陰のリスト：水色が沈むので明るく */
+.pattern-title.lose,
+.dot-lose { color: #7FA8C9; }
+
+/* カレンダーのセル */
+.cal-cell { background: var(--color-cream); border-color: transparent; }
+.cal-cell:hover { border-color: var(--color-accent-soft); }
+.cal-cell.today {
+  border: 1px solid var(--color-accent);
+  box-shadow: 0 0 14px rgba(143,169,216,0.25);
+}
+
+/* 引用の飾り */
+.message-box { border-radius: 12px; }
+.message-box::before { color: var(--color-accent-soft); opacity: 0.6; }
+
+/* 願い枠の二重線 */
+.frame::before { border-color: rgba(255,255,255,0.08); }
+
+/* 天中殺カードのキャプション：絵に埋もれて読めないので影を強くする（260713） */
+.k-card-caption {
+  background: linear-gradient(to top, rgba(6, 9, 16, 0.92) 0%, rgba(6, 9, 16, 0.72) 45%, transparent 100%);
+  padding: 1.1rem 0.9rem 0.75rem;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+  color: #F2EDE0;
+}
+.k-card-face { border-radius: 12px; }
+.k-card-front {
+  background: linear-gradient(150deg, var(--color-cream), var(--color-warm-white));
+  border: 1px solid var(--color-beige);
+}
+.k-card-front-inner .kf-marker { color: var(--color-accent); }
+.k-card-front-inner .kf-label { color: var(--color-brown); }

@@ -23,7 +23,10 @@
       "fullText": "庚午は『火事場の刀』。火で熱されてハンマーで叩かれるほど切れ味が増す干支。楽して強くなるタイプではなく、鍛えられる経験の中に命の輝きがある。親元や身内に留まると陰転するため『外で立つ』ことが宿命。"
     },
     "tenchu": "戌亥天中殺",
-    "tenchuBranches": ["戌", "亥"],
+    "tenchuBranches": [
+      "戌",
+      "亥"
+    ],
     "tenchuNote": "精神世界に恵まれとる。思想・信念・哲学を語ると周りに刺さる人や。予測不能な行動が出るのは精神性が強い証拠。一般常識から自由で、独自の道を歩く能力がある。",
     "specialStructure": "乙庚干合（月柱）",
     "specialNote": "改革のための行動力。知識と実行力が結びつく時に本領発揮や。",
@@ -32,7 +35,20 @@
     "chukuseiNote": "今、52～61歳（大運辛未）は大運天中殺の時期。人生リセットするようなことが起こりがち。52歳の今年は害×3で特にハードモード。でも玉堂×2あるから知識を伝える時期。秘書＋手の平セラピー＋レイキで『教え手になる』決断が毎日手相に刻まれてる。",
     "tenshunNote": "庚午は『天春（てんしゅん）』＝『離太白（りたいはく）』の質も持つ。名誉名声に恵まれる。ただし親元におったら陽転せん。鍛えられる場所におってこそ芽が出る干支や。家にいたらもったいない。──ここが yokoさんの『外で立つ』と直結する。",
     "fireNeedNote": "金性は火がないと動けん。刺激と火剋金で初めて働く。動きの中・人と関わる中・叩かれる経験の中に命の炎がある。",
-    "my": { "ds": 6, "db": 6, "ms": 1, "mb": 1, "ys": 9, "yb": 1, "tc": [10, 11] }
+    "my": {
+      "ds": 6,
+      "db": 6,
+      "ms": 1,
+      "mb": 1,
+      "ys": 9,
+      "yb": 1,
+      "tc": [
+        10,
+        11
+      ]
+    },
+    "birth": "1974-01-29",
+    "travelImgKey": "gohitsuji"
   },
   "goal": {
     "main": "手の平セラピー × SNS発信 × 商売化",
@@ -87,17 +103,105 @@
     }
   ],
   "monthlyFortunes": [
-    { "period": "7/7〜8/6", "kanshi": "乙未", "mainStar": "玉堂星", "jyusei": "天印星", "aspects": "月柱：律音 / 日柱：害", "isTenchu": false, "advice": "月柱律音で原点回帰。玉堂の学びが冴える月。ただ害もあるから人間関係のすれ違いは深追いせんことや。" },
-    { "period": "8/7〜9/6", "kanshi": "丙申", "mainStar": "車騎星", "jyusei": "天禄星", "aspects": "年柱：天剋地冲", "isTenchu": false, "advice": "天剋地冲で外部から揺さぶりが来る月。仕事や環境で予期せぬ変化があっても 慌てんと芯を保つ。動くより守る。" },
-    { "period": "9/7〜10/7", "kanshi": "丁酉", "mainStar": "牽牛星", "jyusei": "天将星", "aspects": "-", "isTenchu": false, "advice": "牽牛で責任ある立場が回ってくる月。プライドを力に変える。引き受けて立つこと。" },
-    { "period": "10/8〜11/6", "kanshi": "戊戌", "mainStar": "龍高星", "jyusei": "天堂星", "aspects": "戌亥天中殺", "isTenchu": true, "advice": "月天中殺の始まり。新しいことを始めず蓄積と内省の時間。判断は急がん。" },
-    { "period": "11/7〜12/6", "kanshi": "己亥", "mainStar": "玉堂星", "jyusei": "天胡星", "aspects": "戌亥天中殺", "isTenchu": true, "advice": "月天中殺が続く。精神世界への感受性が高まる。焦らず待つ。動かずに受け取る月や。" },
-    { "period": "12/7〜2027/1/5", "kanshi": "庚子", "mainStar": "貫索星", "jyusei": "天恍星", "aspects": "日柱：律音(干)", "isTenchu": false, "advice": "天中殺明け。庚子で自分軸が戻る月。一人で立つ感覚を取り戻す。" },
-    { "period": "2027/1/6〜2/3", "kanshi": "辛丑", "mainStar": "石門星", "jyusei": "天南星", "aspects": "月柱：律音(支) / 年柱：律音(支)", "isTenchu": false, "advice": "律音重なりで根っこに戻る月。仲間との繋がりが力になる。" },
-    { "period": "2027/2/4〜3/5", "kanshi": "壬寅", "mainStar": "鳳閣星", "jyusei": "天禄星", "aspects": "-", "isTenchu": false, "advice": "鳳閣で表現の月。淡々と続けることが結果になる。" },
-    { "period": "2027/3/6〜4/4", "kanshi": "癸卯", "mainStar": "調舒星", "jyusei": "天将星", "aspects": "年柱：律音(干)", "isTenchu": false, "advice": "天将星でエネルギー最大。決断と行動の月や。" },
-    { "period": "2027/4/5〜5/5", "kanshi": "甲辰", "mainStar": "龍高星", "jyusei": "天堂星", "aspects": "日柱：支合", "isTenchu": false, "advice": "支合で人との調和が取れる月。学びと改革が穏やかに進む。" },
-    { "period": "2027/5/6〜6/5", "kanshi": "乙巳", "mainStar": "玉堂星", "jyusei": "天胡星", "aspects": "月柱：干合", "isTenchu": false, "advice": "月柱干合で結びつきの月。玉堂の知恵が人と繋がる。" }
+    {
+      "period": "7/7〜8/6",
+      "kanshi": "乙未",
+      "mainStar": "玉堂星",
+      "jyusei": "天印星",
+      "aspects": "月柱：律音 / 日柱：害",
+      "isTenchu": false,
+      "advice": "月柱律音で原点回帰。玉堂の学びが冴える月。ただ害もあるから人間関係のすれ違いは深追いせんことや。"
+    },
+    {
+      "period": "8/7〜9/6",
+      "kanshi": "丙申",
+      "mainStar": "車騎星",
+      "jyusei": "天禄星",
+      "aspects": "年柱：天剋地冲",
+      "isTenchu": false,
+      "advice": "天剋地冲で外部から揺さぶりが来る月。仕事や環境で予期せぬ変化があっても 慌てんと芯を保つ。動くより守る。"
+    },
+    {
+      "period": "9/7〜10/7",
+      "kanshi": "丁酉",
+      "mainStar": "牽牛星",
+      "jyusei": "天将星",
+      "aspects": "-",
+      "isTenchu": false,
+      "advice": "牽牛で責任ある立場が回ってくる月。プライドを力に変える。引き受けて立つこと。"
+    },
+    {
+      "period": "10/8〜11/6",
+      "kanshi": "戊戌",
+      "mainStar": "龍高星",
+      "jyusei": "天堂星",
+      "aspects": "戌亥天中殺",
+      "isTenchu": true,
+      "advice": "月天中殺の始まり。新しいことを始めず蓄積と内省の時間。判断は急がん。"
+    },
+    {
+      "period": "11/7〜12/6",
+      "kanshi": "己亥",
+      "mainStar": "玉堂星",
+      "jyusei": "天胡星",
+      "aspects": "戌亥天中殺",
+      "isTenchu": true,
+      "advice": "月天中殺が続く。精神世界への感受性が高まる。焦らず待つ。動かずに受け取る月や。"
+    },
+    {
+      "period": "12/7〜2027/1/5",
+      "kanshi": "庚子",
+      "mainStar": "貫索星",
+      "jyusei": "天恍星",
+      "aspects": "日柱：律音(干)",
+      "isTenchu": false,
+      "advice": "天中殺明け。庚子で自分軸が戻る月。一人で立つ感覚を取り戻す。"
+    },
+    {
+      "period": "2027/1/6〜2/3",
+      "kanshi": "辛丑",
+      "mainStar": "石門星",
+      "jyusei": "天南星",
+      "aspects": "月柱：律音(支) / 年柱：律音(支)",
+      "isTenchu": false,
+      "advice": "律音重なりで根っこに戻る月。仲間との繋がりが力になる。"
+    },
+    {
+      "period": "2027/2/4〜3/5",
+      "kanshi": "壬寅",
+      "mainStar": "鳳閣星",
+      "jyusei": "天禄星",
+      "aspects": "-",
+      "isTenchu": false,
+      "advice": "鳳閣で表現の月。淡々と続けることが結果になる。"
+    },
+    {
+      "period": "2027/3/6〜4/4",
+      "kanshi": "癸卯",
+      "mainStar": "調舒星",
+      "jyusei": "天将星",
+      "aspects": "年柱：律音(干)",
+      "isTenchu": false,
+      "advice": "天将星でエネルギー最大。決断と行動の月や。"
+    },
+    {
+      "period": "2027/4/5〜5/5",
+      "kanshi": "甲辰",
+      "mainStar": "龍高星",
+      "jyusei": "天堂星",
+      "aspects": "日柱：支合",
+      "isTenchu": false,
+      "advice": "支合で人との調和が取れる月。学びと改革が穏やかに進む。"
+    },
+    {
+      "period": "2027/5/6〜6/5",
+      "kanshi": "乙巳",
+      "mainStar": "玉堂星",
+      "jyusei": "天胡星",
+      "aspects": "月柱：干合",
+      "isTenchu": false,
+      "advice": "月柱干合で結びつきの月。玉堂の知恵が人と繋がる。"
+    }
   ],
   "monthlyTenchuPeriod": {
     "startMonth": 10,
@@ -107,82 +211,286 @@
     "endYear": 2026
   },
   "dailyAdvice": {
-    "7/12": { "advice": "【天中殺の日】牽牛・天胡星。プレッシャー内での判断をしてる。ハーミットのような時間や。", "aspects": "日天中殺", "isTenchu": true },
-    "7/13": { "advice": "龍高・天極星。行動力がある。実技試験に向けて動いてもいい日。", "aspects": "", "isTenchu": false },
-    "7/14": { "advice": "玉堂・天庫星。内省と整理の日。復習に◎。", "aspects": "", "isTenchu": false },
-    "7/15": { "advice": "貫索・天馳星。体力低め。無理は禁物。早めに寝て。", "aspects": "", "isTenchu": false },
-    "7/16": { "advice": "石門・天報星。転生のエネルギー。新しい方向が見える日や。", "aspects": "", "isTenchu": false },
-    "7/17": { "advice": "鳳閣・天印星。感受性が高い。手の感覚を研ぎ澄ます日。", "aspects": "", "isTenchu": false },
-    "7/18": { "advice": "【実技試験日】調舒・天貴星。品格の星。堂々と立つ。自分の力を信じてな。", "aspects": "", "isTenchu": false },
-    "7/19": { "advice": "禄存・天恍星。青春の星。元気いっぱい。試験が終わった達成感。", "aspects": "", "isTenchu": false },
-    "7/20": { "advice": "司禄・天南星。【害×2の日】人間関係のすれ違い注意。本音は大事だけど深追いせん。", "aspects": "害", "isTenchu": false },
-    "7/21": { "advice": "車騎・天禄星。壮年の星。実力が出る。秘書の仕事も好調。", "aspects": "", "isTenchu": false },
-    "7/22": { "advice": "牽牛・天将星。決断の日。王様の星。プレッシャーはもう終わった。リセット。", "aspects": "", "isTenchu": false },
-    "7/23": { "advice": "【月天中殺・日天中殺】龍高・天堂星。老人の星。経験値で勝負する時。", "aspects": "日天中殺", "isTenchu": true },
-    "7/24": { "advice": "【月天中殺・日天中殺】玉堂・天胡星。霊感の星。瞑想・内省に◎。", "aspects": "日天中殺", "isTenchu": true },
-    "7/25": { "advice": "貫索・天極星。新しい月へ。体力低めだけど気持ちは前向き。", "aspects": "", "isTenchu": false },
-    "7/26": { "advice": "石門・天庫星。整理・片付けの日。要らんものを手放す。", "aspects": "", "isTenchu": false },
-    "7/27": { "advice": "鳳閣・天馳星。学びと表現の月。淡々と続けることが大事。", "aspects": "", "isTenchu": false },
-    "7/28": { "advice": "調舒・天報星。転生のエネルギー。新しい手相の発信を始めてもいい日。", "aspects": "", "isTenchu": false },
-    "7/29": { "advice": "禄存・天印星。赤ちゃんの星。素直に動く。やってみることや。", "aspects": "", "isTenchu": false },
-    "7/30": { "advice": "司禄・天貴星。品格。プライドが力になる。7月最後。来月の準備をしてな。", "aspects": "", "isTenchu": false },
-    "7/31": { "advice": "車騎・天恍星。8月へ向け ロマンチックなビジョンを持つ日。", "aspects": "", "isTenchu": false },
-    "8/1": { "advice": "【新月】牽牛・天南星。前進のエネルギー。8月入り。新しい循環。", "aspects": "", "isTenchu": false },
-    "8/2": { "advice": "龍高・天禄星。実力発揮。秘書＋手の平セラピーで存在感出す。", "aspects": "", "isTenchu": false },
-    "8/3": { "advice": "玉堂・天将星。最大エネルギー。決断と行動の日や。", "aspects": "", "isTenchu": false },
-    "8/4": { "advice": "【月天中殺・日天中殺】貫索・天堂星。老人の星。慎重に行動。焦らん。", "aspects": "日天中殺", "isTenchu": true },
-    "8/5": { "advice": "【月天中殺・日天中殺】石門・天胡星。霊感高い。感性を信じる日。", "aspects": "日天中殺", "isTenchu": true },
-    "8/6": { "advice": "鳳閣・天極星。体力低め。ペース配分を考える。", "aspects": "", "isTenchu": false },
-    "8/7": { "advice": "調舒・天庫星。内省の日。今月のテーマを確認する。", "aspects": "", "isTenchu": false },
-    "8/8": { "advice": "禄存・天馳星。体力の底。スピ感性が高まる。瞑想をおススメ。", "aspects": "", "isTenchu": false },
-    "8/9": { "advice": "司禄・天報星。転生。多方向に動ける。SNS発信を続ける。", "aspects": "", "isTenchu": false },
-    "8/10": { "advice": "車騎・天印星。素直さと愛嬌が武器。人と繋がる日。", "aspects": "", "isTenchu": false },
-    "8/11": { "advice": "牽牛・天将星。王様の星。決断の日や。", "aspects": "", "isTenchu": false },
-    "8/12": { "advice": "龍高・天恍星。【害×2の日】ロマンチックだけど現実も見る。", "aspects": "害", "isTenchu": false },
-    "8/13": { "advice": "玉堂・天南星。【前進の星】攻めてOK。手の平セラピーの発信が本格化。", "aspects": "", "isTenchu": false },
-    "8/14": { "advice": "貫索・天禄星。壮年の星。実力を見せる日。", "aspects": "", "isTenchu": false },
-    "8/15": { "advice": "石門・天将星。最大エネルギー。立場を取ってリード。", "aspects": "", "isTenchu": false },
-    "8/16": { "advice": "【月天中殺・日天中殺】鳳閣・天堂星。老人の星。経験値で勝負。", "aspects": "日天中殺", "isTenchu": true },
-    "8/17": { "advice": "【月天中殺・日天中殺】調舒・天胡星。霊感の星。内観と瞑想。", "aspects": "日天中殺", "isTenchu": true },
-    "8/18": { "advice": "禄存・天極星。体力低め。省エネで過ごす。", "aspects": "", "isTenchu": false },
-    "8/19": { "advice": "司禄・天庫星。【害のある日】片付けと整理。内省に◎。", "aspects": "害", "isTenchu": false },
-    "8/20": { "advice": "車騎・天馳星。体力の底。早めに寝る。", "aspects": "", "isTenchu": false },
-    "8/21": { "advice": "牽牛・天報星。転生のエネルギー。新しい視点が開ける。", "aspects": "", "isTenchu": false },
-    "8/22": { "advice": "龍高・天印星。赤ちゃんの星。素直に愛嬌を出す。", "aspects": "", "isTenchu": false },
-    "8/23": { "advice": "玉堂・天貴星。品格の星。プライドが力になる日。", "aspects": "", "isTenchu": false },
-    "8/24": { "advice": "貫索・天恍星。【律音・害のある日】ロマンチックだけど現実的に。", "aspects": "律音・害", "isTenchu": false },
-    "8/25": { "advice": "石門・天南星。【前進の星】攻めてOK。AI講座も手の平セラピーも全力で。", "aspects": "", "isTenchu": false },
-    "8/26": { "advice": "鳳閣・天禄星。壮年の星。責任ある仕事に向く。", "aspects": "", "isTenchu": false },
-    "8/27": { "advice": "調舒・天将星。王様の星。決断と行動の最高のタイミング。", "aspects": "", "isTenchu": false },
-    "8/28": { "advice": "【月天中殺・日天中殺】禄存・天堂星。老人の星。慎重に経験値で勝負。", "aspects": "日天中殺", "isTenchu": true },
-    "8/29": { "advice": "【月天中殺・日天中殺】司禄・天胡星。霊感の星。瞑想・内観。", "aspects": "日天中殺", "isTenchu": true },
-    "8/30": { "advice": "車騎・天極星。体力低め。省エネで。", "aspects": "", "isTenchu": false },
-    "8/31": { "advice": "牽牛・天庫星。【害のある日】最後の整理。8月の成果を確認してな。", "aspects": "害", "isTenchu": false }
+    "7/12": {
+      "advice": "【天中殺の日】牽牛・天胡星。プレッシャー内での判断をしてる。ハーミットのような時間や。",
+      "aspects": "日天中殺",
+      "isTenchu": true
+    },
+    "7/13": {
+      "advice": "龍高・天極星。行動力がある。実技試験に向けて動いてもいい日。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "7/14": {
+      "advice": "玉堂・天庫星。内省と整理の日。復習に◎。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "7/15": {
+      "advice": "貫索・天馳星。体力低め。無理は禁物。早めに寝て。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "7/16": {
+      "advice": "石門・天報星。転生のエネルギー。新しい方向が見える日や。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "7/17": {
+      "advice": "鳳閣・天印星。感受性が高い。手の感覚を研ぎ澄ます日。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "7/18": {
+      "advice": "【実技試験日】調舒・天貴星。品格の星。堂々と立つ。自分の力を信じてな。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "7/19": {
+      "advice": "禄存・天恍星。青春の星。元気いっぱい。試験が終わった達成感。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "7/20": {
+      "advice": "司禄・天南星。【害×2の日】人間関係のすれ違い注意。本音は大事だけど深追いせん。",
+      "aspects": "害",
+      "isTenchu": false
+    },
+    "7/21": {
+      "advice": "車騎・天禄星。壮年の星。実力が出る。秘書の仕事も好調。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "7/22": {
+      "advice": "牽牛・天将星。決断の日。王様の星。プレッシャーはもう終わった。リセット。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "7/23": {
+      "advice": "【月天中殺・日天中殺】龍高・天堂星。老人の星。経験値で勝負する時。",
+      "aspects": "日天中殺",
+      "isTenchu": true
+    },
+    "7/24": {
+      "advice": "【月天中殺・日天中殺】玉堂・天胡星。霊感の星。瞑想・内省に◎。",
+      "aspects": "日天中殺",
+      "isTenchu": true
+    },
+    "7/25": {
+      "advice": "貫索・天極星。新しい月へ。体力低めだけど気持ちは前向き。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "7/26": {
+      "advice": "石門・天庫星。整理・片付けの日。要らんものを手放す。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "7/27": {
+      "advice": "鳳閣・天馳星。学びと表現の月。淡々と続けることが大事。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "7/28": {
+      "advice": "調舒・天報星。転生のエネルギー。新しい手相の発信を始めてもいい日。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "7/29": {
+      "advice": "禄存・天印星。赤ちゃんの星。素直に動く。やってみることや。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "7/30": {
+      "advice": "司禄・天貴星。品格。プライドが力になる。7月最後。来月の準備をしてな。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "7/31": {
+      "advice": "車騎・天恍星。8月へ向け ロマンチックなビジョンを持つ日。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/1": {
+      "advice": "【新月】牽牛・天南星。前進のエネルギー。8月入り。新しい循環。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/2": {
+      "advice": "龍高・天禄星。実力発揮。秘書＋手の平セラピーで存在感出す。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/3": {
+      "advice": "玉堂・天将星。最大エネルギー。決断と行動の日や。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/4": {
+      "advice": "【月天中殺・日天中殺】貫索・天堂星。老人の星。慎重に行動。焦らん。",
+      "aspects": "日天中殺",
+      "isTenchu": true
+    },
+    "8/5": {
+      "advice": "【月天中殺・日天中殺】石門・天胡星。霊感高い。感性を信じる日。",
+      "aspects": "日天中殺",
+      "isTenchu": true
+    },
+    "8/6": {
+      "advice": "鳳閣・天極星。体力低め。ペース配分を考える。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/7": {
+      "advice": "調舒・天庫星。内省の日。今月のテーマを確認する。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/8": {
+      "advice": "禄存・天馳星。体力の底。スピ感性が高まる。瞑想をおススメ。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/9": {
+      "advice": "司禄・天報星。転生。多方向に動ける。SNS発信を続ける。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/10": {
+      "advice": "車騎・天印星。素直さと愛嬌が武器。人と繋がる日。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/11": {
+      "advice": "牽牛・天将星。王様の星。決断の日や。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/12": {
+      "advice": "龍高・天恍星。【害×2の日】ロマンチックだけど現実も見る。",
+      "aspects": "害",
+      "isTenchu": false
+    },
+    "8/13": {
+      "advice": "玉堂・天南星。【前進の星】攻めてOK。手の平セラピーの発信が本格化。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/14": {
+      "advice": "貫索・天禄星。壮年の星。実力を見せる日。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/15": {
+      "advice": "石門・天将星。最大エネルギー。立場を取ってリード。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/16": {
+      "advice": "【月天中殺・日天中殺】鳳閣・天堂星。老人の星。経験値で勝負。",
+      "aspects": "日天中殺",
+      "isTenchu": true
+    },
+    "8/17": {
+      "advice": "【月天中殺・日天中殺】調舒・天胡星。霊感の星。内観と瞑想。",
+      "aspects": "日天中殺",
+      "isTenchu": true
+    },
+    "8/18": {
+      "advice": "禄存・天極星。体力低め。省エネで過ごす。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/19": {
+      "advice": "司禄・天庫星。【害のある日】片付けと整理。内省に◎。",
+      "aspects": "害",
+      "isTenchu": false
+    },
+    "8/20": {
+      "advice": "車騎・天馳星。体力の底。早めに寝る。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/21": {
+      "advice": "牽牛・天報星。転生のエネルギー。新しい視点が開ける。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/22": {
+      "advice": "龍高・天印星。赤ちゃんの星。素直に愛嬌を出す。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/23": {
+      "advice": "玉堂・天貴星。品格の星。プライドが力になる日。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/24": {
+      "advice": "貫索・天恍星。【律音・害のある日】ロマンチックだけど現実的に。",
+      "aspects": "律音・害",
+      "isTenchu": false
+    },
+    "8/25": {
+      "advice": "石門・天南星。【前進の星】攻めてOK。AI講座も手の平セラピーも全力で。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/26": {
+      "advice": "鳳閣・天禄星。壮年の星。責任ある仕事に向く。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/27": {
+      "advice": "調舒・天将星。王様の星。決断と行動の最高のタイミング。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/28": {
+      "advice": "【月天中殺・日天中殺】禄存・天堂星。老人の星。慎重に経験値で勝負。",
+      "aspects": "日天中殺",
+      "isTenchu": true
+    },
+    "8/29": {
+      "advice": "【月天中殺・日天中殺】司禄・天胡星。霊感の星。瞑想・内観。",
+      "aspects": "日天中殺",
+      "isTenchu": true
+    },
+    "8/30": {
+      "advice": "車騎・天極星。体力低め。省エネで。",
+      "aspects": "",
+      "isTenchu": false
+    },
+    "8/31": {
+      "advice": "牽牛・天庫星。【害のある日】最後の整理。8月の成果を確認してな。",
+      "aspects": "害",
+      "isTenchu": false
+    }
   },
   "todos": [],
   "design": {
-    "colors": {
-      "cream": "#FFF6EE",
-      "warm-white": "#FFFAF3",
-      "beige": "#F5E2CE",
-      "accent": "#C2491F",
-      "accent-light": "#E07A4A",
-      "accent-soft": "#F0B690",
-      "gold": "#B8862C",
-      "gold-light": "#D4A85F",
-      "brown": "#8B5A3C",
-      "brown-dark": "#4B2D1F",
-      "rose": "#D4564A",
-      "rose-light": "#F8DCD2",
-      "sage": "#A89060",
-      "water": "#5B6E7F",
-      "fire": "#C2491F",
-      "bg-gradient-end": "#FCE9D6"
-    },
     "eraLabel": "令和八年",
     "headerSub": "― 庚午・玉堂星の暦 ―",
     "headerTitle": "yokoさんの暦",
     "headerTagline": "炉の中で 鍛えられて 切れ味が増す",
-    "footerText": "― 自立 そして 渡す ―"
+    "footerText": "― 自立 そして 渡す ―",
+    "accentColor": "#D9553F",
+    "needElement": "火",
+    "needElementNote": "火性21 最小"
+  },
+  "expiresAt": "2026-09-12",
+  "doorHref": "/menu",
+  "doorLabel": "お品書き",
+  "doorNote": "この先に もう少し深く視るための品書きがあります",
+  "starChart": {
+    "banse": "玉堂星",
+    "meue": "調舒星",
+    "shonen": "天庫星",
+    "haigu": "牽牛星",
+    "center": "玉堂星",
+    "shakai": "玉堂星",
+    "bannen": "天恍星",
+    "meshita": "司禄星",
+    "chunen": "天庫星"
   }
 }

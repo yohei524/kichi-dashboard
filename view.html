@@ -32,6 +32,10 @@
     var seg = path.split('/').pop();
     if (seg && seg !== 'view.html' && seg !== '') client = seg;
   }
+  // URLのパス名とJSONのファイル名が違う場合の対応表。
+  // 表示名は「Hidetoさん」が正しいが、JSONは hidetoh.json のまま（既存URL互換のため）。
+  var ALIAS = { 'hideto': 'hidetoh' };
+  if (ALIAS[client]) client = ALIAS[client];
   var app = document.getElementById('app');
   if (!client) {
     app.innerHTML = '<p class="text-center text-sm" style="color:var(--color-brown);padding:2rem 0">クライアント指定がありません（?client=名前 が必要です）</p>';

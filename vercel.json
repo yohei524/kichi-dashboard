@@ -2,14 +2,25 @@
   "buildCommand": "",
   "outputDirectory": ".",
   "framework": null,
+  "redirects": [
+    { "source": "/clients/sachiko.html",  "destination": "/sachiko",   "permanent": false },
+    { "source": "/clients/asuka.html",    "destination": "/asuka",     "permanent": false },
+    { "source": "/clients/yui.html",      "destination": "/yui",       "permanent": false },
+    { "source": "/clients/nanafushi.html","destination": "/nanafushi", "permanent": false },
+    { "source": "/clients/syuko.html",    "destination": "/syuko",     "permanent": false },
+    { "source": "/clients/hiromi.html",   "destination": "/hiromi",    "permanent": false },
+    { "source": "/clients/sayuri.html",   "destination": "/sayuri",    "permanent": false },
+    { "source": "/clients/y-ayumi.html",  "destination": "/y-ayumi",   "permanent": false },
+    { "source": "/clients/ayumi.html",    "destination": "/ayumi",     "permanent": false }
+  ],
   "rewrites": [
     {
       "source": "/yui",
-      "destination": "/clients/yui.html"
+      "destination": "/view.html?client=yui"
     },
     {
       "source": "/nanafushi",
-      "destination": "/clients/nanafushi.html"
+      "destination": "/view.html?client=nanafushi"
     },
     {
       "source": "/yoko",
@@ -21,27 +32,39 @@
     },
     {
       "source": "/hiromi",
-      "destination": "/clients/hiromi.html"
+      "destination": "/view.html?client=hiromi"
     },
     {
       "source": "/asuka",
-      "destination": "/clients/asuka.html"
+      "destination": "/view.html?client=asuka"
     },
     {
       "source": "/y-ayumi",
-      "destination": "/clients/y-ayumi.html"
+      "destination": "/view.html?client=y-ayumi"
     },
     {
       "source": "/syuko",
-      "destination": "/clients/syuko.html"
+      "destination": "/view.html?client=syuko"
     },
     {
       "source": "/sayuri",
-      "destination": "/clients/sayuri.html"
+      "destination": "/view.html?client=sayuri"
+    },
+    {
+      "source": "/sachiko",
+      "destination": "/view.html?client=sachiko"
     },
     {
       "source": "/hidetoh",
       "destination": "/view.html?client=hidetoh"
+    },
+    {
+      "source": "/hideto",
+      "destination": "/view.html?client=hidetoh"
+    },
+    {
+      "source": "/menu",
+      "destination": "/clients/menu.html"
     },
     {
       "source": "/demo",
