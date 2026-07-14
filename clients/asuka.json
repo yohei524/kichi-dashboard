@@ -1,0 +1,212 @@
+{
+  "client": {
+    "name": "あすか",
+    "dayStem": "壬",
+    "dayStemReading": "みずのえ",
+    "element": "水（大海）",
+    "elementNote": "海や。広く深く、すべてを受け入れる器。感受性が豊かで表現力に才能がある。自然体でおること、それがあんたの本来の姿やで。",
+    "tenchu": "子丑天中殺",
+    "tenchuNote": "北方欠け。精神世界や根っこが揺れやすい。答えを急がず、流れの中で見つける。",
+    "specialStructure": null,
+    "specialNote": null,
+    "stars": "鳳閣星(中央) + 龍高星 + 石門星",
+    "starsNote": "鳳閣星中心。自由な表現・自然体の発信・マイペース。焦りは大敵や。自分のペースで流れに乗ることが吉。",
+    "my": {
+      "ds": 8,
+      "db": 10,
+      "ms": 4,
+      "mb": 2,
+      "ys": 6,
+      "yb": 6,
+      "tc": [
+        0,
+        1
+      ]
+    },
+    "birth": "1990-02-26",
+    "travelImgKey": "gohitsuji"
+  },
+  "goal": {
+    "main": "自分自身を取り戻す",
+    "sub": "自分の感覚を信じる。\n「正しい答え」を外に探さない。\n流れの中に身を置く。"
+  },
+  "winPatterns": [
+    "自然体でいる（壬は流れてこそ輝く）",
+    "感じたことをアウトプットする",
+    "迷ったら動かない（水は止まって清まる）",
+    "心の言葉を選び直す（外の言葉より内の言葉）",
+    "美しいものに触れる"
+  ],
+  "losePatterns": [
+    "溜め込んで爆発させる（流さずに堰き止める）",
+    "白黒つけようとして焦る",
+    "考えすぎて一気に動く",
+    "彼の沈黙を拒絶と解釈する",
+    "外の評価で自分を測る"
+  ],
+  "fiveViews": [
+    {
+      "key": "流れる",
+      "body": "壬は大海や。海は押し返さない。全部受け入れて、流れに乗る。それがあすかの強さや。"
+    },
+    {
+      "key": "感じる",
+      "body": "鳳閣星は自然体の星。頭より感性が先に動く。「なんか違う」という感覚を、大事にしてな。"
+    },
+    {
+      "key": "待つ",
+      "body": "子丑天中殺の人は、急ぐと空回りしやすい。止まって清まる時間が必要な時がある。"
+    },
+    {
+      "key": "出す",
+      "body": "感受性が豊かな分、溜め込むと詰まる。感じたことを小さく出し続けることで、流れが生まれる。"
+    },
+    {
+      "key": "自分",
+      "body": "壬の水は、外の器に合わせて形を変える。でも本質は水のまま。外に合わせながら、芯は自分やで。"
+    }
+  ],
+  "monthlyFortunes": [
+    {
+      "period": "6/6〜7/6",
+      "kanshi": "甲午",
+      "mainStar": "調舒星",
+      "jyusei": "天南星",
+      "aspects": "日柱：害 / 月柱：天剋地冲",
+      "isTenchu": false,
+      "advice": "変化の多い月。感情が揺れやすい。大きな決断は後回しで。小さく動く一ヶ月にしてな。"
+    },
+    {
+      "period": "7/7〜8/6",
+      "kanshi": "乙未",
+      "mainStar": "玉堂星",
+      "jyusei": "天庫星",
+      "aspects": "月柱：害",
+      "isTenchu": false,
+      "advice": "内省の月。学びと整理が合う。溜め込んでたものを一つ手放してみて。"
+    },
+    {
+      "period": "8/7〜9/6",
+      "kanshi": "丙申",
+      "mainStar": "鳳閣星",
+      "jyusei": "天将星",
+      "aspects": "日柱：律音(干)",
+      "isTenchu": false,
+      "advice": "律音で原点回帰。自分らしさが戻る月。感じたままに動くとええ。"
+    },
+    {
+      "period": "9/7〜10/7",
+      "kanshi": "丁酉",
+      "mainStar": "石門星",
+      "jyusei": "天堂星",
+      "aspects": "-",
+      "isTenchu": false,
+      "advice": "人間関係が温まる月。話を聞いてもらうと楽になる。一人で抱え込まんで。"
+    },
+    {
+      "period": "10/8〜11/6",
+      "kanshi": "戊戌",
+      "mainStar": "禄存星",
+      "jyusei": "天極星",
+      "aspects": "日柱：対冲",
+      "isTenchu": false,
+      "advice": "エネルギー低め。無理せん月。体を優先して。"
+    },
+    {
+      "period": "11/7〜12/6",
+      "kanshi": "己亥",
+      "mainStar": "司禄星",
+      "jyusei": "天馳星",
+      "aspects": "日柱：律音(支)",
+      "isTenchu": false,
+      "advice": "律音で自分の軸が戻る。蓄積の月。コツコツが吉。"
+    },
+    {
+      "period": "12/7〜2027/1/5",
+      "kanshi": "庚子",
+      "mainStar": "車騎星",
+      "jyusei": "天報星",
+      "aspects": "天中殺（子）",
+      "isTenchu": true,
+      "advice": "月天中殺の始まり。新しいことを動かさず、今あるものを丁寧に保つ月。"
+    },
+    {
+      "period": "2027/1/6〜2/3",
+      "kanshi": "辛丑",
+      "mainStar": "牽牛星",
+      "jyusei": "天印星",
+      "aspects": "天中殺（丑）",
+      "isTenchu": true,
+      "advice": "月天中殺続く。焦らず内側に向く月。待つが正解。"
+    },
+    {
+      "period": "2027/2/4〜3/5",
+      "kanshi": "壬寅",
+      "mainStar": "龍高星",
+      "jyusei": "天貴星",
+      "aspects": "日柱：律音(干)",
+      "isTenchu": false,
+      "advice": "天中殺明け・律音の月。本来の自分が戻ってくる。動き出す準備ができてる。"
+    },
+    {
+      "period": "2027/3/6〜4/4",
+      "kanshi": "癸卯",
+      "mainStar": "玉堂星",
+      "jyusei": "天南星",
+      "aspects": "月柱：律音(干)",
+      "isTenchu": false,
+      "advice": "エネルギー満タンの月。どんどん動ける。感じたことを全部出していい月。"
+    },
+    {
+      "period": "2027/4/5〜5/5",
+      "kanshi": "甲辰",
+      "mainStar": "調舒星",
+      "jyusei": "天将星",
+      "aspects": "-",
+      "isTenchu": false,
+      "advice": "感性が冴える月。美しいものを作る・整えることに向く。"
+    },
+    {
+      "period": "2027/5/6〜6/5",
+      "kanshi": "乙巳",
+      "mainStar": "鳳閣星",
+      "jyusei": "天堂星",
+      "aspects": "年柱：律音(干)",
+      "isTenchu": false,
+      "advice": "自然体の月。淡々と続けることが結果になる。"
+    }
+  ],
+  "monthlyTenchuPeriod": {
+    "startMonth": 12,
+    "startDay": 7,
+    "endMonth": 2,
+    "endDay": 3,
+    "endYear": 2027
+  },
+  "design": {
+    "headerSub": "― 壬戌・鳳閣星の暦 ―",
+    "headerTitle": "あすかの暦",
+    "headerTagline": "流れてこそ 海は輝く",
+    "footerText": "― 感じて 流して 自分に戻る ―",
+    "accentColor": "#3E7FA8",
+    "needElement": "水",
+    "needElementNote": "数理法 水17が最少"
+  },
+  "dailyAdvice": {},
+  "yearTenchuNote": "",
+  "expiresAt": "2026-09-12",
+  "doorHref": "/menu",
+  "doorLabel": "お品書き",
+  "doorNote": "この先に もう少し深く視るための品書きがあります",
+  "starChart": {
+    "banse": "調舒星",
+    "meue": "龍高星",
+    "shonen": "天報星",
+    "haigu": "車騎星",
+    "center": "鳳閣星",
+    "shakai": "司禄星",
+    "bannen": "天南星",
+    "meshita": "車騎星",
+    "chunen": "天胡星"
+  }
+}

@@ -91,6 +91,90 @@ function computeFortune(y,m,d){
   return{date:m+'/'+d, kanshi:k, mainStar:ms, jyusei:bs, aspects:asp, isTenchu:isTenchu};
 }
 
+// ---------- 月運の自動計算（節入りベース） ----------
+// 月柱は「節入り」で切り替わるため、太陽黄経から節入りを天文計算して月支を決める。
+// 固定テーブルを持たないので、何年先でも正しく出せる（＝月運が期限切れにならない）。
+// 本質チェッカー(nanafushi-honshitsu)と同一のロジック。ayumiの手書き月運10ヶ月分と照合済み。
+// 【重要】getJD は世界時(UT)基準のユリウス日を返す。
+// 節入りは「日本時間で何日か」で決まる。節入りの瞬間がその日のうち（JST 0〜24時）に
+// 訪れれば、その日が節入り日＝新しい月の初日になる。
+// したがって判定は「その日の終わり(JST24時=UT15時)」の黄経で見る。
+// JST 0時(=前日UT15時)で見ると、節入りが日中に来る月（例：2026年の小暑 JST7/7 11時）を
+// 取りこぼして節入り日が1日後ろにずれる（260713修正）。
+function _jd(y,m,d,hUT){
+  if(hUT===undefined)hUT=15; // JST当日24時 = UT当日15時
+  if(m<=2){y--;m+=12}
+  var A=Math.floor(y/100),B=2-A+Math.floor(A/4);
+  return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+B-1524.5+hUT/24;
+}
+function _sunLon(jd){
+  var D=jd-2451545.0;
+  var g=(357.529+0.98560028*D)%360;
+  var q=(280.459+0.98564736*D)%360;
+  var L=q+1.915*Math.sin(g*Math.PI/180)+0.020*Math.sin(2*g*Math.PI/180);
+  return (L%360+360)%360;
+}
+// 黄経 → 月支（立春315°=寅 から12節気）
+var SOLAR_TERMS=[{d:315,b:2},{d:345,b:3},{d:15,b:4},{d:45,b:5},{d:75,b:6},{d:105,b:7},
+                 {d:135,b:8},{d:165,b:9},{d:195,b:10},{d:225,b:11},{d:255,b:0},{d:285,b:1}];
+function _monthBranch(y,m,d){
+  var sl=_sunLon(_jd(y,m,d));
+  for(var i=0;i<12;i++){
+    var cur=SOLAR_TERMS[i],nxt=SOLAR_TERMS[(i+1)%12];
+    var hit=(cur.d<nxt.d)?(sl>=cur.d&&sl<nxt.d):(sl>=cur.d||sl<nxt.d);
+    if(hit)return{b:cur.b, deg:cur.d, sunLon:sl};
+  }
+  return{b:2, deg:315, sunLon:sl};
+}
+// その日が属する「月」の干支・節入り開始日・終了日を返す
+function computeMonthFortune(y,m,d){
+  var mb=_monthBranch(y,m,d);
+  // 年柱（立春=315°で切り替わる）
+  var sY=y;
+  if(m===1)sY=y-1;
+  else if(m===2&&mb.sunLon>=270&&mb.sunLon<315)sY=y-1;
+  var yIdx=(((sY-1984)%60)+60)%60, yStem=yIdx%10;
+  // 五虎遁：年干から月干を導く
+  var startMStem=(yStem%5)*2+2;
+  var steps=(mb.b-2+12)%12;
+  var msi=(startMStem+steps)%10;
+  var kanshi=STEMS[msi]+BRANCHES[mb.b];
+
+  // 節入り日（この月の開始日）と、次の節入りの前日（終了日）を実日付で求める
+  var start=_findTermDate(y,m,d,-1);
+  var end=_findTermDate(y,m,d,1);
+  var endPrev=new Date(end.y,end.m-1,end.d);
+  endPrev.setDate(endPrev.getDate()-1);
+
+  return {
+    kanshi: kanshi,
+    mainStar: _ms(MY.ds,msi),
+    jyusei: _bs(MY.ds,mb.b),
+    aspects: _asp(msi,mb.b),
+    isTenchu: (MY.tc.indexOf(mb.b)>=0),
+    period: start.m+'/'+start.d+'〜'+(endPrev.getMonth()+1)+'/'+endPrev.getDate(),
+    startY: start.y, startM: start.m, startD: start.d,
+    endY: endPrev.getFullYear(), endM: endPrev.getMonth()+1, endD: endPrev.getDate()
+  };
+}
+// dir=-1: その日が属する節入り日を遡って探す ／ dir=+1: 次の節入り日を探す
+function _findTermDate(y,m,d,dir){
+  var cur=new Date(y,m-1,d);
+  var base=_monthBranch(y,m,d).b;
+  for(var i=0;i<40;i++){
+    var probe=new Date(cur.getTime());
+    probe.setDate(probe.getDate()+dir*(i+1));
+    var pb=_monthBranch(probe.getFullYear(),probe.getMonth()+1,probe.getDate()).b;
+    if(pb!==base){
+      // 境界を跨いだ：dir=-1なら跨いだ翌日が節入り日／dir=+1ならその日が節入り日
+      var hit=new Date(probe.getTime());
+      if(dir<0)hit.setDate(hit.getDate()+1);
+      return{y:hit.getFullYear(), m:hit.getMonth()+1, d:hit.getDate()};
+    }
+  }
+  return{y:y, m:m, d:d};
+}
+
 // ---------- 12段階旅フロー（無料版天中殺チェッカー相当） ----------
 // level: 運気の強さ（12=最強〜1=最弱）。六星占術の12運気（種子→緑生→立花→健弱→
 // 達成→乱気→再会→財成→安定→陰影→停止→減退）の強弱順を踏まえて割り当てている。
@@ -144,9 +228,32 @@ function renderLevelDots(level) {
   return dots;
 }
 
+// 旅の12段階。天中殺の2支を起点にして、今日がサイクルのどこにいるかを出す。
+//
+// 【260713・重大バグ修正】
+// 以前は呼び出し側が D.client.tenchuBranches を渡し、それが無い場合は
+// 問答無用で ['子','丑'] にフォールバックしていた。
+// tenchuBranches を持っていたのは4人だけで、残りは全員「子丑天中殺」として
+// 計算されていた（例：寅卯天中殺の㐂さんが、子の日に「日天中殺」と表示された）。
+// 命式の tc（天中殺の支インデックス）は全員が持っているのだから、そこから導出する。
+// 引数は互換のために残すが、渡されなくても MY.tc から必ず正しく求まる。
+function getTenchuBranches() {
+  if (MY && MY.tc && MY.tc.length >= 2) {
+    // tc は支のインデックス。連続する2支のうち、若い方が起点。
+    // ただし [11,0]（亥子）のように年をまたぐ並びは無い（天中殺は必ず連続する2支）。
+    var a = MY.tc[0], b = MY.tc[1];
+    var start = (((b - a) % 12) + 12) % 12 === 1 ? a : b;
+    return [BRANCH_ORDER[start], BRANCH_ORDER[(start + 1) % 12]];
+  }
+  return null;
+}
 function getTravelStage(tenchuBr, todayDshi) {
-  var startIdx = BRANCH_ORDER.indexOf(tenchuBr[0]);
+  // 命式から導出したものを常に優先する（引数は旧シグネチャ互換のため残す）
+  var br = getTenchuBranches() || tenchuBr;
+  if (!br) return null;
+  var startIdx = BRANCH_ORDER.indexOf(br[0]);
   var todayIdx = BRANCH_ORDER.indexOf(todayDshi);
+  if (startIdx < 0 || todayIdx < 0) return null;
   var stage = ((todayIdx - startIdx + 10) % 12);
   return TRAVEL_STAGES[stage];
 }
@@ -212,18 +319,18 @@ function buildMonthGuidance(monthF) {
 
 // ---------- 従星の意味 ----------
 var jyuseiDesc = {
-  '天報星': '転生の星(エネルギー3)。多芸多才。色んな方向に動ける日や。',
-  '天印星': '赤ちゃんの星(6)。素直さと愛嬌が武器。甘えてええ日。',
-  '天貴星': '品格の星(9)。プライドが力になる。堂々と立つ日や。',
-  '天恍星': '青春の星(7)。ロマンチックで感性が冴える日。',
-  '天南星': '前進の星(10)。勢いがある日。積極的に動いてええ。',
-  '天禄星': '壮年の星(11)。実力発揮。責任ある仕事に向く日。',
-  '天将星': '王様の星(12)。最大エネルギー。決断の日や。',
-  '天堂星': '老人の星(8)。経験値で勝負。穏やかに過ごす日。',
-  '天胡星': '霊感の星(4)。感性が鋭い。美や芸術に触れるとええ。',
-  '天極星': '死の星(2)。体力低め。省エネで過ごす日。',
-  '天庫星': '入墓の星(5)。片付け・整理に向く。内省の日。',
-  '天馳星': 'あの世の星(1)。体力の底。スピ感性が高まる。早く寝る日や。'
+  '天報星': '転生の星(エネルギー3)。多芸多才で、色んな方向に動ける時。一つに絞らず可能性を試す動きが合います。',
+  '天印星': '赤ちゃんの星(6)。素直さと愛嬌が武器になる時。人に甘える・助けてもらう動きが合います。',
+  '天貴星': '品格の星(9)。プライドが力になる時。堂々と構える・役割を引き受ける動きが合います。',
+  '天恍星': '青春の星(7)。ロマンと感性が冴える時。心が動くものに触れる動きが合います。',
+  '天南星': '前進の星(10)。勢いが出る時。積極的に前へ出る・思い切って動く動きが合います。',
+  '天禄星': '壮年の星(11)。実力が出せる時。責任ある仕事・地に足のついた動きが合います。',
+  '天将星': '王様の星(12)。エネルギーが最大になる時。決断する・先頭に立つ動きが合います。',
+  '天堂星': '老人の星(8)。経験値で勝負できる時。穏やかに構える・知恵を使う動きが合います。',
+  '天胡星': '霊感の星(4)。感性が鋭くなる時。美しいもの・芸術に触れる動きが合います。',
+  '天極星': '死の星(2)。体力が落ちやすい時。省エネで過ごす・無理をしない動きが合います。',
+  '天庫星': '入墓の星(5)。内側に向かう時。片付け・整理・内省する動きが合います。',
+  '天馳星': 'あの世の星(1)。体力の底になる時。早めに休む・直感を大事にする動きが合います。'
 };
 
 // ---------- 位相法の意味（今日のアドバイス生成に使う） ----------
@@ -426,8 +533,10 @@ function emojiForAspects(aspStr) {
 }
 
 // dailyAdvice は D.dailyAdvice（クライアントJSON）から参照する
+// year 省略時は「今年」を使う。以前は 6〜12月なら2026年・それ以外は2027年と
+// 決め打ちしていたため、2028年以降は全ての日運がズレる状態だった（260713修正）。
 function getFortuneByDate(month, day, year) {
-  if (!year) year = (month >= 6 && month <= 12) ? 2026 : 2027;
+  if (!year) year = getToday().year;
   var calc = computeFortune(year, month, day);
   var key = month + '/' + day;
   var manual = (D.dailyAdvice || {})[key];
@@ -461,23 +570,44 @@ function getJapaneseDate(m, d) {
   return { month: ms[m] || (m+'月'), day: (ds[d] || (d+'日')) + (ds[d]?'日':'') };
 }
 
+// 今月の運気を返す。
+// 【重要】以前は monthlyFortunes（手書きリスト）から期間文字列で探し、
+// 見つからないと monthlyFortunes[0]＝リストの一番古い月にフォールバックしていた。
+// そのため書いた期間を過ぎると「6月の運気」が延々と表示され続けていた（260713修正）。
+// 現在は節入りベースで自動計算するのが基本。手書きがあればその月だけ上書きする。
 function getCurrentMonthFortune(m, d, y) {
-  var today;
-  if (y === 2026) today = m * 100 + d;
-  else if (y === 2027) today = 1200 + m * 100 + d;
-  else return D.monthlyFortunes[0];
-  for (var i = 0; i < D.monthlyFortunes.length; i++) {
-    var f = D.monthlyFortunes[i];
-    var match = f.period.match(/(?:(\d{4})\/)?(\d+)\/(\d+)〜(?:(\d{4})\/)?(\d+)\/(\d+)/);
-    if (!match) continue;
-    var sY = match[1] ? +match[1] : 2026, sM = +match[2], sD = +match[3];
-    var eY = match[4] ? +match[4] : sY, eM = +match[5], eD = +match[6];
-    if (eY < sY) eY = sY;
-    var sKey = (sY === 2027 ? 1200 : 0) + sM * 100 + sD;
-    var eKey = (eY === 2027 ? 1200 : 0) + eM * 100 + eD;
-    if (today >= sKey && today <= eKey) return f;
+  var auto = computeMonthFortune(y, m, d);
+  var manual = _findManualMonth(m, d, y);
+  if (!manual) return auto;
+  // 手書きから重ねるのは advice（㐂さんの言葉）だけ。
+  // 期間・干支・星・天中殺は常に自動計算を正とする。
+  // 過去の手書きには「7/1〜7/31」のようにカレンダー月で書かれたもの（節入りを無視）や、
+  // 2ヶ月分をまとめた変則的な期間があり、それを信じると月柱がズレて表示される（260713）。
+  var out = {};
+  for (var k in auto) out[k] = auto[k];
+  if (manual.advice) out.advice = manual.advice;
+  return out;
+}
+
+// monthlyFortunes（手書き）から、今日が含まれる月を探す。無ければ null（＝自動計算に任せる）。
+// 年をまたぐ期間（"12/7〜2027/1/5"）にも対応。年の決め打ちはしない。
+function _findManualMonth(m, d, y) {
+  var list = D.monthlyFortunes || [];
+  var todayTime = new Date(y, m - 1, d).getTime();
+  for (var i = 0; i < list.length; i++) {
+    var f = list[i];
+    if (!f || !f.period) continue;
+    var mt = f.period.match(/(?:(\d{4})\/)?(\d+)\/(\d+)〜(?:(\d{4})\/)?(\d+)\/(\d+)/);
+    if (!mt) continue;
+    var sY = mt[1] ? +mt[1] : y, sM = +mt[2], sD = +mt[3];
+    var eY = mt[4] ? +mt[4] : sY, eM = +mt[5], eD = +mt[6];
+    // 年の明記がない期間で 終わり<始まり なら年をまたいでいる（例 12/7〜1/5）
+    if (!mt[4] && (eM < sM)) eY = sY + 1;
+    var s = new Date(sY, sM - 1, sD).getTime();
+    var e = new Date(eY, eM - 1, eD).getTime();
+    if (todayTime >= s && todayTime <= e) return f;
   }
-  return D.monthlyFortunes[0];
+  return null;
 }
 
 function isInTenchuPeriod(m, d, y) {
@@ -548,7 +678,7 @@ function buildMonthGridHTML(year, month, todayM, todayD, todayY) {
       if (shortAspect) html += '<span class="cal-aspect">' + shortAspect + '</span>';
       // 天中殺サイクル（12段階）の何日目かを小さく併記
       var dDshi = f.kanshi.charAt(1);
-      var dStg = getTravelStage(D.client.tenchuBranches || ['子','丑'], dDshi);
+      var dStg = getTravelStage(null, dDshi);
       var dStageNum = TRAVEL_STAGES.indexOf(dStg) + 1;
       html += '<span class="cal-stage">' + dStageNum + '段</span>';
     }
@@ -572,7 +702,7 @@ function openDetail(year, month, day) {
   var f = getFortuneByDate(month, day, year);
   var jdesc = jyuseiDesc[f.jyusei] || '';
   var dDshi = f.kanshi.charAt(1);
-  var dStg = getTravelStage(D.client.tenchuBranches || ['子','丑'], dDshi);
+  var dStg = getTravelStage(null, dDshi);
   var dStageNum = TRAVEL_STAGES.indexOf(dStg) + 1;
   var dIsTenchuDay = (dStageNum === 11 || dStageNum === 12);
 
@@ -597,14 +727,56 @@ function closeDetail() {
   document.getElementById('detailModal').classList.remove('active');
 }
 
-// ---------- 配色（design）をCSS変数に適用 ----------
+// ---------- 配色（五行の調律）をCSS変数に適用 ----------
+// 【260713・全面ダーク化】
+// 配色は飾りではなく、その人の命式の五行エネルギーを調律する装置。
+// 以前は design.colors（16色のフルパレット）しか見ておらず、それを持つ3人以外は
+// 全員デフォルトの緑になっていた（＝調律が死んでいた）。
+// 今は「五行のアクセント1色」だけを受け取り、そこから夜空に馴染む階調を自動生成する。
+// これで accentColor しか持たない人も、命式どおりの色が戻る。
+function _hex2rgb(h) {
+  h = String(h).replace('#', '');
+  if (h.length === 3) h = h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+  return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)];
+}
+function _rgb2hex(r,g,b) {
+  function p(v){ v = Math.max(0, Math.min(255, Math.round(v))); return ('0'+v.toString(16)).slice(-2); }
+  return '#' + p(r) + p(g) + p(b);
+}
+// 夜空の上で光として成立するよう、彩度を保ったまま明るく持ち上げる
+function _lift(hex, amount) {
+  var c = _hex2rgb(hex);
+  return _rgb2hex(
+    c[0] + (255 - c[0]) * amount,
+    c[1] + (255 - c[1]) * amount,
+    c[2] + (255 - c[2]) * amount
+  );
+}
+function _mixNight(hex, ratio) {
+  var c = _hex2rgb(hex), n = _hex2rgb('#131A28');
+  return _rgb2hex(
+    n[0] + (c[0] - n[0]) * ratio,
+    n[1] + (c[1] - n[1]) * ratio,
+    n[2] + (c[2] - n[2]) * ratio
+  );
+}
 function applyDesignColors(design) {
-  if (!design || !design.colors) return;
+  if (!design) return;
   var root = document.documentElement.style;
-  var c = design.colors;
-  for (var key in c) {
-    if (c.hasOwnProperty(key)) root.setProperty('--color-' + key, c[key]);
-  }
+  // 五行の色。design.accentColor（旧HTMLから復元）を最優先で使う。
+  // design.colors.accent は旧・明るい背景用パレットの名残なので、色味だけ拝借する。
+  var accent = design.accentColor || (design.colors && design.colors.accent);
+  if (!accent) return;
+  // 夜空の上では、元の色そのままだと沈むので光として持ち上げる
+  var lit = _lift(accent, 0.42);
+  root.setProperty('--color-accent', lit);
+  root.setProperty('--color-accent-light', _lift(accent, 0.60));
+  root.setProperty('--color-accent-soft', _lift(accent, 0.22));
+  // 面と罫線にも、その人の五行をわずかに溶かす（＝ページ全体が微かにその色を帯びる）
+  root.setProperty('--color-warm-white', _mixNight(accent, 0.10));
+  root.setProperty('--color-cream', _mixNight(accent, 0.06));
+  root.setProperty('--color-beige', _mixNight(accent, 0.24));
+  root.setProperty('--color-sage', _lift(accent, 0.30));
 }
 
 // ---------- メイン render ----------
@@ -626,13 +798,14 @@ function render() {
   var app = document.getElementById('app');
   var html = '';
 
-  // ①日付表示（単独カード。時事セクションの入り口）
+  // ①日付表示＋月齢ストリップ
   html += '<div class="card">';
   html += '<div class="text-center">';
   html += '<p class="text-xs" style="color:var(--color-brown)">' + (D.design.eraLabel || '') + '</p>';
   html += '<p class="date-display"><span class="date-month">' + jpDate.month + '</span><span style="margin:0 0.5rem">' + jpDate.day + '</span></p>';
   html += '<p class="text-xs" style="color:var(--color-accent);margin-top:0.25rem">' + (todayF ? todayF.kanshi : '') + '</p>';
   html += '</div>';
+  html += buildMoonStripHTML(y, m, d);
   html += '</div>';
 
   // ②本日の運気（簡易版：主星・従星・位相法の一言・カードめくりのみ。詳細解説はカレンダーの後ろに回す）
@@ -640,7 +813,7 @@ function render() {
   if (todayF) {
     var jdesc = jyuseiDesc[todayF.jyusei] || '';
     var todayDshi = todayF.kanshi.charAt(1);
-    stg = getTravelStage(D.client.tenchuBranches || ['子','丑'], todayDshi);
+    stg = getTravelStage(null, todayDshi);
     stageNum = TRAVEL_STAGES.indexOf(stg) + 1;
     isTenchuDay = (stageNum === 11 || stageNum === 12);
     var imgKey = D.client.travelImgKey || '';
@@ -740,10 +913,30 @@ function render() {
   html += '<div class="card">';
   html += '<div class="card-header" style="border:none;padding-bottom:0"><span style="color:var(--color-accent)">◆</span><span>' + D.client.name + 'の宿命</span></div>';
   var dp = D.client.dayPillar;
+  // 生年月日と陰占（年柱・月柱・日柱）を必ず出す。
+  // これが無いために「命式が合っているか」を毎回ファイルを掘って確かめる羽目になっていた（260713）。
+  if (D.client.birth) {
+    html += '<div class="meishiki-item"><span class="meishiki-label">生年月日</span><span class="meishiki-value">' + formatBirth(D.client.birth) + '</span></div>';
+  }
+  var my = D.client.my;
+  if (my) {
+    var pillars = STEMS[my.ys] + BRANCHES[my.yb] + '　' + STEMS[my.ms] + BRANCHES[my.mb] + '　' + STEMS[my.ds] + BRANCHES[my.db];
+    html += '<div class="meishiki-item"><span class="meishiki-label">陰占（年・月・日）</span><span class="meishiki-value" style="letter-spacing:0.08em">' + pillars + '</span></div>';
+  }
   html += '<div class="meishiki-item"><span class="meishiki-label">日柱</span><span class="meishiki-value">' + (dp ? dp.kanshi : D.client.dayStem) + '(' + D.client.dayStemReading + ') = ' + D.client.element + '性</span></div>';
   html += '<div class="meishiki-item"><span class="meishiki-label">天中殺</span><span class="meishiki-value">' + D.client.tenchu + '</span></div>';
+  // 補っている五行（配色の根拠）も明示する
+  if (D.design && D.design.needElement) {
+    html += '<div class="meishiki-item"><span class="meishiki-label">補う五行</span><span class="meishiki-value" style="color:var(--color-accent)">' + D.design.needElement + '性</span></div>';
+  }
   if (D.client.specialStructure) html += '<div class="meishiki-item"><span class="meishiki-label">特殊構造</span><span class="meishiki-value" style="font-size:0.8rem">' + D.client.specialStructure + '</span></div>';
-  if (D.client.stars) html += '<div class="meishiki-item"><span class="meishiki-label">主星配置</span><span class="meishiki-value" style="font-size:0.68rem;text-align:right;line-height:1.6">' + D.client.stars + '</span></div>';
+  // 人体星図。starChart（9マス分）があれば曼荼羅で描く。
+  // 無ければ従来どおり stars のテキスト1行にフォールバックする。
+  if (D.starChart) {
+    html += buildStarChartHTML(D.starChart);
+  } else if (D.client.stars) {
+    html += '<div class="meishiki-item"><span class="meishiki-label">主星配置</span><span class="meishiki-value" style="font-size:0.68rem;text-align:right;line-height:1.6">' + D.client.stars + '</span></div>';
+  }
 
   // 日柱の詳細（本質鑑定・中級相当）
   if (dp) {
@@ -807,13 +1000,16 @@ function render() {
     html += '</div>';
   }
 
-  // 5人の占術家視点（上級コンテンツ・別セクション。CLAUDE.md ルール6準拠）
-  if (D.fiveOccultists && D.fiveOccultists.length > 0) {
+  // 5つの視点（上級コンテンツ・別セクション）
+  // 【重要】「5人の算命学者が読むと」等、架空の人物を立てる書き方は禁止（260713）。
+  // 占術家名を出さないのはもちろん、人数を語ること自体をやめ「5つの視点」で通す。
+  var fiveV = D.fiveOccultists || D.fiveViewsDeep;
+  if (fiveV && fiveV.length > 0) {
     html += '<div class="card">';
     html += '<div class="card-header"><span style="color:var(--color-gold)">◆</span><span>- in depth - ５つの視点</span></div>';
-    html += '<p class="text-xs mb-3" style="color:var(--color-brown);line-height:1.7">同じ命式を、5人それぞれの視点で読んだもの。</p>';
-    for (var i = 0; i < D.fiveOccultists.length; i++) {
-      var o = D.fiveOccultists[i];
+    html += '<p class="text-xs mb-3" style="color:var(--color-brown);line-height:1.7">同じ命式を、5つの視点から読んだもの。</p>';
+    for (var i = 0; i < fiveV.length; i++) {
+      var o = fiveV[i];
       html += '<div class="occultist-block">';
       html += '<p class="occultist-name">' + o.name + '</p>';
       html += '<p class="occultist-view">' + o.view + '</p>';
@@ -823,15 +1019,211 @@ function render() {
     html += '</div>';
   }
 
-  // 願い
-  html += '<div class="frame">';
-  html += '<p class="text-xs text-center mb-3" style="color:var(--color-accent);letter-spacing:0.2em">' + D.client.name + 'の夢</p>';
-  html += '<p class="text-center text-sm font-medium" style="color:var(--color-brown-dark)">' + D.goal.main + '</p>';
-  html += '<div class="divider"></div>';
-  html += '<p class="text-xs text-center" style="color:var(--color-brown);line-height:1.8">' + D.goal.sub.replace(/\\n/g, '<br>').replace(/\n/g, '<br>') + '</p>';
-  html += '</div>';
+  // 願い（goal が空の人には枠ごと出さない）
+  if (D.goal && (D.goal.main || D.goal.sub)) {
+    html += '<div class="frame">';
+    html += '<p class="text-xs text-center mb-3" style="color:var(--color-accent);letter-spacing:0.2em">' + D.client.name + 'の夢</p>';
+    html += '<p class="text-center text-sm font-medium" style="color:var(--color-brown-dark)">' + (D.goal.main || '') + '</p>';
+    if (D.goal.sub) {
+      html += '<div class="divider"></div>';
+      html += '<p class="text-xs text-center" style="color:var(--color-brown);line-height:1.8">' + D.goal.sub.replace(/\\n/g, '<br>').replace(/\n/g, '<br>') + '</p>';
+    }
+    html += '</div>';
+  }
+
+  // 閲覧期限のお知らせ（残りわずかになってから静かに出す）
+  html += buildExpiryHTML();
+
+  // 一番下の扉。開くとお品書きへ。
+  html += buildDoorHTML();
 
   app.innerHTML = html;
+}
+
+// "1978-04-21" → "1978年4月21日（48歳）"
+function formatBirth(b) {
+  var p = String(b).split('-');
+  if (p.length !== 3) return String(b);
+  var y = +p[0], m = +p[1], d = +p[2];
+  var t = getToday();
+  var age = t.year - y - ((t.month < m || (t.month === m && t.day < d)) ? 1 : 0);
+  return y + '年' + m + '月' + d + '日（' + age + '歳）';
+}
+
+// ---------- 月齢（天文計算） ----------
+// 節入りと同じく計算で出すので、何年先でも正しく出る。
+// 基準：2000/1/6 の新月（JD 2451550.26）／朔望月 29.530588853日
+var SYNODIC = 29.530588853;
+function moonAge(y, m, d) {
+  var j = _jd(y, m, d, 3); // JST正午で評価
+  var a = (j - 2451550.26) % SYNODIC;
+  return a < 0 ? a + SYNODIC : a;
+}
+function moonPhaseName(a) {
+  if (a < 1.0 || a >= 28.5) return '新月';
+  if (a < 6.4) return '三日月';
+  if (a < 8.4) return '上弦';
+  if (a < 13.8) return '十三夜';
+  if (a < 15.8) return '満月';
+  if (a < 21.5) return '十八夜';
+  if (a < 23.5) return '下弦';
+  return '有明';
+}
+// 月の満ち欠けをSVGで正確に描く。
+// 月相は「円」と「楕円（ターミネーター＝明暗境界線）」の合成で決まる。
+// 境界線の横幅は cos(位相角) に比例し、半月でちょうど0（直線）になる。
+// CSSの影ずらしでは半月付近が破綻するので、パスで正しく描く。
+function moonDiscHTML(a, size) {
+  var s = size || 26;
+  var r = s / 2;
+  var phase = 2 * Math.PI * a / SYNODIC;   // 0=新月 π=満月
+  var k = Math.cos(phase);                  // +1=新月 -1=満月
+  var rx = Math.abs(k) * r;                 // 境界楕円の横半径
+  // 右が光る（満ちていく）か左が光る（欠けていく）か
+  var waxing = (a < SYNODIC / 2);
+  // 光っている側の半円 + 境界の楕円弧 で「光の形」を作る
+  var sweepHalf = waxing ? 1 : 0;           // 半円の向き
+  var sweepTerm = (k > 0) ? (waxing ? 0 : 1) : (waxing ? 1 : 0); // 境界の膨らむ向き
+  var d = 'M ' + r + ' 0 ' +
+          'A ' + r + ' ' + r + ' 0 0 ' + sweepHalf + ' ' + r + ' ' + s + ' ' +
+          'A ' + rx.toFixed(2) + ' ' + r + ' 0 0 ' + sweepTerm + ' ' + r + ' 0 Z';
+  var html = '<span class="moon-disc" style="width:' + s + 'px;height:' + s + 'px">';
+  html += '<svg viewBox="0 0 ' + s + ' ' + s + '" width="' + s + '" height="' + s + '">';
+  html += '<circle cx="' + r + '" cy="' + r + '" r="' + r + '" class="moon-dark"/>';
+  html += '<path d="' + d + '" class="moon-lit"/>';
+  html += '</svg></span>';
+  return html;
+}
+
+// ---------- 月齢ストリップ（今日を中心に前後3日） ----------
+// 横一列に日が並び、各日に実際の月相を描く。今日だけ枠で強調する。
+// 各日をタップするとその日の運気詳細が開く（既存の openDetail を使う）。
+var WDAY = ['日','月','火','水','木','金','土'];
+function buildMoonStripHTML(y, m, d) {
+  var html = '<div class="moon-strip">';
+  for (var i = -3; i <= 3; i++) {
+    var dt = new Date(y, m - 1, d);
+    dt.setDate(dt.getDate() + i);
+    var yy = dt.getFullYear(), mm = dt.getMonth() + 1, dd = dt.getDate();
+    var a = moonAge(yy, mm, dd);
+    var isToday = (i === 0);
+    // その日が日天中殺かどうかも点で示す
+    var f = computeFortune(yy, mm, dd);
+    var cls = 'ms-day' + (isToday ? ' ms-today' : '');
+    html += '<div class="' + cls + '" onclick="openDetail(' + yy + ',' + mm + ',' + dd + ')">';
+    html += '<span class="ms-w">' + WDAY[dt.getDay()] + '</span>';
+    html += moonDiscHTML(a, isToday ? 30 : 24);
+    html += '<span class="ms-d">' + dd + '</span>';
+    html += '<span class="ms-dot' + (f.isTenchu ? ' ms-dot-on' : '') + '"></span>';
+    html += '</div>';
+  }
+  html += '</div>';
+  // 今日の月相を一行で
+  var ta = moonAge(y, m, d);
+  html += '<p class="moon-today">' + moonPhaseName(ta) + '　月齢 ' + ta.toFixed(1) + '</p>';
+  return html;
+}
+
+// ---------- 人体星図（9マスの曼荼羅） ----------
+// テキスト1行では読めないので、算命学の標準配置どおり3×3で描く。
+//   伴星   目上   初年運
+//   配偶者 中心   社会
+//   晩年運 目下   中年運
+// 中央の「中心」がその人の核。四方の主星が社会・家庭・目上・目下との関わり方を示し、
+// 角の3つ（初年・中年・晩年）は十二大従星＝人生3期のエネルギー量を示す。
+var STAR_CHART_CELLS = [
+  { key:'banse',   label:'伴星',   sub:'ご先祖' },
+  { key:'meue',    label:'目上',   sub:'北' },
+  { key:'shonen',  label:'初年運', sub:'〜30代' },
+  { key:'haigu',   label:'配偶者', sub:'西' },
+  { key:'center',  label:'中心',   sub:'core' },
+  { key:'shakai',  label:'社会',   sub:'東' },
+  { key:'bannen',  label:'晩年運', sub:'60代〜' },
+  { key:'meshita', label:'目下',   sub:'南' },
+  { key:'chunen',  label:'中年運', sub:'30〜60代' }
+];
+function buildStarChartHTML(sc) {
+  var html = '<div class="starchart-wrap">';
+  html += '<p class="starchart-title">人体星図</p>';
+  html += '<div class="starchart">';
+  for (var i = 0; i < STAR_CHART_CELLS.length; i++) {
+    var c = STAR_CHART_CELLS[i];
+    var star = sc[c.key];
+    if (!star) { html += '<div class="sc-cell sc-empty"></div>'; continue; }
+    var isCenter = (c.key === 'center');
+    var isJyusei = !!jyuseiDesc[star];   // 十二大従星なら別色
+    var cls = 'sc-cell' + (isCenter ? ' sc-center' : '') + (isJyusei ? ' sc-jyusei' : '');
+    html += '<div class="' + cls + '" onclick="openStarDetail(\'' + star + '\',\'' + c.label + '\')">';
+    html += '<span class="sc-pos">' + c.label + '</span>';
+    html += '<span class="sc-star">' + star.replace('星', '') + '</span>';
+    html += '<span class="sc-sub">' + c.sub + '</span>';
+    html += '</div>';
+  }
+  html += '</div>';
+  html += '<p class="starchart-note">マスを押すと その星の意味が出ます</p>';
+  html += '</div>';
+  return html;
+}
+// 星のマスを押した時：主星なら mainStarDesc、従星なら jyuseiDesc から意味を出す
+function openStarDetail(star, pos) {
+  var desc = mainStarDesc[star] || jyuseiDesc[star] || '';
+  var kind = jyuseiDesc[star] ? '十二大従星' : '十大主星';
+  var el = document.getElementById('detailContent');
+  if (!el) return;
+  var html = '<p class="detail-date-stars">' + pos + '<span class="detail-day-stars"> ' + star + '</span></p>';
+  html += '<p class="text-xs" style="color:var(--color-accent);letter-spacing:0.1em;margin-bottom:0.5rem">' + kind + '</p>';
+  html += '<p class="text-sm" style="line-height:1.9;color:var(--color-brown-dark)">' + (desc || 'この星の解説はまだ入っていません。') + '</p>';
+  html += '<p class="text-xs text-center mt-3" style="color:var(--color-brown);cursor:pointer" onclick="closeDetail()">閉じる</p>';
+  el.innerHTML = html;
+  document.getElementById('detailModal').classList.add('active');
+}
+
+// ---------- 閲覧期限 ----------
+// D.expiresAt（"YYYY-MM-DD"）が無ければ何も出さない。
+// 押し売りにしないため、期限がまだ遠いうちは黙っている。残り30日を切ってから静かに出す。
+function buildExpiryHTML() {
+  if (!D.expiresAt) return '';
+  var p = String(D.expiresAt).split('-');
+  if (p.length !== 3) return '';
+  var ey = +p[0], em = +p[1], ed = +p[2];
+  var left = getDaysUntil(ey, em, ed);
+  var t = getToday();
+  var isOver = new Date(t.year, t.month - 1, t.day).getTime() > new Date(ey, em - 1, ed).getTime();
+
+  if (isOver) {
+    return '<div class="expiry-box expiry-over">' +
+      '<p class="expiry-title">閲覧期間を過ぎました</p>' +
+      '<p class="expiry-body">このページはこのまま残していますが、日々の運気の更新は止まっていません。' +
+      'この先も使いたい場合は、下の扉から声をかけてください。</p>' +
+      '</div>';
+  }
+  if (left > 30) return ''; // まだ先。何も言わない
+  return '<div class="expiry-box">' +
+    '<p class="expiry-title">このページが開いている残り</p>' +
+    '<p class="expiry-days">' + left + '<span>日</span></p>' +
+    '<p class="expiry-body">' + em + '月' + ed + '日までを目安にしています。' +
+    'まだ見ていたい・この先も使いたい時は、下の扉から。</p>' +
+    '</div>';
+}
+
+// ---------- 一番下の扉 ----------
+// ページの最下部にひっそり置く。押し売りにしない。たどり着いた人だけが開ける場所。
+// 開くと「お品書き」（鑑定メニュー）へ飛ぶ。
+function buildDoorHTML() {
+  var href = (D.doorHref || 'menu.html');
+  var label = (D.doorLabel || 'お品書き');
+  var note = (D.doorNote || 'この先に、もう少し深く視るための品書きがあります');
+  return '' +
+    '<a class="door" href="' + href + '">' +
+    '  <div class="door-frame">' +
+    '    <div class="door-panel">' +
+    '      <div class="door-arch"></div>' +
+    '      <div class="door-knob"></div>' +
+    '    </div>' +
+    '  </div>' +
+    '  <p class="door-label">' + label + '</p>' +
+    '  <p class="door-note">' + note + '</p>' +
+    '</a>';
 }
 
 // ---------- 初期化 ----------

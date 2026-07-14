@@ -29,8 +29,9 @@
       "午",
       "未"
     ],
-    "travelImgKey": "",
-    "dayPillar": null
+    "travelImgKey": "gohitsuji",
+    "dayPillar": null,
+    "birth": "1970-07-12"
   },
   "goal": {
     "main": "愛犬キャラクターで 世界に届ける",
@@ -184,12 +185,14 @@
   },
   "projects": [],
   "design": {
-    "accentColor": "#3A6B47",
+    "accentColor": "#4E9A6B",
     "headerSub": "― 癸巳・禄存星の暦 ―",
     "headerTitle": "ayumiさんの暦",
     "headerTagline": "諦めない力が 根っこにある",
     "footerText": "― 決めた瞬間に エネルギーが動く ―",
-    "eraLabel": "令和八年"
+    "eraLabel": "令和八年",
+    "needElement": "木",
+    "needElementNote": "木性18が最少・補完=植物/木製品/青緑"
   },
   "dailyAdvice": {
     "7/1": {
@@ -485,5 +488,20 @@
       "m": 9,
       "label": "9月"
     }
-  ]
+  ],
+  "expiresAt": "2026-09-12",
+  "doorHref": "/menu",
+  "doorLabel": "お品書き",
+  "doorNote": "この先に もう少し深く視るための品書きがあります",
+  "starChart": {
+    "banse": "鳳閣星",
+    "meue": "玉堂星",
+    "shonen": "天堂星",
+    "haigu": "牽牛星",
+    "center": "禄存星",
+    "shakai": "龍高星",
+    "bannen": "天報星",
+    "meshita": "貫索星",
+    "chunen": "天庫星"
+  }
 }
