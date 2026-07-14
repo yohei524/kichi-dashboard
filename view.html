@@ -41,7 +41,10 @@
     app.innerHTML = '<p class="text-center text-sm" style="color:var(--color-brown);padding:2rem 0">クライアント指定がありません（?client=名前 が必要です）</p>';
     return;
   }
-  var isPreview = (client === 'demo') || (params.get('preview') === '1');
+  // 後半をロック（見出しだけ見せて本文ぼかし＋申し込み導線）するクライアント。
+  // rewriteのクエリはブラウザに届かないため、ここに名前を足すのが唯一の方法。
+  var PREVIEW_LOCKED = { 'demo': 1, 'asuka': 1 };
+  var isPreview = !!PREVIEW_LOCKED[client] || (params.get('preview') === '1');
 
   fetch('clients/' + client + '.json')
     .then(function (res) {
@@ -53,7 +56,7 @@
       initDashboard(data);
       if (isPreview) {
         applyPreviewLock();
-        insertPaletteNote(data);
+        if (client === 'demo') insertPaletteNote(data);
       }
     })
     .catch(function (err) {
