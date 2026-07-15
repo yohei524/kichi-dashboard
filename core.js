@@ -559,7 +559,13 @@ function getFortuneByDate(month, day, year) {
 
 function getToday() {
   var n = new Date();
-  return { month: n.getMonth()+1, day: n.getDate(), year: n.getFullYear() };
+  // UTC時刻を日本時間(JST = UTC+9)に調整
+  var jstTime = new Date(n.getTime() + (9 * 60 * 60 * 1000));
+  return {
+    month: jstTime.getUTCMonth() + 1,
+    day: jstTime.getUTCDate(),
+    year: jstTime.getUTCFullYear()
+  };
 }
 
 function getJapaneseDate(m, d) {
