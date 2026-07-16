@@ -958,16 +958,24 @@ function render() {
     html += '<div class="message-box" style="margin-top:1rem"><p class="text-sm" style="padding-left:1rem;line-height:1.8">' + D.client.elementNote + '</p></div>';
   }
 
-  if (D.client.starsNote) {
-    html += '<p class="text-xs mt-3" style="color:var(--color-brown);line-height:1.7">' + D.client.starsNote + '</p>';
-  }
-  if (D.client.chukuseiNote) {
-    html += '<div class="message-box" style="margin-top:0.75rem;background:rgba(58,107,71,0.07);border-color:var(--color-accent-soft)">';
-    html += '<p class="text-xs" style="padding-left:1rem;line-height:1.75;color:var(--color-brown-dark)">' + D.client.chukuseiNote + '</p>';
-    html += '</div>';
-  }
-  if (D.client.guardianNote) {
-    html += '<p class="text-xs mt-3" style="color:var(--color-accent);line-height:1.7;font-style:italic;text-align:center">' + D.client.guardianNote + '</p>';
+  // ─────────────────────────────────────────────
+  // koyomiOnly=true のクライアントは、ここから下の「静的な長文解説」を
+  // 暦（1ページ目）に出さない。解説は鑑定書（2ページ目）に集約する方針（260716）。
+  // 命式の要点（生年月日・陰占・日柱名・天中殺・星図）は上で既に出しているので残る。
+  // 全クライアントを2ページ制へ移行し終えたら、各jsonに koyomiOnly:true を立てる。
+  // ─────────────────────────────────────────────
+  if (!D.koyomiOnly) {
+    if (D.client.starsNote) {
+      html += '<p class="text-xs mt-3" style="color:var(--color-brown);line-height:1.7">' + D.client.starsNote + '</p>';
+    }
+    if (D.client.chukuseiNote) {
+      html += '<div class="message-box" style="margin-top:0.75rem;background:rgba(58,107,71,0.07);border-color:var(--color-accent-soft)">';
+      html += '<p class="text-xs" style="padding-left:1rem;line-height:1.75;color:var(--color-brown-dark)">' + D.client.chukuseiNote + '</p>';
+      html += '</div>';
+    }
+    if (D.client.guardianNote) {
+      html += '<p class="text-xs mt-3" style="color:var(--color-accent);line-height:1.7;font-style:italic;text-align:center">' + D.client.guardianNote + '</p>';
+    }
   }
 
   html += '<div class="divider"></div>';
@@ -978,51 +986,53 @@ function render() {
   html += '</div>';
   html += '</div>';
 
-  // 陽転・陰転
-  html += '<div class="card">';
-  html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>' + D.client.name + 'の 陽・陰</span></div>';
-  html += '<div class="patterns">';
-  html += '<div><p class="pattern-title win">大切にすること</p><ul class="pattern-list">';
-  for (var i = 0; i < D.winPatterns.length; i++) html += '<li><span class="dot-win">◇</span><span>' + D.winPatterns[i] + '</span></li>';
-  html += '</ul></div>';
-  html += '<div><p class="pattern-title lose">気をつけること</p><ul class="pattern-list">';
-  for (var i = 0; i < D.losePatterns.length; i++) html += '<li><span class="dot-lose">×</span><span>' + D.losePatterns[i] + '</span></li>';
-  html += '</ul></div>';
-  html += '</div>';
-  html += '</div>';
-
-  // 5視点（ベーシック・占術家名なし）
-  if (D.fiveViews && D.fiveViews.length > 0) {
+  if (!D.koyomiOnly) {
+    // 陽転・陰転
     html += '<div class="card">';
-    html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>五つの視点 ─ ぐるりと見る</span></div>';
-    html += '<p class="text-xs mb-3" style="color:var(--color-brown);line-height:1.7">命式を 違う角度から見たメモや。</p>';
-    for (var i = 0; i < D.fiveViews.length; i++) {
-      var v = D.fiveViews[i];
-      html += '<div style="margin-bottom:0.85rem;padding:0.7rem 0.9rem;background:var(--color-cream);border-left:3px solid var(--color-accent-light);border-radius:0 4px 4px 0">';
-      html += '<p class="text-xs" style="color:var(--color-accent);font-weight:500;letter-spacing:0.15em;margin-bottom:0.25rem">' + (i+1) + '. ' + v.key + '</p>';
-      html += '<p class="text-xs" style="color:var(--color-brown-dark);line-height:1.75">' + v.body + '</p>';
+    html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>' + D.client.name + 'の 陽・陰</span></div>';
+    html += '<div class="patterns">';
+    html += '<div><p class="pattern-title win">大切にすること</p><ul class="pattern-list">';
+    for (var i = 0; i < D.winPatterns.length; i++) html += '<li><span class="dot-win">◇</span><span>' + D.winPatterns[i] + '</span></li>';
+    html += '</ul></div>';
+    html += '<div><p class="pattern-title lose">気をつけること</p><ul class="pattern-list">';
+    for (var i = 0; i < D.losePatterns.length; i++) html += '<li><span class="dot-lose">×</span><span>' + D.losePatterns[i] + '</span></li>';
+    html += '</ul></div>';
+    html += '</div>';
+    html += '</div>';
+
+    // 5視点（ベーシック・占術家名なし）
+    if (D.fiveViews && D.fiveViews.length > 0) {
+      html += '<div class="card">';
+      html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>五つの視点 ─ ぐるりと見る</span></div>';
+      html += '<p class="text-xs mb-3" style="color:var(--color-brown);line-height:1.7">命式を 違う角度から見たメモや。</p>';
+      for (var i = 0; i < D.fiveViews.length; i++) {
+        var v = D.fiveViews[i];
+        html += '<div style="margin-bottom:0.85rem;padding:0.7rem 0.9rem;background:var(--color-cream);border-left:3px solid var(--color-accent-light);border-radius:0 4px 4px 0">';
+        html += '<p class="text-xs" style="color:var(--color-accent);font-weight:500;letter-spacing:0.15em;margin-bottom:0.25rem">' + (i+1) + '. ' + v.key + '</p>';
+        html += '<p class="text-xs" style="color:var(--color-brown-dark);line-height:1.75">' + v.body + '</p>';
+        html += '</div>';
+      }
       html += '</div>';
     }
-    html += '</div>';
-  }
 
-  // 5つの視点（上級コンテンツ・別セクション）
-  // 【重要】「5人の算命学者が読むと」等、架空の人物を立てる書き方は禁止（260713）。
-  // 占術家名を出さないのはもちろん、人数を語ること自体をやめ「5つの視点」で通す。
-  var fiveV = D.fiveOccultists || D.fiveViewsDeep;
-  if (fiveV && fiveV.length > 0) {
-    html += '<div class="card">';
-    html += '<div class="card-header"><span style="color:var(--color-gold)">◆</span><span>- in depth - ５つの視点</span></div>';
-    html += '<p class="text-xs mb-3" style="color:var(--color-brown);line-height:1.7">同じ命式を、5つの視点から読んだもの。</p>';
-    for (var i = 0; i < fiveV.length; i++) {
-      var o = fiveV[i];
-      html += '<div class="occultist-block">';
-      html += '<p class="occultist-name">' + o.name + '</p>';
-      html += '<p class="occultist-view">' + o.view + '</p>';
-      html += '<p class="occultist-body">' + o.body + '</p>';
+    // 5つの視点（上級コンテンツ・別セクション）
+    // 【重要】「5人の算命学者が読むと」等、架空の人物を立てる書き方は禁止（260713）。
+    // 占術家名を出さないのはもちろん、人数を語ること自体をやめ「5つの視点」で通す。
+    var fiveV = D.fiveOccultists || D.fiveViewsDeep;
+    if (fiveV && fiveV.length > 0) {
+      html += '<div class="card">';
+      html += '<div class="card-header"><span style="color:var(--color-gold)">◆</span><span>- in depth - ５つの視点</span></div>';
+      html += '<p class="text-xs mb-3" style="color:var(--color-brown);line-height:1.7">同じ命式を、5つの視点から読んだもの。</p>';
+      for (var i = 0; i < fiveV.length; i++) {
+        var o = fiveV[i];
+        html += '<div class="occultist-block">';
+        html += '<p class="occultist-name">' + o.name + '</p>';
+        html += '<p class="occultist-view">' + o.view + '</p>';
+        html += '<p class="occultist-body">' + o.body + '</p>';
+        html += '</div>';
+      }
       html += '</div>';
     }
-    html += '</div>';
   }
 
   // 願い（goal が空の人には枠ごと出さない）
@@ -1035,6 +1045,14 @@ function render() {
       html += '<p class="text-xs text-center" style="color:var(--color-brown);line-height:1.8">' + D.goal.sub.replace(/\\n/g, '<br>').replace(/\n/g, '<br>') + '</p>';
     }
     html += '</div>';
+  }
+
+  // 詳しい鑑定書（2ページ目）への導線。kanteishoHref があるクライアントだけ出す。
+  if (D.kanteishoHref) {
+    html += '<a class="kanteisho-link" href="' + D.kanteishoHref + '">';
+    html += '<span class="kanteisho-arrow">📖</span> ' + D.client.name + 'さんの鑑定書をひらく';
+    html += '<small>命式・本質・この先の生き方まで、じっくり読む用</small>';
+    html += '</a>';
   }
 
   // 閲覧期限のお知らせ（残りわずかになってから静かに出す）

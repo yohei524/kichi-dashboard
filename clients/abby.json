@@ -121,6 +121,8 @@
     "sub": ""
   },
   "dailyAdvice": {},
+  "koyomiOnly": true,
+  "kanteishoHref": "/abby-kanteisho",
   "expiresAt": "2026-10-16",
   "doorHref": "/menu",
   "doorLabel": "お品書き",

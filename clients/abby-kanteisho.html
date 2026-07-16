@@ -67,10 +67,11 @@ header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:
   background:var(--sink);border:1px solid var(--line);border-radius:12px;
   padding:.7rem .4rem;text-align:center;
 }
-.pillar .lbl{font-size:.64rem;color:var(--muted);letter-spacing:.1em;margin-bottom:.5rem;}
-.pillar .kan{font-size:1.9rem;font-weight:600;color:var(--text);line-height:1.2;}
-.pillar .shi{font-size:1.9rem;font-weight:600;color:var(--accent);line-height:1.2;margin-top:.1rem;}
-.pillar .zou{font-size:.66rem;color:var(--muted2);margin-top:.5rem;letter-spacing:.08em;}
+.pillar .lbl{font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.55rem;}
+.pillar .yomi{font-size:.58rem;color:var(--muted);letter-spacing:.04em;line-height:1.3;}
+.pillar .kan{font-size:1.85rem;font-weight:600;color:var(--text);line-height:1.15;}
+.pillar .shi{font-size:1.85rem;font-weight:600;color:var(--accent);line-height:1.15;margin-top:.2rem;}
+.pillar .zou{font-size:.62rem;color:var(--muted2);margin-top:.55rem;letter-spacing:.04em;}
 .meishiki-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;}
 
 /* 人体星図 */
@@ -214,11 +215,26 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
   <div class="card">
     <p class="soft" style="margin-bottom:.6rem;">陰占 ― 生まれ持った気の柱</p>
     <div class="meishiki">
-      <div class="pillar"><div class="lbl">年柱（社会・先祖）</div><div class="kan">丙</div><div class="shi">午</div><div class="zou">丁・己</div></div>
-      <div class="pillar"><div class="lbl">月柱（仕事・家系）</div><div class="kan">乙</div><div class="shi">未</div><div class="zou">己・丁・乙</div></div>
-      <div class="pillar"><div class="lbl">日柱（自分・家庭）</div><div class="kan">己</div><div class="shi">丑</div><div class="zou">己・癸・辛</div></div>
+      <div class="pillar">
+        <div class="lbl">日柱（自分・家庭）</div>
+        <div class="yomi">つちのと</div><div class="kan">己</div>
+        <div class="shi">丑</div><div class="yomi">うし</div>
+        <div class="zou">蔵干　己・癸・辛</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">月柱（仕事・家系）</div>
+        <div class="yomi">きのと</div><div class="kan">乙</div>
+        <div class="shi">未</div><div class="yomi">ひつじ</div>
+        <div class="zou">蔵干　己・丁・乙</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">年柱（社会・先祖）</div>
+        <div class="yomi">ひのえ</div><div class="kan">丙</div>
+        <div class="shi">午</div><div class="yomi">うま</div>
+        <div class="zou">蔵干　丁・己</div>
+      </div>
     </div>
-    <p class="meishiki-note">年柱 丙午 ／ 月柱 乙未 ／ 日柱 己丑</p>
+    <p class="meishiki-note">日柱 己丑 ／ 月柱 乙未 ／ 年柱 丙午</p>
 
     <div class="divider" style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
 
