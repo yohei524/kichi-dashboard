@@ -51,6 +51,10 @@
       "destination": "/view.html?client=sayuri"
     },
     {
+      "source": "/abby",
+      "destination": "/view.html?client=abby"
+    },
+    {
       "source": "/sachiko",
       "destination": "/view.html?client=sachiko"
     },
