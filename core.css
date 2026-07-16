@@ -451,6 +451,33 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
 
 /* ===== 一番下の扉 ===== */
 /* ページ最下部にひっそり置く。押し売りにしない。開くとお品書きへ */
+.kanteisho-link {
+  display: block;
+  text-align: center;
+  margin: 1.25rem 0 0.5rem;
+  padding: 1.05rem 1rem;
+  background: var(--color-night-2, var(--color-cream));
+  border: 1px solid var(--color-accent-soft);
+  border-radius: 14px;
+  color: var(--color-brown-dark);
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.kanteisho-link:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 18px rgba(201, 162, 74, 0.12);
+}
+.kanteisho-arrow { color: var(--color-accent); }
+.kanteisho-link small {
+  display: block;
+  color: var(--color-brown);
+  font-size: 0.7rem;
+  margin-top: 0.35rem;
+  letter-spacing: 0.03em;
+}
+
 .door {
   display: block;
   text-decoration: none;
