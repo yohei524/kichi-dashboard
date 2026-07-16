@@ -55,6 +55,10 @@
       "destination": "/view.html?client=abby"
     },
     {
+      "source": "/abby-kanteisho",
+      "destination": "/clients/abby-kanteisho.html"
+    },
+    {
       "source": "/sachiko",
       "destination": "/view.html?client=sachiko"
     },
