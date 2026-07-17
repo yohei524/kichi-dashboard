@@ -59,6 +59,14 @@
       "destination": "/clients/abby-kanteisho.html"
     },
     {
+      "source": "/kyoko",
+      "destination": "/view.html?client=kyoko"
+    },
+    {
+      "source": "/kyoko-kanteisho",
+      "destination": "/clients/kyoko-kanteisho.html"
+    },
+    {
       "source": "/abby-koyomi",
       "destination": "/clients/abby-koyomi.html"
     },
