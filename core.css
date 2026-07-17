@@ -37,11 +37,17 @@
   --color-bg-gradient-end: #F1E8D6;
 }
 
+/* このサイトはライト（和紙）固定。OSのダークモードで
+   背景やカードが自動反転して黒くなるのを防ぐ（260717）。 */
+:root { color-scheme: light; }
+html { background: #F7F1E6; }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   font-family: 'Noto Serif JP', serif;
-  background:
+  background-color: #F7F1E6;
+  background-image:
     radial-gradient(1200px 600px at 50% -10%, rgba(184, 134, 44, 0.08), transparent 60%),
     linear-gradient(180deg, var(--color-night) 0%, #FBF6EC 45%, var(--color-bg-gradient-end) 100%);
   background-attachment: fixed;
@@ -311,12 +317,12 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
 .k-card { position: relative; width: 100%; aspect-ratio: 1/1; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transition: transform 1s cubic-bezier(0.4,0,0.2,1); cursor: pointer; }
 .k-card.flipping { transform: rotateY(180deg); }
 .k-card-face { position: absolute; top: 0; left: 0; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 6px; overflow: hidden; box-shadow: 0 8px 24px rgba(51,45,37,0.3), 0 2px 8px rgba(184,150,79,0.15); }
-.k-card-front { background: linear-gradient(135deg,#2E3A4A,#1F2836); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(184,150,79,0.3); }
-.k-card-front::before { content:""; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 60%; height: 60%; border: 1px solid rgba(184,150,79,0.2); border-radius: 50%; }
-.k-card-front-inner { position: relative; text-align: center; color: var(--color-gold); }
+.k-card-front { background: linear-gradient(135deg,#FBF6EC,#EFE3CC); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(184,134,44,0.45); }
+.k-card-front::before { content:""; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 60%; height: 60%; border: 1px solid rgba(184,134,44,0.28); border-radius: 50%; }
+.k-card-front-inner { position: relative; text-align: center; color: #B8862C; }
 .k-card-front-inner .kf-marker { font-size: 3rem; font-weight: 200; margin-bottom: 0.5rem; }
-.k-card-front-inner .kf-label { font-size: 0.7rem; letter-spacing: 0.3em; color: var(--color-accent-soft); }
-.k-card-back { background: #1F2836; transform: rotateY(180deg); -webkit-transform: rotateY(180deg); }
+.k-card-front-inner .kf-label { font-size: 0.7rem; letter-spacing: 0.3em; color: #A07A28; }
+.k-card-back { background: #EFE3CC; transform: rotateY(180deg); -webkit-transform: rotateY(180deg); }
 .k-card-back img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .k-card-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 0.75rem 0.85rem; background: linear-gradient(to top, rgba(51,45,37,0.9), transparent); color: #fff; font-size: 0.85rem; line-height: 1.5; letter-spacing: 0.05em; }
 .k-card-caption .kc-num { color: var(--color-gold); font-size: 0.7rem; margin-right: 0.35rem; }
