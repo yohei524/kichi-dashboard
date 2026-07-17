@@ -179,6 +179,20 @@ header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:
 .koyomi-link .arrow{color:var(--accent);}
 .koyomi-link small{display:block;color:var(--muted);font-size:.7rem;margin-top:.3rem;}
 
+/* 日本風の引き戸（襖）― タップで左右に開く */
+.door{display:block;text-align:center;padding:2.2rem 0 .5rem;margin-top:1.5rem;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.door-gate{position:relative;width:210px;height:132px;margin:0 auto 1rem;border-radius:4px;overflow:hidden;border:3px solid var(--accent-soft);box-shadow:0 4px 18px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.06);background:var(--sink);}
+.door-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.05rem;letter-spacing:.28em;text-indent:.28em;color:var(--accent);text-decoration:none;font-weight:500;background:radial-gradient(120% 90% at 50% 120%,rgba(217,164,65,.22) 0%,var(--sink) 62%);}
+.door-leaf{position:absolute;top:0;width:50%;height:100%;background:repeating-linear-gradient(90deg,rgba(0,0,0,.14) 0 1px,transparent 1px 26px),linear-gradient(170deg,var(--panel) 0%,#141B29 100%);transition:transform .55s cubic-bezier(.65,0,.35,1);z-index:2;}
+.door-leaf-l{left:0;border-right:1px solid var(--line);}
+.door-leaf-r{right:0;border-left:1px solid var(--line);}
+.door-pull{position:absolute;top:50%;width:8px;height:26px;border-radius:3px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);transform:translateY(-50%);}
+.door-leaf-l .door-pull{right:8px;} .door-leaf-r .door-pull{left:8px;}
+.door.open .door-leaf-l{transform:translateX(-100%);}
+.door.open .door-leaf-r{transform:translateX(100%);}
+.door.open .door-inner{text-shadow:0 0 12px rgba(217,164,65,.3);}
+.door-note{font-size:.68rem;color:var(--muted);line-height:1.8;margin-top:.35rem;}
+
 footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
 footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
 </style>
@@ -261,7 +275,13 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
     <p class="lead">「独りで、ちゃんと立つように生まれてきた人」</p>
     <p>芯が強い。流されない。誰かに合わせようとしても、深いところで「でも違う」が出てくる。周りからはとっつきにくく見えることもあるかもしれへんけど、実際は<span class="hl">筋を通すことに強いこだわりがある人</span>です。これは性格やのうて、生まれ持った宿命の構造。Abbyさんの魂のど真ん中と、家庭の場所と、両方に「守る・独りで立つ」という同じエネルギーが二重に入ってます。だからいっそう濃く出ます。</p>
     <p>面白いのはここから。日の宿命「己丑」は<span class="hl">肥沃な田土</span>。人を受け入れて、包んで、育てる土です。つまりAbbyさんの中には二つの質が同居してる ―― <b>独りで立って守る「芯」</b>と、<b>人を受け入れて包む「土」</b>。</p>
-    <p>ついこの前まで「大変依存的で、一人では何もできないと思い込んでいた」。この二つの綱引きが、ずっとAbbyさんを迷わせてきたはずなんです。</p>
+    <div class="card" style="background:var(--sink);border-color:var(--accent-soft);margin:1rem 0;">
+      <p class="lead" style="margin-bottom:.6rem;">この人の背骨 ―― 宿命二中殺（生年中殺＋生月中殺）</p>
+      <p style="margin-bottom:.7rem;">Abbyさんの一番の特徴は、これです。<span class="hl">生まれ持った宿命の中に、天中殺が二つ入っている</span>。ふつうは「時期」としてめぐってくる天中殺を、Abbyさんは<b>生まれた時から二つ抱えて生まれてきました</b>。年柱（社会・先祖）と月柱（家系・仕事）― つまり<b>自分の“加護”になるはずの柱が、二つとも空いた状態</b>で生まれた、ということです。</p>
+      <p style="margin-bottom:.7rem;">言い方を変えると、Abbyさんは<span class="hl">ハードモードを選んで生まれてきた人</span>。親・先祖・家系の援助を当てにできない。ふつうのレールに乗ろうとすると、なぜか噛み合わへん。でもこれは不幸やのうて、<b>「独りで、自分の力で道を作る」ことで運が開く設計</b>なんです。家系や親元から精神的・経済的に離れるほど、運が良くなる。</p>
+      <p style="margin-bottom:0;">通話で「16歳まで母にガチッと管理されていた」「この間まで親と分かり合えなかった」と話してくれましたね。それも、父の死をきっかけに母との確執を浄化して「選んだのは自分だった」と気づいたことも ―― 全部、この宿命二中殺が「もう独りで立っていいよ」と促していた流れの中にあります。<b>ここが、Abbyさんの人生のいちばん太い一本の柱</b>です。</p>
+    </div>
+    <p>そしてこの「独りで立つ宿命」と、さっきの「包む土」。ついこの前まで「大変依存的で、一人では何もできないと思い込んでいた」。この二つの綱引きが、ずっとAbbyさんを迷わせてきたはずなんです。</p>
     <div class="pull">独立の宿命を持つ人が、依存で生きようとすると、必ず摩擦が起きる。日々不満だらけになる。人のせいにしたくなる。あれは性格が悪かったんやのうて、宿命に逆らってた時期の姿です。</div>
     <p>Abbyさんは自分の力で舵を切り直した。「自分のご機嫌は自分でとらんと」と気づいて、訓練しながら今に至っている。これ、根性で勝ち取ったんやのうて、本当は<span class="hl">元の設計に「還った」だけ</span>なんです。だから依存から抜けたら楽になった。当たり前です。やっと生まれ持った自分の形に戻ったんやから。</p>
     <p class="soft">※ 通話で話してくれた「旦那も、母のような人を選んだのは自分だった」という気づき ―― あれこそ、宿命を自分ごととして引き受けた瞬間でした。もし依存の考え方がまた顔を出したら、「こっちに行ったら運気が逆回転する方や」と思い出してください。すぐ戻せます。</p>
@@ -338,9 +358,9 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
 <div class="sec">
   <div class="sec-head"><span class="sec-no">肆</span><span class="sec-title">この先、どう生きるか</span></div>
   <div class="card">
-    <p class="lead">Abbyさんは、精神世界の方面で大成する宿命</p>
-    <p>これはリップサービスやのうて、宿命が四方から指してます ―― 天中殺が「精神・無形の世界」に向く型／「害」が“精神世界や無形の分野で力を発揮”と出てる／才能の出口が学問・研究／上と横に知性の星が二つ。</p>
-    <p>だから「精神世界が好物🤤」「もっと学びたい」は趣味やのうて、<span class="hl">宿命の中心線</span>。好きなのは当たり前。そこが本業になる設計なんやから。今のアセンションワークの学びも、父の死・母との確執を浄化して自分を救った経験も、全部この線の上にあります。</p>
+    <p class="lead">Abbyさんは、精神世界の方面で力を発揮する宿命</p>
+    <p>これはリップサービスやのうて、命式の3か所が同じ方を指してます ―― ひとつ、<b>「害」</b>（日柱と年柱）が“素直に生きられん分、精神世界や無形の分野で力を発揮する”と出てる。ふたつ、<b>才能の出口が「北天運」</b>＝学問・研究・専門性の方向。みっつ、上に玉堂星（学問・伝統・知性）、横に龍高星（探求・改革）と、<b>知性の星が二つ</b>。この3つが揃うと、無形のもの・深く掘る学びの世界が合います。</p>
+    <p>そしてもう一つ大きいのが、後で詳しく言う<span class="hl">宿命二中殺（生年中殺＋生月中殺）</span>。家系や社会の“ふつうのレール”から外れて、独りで深めたものが、めぐりめぐって人の役に立つ ―― そういう設計です。だから「精神世界が好物🤤」「もっと学びたい」は趣味やのうて、Abbyさんの<span class="hl">宿命の芯そのもの</span>。今のアセンションワークの学びも、父の死・母との確執を浄化して自分を救った経験も、全部この線の上にあります。</p>
     <div class="pull">学ぶ人 → 深める人 → いずれ、伝える人・分かち合う人へ。</div>
     <p>通話で話してくれましたね。「対価をつけるのが苦手」「整えてからしか動けない」。これ、才能星（動いて満ちる）と出口（考えて止まる）、そして<b>金のエネルギーがゼロ</b>だから、まさに宿命通りの正直な悩みなんです。僕も金ゼロなので、痛いほど分かります。</p>
     <p>だから、今すぐ「事業にせな」と気負わんでいい。友達のセッションの<span class="hl">“保健室”的なサポート</span>、マルシェで対価をいただいた経験 ―― あれが糸口です。<b>向こうからニーズが来たら受け取る</b>。無理に取りに行かない。この“ゆるいスタンス”が、実は今のAbbyさんに一番合ってます。焦って価格や集客に飲まれると、大事な芯が濁ります。</p>
@@ -373,6 +393,15 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
   <span class="arrow">▶</span> Abbyの暦（日々の運気カレンダー）をひらく
   <small>毎日の運気が天気予報のように見られます。傘を持つくらいの気持ちで、楽しんで。</small>
 </a>
+
+<div class="door" onclick="this.classList.toggle('open')">
+  <div class="door-gate">
+    <a class="door-inner" href="/menu">鑑定目録</a>
+    <div class="door-leaf door-leaf-l"><span class="door-pull"></span></div>
+    <div class="door-leaf door-leaf-r"><span class="door-pull"></span></div>
+  </div>
+  <p class="door-note">戸をあけると、鑑定の目録があります</p>
+</div>
 
 <footer>
   <p>いつもおおきにです😆　またゆっくり話しましょう💬</p>

@@ -6,34 +6,35 @@
    ======================================== */
 
 :root {
-  /* ダーク（夜空）基調。260713にMoonly準拠で全面変更。
-     変数名は旧来のまま（cream / warm-white / brown 等）だが、中身は夜の値。
-     名前を変えると全セクションのCSSを書き換える必要があるため、意味だけ移した。
-       warm-white → カードの面（夜のパネル）
-       cream      → 一段沈んだ面
-       beige      → 罫線
-       brown      → 弱い文字（旧：茶）
-       brown-dark → 主たる文字（＝ほぼ白）
-       accent     → その人の五行の色（唯一の“光”。JSONから上書きされる）
+  /* 朝の和紙（生成り白 × 墨 × 金）基調。260717に変更。
+     暦（毎朝見るページ）は明るい和紙トーン。鑑定書（夜空×金・2ページ目）と
+     「金」を共通の軸にした昼夜ペアにする。
+     変数名は旧来のまま（cream / warm-white / brown 等）＝中身の意味だけ移す。
+       warm-white → カードの面（白い和紙のパネル）
+       cream      → 一段沈んだ面（生成り）
+       beige      → 罫線（薄墨）
+       brown      → 弱い文字（薄墨）
+       brown-dark → 主たる文字（濃い墨）
+       accent     → その人の五行の色（JSONから上書きされる。既定は金）
   */
-  --color-night: #0B0F1A;          /* 最も深い夜 */
-  --color-night-2: #131A28;        /* 夜の面 */
-  --color-cream: #171F30;          /* 一段沈んだ面 */
-  --color-warm-white: #1B2334;     /* カードの面 */
-  --color-beige: #2A3346;          /* 罫線 */
-  --color-accent: #8FA9D8;         /* 五行の光（デフォルト：月白の青） */
-  --color-accent-light: #A9BFE4;
-  --color-accent-soft: #6B80AB;
-  --color-gold: #C9A24A;           /* 金：強調・従星 */
-  --color-gold-light: #E0BE6C;
-  --color-brown: #8A96AC;          /* 弱い文字 */
-  --color-brown-dark: #ECEAE4;     /* 主たる文字（月の白） */
-  --color-rose: #C9A24A;
-  --color-rose-light: #2A3346;
-  --color-sage: #6B80AB;
-  --color-water: #6E9BC4;
-  --color-fire: #D08A5A;
-  --color-bg-gradient-end: #080B14;
+  --color-night: #F7F1E6;          /* 最も明るい和紙（背景の上端） */
+  --color-night-2: #FBF6EC;        /* 明るい面 */
+  --color-cream: #F1E8D6;          /* 一段沈んだ面（生成り） */
+  --color-warm-white: #FFFCF6;     /* カードの面（白い和紙） */
+  --color-beige: #E0D3BC;          /* 罫線（薄墨がかった生成り） */
+  --color-accent: #B8862C;         /* 五行の光（既定：金／墨に映える） */
+  --color-accent-light: #CDA04A;
+  --color-accent-soft: #D8C9A8;
+  --color-gold: #B8862C;           /* 金：強調・従星（鑑定書と共通の軸） */
+  --color-gold-light: #CDA04A;
+  --color-brown: #8A7B62;          /* 弱い文字（薄墨） */
+  --color-brown-dark: #3A3228;     /* 主たる文字（濃い墨） */
+  --color-rose: #B8862C;
+  --color-rose-light: #E0D3BC;
+  --color-sage: #8A7B62;
+  --color-water: #4E7CA6;
+  --color-fire: #C2652F;
+  --color-bg-gradient-end: #F1E8D6;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -41,8 +42,8 @@
 body {
   font-family: 'Noto Serif JP', serif;
   background:
-    radial-gradient(1200px 600px at 50% -10%, rgba(143, 169, 216, 0.10), transparent 60%),
-    linear-gradient(180deg, var(--color-night) 0%, #0D1220 45%, var(--color-bg-gradient-end) 100%);
+    radial-gradient(1200px 600px at 50% -10%, rgba(184, 134, 44, 0.08), transparent 60%),
+    linear-gradient(180deg, var(--color-night) 0%, #FBF6EC 45%, var(--color-bg-gradient-end) 100%);
   background-attachment: fixed;
   color: var(--color-brown-dark);
   min-height: 100vh;
@@ -68,7 +69,7 @@ header .tagline { font-size: 0.78rem; color: var(--color-brown); letter-spacing:
   border: 1px solid var(--color-beige);
   border-radius: 18px;
   padding: 1.4rem 1.25rem;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.32);
+  box-shadow: 0 4px 18px rgba(58, 50, 40, 0.10);
   margin-bottom: 1.1rem;
   animation: fadeIn 0.5s ease-out;
 }
@@ -310,12 +311,12 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
 .k-card { position: relative; width: 100%; aspect-ratio: 1/1; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transition: transform 1s cubic-bezier(0.4,0,0.2,1); cursor: pointer; }
 .k-card.flipping { transform: rotateY(180deg); }
 .k-card-face { position: absolute; top: 0; left: 0; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 6px; overflow: hidden; box-shadow: 0 8px 24px rgba(51,45,37,0.3), 0 2px 8px rgba(184,150,79,0.15); }
-.k-card-front { background: linear-gradient(135deg,var(--color-brown-dark),var(--color-brown)); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(184,150,79,0.3); }
+.k-card-front { background: linear-gradient(135deg,#2E3A4A,#1F2836); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(184,150,79,0.3); }
 .k-card-front::before { content:""; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 60%; height: 60%; border: 1px solid rgba(184,150,79,0.2); border-radius: 50%; }
 .k-card-front-inner { position: relative; text-align: center; color: var(--color-gold); }
 .k-card-front-inner .kf-marker { font-size: 3rem; font-weight: 200; margin-bottom: 0.5rem; }
 .k-card-front-inner .kf-label { font-size: 0.7rem; letter-spacing: 0.3em; color: var(--color-accent-soft); }
-.k-card-back { background: #000; transform: rotateY(180deg); -webkit-transform: rotateY(180deg); }
+.k-card-back { background: #1F2836; transform: rotateY(180deg); -webkit-transform: rotateY(180deg); }
 .k-card-back img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .k-card-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 0.75rem 0.85rem; background: linear-gradient(to top, rgba(51,45,37,0.9), transparent); color: #fff; font-size: 0.85rem; line-height: 1.5; letter-spacing: 0.05em; }
 .k-card-caption .kc-num { color: var(--color-gold); font-size: 0.7rem; margin-right: 0.35rem; }
@@ -478,71 +479,81 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
   letter-spacing: 0.03em;
 }
 
+/* ===== 日本風の引き戸（襖） ===== */
+/* 四角い枠。タップすると左右の襖が中央から開き、奥の「鑑定目録」が現れる。 */
 .door {
   display: block;
-  text-decoration: none;
   text-align: center;
   padding: 2.5rem 0 3rem;
   margin-top: 1rem;
   border-top: 1px solid var(--color-beige);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
-.door-frame {
-  width: 88px;
-  height: 116px;
-  margin: 0 auto 0.9rem;
-  padding: 6px;
-  background: var(--color-beige);
-  border-radius: 46px 46px 3px 3px;
-  box-shadow: 0 3px 14px rgba(58, 107, 71, 0.16);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-.door-panel {
+.door-gate {
   position: relative;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(170deg, var(--color-accent-light) 0%, var(--color-accent) 100%);
-  border-radius: 40px 40px 2px 2px;
+  width: 210px;
+  height: 132px;
+  margin: 0 auto 1rem;
+  border-radius: 4px;
   overflow: hidden;
-}
-/* 扉の縦の彫り */
-.door-arch {
-  position: absolute;
-  top: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 44px;
-  height: 74px;
-  border: 1px solid rgba(249, 251, 248, 0.35);
-  border-radius: 22px 22px 2px 2px;
-}
-/* 取っ手 */
-.door-knob {
-  position: absolute;
-  top: 62px;
-  right: 13px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
+  /* 枠：木目の縁 */
+  border: 3px solid var(--color-accent-soft);
+  box-shadow: 0 4px 16px rgba(58, 50, 40, 0.14), inset 0 0 0 1px rgba(255,255,255,0.4);
   background: var(--color-cream);
-  box-shadow: 0 0 0 2px rgba(249, 251, 248, 0.25);
 }
-.door-label {
-  font-size: 0.9rem;
+/* 奥の間（開くと見える） */
+.door-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  letter-spacing: 0.28em;
   color: var(--color-accent);
-  letter-spacing: 0.2em;
+  text-decoration: none;
   font-weight: 500;
+  background: radial-gradient(120% 90% at 50% 120%, var(--color-accent-soft) 0%, var(--color-cream) 60%);
+  text-indent: 0.28em;
 }
+/* 襖（2枚） */
+.door-leaf {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background:
+    repeating-linear-gradient(90deg, rgba(58,50,40,0.05) 0 1px, transparent 1px 26px),
+    linear-gradient(170deg, var(--color-warm-white) 0%, #F3EAD8 100%);
+  transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+  z-index: 2;
+}
+.door-leaf-l { left: 0;  border-right: 1px solid var(--color-beige); }
+.door-leaf-r { right: 0; border-left: 1px solid var(--color-beige); }
+/* 襖の引き手（へこみ） */
+.door-pull {
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  height: 26px;
+  border-radius: 3px;
+  background: rgba(58, 50, 40, 0.10);
+  box-shadow: inset 0 0 0 1px rgba(58,50,40,0.14);
+  transform: translateY(-50%);
+}
+.door-leaf-l .door-pull { right: 8px; }
+.door-leaf-r .door-pull { left: 8px; }
+/* 開いた状態：襖が左右に引き込まれる */
+.door.open .door-leaf-l { transform: translateX(-100%); }
+.door.open .door-leaf-r { transform: translateX(100%); }
+.door.open .door-inner { text-shadow: 0 0 12px rgba(184,134,44,0.25); }
+
 .door-note {
   font-size: 0.68rem;
   color: var(--color-brown);
   line-height: 1.8;
   margin-top: 0.35rem;
-}
-/* 触れると、扉がわずかに開く */
-.door:hover .door-frame,
-.door:active .door-frame {
-  transform: perspective(600px) rotateY(-16deg) translateX(-3px);
-  box-shadow: 6px 5px 20px rgba(58, 107, 71, 0.24);
 }
 
 /* ===== 人体星図（9マスの曼荼羅） ===== */
@@ -603,7 +614,7 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
 .sc-center {
   background: var(--color-accent);
   border-color: var(--color-accent);
-  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 3px 12px rgba(58, 50, 40, 0.10);
 }
 .sc-center .sc-star {
   color: var(--color-warm-white);
@@ -693,7 +704,7 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
 .moon-disc {
   display: inline-block;
   line-height: 0;
-  filter: drop-shadow(0 0 5px rgba(255, 250, 235, 0.16));
+  filter: drop-shadow(0 0 5px rgba(255, 250, 235, 0.18));
 }
 .moon-dark {
   fill: #2b3245;
@@ -741,7 +752,7 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
   background: var(--color-warm-white);
   border-color: var(--color-beige);
   border-radius: 18px;
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 12px 40px rgba(58, 50, 40, 0.22);
 }
 
 /* 願いの枠 */
@@ -749,7 +760,7 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
   background: var(--color-warm-white);
   border-color: var(--color-beige);
   border-radius: 18px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 18px rgba(58, 50, 40, 0.10);
 }
 
 /* 曼荼羅：夜の面に馴染ませる */
@@ -761,27 +772,12 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
 .sc-center {
   background: var(--color-accent);
   border-color: var(--color-accent);
-  box-shadow: 0 0 22px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 2px 14px rgba(184, 134, 44, 0.30);
 }
-.sc-center .sc-star { color: #0B0F1A; }
+.sc-center .sc-star { color: #FFFCF6; }
 .sc-center .sc-pos,
 .sc-center .sc-sub { color: rgba(11, 15, 26, 0.72); }
 .sc-jyusei { background: rgba(201, 162, 74, 0.06); }
-
-/* 扉：夜に浮かぶ光の扉に */
-.door { border-top-color: var(--color-beige); }
-.door-frame {
-  background: var(--color-beige);
-  box-shadow: 0 4px 26px rgba(0, 0, 0, 0.5);
-}
-.door-panel {
-  background: linear-gradient(170deg, var(--color-accent) 0%, var(--color-accent-soft) 100%);
-}
-.door-arch { border-color: rgba(11, 15, 26, 0.32); }
-.door-knob {
-  background: #0B0F1A;
-  box-shadow: 0 0 0 2px rgba(11, 15, 26, 0.25);
-}
 
 /* 期限のお知らせ */
 .expiry-box {
