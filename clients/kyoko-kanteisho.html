@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>恭子さん 鑑定書 ｜ 㐂占</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --night:#0B0F1A; --night2:#131A28; --sink:#171F30; --panel:#1B2334;
+  --line:#2A3346; --accent:#D9A441; --accent-soft:#B8842C; --accent-glow:rgba(217,164,65,.14);
+  --gold:#C9A24A; --text:#ECEAE4; --muted:#8A96AC; --muted2:#A9B3C6;
+  --water:#6E9BC4; --fire:#D08A5A; --wood:#7FA86B; --metal:#C4C9D2; --earth:#C9A24A;
+  --bad:#C97A6A; --good:#6E9BC4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Serif JP',serif; color:var(--text); line-height:1.95; letter-spacing:.045em;
+  background:
+    radial-gradient(1200px 620px at 50% -12%, rgba(217,164,65,.10), transparent 60%),
+    linear-gradient(180deg,#0B0F1A 0%,#0D1220 45%,#080B14 100%);
+  background-attachment:fixed; min-height:100vh;
+}
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.05rem 4rem;}
+
+/* header */
+header{text-align:center;padding:3rem 1rem 1.4rem;}
+header .kicker{font-size:.68rem;letter-spacing:.32em;color:var(--accent);opacity:.9;margin-bottom:.9rem;}
+header h1{font-size:1.5rem;font-weight:500;letter-spacing:.08em;margin-bottom:.5rem;}
+header h1 .nm{color:var(--accent);}
+header .tagline{font-size:.8rem;color:var(--muted2);letter-spacing:.1em;line-height:1.7;}
+header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:.12em;}
+
+/* profile strip */
+.profile{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem .8rem;
+}
+.profile div{font-size:.74rem;color:var(--muted);}
+.profile div b{display:block;font-size:.9rem;color:var(--text);font-weight:500;margin-top:.1rem;letter-spacing:.06em;}
+.profile div.full{grid-column:1/3;}
+
+/* section */
+.sec{margin-bottom:1.65rem;}
+.sec-head{
+  display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;
+  padding-bottom:.6rem;border-bottom:1px solid var(--line);
+}
+.sec-no{font-size:.72rem;color:var(--accent);letter-spacing:.18em;font-weight:600;}
+.sec-title{font-size:1.02rem;font-weight:500;letter-spacing:.08em;}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  padding:1.25rem 1.15rem;box-shadow:0 4px 24px rgba(0,0,0,.32);margin-bottom:1rem;
+}
+.card p{font-size:.87rem;margin-bottom:.9rem;color:var(--text);}
+.card p:last-child{margin-bottom:0;}
+.card .lead{color:var(--accent);font-size:.9rem;font-weight:500;}
+.hl{color:var(--accent);font-weight:500;}
+.soft{color:var(--muted2);font-size:.8rem;}
+
+/* 陰占盤 */
+.meishiki{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.2rem 0 .3rem;
+}
+.pillar{
+  background:var(--sink);border:1px solid var(--line);border-radius:12px;
+  padding:.7rem .4rem;text-align:center;
+}
+.pillar .lbl{font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.55rem;}
+.pillar .yomi{font-size:.58rem;color:var(--muted);letter-spacing:.04em;line-height:1.3;}
+.pillar .kan{font-size:1.85rem;font-weight:600;color:var(--text);line-height:1.15;}
+.pillar .shi{font-size:1.85rem;font-weight:600;color:var(--accent);line-height:1.15;margin-top:.2rem;}
+.pillar .zou{font-size:.62rem;color:var(--muted2);margin-top:.55rem;letter-spacing:.04em;}
+.meishiki-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;}
+
+/* 人体星図 */
+.jintai{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:19rem;margin:.4rem auto .2rem;}
+.jcell{
+  background:var(--sink);border:1px solid var(--line);border-radius:11px;
+  aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;
+}
+.jcell .pos{font-size:.58rem;color:var(--muted);letter-spacing:.05em;}
+.jcell .star{font-size:.92rem;font-weight:600;color:var(--text);letter-spacing:.03em;}
+.jcell.center{background:linear-gradient(160deg,rgba(217,164,65,.18),var(--sink));border-color:var(--accent-soft);}
+.jcell.center .star{color:var(--accent);}
+.jcell.jusei-cell{background:var(--night2);}
+.jcell .star.gold{color:var(--gold);}
+
+/* 五行バー */
+.gogyo{margin-top:.3rem;}
+.gbar{display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;}
+.gbar .gname{width:2.6rem;font-size:.76rem;color:var(--muted2);flex-shrink:0;}
+.gbar .gtrack{flex:1;height:9px;background:var(--sink);border-radius:5px;overflow:hidden;}
+.gbar .gfill{height:100%;border-radius:5px;}
+.gbar .gval{width:2.2rem;text-align:right;font-size:.72rem;color:var(--muted);flex-shrink:0;}
+.g-wood .gfill{background:var(--wood);}
+.g-fire .gfill{background:var(--fire);}
+.g-earth .gfill{background:var(--earth);}
+.g-metal .gfill{background:var(--metal);}
+.g-water .gfill{background:var(--water);}
+
+/* 大運テーブル */
+.daiun-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.daiun{width:100%;border-collapse:collapse;font-size:.78rem;min-width:19rem;}
+.daiun th{
+  font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.05em;
+  padding:.4rem .3rem;border-bottom:1px solid var(--line);text-align:center;
+}
+.daiun td{padding:.5rem .3rem;text-align:center;border-bottom:1px solid rgba(42,51,70,.5);color:var(--text);}
+.daiun td:first-child{color:var(--muted2);font-size:.72rem;white-space:nowrap;}
+.daiun .tc-cell{color:var(--bad);font-size:.68rem;}
+.daiun .now-row td{background:linear-gradient(90deg,rgba(217,164,65,.12),transparent);}
+.daiun .now-row td:first-child{color:var(--accent);font-weight:600;}
+.daiun .now-cell{color:var(--accent);font-size:.68rem;font-weight:600;}
+
+/* timeline */
+.tl{position:relative;padding-left:1.1rem;margin-top:.3rem;}
+.tl::before{content:"";position:absolute;left:3px;top:.4rem;bottom:.4rem;width:2px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:1rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before{content:"";position:absolute;left:-1.1rem;top:.45rem;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--night2);}
+.tl-item.tc::before{background:var(--bad);}
+.tl-when{font-size:.76rem;color:var(--accent);font-weight:600;letter-spacing:.06em;}
+.tl-item.tc .tl-when{color:var(--bad);}
+.tl-body{font-size:.82rem;color:var(--text);margin-top:.15rem;}
+
+/* do / dont */
+.dodont{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.dobox,.dontbox{border-radius:12px;padding:.85rem .8rem;border:1px solid var(--line);}
+.dobox{background:rgba(110,155,196,.08);}
+.dontbox{background:rgba(201,122,106,.08);}
+.dobox .h,.dontbox .h{font-size:.78rem;font-weight:600;margin-bottom:.5rem;letter-spacing:.06em;}
+.dobox .h{color:var(--good);}
+.dontbox .h{color:var(--bad);}
+.dodont ul{list-style:none;}
+.dodont li{font-size:.75rem;color:var(--text);padding-left:.9rem;position:relative;margin-bottom:.45rem;line-height:1.6;}
+.dodont li:last-child{margin-bottom:0;}
+.dobox li::before{content:"○";position:absolute;left:0;color:var(--good);font-size:.7rem;}
+.dontbox li::before{content:"×";position:absolute;left:0;color:var(--bad);font-size:.7rem;}
+@media(max-width:400px){.dodont{grid-template-columns:1fr;}}
+
+/* 処方 */
+.recipe{counter-reset:r;}
+.recipe .item{display:flex;gap:.75rem;margin-bottom:1rem;}
+.recipe .item:last-child{margin-bottom:0;}
+.recipe .num{
+  flex-shrink:0;width:1.7rem;height:1.7rem;border-radius:50%;
+  background:linear-gradient(160deg,var(--accent),var(--accent-soft));
+  color:var(--night);font-weight:700;font-size:.85rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.recipe .rbody{font-size:.83rem;}
+.recipe .rbody b{color:var(--accent);font-weight:600;}
+
+/* pull quote */
+.pull{
+  border-left:3px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:1rem 0;
+  font-size:.9rem;color:var(--muted2);font-style:normal;
+}
+
+/* closing */
+.closing{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--accent-soft);border-radius:18px;padding:1.6rem 1.25rem;text-align:center;
+  box-shadow:0 0 30px rgba(217,164,65,.08);
+}
+.closing p{font-size:.88rem;margin-bottom:.9rem;}
+.closing p:last-child{margin-bottom:0;}
+.closing .big{font-size:1.05rem;color:var(--accent);font-weight:500;letter-spacing:.06em;}
+
+/* link to koyomi */
+.koyomi-link{
+  display:block;text-align:center;margin-top:1.5rem;padding:1rem;
+  background:var(--night2);border:1px solid var(--line);border-radius:14px;
+  color:var(--text);text-decoration:none;font-size:.86rem;transition:border-color .3s;
+}
+.koyomi-link:hover{border-color:var(--accent-soft);}
+.koyomi-link .arrow{color:var(--accent);}
+.koyomi-link small{display:block;color:var(--muted);font-size:.7rem;margin-top:.3rem;}
+
+/* 日本風の引き戸（襖）― タップで左右に開く */
+.door{display:block;text-align:center;padding:2.2rem 0 .5rem;margin-top:1.5rem;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.door-gate{position:relative;width:210px;height:132px;margin:0 auto 1rem;border-radius:4px;overflow:hidden;border:3px solid var(--accent-soft);box-shadow:0 4px 18px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.06);background:var(--sink);}
+.door-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.05rem;letter-spacing:.28em;text-indent:.28em;color:var(--accent);text-decoration:none;font-weight:500;background:radial-gradient(120% 90% at 50% 120%,rgba(217,164,65,.22) 0%,var(--sink) 62%);}
+.door-leaf{position:absolute;top:0;width:50%;height:100%;background:repeating-linear-gradient(90deg,rgba(0,0,0,.14) 0 1px,transparent 1px 26px),linear-gradient(170deg,var(--panel) 0%,#141B29 100%);transition:transform .55s cubic-bezier(.65,0,.35,1);z-index:2;}
+.door-leaf-l{left:0;border-right:1px solid var(--line);}
+.door-leaf-r{right:0;border-left:1px solid var(--line);}
+.door-pull{position:absolute;top:50%;width:8px;height:26px;border-radius:3px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);transform:translateY(-50%);}
+.door-leaf-l .door-pull{right:8px;} .door-leaf-r .door-pull{left:8px;}
+.door.open .door-leaf-l{transform:translateX(-100%);}
+.door.open .door-leaf-r{transform:translateX(100%);}
+.door.open .door-inner{text-shadow:0 0 12px rgba(217,164,65,.3);}
+.door-note{font-size:.68rem;color:var(--muted);line-height:1.8;margin-top:.35rem;}
+
+footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
+footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">㐂占 　 命 術 本鑑定書</p>
+  <h1><span class="nm">Abby</span> さんへ</h1>
+  <p class="tagline">独りで立つと決めた、その芯が花になる</p>
+  <p class="date">1966年（昭和41年）7月29日 生　／　鑑定 2026.07.16</p>
+</header>
+
+<!-- プロフィール -->
+<div class="profile">
+  <div class="full">魂の本質（日の宿命）<b>己丑（つちのとうし）― 雪に埋もれた田畑</b></div>
+  <div>中心の星<b>貫索星</b></div>
+  <div>天中殺<b>午未（南方）</b></div>
+  <div>才能の星<b>車騎星</b></div>
+  <div>今の大運<b>己丑・貫索星（57〜66歳）</b></div>
+  <div class="full">特別な構造<b>宿命二中殺（生年中殺＋生月中殺）／ 律音（人生の仕切り直し）</b></div>
+</div>
+
+<div class="card" style="border-color:var(--accent-soft);">
+  <p>おおきにです、Abbyさん😆</p>
+  <p>この席まで来ていただいて、ほんまにありがとうございます。魂と宿命、運気、じっくり見させてもらいました。そして通話でお聞きした話も、全部この鑑定書に織り込みました。</p>
+  <p>Abbyさんの人生の言葉に翻訳して、隠さず全部お渡しします。気になったところは、いつでもLINEで掘ってください。</p>
+</div>
+
+<!-- 命式盤 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">命 式</span><span class="sec-title">Abbyさんの設計図</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.6rem;">陰占 ― 生まれ持った気の柱</p>
+    <div class="meishiki">
+      <div class="pillar">
+        <div class="lbl">日柱（自分・家庭）</div>
+        <div class="yomi">つちのと</div><div class="kan">己</div>
+        <div class="shi">丑</div><div class="yomi">うし</div>
+        <div class="zou">蔵干　己・癸・辛</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">月柱（仕事・家系）</div>
+        <div class="yomi">きのと</div><div class="kan">乙</div>
+        <div class="shi">未</div><div class="yomi">ひつじ</div>
+        <div class="zou">蔵干　己・丁・乙</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">年柱（社会・先祖）</div>
+        <div class="yomi">ひのえ</div><div class="kan">丙</div>
+        <div class="shi">午</div><div class="yomi">うま</div>
+        <div class="zou">蔵干　丁・己</div>
+      </div>
+    </div>
+    <p class="meishiki-note">日柱 己丑 ／ 月柱 乙未 ／ 年柱 丙午</p>
+
+    <div class="divider" style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p class="soft" style="margin-bottom:.2rem;">陽占 ― 心のかたち（人体星図）</p>
+    <div class="jintai">
+      <div class="jcell jusei-cell"><span class="pos">伴星（先祖）</span><span class="star">鳳閣星</span></div>
+      <div class="jcell"><span class="pos">目上（北）</span><span class="star">玉堂星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">初年運</span><span class="star gold">天禄星</span></div>
+      <div class="jcell"><span class="pos">配偶者（西）</span><span class="star">貫索星</span></div>
+      <div class="jcell center"><span class="pos">中心・本人</span><span class="star">貫索星</span></div>
+      <div class="jcell"><span class="pos">社会（東）</span><span class="star">龍高星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">晩年運</span><span class="star gold">天庫星</span></div>
+      <div class="jcell"><span class="pos">目下（南）</span><span class="star">車騎星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">中年運</span><span class="star gold">天南星</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.7rem;">中央が本人。四隅は人生3時期のエネルギー（初年・中年・晩年）と、ご先祖の星（伴星）。</p>
+  </div>
+</div>
+
+<!-- 1 本質 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">壱</span><span class="sec-title">どういう魂か</span></div>
+  <div class="card">
+    <p class="lead">「独りで、ちゃんと立つように生まれてきた人」</p>
+    <p>芯が強い。流されない。誰かに合わせようとしても、深いところで「でも違う」が出てくる。周りからはとっつきにくく見えることもあるかもしれへんけど、実際は<span class="hl">筋を通すことに強いこだわりがある人</span>です。これは性格やのうて、生まれ持った宿命の構造。Abbyさんの魂のど真ん中と、家庭の場所と、両方に「守る・独りで立つ」という同じエネルギーが二重に入ってます。だからいっそう濃く出ます。</p>
+    <p>面白いのはここから。日の宿命「己丑」は<span class="hl">肥沃な田土</span>。人を受け入れて、包んで、育てる土です。つまりAbbyさんの中には二つの質が同居してる ―― <b>独りで立って守る「芯」</b>と、<b>人を受け入れて包む「土」</b>。</p>
+    <div class="card" style="background:var(--sink);border-color:var(--accent-soft);margin:1rem 0;">
+      <p class="lead" style="margin-bottom:.6rem;">この人の背骨 ―― 宿命二中殺（生年中殺＋生月中殺）</p>
+      <p style="margin-bottom:.7rem;">Abbyさんの一番の特徴は、これです。<span class="hl">生まれ持った宿命の中に、天中殺が二つ入っている</span>。ふつうは「時期」としてめぐってくる天中殺を、Abbyさんは<b>生まれた時から二つ抱えて生まれてきました</b>。年柱（社会・先祖）と月柱（家系・仕事）― つまり<b>自分の“加護”になるはずの柱が、二つとも空いた状態</b>で生まれた、ということです。</p>
+      <p style="margin-bottom:.7rem;">言い方を変えると、Abbyさんは<span class="hl">ハードモードを選んで生まれてきた人</span>。親・先祖・家系の援助を当てにできない。ふつうのレールに乗ろうとすると、なぜか噛み合わへん。でもこれは不幸やのうて、<b>「独りで、自分の力で道を作る」ことで運が開く設計</b>なんです。家系や親元から精神的・経済的に離れるほど、運が良くなる。</p>
+      <p style="margin-bottom:0;">通話で「16歳まで母にガチッと管理されていた」「この間まで親と分かり合えなかった」と話してくれましたね。それも、父の死をきっかけに母との確執を浄化して「選んだのは自分だった」と気づいたことも ―― 全部、この宿命二中殺が「もう独りで立っていいよ」と促していた流れの中にあります。<b>ここが、Abbyさんの人生のいちばん太い一本の柱</b>です。</p>
+    </div>
+    <p>そしてこの「独りで立つ宿命」と、さっきの「包む土」。ついこの前まで「大変依存的で、一人では何もできないと思い込んでいた」。この二つの綱引きが、ずっとAbbyさんを迷わせてきたはずなんです。</p>
+    <div class="pull">独立の宿命を持つ人が、依存で生きようとすると、必ず摩擦が起きる。日々不満だらけになる。人のせいにしたくなる。あれは性格が悪かったんやのうて、宿命に逆らってた時期の姿です。</div>
+    <p>Abbyさんは自分の力で舵を切り直した。「自分のご機嫌は自分でとらんと」と気づいて、訓練しながら今に至っている。これ、根性で勝ち取ったんやのうて、本当は<span class="hl">元の設計に「還った」だけ</span>なんです。だから依存から抜けたら楽になった。当たり前です。やっと生まれ持った自分の形に戻ったんやから。</p>
+    <p class="soft">※ 通話で話してくれた「旦那も、母のような人を選んだのは自分だった」という気づき ―― あれこそ、宿命を自分ごととして引き受けた瞬間でした。もし依存の考え方がまた顔を出したら、「こっちに行ったら運気が逆回転する方や」と思い出してください。すぐ戻せます。</p>
+  </div>
+</div>
+
+<!-- 2 才能 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">弐</span><span class="sec-title">才能と、その活かし方</span></div>
+  <div class="card">
+    <p>Abbyさんの才能の芯は<span class="hl">「動くこと」</span>。才能を司る星（車騎星）が、南 ― 行動の場所に出てます。タロットで言う「戦車（チャリオット）」。<b>動いて満たされる・じっとすると枯れる</b>星です。</p>
+    <p>ところが才能の“出口”のほうは、頭のエリア（北天運）― <b>考えてから満足して、動きにくい</b>。だからこうなりやすい。</p>
+    <div class="pull">体を動かせば元気になるのに、頭で考えすぎて腰が上がらへん。<br><span class="soft">（通話でも「お尻が重たい、あります」と。まさにこれです）</span></div>
+    <p>だから処方はシンプル。Abbyさんは<span class="hl">「考えてから動く人」やのうて「動いてから分かる人」</span>。散歩でも、水辺でも、軽い旅でもいい。まず一歩、体を動かす。意味は後からついてきます。順番が逆なんです。</p>
+    <p>そして上と横に、知性の星が二つ（玉堂星＝学問・伝統／龍高星＝改革・探求）。これがAbbyさんの<span class="hl">「精神世界が好物」</span>の正体です。退職前、歯科の現場で「虫歯を追う治療」から「予防歯科」へ切り替えていったあの動き ―― あれは龍高星（既存の枠を壊して新しいものを作る力）が、仕事で見事に陽転していた証拠でした。「家庭より仕事に行っちゃう時期やった」のも、魂が出せてたからです。</p>
+  </div>
+</div>
+
+<!-- 3 運気 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">参</span><span class="sec-title">運気のリズム ― 今どこにいるか</span></div>
+
+  <div class="card">
+    <p class="soft" style="margin-bottom:.7rem;">大運 ― 10年ごとに巡る運気のテーマ（7歳運）</p>
+    <div class="daiun-scroll">
+      <table class="daiun">
+        <thead><tr><th>年齢</th><th>干支</th><th>主星</th><th>従星</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr><td>7〜16</td><td>甲午</td><td>牽牛星</td><td>天禄星</td><td class="tc-cell">大運天中殺</td></tr>
+          <tr><td>17〜26</td><td>癸巳</td><td>禄存星</td><td>天将星</td><td></td></tr>
+          <tr><td>27〜36</td><td>壬辰</td><td>司禄星</td><td>天堂星</td><td></td></tr>
+          <tr><td>37〜46</td><td>辛卯</td><td>鳳閣星</td><td>天胡星</td><td></td></tr>
+          <tr><td>47〜56</td><td>庚寅</td><td>調舒星</td><td>天極星</td><td></td></tr>
+          <tr class="now-row"><td>57〜66</td><td>己丑</td><td>貫索星</td><td>天庫星</td><td class="now-cell">今ここ・律音</td></tr>
+          <tr><td>67〜76</td><td>戊子</td><td>石門星</td><td>天馳星</td><td></td></tr>
+          <tr><td>77〜86</td><td>丁亥</td><td>龍高星</td><td>天報星</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:.9rem;font-size:.83rem;">大運天中殺は<span class="hl">7〜16歳（幼少期）だけ</span>。これは「一番エネルギーの強い星（天将星や貫索星のような）」ではなく静かな星が巡る時期に当たっていて、宿命二中殺と合わせて<b>親に管理されていた時期</b>と重なります。通話で「16歳までは母にガチッと管理されていた」と話してくれたのが、まさにこの配置でした。その後の37〜56歳は仕事で力を発揮した時期。職場が変わって大変やった頃も、後から見れば糧になっている ―― これも話してくれた通りです。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">今は、人生の大きな仕切り直しのど真ん中</p>
+    <p>今の10年（57〜66歳・己丑貫索）は、Abbyさんの<span class="hl">中心星とも、生まれた日とも、ぴったり同じ</span>。同じものが重なると本質が濃く出ます。芯の強さも、頑固さも。しかも生まれた日と同じ干支が巡る「律音」＝<b>人生を原点に巻き戻して、組み直す時期</b>。2026年の還暦は、その巻き戻しが一番深くなる年です。</p>
+    <div class="pull">「さぁ、この先どないしよ」とゆるり考えている今のAbbyさんは、迷子やのうて、宿命通りの“仕切り直しの真っ最中”。それがあって当然なんです。</div>
+
+    <p class="soft" style="margin-top:1.2rem;">▼ この先の動き方（年ごと）</p>
+    <div class="tl">
+      <div class="tl-item tc">
+        <div class="tl-when">2026〜2027年 ― 振り返り・清算・仕込みの2年（午未の年天中殺）</div>
+        <div class="tl-body">気のパイプが少し外れる時期。無理に外へ動くと噛み合わへん。「生産」やのうて「清算」の“算”。お墓参り・先祖供養にとても向く時。ここは基盤を整える2年です。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">特に静かに過ごす月 ― 2026年6〜8月／2027年6〜8月</div>
+        <div class="tl-body">年天中殺に月天中殺が重なる底。大きなお金・契約・引っ越しの決断はこの時期を外す。日々の細かな運気は「暦」で毎日見られます。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年末までに ― 「これだけは続ける」を一つ決める</div>
+        <div class="tl-body">粛々と続けられることを一つ。新しく探すんやのうて、前から持っていたものの延長で。それが次の10年の軸になります。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2028年から ― 次の10年の本番</div>
+        <div class="tl-body">天中殺が明けて、新しいサイクルへ。<span class="hl">その10年を何色にするかは、今の2年の過ごし方で決まります。</span></div>
+      </div>
+    </div>
+
+    <p class="soft" style="margin-top:1.2rem;">▼ 今の10年で、一つだけ気をつけること</p>
+    <p style="font-size:.83rem;">社会・契約の場所に「害」が出ています。<span class="hl">お金や契約は、口約束で終わらせず必ず書面で。</span>「なんか話が違うな」と思ったら、その違和感は正しいです。</p>
+  </div>
+</div>
+
+<!-- 4 相談テーマ -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">肆</span><span class="sec-title">この先、どう生きるか</span></div>
+  <div class="card">
+    <p class="lead">Abbyさんは、精神世界の方面で力を発揮する宿命</p>
+    <p>これはリップサービスやのうて、命式の3か所が同じ方を指してます ―― ひとつ、<b>「害」</b>（日柱と年柱）が“素直に生きられん分、精神世界や無形の分野で力を発揮する”と出てる。ふたつ、<b>才能の出口が「北天運」</b>＝学問・研究・専門性の方向。みっつ、上に玉堂星（学問・伝統・知性）、横に龍高星（探求・改革）と、<b>知性の星が二つ</b>。この3つが揃うと、無形のもの・深く掘る学びの世界が合います。</p>
+    <p>そしてもう一つ大きいのが、後で詳しく言う<span class="hl">宿命二中殺（生年中殺＋生月中殺）</span>。家系や社会の“ふつうのレール”から外れて、独りで深めたものが、めぐりめぐって人の役に立つ ―― そういう設計です。だから「精神世界が好物🤤」「もっと学びたい」は趣味やのうて、Abbyさんの<span class="hl">宿命の芯そのもの</span>。今のアセンションワークの学びも、父の死・母との確執を浄化して自分を救った経験も、全部この線の上にあります。</p>
+    <div class="pull">学ぶ人 → 深める人 → いずれ、伝える人・分かち合う人へ。</div>
+    <p>通話で話してくれましたね。「対価をつけるのが苦手」「整えてからしか動けない」。これ、才能星（動いて満ちる）と出口（考えて止まる）、そして<b>金のエネルギーがゼロ</b>だから、まさに宿命通りの正直な悩みなんです。僕も金ゼロなので、痛いほど分かります。</p>
+    <p>だから、今すぐ「事業にせな」と気負わんでいい。友達のセッションの<span class="hl">“保健室”的なサポート</span>、マルシェで対価をいただいた経験 ―― あれが糸口です。<b>向こうからニーズが来たら受け取る</b>。無理に取りに行かない。この“ゆるいスタンス”が、実は今のAbbyさんに一番合ってます。焦って価格や集客に飲まれると、大事な芯が濁ります。</p>
+    <p>そして己丑の警句「独り決めで悪者に見られやすい」も、<span class="hl">和協の心と熱意があれば必ず実る</span>とされてます。独りで深めたものを、最後は人に開く。そこでAbbyさんの土（包む力）と芯（独立）が、やっと一つになります。目指してる<span class="hl">「可愛いおばあちゃん👵」</span>は、まさにこれ。芯を残したまま、包む土で角を取っていく。頑固さを消すんやのうて、包む力で丸くする。その統合の先に、あの姿があります。</p>
+    <p class="soft">※ 通話でAbbyさんがくれたいちばんいい言葉 ―― 「最後にあー楽しかった、と言って終わりたい」。これ、ご先祖（伴星＝鳳閣星）からのメッセージ「楽しめよ」とドンピシャです。何代ものご先祖を代表して、今この世界を生きているAbbyさんへの願いが「楽しんでや」。それだけ守れたら、この人生は大成功です。</p>
+  </div>
+</div>
+
+<!-- 5 処方 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">伍</span><span class="sec-title">今日から動ける処方</span></div>
+  <div class="card recipe">
+    <div class="item"><div class="num">1</div><div class="rbody"><b>考えすぎたら、まず一歩動く。</b><br>Abbyさんは動いてから分かる人。結論を出す前に、まず体を。散歩・水辺・軽い旅・片付け。答えは動いた後についてきます。腰・股関節・背中が固まりやすい命でもあるので、<b>ウォーキングより少し強めの運動</b>で“今をキープ”を。※いきなり無理して体を壊さないように、徐々に。</div></div>
+    <div class="item"><div class="num">2</div><div class="rbody"><b>足りない「水」と「金」を、生活で足す。</b><br>Abbyさんは土と火が厚く、水と金が少なめ。<br><span class="soft">水を足す＝読書・記録・学びを体系立てて溜める／水辺／黒・濃紺／水を多めに。とくに<b>精神世界の学びをノートに体系化する</b>ことが、そのまま守護神（水）を取りに行く行為になります。</span><br><span class="soft">金を足す＝整理・断捨離・決断／白系／金属や石のアクセサリー／<b>岩盤浴</b>（水と金を同時に補える優れもの）。</span></div></div>
+    <div class="item"><div class="num">3</div><div class="rbody"><b>縁は「独立した者同士」を選ぶ。</b><br>家庭の場所にも「独りで立つ」星。ベタベタより、お互いの領域を尊重する距離感が合います。そして「普通と違う縁」に自然と引かれるのは設計通り。気にせんでいい、むしろそこにご縁があります。<br><span class="soft">※ 自分と同じ「水」の感覚を持つ人は、一緒にいると運気が上がる相手。周りを楽しみながら見てみてください。</span></div></div>
+    <div class="item"><div class="num">4</div><div class="rbody"><b>この2年は「引き算」、2028年から「足し算」。</b><br>2026〜2027は振り返り・整理・清算・仕込み。2027年末までに「これだけは続ける」を一つ。2028年から本番。日々の動きに迷ったら、<b>暦（Abbyの暦）</b>を見てください。今どの時期にいて、何をする時期か、ひと目で分かります。</div></div>
+  </div>
+</div>
+
+<!-- 締め -->
+<div class="closing">
+  <p>Abbyさんは、独りで立つと決めた人です。<br>その決断は、宿命に逆らったんやのうて、<span class="hl">宿命に還る決断</span>でした。</p>
+  <p>あとは、その芯を残したまま、包む土で角を取って、<br>好物の精神世界を、趣味から学びへ、学びから分かち合いへ、育てていくだけ。</p>
+  <p class="big">還暦は、終わりやのうて、二度目のスタート。</p>
+  <p>「見えない世界も見える世界も、面白がってご機嫌に過ごしたい」<br>Abbyさんのその言葉、宿命とドンピシャです🎯<br>そういうふうに、生まれてきてます。</p>
+  <p>今日から、まず一歩。考える前に、動く。<br>それが、2028年からの10年を、いちばんいい色にします。</p>
+</div>
+
+<a class="koyomi-link" href="/abby">
+  <span class="arrow">▶</span> Abbyの暦（日々の運気カレンダー）をひらく
+  <small>毎日の運気が天気予報のように見られます。傘を持つくらいの気持ちで、楽しんで。</small>
+</a>
+
+<div class="door" onclick="this.classList.toggle('open')">
+  <div class="door-gate">
+    <a class="door-inner" href="/menu">鑑定目録</a>
+    <div class="door-leaf door-leaf-l"><span class="door-pull"></span></div>
+    <div class="door-leaf door-leaf-r"><span class="door-pull"></span></div>
+  </div>
+  <p class="door-note">戸をあけると、鑑定の目録があります</p>
+</div>
+
+<footer>
+  <p>いつもおおきにです😆　またゆっくり話しましょう💬</p>
+  <p class="sig">㐂</p>
+</footer>
+
+</div>
+</body>
+</html>

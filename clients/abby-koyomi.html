@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abbyの暦 ｜ 㐂占</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light;
+  --paper:#F7F1E6; --paper2:#FBF6EC; --sink:#F1E8D6; --card:#FFFCF6;
+  --line:#E0D3BC; --gold:#B8862C; --gold-lt:#CDA04A; --gold-sf:#D8C9A8;
+  --ink:#3A3228; --ink-lt:#8A7B62; --water:#4E7CA6; --fire:#C2652F;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{background:var(--paper);}
+body{
+  font-family:'Noto Serif JP',serif; color:var(--ink); line-height:1.9; letter-spacing:.045em;
+  background-color:var(--paper);
+  background-image:radial-gradient(1100px 560px at 50% -12%, rgba(184,134,44,.09), transparent 60%);
+  background-attachment:fixed; min-height:100vh;
+}
+.wrap{max-width:29rem;margin:0 auto;padding:0 1.05rem 3rem;}
+
+header{text-align:center;padding:2.6rem 1rem 1.1rem;}
+header .kicker{font-size:.66rem;letter-spacing:.3em;color:var(--gold);margin-bottom:.8rem;}
+header h1{font-size:1.55rem;font-weight:500;letter-spacing:.1em;margin-bottom:.4rem;}
+header .tagline{font-size:.78rem;color:var(--ink-lt);letter-spacing:.08em;}
+header .today{font-size:.72rem;color:var(--gold);margin-top:.9rem;letter-spacing:.1em;}
+
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:1.3rem 1.2rem;box-shadow:0 4px 16px rgba(58,50,40,.08);margin-bottom:1.1rem;
+}
+.card-head{
+  font-size:.78rem;font-weight:500;color:var(--ink);letter-spacing:.12em;
+  margin-bottom:1rem;padding-bottom:.7rem;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:.5rem;
+}
+.card-head .mk{color:var(--gold);}
+
+/* 運気メーター */
+.meter{display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;}
+.meter .lv{font-size:2.4rem;font-weight:300;color:var(--gold);line-height:1;}
+.meter .lvmax{font-size:.9rem;color:var(--ink-lt);}
+.meter .tag{margin-left:auto;font-size:.7rem;color:var(--water);border:1px solid var(--water);
+  padding:.15rem .6rem;border-radius:999px;letter-spacing:.06em;}
+.bar{height:8px;background:var(--sink);border-radius:5px;overflow:hidden;margin-bottom:1rem;}
+.bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--gold-lt),var(--gold));border-radius:5px;}
+
+.row{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--line);font-size:.82rem;}
+.row:last-child{border-bottom:none;}
+.row .k{color:var(--ink-lt);}
+.row .v{font-weight:500;}
+.row .v.gold{color:var(--gold);}
+
+.note{font-size:.82rem;color:var(--ink);line-height:1.85;margin-top:.9rem;}
+.note.soft{color:var(--ink-lt);font-size:.78rem;}
+.hl{color:var(--gold);font-weight:500;}
+
+.tenchu-flag{
+  margin-top:.9rem;padding:.7rem .9rem;border-radius:10px;
+  background:rgba(78,124,166,.08);border:1px solid rgba(78,124,166,.3);
+  font-size:.78rem;color:var(--ink);line-height:1.7;
+}
+.tenchu-flag b{color:var(--water);}
+
+/* 今日の 向く/控える 2カラム */
+.do2{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1rem;}
+.do2col{border-radius:11px;padding:.8rem .75rem;border:1px solid var(--line);}
+.do-yes{background:rgba(184,134,44,.07);}
+.do-no{background:rgba(78,124,166,.07);}
+.do2h{font-size:.74rem;font-weight:600;margin-bottom:.5rem;letter-spacing:.05em;}
+.do-yes .do2h{color:var(--gold);}
+.do-no .do2h{color:var(--water);}
+.do2col ul{list-style:none;}
+.do2col li{font-size:.74rem;color:var(--ink);padding-left:.9rem;position:relative;margin-bottom:.4rem;line-height:1.55;}
+.do2col li:last-child{margin-bottom:0;}
+.do-yes li::before{content:"○";position:absolute;left:0;color:var(--gold);font-size:.68rem;}
+.do-no li::before{content:"×";position:absolute;left:0;color:var(--water);font-size:.68rem;}
+@media(max-width:390px){.do2{grid-template-columns:1fr;}}
+
+/* 天中殺サイクル カード（タップで裏返る） */
+.kcard{position:relative;width:100%;aspect-ratio:1/1;margin:1rem 0 .6rem;
+  transform-style:preserve-3d;transition:transform 1s cubic-bezier(.4,0,.2,1);cursor:pointer;}
+.kcard.flip{transform:rotateY(180deg);}
+.kface{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(58,50,40,.14);}
+.kfront{display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#FBF6EC,#EFE3CC);border:1px solid rgba(184,134,44,.45);}
+.kfront::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:58%;height:58%;border:1px solid rgba(184,134,44,.28);border-radius:50%;}
+.kfront-in{position:relative;text-align:center;color:var(--gold);}
+.kmk{font-size:3rem;font-weight:200;margin-bottom:.4rem;}
+.klabel{font-size:.68rem;letter-spacing:.35em;text-indent:.35em;color:#A07A28;}
+.kback{background:#EFE3CC;transform:rotateY(180deg);}
+.kback img{display:block;width:100%;height:100%;object-fit:cover;}
+.kcap{position:absolute;bottom:0;left:0;right:0;padding:.7rem .85rem;
+  background:linear-gradient(to top,rgba(51,45,37,.88),transparent);color:#fff;
+  font-size:.85rem;line-height:1.5;}
+.kcap span{font-size:.7rem;opacity:.85;}
+
+/* 引き戸 */
+.door{display:block;text-align:center;padding:2.2rem 0 .5rem;margin-top:1.4rem;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.door-gate{position:relative;width:210px;height:130px;margin:0 auto 1rem;border-radius:4px;overflow:hidden;
+  border:3px solid var(--gold-sf);box-shadow:0 4px 16px rgba(58,50,40,.14),inset 0 0 0 1px rgba(255,255,255,.5);background:var(--sink);}
+.door-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:1.05rem;letter-spacing:.28em;text-indent:.28em;color:var(--gold);text-decoration:none;font-weight:500;
+  background:radial-gradient(120% 90% at 50% 120%,var(--gold-sf) 0%,var(--sink) 62%);}
+.door-leaf{position:absolute;top:0;width:50%;height:100%;
+  background:repeating-linear-gradient(90deg,rgba(58,50,40,.05) 0 1px,transparent 1px 26px),linear-gradient(170deg,var(--card),#F3EAD8);
+  transition:transform .55s cubic-bezier(.65,0,.35,1);z-index:2;}
+.door-leaf-l{left:0;border-right:1px solid var(--line);}
+.door-leaf-r{right:0;border-left:1px solid var(--line);}
+.door-pull{position:absolute;top:50%;width:8px;height:26px;border-radius:3px;background:rgba(58,50,40,.1);
+  box-shadow:inset 0 0 0 1px rgba(58,50,40,.14);transform:translateY(-50%);}
+.door-leaf-l .door-pull{right:8px;} .door-leaf-r .door-pull{left:8px;}
+.door.open .door-leaf-l{transform:translateX(-100%);}
+.door.open .door-leaf-r{transform:translateX(100%);}
+.door-note{font-size:.68rem;color:var(--ink-lt);line-height:1.8;margin-top:.35rem;}
+
+.kanteisho-link{display:block;text-align:center;margin-top:1.2rem;padding:1rem;
+  background:var(--paper2);border:1px solid var(--gold-sf);border-radius:14px;color:var(--ink);
+  text-decoration:none;font-size:.86rem;transition:border-color .3s;}
+.kanteisho-link:hover{border-color:var(--gold);}
+.kanteisho-link .a{color:var(--gold);}
+.kanteisho-link small{display:block;color:var(--ink-lt);font-size:.7rem;margin-top:.3rem;}
+
+footer{text-align:center;padding:2.2rem 1rem 1rem;font-size:.72rem;color:var(--ink-lt);}
+footer .sig{color:var(--gold);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">㐂占 　 Abby の 暦</p>
+  <h1>今日の運気</h1>
+  <p class="tagline">見えない世界も、見える世界も、面白がってご機嫌に</p>
+  <p class="today">2026年 7月17日（金）</p>
+</header>
+
+<!-- 本日の運気 -->
+<div class="card">
+  <div class="card-head"><span class="mk">◆</span>本日の運気</div>
+  <div class="meter">
+    <span class="lv">6</span><span class="lvmax">/ 12</span>
+    <span class="tag">穏やかで落ち着く日</span>
+  </div>
+  <div class="bar"><i style="width:50%"></i></div>
+  <div class="row"><span class="k">日の干支</span><span class="v">壬辰（みずのえたつ）</span></div>
+  <div class="row"><span class="k">今日の星</span><span class="v gold">司禄星 ・ 天堂星</span></div>
+  <div class="row"><span class="k">天中殺サイクル</span><span class="v gold">🏠 帰路につく（9/12段階）</span></div>
+  <div class="row"><span class="k">今日の位相</span><span class="v">なし（静かな一日）</span></div>
+
+  <p class="note"><span class="hl">「司禄星」の日</span>。コツコツ積み上げる、堅実の星です。派手な動きより、片づけ・記録・整理が今日は気持ちよく進みます。落ち着いた「天堂星」も重なって、腰を据えて手堅くいける一日。</p>
+
+  <p class="note">今日は大きな波を起こす位相がありません。<span class="hl">逆に言うと、乱されず自分のペースで進められる日</span>。年天中殺の“仕込み・清算”の2年には、こういう静かな日がいちばん相性がいいんです。焦って外へ動くより、家のことや溜めていた学びを整えるのに向いています。</p>
+
+  <div class="do2">
+    <div class="do2col do-yes">
+      <p class="do2h">今日 向いてること</p>
+      <ul>
+        <li>片づけ・断捨離・記録をつける</li>
+        <li>溜めていた学びを見返す</li>
+        <li>散歩・水辺で軽く体を動かす</li>
+      </ul>
+    </div>
+    <div class="do2col do-no">
+      <p class="do2h">今日 控えること</p>
+      <ul>
+        <li>新しい話に飛びつく・大きな決断</li>
+        <li>考えすぎて動けなくなる</li>
+        <li>頑張りすぎ・予定の詰めすぎ</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="note soft">※ 運気レベルは「天中殺の12日サイクルの中で今日がどのくらいか」の目安。今日は9段階目「帰路につく」＝穏やかで落ち着く日。天気予報でいう「くもり、おだやか」くらいの気持ちで。</p>
+</div>
+
+<!-- 天中殺サイクルのカード（タップで裏返る） -->
+<div class="card">
+  <div class="card-head"><span class="mk">◆</span>天中殺サイクル ― 今どこにいる？</div>
+  <p class="note" style="margin-top:0;">午未天中殺の運気は、12日でひと巡りする「旅」のように動きます。今日は<span class="hl">9段階目「帰路につく」</span>。カードをタップすると、今いる場所の絵が出ます。</p>
+  <div class="kcard" onclick="this.classList.toggle('flip')">
+    <div class="kface kfront"><div class="kfront-in"><div class="kmk">㐂</div><div class="klabel">TAP</div></div></div>
+    <div class="kface kback">
+      <img src="clients/images/gohitsuji_9.webp" alt="旅の段階9 帰路につく">
+      <div class="kcap">🏠 帰路につく<br><span>次の準備・運気レベル6</span></div>
+    </div>
+  </div>
+  <p class="note soft">🏠 穏やかで落ち着ける段階。派手なことより、日常を整える・大切な人とゆっくり過ごすのに向きます。次のサイクルへの土台を作る時。</p>
+</div>
+
+<!-- 今月の流れ -->
+<div class="card">
+  <div class="card-head"><span class="mk">◆</span>今月の流れ（7月）</div>
+  <div class="row"><span class="k">月の干支</span><span class="v">乙未（きのとひつじ）</span></div>
+  <div class="row"><span class="k">今月の星</span><span class="v gold">車騎星 ・ 天南星</span></div>
+  <div class="row"><span class="k">状態</span><span class="v" style="color:var(--water)">月天中殺</span></div>
+  <p class="note">今月は「動いて満ちる」車騎星の月。でも同時に<span class="hl">月天中殺</span>が重なっています。新しいこと・新しい人を“探しに行く”より、これまでの振り返りと整理に向く時期。体は散歩や水辺で軽く動かしてOK。大きなお金や契約の決断は、この時期を外すのが安全です。</p>
+  <div class="tenchu-flag">
+    <b>いま「午未の年天中殺」の真っ最中（2026〜2027年）</b><br>
+    “何もするな”ではありません。振り返り・清算・仕込みの2年。合言葉は「探すな。でも、来たものは全部受け取れ」。2028年から次の10年の本番です。
+  </div>
+</div>
+
+<!-- 鑑定書への導線 -->
+<a class="kanteisho-link" href="/abby-kanteisho">
+  <span class="a">📖</span> Abbyさんの鑑定書をひらく
+  <small>命式・本質・この先の生き方まで、じっくり読む用</small>
+</a>
+
+<!-- 引き戸 -->
+<div class="door" onclick="this.classList.toggle('open')">
+  <div class="door-gate">
+    <a class="door-inner" href="/menu">鑑定目録</a>
+    <div class="door-leaf door-leaf-l"><span class="door-pull"></span></div>
+    <div class="door-leaf door-leaf-r"><span class="door-pull"></span></div>
+  </div>
+  <p class="door-note">戸をあけると、鑑定の目録があります</p>
+</div>
+
+<footer>
+  <p>毎日の運気は、天気予報のように。傘を持つくらいの気持ちで、楽しんで。</p>
+  <p class="sig">㐂</p>
+</footer>
+
+</div>
+</body>
+</html>
