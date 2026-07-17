@@ -662,7 +662,8 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
   gap: 2px;
   margin-top: 1rem;
   padding: 0.7rem 0.35rem 0.5rem;
-  background: linear-gradient(165deg, #1a2233 0%, #0e1420 100%);
+  background: linear-gradient(165deg, var(--color-cream) 0%, var(--color-warm-white) 100%);
+  border: 1px solid var(--color-beige);
   border-radius: 12px;
 }
 .ms-day {
@@ -677,25 +678,25 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
   cursor: pointer;
   transition: background 0.2s ease;
 }
-.ms-day:active { background: rgba(255,255,255,0.06); }
+.ms-day:active { background: rgba(58,50,40,0.05); }
 /* 今日だけ枠で囲む */
 .ms-today {
-  border-color: rgba(255, 255, 255, 0.32);
-  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--color-accent-soft);
+  background: rgba(184,134,44,0.08);
 }
 .ms-w {
   font-size: 0.56rem;
-  color: rgba(240, 237, 230, 0.5);
+  color: var(--color-brown);
   letter-spacing: 0.04em;
 }
-.ms-today .ms-w { color: rgba(240, 237, 230, 0.85); }
+.ms-today .ms-w { color: var(--color-brown-dark); }
 .ms-d {
   font-size: 0.72rem;
-  color: rgba(240, 237, 230, 0.72);
+  color: var(--color-brown);
   font-weight: 400;
 }
 .ms-today .ms-d {
-  color: #F0EDE6;
+  color: var(--color-brown-dark);
   font-weight: 600;
 }
 /* 日天中殺の日に点を打つ */
@@ -710,13 +711,13 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
 .moon-disc {
   display: inline-block;
   line-height: 0;
-  filter: drop-shadow(0 0 5px rgba(255, 250, 235, 0.18));
+  filter: drop-shadow(0 0 4px rgba(184,134,44,0.22));
 }
 .moon-dark {
-  fill: #2b3245;
+  fill: #D8CBB2;
 }
 .moon-lit {
-  fill: #F2EDE0;
+  fill: #B8862C;
 }
 .moon-today {
   text-align: center;
@@ -847,7 +848,7 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
 .message-box::before { color: var(--color-accent-soft); opacity: 0.6; }
 
 /* 願い枠の二重線 */
-.frame::before { border-color: rgba(255,255,255,0.08); }
+.frame::before { border-color: var(--color-accent-soft); }
 
 /* 天中殺カードのキャプション：絵に埋もれて読めないので影を強くする（260713） */
 .k-card-caption {
