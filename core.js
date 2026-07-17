@@ -766,6 +766,18 @@ function _mixNight(hex, ratio) {
     n[2] + (c[2] - n[2]) * ratio
   );
 }
+// 和紙（生成りの白）の上に、その人の五行の色をごくわずかだけ溶かす。
+// 旧・夜空デザインの名残で背景を _mixNight（濃紺と混色）していたため、
+// 和紙化後もカード面が黒く沈み文字が読めなくなっていた（260717修正）。
+// ベースは白側に固定し、面が沈まないようにする。
+function _mixPaper(hex, ratio, baseHex) {
+  var c = _hex2rgb(hex), p = _hex2rgb(baseHex);
+  return _rgb2hex(
+    p[0] + (c[0] - p[0]) * ratio,
+    p[1] + (c[1] - p[1]) * ratio,
+    p[2] + (c[2] - p[2]) * ratio
+  );
+}
 function applyDesignColors(design) {
   if (!design) return;
   var root = document.documentElement.style;
@@ -778,10 +790,12 @@ function applyDesignColors(design) {
   root.setProperty('--color-accent', lit);
   root.setProperty('--color-accent-light', _lift(accent, 0.60));
   root.setProperty('--color-accent-soft', _lift(accent, 0.22));
-  // 面と罫線にも、その人の五行をわずかに溶かす（＝ページ全体が微かにその色を帯びる）
-  root.setProperty('--color-warm-white', _mixNight(accent, 0.10));
-  root.setProperty('--color-cream', _mixNight(accent, 0.06));
-  root.setProperty('--color-beige', _mixNight(accent, 0.24));
+  // 面と罫線にも、その人の五行をわずかに溶かす（＝ページ全体が微かにその色を帯びる）。
+  // 和紙（生成りの白）をベースに、ごく薄く色を溶かす。旧版は夜空色ベースで
+  // 混色していたため、和紙化後にカードが黒く沈んでいた（260717修正）。
+  root.setProperty('--color-warm-white', _mixPaper(accent, 0.05, '#FFFCF6'));
+  root.setProperty('--color-cream', _mixPaper(accent, 0.06, '#F1E8D6'));
+  root.setProperty('--color-beige', _mixPaper(accent, 0.30, '#E0D3BC'));
   root.setProperty('--color-sage', _lift(accent, 0.30));
 }
 
