@@ -19,6 +19,18 @@
   <div class="detail-content" id="detailContent"></div>
 </div>
 
+<script>
+// 旧Service Workerが古いCSS/JSをキャッシュし続ける事故のため、SWを全解除しキャッシュを消す（260717）。
+// /abby など view.html を直接開く人のSWも、これで確実に外れる。
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.getRegistrations().then(function(rs){
+    var had=rs.length>0;
+    rs.forEach(function(r){r.unregister()});
+    if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k)})})}
+    if(had&&!sessionStorage.getItem('sw_cleared')){sessionStorage.setItem('sw_cleared','1');location.reload(true)}
+  });
+}
+</script>
 <script src="core.js"></script>
 <script>
 (function () {

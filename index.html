@@ -536,7 +536,15 @@ function switchCalMonth(month){
   for(var i=0;i<tabs.length;i++){tabs[i].classList.remove('active');if((month===2&&i===0)||(month===3&&i===1))tabs[i].classList.add('active')}
 }
 render();
-if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js')}
+// 旧Service Workerが古いCSS/JSをキャッシュし続ける事故のため、SWを全解除しキャッシュを消す（260717）
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.getRegistrations().then(function(rs){
+    var had=rs.length>0;
+    rs.forEach(function(r){r.unregister()});
+    if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k)})})}
+    if(had&&!sessionStorage.getItem('sw_cleared')){sessionStorage.setItem('sw_cleared','1');location.reload(true)}
+  });
+}
 </script>
 </body>
 </html>
