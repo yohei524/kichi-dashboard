@@ -125,8 +125,8 @@
   "kanteishoHref": "/abby-kanteisho",
   "expiresAt": "2026-10-16",
   "doorHref": "/menu",
-  "doorLabel": "お品書き",
-  "doorNote": "この先に もう少し深く視るための品書きがあります",
+  "doorLabel": "鑑定目録",
+  "doorNote": "戸をあけると、鑑定の目録があります",
   "starChart": {
     "banse": "鳳閣星",
     "meue": "玉堂星",

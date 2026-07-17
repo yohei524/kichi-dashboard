@@ -1235,19 +1235,19 @@ function buildExpiryHTML() {
 // 開くと「お品書き」（鑑定メニュー）へ飛ぶ。
 function buildDoorHTML() {
   var href = (D.doorHref || 'menu.html');
-  var label = (D.doorLabel || 'お品書き');
-  var note = (D.doorNote || 'この先に、もう少し深く視るための品書きがあります');
+  var label = (D.doorLabel || '鑑定目録');
+  var note = (D.doorNote || 'この先に、もう少し深く視るための目録があります');
+  // 日本風の引き戸。タップすると左右の襖が中央から開き、奥のラベルが現れる。
+  // 開いた奥のラベル（.door-inner）を押すと目録へ遷移する。
   return '' +
-    '<a class="door" href="' + href + '">' +
-    '  <div class="door-frame">' +
-    '    <div class="door-panel">' +
-    '      <div class="door-arch"></div>' +
-    '      <div class="door-knob"></div>' +
-    '    </div>' +
+    '<div class="door" onclick="this.classList.toggle(\'open\')">' +
+    '  <div class="door-gate">' +
+    '    <a class="door-inner" href="' + href + '">' + label + '</a>' +
+    '    <div class="door-leaf door-leaf-l"><span class="door-pull"></span></div>' +
+    '    <div class="door-leaf door-leaf-r"><span class="door-pull"></span></div>' +
     '  </div>' +
-    '  <p class="door-label">' + label + '</p>' +
     '  <p class="door-note">' + note + '</p>' +
-    '</a>';
+    '</div>';
 }
 
 // ---------- 初期化 ----------
