@@ -35,6 +35,10 @@
       "destination": "/view.html?client=hiromi"
     },
     {
+      "source": "/hiromi-kanteisho",
+      "destination": "/kanteisho.html?c=hiromi"
+    },
+    {
       "source": "/asuka",
       "destination": "/view.html?client=asuka"
     },
