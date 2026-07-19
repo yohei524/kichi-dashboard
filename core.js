@@ -282,7 +282,8 @@ function buildMonthGuidance(monthF) {
   if (monthF.isTenchu) {
     var tc = ASPECT_ACTION['天中殺'];
     phaseLines.push('🌀 月天中殺：' + tc.monthText.replace(/^今月は/, ''));
-    if (tc.why) phaseLines.push('　└ なぜ：' + tc.why);
+    // 暦（毎日見る用）では「なぜ」を省く（260720 㐂さん指示）
+    if (!D.koyomiOnly && tc.why) phaseLines.push('　└ なぜ：' + tc.why);
     hasCaution = true;
   }
   for (var i = 0; i < aspKeys.length; i++) {
@@ -290,7 +291,7 @@ function buildMonthGuidance(monthF) {
     if (k === '天中殺') continue;
     var a = ASPECT_ACTION[k];
     phaseLines.push((a.tone === 'good' ? '🌼 ' : a.tone === 'caution' ? '⚡ ' : '🔔 ') + k + '：' + a.monthText);
-    if (a.why) phaseLines.push('　└ なぜ：' + a.why);
+    if (!D.koyomiOnly && a.why) phaseLines.push('　└ なぜ：' + a.why);
     if (a.tone === 'caution') hasCaution = true;
     if (a.tone === 'good') hasGood = true;
   }
@@ -452,8 +453,9 @@ function buildTodayGuidance(todayF, stg, isTenchuDay) {
   if (isTenchuDay || todayF.isTenchu) {
     var tc = ASPECT_ACTION['天中殺'];
     phaseLines.push('🌀 日天中殺：' + tc.text.replace(/^今日は/, ''));
-    if (tc.why) phaseLines.push('　└ なぜ：' + tc.why);
-    if (tc.action) phaseLines.push('　└ 今日の動き方：' + tc.action);
+    // 暦（毎日見る用）では「なぜ／今日の動き方」を省き、見出し＋一言だけにする（260720 㐂さん指示）
+    if (!D.koyomiOnly && tc.why) phaseLines.push('　└ なぜ：' + tc.why);
+    if (!D.koyomiOnly && tc.action) phaseLines.push('　└ 今日の動き方：' + tc.action);
     hasCaution = true;
   }
   for (var i = 0; i < aspKeys.length; i++) {
@@ -461,8 +463,8 @@ function buildTodayGuidance(todayF, stg, isTenchuDay) {
     if (k === '天中殺') continue;
     var a = ASPECT_ACTION[k];
     phaseLines.push((a.tone === 'good' ? '🌼 ' : a.tone === 'caution' ? '⚡ ' : '🔔 ') + k + '：' + a.text);
-    if (a.why) phaseLines.push('　└ なぜ：' + a.why);
-    if (a.action) phaseLines.push('　└ 今日の動き方：' + a.action);
+    if (!D.koyomiOnly && a.why) phaseLines.push('　└ なぜ：' + a.why);
+    if (!D.koyomiOnly && a.action) phaseLines.push('　└ 今日の動き方：' + a.action);
     if (a.tone === 'caution') hasCaution = true;
     if (a.tone === 'good') hasGood = true;
   }
@@ -471,8 +473,9 @@ function buildTodayGuidance(todayF, stg, isTenchuDay) {
   // ③天中殺サイクル（12段階旅フロー）※日天中殺かどうかとは別の、12日周期の技法
   if (stg && stg.longHint) {
     var cycleLines = ['🧭 ' + stg.longHint];
-    if (stg.hint) cycleLines.push('　└ 今日のヒント：' + stg.hint);
-    cycleLines.push('　└ 全12段階中の位置：' + (TRAVEL_STAGES.indexOf(stg) + 1) + '段階目・運気レベル' + stg.level);
+    // 暦では補足（今日のヒント・段階の位置）を省く。位置は本日の運気カードに既に出ている（二重回避・260720）
+    if (!D.koyomiOnly && stg.hint) cycleLines.push('　└ 今日のヒント：' + stg.hint);
+    if (!D.koyomiOnly) cycleLines.push('　└ 全12段階中の位置：' + (TRAVEL_STAGES.indexOf(stg) + 1) + '段階目・運気レベル' + stg.level);
     groups.push({ label:'天中殺サイクル（12段階の' + (stg.name) + '）', lines:cycleLines });
   }
 
@@ -785,11 +788,14 @@ function applyDesignColors(design) {
   // design.colors.accent は旧・明るい背景用パレットの名残なので、色味だけ拝借する。
   var accent = design.accentColor || (design.colors && design.colors.accent);
   if (!accent) return;
-  // 夜空の上では、元の色そのままだと沈むので光として持ち上げる
-  var lit = _lift(accent, 0.42);
+  // 夜空（暗背景）の上では元の色が沈むので光として持ち上げる。
+  // 暦（koyomiOnly）は和紙の明るい背景なので、持ち上げると文字が白茶けて読めない。
+  // 明るい背景では持ち上げず、元色をそのまま濃く使う（260720 主星・従星が薄すぎた件）。
+  var bright = D && D.koyomiOnly;
+  var lit = bright ? accent : _lift(accent, 0.42);
   root.setProperty('--color-accent', lit);
-  root.setProperty('--color-accent-light', _lift(accent, 0.60));
-  root.setProperty('--color-accent-soft', _lift(accent, 0.22));
+  root.setProperty('--color-accent-light', bright ? _lift(accent, 0.20) : _lift(accent, 0.60));
+  root.setProperty('--color-accent-soft', bright ? _lift(accent, 0.10) : _lift(accent, 0.22));
   // 面と罫線にも、その人の五行をわずかに溶かす（＝ページ全体が微かにその色を帯びる）。
   // 和紙（生成りの白）をベースに、ごく薄く色を溶かす。旧版は夜空色ベースで
   // 混色していたため、和紙化後にカードが黒く沈んでいた（260717修正）。
@@ -870,25 +876,28 @@ function render() {
     html += '</div>';
   }
 
-  // ③今月の流れ（時事セクション）
+  // ③今月の流れ（時事セクション）。
+  // 「今日の運気」を上・「月単位の動き」は下、という並び（260720 㐂さん指示）のため、
+  // ここでは組み立てておいて、日運カレンダー・今日どう動くかの後ろに差し込む。
+  var monthFlowHtml = '';
   if (currentMonth) {
     var monthGuidance = buildMonthGuidance(currentMonth);
-    html += '<div class="card">';
-    html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>今月の流れ</span></div>';
-    html += '<div class="text-center">';
-    html += '<p class="text-sm mb-1"><span style="color:var(--color-brown)">' + currentMonth.period + '</span><span style="margin:0 0.5rem">|</span><span style="color:var(--color-accent);font-weight:500">' + currentMonth.kanshi + ' ' + currentMonth.mainStar + '</span></p>';
-    if (currentMonth.isTenchu) html += '<span class="badge badge-tenchu">月天中殺</span>';
-    html += '</div>';
-    html += renderGuidanceHTML('今月どう動くか', monthGuidance);
-    if (currentMonth.advice) html += '<p class="text-xs text-center mt-2" style="color:var(--color-brown-dark);line-height:1.7">' + currentMonth.advice + '</p>';
+    monthFlowHtml += '<div class="card">';
+    monthFlowHtml += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>今月の流れ</span></div>';
+    monthFlowHtml += '<div class="text-center">';
+    monthFlowHtml += '<p class="text-sm mb-1"><span style="color:var(--color-brown)">' + currentMonth.period + '</span><span style="margin:0 0.5rem">|</span><span style="color:var(--color-accent);font-weight:500">' + currentMonth.kanshi + ' ' + currentMonth.mainStar + '</span></p>';
+    if (currentMonth.isTenchu) monthFlowHtml += '<span class="badge badge-tenchu">月天中殺</span>';
+    monthFlowHtml += '</div>';
+    monthFlowHtml += renderGuidanceHTML('今月どう動くか', monthGuidance);
+    if (currentMonth.advice) monthFlowHtml += '<p class="text-xs text-center mt-2" style="color:var(--color-brown-dark);line-height:1.7">' + currentMonth.advice + '</p>';
     if (inTenchu && D.monthlyTenchuPeriod) {
-      html += '<div class="tenchu-box" style="margin-top:0.75rem">';
-      html += '<p class="tenchu-label">月天中殺終了まで</p>';
-      html += '<p class="tenchu-days">' + getDaysUntil(D.monthlyTenchuPeriod.endYear, D.monthlyTenchuPeriod.endMonth, D.monthlyTenchuPeriod.endDay + 1) + '<span>日</span></p>';
-      html += '<p class="tenchu-note">' + D.monthlyTenchuPeriod.endMonth + '月' + (D.monthlyTenchuPeriod.endDay + 1) + '日から動き出せる</p>';
-      html += '</div>';
+      monthFlowHtml += '<div class="tenchu-box" style="margin-top:0.75rem">';
+      monthFlowHtml += '<p class="tenchu-label">月天中殺終了まで</p>';
+      monthFlowHtml += '<p class="tenchu-days">' + getDaysUntil(D.monthlyTenchuPeriod.endYear, D.monthlyTenchuPeriod.endMonth, D.monthlyTenchuPeriod.endDay + 1) + '<span>日</span></p>';
+      monthFlowHtml += '<p class="tenchu-note">' + D.monthlyTenchuPeriod.endMonth + '月' + (D.monthlyTenchuPeriod.endDay + 1) + '日から動き出せる</p>';
+      monthFlowHtml += '</div>';
     }
-    html += '</div>';
+    monthFlowHtml += '</div>';
   }
 
   // 日運カレンダー
@@ -926,7 +935,13 @@ function render() {
     html += '</div>';
   }
 
-  // ここから下は「宿命」セクション（変わらないエネルギー・方針・土台）
+  // 今月の流れ（月単位＝日単位の下に置く）
+  html += monthFlowHtml;
+
+  // ここから下は「宿命」セクション（命式・日柱・星図＝“鑑定の中身”）。
+  // 暦（koyomiOnly）は「毎日見る運気カレンダー」なので、宿命は出さない。
+  // 命式・本質・宿命は鑑定後の鑑定書ページに載せる方針（260720 㐂さん指示）。
+  if (!D.koyomiOnly) {
   html += '<p class="text-center text-xs mb-2" style="color:var(--color-accent);letter-spacing:0.3em;opacity:0.7">─── ' + D.client.name + 'の宿命 ───</p>';
 
   // 宿命（日柱・中心星・年天中殺の説明）
@@ -971,6 +986,7 @@ function render() {
   } else {
     html += '<div class="message-box" style="margin-top:1rem"><p class="text-sm" style="padding-left:1rem;line-height:1.8">' + D.client.elementNote + '</p></div>';
   }
+  } // end 宿命セクション（!D.koyomiOnly）
 
   // ─────────────────────────────────────────────
   // koyomiOnly=true のクライアントは、ここから下の「静的な長文解説」を
@@ -992,13 +1008,23 @@ function render() {
     }
   }
 
-  html += '<div class="divider"></div>';
-
-  html += '<div class="year-tenchu-box">';
-  html += '<p class="year-tenchu-label">🌀 年天中殺について</p>';
-  html += '<p class="year-tenchu-body">' + D.yearTenchuNote + '</p>';
-  html += '</div>';
-  html += '</div>';
+  if (!D.koyomiOnly) {
+    // 宿命カードの締めくくり（宿命セクションを出す時だけ、その中に年天中殺を入れる）
+    html += '<div class="divider"></div>';
+    html += '<div class="year-tenchu-box">';
+    html += '<p class="year-tenchu-label">🌀 年天中殺について</p>';
+    html += '<p class="year-tenchu-body">' + D.yearTenchuNote + '</p>';
+    html += '</div>';
+    html += '</div>';
+  } else {
+    // 暦（宿命なし）では、年天中殺だけを独立した1枚のカードで出す
+    html += '<div class="card">';
+    html += '<div class="year-tenchu-box" style="margin:0">';
+    html += '<p class="year-tenchu-label">🌀 年天中殺について</p>';
+    html += '<p class="year-tenchu-body">' + D.yearTenchuNote + '</p>';
+    html += '</div>';
+    html += '</div>';
+  }
 
   if (!D.koyomiOnly) {
     // 陽転・陰転
@@ -1072,8 +1098,8 @@ function render() {
   // 閲覧期限のお知らせ（残りわずかになってから静かに出す）
   html += buildExpiryHTML();
 
-  // 一番下の扉。開くとお品書きへ。
-  html += buildDoorHTML();
+  // 一番下の扉。開くとお品書きへ。doorHref を空にしたクライアントは扉を出さない（260720）
+  if (D.doorHref !== '') html += buildDoorHTML();
 
   app.innerHTML = html;
 }
