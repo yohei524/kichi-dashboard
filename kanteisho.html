@@ -247,13 +247,14 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
 
   function render(d){
     var cl=d.client||{};
-    var name=(cl.name||c).replace(/さん$/,"");
+    // 暦のヘッダー（「◯◯の暦」）から呼び名を取る。自分で見るものなので「さん」は付けない。
+    var name=((d.design&&d.design.headerTitle)||"").replace(/の暦$/,"").trim()||(cl.name||c).replace(/さん$/,"");
     document.title=name+"さん 鑑定書 ｜ 㐂占";
     var h="";
 
     // header
     h+='<header><p class="kicker">㐂占 　 命 術 本鑑定書</p>';
-    h+='<h1><span class="nm">'+esc(name)+'</span> さんへ</h1>';
+    h+='<h1><span class="nm">'+esc(name)+'</span> の 本鑑定</h1>';
     if(d.design&&d.design.headerTagline)h+='<p class="tagline">'+esc(d.design.headerTagline)+'</p>';
     if(cl.birth)h+='<p class="date">'+esc(cl.birth.replace(/-/g,'年',1).replace('-','月')+'日 生')+'</p>';
     h+='</header>';
@@ -270,7 +271,7 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
     // 命式盤
     if(cl.my){
       var my=cl.my;
-      h+='<div class="sec"><div class="sec-head"><span class="sec-no">命 式</span><span class="sec-title">'+esc(name)+'さんの設計図</span></div><div class="card">';
+      h+='<div class="sec"><div class="sec-head"><span class="sec-no">命 式</span><span class="sec-title">'+esc(name)+'の設計図</span></div><div class="card">';
       h+='<p class="soft" style="margin-bottom:.6rem;">陰占 ― 生まれ持った気の柱</p><div class="meishiki">';
       h+=pill({lbl:'日柱（自分・家庭）',kan:STEMS[my.ds],shi:BR[my.db]},null,ZOU[BR[my.db]]);
       h+=pill({lbl:'月柱（仕事・家系）',kan:STEMS[my.ms],shi:BR[my.mb]},null,ZOU[BR[my.mb]]);
