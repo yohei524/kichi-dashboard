@@ -44,6 +44,9 @@ if('serviceWorker' in navigator){
     var seg = path.split('/').pop();
     if (seg && seg !== 'view.html' && seg !== '') client = seg;
   }
+  // 「/○○-koyomi」（暦ページ用URL）はJSONファイル名の「○○」に読み替える。
+  // 例：/abby-koyomi → clients/abby.json。これが無いと abby-koyomi.json を探して失敗する。
+  if (client) client = client.replace(/-koyomi$/, '');
   // URLのパス名とJSONのファイル名が違う場合の対応表。
   // 表示名は「Hidetoさん」が正しいが、JSONは hidetoh.json のまま（既存URL互換のため）。
   var ALIAS = { 'hideto': 'hidetoh' };
