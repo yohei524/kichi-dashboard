@@ -72,7 +72,7 @@
     },
     {
       "source": "/abby-koyomi",
-      "destination": "/clients/abby-koyomi.html"
+      "destination": "/view.html?client=abby"
     },
     {
       "source": "/sachi",
