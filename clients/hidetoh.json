@@ -466,5 +466,8 @@
     "bannen": "天馳星",
     "meshita": "調舒星",
     "chunen": "天庫星"
-  }
+  },
+  "koyomiOnly": true,
+  "koyomiNoDestiny": true,
+  "kanteishoHref": "/hidetoh-kanteisho"
 }

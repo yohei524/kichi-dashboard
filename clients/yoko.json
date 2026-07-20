@@ -492,5 +492,8 @@
     "bannen": "天恍星",
     "meshita": "司禄星",
     "chunen": "天庫星"
-  }
+  },
+  "koyomiOnly": true,
+  "koyomiNoDestiny": true,
+  "kanteishoHref": "/yoko-kanteisho"
 }

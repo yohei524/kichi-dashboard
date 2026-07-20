@@ -3,15 +3,51 @@
   "outputDirectory": ".",
   "framework": null,
   "redirects": [
-    { "source": "/clients/sachiko.html",  "destination": "/sachiko",   "permanent": false },
-    { "source": "/clients/asuka.html",    "destination": "/asuka",     "permanent": false },
-    { "source": "/clients/yui.html",      "destination": "/yui",       "permanent": false },
-    { "source": "/clients/nanafushi.html","destination": "/nanafushi", "permanent": false },
-    { "source": "/clients/syuko.html",    "destination": "/syuko",     "permanent": false },
-    { "source": "/clients/hiromi.html",   "destination": "/hiromi",    "permanent": false },
-    { "source": "/clients/sayuri.html",   "destination": "/sayuri",    "permanent": false },
-    { "source": "/clients/y-ayumi.html",  "destination": "/y-ayumi",   "permanent": false },
-    { "source": "/clients/ayumi.html",    "destination": "/ayumi",     "permanent": false }
+    {
+      "source": "/clients/sachiko.html",
+      "destination": "/sachiko",
+      "permanent": false
+    },
+    {
+      "source": "/clients/asuka.html",
+      "destination": "/asuka",
+      "permanent": false
+    },
+    {
+      "source": "/clients/yui.html",
+      "destination": "/yui",
+      "permanent": false
+    },
+    {
+      "source": "/clients/nanafushi.html",
+      "destination": "/nanafushi",
+      "permanent": false
+    },
+    {
+      "source": "/clients/syuko.html",
+      "destination": "/syuko",
+      "permanent": false
+    },
+    {
+      "source": "/clients/hiromi.html",
+      "destination": "/hiromi",
+      "permanent": false
+    },
+    {
+      "source": "/clients/sayuri.html",
+      "destination": "/sayuri",
+      "permanent": false
+    },
+    {
+      "source": "/clients/y-ayumi.html",
+      "destination": "/y-ayumi",
+      "permanent": false
+    },
+    {
+      "source": "/clients/ayumi.html",
+      "destination": "/ayumi",
+      "permanent": false
+    }
   ],
   "rewrites": [
     {
@@ -19,16 +55,32 @@
       "destination": "/view.html?client=yui"
     },
     {
+      "source": "/yui-kanteisho",
+      "destination": "/kanteisho.html?c=yui"
+    },
+    {
       "source": "/nanafushi",
       "destination": "/view.html?client=nanafushi"
+    },
+    {
+      "source": "/nanafushi-kanteisho",
+      "destination": "/kanteisho.html?c=nanafushi"
     },
     {
       "source": "/yoko",
       "destination": "/view.html?client=yoko"
     },
     {
+      "source": "/yoko-kanteisho",
+      "destination": "/kanteisho.html?c=yoko"
+    },
+    {
       "source": "/ayumi",
       "destination": "/view.html?client=ayumi"
+    },
+    {
+      "source": "/ayumi-kanteisho",
+      "destination": "/kanteisho.html?c=ayumi"
     },
     {
       "source": "/hiromi",
@@ -43,16 +95,32 @@
       "destination": "/view.html?client=asuka"
     },
     {
+      "source": "/asuka-kanteisho",
+      "destination": "/kanteisho.html?c=asuka"
+    },
+    {
       "source": "/y-ayumi",
       "destination": "/view.html?client=y-ayumi"
+    },
+    {
+      "source": "/y-ayumi-kanteisho",
+      "destination": "/kanteisho.html?c=y-ayumi"
     },
     {
       "source": "/syuko",
       "destination": "/view.html?client=syuko"
     },
     {
+      "source": "/syuko-kanteisho",
+      "destination": "/kanteisho.html?c=syuko"
+    },
+    {
       "source": "/sayuri",
       "destination": "/view.html?client=sayuri"
+    },
+    {
+      "source": "/sayuri-kanteisho",
+      "destination": "/kanteisho.html?c=sayuri"
     },
     {
       "source": "/abby",
@@ -83,8 +151,16 @@
       "destination": "/view.html?client=sachiko"
     },
     {
+      "source": "/sachiko-kanteisho",
+      "destination": "/kanteisho.html?c=sachiko"
+    },
+    {
       "source": "/hidetoh",
       "destination": "/view.html?client=hidetoh"
+    },
+    {
+      "source": "/hidetoh-kanteisho",
+      "destination": "/kanteisho.html?c=hidetoh"
     },
     {
       "source": "/hideto",
