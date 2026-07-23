@@ -295,6 +295,13 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
       h+='</div></div>';
     }
 
+    // 陽占の読み解き（9マス各位置の意味）
+    if(d.starChartReading&&d.starChartReading.length){
+      h+='<div class="sec"><div class="sec-head"><span class="sec-no">陽 占</span><span class="sec-title">心のかたち ― 九つの位の読み解き</span></div><div class="card occ">';
+      d.starChartReading.forEach(function(r){h+='<div class="o"><div class="on">'+esc(r.pos)+'　'+esc(r.star||'')+'</div><div class="ob">'+esc(r.body)+'</div></div>';});
+      h+='</div></div>';
+    }
+
     // 本質（Note群）
     var notes=[];
     ['elementNote','specialNote','tenchuNote','starsNote','chukuseiNote','guardianNote'].forEach(function(k){if(cl[k])notes.push(cl[k]);});
@@ -326,6 +333,13 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
       h+='<div class="patcol pat-y"><h4>大切にすること</h4><ul>'+win.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>';
       h+='<div class="patcol pat-n"><h4>気をつけること</h4><ul>'+lose.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>';
       h+='</div></div></div>';
+    }
+
+    // 処方（伍）
+    if(d.recipe&&d.recipe.length){
+      h+='<div class="sec"><div class="sec-head"><span class="sec-no">伍</span><span class="sec-title">今日から動ける処方</span></div><div class="card recipe">';
+      d.recipe.forEach(function(r,i){h+='<div class="item"><div class="num">'+(i+1)+'</div><div class="rbody">'+esc(r)+'</div></div>';});
+      h+='</div></div>';
     }
 
     // 暦リンク＋引き戸
