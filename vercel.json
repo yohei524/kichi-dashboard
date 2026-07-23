@@ -147,6 +147,10 @@
       "destination": "/view.html?client=sachi"
     },
     {
+      "source": "/sachi-kanteisho",
+      "destination": "/kanteisho.html?c=sachi"
+    },
+    {
       "source": "/sachiko",
       "destination": "/view.html?client=sachiko"
     },
@@ -172,7 +176,7 @@
     },
     {
       "source": "/demo",
-      "destination": "/view.html?client=demo&preview=1"
+      "destination": "/demo-intro.html"
     }
   ]
 }
