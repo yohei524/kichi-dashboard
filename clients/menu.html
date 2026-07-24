@@ -70,25 +70,10 @@ footer { text-align: center; padding: 2rem 1rem; font-size: 0.8rem; color: var(-
   margin-bottom: 1.25rem;
 }
 
-.menu-item-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 0.75rem;
-  margin-bottom: 0.25rem;
-}
-
 .menu-item-title {
   font-size: 0.95rem;
   font-weight: 500;
   color: var(--color-brown-dark);
-}
-
-.menu-item-price {
-  font-size: 0.9rem;
-  color: var(--color-accent);
-  font-weight: 600;
-  white-space: nowrap;
 }
 
 .menu-item-description {
@@ -162,16 +147,6 @@ footer { text-align: center; padding: 2rem 1rem; font-size: 0.8rem; color: var(-
   background: var(--color-accent-light);
 }
 
-.note {
-  font-size: 0.75rem;
-  color: var(--color-brown);
-  margin-top: 1rem;
-  padding: 0.75rem;
-  background: rgba(139, 90, 60, 0.04);
-  border-radius: 4px;
-  line-height: 1.6;
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
     --color-cream: #1a1410;
@@ -189,35 +164,21 @@ footer { text-align: center; padding: 2rem 1rem; font-size: 0.8rem; color: var(-
 <body>
 
 <header>
-  <p class="sub">── 鑑定メニュー ──</p>
+  <p class="sub">── 鑑定のご案内 ──</p>
   <h1>ナナフシ占い</h1>
   <p class="tagline">宿命を知り、道を選ぶ</p>
 </header>
 
 <div class="container">
 
-  <!-- 迷ったらこれ -->
+  <!-- まずは紡の席から -->
   <div class="card featured">
-    <span class="featured-badge">迷ったらこれ</span>
-
-    <div class="menu-item">
-      <div class="menu-item-row">
-        <div class="menu-item-title">命式鑑定「紡の席」</div>
-        <div class="menu-item-price">¥20,000</div>
-      </div>
-      <div class="menu-item-description">算命学で、あなたの宿命・大運・年運から人生の全体像を読み解きます。1時間程度。一番ご依頼の多い、㐂占の看板鑑定です。</div>
-    </div>
-
-    <div class="divider"></div>
+    <span class="featured-badge">まずはここから</span>
 
     <div class="menu-item" style="margin-bottom:0">
-      <div class="menu-item-row">
-        <div class="menu-item-title">総合鑑定（手相 × タロット × 命式）</div>
-        <div class="menu-item-price">¥30,000</div>
-      </div>
-      <div class="menu-item-description">3つの占術を重ねて、過去・現在・未来を多角的に読み解く一番詳しい鑑定。1.5時間程度。</div>
+      <div class="menu-item-title">命式鑑定「紡の席」</div>
+      <div class="menu-item-description">算命学で、あなたの宿命・大運・年運から人生の全体像を読み解きます。㐂占の看板鑑定であり、すべての鑑定の土台になる一席です。まずはここから受けていただくと、あなたに本当に必要な次の一手が見えてきます。</div>
     </div>
-
   </div>
 
   <!-- まずは軽く -->
@@ -228,34 +189,22 @@ footer { text-align: center; padding: 2rem 1rem; font-size: 0.8rem; color: var(-
     </div>
 
     <div class="menu-item">
-      <div class="menu-item-row">
-        <div class="menu-item-title">手相鑑定</div>
-        <div class="menu-item-price">¥5,000</div>
-      </div>
+      <div class="menu-item-title">手相鑑定</div>
       <div class="menu-item-description">手のひらに刻まれた線から、対人関係・運勢・特性を読み解きます。</div>
     </div>
 
     <div class="menu-item">
-      <div class="menu-item-row">
-        <div class="menu-item-title">タロット鑑定（3枚引き）</div>
-        <div class="menu-item-price">¥5,000</div>
-      </div>
+      <div class="menu-item-title">タロット鑑定（3枚引き）</div>
       <div class="menu-item-description">シンプルな3枚展開で、今のあなたに必要なメッセージを引き出します。</div>
     </div>
 
     <div class="menu-item">
-      <div class="menu-item-row">
-        <div class="menu-item-title">タロット鑑定（ケルト十字・10枚引き）</div>
-        <div class="menu-item-price">¥10,000</div>
-      </div>
+      <div class="menu-item-title">タロット鑑定（ケルト十字・10枚引き）</div>
       <div class="menu-item-description">詳細な10枚展開で、状況・背景・対策・未来まで読み解きます。</div>
     </div>
 
     <div class="menu-item">
-      <div class="menu-item-row">
-        <div class="menu-item-title">五行波動調律鑑定</div>
-        <div class="menu-item-price">¥5,000</div>
-      </div>
+      <div class="menu-item-title">五行波動調律鑑定</div>
       <div class="menu-item-description">あなたに不足している五行エネルギーを診断し、補う方法をお伝えします。</div>
     </div>
 
@@ -269,34 +218,22 @@ footer { text-align: center; padding: 2rem 1rem; font-size: 0.8rem; color: var(-
     </div>
 
     <div class="menu-item">
-      <div class="menu-item-row">
-        <div class="menu-item-title">相性鑑定（1人追加）</div>
-        <div class="menu-item-price">¥10,000</div>
-      </div>
+      <div class="menu-item-title">相性鑑定（1人追加）</div>
       <div class="menu-item-description">あの人との相性・関係の位相・今後の展開を読み解きます。命式鑑定への追加オプションです。</div>
     </div>
 
     <div class="menu-item">
-      <div class="menu-item-row">
-        <div class="menu-item-title">親子鑑定</div>
-        <div class="menu-item-price">¥10,000</div>
-      </div>
+      <div class="menu-item-title">親子鑑定</div>
       <div class="menu-item-description">親子関係の宿命的背景・今の課題・乗り越え方を読み解きます。</div>
     </div>
 
     <div class="menu-item">
-      <div class="menu-item-row">
-        <div class="menu-item-title">気になるあの人の攻略鑑定</div>
-        <div class="menu-item-price">¥10,000</div>
-      </div>
+      <div class="menu-item-title">気になるあの人の攻略鑑定</div>
       <div class="menu-item-description">相手の宿命・性質から、あなたがどう接するべきかの指針を得られます。</div>
     </div>
 
     <div class="menu-item">
-      <div class="menu-item-row">
-        <div class="menu-item-title">適職天命鑑定</div>
-        <div class="menu-item-price">¥10,000</div>
-      </div>
+      <div class="menu-item-title">適職天命鑑定</div>
       <div class="menu-item-description">算命学から、あなたの天命に合った職業・働き方の方向性を導き出します。</div>
     </div>
 
@@ -310,19 +247,13 @@ footer { text-align: center; padding: 2rem 1rem; font-size: 0.8rem; color: var(-
     </div>
 
     <div class="menu-item">
-      <div class="menu-item-row">
-        <div class="menu-item-title">リピーター鑑定（90分）</div>
-        <div class="menu-item-price">¥15,000</div>
-      </div>
+      <div class="menu-item-title">リピーター鑑定</div>
       <div class="menu-item-description">以前鑑定を受けた方向け。手相・タロット・命式など、必要な方法で深く掘り下げます。</div>
     </div>
 
     <div class="menu-item">
-      <div class="menu-item-row">
-        <div class="menu-item-title">オーダーメイドジュエリー（五行鑑定付き）</div>
-        <div class="menu-item-price">¥25,000〜</div>
-      </div>
-      <div class="menu-item-description">あなたの五行バランスに基づいて、最適な石・デザインのジュエリーをオーダーメイド（〜¥100,000）。五行鑑定込み。</div>
+      <div class="menu-item-title">オーダーメイドジュエリー（五行鑑定付き）</div>
+      <div class="menu-item-description">あなたの五行バランスに基づいて、最適な石・デザインのジュエリーをオーダーメイドします。五行鑑定込み。</div>
     </div>
 
   </div>
@@ -335,29 +266,22 @@ footer { text-align: center; padding: 2rem 1rem; font-size: 0.8rem; color: var(-
     </div>
 
     <div class="menu-item">
-      <div class="menu-item-row">
-        <div class="menu-item-title">AI × SNS コース</div>
-        <div class="menu-item-price">¥500,000</div>
-      </div>
-      <div class="menu-item-description">SNS運用を自動化し、あなたの発信を加速させる。企画〜台本〜投稿〜販売まで全て。3ヶ月・週1回のMeet + LINEサポート。</div>
+      <div class="menu-item-title">AI × SNS コース</div>
+      <div class="menu-item-description">SNS運用を自動化し、あなたの発信を加速させる。企画〜台本〜投稿〜販売まで全て。週1回のMeet + LINEサポート。</div>
     </div>
 
     <div class="menu-item">
-      <div class="menu-item-row">
-        <div class="menu-item-title">AI × SNS × 占い師 コース</div>
-        <div class="menu-item-price">¥500,000</div>
-      </div>
-      <div class="menu-item-description">占いを仕事にしたい方向け。SNSでの集客から、鑑定メニューづくり・販売導線まで、AIを使って一人で回せる形を作る。3ヶ月・週1回のMeet + LINEサポート。<br><span style="font-size:0.72rem;opacity:0.75">※ この目録だけのご案内です。</span></div>
+      <div class="menu-item-title">AI × SNS × 占い師 コース</div>
+      <div class="menu-item-description">占いを仕事にしたい方向け。SNSでの集客から、鑑定メニューづくり・販売導線まで、AIを使って一人で回せる形を作る。週1回のMeet + LINEサポート。</div>
     </div>
 
   </div>
 
   <!-- 申し込み -->
   <div class="cta-box">
-    <p style="font-weight:500;font-size:0.95rem">ご質問・申し込みは</p>
+    <p style="font-weight:500;font-size:0.95rem">ご質問・お申し込みは</p>
     <p style="font-size:0.85rem;color:var(--color-brown)">お気軽にLINEまでお問い合わせください</p>
     <a href="https://line.me/R/ti/p/@hossoiossan" class="cta-button">LINEで相談する</a>
-    <p class="note">※ LINEが難しい場合はメール（mails5244@gmail.com）でもお受けしています。</p>
   </div>
 
 </div>
