@@ -26,7 +26,7 @@
       ]
     },
     "birth": "1968-12-31",
-    "travelImgKey": "gohitsuji"
+    "travelImgKey": "shinyu"
   },
   "yearTenchuNote": "2026年7月〜2027年6月は、申酉天中殺の使命が最も光る時期。特に2027年3月（龍高星月運・天禄星）は申し分ない配置。この時期に『古いものと新しいものを繋ぐ活動』を具体化させておくと、2028-2029年の年天中殺中も軸がぶれない。2027年末までに『これだけは続ける』を決めておく。",
   "fiveViews": [
@@ -156,5 +156,8 @@
   ],
   "koyomiOnly": true,
   "koyomiNoDestiny": true,
-  "kanteishoHref": "/sayuri-kanteisho"
+  "kanteishoHref": "/sayuri-kanteisho",
+  "travelImgExt": {
+    "shinyu_11": "jpeg"
+  }
 }
