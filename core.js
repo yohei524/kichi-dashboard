@@ -302,26 +302,24 @@ function buildMonthGuidance(monthF) {
   var msDesc = mainStarDesc[monthF.mainStar];
   if (msDesc) groups.push({ label:'今月の主星（' + monthF.mainStar + '）', lines:['⭐ ' + msDesc] });
 
-  // 位相法だけでなく従星エネルギーも反映（今月の従星が高い＝勢いのある月）
+  // 【設計思想・260724】月運も点数化しない。従星(出力の質)・位相法(気配)・月天中殺は別次元。
+  //   軸が干渉して特別な意味が生まれる時だけ総合で言う。無ければ断定を避ける。
   var mEnergy = JYUSEI_ENERGY[monthF.jyusei] || 0;
+  var mJyusei = monthF.jyusei || '';
 
   var summary;
-  if (monthF.isTenchu) {
-    summary = '総合すると、今月は新しく大きく動くより、既にあるものを整える月にすると無理がありません。';
+  if (monthF.isTenchu && mEnergy >= 10) {
+    summary = '⚠️ 今月は月天中殺に' + mJyusei + '（出力の高い星）が重なっています。力は出ますが天中殺の月は空回りしやすい向き。大きな決断は急がず、既にあるものを整える・仕込むほうに力を使うのが吉です。';
+  } else if (monthF.isTenchu) {
+    summary = '今月は月天中殺。新しく大きく動くより、既にあるものを整える・見直す月にすると無理がありません。';
+  } else if (mEnergy >= 10) {
+    summary = '今月は' + mJyusei + '（出力の高い星）が巡っています。力が乗る月なので、決断・前進・責任ある動きが活きます。気になっていたことを今月中に一歩進めるのに向いています。';
+  } else if (mEnergy > 0 && mEnergy <= 2) {
+    summary = '今月は' + mJyusei + 'で、エネルギーが静かに落ちる月。無理に動かず、充電と整理に充てると後で効いてきます。';
   } else if (hasCaution && hasGood) {
-    summary = '総合すると、伸びる流れと注意すべき流れが両方来ている月。的を絞って動くと結果が出やすいです。';
-  } else if (hasCaution && mEnergy < 8) {
-    summary = '総合すると、今月は慎重に構えるのが吉な月。大きな決断は来月以降に回すのも一つの手です。';
-  } else if (hasGood || mEnergy >= 10) {
-    summary = '総合すると、今月はエネルギーが高く、動くと結果が出やすい月。気になっていたことを一つ、今月中に思い切って進めてみてください。';
-  } else if (mEnergy >= 8) {
-    summary = '総合すると、今月は追い風寄りの月。勢いがあるので、気になっていたことを一歩進めるのに向いています。';
-  } else if (hasCaution) {
-    summary = '総合すると、今月は慎重に構えるのが吉な月。大きな決断は来月以降に回すのも一つの手です。';
-  } else if (mEnergy > 0 && mEnergy <= 3) {
-    summary = '総合すると、今月はエネルギーが静かに落ちる月。無理に動かず、充電と整理に充てると後で効いてきます。';
+    summary = '今月は伸びる気配と気をつけたい気配が両方来ています。的を絞って動くと結果が出やすい月です。';
   } else {
-    summary = '総合すると、今月は特別な追い風も向かい風もない、いつも通りのペースで過ごせる月です。';
+    summary = '今月はいくつかの気が静かに重なっています。上の各項目のうち、ご自身に響くものを手がかりに過ごしてみてください。';
   }
 
   return { groups: groups, summary: summary };
@@ -494,31 +492,38 @@ function buildTodayGuidance(todayF, stg, isTenchuDay) {
     groups.push({ label:'天中殺サイクル（12段階の' + (stg.name) + '）', lines:cycleLines });
   }
 
-  // ③総合の一言（吉日か注意日かをまとめて明示。ここだけは複数の技法をまたいだ㐂の判断として出す）
-  // 位相法(hasGood/hasCaution)だけでなく、従星エネルギーと天中殺サイクルの運気レベルも統合して判定する。
-  // ※画面に「運気レベル9」「天将星＝エネルギー最大」と大きく出ているのに総合が「いつも通り」になる矛盾を防ぐ。
-  var energy = JYUSEI_ENERGY[todayF.jyusei] || 0;   // 従星エネルギー(1〜12)
-  var cycleLv = (stg && stg.level) ? stg.level : 0;  // 天中殺サイクルの運気レベル(1〜12)
-  // 従星と天中殺サイクルの高い方を「今日の勢い」とみなす
-  var power = Math.max(energy, cycleLv);
+  // ③総合の一言。
+  // 【設計思想・260724】運気は「良い⇔悪い」の点数ではない。
+  //   天中殺サイクル(局面)・従星(出力の質)・主星・位相法は、それぞれ別次元の軸。
+  //   これを1つの点数(power)に潰すと情報が死ぬ。多重的な運気の重なりは、
+  //   各軸を独立表示(=上のgroups)したうえで、軸どうしが干渉して特別な意味が生まれる時だけ
+  //   総合欄でそれを言う。干渉が無ければ断定せず「各項目を見て」と引く。
+  var energy = JYUSEI_ENERGY[todayF.jyusei] || 0;    // 従星の出力の質(1〜12)。強弱ではなくエンジンの状態
+  var cycleLv = (stg && stg.level) ? stg.level : 0;   // 天中殺サイクルの局面レベル(1〜12)
+  var isTenchu = (isTenchuDay || todayF.isTenchu);
+  var jyusei = todayF.jyusei || '';
+  var stageName = (stg && stg.name) ? stg.name : '';
 
   var summary;
-  if (isTenchuDay || todayF.isTenchu) {
-    summary = '総合すると、今日は「動く」より「整える」に向いた日です。';
+  if (isTenchu && energy >= 10) {
+    // 日天中殺 × 高出力従星：同じ最大出力が「暴走」に化ける最重要パターン
+    summary = '⚠️ 今日は日天中殺に' + jyusei + '（出力の高い星）が重なっています。力はいつも以上に出ますが、天中殺の日はその力が空回り・暴走しやすい向き。大きく踏み込むより、出力を絞って整えるほうに使うのが吉です。';
+  } else if (isTenchu) {
+    summary = '今日は日天中殺。天と地が少しねじれる日なので、新しく大きく動くより、既にあるものを整える・見直すほうが流れに乗れます。';
+  } else if (cycleLv >= 8 && energy >= 10) {
+    // 高い局面 × 高出力：軸が噛み合って加速する日
+    summary = '今日は「' + stageName + '」の局面に' + jyusei + '（出力の高い星）が重なっています。局面と力が噛み合うので、決断・発信・先頭に立つ動きが活きます。動くなら今日に合わせるのが向いています。';
+  } else if (cycleLv <= 3 && energy >= 10) {
+    // 静かな局面 × 高出力：空回りしやすい日
+    summary = '今日は局面としては静かな「' + stageName + '」ですが、' + jyusei + '（出力の高い星）が来ています。力はあるのに局面が受け止めきれず空回りしやすい向き。力は溜める・準備に回すほうが後で効いてきます。';
+  } else if (energy > 0 && energy <= 2) {
+    // 出力が底：局面に関わらず省エネ推奨
+    summary = '今日は' + jyusei + 'で、エネルギーが静かに落ちる日。無理に動かず、休む・整える・直感を大事にするほうが流れに合います。';
   } else if (hasCaution && hasGood) {
-    summary = '総合すると、良い流れと注意すべき流れが両方来ている日。無理に全部を進めようとせず、一つに絞って動くと吉です。';
-  } else if (hasCaution && power < 8) {
-    summary = '総合すると、今日は慎重に構えるのが吉。大きな決断は避けて、様子を見る日にしましょう。';
-  } else if (hasGood || power >= 10) {
-    summary = '総合すると、今日はエネルギーが高く、動くと結果が出やすい日。決断・発信・先頭に立つ動きが向いています。気になっていたことを一つ、思い切って進めてみてください。';
-  } else if (power >= 8) {
-    summary = '総合すると、今日は追い風寄りの日。勢いがあるので、気になっていたことを一歩進めるのに向いています。';
-  } else if (hasCaution) {
-    summary = '総合すると、今日は慎重に構えるのが吉。大きな決断は避けて、様子を見る日にしましょう。';
-  } else if (power > 0 && power <= 3) {
-    summary = '総合すると、今日はエネルギーが静かに落ちる日。無理に動かず、休む・整えるほうが後で効いてきます。';
+    summary = '今日は伸びる気配と気をつけたい気配が両方重なっています。全部を進めようとせず、一つに絞って動くと結果が出やすい日です。';
   } else {
-    summary = '総合すると、今日は特別な追い風も向かい風もない、いつも通りのペースで過ごせる日です。';
+    // 特別な干渉なし：断定せず、各軸を自分で読んでもらう
+    summary = '今日はいくつかの気が静かに重なっています。上の各項目のうち、ご自身に響くものを手がかりに過ごしてみてください。';
   }
 
   return { groups: groups, summary: summary };
