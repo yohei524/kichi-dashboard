@@ -171,6 +171,14 @@
       "destination": "/view.html?client=hidetoh"
     },
     {
+      "source": "/ciel",
+      "destination": "/view.html?client=ciel"
+    },
+    {
+      "source": "/ciel-kanteisho",
+      "destination": "/kanteisho.html?c=ciel"
+    },
+    {
       "source": "/menu",
       "destination": "/clients/menu.html"
     },

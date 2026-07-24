@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>㐂の暦について</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-night: #F7F1E6;
+    --color-warm-white: #FFFCF6;
+    --color-beige: #E0D3BC;
+    --color-accent: #B8862C;
+    --color-brown: #8A7B62;
+    --color-brown-dark: #3A3228;
+  }
+  html { background: #F7F1E6; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Serif JP', serif;
+    background-color: #F7F1E6;
+    background-image:
+      radial-gradient(1200px 600px at 50% -10%, rgba(184, 134, 44, 0.08), transparent 60%),
+      linear-gradient(180deg, var(--color-night) 0%, #FBF6EC 45%, #F1E8D6 100%);
+    background-attachment: fixed;
+    color: var(--color-brown-dark);
+    min-height: 100vh;
+    line-height: 1.9;
+    letter-spacing: 0.05em;
+  }
+  .wrap { max-width: 28rem; margin: 0 auto; padding: 56px 24px 80px; }
+  header { text-align: center; margin-bottom: 40px; }
+  header .mark { font-size: 13px; color: var(--color-accent); letter-spacing: 0.3em; margin-bottom: 10px; }
+  header h1 { font-size: 24px; font-weight: 500; margin: 0; letter-spacing: 0.06em; }
+  section { margin-bottom: 40px; }
+  .divider { text-align: center; color: var(--color-accent); font-size: 12px; opacity: 0.6; margin-bottom: 18px; }
+  h2 { font-size: 16px; font-weight: 500; color: var(--color-accent); text-align: center; margin-bottom: 16px; }
+  p.lead { font-size: 15px; text-align: center; }
+  .card {
+    background: var(--color-warm-white);
+    border: 1px solid var(--color-beige);
+    border-radius: 6px;
+    padding: 24px 20px;
+    font-size: 14px;
+  }
+  .note { font-size: 12px; color: var(--color-brown); text-align: center; margin-top: 10px; }
+  .cta {
+    display: block;
+    text-align: center;
+    background: var(--color-accent);
+    color: #fffaf0;
+    text-decoration: none;
+    padding: 16px;
+    border-radius: 4px;
+    font-size: 15px;
+    letter-spacing: 0.05em;
+    margin: 8px 0;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="mark">㐂占</div>
+    <h1>㐂の暦について</h1>
+  </header>
+
+  <section>
+    <div class="divider">━━━━━━━━━━━</div>
+    <h2>宿命と、今日という日</h2>
+    <p class="lead">
+      宿命は、生まれた時に宿した<br>
+      あなただけのエネルギーです<br><br>
+      そして今日、今週、今月にも<br>
+      それぞれ固有のエネルギーがあります<br>
+      （先週と今週で、少し違いますよね）<br><br>
+      その2つが干渉することで<br>
+      追い風にも、向かい風にもなる<br><br>
+      「㐂の暦」は<br>
+      その干渉＝毎日の運気を<br>
+      見える形にしたものです
+    </p>
+  </section>
+
+  <section>
+    <div class="divider">━━━━━━━━━━━</div>
+    <h2>「紡の席」を受けると</h2>
+    <div class="card">
+      あなた専用のこのページが手に入ります<br><br>
+      命式・天中殺・大運といった宿命と<br>
+      今日という日のエネルギーを重ねて<br>
+      追い風か向かい風かを毎日見える形にします
+    </div>
+  </section>
+
+  <section>
+    <div class="divider">━━━━━━━━━━━</div>
+    <a class="cta" href="/view.html?client=demo&preview=1">見本を見てみる →</a>
+    <p class="note">以下は「見本さん」という仮の人物で作ったサンプルです</p>
+  </section>
+
+</div>
+</body>
+</html>
