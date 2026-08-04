@@ -139,6 +139,10 @@
       "destination": "/clients/kyoko-kanteisho.html"
     },
     {
+      "source": "/naoko",
+      "destination": "/view.html?client=naoko"
+    },
+    {
       "source": "/abby-koyomi",
       "destination": "/view.html?client=abby"
     },
