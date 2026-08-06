@@ -193,6 +193,10 @@
     {
       "source": "/demo",
       "destination": "/demo-intro.html"
+    },
+    {
+      "source": "/tsujioka",
+      "destination": "/view.html?client=tsujioka"
     }
   ]
 }
