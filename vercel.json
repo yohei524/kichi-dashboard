@@ -197,6 +197,10 @@
     {
       "source": "/tsujioka",
       "destination": "/view.html?client=tsujioka"
+    },
+    {
+      "source": "/tsujioka-kanteisho",
+      "destination": "/kanteisho.html?c=tsujioka"
     }
   ]
 }
