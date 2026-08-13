@@ -139,6 +139,14 @@
       "destination": "/clients/kyoko-kanteisho.html"
     },
     {
+      "source": "/nao",
+      "destination": "/view.html?client=nao"
+    },
+    {
+      "source": "/nao-kanteisho",
+      "destination": "/kanteisho.html?c=nao"
+    },
+    {
       "source": "/naoko",
       "destination": "/view.html?client=naoko"
     },
