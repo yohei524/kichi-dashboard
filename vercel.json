@@ -209,6 +209,14 @@
     {
       "source": "/tsujioka-kanteisho",
       "destination": "/kanteisho.html?c=tsujioka"
+    },
+    {
+      "source": "/yamashita",
+      "destination": "/view.html?client=yamashita"
+    },
+    {
+      "source": "/yamashita-kanteisho",
+      "destination": "/kanteisho.html?c=yamashita"
     }
   ]
 }
