@@ -217,6 +217,14 @@
     {
       "source": "/yamashita-kanteisho",
       "destination": "/kanteisho.html?c=yamashita"
+    },
+    {
+      "source": "/ann",
+      "destination": "/view.html?client=ann"
+    },
+    {
+      "source": "/ann-kanteisho",
+      "destination": "/kanteisho.html?c=ann"
     }
   ]
 }
