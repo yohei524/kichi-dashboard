@@ -148,8 +148,9 @@
   },
   "design": {
     "accentColor": "#C4622D",
-    "headerSub": "― 丙寅・調舒星の暦 ―",
-    "headerTitle": "山下の暦",
+    "displayName": "山下さん",
+    "headerSub": "― 丙寅・調舒星 ―",
+    "headerTitle": "運気の暦",
     "headerTagline": "のどかな春の太陽。焼き尽くさず、長く照らす",
     "footerText": "― 全力で走るより、いちばんええ一手に絞る ―",
     "needElement": "金・水",

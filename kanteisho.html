@@ -247,9 +247,16 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
 
   function render(d){
     var cl=d.client||{};
-    // 暦のヘッダー（「◯◯の暦」）から呼び名を取る。自分で見るものなので「さん」は付けない。
-    var name=((d.design&&d.design.headerTitle)||"").replace(/の暦$/,"").trim()||(cl.name||c).replace(/さん$/,"");
-    document.title=name+"さん 鑑定書 ｜ 㐂占";
+    // 呼び名。design.displayName が最優先（headerTitle を「運気の暦」等にした場合の受け皿）。
+    // 次に暦のヘッダー「◯◯の暦」から取る。自分で見るものなので「さん」は付けない。
+    var name=(d.design&&d.design.displayName)||"";
+    if(!name){
+      var ht=((d.design&&d.design.headerTitle)||"").trim();
+      // 「◯◯の暦」形式で、かつ◯◯が個人名らしい時だけ採用する
+      name=(/の暦$/.test(ht)&&!/^(運気|㐂び?)/.test(ht))?ht.replace(/の暦$/,"").trim():"";
+    }
+    if(!name)name=(cl.name||c).replace(/さん$/,"");
+    document.title=(/さん$/.test(name)?name:name+"さん")+" 鑑定書 ｜ 㐂占";
     var h="";
 
     // header
@@ -343,7 +350,8 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
     }
 
     // 暦リンク＋引き戸
-    h+='<a class="koyomi-link" href="/'+esc(c)+'"><span class="arrow">▶</span> '+esc(name)+'の暦（日々の運気）をひらく<small>毎日の運気を、天気予報のように</small></a>';
+    var koyomiLabel=((d.design&&d.design.headerTitle)||"").trim()||esc(name)+'の暦';
+    h+='<a class="koyomi-link" href="/'+esc(c)+'"><span class="arrow">▶</span> '+esc(koyomiLabel)+'（日々の運気）をひらく<small>毎日の運気を、天気予報のように</small></a>';
     h+='<div class="door" onclick="this.classList.toggle(\'open\')"><div class="door-gate"><a class="door-inner" href="/menu">鑑定目録</a><div class="door-leaf door-leaf-l"><span class="door-pull"></span></div><div class="door-leaf door-leaf-r"><span class="door-pull"></span></div></div><p class="door-note">戸をあけると、鑑定の目録があります</p></div>';
     h+='<footer><p>いつもおおきにです😆</p><p class="sig">㐂</p></footer>';
 
