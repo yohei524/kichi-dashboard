@@ -225,6 +225,14 @@
     {
       "source": "/ann-kanteisho",
       "destination": "/kanteisho.html?c=ann"
+    },
+    {
+      "source": "/kimiko",
+      "destination": "/view.html?client=kimiko"
+    },
+    {
+      "source": "/kimiko-kanteisho",
+      "destination": "/kanteisho.html?c=kimiko"
     }
   ]
 }
