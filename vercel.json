@@ -147,6 +147,14 @@
       "destination": "/kanteisho.html?c=nao"
     },
     {
+      "source": "/misato",
+      "destination": "/view.html?client=misato"
+    },
+    {
+      "source": "/misato-kanteisho",
+      "destination": "/kanteisho.html?c=misato"
+    },
+    {
       "source": "/naoko",
       "destination": "/view.html?client=naoko"
     },
