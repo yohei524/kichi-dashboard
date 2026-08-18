@@ -233,6 +233,14 @@
     {
       "source": "/kimiko-kanteisho",
       "destination": "/kanteisho.html?c=kimiko"
+    },
+    {
+      "source": "/toshiko",
+      "destination": "/view.html?client=toshiko"
+    },
+    {
+      "source": "/toshiko-kanteisho",
+      "destination": "/kanteisho.html?c=toshiko"
     }
   ]
 }
