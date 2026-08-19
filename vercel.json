@@ -247,6 +247,10 @@
       "destination": "/view.html?client=toshiko"
     },
     {
+      "source": "/sakura",
+      "destination": "/view.html?client=sakura"
+    },
+    {
       "source": "/toshiko-kanteisho",
       "destination": "/kanteisho.html?c=toshiko"
     }
