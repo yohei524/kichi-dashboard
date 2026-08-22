@@ -101,7 +101,7 @@
   },
   "dailyAdvice": {},
   "koyomiOnly": true,
-  "kanteishoHref": "",
+  "kanteishoHref": "/masami-kanteisho",
   "expiresAt": "2026-11-22",
   "doorHref": "/menu",
   "doorLabel": "鑑定目録",
