@@ -115,6 +115,14 @@
       "destination": "/kanteisho.html?c=syuko"
     },
     {
+      "source": "/masami",
+      "destination": "/view.html?client=masami"
+    },
+    {
+      "source": "/masami-kanteisho",
+      "destination": "/kanteisho.html?c=masami"
+    },
+    {
       "source": "/sayuri",
       "destination": "/view.html?client=sayuri"
     },
