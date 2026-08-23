@@ -261,6 +261,14 @@
     {
       "source": "/toshiko-kanteisho",
       "destination": "/kanteisho.html?c=toshiko"
+    },
+    {
+      "source": "/nanami",
+      "destination": "/view.html?client=nanami"
+    },
+    {
+      "source": "/nanami-kanteisho",
+      "destination": "/kanteisho.html?c=nanami"
     }
   ]
 }
