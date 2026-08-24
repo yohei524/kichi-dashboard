@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美奈子さん 鑑定書 ｜ 㐂占</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --night:#0B0F1A; --night2:#131A28; --sink:#171F30; --panel:#1B2334;
+  --line:#2A3346; --accent:#B8834A; --accent-soft:#96692F; --accent-glow:rgba(184,131,74,.14);
+  --gold:#C9A24A; --text:#ECEAE4; --muted:#8A96AC; --muted2:#A9B3C6;
+  --water:#6E9BC4; --fire:#D08A5A; --wood:#7FA86B; --metal:#C4C9D2; --earth:#C9A24A;
+  --bad:#C97A6A; --good:#6E9BC4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Serif JP',serif; color:var(--text); line-height:1.95; letter-spacing:.045em;
+  background:
+    radial-gradient(1200px 620px at 50% -12%, rgba(184,131,74,.10), transparent 60%),
+    linear-gradient(180deg,#0B0F1A 0%,#0D1220 45%,#080B14 100%);
+  background-attachment:fixed; min-height:100vh;
+}
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.05rem 4rem;}
+
+header{text-align:center;padding:3rem 1rem 1.4rem;}
+header .kicker{font-size:.68rem;letter-spacing:.32em;color:var(--accent);opacity:.9;margin-bottom:.9rem;}
+header h1{font-size:1.5rem;font-weight:500;letter-spacing:.08em;margin-bottom:.5rem;}
+header h1 .nm{color:var(--accent);}
+header .tagline{font-size:.8rem;color:var(--muted2);letter-spacing:.1em;line-height:1.7;}
+header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:.12em;}
+
+.profile{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem .8rem;
+}
+.profile div{font-size:.74rem;color:var(--muted);}
+.profile div b{display:block;font-size:.9rem;color:var(--text);font-weight:500;margin-top:.1rem;letter-spacing:.06em;}
+.profile div.full{grid-column:1/3;}
+
+.sec{margin-bottom:1.65rem;}
+.sec-head{
+  display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;
+  padding-bottom:.6rem;border-bottom:1px solid var(--line);
+}
+.sec-no{font-size:.72rem;color:var(--accent);letter-spacing:.18em;font-weight:600;}
+.sec-title{font-size:1.02rem;font-weight:500;letter-spacing:.08em;}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  padding:1.25rem 1.15rem;box-shadow:0 4px 24px rgba(0,0,0,.32);margin-bottom:1rem;
+}
+.card p{font-size:.87rem;margin-bottom:.9rem;color:var(--text);}
+.card p:last-child{margin-bottom:0;}
+.card .lead{color:var(--accent);font-size:.9rem;font-weight:500;}
+.hl{color:var(--accent);font-weight:500;}
+.soft{color:var(--muted2);font-size:.8rem;}
+
+.meishiki{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.2rem 0 .3rem;
+}
+.pillar{
+  background:var(--sink);border:1px solid var(--line);border-radius:12px;
+  padding:.7rem .4rem;text-align:center;
+}
+.pillar .lbl{font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.55rem;}
+.pillar .yomi{font-size:.58rem;color:var(--muted);letter-spacing:.04em;line-height:1.3;}
+.pillar .kan{font-size:1.85rem;font-weight:600;color:var(--text);line-height:1.15;}
+.pillar .shi{font-size:1.85rem;font-weight:600;color:var(--accent);line-height:1.15;margin-top:.2rem;}
+.pillar .zou{font-size:.62rem;color:var(--muted2);margin-top:.55rem;letter-spacing:.04em;}
+.meishiki-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;}
+
+.jintai{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:19rem;margin:.4rem auto .2rem;}
+.jcell{
+  background:var(--sink);border:1px solid var(--line);border-radius:11px;
+  aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;
+}
+.jcell .pos{font-size:.58rem;color:var(--muted);letter-spacing:.05em;}
+.jcell .star{font-size:.92rem;font-weight:600;color:var(--text);letter-spacing:.03em;}
+.jcell.center{background:linear-gradient(160deg,rgba(184,131,74,.18),var(--sink));border-color:var(--accent-soft);}
+.jcell.center .star{color:var(--accent);}
+.jcell.jusei-cell{background:var(--night2);}
+.jcell .star.gold{color:var(--gold);}
+
+.gogyo{margin-top:.3rem;}
+.gbar{display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;}
+.gbar .gname{width:2.6rem;font-size:.76rem;color:var(--muted2);flex-shrink:0;}
+.gbar .gtrack{flex:1;height:9px;background:var(--sink);border-radius:5px;overflow:hidden;}
+.gbar .gfill{height:100%;border-radius:5px;}
+.gbar .gval{width:2.2rem;text-align:right;font-size:.72rem;color:var(--muted);flex-shrink:0;}
+.g-wood .gfill{background:var(--wood);}
+.g-fire .gfill{background:var(--fire);}
+.g-earth .gfill{background:var(--earth);}
+.g-metal .gfill{background:var(--metal);}
+.g-water .gfill{background:var(--water);}
+
+.daiun-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.daiun{width:100%;border-collapse:collapse;font-size:.78rem;min-width:19rem;}
+.daiun th{
+  font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.05em;
+  padding:.4rem .3rem;border-bottom:1px solid var(--line);text-align:center;
+}
+.daiun td{padding:.5rem .3rem;text-align:center;border-bottom:1px solid rgba(42,51,70,.5);color:var(--text);}
+.daiun td:first-child{color:var(--muted2);font-size:.72rem;white-space:nowrap;}
+.daiun .tc-cell{color:var(--bad);font-size:.68rem;}
+.daiun .now-row td{background:linear-gradient(90deg,rgba(184,131,74,.12),transparent);}
+.daiun .now-row td:first-child{color:var(--accent);font-weight:600;}
+.daiun .now-cell{color:var(--accent);font-size:.68rem;font-weight:600;}
+
+.tl{position:relative;padding-left:1.1rem;margin-top:.3rem;}
+.tl::before{content:"";position:absolute;left:3px;top:.4rem;bottom:.4rem;width:2px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:1rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before{content:"";position:absolute;left:-1.1rem;top:.45rem;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--night2);}
+.tl-item.tc::before{background:var(--bad);}
+.tl-when{font-size:.76rem;color:var(--accent);font-weight:600;letter-spacing:.06em;}
+.tl-item.tc .tl-when{color:var(--bad);}
+.tl-body{font-size:.82rem;color:var(--text);margin-top:.15rem;}
+
+.dodont{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.dobox,.dontbox{border-radius:12px;padding:.85rem .8rem;border:1px solid var(--line);}
+.dobox{background:rgba(110,155,196,.08);}
+.dontbox{background:rgba(201,122,106,.08);}
+.dobox .h,.dontbox .h{font-size:.78rem;font-weight:600;margin-bottom:.5rem;letter-spacing:.06em;}
+.dobox .h{color:var(--good);}
+.dontbox .h{color:var(--bad);}
+.dodont ul{list-style:none;}
+.dodont li{font-size:.75rem;color:var(--text);padding-left:.9rem;position:relative;margin-bottom:.45rem;line-height:1.6;}
+.dodont li:last-child{margin-bottom:0;}
+.dobox li::before{content:"○";position:absolute;left:0;color:var(--good);font-size:.7rem;}
+.dontbox li::before{content:"×";position:absolute;left:0;color:var(--bad);font-size:.7rem;}
+@media(max-width:400px){.dodont{grid-template-columns:1fr;}}
+
+.recipe{counter-reset:r;}
+.recipe .item{display:flex;gap:.75rem;margin-bottom:1rem;}
+.recipe .item:last-child{margin-bottom:0;}
+.recipe .num{
+  flex-shrink:0;width:1.7rem;height:1.7rem;border-radius:50%;
+  background:linear-gradient(160deg,var(--accent),var(--accent-soft));
+  color:var(--night);font-weight:700;font-size:.85rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.recipe .rbody{font-size:.83rem;}
+.recipe .rbody b{color:var(--accent);font-weight:600;}
+
+.pull{
+  border-left:3px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:1rem 0;
+  font-size:.9rem;color:var(--muted2);font-style:normal;
+}
+
+.closing{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--accent-soft);border-radius:18px;padding:1.6rem 1.25rem;text-align:center;
+  box-shadow:0 0 30px rgba(184,131,74,.08);
+}
+.closing p{font-size:.88rem;margin-bottom:.9rem;}
+.closing p:last-child{margin-bottom:0;}
+.closing .big{font-size:1.05rem;color:var(--accent);font-weight:500;letter-spacing:.06em;}
+
+.koyomi-link{
+  display:block;text-align:center;margin-top:1.5rem;padding:1rem;
+  background:var(--night2);border:1px solid var(--line);border-radius:14px;
+  color:var(--text);text-decoration:none;font-size:.86rem;transition:border-color .3s;
+}
+.koyomi-link:hover{border-color:var(--accent-soft);}
+.koyomi-link .arrow{color:var(--accent);}
+.koyomi-link small{display:block;color:var(--muted);font-size:.7rem;margin-top:.3rem;}
+
+.door{display:block;text-align:center;padding:2.2rem 0 .5rem;margin-top:1.5rem;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.door-gate{position:relative;width:210px;height:132px;margin:0 auto 1rem;border-radius:4px;overflow:hidden;border:3px solid var(--accent-soft);box-shadow:0 4px 18px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.06);background:var(--sink);}
+.door-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.05rem;letter-spacing:.28em;text-indent:.28em;color:var(--accent);text-decoration:none;font-weight:500;background:radial-gradient(120% 90% at 50% 120%,rgba(184,131,74,.22) 0%,var(--sink) 62%);}
+.door-leaf{position:absolute;top:0;width:50%;height:100%;background:repeating-linear-gradient(90deg,rgba(0,0,0,.14) 0 1px,transparent 1px 26px),linear-gradient(170deg,var(--panel) 0%,#141B29 100%);transition:transform .55s cubic-bezier(.65,0,.35,1);z-index:2;}
+.door-leaf-l{left:0;border-right:1px solid var(--line);}
+.door-leaf-r{right:0;border-left:1px solid var(--line);}
+.door-pull{position:absolute;top:50%;width:8px;height:26px;border-radius:3px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);transform:translateY(-50%);}
+.door-leaf-l .door-pull{right:8px;} .door-leaf-r .door-pull{left:8px;}
+.door.open .door-leaf-l{transform:translateX(-100%);}
+.door.open .door-leaf-r{transform:translateX(100%);}
+.door.open .door-inner{text-shadow:0 0 12px rgba(184,131,74,.3);}
+.door-note{font-size:.68rem;color:var(--muted);line-height:1.8;margin-top:.35rem;}
+
+footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
+footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">㐂占 　 命 術 本鑑定書</p>
+  <h1><span class="nm">美奈子</span> さんへ</h1>
+  <p class="tagline">異国への狼煙。遠くまで届く、合図の煙</p>
+  <p class="date">1978年（昭和53年）6月14日 生　／　鑑定 2026.08.24</p>
+</header>
+
+<div class="profile">
+  <div class="full">魂の本質（日の宿命）<b>丁未（ひのとひつじ）― 異国への狼煙</b></div>
+  <div>中心の星<b>石門星</b></div>
+  <div>天中殺<b>寅卯（東方）</b></div>
+  <div>才能の星<b>車騎星（無玄の型）</b></div>
+  <div>今の大運<b>癸丑・車騎星（43〜52歳）</b></div>
+  <div class="full">運気の位置<b>大運天中殺（20年）を42歳で通り抜けた直後。今は天剋地冲を中心にした二十年のはじまり</b></div>
+</div>
+
+<div class="card" style="border-color:var(--accent-soft);">
+  <p>おおきにです、美奈子さん☺️</p>
+  <p>今日は夜遅くまで、二時間以上お付き合いいただき、ほんまにありがとうございました。長い文章で相談を送ってくださった時から、苦しい時期を一人で抱えてこられたんやと感じていました。命式、じっくり見させてもらいましたね。</p>
+  <p>無料鑑定のときは「金のエネルギーがゼロで、線を引く力が丸ごと欠けている」というところまでをお伝えしました。今日はその奥を全部開けました。ここに、お話しした内容を文章としてまとめておきます。あとから何度でも読み返してください。</p>
+</div>
+
+<!-- 命式盤 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">命 式</span><span class="sec-title">美奈子さんの設計図</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.6rem;">陰占 ― 生まれ持った気の柱</p>
+    <div class="meishiki">
+      <div class="pillar">
+        <div class="lbl">日柱（自分・家庭）</div>
+        <div class="yomi">ひのと</div><div class="kan">丁</div>
+        <div class="shi">未</div><div class="yomi">ひつじ</div>
+        <div class="zou">蔵干　己・丁・乙</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">月柱（仕事・家系）</div>
+        <div class="yomi">つちのえ</div><div class="kan">戊</div>
+        <div class="shi">午</div><div class="yomi">うま</div>
+        <div class="zou">蔵干　丁・己</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">年柱（社会・先祖）</div>
+        <div class="yomi">つちのえ</div><div class="kan">戊</div>
+        <div class="shi">午</div><div class="yomi">うま</div>
+        <div class="zou">蔵干　丁・己</div>
+      </div>
+    </div>
+    <p class="meishiki-note">日柱 丁未 ／ 月柱 戊午 ／ 年柱 戊午 ―― 月柱と年柱が同じ干支〈律音〉。日柱は両方と〈支合〉</p>
+
+    <div class="divider" style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p class="soft" style="margin-bottom:.2rem;">陽占 ― 心のかたち（人体星図）</p>
+    <div class="jintai">
+      <div class="jcell jusei-cell"><span class="pos">伴星（先祖）</span><span class="star">車騎星</span></div>
+      <div class="jcell"><span class="pos">目上（北）</span><span class="star">調舒星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">初年運</span><span class="star gold">天禄星</span></div>
+      <div class="jcell"><span class="pos">配偶者（西）</span><span class="star">貫索星</span></div>
+      <div class="jcell center"><span class="pos">中心・本人</span><span class="star">石門星</span></div>
+      <div class="jcell"><span class="pos">社会（東）</span><span class="star">石門星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">晩年運</span><span class="star gold">天南星</span></div>
+      <div class="jcell"><span class="pos">目下（南）</span><span class="star">調舒星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">中年運</span><span class="star gold">天禄星</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.7rem;">中央が本人。石門星が中央と東（社会）、調舒星が北（目上）と南（目下）――どちらも二連変化。配偶者の場所には貫索星が実際にあります。</p>
+  </div>
+</div>
+
+<!-- 1 本質 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">壱</span><span class="sec-title">どういう魂か ― 異国への狼煙</span></div>
+  <div class="card">
+    <p class="lead">「遠くまで届く合図の煙。表は穏やか、内は情熱的」</p>
+    <p>日の宿命「丁未」は<span class="hl">「異国への狼煙」</span>。おとなしそうに見えて、中身は情熱的で持続力もあり、どこにいても目立つ。野心も底力もあって、必要なことはストレートに口にし、行動する人です。</p>
+    <p>男女別の説明にはこうあります――<b>「女性は内に激しさを秘めながら、楽しい社交家を振る舞う」</b>。表では明るく社交的に振る舞いながら、内側ではずっと激しいものを抱えている。今日、その感覚に「小さい頃からあるかもしれない」とお話しくださいましたね。あの感覚が、そのまま美奈子さんの本体です。</p>
+    <div class="card" style="background:var(--sink);border-color:var(--accent-soft);margin:1rem 0;">
+      <p class="lead" style="margin-bottom:.6rem;">この人の背骨 ―― 三重に埋まった貫索星の芯</p>
+      <p style="margin-bottom:.7rem;">中心と社会に石門星、目上と目下に調舒星――どちらも同じ星が二つ揃う〈二連変化〉です。算命学には共通のルールがあります。同じ星が二つ重なると、力が倍になるだけでなく、裏に〈虚気〉としてもう一つの性質が生まれる。石門星・調舒星、どちらの裏にも生まれるのが<span class="hl">貫索星（頑固・独立独歩・簡単には染まらない芯）</span>です。</p>
+      <p style="margin-bottom:0;">そして美奈子さんは、配偶者の場所に<b>実際の貫索星</b>も持っています。表は誰とでも仲良くなれる社交的な人、内側には誰よりも頑固で我が道を行く芯が、<b>三重</b>に埋まっている。これは矛盾ではありません。必要なのは新しい力を一から作ることではなく、<b>もうそこにある芯を掘り起こして使えるようにするだけ</b>です。</p>
+    </div>
+    <p>警句にはこうも書かれています――「熱意を持って運ぶ力を持っている。細心の注意を欠くと、大変な困難を招き、流浪の憂き目を見ることがある」。流浪は悪い意味だけではありません。熱意で運ぶ力があるからこそ、いろんな場所、いろんな人の間を動いてこれた、という読み方もできます。ただ、動きすぎて自分の場所を見失うことがある――それが今日、いちばんお伝えしたかったことに繋がっていきます。</p>
+  </div>
+</div>
+
+<!-- 2 五行 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">弐</span><span class="sec-title">終わらせる季節がない ― 五行の絵</span></div>
+  <div class="card">
+    <p>五行は本来、季節の巡りです。木は春（芽吹く・伸びる）、火は夏（燃え広がる）、土は季節の変わり目（受け止める・溜める）、金は秋（実を結んで固める・仕上げる）、水は冬（内側に染み込んで鎮める）。</p>
+    <div class="gogyo" style="margin:1rem 0;">
+      <div class="gbar g-wood"><span class="gname">木</span><div class="gtrack"><div class="gfill" style="width:8%"></div></div><span class="gval">24</span></div>
+      <div class="gbar g-fire"><span class="gname">火</span><div class="gtrack"><div class="gfill" style="width:41%"></div></div><span class="gval">128</span></div>
+      <div class="gbar g-earth"><span class="gname">土</span><div class="gtrack"><div class="gfill" style="width:51%"></div></div><span class="gval">160</span></div>
+      <div class="gbar g-metal"><span class="gname">金</span><div class="gtrack"><div class="gfill" style="width:0%"></div></div><span class="gval">0</span></div>
+      <div class="gbar g-water"><span class="gname">水</span><div class="gtrack"><div class="gfill" style="width:0%"></div></div><span class="gval">0</span></div>
+    </div>
+    <p>木で始まり、火で燃え広がり、土で受け止める――前半三つの季節はたっぷり揃っています。総エネルギー312、むしろすごい勢いです。<span class="hl">でも金と水が丸ごとゼロ</span>。つまり美奈子さんの命式は「春と夏だけがずっと続く一年」のような作りです。</p>
+    <p>芽吹かせる・燃やす・受け止めるはいくらでもできる。でも、実を収穫して「ここで終わり」と閉じることも、起きたことを静かに自分の中に染み込ませて消化することも、命式の作りとしてそもそもありません。</p>
+    <div class="pull">姉さんとお母さんの間。元恋人との関係。今のパートナーとの関係。どれも「始まって、燃え広がって、土台として受け止める」ところまでは自然にできる。でも終わりにする、閉じることができない。だから始まった関係が、終わらないまま続いてしまう。</div>
+    <p>無料鑑定で「金のエネルギーがゼロやから、線を引く力がまるごと欠けている」とお伝えしたのは、この構造です。今日、去年から今年にかけて距離を置いたことを「それが線だったんですね」と受け取ってくださいましたが、まさにその通りです。持っていない季節を、ずっと自分の意志の弱さのせいにしてきただけです。美奈子さんのせいではありません。</p>
+  </div>
+</div>
+
+<!-- 3 才能と依存 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">参</span><span class="sec-title">才能の出し方と、依存とのつき合い方</span></div>
+  <div class="card">
+    <p>才能の型は<span class="hl">無玄の型</span>――剋線ゼロで、才能が一点に固まっていない型です。何でもできてしまうぶん、自分では自分の力に気づきにくい。マッサージ、料理、絵、そして今のシンギングボウル――バラバラに見える得意分野は、全部この型の豊かさから出ています。</p>
+    <p>無玄の型の人は、<b>外からの刺激や人との関わりの中で、初めて自分の才能が見えてくるタイプ</b>です。9月のアメリカ行き、新しい場所・新しい人・新しい体験は、まさに才能が開くきっかけになる動きです。</p>
+    <div class="pull">動いても動いても「自分が何をしたいか分からない」感覚が消えないのは、動く力（伴星の車騎星・気図法）はあっても、動いてつかんだものを「これは残す・これは手放す」と選んで形にする力（金・水）が命式にないからです。体験は増えていく、学びも増えていく、でもそれを自分の輪郭として固定できない。</div>
+    <p>これは、42歳を過ぎても答えが定まらないことへの答えでもあります。23〜42歳の二十年（大運天中殺）を通り抜けたのに、今もまだ模索が続いているのは、模索が下手だからではなく、今の大運（43〜52歳・癸丑）が命式の中でもとりわけ複雑な十年だからです。今、模索している真っ最中ということは、命式が予定していた通りの場所に、ちゃんと美奈子さんがいるということです。</p>
+    <p>喫煙やお酒についても、今日お話ししましたね。<span class="hl">金がゼロということは、自分で切り止める作りがどこにも現れる</span>ということです。良い悪いの話ではなく、そういう構造があるだけ。外には持っていかない、飲み会ではどちらかにする――そういう小さなルールを自分の中に作ることが、そのまま金の力を育てる練習になります。罪悪感を持って我慢するのではなく、好きなものは好きでいい、そのうえでルールを狭めていく。それでいいんです。</p>
+  </div>
+</div>
+
+<!-- 4 運気 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">肆</span><span class="sec-title">運気のリズム ― 通り抜けた二十年と、選び取る二十年</span></div>
+
+  <div class="card">
+    <p class="soft" style="margin-bottom:.7rem;">大運 ― 10年ごとに巡る運気のテーマ（3歳運）</p>
+    <div class="daiun-scroll">
+      <table class="daiun">
+        <thead><tr><th>年齢</th><th>干支</th><th>主星</th><th>従星</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr><td>3〜12</td><td>丁巳</td><td>貫索星</td><td>天将星</td><td></td></tr>
+          <tr><td>13〜22</td><td>丙辰</td><td>石門星</td><td>天堂星</td><td></td></tr>
+          <tr><td>23〜32</td><td>乙卯</td><td>龍高星</td><td>天胡星</td><td class="tc-cell">大運天中殺</td></tr>
+          <tr><td>33〜42</td><td>甲寅</td><td>玉堂星</td><td>天極星</td><td class="tc-cell">大運天中殺</td></tr>
+          <tr class="now-row"><td>43〜52</td><td>癸丑</td><td>車騎星</td><td>天庫星</td><td class="now-cell">今ここ</td></tr>
+          <tr><td>53〜62</td><td>壬子</td><td>牽牛星</td><td>天馳星</td><td></td></tr>
+          <tr><td>63〜72</td><td>辛亥</td><td>禄存星</td><td>天報星</td><td>流れが合う十年</td></tr>
+          <tr><td>73〜82</td><td>庚戌</td><td>司禄星</td><td>天印星</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:.9rem;font-size:.83rem;">美奈子さんは<span class="hl">23〜42歳の二十年間、大運天中殺</span>の中にいました。妊娠中の音信不通、ひとり親でいた五年間、お姉さんご夫婦との同居――あの時期に起きたことの多くは、この二十年の中で起きています。天中殺中に起きたことは、美奈子さんが選んで招いたことではなく、流れの中で、意思の外で決まっていったことです。<b>その二十年を、美奈子さんはもう通り抜けています。</b></p>
+  </div>
+
+  <div class="card">
+    <p class="lead">通り抜けた先も、まだ嵐が続く。でも質が違う</p>
+    <p>普通なら、天中殺を抜けたら「運が良くなってきた」と感じるはずです。でも美奈子さんの場合、43〜52歳（癸丑）と53〜62歳（壬子）――続けて<span class="hl">天剋地冲を中心にした重い配置</span>が出ています。四十年、休みなしに見えるかもしれません。正直に言うと、これはなかなかない並びです。</p>
+    <div class="pull">でも、天中殺と天剋地冲はまったく別のものです。天中殺は「流れに巻き込まれる」時期でした。自分の意思より、周りの都合で物事が決まりやすい。天剋地冲は違います。「壊して、作り直す」時期です。巻き込まれるのではなく、美奈子さんの意志で、壊して選び直していく力が、この二十年には働いています。</div>
+    <p>23〜42歳は流れに運ばれる二十年でした。43〜62歳は、美奈子さんが自分の手で、壊すものと残すものを選んでいく二十年です。同じ「重い」でも、中身がまったく違う。<span class="hl">巻き込まれる重さから、選び取る重さへ。これは後退ではなく、前進です。</span></p>
+    <p>今の大運（癸丑）は、才能星と同じ車騎星が回っています。動くこと自体は美奈子さんの命式に合っている――9月のアメリカ行きも、この大運の力そのものです。ただし干合と害が重なる大運なので、良さそうに見えて蓋を開けたら負担になっていた関係や約束が出やすい十年でもあります。パートナーのこと、お母さんとお姉さんのこと、息子さんのこと――バラバラに見えても、全部この一つの大運の中で起きていることです。崩れているのではなく、初めて線を引く力を試されている十年です。</p>
+
+    <p class="soft" style="margin-top:1.2rem;">▼ この先の見取り図</p>
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-when">今〜52歳ごろ ― 選び取る練習の十年（癸丑）</div>
+        <div class="tl-body">動きながら考える。頼まれごとには即答せず一回持ち帰る。この十年の課題そのものです。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">53〜62歳 ― もう一段大きい規模で選び直す十年（壬子）</div>
+        <div class="tl-body">怖い十年が二つ続くのではなく、練習期と本番期。43歳からの十年で線を引く練習をした延長線上にあります。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">63〜72歳 ― 落ち着くところに落ち着く十年（辛亥）</div>
+        <div class="tl-body">日柱と大半会、とても流れの合う十年です。四十年かけて壊して選んで作り直してきたものが、ここで美奈子さん自身の日柱と噛み合います。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">2027年2〜3月 ― 月天中殺</div>
+        <div class="tl-body">大きな契約・大きな決断はここでは結ばない。観察と記録に徹する二ヶ月です。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 5 線を引く型 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">伍</span><span class="sec-title">今日から使える、線の引き方</span></div>
+  <div class="card">
+    <p class="lead">埋まっている芯を、掘り起こすだけでいい</p>
+    <p>美奈子さんに必要なのは、ないものを一から作ることではありません。すでに三重に埋まっている貫索星の芯を、掘り起こして使えるようにするだけです。</p>
+    <div class="pull">頼まれごとがあった時、その場ですぐ「うん」と言わない。「ちょっと考えさせて」と一回持ち帰る。それだけです。</div>
+    <p>これだけで、埋まっている貫索星の芯が外に引っ張り出されます。持ち帰って一晩置いたら、「やっぱり無理」と言える自分がちゃんと出てきます。それは新しい力を作っているのではなく、元々中にある頑固な芯が、初めて表に出てくる瞬間です。</p>
+    <p>今日お話しくださった通り、すでにお母様やパートナー、お友達との間で「即答しない」を実践して、距離を置いていましたね。あれは間違っていません。むしろ、金の力が育ってきている証拠です。次の段階として、「いつまでに返事する」という期限のルールを自分に足していくと、優柔不断で先延ばしになるのを防げます。感情の揺れに判断を任せず、外にルールを設ける――それが、この命式に合ったやり方です。</p>
+  </div>
+</div>
+
+<!-- 6 処方 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">陸</span><span class="sec-title">今日から動ける処方</span></div>
+  <div class="card recipe">
+    <div class="item"><div class="num">1</div><div class="rbody"><b>金を補う。</b>白系のもの、宝石や金属を身につける。すでにピアスや指輪で始めていることも、そのまま続けてください。金属を身につけることは、命式にない「線を引く力」を外から補う、理にかなった方法です。</div></div>
+    <div class="item"><div class="num">2</div><div class="rbody"><b>水を補う。</b>水辺に行く、黒や濃紺の色を身につける、一人で静かに過ごす時間を作る。シンギングボウルの倍音も、まさにこの水の質――考えるのではなく、体ごと変性意識に入っていく力です。思考で整おうとするより、こちらの方が美奈子さんには圧倒的に合っています。</div></div>
+    <div class="item"><div class="num">3</div><div class="rbody"><b>動きながら考える。</b>先に考えてから動こうとすると、エネルギーが空回りします。9月のアメリカ行きも、シンギングボウルの購入も、直感で動いたことをそのまま信じてください。それが美奈子さんの命式に合った、才能を開くやり方です。</div></div>
+    <div class="item"><div class="num">4</div><div class="rbody"><b>一人で完結させようとしない。</b>無玄の型は、人との関わりの中で初めて才能が見えるタイプです。仲間と組む、人に判断してもらう、発信して反応を受け取る――それが才能を開く鍵にも、金運を上げる働き方にもなります。</div></div>
+    <div class="item"><div class="num">5</div><div class="rbody"><b>喫煙・依存には、罪悪感を持たない。</b>好きなら好きでいい。そのうえで「外には持っていかない」「飲み会ではどちらかにする」といった小さなルールを自分の中に作る。それが線を引く練習そのものです。</div></div>
+    <div class="item"><div class="num">6</div><div class="rbody"><b>2027年2〜3月の月天中殺は、観察の二ヶ月に。</b>大きな契約・大きな決断はこの時期を避けて、記録と観察に徹してください。詳しくは暦カレンダーにも書いておきます。</div></div>
+  </div>
+</div>
+
+<!-- 締め -->
+<div class="closing">
+  <p>美奈子さんは、遠くまで届く狼煙のように、<span class="hl">熱意で運ぶ力を持った人</span>です。<br>その力で、これまでもたくさんの人の間を、動いて繋いできたんやと思います。</p>
+  <p>頼まれたら断れなかったのは、優しさの問題ではなく、<br>木・火・土だけがたっぷりあって、金と水――終わらせる季節が、<br>命式に無かったという構造の話でした。それは美奈子さんのせいではありません。</p>
+  <p class="big">ないものを新しく作るのではなく、もう埋まっている芯を掘り起こすだけでいい。</p>
+  <p>石門星と調舒星、その裏に隠れた貫索星の芯。配偶者の場所に、実際にある貫索星。<br>三重に埋まったその芯を、今日渡した小さな型で、少しずつ表に出していってください。</p>
+  <p>シンギングボウルも、9月のアメリカも、逃げではありません。<br>美奈子さんの命式が、ずっと探していた答えの出し方、そのものです。<br>考えるのではなく、浸る。動きながら、考える。それでいいんです。</p>
+  <p>長い時間、たくさん話してくださって、おおきにでした。安心して、一個ずつ、いきましょう。</p>
+</div>
+
+<a class="koyomi-link" href="/minako">
+  <span class="arrow">▶</span> 美奈子の暦（日々の運気カレンダー）をひらく
+  <small>毎日の運気が天気予報のように見られます。傘を持つくらいの気持ちで、楽しんで。</small>
+</a>
+
+<div class="door" onclick="this.classList.toggle('open')">
+  <div class="door-gate">
+    <a class="door-inner" href="/menu">鑑定目録</a>
+    <div class="door-leaf door-leaf-l"><span class="door-pull"></span></div>
+    <div class="door-leaf door-leaf-r"><span class="door-pull"></span></div>
+  </div>
+  <p class="door-note">戸をあけると、鑑定の目録があります</p>
+</div>
+
+<footer>
+  <p>いつもおおきにです😆　またゆっくり話しましょう💬</p>
+  <p class="sig">㐂</p>
+</footer>
+
+</div>
+</body>
+</html>
