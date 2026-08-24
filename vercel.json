@@ -51,6 +51,14 @@
   ],
   "rewrites": [
     {
+      "source": "/minako",
+      "destination": "/view.html?client=minako"
+    },
+    {
+      "source": "/minako-kanteisho",
+      "destination": "/clients/minako-kanteisho.html"
+    },
+    {
       "source": "/yui",
       "destination": "/view.html?client=yui"
     },
