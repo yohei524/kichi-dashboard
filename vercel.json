@@ -191,6 +191,10 @@
       "destination": "/view.html?client=sachie"
     },
     {
+      "source": "/sachie-kanteisho",
+      "destination": "/clients/sachie-kanteisho.html"
+    },
+    {
       "source": "/sachi-kanteisho",
       "destination": "/kanteisho.html?c=sachi"
     },

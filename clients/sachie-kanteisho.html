@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sachieさん 鑑定書 ｜ 㐂占</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --night:#0B0F1A; --night2:#131A28; --sink:#171F30; --panel:#1B2334;
+  --line:#2A3346; --accent:#5B93A8; --accent-soft:#3E7182; --accent-glow:rgba(91,147,168,.14);
+  --gold:#5B93A8; --text:#ECEAE4; --muted:#8A96AC; --muted2:#A9B3C6;
+  --water:#6E9BC4; --fire:#D08A5A; --wood:#7FA86B; --metal:#C4C9D2; --earth:#C9A24A;
+  --bad:#C97A6A; --good:#6E9BC4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Serif JP',serif; color:var(--text); line-height:1.95; letter-spacing:.045em;
+  background:
+    radial-gradient(1200px 620px at 50% -12%, rgba(91,147,168,.10), transparent 60%),
+    linear-gradient(180deg,#0B0F1A 0%,#0D1220 45%,#080B14 100%);
+  background-attachment:fixed; min-height:100vh;
+}
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.05rem 4rem;}
+
+header{text-align:center;padding:3rem 1rem 1.4rem;}
+header .kicker{font-size:.68rem;letter-spacing:.32em;color:var(--accent);opacity:.9;margin-bottom:.9rem;}
+header h1{font-size:1.5rem;font-weight:500;letter-spacing:.08em;margin-bottom:.5rem;}
+header h1 .nm{color:var(--accent);}
+header .tagline{font-size:.8rem;color:var(--muted2);letter-spacing:.1em;line-height:1.7;}
+header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:.12em;}
+
+.profile{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem .8rem;
+}
+.profile div{font-size:.74rem;color:var(--muted);}
+.profile div b{display:block;font-size:.9rem;color:var(--text);font-weight:500;margin-top:.1rem;letter-spacing:.06em;}
+.profile div.full{grid-column:1/3;}
+
+.sec{margin-bottom:1.65rem;}
+.sec-head{
+  display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;
+  padding-bottom:.6rem;border-bottom:1px solid var(--line);
+}
+.sec-no{font-size:.72rem;color:var(--accent);letter-spacing:.18em;font-weight:600;}
+.sec-title{font-size:1.02rem;font-weight:500;letter-spacing:.08em;}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  padding:1.25rem 1.15rem;box-shadow:0 4px 24px rgba(0,0,0,.32);margin-bottom:1rem;
+}
+.card p{font-size:.87rem;margin-bottom:.9rem;color:var(--text);}
+.card p:last-child{margin-bottom:0;}
+.card .lead{color:var(--accent);font-size:.9rem;font-weight:500;}
+.hl{color:var(--accent);font-weight:500;}
+.soft{color:var(--muted2);font-size:.8rem;}
+
+.meishiki{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.2rem 0 .3rem;
+}
+.pillar{
+  background:var(--sink);border:1px solid var(--line);border-radius:12px;
+  padding:.7rem .4rem;text-align:center;
+}
+.pillar .lbl{font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.55rem;}
+.pillar .yomi{font-size:.58rem;color:var(--muted);letter-spacing:.04em;line-height:1.3;}
+.pillar .kan{font-size:1.85rem;font-weight:600;color:var(--text);line-height:1.15;}
+.pillar .shi{font-size:1.85rem;font-weight:600;color:var(--accent);line-height:1.15;margin-top:.2rem;}
+.pillar .zou{font-size:.62rem;color:var(--muted2);margin-top:.55rem;letter-spacing:.04em;}
+.meishiki-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;}
+
+.jintai{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:19rem;margin:.4rem auto .2rem;}
+.jcell{
+  background:var(--sink);border:1px solid var(--line);border-radius:11px;
+  aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;
+}
+.jcell .pos{font-size:.58rem;color:var(--muted);letter-spacing:.05em;}
+.jcell .star{font-size:.92rem;font-weight:600;color:var(--text);letter-spacing:.03em;}
+.jcell.center{background:linear-gradient(160deg,rgba(91,147,168,.18),var(--sink));border-color:var(--accent-soft);}
+.jcell.center .star{color:var(--accent);}
+.jcell.jusei-cell{background:var(--night2);}
+.jcell .star.gold{color:var(--gold);}
+
+.gogyo{margin-top:.3rem;}
+.gbar{display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;}
+.gbar .gname{width:2.6rem;font-size:.76rem;color:var(--muted2);flex-shrink:0;}
+.gbar .gtrack{flex:1;height:9px;background:var(--sink);border-radius:5px;overflow:hidden;}
+.gbar .gfill{height:100%;border-radius:5px;}
+.gbar .gval{width:2.2rem;text-align:right;font-size:.72rem;color:var(--muted);flex-shrink:0;}
+.g-wood .gfill{background:var(--wood);}
+.g-fire .gfill{background:var(--fire);}
+.g-earth .gfill{background:var(--earth);}
+.g-metal .gfill{background:var(--metal);}
+.g-water .gfill{background:var(--water);}
+
+.daiun-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.daiun{width:100%;border-collapse:collapse;font-size:.78rem;min-width:19rem;}
+.daiun th{
+  font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.05em;
+  padding:.4rem .3rem;border-bottom:1px solid var(--line);text-align:center;
+}
+.daiun td{padding:.5rem .3rem;text-align:center;border-bottom:1px solid rgba(42,51,70,.5);color:var(--text);}
+.daiun td:first-child{color:var(--muted2);font-size:.72rem;white-space:nowrap;}
+.daiun .tc-cell{color:var(--bad);font-size:.68rem;}
+.daiun .now-row td{background:linear-gradient(90deg,rgba(91,147,168,.12),transparent);}
+.daiun .now-row td:first-child{color:var(--accent);font-weight:600;}
+.daiun .now-cell{color:var(--accent);font-size:.68rem;font-weight:600;}
+
+.tl{position:relative;padding-left:1.1rem;margin-top:.3rem;}
+.tl::before{content:"";position:absolute;left:3px;top:.4rem;bottom:.4rem;width:2px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:1rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before{content:"";position:absolute;left:-1.1rem;top:.45rem;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--night2);}
+.tl-item.tc::before{background:var(--bad);}
+.tl-when{font-size:.76rem;color:var(--accent);font-weight:600;letter-spacing:.06em;}
+.tl-item.tc .tl-when{color:var(--bad);}
+.tl-body{font-size:.82rem;color:var(--text);margin-top:.15rem;}
+
+.dodont{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.dobox,.dontbox{border-radius:12px;padding:.85rem .8rem;border:1px solid var(--line);}
+.dobox{background:rgba(110,155,196,.08);}
+.dontbox{background:rgba(201,122,106,.08);}
+.dobox .h,.dontbox .h{font-size:.78rem;font-weight:600;margin-bottom:.5rem;letter-spacing:.06em;}
+.dobox .h{color:var(--good);}
+.dontbox .h{color:var(--bad);}
+.dodont ul{list-style:none;}
+.dodont li{font-size:.75rem;color:var(--text);padding-left:.9rem;position:relative;margin-bottom:.45rem;line-height:1.6;}
+.dodont li:last-child{margin-bottom:0;}
+.dobox li::before{content:"○";position:absolute;left:0;color:var(--good);font-size:.7rem;}
+.dontbox li::before{content:"×";position:absolute;left:0;color:var(--bad);font-size:.7rem;}
+@media(max-width:400px){.dodont{grid-template-columns:1fr;}}
+
+.recipe{counter-reset:r;}
+.recipe .item{display:flex;gap:.75rem;margin-bottom:1rem;}
+.recipe .item:last-child{margin-bottom:0;}
+.recipe .num{
+  flex-shrink:0;width:1.7rem;height:1.7rem;border-radius:50%;
+  background:linear-gradient(160deg,var(--accent),var(--accent-soft));
+  color:var(--night);font-weight:700;font-size:.85rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.recipe .rbody{font-size:.83rem;}
+.recipe .rbody b{color:var(--accent);font-weight:600;}
+
+.pull{
+  border-left:3px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:1rem 0;
+  font-size:.9rem;color:var(--muted2);font-style:normal;
+}
+
+.closing{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--accent-soft);border-radius:18px;padding:1.6rem 1.25rem;text-align:center;
+  box-shadow:0 0 30px rgba(91,147,168,.08);
+}
+.closing p{font-size:.88rem;margin-bottom:.9rem;}
+.closing p:last-child{margin-bottom:0;}
+.closing .big{font-size:1.05rem;color:var(--accent);font-weight:500;letter-spacing:.06em;}
+
+.koyomi-link{
+  display:block;text-align:center;margin-top:1.5rem;padding:1rem;
+  background:var(--night2);border:1px solid var(--line);border-radius:14px;
+  color:var(--text);text-decoration:none;font-size:.86rem;transition:border-color .3s;
+}
+.koyomi-link:hover{border-color:var(--accent-soft);}
+.koyomi-link .arrow{color:var(--accent);}
+.koyomi-link small{display:block;color:var(--muted);font-size:.7rem;margin-top:.3rem;}
+
+footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
+footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">㐂占 　 命 術 本鑑定書</p>
+  <h1><span class="nm">sachie</span> さんへ</h1>
+  <p class="tagline">大海は自分で山を作らない。流れ込む川があって、初めて満ちていく</p>
+  <p class="date">1967年（昭和42年）10月15日 生　／　鑑定 2026.08.26</p>
+</header>
+
+<div class="profile">
+  <div class="full">魂の本質（日の宿命）<b>壬子（みずのえね）― 真冬の大海</b></div>
+  <div>中心の星<b>玉堂星</b></div>
+  <div>天中殺<b>寅卯（継承の使命）</b></div>
+  <div>才能の星<b>司禄星（順殿の型）</b></div>
+  <div>今の大運<b>丙辰・禄存星（58〜67歳）</b></div>
+  <div class="full">運気の位置<b>38〜57歳の大運天中殺を抜けた直後。守護神と同じ丙が巡る、一番動きやすい十年</b></div>
+</div>
+
+<div class="card" style="border-color:var(--accent-soft);">
+  <p>おおきにです、sachieさん☺️</p>
+  <p>紡の席まで来ていただいて、ほんまにありがとうございます。無料のときは、入口だけをお伝えしました。ここからはその奥です。sachieさんの人生の言葉に翻訳して、隠さず全部お渡しします。気になったところは、いつでもLINEで掘ってください。</p>
+</div>
+
+<!-- 命式盤 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">命 式</span><span class="sec-title">sachieさんの設計図</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.6rem;">陰占 ― 生まれ持った気の柱</p>
+    <div class="meishiki">
+      <div class="pillar">
+        <div class="lbl">日柱（自分・家庭）</div>
+        <div class="yomi">みずのえ</div><div class="kan">壬</div>
+        <div class="shi">子</div><div class="yomi">ね</div>
+        <div class="zou">蔵干　癸</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">月柱（仕事・目標）</div>
+        <div class="yomi">かのえ</div><div class="kan">庚</div>
+        <div class="shi">戌</div><div class="yomi">いぬ</div>
+        <div class="zou">蔵干　戊・辛・丁</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">年柱（社会・対外）</div>
+        <div class="yomi">ひのと</div><div class="kan">丁</div>
+        <div class="shi">未</div><div class="yomi">ひつじ</div>
+        <div class="zou">蔵干　己・丁・乙</div>
+      </div>
+    </div>
+    <p class="meishiki-note">日柱 壬子 ／ 月柱 庚戌 ／ 年柱 丁未</p>
+
+    <div class="divider" style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p class="soft" style="margin-bottom:.2rem;">陽占 ― 心のかたち（人体星図）</p>
+    <div class="jintai">
+      <div class="jcell jusei-cell"><span class="pos">伴星（先祖）</span><span class="star">貫索星</span></div>
+      <div class="jcell"><span class="pos">目上（北）</span><span class="star">司禄星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">初年運</span><span class="star gold">天印星</span></div>
+      <div class="jcell"><span class="pos">配偶者（西）</span><span class="star">石門星</span></div>
+      <div class="jcell center"><span class="pos">中心・本人</span><span class="star">玉堂星</span></div>
+      <div class="jcell"><span class="pos">社会（東）</span><span class="star">司禄星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">晩年運</span><span class="star gold">天将星</span></div>
+      <div class="jcell"><span class="pos">目下（南）</span><span class="star">龍高星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">中年運</span><span class="star gold">天南星</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.7rem;">中央が本人。四隅は人生3時期のエネルギー（初年・中年・晩年）と、ご先祖の星（伴星）。司禄星が目上と社会に二つ――堅実に積み上げ、蓄える力が、sachieさんの背骨です。</p>
+  </div>
+</div>
+
+<!-- 1 本質 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">壱</span><span class="sec-title">どういう魂か ― 真冬の大海</span></div>
+  <div class="card">
+    <p class="lead">「何を考えているか、簡単には見せない、器の大きい人」</p>
+    <p>日の宿命「壬子」は、<span class="hl">「真冬の大海」</span>、もう一つの呼び名は<span class="hl">「汪溢の水（おういつのみず）」</span>。海に、雨が降っている。冬の真夜中、静かにかき回されている海のイメージです。算命学では"天帝"の質が出る干支とされ、王様・帝王クラスの、一番強いエネルギーの質を持ちます。ただしsachieさんは、その天帝の質を表には出さず、内側に持っているタイプ――"隠れ天帝"です。</p>
+    <p>だから、何を考えているか、簡単には分からへん人。本心をそう簡単には見せへん人。4人から15人まで会社を育てられたのは、偶然やないです。sachieさんの本体そのものが、それだけの器を持ってるからです。</p>
+    <div class="card" style="background:var(--sink);border-color:var(--accent-soft);margin:1rem 0;">
+      <p class="lead" style="margin-bottom:.6rem;">この人の背骨 ―― 蓄える力（司禄星が二つ）</p>
+      <p style="margin-bottom:.7rem;">sachieさんの目上と社会、この二つに、同じ<span class="hl">「蓄積・堅実・用心深さ」</span>の星（司禄星）が入っています。目上の人からも、社会全体からも、堅実で信頼される人。この二連変化の裏には、実は誰よりも頑固で、自分のやり方を簡単には譲らない<b>貫索星</b>の芯が隠れています。</p>
+      <p style="margin-bottom:0;">しかも、ご先祖様の位置にも、実際に貫索星があります。<b>二重に埋まった貫索の芯</b>が、4人から15人まで、自分のやり方で会社を育ててこられた原動力です。</p>
+    </div>
+    <p>もう一つ、大事な警句があります。「蓄財力はあるが、侠気があって体裁をつくる性格なので、伝来の財を失うことがある」。侠気――義理堅さ、頼られたら断れへん質。体裁をつくる――人にどう見えるかを大事にする質。この質のまま突っ走ると、積み上げてきたものを、どこかで手放すことになりやすい。右腕を選ぶ時、「義理堅そうやから」「見た目がしっかりしてるから」だけで決めると、この警句の通りになりやすいので、要注意です。</p>
+  </div>
+</div>
+
+<!-- 2 才能 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">弐</span><span class="sec-title">才能と、その活かし方</span></div>
+  <div class="card">
+    <p>sachieさんの才能星は<span class="hl">司禄星</span>。才能の型は<span class="hl">「順殿の型」</span>――一気に花開くのではなく、時間をかけて、剋線の大きい星の順番に、才能が少しずつ現れて発展していきます。</p>
+    <p>領域は<b>北天運</b>。考える時も行動する時も、先に考えてしまう。頭はいいけど、考えすぎるとかえって行動が伴いにくい面もあります。sachieさんが「時期を見て動きたい」とおっしゃるのも、この型そのもの。無理に動くより、考えて、タイミングを見極めて動く方が命式に合っています。</p>
+    <div class="pull">今すぐスパッと結果を出さなくていい。この十年、二十年かけて、体制も才能も、じっくり形になっていく作りです。</div>
+    <p>八門法では<span class="hl">螣陀型（とうだがた）</span>。自分の意志を最優先して、揺るがない強さを持っています。自分の判断に基づいて行動して、周りに流されにくい。ただし他人に頼りすぎると自立性が損なわれるので、自力で状況を切り開く環境に身を置くことが、成功の鍵になります。</p>
+  </div>
+</div>
+
+<!-- 3 五行 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">参</span><span class="sec-title">五行のバランス ― 木だけが極端に少ない</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.7rem;">五行エネルギーの内訳</p>
+    <div class="gogyo">
+      <div class="gbar g-wood"><span class="gname">木</span><div class="gtrack"><div class="gfill" style="width:15%"></div></div><span class="gval">15</span></div>
+      <div class="gbar g-fire"><span class="gname">火</span><div class="gtrack"><div class="gfill" style="width:51%"></div></div><span class="gval">51</span></div>
+      <div class="gbar g-earth"><span class="gname">土</span><div class="gtrack"><div class="gfill" style="width:33%"></div></div><span class="gval">33</span></div>
+      <div class="gbar g-metal"><span class="gname">金</span><div class="gtrack"><div class="gfill" style="width:47%"></div></div><span class="gval">47</span></div>
+      <div class="gbar g-water"><span class="gname">水</span><div class="gtrack"><div class="gfill" style="width:52%"></div></div><span class="gval">52</span></div>
+    </div>
+    <p style="margin-top:1rem;">火・土・金・水はどれも30〜50台の帯にありますが、<span class="hl">木だけが15と、他の三分の一以下</span>。守り育てて実らせる力は、とんでもなく強い。でも"自分一人の軸だけで、一からまっすぐ立てる力"だけが、構造として薄い作りです。</p>
+    <p>会社を体制として整えていく場面、人を新しく雇って組織として作り直す場面。どれも、自分一人の軸で立てる力が要る局面です。そこで壁にぶつかっているのは、努力が足りないからではなく、命式の作りとして、そこだけ薄いから。<span class="hl">sachieさんのせいではありません。</span></p>
+  </div>
+</div>
+
+<!-- 4 天中殺 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">肆</span><span class="sec-title">天中殺 ― 引き継ぎ・継承の使命</span></div>
+  <div class="card">
+    <p>sachieさんは<span class="hl">寅卯天中殺</span>のグループ。本質は「引き継ぎ・継承の使命」。家系の繋がりでは、母親・兄弟姉妹より父親との縁が深く、既存の事業に入って発展させる型です。お父様の会社を引き継いで、4人から15人まで育ててこられたこと自体が、この天中殺の使命そのもの。継いで終わりやなく、継いで発展させる――それがsachieさんの命式に刻まれた役割です。</p>
+    <p>もう一つ、この天中殺グループには「どんなに人生が多忙であっても、静かな生活に憧れる」という特徴があります。持っていないものほど、強く求める――静かな暮らしは、sachieさんにとって"ないものねだり"の対象になっているかもしれません。</p>
+    <p>宿命天中殺はなし。後天運では、次の年天中殺は2034〜2035年、まだ8年ほど先です。今は動ける時期です。</p>
+  </div>
+</div>
+
+<!-- 5 運気 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">伍</span><span class="sec-title">運気のリズム ― 大運天中殺を抜けた、動ける十年</span></div>
+
+  <div class="card">
+    <p class="soft" style="margin-bottom:.7rem;">大運 ― 10年ごとに巡る運気のテーマ（8歳運）</p>
+    <div class="daiun-scroll">
+      <table class="daiun">
+        <thead><tr><th>年齢</th><th>干支</th><th>主星</th><th>従星</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr><td>8〜17</td><td>辛亥</td><td>玉堂星</td><td>天禄星</td><td>年柱：大半会</td></tr>
+          <tr><td>18〜27</td><td>壬子</td><td>貫索星</td><td>天将星</td><td>律音・年柱：干合害</td></tr>
+          <tr><td>28〜37</td><td>癸丑</td><td>石門星</td><td>天堂星</td><td>年柱：庫刑天剋地冲</td></tr>
+          <tr><td>38〜47</td><td>甲寅</td><td>鳳閣星</td><td>天胡星</td><td class="tc-cell">大運天中殺</td></tr>
+          <tr><td>48〜57</td><td>乙卯</td><td>調舒星</td><td>天極星</td><td class="tc-cell">大運天中殺</td></tr>
+          <tr class="now-row"><td>58〜67</td><td>丙辰</td><td>禄存星</td><td>天庫星</td><td class="now-cell">今ここ・脱皮明け</td></tr>
+          <tr><td>68〜77</td><td>丁巳</td><td>司禄星</td><td>天馳星</td><td>日柱：干合</td></tr>
+          <tr><td>78〜87</td><td>戊午</td><td>車騎星</td><td>天報星</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:.9rem;font-size:.83rem;">sachieさんは、<span class="hl">38〜57歳の20年間、大運天中殺</span>の中にいました。お父様の会社を引き継いで、4人から15人まで拡大されたのは、まさにこの二十年の中でのことです。天中殺やったからこそ、"自分のためやなく、会社のため・人のため"に動いた結果が、そのまま実を結んだと言えます。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">今の十年は、命式的に一番動きやすい十年</p>
+    <p>今の大運は<span class="hl">丙辰</span>。月柱と天剋地冲、日柱と半会。大運天中殺の二十年を抜けて、初めて迎える十年です。丙は、sachieさんの第二守護神と同じ字――大運そのものが、守護神の質を帯びています。体制を整えて、右腕を見つけて、会社を拡大していく。その全部が、この十年のテーマそのものです。</p>
+    <div class="pull">次に運気の枠が外れる時期（年天中殺）は、2034年まで来ません。今の十年は、地に足をつけてしっかり動ける、貴重な本番の十年です。</div>
+
+    <p class="soft" style="margin-top:1.2rem;">▼ この先の動き方（年ごと）</p>
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-when">2026年（今年）― 丙午</div>
+        <div class="tl-body">守護神と同じ丙が年運にも出ています。外に発信していく方向に動きやすい年。年柱：支合、月柱：半会。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">2027年 ― 丁未（アクセルとブレーキを同時に踏む年）</div>
+        <div class="tl-body">年柱：律音、月柱：庫刑・破、日柱：干合・害。人生の分岐点になりやすい年ですが、同時に体制側で摩擦も出やすい年。急いで右腕を決め切ろうとせず、候補との距離を詰めながら、摩擦は摩擦として受け止める。慎重に進める年です。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2028〜2029年 ― 足場を固める時期</div>
+        <div class="tl-body">大きな山谷のない年。今の十年の中で、足場を固める時期として使う。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2030年 ― 庚戌（締め直しの年）</div>
+        <div class="tl-body">庫刑・破。広げすぎたものを、この年でいったん整理する、くらいのつもりで。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2031年 ― 辛亥（大きく広がるタイミング）</div>
+        <div class="tl-body">年柱と大半会。流れが合う年。今の十年で作ってきた形が、ここで大きく広がるタイミングになります。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 6 相談テーマ -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">陸</span><span class="sec-title">今日の本命 ― 右腕の選び方</span></div>
+  <div class="card">
+    <p class="lead">sachieさんに要るのは、自分一人の軸で立てる力を身につけることではない</p>
+    <p>命式にない木の気を、外から人で補うこと。sachieさんの調候守護神の第一が<span class="hl">甲（大きな木）</span>――一番欠けている木性が、一番の守護神として入っています。欠けているからこそ、命式が一番強く求めている気なんです。</p>
+    <div class="pull">大海は自分で山を作らない。流れ込む川があって、初めて満ちていく。sachieさんの命式にとって、その"川"が甲・丙の質を持った人です。</div>
+    <p>右腕を選ぶ基準は三つ。</p>
+    <p><b>一つ目、甲の質を持った人。</b>真っ直ぐ、頑固なくらい自分の軸があって、リーダー気質。「この人について行けば間違いない」と思わせる、まっすぐな人。</p>
+    <p><b>二つ目、丙の質を持った人。</b>明るくて、外に開いていく力がある人。sachieさんが守り抜いてきた土台を、外に向けて発信・展開していける人。</p>
+    <p><b>三つ目、sachieさん自身の伴星・貫索星と噛み合う人。</b>「人の言うことは聞かへんけど意見は聞く」タイプなので、指図されるのを嫌う相手には合わず、逆に言いなりになる人でも物足りません。同じ方向を見ながら、自分の意見も持っている人が合います。</p>
+    <p>右腕を選ぶ場面では、義理堅そうだから・見た目がしっかりしてるから、で決めてしまわないこと。甲・丙の質、そして貫索星と噛み合うか。この三つの基準で、中身を見て選ぶことが、日干支の警句を外す一番の方法です。</p>
+  </div>
+</div>
+
+<!-- 7 処方 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">漆</span><span class="sec-title">今日から動ける処方</span></div>
+  <div class="card recipe">
+    <div class="item"><div class="num">1</div><div class="rbody"><b>右腕候補に会う時、三つの基準を意識する。</b><br>甲の軸（真っ直ぐでリーダー気質）・丙の発信力（明るく外に開いていく）・意見を言い合える距離感（言いなりでも指図されるのも合わない）。次に人と会う時、どれか一つでいいので意識してみてください。</div></div>
+    <div class="item"><div class="num">2</div><div class="rbody"><b>2027年は急がず、慎重に。</b><br>分岐点に立つ力と、体制側の摩擦が同時にかかる年です。右腕を決め切ろうと焦らず、候補との距離を詰めながら、摩擦は摩擦として受け止めてください。</div></div>
+    <div class="item"><div class="num">3</div><div class="rbody"><b>今すぐ結果を求めない。</b><br>才能占技は「順殿の型」――時間をかけて少しずつ発展していく作りです。この十年、二十年かけて、体制も才能もじっくり形になっていきます。</div></div>
+    <div class="item"><div class="num">4</div><div class="rbody"><b>木の気を、生活でも足す。</b><br>観葉植物・生花・緑の多い場所。真っ直ぐに伸びる木を意識すること自体が、守護神（木）を取りに行く行為になります。</div></div>
+    <div class="item"><div class="num">5</div><div class="rbody"><b>今の十年は「動く」。迷ったら暦を見る。</b><br>58〜67歳＝大運天中殺を抜けた、動ける本番の十年。日々の動きに迷ったら、暦（sachieの暦）を見てください。今どの時期にいて、何をする時期か、ひと目で分かります。</div></div>
+  </div>
+</div>
+
+<!-- 締め -->
+<div class="closing">
+  <p>sachieさんは、真冬の大海――<span class="hl">何を考えているか、簡単には見せない、器の大きい人</span>です。<br>その器の大きさで、これまで4人から15人まで、会社を育ててこられました。</p>
+  <p>拡大の壁にぶつかっているのは、経営判断のミスではありません。<br>中心の玉堂星には、前例を積み上げて守り抜く力はもともと強いけど、<br>自分一人の軸だけで、一からまっすぐ立てる力は、構造として薄い。<br>それは<span class="hl">sachieさんのせいではありません。</span></p>
+  <p>その足りていない木の気が、命式で一番の守護神として入っていました。<br>欠けているからこそ、一番強く求める気です。</p>
+  <p class="big">まだまだこれから。ハイライトはまだ来てない。</p>
+  <p>大海は自分で山を作らない。流れ込む川があって、初めて満ちていく。<br>右腕と出会う直感は、命式の設計そのものです🎯</p>
+  <p>体制を整えるのも、右腕を見つけるのも、焦らず一個ずつ。安心して、進んでいってください。</p>
+</div>
+
+<a class="koyomi-link" href="/sachie">
+  <span class="arrow">▶</span> sachieの暦（日々の運気カレンダー）をひらく
+  <small>毎日の運気が天気予報のように見られます。傘を持つくらいの気持ちで、楽しんで。</small>
+</a>
+
+<footer>
+  <p>いつもおおきにです😆　またゆっくり話しましょう💬</p>
+  <p class="sig">㐂</p>
+</footer>
+
+</div>
+</body>
+</html>
