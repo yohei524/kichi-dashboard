@@ -1193,33 +1193,27 @@ function moonPhaseName(a) {
   if (a < 23.5) return '下弦';
   return '有明';
 }
-// 月の満ち欠けをSVGで正確に描く。
-// 月相は「円」と「楕円（ターミネーター＝明暗境界線）」の合成で決まる。
-// 境界線の横幅は cos(位相角) に比例し、半月でちょうど0（直線）になる。
-// CSSの影ずらしでは半月付近が破綻するので、パスで正しく描く。
+// 月の満ち欠けは自前SVG計算をやめ、絵文字の月相記号を使う（260827：境界楕円の
+// sweep向き計算が満月前後で繰り返しバグを作り込んだため、計算自体をやめて
+// 標準の月相絵文字表示に切り替えた）。
 function moonDiscHTML(a, size) {
   var s = size || 26;
-  var r = s / 2;
-  var phase = 2 * Math.PI * a / SYNODIC;   // 0=新月 π=満月
-  var k = Math.cos(phase);                  // +1=新月 -1=満月
-  var rx = Math.abs(k) * r;                 // 境界楕円の横半径
-  // 右が光る（満ちていく）か左が光る（欠けていく）か
-  var waxing = (a < SYNODIC / 2);
-  // 光っている側の半円 + 境界の楕円弧 で「光の形」を作る
-  var sweepHalf = waxing ? 1 : 0;           // 半円の向き
-  // 境界の膨らむ向きは k の符号だけで決まる（waxing/waningでの反転は不要。
-  // sweepHalf側で既に左右反転を処理しているため、ここでも反転させると
-  // 満月前後で二重反転して真っ黒になるバグがあった＝260827発覚・修正）
-  var sweepTerm = (k > 0) ? 0 : 1; // 境界の膨らむ向き
-  var d = 'M ' + r + ' 0 ' +
-          'A ' + r + ' ' + r + ' 0 0 ' + sweepHalf + ' ' + r + ' ' + s + ' ' +
-          'A ' + rx.toFixed(2) + ' ' + r + ' 0 0 ' + sweepTerm + ' ' + r + ' 0 Z';
-  var html = '<span class="moon-disc" style="width:' + s + 'px;height:' + s + 'px">';
-  html += '<svg viewBox="0 0 ' + s + ' ' + s + '" width="' + s + '" height="' + s + '">';
-  html += '<circle cx="' + r + '" cy="' + r + '" r="' + r + '" class="moon-dark"/>';
-  html += '<path d="' + d + '" class="moon-lit"/>';
-  html += '</svg></span>';
+  var emoji = moonPhaseEmoji(a);
+  var html = '<span class="moon-disc" style="width:' + s + 'px;height:' + s + 'px;font-size:' + Math.round(s * 0.85) + 'px;line-height:' + s + 'px">';
+  html += emoji;
+  html += '</span>';
   return html;
+}
+function moonPhaseEmoji(a) {
+  // 8方位の絵文字を、moonPhaseNameと同じ境界幅で均等割り当て
+  if (a < 1.0 || a >= 28.5) return '🌑';
+  if (a < 6.4) return '🌒';
+  if (a < 8.4) return '🌓';
+  if (a < 13.3) return '🌔';
+  if (a < 16.3) return '🌕';
+  if (a < 21.5) return '🌖';
+  if (a < 23.5) return '🌗';
+  return '🌘';
 }
 
 // ---------- 月齢ストリップ（今日を中心に前後3日） ----------
