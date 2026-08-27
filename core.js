@@ -1182,11 +1182,13 @@ function moonAge(y, m, d) {
   return a < 0 ? a + SYNODIC : a;
 }
 function moonPhaseName(a) {
+  // 満月ピーク=SYNODIC/2≈14.765。境界は各名称の中心幅で対称に取る（260827修正：
+  // 旧13.8境界が実際の月齢13.8とほぼ一致し、本来「十三夜」の日が「満月」表示になる事故があった）。
   if (a < 1.0 || a >= 28.5) return '新月';
   if (a < 6.4) return '三日月';
   if (a < 8.4) return '上弦';
-  if (a < 13.8) return '十三夜';
-  if (a < 15.8) return '満月';
+  if (a < 13.3) return '十三夜';
+  if (a < 16.3) return '満月';
   if (a < 21.5) return '十八夜';
   if (a < 23.5) return '下弦';
   return '有明';
