@@ -714,10 +714,10 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
   filter: drop-shadow(0 0 4px rgba(184,134,44,0.22));
 }
 .moon-dark {
-  fill: #D8CBB2;
+  fill: #B8862C;
 }
 .moon-lit {
-  fill: #B8862C;
+  fill: #D8CBB2;
 }
 .moon-today {
   text-align: center;
