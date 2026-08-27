@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>norikoさん 鑑定書 ｜ 㐂占</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --night:#0B0F1A; --night2:#131A28; --sink:#171F30; --panel:#1B2334;
+  --line:#2A3346; --accent:#C4C9D2; --accent-soft:#9AA0AC; --accent-glow:rgba(196,201,210,.14);
+  --gold:#C9A24A; --text:#ECEAE4; --muted:#8A96AC; --muted2:#A9B3C6;
+  --water:#6E9BC4; --fire:#D08A5A; --wood:#7FA86B; --metal:#C4C9D2; --earth:#C9A24A;
+  --bad:#C97A6A; --good:#6E9BC4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Serif JP',serif; color:var(--text); line-height:1.95; letter-spacing:.045em;
+  background:
+    radial-gradient(1200px 620px at 50% -12%, rgba(196,201,210,.10), transparent 60%),
+    linear-gradient(180deg,#0B0F1A 0%,#0D1220 45%,#080B14 100%);
+  background-attachment:fixed; min-height:100vh;
+}
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.05rem 4rem;}
+
+header{text-align:center;padding:3rem 1rem 1.4rem;}
+header .kicker{font-size:.68rem;letter-spacing:.32em;color:var(--accent);opacity:.9;margin-bottom:.9rem;}
+header h1{font-size:1.5rem;font-weight:500;letter-spacing:.08em;margin-bottom:.5rem;}
+header h1 .nm{color:var(--accent);}
+header .tagline{font-size:.8rem;color:var(--muted2);letter-spacing:.1em;line-height:1.7;}
+header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:.12em;}
+
+.profile{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem .8rem;
+}
+.profile div{font-size:.74rem;color:var(--muted);}
+.profile div b{display:block;font-size:.9rem;color:var(--text);font-weight:500;margin-top:.1rem;letter-spacing:.06em;}
+.profile div.full{grid-column:1/3;}
+
+.sec{margin-bottom:1.65rem;}
+.sec-head{
+  display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;
+  padding-bottom:.6rem;border-bottom:1px solid var(--line);
+}
+.sec-no{font-size:.72rem;color:var(--accent);letter-spacing:.18em;font-weight:600;}
+.sec-title{font-size:1.02rem;font-weight:500;letter-spacing:.08em;}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  padding:1.25rem 1.15rem;box-shadow:0 4px 24px rgba(0,0,0,.32);margin-bottom:1rem;
+}
+.card p{font-size:.87rem;margin-bottom:.9rem;color:var(--text);}
+.card p:last-child{margin-bottom:0;}
+.card .lead{color:var(--accent);font-size:.9rem;font-weight:500;}
+.hl{color:var(--accent);font-weight:500;}
+.soft{color:var(--muted2);font-size:.8rem;}
+
+.meishiki{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.2rem 0 .3rem;
+}
+.pillar{
+  background:var(--sink);border:1px solid var(--line);border-radius:12px;
+  padding:.7rem .4rem;text-align:center;
+}
+.pillar .lbl{font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.55rem;}
+.pillar .yomi{font-size:.58rem;color:var(--muted);letter-spacing:.04em;line-height:1.3;}
+.pillar .kan{font-size:1.85rem;font-weight:600;color:var(--text);line-height:1.15;}
+.pillar .shi{font-size:1.85rem;font-weight:600;color:var(--accent);line-height:1.15;margin-top:.2rem;}
+.pillar .zou{font-size:.62rem;color:var(--muted2);margin-top:.55rem;letter-spacing:.04em;}
+.meishiki-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;}
+
+.jintai{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:19rem;margin:.4rem auto .2rem;}
+.jcell{
+  background:var(--sink);border:1px solid var(--line);border-radius:11px;
+  aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;
+}
+.jcell .pos{font-size:.58rem;color:var(--muted);letter-spacing:.05em;}
+.jcell .star{font-size:.92rem;font-weight:600;color:var(--text);letter-spacing:.03em;}
+.jcell.center{background:linear-gradient(160deg,rgba(196,201,210,.18),var(--sink));border-color:var(--accent-soft);}
+.jcell.center .star{color:var(--accent);}
+.jcell.jusei-cell{background:var(--night2);}
+.jcell .star.gold{color:var(--gold);}
+
+.gogyo{margin-top:.3rem;}
+.gbar{display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;}
+.gbar .gname{width:2.6rem;font-size:.76rem;color:var(--muted2);flex-shrink:0;}
+.gbar .gtrack{flex:1;height:9px;background:var(--sink);border-radius:5px;overflow:hidden;}
+.gbar .gfill{height:100%;border-radius:5px;}
+.gbar .gval{width:2.2rem;text-align:right;font-size:.72rem;color:var(--muted);flex-shrink:0;}
+.g-wood .gfill{background:var(--wood);}
+.g-fire .gfill{background:var(--fire);}
+.g-earth .gfill{background:var(--earth);}
+.g-metal .gfill{background:var(--metal);}
+.g-water .gfill{background:var(--water);}
+
+.daiun-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.daiun{width:100%;border-collapse:collapse;font-size:.78rem;min-width:19rem;}
+.daiun th{
+  font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.05em;
+  padding:.4rem .3rem;border-bottom:1px solid var(--line);text-align:center;
+}
+.daiun td{padding:.5rem .3rem;text-align:center;border-bottom:1px solid rgba(42,51,70,.5);color:var(--text);}
+.daiun td:first-child{color:var(--muted2);font-size:.72rem;white-space:nowrap;}
+.daiun .tc-cell{color:var(--bad);font-size:.68rem;}
+.daiun .now-row td{background:linear-gradient(90deg,rgba(196,201,210,.12),transparent);}
+.daiun .now-row td:first-child{color:var(--accent);font-weight:600;}
+.daiun .now-cell{color:var(--accent);font-size:.68rem;font-weight:600;}
+
+.tl{position:relative;padding-left:1.1rem;margin-top:.3rem;}
+.tl::before{content:"";position:absolute;left:3px;top:.4rem;bottom:.4rem;width:2px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:1rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before{content:"";position:absolute;left:-1.1rem;top:.45rem;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--night2);}
+.tl-item.tc::before{background:var(--bad);}
+.tl-when{font-size:.76rem;color:var(--accent);font-weight:600;letter-spacing:.06em;}
+.tl-item.tc .tl-when{color:var(--bad);}
+.tl-body{font-size:.82rem;color:var(--text);margin-top:.15rem;}
+
+.dodont{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.dobox,.dontbox{border-radius:12px;padding:.85rem .8rem;border:1px solid var(--line);}
+.dobox{background:rgba(110,155,196,.08);}
+.dontbox{background:rgba(201,122,106,.08);}
+.dobox .h,.dontbox .h{font-size:.78rem;font-weight:600;margin-bottom:.5rem;letter-spacing:.06em;}
+.dobox .h{color:var(--good);}
+.dontbox .h{color:var(--bad);}
+.dodont ul{list-style:none;}
+.dodont li{font-size:.75rem;color:var(--text);padding-left:.9rem;position:relative;margin-bottom:.45rem;line-height:1.6;}
+.dodont li:last-child{margin-bottom:0;}
+.dobox li::before{content:"○";position:absolute;left:0;color:var(--good);font-size:.7rem;}
+.dontbox li::before{content:"×";position:absolute;left:0;color:var(--bad);font-size:.7rem;}
+@media(max-width:400px){.dodont{grid-template-columns:1fr;}}
+
+.recipe{counter-reset:r;}
+.recipe .item{display:flex;gap:.75rem;margin-bottom:1rem;}
+.recipe .item:last-child{margin-bottom:0;}
+.recipe .num{
+  flex-shrink:0;width:1.7rem;height:1.7rem;border-radius:50%;
+  background:linear-gradient(160deg,var(--accent),var(--accent-soft));
+  color:var(--night);font-weight:700;font-size:.85rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.recipe .rbody{font-size:.83rem;}
+.recipe .rbody b{color:var(--accent);font-weight:600;}
+
+.pull{
+  border-left:3px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:1rem 0;
+  font-size:.9rem;color:var(--muted2);font-style:normal;
+}
+
+.closing{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--accent-soft);border-radius:18px;padding:1.6rem 1.25rem;text-align:center;
+  box-shadow:0 0 30px rgba(196,201,210,.08);
+}
+.closing p{font-size:.88rem;margin-bottom:.9rem;}
+.closing p:last-child{margin-bottom:0;}
+.closing .big{font-size:1.05rem;color:var(--accent);font-weight:500;letter-spacing:.06em;}
+
+.koyomi-link{
+  display:block;text-align:center;margin-top:1.5rem;padding:1rem;
+  background:var(--night2);border:1px solid var(--line);border-radius:14px;
+  color:var(--text);text-decoration:none;font-size:.86rem;transition:border-color .3s;
+}
+.koyomi-link:hover{border-color:var(--accent-soft);}
+.koyomi-link .arrow{color:var(--accent);}
+.koyomi-link small{display:block;color:var(--muted);font-size:.7rem;margin-top:.3rem;}
+
+footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
+footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">㐂占 　 命 術 本鑑定書</p>
+  <h1><span class="nm">noriko</span> さんへ</h1>
+  <p class="tagline">守ると決めたら、誰より強く戦える人</p>
+  <p class="date">1980年10月14日 生　／　鑑定 2026.08.27</p>
+</header>
+
+<div class="profile">
+  <div class="full">魂の本質（日の宿命）<b>庚申（かのえさる）― 軍人・戦いの守り神</b></div>
+  <div>中心の星<b>石門星</b></div>
+  <div>天中殺<b>子丑（北方）</b></div>
+  <div>才能の星<b>車騎星</b></div>
+  <div>今の大運<b>辛巳・石門星（42〜51歳）</b></div>
+  <div class="full">運気の位置<b>天中殺前・動ける10年のただ中。次の年天中殺は2032〜2033年</b></div>
+</div>
+
+<div class="card" style="border-color:var(--accent-soft);">
+  <p>おおきにです、norikoさん☺️</p>
+  <p>紡の席まで来ていただいて、ほんまにありがとうございます。無料鑑定でお伝えしたのは入口だけでした。ここからはその奥、全部お渡しします。</p>
+  <p>気になったところは、いつでもLINEで聞いてください。</p>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">命 式</span><span class="sec-title">norikoさんの設計図</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.6rem;">陰占 ― 生まれ持った気の柱</p>
+    <div class="meishiki">
+      <div class="pillar">
+        <div class="lbl">日柱（自分・家庭）</div>
+        <div class="yomi">かのえ</div><div class="kan">庚</div>
+        <div class="shi">申</div><div class="yomi">さる</div>
+        <div class="zou">蔵干　庚・壬・戊</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">月柱（仕事・家系）</div>
+        <div class="yomi">ひのえ</div><div class="kan">丙</div>
+        <div class="shi">戌</div><div class="yomi">いぬ</div>
+        <div class="zou">蔵干　戊・辛・丁</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">年柱（社会・先祖）</div>
+        <div class="yomi">かのえ</div><div class="kan">庚</div>
+        <div class="shi">申</div><div class="yomi">さる</div>
+        <div class="zou">蔵干　庚・壬・戊</div>
+      </div>
+    </div>
+    <p class="meishiki-note">日柱 庚申 ／ 月柱 丙戌 ／ 年柱 庚申（日柱と年柱が同じ＝律音）</p>
+
+    <div class="divider" style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p class="soft" style="margin-bottom:.2rem;">陽占 ― 心のかたち（人体星図）</p>
+    <div class="jintai">
+      <div class="jcell jusei-cell"><span class="pos">伴星（先祖）</span><span class="star">司禄星</span></div>
+      <div class="jcell"><span class="pos">目上（北）</span><span class="star">貫索星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">初年運</span><span class="star gold">天禄星</span></div>
+      <div class="jcell"><span class="pos">配偶者（西）</span><span class="star">龍高星</span></div>
+      <div class="jcell center"><span class="pos">中心・本人</span><span class="star">石門星</span></div>
+      <div class="jcell"><span class="pos">社会（東）</span><span class="star">龍高星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">晩年運</span><span class="star gold">天禄星</span></div>
+      <div class="jcell"><span class="pos">目下（南）</span><span class="star">車騎星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">中年運</span><span class="star gold">天堂星</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.7rem;">中央が本人。四隅は人生3時期のエネルギー（初年・中年・晩年）と、ご先祖の星（伴星）。配偶者・社会がどちらも龍高星――家庭でも社会でも「じっとしていられない」質が出る配置です。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">壱</span><span class="sec-title">どういう魂か ― 軍人・戦いの守り神</span></div>
+  <div class="card">
+    <p class="lead">「守ると決めたら、誰より強く戦える人」</p>
+    <p>日の宿命「庚申」は<span class="hl">「軍人・戦いの守り神」</span>と呼ばれる干支。西方の金神で、六十干支の中でも数少ない、武将として描かれる強い干支です。知的で穏やか、正義感が強く、規則や常識にはうるさい。理性に従って断固とした行動をとります。</p>
+    <p>警句には「変化の多い心情で神経質に近い素質がある」ともありますが、本命はこの一文です。<b>「口を慎み精神修養に努めれば一生を安定して大成」</b>。norikoさんの命式が抱えてる一番の課題は、能力ではなく、<span class="hl">自分を修める</span>という内側の作業です。</p>
+    <div class="card" style="background:var(--sink);border-color:var(--accent-soft);margin:1rem 0;">
+      <p class="lead" style="margin-bottom:.6rem;">日柱と年柱が同じ庚申 ―― 律音</p>
+      <p style="margin-bottom:0;">外向き・社会的な場面ほど、自分の軸に戻る力が強い配置です。誰かに合わせて自分を崩す、ということが構造的に起きにくい人。彼との関係でも、感情的にならず理性で整理してしまったのは、この律音の質がそのまま出ていました。</p>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">弐</span><span class="sec-title">中心の星 ― 石門星、深く踏み込ませない</span></div>
+  <div class="card">
+    <p>中心の星は石門星。調和を重んじる星です。平等・公平。誰とでも和気あいあいとした関係を築けます。社交的やけど、周りに流されない芯の強さも秘めています。</p>
+    <p>ただ、この星には裏があります。<span class="hl">「広く浅く」</span>。人の深いところまでは、あんまり立ち入らないんです。</p>
+    <p>彼が言うてた「家族みたいになってしまった」――あれは彼の言葉やけど、norikoさんの関わり方の形、そのものでもあります。相談し合えんかったのも、norikoさんが弱いからやなくて、この石門星の「深く踏み込ませない」性質が、そのまま出てるだけです。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">参</span><span class="sec-title">せめぎ合う二つの使命 ― 伴星と配偶者位</span></div>
+  <div class="card">
+    <p>伴星（ご先祖からの使命）は司禄星。<span class="hl">「継続が成功のカギ。家庭と家族を大切にしなさい」</span>という使命です。愛・精神・経済・知識、すべて積み重ねで信用を勝ち取る質。</p>
+    <p>一方、配偶者の星は龍高星。改革・国際性・放浪・冒険――<b>「破壊と再構築」</b>と呼ばれる動きの星です。「とにかく家にいない。家でじっとしているとイライラする」という質。</p>
+    <div class="pull">伴星の司禄星＝家庭を築いて積み重ねたい使命<br>配偶者位の龍高星＝でも家庭の中でも、自由や変化を求めてしまう自分<br>この二つが、最初から同じ命式の中でせめぎ合っています。</div>
+    <p>卵子凍結を使ってまで妊活にトライした。独身証明書まで取り寄せて事実婚として進めた。あれは全部、司禄星の使命が動いた結果です。それでも結婚の形にならなかったのは、norikoさんが選択を間違えたのではなく、<span class="hl">この命式の作りが、そのまま形になっただけ</span>です。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">肆</span><span class="sec-title">五行バランス ― 金が強く、木が0</span></div>
+  <div class="card">
+    <div class="gogyo">
+      <div class="gbar g-wood"><span class="gname">木</span><div class="gtrack"><div class="gfill" style="width:0%"></div></div><span class="gval">0</span></div>
+      <div class="gbar g-fire"><span class="gname">火</span><div class="gtrack"><div class="gfill" style="width:12%"></div></div><span class="gval">33</span></div>
+      <div class="gbar g-earth"><span class="gname">土</span><div class="gtrack"><div class="gfill" style="width:14%"></div></div><span class="gval">39</span></div>
+      <div class="gbar g-metal"><span class="gname">金</span><div class="gtrack"><div class="gfill" style="width:55%"></div></div><span class="gval">154</span></div>
+      <div class="gbar g-water"><span class="gname">水</span><div class="gtrack"><div class="gfill" style="width:20%"></div></div><span class="gval">56</span></div>
+    </div>
+    <p style="margin-top:1rem;">金が圧倒的に多く、総エネルギー282のうち半分以上を占めます。金の性質は<span class="hl">決断・切る・整理する力</span>。庚申という日干支自体も金の性質やから、判断して切って前に進む力が、ものすごく強く出ています。</p>
+    <p>一方で、木が0。木は自分の軸・成長・始まりの力です。金が強すぎて木を剋す形になっていて、<b>決断する力が強すぎて、自分がどうしたいかをじっくり育てる前に、先に結論を出して切ってしまう</b>ところがあります。</p>
+    <div class="pull">金の強さ（理性で断ち切る力）× 木の欠損（自分の気持ちをじっくり育てる力の弱さ）<br>＝ 感情がまだ追いついていないうちに、頭が先に整理して手放してしまう構造。</div>
+    <p>一人で泣いて、起こったことを理論的に整理して頭で理解させ、心がやっと追いついてきた――まさにこの並びの通りです。火も33と少なく、気持ちを外に出す力も足りていません。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">伍</span><span class="sec-title">守護神 ― 足りない力を、これから自分で育てる</span></div>
+  <div class="card">
+    <p>第一守護神は甲（禄存星）＝大樹のように真っ直ぐ、リーダー意識。第二守護神は丁（牽牛星）＝灯火のように繊細、温かさで照らす。どちらも、命式に一番足りない木・火の質です。</p>
+    <p>守り神は、<span class="hl">守る相手が決まった時だけ剣を抜く</span>んです。彼との関係で見せていた優しさ・気遣いは、本当はこの守護神の力を無意識に使っていました。今度は、それを自分で育てる番です。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">陸</span><span class="sec-title">運気のリズム ― 42歳からの10年、じっくり基盤を作る</span></div>
+
+  <div class="card">
+    <p class="soft" style="margin-bottom:.7rem;">大運 ― 10年ごとに巡る運気のテーマ（2歳運）</p>
+    <div class="daiun-scroll">
+      <table class="daiun">
+        <thead><tr><th>年齢</th><th>干支</th><th>主星</th><th>従星</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr><td>2〜11</td><td>乙酉</td><td>司禄星</td><td>天将星</td><td></td></tr>
+          <tr><td>12〜21</td><td>甲申</td><td>禄存星</td><td>天禄星</td><td></td></tr>
+          <tr><td>22〜31</td><td>癸未</td><td>調舒星</td><td>天南星</td><td></td></tr>
+          <tr><td>32〜41</td><td>壬午</td><td>鳳閣星</td><td>天恍星</td><td></td></tr>
+          <tr class="now-row"><td>42〜51</td><td>辛巳</td><td>石門星</td><td>天貴星</td><td class="now-cell">今ここ・中心星の10年</td></tr>
+          <tr><td>52〜61</td><td>庚辰</td><td>貫索星</td><td>天印星</td><td>大発展期</td></tr>
+          <tr><td>62〜71</td><td>己卯</td><td>玉堂星</td><td>天報星</td><td></td></tr>
+          <tr><td>72〜81</td><td>戊寅</td><td>龍高星</td><td>天馳星</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:.9rem;font-size:.83rem;">norikoさんは今、<span class="hl">42〜51歳の大運・辛巳</span>の中にいます。中心星の石門星が、そのまま大運に立つ10年――本質そのものが社会の前面に出てくる時期です。支合を伴う手堅い発展の配置で、流動占技では「速度は遅い・女性起業家向き・一つをじっくり」と出ています。業務委託を経て会社を立ち上げていく方向は、この大運の性質と噛み合っています。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">52歳から、大発展期に入る</p>
+    <p>次の52〜61歳の大運は庚辰。三合・半会という大発展の配置で、事業拡大・人脈拡大に向く10年です。<span class="hl">今の10年（42〜51歳）は、その仕込みの時期</span>。焦って広げるのではなく、一つをじっくり育てることが、52歳からの拡大に繋がります。</p>
+    <div class="pull">宿命はゼロから自分で立ち上げる形。数年先に、それが大きく開く巡りが置かれています。自分の名前で契約書にサインして、隣に、同じ方向を向いて並んで走る相手がいる――その土台を、今の10年で作ります。</div>
+
+    <p class="soft" style="margin-top:1.2rem;">▼ 直近の動き方</p>
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-when">今〜2032年ごろ ― 天中殺前・動ける期間</div>
+        <div class="tl-body">年天中殺は2032〜2033年とまだ先。今は動いていい時期です。42〜51歳でじっくり基盤を作り、52歳からの大発展期に備えてください。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">2026年12月〜2027年1月 ― 月天中殺</div>
+        <div class="tl-body">この1、2ヶ月は、新しい契約・大きな決断を避けてください。会社の立ち上げに関わる大事な判断は、年明けが明けてからか、それより前に済ませておくのが安全です。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2028年 ― 戊申・龍高星の年</div>
+        <div class="tl-body">社会の星がそのまま巡ってくる年。自分の名前で動く場面が増え、会社の形が見えてくる頃です。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">漆</span><span class="sec-title">彼との相性 ― 軽く</span></div>
+  <div class="card">
+    <p>norikoさんの日干は庚。鉄や剣の質感です。彼の日干は丙。太陽の質感で、火が金を打つ関係――彼の方が刺激を与える攻め手になる組み合わせでした。</p>
+    <p>同時に、norikoさんの月柱と彼の日柱は、天干が同じで支が正反対の<span class="hl">納音</span>――お互いがブレーキになる形です。攻められているのに、なぜか安定していた。その感覚は、この二つの掛け算です。</p>
+    <p>ただ、このブレーキは諸刃です。一緒にどんどん伸びていく相性ではなく、維持することには強いけれど、二人で成長していく形ではありません。刺激がだんだん凪いでいったのも、このブレーキが効きすぎた結果でもあります。</p>
+    <p>中心の星は二人とも石門星。価値観はもともと近く、だから喧嘩にならなかった。支合が二重にかかっていて、体の相性・一緒にいる時間の相性は強い組み合わせです。天中殺も同じグループで、呼吸が合う――言わなくても分かる感じがあったはずです。</p>
+    <div class="pull">次にパートナーを見る時の物差しが、これで一つ増えます。刺激をくれるだけの相手ではなく、刺激をもらいながら一緒に伸びていける相手かどうか。ブレーキだけがかかる相手ではなく、アクセルも一緒に踏める相手を見てください。</div>
+    <p class="soft">彼との相性の詳しいところは、また改めて時間を取ってお伝えします。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">捌</span><span class="sec-title">今日から動ける処方</span></div>
+  <div class="card recipe">
+    <div class="item"><div class="num">1</div><div class="rbody"><b>12月・1月は、契約や大きな決断をしない。</b><br>月天中殺の期間は、今の業務委託の基盤を固めることに使ってください。会社の立ち上げに関わる大事な判断は、年明け後か、それより前に済ませておくのが安全です。</div></div>
+    <div class="item"><div class="num">2</div><div class="rbody"><b>気持ちが追いつく前に、結論を急がない。</b><br>金が強く木が0という命式の作りから、感情が育つ前に頭が先に切ってしまいやすい人です。迷ったら、一呼吸置いてください。</div></div>
+    <div class="item"><div class="num">3</div><div class="rbody"><b>足りない木・火を、暮らしで補う。</b><br>観葉植物や早朝散歩、青緑系の色で木を。赤系の色や、人前に出る・発信する時間で火を。守護神である甲（真っ直ぐな軸）と丁（繊細な温かさ）を、自分の中で育てる意識で。</div></div>
+    <div class="item"><div class="num">4</div><div class="rbody"><b>42〜51歳は、速度が遅くていい10年。</b><br>一つをじっくり育てる10年です。焦って広げず、52歳からの大発展期に向けて基盤を作ってください。</div></div>
+    <div class="item"><div class="num">5</div><div class="rbody"><b>次のパートナーは「一緒に伸びていける相手」を見る。</b><br>刺激をくれるだけの相手ではなく、ブレーキだけがかかる相手でもなく、アクセルも一緒に踏める相手かどうかを見極めてください。</div></div>
+  </div>
+</div>
+
+<div class="closing">
+  <p>norikoさんは、<span class="hl">守ると決めたら、誰より強く戦える人</span>です。<br>その強さは、これまでも大切なものを守るために使われてきたんやと思います。</p>
+  <p>今回の彼との別れも、norikoさんが弱いからやなくて、<br>「守ると決めたら戦うけど、深いところは誰にも渡さない」という<br>命式の作りが、そのまま出ただけです。</p>
+  <p class="big">42歳からの10年は、その本質そのものをじっくり形にしていく時期。</p>
+  <p>52歳から、それが大きく拡大します。<br>次にパートナーを見るなら、物差しは一つ――<br>"隣で、同じ方向を向いて並んで走れる"かどうかです。</p>
+  <p>何かあったら、いつでもLINEで聞いてください。</p>
+</div>
+
+<a class="koyomi-link" href="/noriko">
+  <span class="arrow">▶</span> norikoの暦（日々の運気カレンダー）をひらく
+  <small>毎日の運気が天気予報のように見られます。傘を持つくらいの気持ちで、楽しんで。</small>
+</a>
+
+<footer>
+  <p>いつもおおきにです😆　またゆっくり話しましょう💬</p>
+  <p class="sig">㐂</p>
+</footer>
+
+</div>
+</body>
+</html>
