@@ -51,6 +51,14 @@
   ],
   "rewrites": [
     {
+      "source": "/noriko",
+      "destination": "/view.html?client=noriko"
+    },
+    {
+      "source": "/noriko-kanteisho",
+      "destination": "/clients/noriko-kanteisho.html"
+    },
+    {
       "source": "/minako",
       "destination": "/view.html?client=minako"
     },
