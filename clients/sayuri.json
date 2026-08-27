@@ -114,8 +114,8 @@
   "dailyAdvice": {},
   "expiresAt": "2026-09-12",
   "doorHref": "/menu",
-  "doorLabel": "お品書き",
-  "doorNote": "この先に もう少し深く視るための品書きがあります",
+  "doorLabel": "鑑定目録",
+  "doorNote": "この先に もう少し深く視るための目録があります",
   "starChart": {
     "banse": "龍高星",
     "meue": "司禄星",
