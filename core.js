@@ -882,14 +882,13 @@ function render() {
   var app = document.getElementById('app');
   var html = '';
 
-  // ①日付表示＋月齢ストリップ
+  // ①日付表示
   html += '<div class="card">';
   html += '<div class="text-center">';
   html += '<p class="text-xs" style="color:var(--color-brown)">' + (D.design.eraLabel || '') + '</p>';
   html += '<p class="date-display"><span class="date-month">' + jpDate.month + '</span><span style="margin:0 0.5rem">' + jpDate.day + '</span></p>';
   html += '<p class="text-xs" style="color:var(--color-accent);margin-top:0.25rem">' + (todayF ? todayF.kanshi : '') + '</p>';
   html += '</div>';
-  html += buildMoonStripHTML(y, m, d);
   html += '</div>';
 
   // ②本日の運気（簡易版：主星・従星・位相法の一言・カードめくりのみ。詳細解説はカレンダーの後ろに回す）
@@ -1170,79 +1169,6 @@ function formatBirth(b) {
   var t = getToday();
   var age = t.year - y - ((t.month < m || (t.month === m && t.day < d)) ? 1 : 0);
   return y + '年' + m + '月' + d + '日（' + age + '歳）';
-}
-
-// ---------- 月齢（天文計算） ----------
-// 節入りと同じく計算で出すので、何年先でも正しく出る。
-// 基準：2000/1/6 の新月（JD 2451550.26）／朔望月 29.530588853日
-var SYNODIC = 29.530588853;
-function moonAge(y, m, d) {
-  var j = _jd(y, m, d, 3); // JST正午で評価
-  var a = (j - 2451550.26) % SYNODIC;
-  return a < 0 ? a + SYNODIC : a;
-}
-function moonPhaseName(a) {
-  // 満月ピーク=SYNODIC/2≈14.765。境界は各名称の中心幅で対称に取る（260827修正：
-  // 旧13.8境界が実際の月齢13.8とほぼ一致し、本来「十三夜」の日が「満月」表示になる事故があった）。
-  if (a < 1.0 || a >= 28.5) return '新月';
-  if (a < 6.4) return '三日月';
-  if (a < 8.4) return '上弦';
-  if (a < 13.3) return '十三夜';
-  if (a < 16.3) return '満月';
-  if (a < 21.5) return '十八夜';
-  if (a < 23.5) return '下弦';
-  return '有明';
-}
-// 月の満ち欠けは自前SVG計算をやめ、絵文字の月相記号を使う（260827：境界楕円の
-// sweep向き計算が満月前後で繰り返しバグを作り込んだため、計算自体をやめて
-// 標準の月相絵文字表示に切り替えた）。
-function moonDiscHTML(a, size) {
-  var s = size || 26;
-  var emoji = moonPhaseEmoji(a);
-  var html = '<span class="moon-disc" style="width:' + s + 'px;height:' + s + 'px;font-size:' + Math.round(s * 0.85) + 'px;line-height:' + s + 'px">';
-  html += emoji;
-  html += '</span>';
-  return html;
-}
-function moonPhaseEmoji(a) {
-  // 8方位の絵文字を、moonPhaseNameと同じ境界幅で均等割り当て
-  if (a < 1.0 || a >= 28.5) return '🌑';
-  if (a < 6.4) return '🌒';
-  if (a < 8.4) return '🌓';
-  if (a < 13.3) return '🌔';
-  if (a < 16.3) return '🌕';
-  if (a < 21.5) return '🌖';
-  if (a < 23.5) return '🌗';
-  return '🌘';
-}
-
-// ---------- 月齢ストリップ（今日を中心に前後3日） ----------
-// 横一列に日が並び、各日に実際の月相を描く。今日だけ枠で強調する。
-// 各日をタップするとその日の運気詳細が開く（既存の openDetail を使う）。
-var WDAY = ['日','月','火','水','木','金','土'];
-function buildMoonStripHTML(y, m, d) {
-  var html = '<div class="moon-strip">';
-  for (var i = -3; i <= 3; i++) {
-    var dt = new Date(y, m - 1, d);
-    dt.setDate(dt.getDate() + i);
-    var yy = dt.getFullYear(), mm = dt.getMonth() + 1, dd = dt.getDate();
-    var a = moonAge(yy, mm, dd);
-    var isToday = (i === 0);
-    // その日が日天中殺かどうかも点で示す
-    var f = computeFortune(yy, mm, dd);
-    var cls = 'ms-day' + (isToday ? ' ms-today' : '');
-    html += '<div class="' + cls + '" onclick="openDetail(' + yy + ',' + mm + ',' + dd + ')">';
-    html += '<span class="ms-w">' + WDAY[dt.getDay()] + '</span>';
-    html += moonDiscHTML(a, isToday ? 30 : 24);
-    html += '<span class="ms-d">' + dd + '</span>';
-    html += '<span class="ms-dot' + (f.isTenchu ? ' ms-dot-on' : '') + '"></span>';
-    html += '</div>';
-  }
-  html += '</div>';
-  // 今日の月相を一行で
-  var ta = moonAge(y, m, d);
-  html += '<p class="moon-today">' + moonPhaseName(ta) + '　月齢 ' + ta.toFixed(1) + '</p>';
-  return html;
 }
 
 // ---------- 人体星図（9マスの曼荼羅） ----------
