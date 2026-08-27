@@ -1205,7 +1205,10 @@ function moonDiscHTML(a, size) {
   var waxing = (a < SYNODIC / 2);
   // 光っている側の半円 + 境界の楕円弧 で「光の形」を作る
   var sweepHalf = waxing ? 1 : 0;           // 半円の向き
-  var sweepTerm = (k > 0) ? (waxing ? 0 : 1) : (waxing ? 1 : 0); // 境界の膨らむ向き
+  // 境界の膨らむ向きは k の符号だけで決まる（waxing/waningでの反転は不要。
+  // sweepHalf側で既に左右反転を処理しているため、ここでも反転させると
+  // 満月前後で二重反転して真っ黒になるバグがあった＝260827発覚・修正）
+  var sweepTerm = (k > 0) ? 0 : 1; // 境界の膨らむ向き
   var d = 'M ' + r + ' 0 ' +
           'A ' + r + ' ' + r + ' 0 0 ' + sweepHalf + ' ' + r + ' ' + s + ' ' +
           'A ' + rx.toFixed(2) + ' ' + r + ' 0 0 ' + sweepTerm + ' ' + r + ' 0 Z';
