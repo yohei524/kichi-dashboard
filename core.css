@@ -707,17 +707,10 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
 }
 .ms-dot-on { background: #C9A24A; }
 
-/* 月そのもの（SVG） */
+/* 月そのもの（絵文字。260827：自前SVG計算をやめ絵文字表示に切り替え） */
 .moon-disc {
   display: inline-block;
-  line-height: 0;
-  filter: drop-shadow(0 0 4px rgba(184,134,44,0.22));
-}
-.moon-dark {
-  fill: #B8862C;
-}
-.moon-lit {
-  fill: #D8CBB2;
+  text-align: center;
 }
 .moon-today {
   text-align: center;
