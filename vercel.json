@@ -293,6 +293,10 @@
     {
       "source": "/natsumi-kanteisho",
       "destination": "/kanteisho.html?c=natsumi"
+    },
+    {
+      "source": "/mamiko",
+      "destination": "/view.html?client=mamiko"
     }
   ]
 }
