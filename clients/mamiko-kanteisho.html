@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>麻美子さん 鑑定書 ｜ 㐂占</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --night:#0B0F1A; --night2:#131A28; --sink:#171F30; --panel:#1B2334;
+  --line:#2A3346; --accent:#8CA06A; --accent-soft:#6E8354; --accent-glow:rgba(140,160,106,.14);
+  --gold:#8CA06A; --text:#ECEAE4; --muted:#8A96AC; --muted2:#A9B3C6;
+  --water:#6E9BC4; --fire:#D08A5A; --wood:#7FA86B; --metal:#C4C9D2; --earth:#C9A24A;
+  --bad:#C97A6A; --good:#6E9BC4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Serif JP',serif; color:var(--text); line-height:1.95; letter-spacing:.045em;
+  background:
+    radial-gradient(1200px 620px at 50% -12%, rgba(140,160,106,.10), transparent 60%),
+    linear-gradient(180deg,#0B0F1A 0%,#0D1220 45%,#080B14 100%);
+  background-attachment:fixed; min-height:100vh;
+}
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.05rem 4rem;}
+
+header{text-align:center;padding:3rem 1rem 1.4rem;}
+header .kicker{font-size:.68rem;letter-spacing:.32em;color:var(--accent);opacity:.9;margin-bottom:.9rem;}
+header h1{font-size:1.5rem;font-weight:500;letter-spacing:.08em;margin-bottom:.5rem;}
+header h1 .nm{color:var(--accent);}
+header .tagline{font-size:.8rem;color:var(--muted2);letter-spacing:.1em;line-height:1.7;}
+header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:.12em;}
+
+.profile{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem .8rem;
+}
+.profile div{font-size:.74rem;color:var(--muted);}
+.profile div b{display:block;font-size:.9rem;color:var(--text);font-weight:500;margin-top:.1rem;letter-spacing:.06em;}
+.profile div.full{grid-column:1/3;}
+
+.sec{margin-bottom:1.65rem;}
+.sec-head{
+  display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;
+  padding-bottom:.6rem;border-bottom:1px solid var(--line);
+}
+.sec-no{font-size:.72rem;color:var(--accent);letter-spacing:.18em;font-weight:600;}
+.sec-title{font-size:1.02rem;font-weight:500;letter-spacing:.08em;}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  padding:1.25rem 1.15rem;box-shadow:0 4px 24px rgba(0,0,0,.32);margin-bottom:1rem;
+}
+.card p{font-size:.87rem;margin-bottom:.9rem;color:var(--text);}
+.card p:last-child{margin-bottom:0;}
+.card .lead{color:var(--accent);font-size:.9rem;font-weight:500;}
+.hl{color:var(--accent);font-weight:500;}
+.soft{color:var(--muted2);font-size:.8rem;}
+
+.meishiki{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.2rem 0 .3rem;
+}
+.pillar{
+  background:var(--sink);border:1px solid var(--line);border-radius:12px;
+  padding:.7rem .4rem;text-align:center;
+}
+.pillar .lbl{font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.55rem;}
+.pillar .yomi{font-size:.58rem;color:var(--muted);letter-spacing:.04em;line-height:1.3;}
+.pillar .kan{font-size:1.85rem;font-weight:600;color:var(--text);line-height:1.15;}
+.pillar .shi{font-size:1.85rem;font-weight:600;color:var(--accent);line-height:1.15;margin-top:.2rem;}
+.pillar .zou{font-size:.62rem;color:var(--muted2);margin-top:.55rem;letter-spacing:.04em;}
+.meishiki-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;}
+
+.jintai{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:19rem;margin:.4rem auto .2rem;}
+.jcell{
+  background:var(--sink);border:1px solid var(--line);border-radius:11px;
+  aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;
+}
+.jcell .pos{font-size:.58rem;color:var(--muted);letter-spacing:.05em;}
+.jcell .star{font-size:.92rem;font-weight:600;color:var(--text);letter-spacing:.03em;}
+.jcell.center{background:linear-gradient(160deg,rgba(140,160,106,.18),var(--sink));border-color:var(--accent-soft);}
+.jcell.center .star{color:var(--accent);}
+.jcell.jusei-cell{background:var(--night2);}
+.jcell .star.gold{color:var(--gold);}
+
+.gogyo{margin-top:.3rem;}
+.gbar{display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;}
+.gbar .gname{width:2.6rem;font-size:.76rem;color:var(--muted2);flex-shrink:0;}
+.gbar .gtrack{flex:1;height:9px;background:var(--sink);border-radius:5px;overflow:hidden;}
+.gbar .gfill{height:100%;border-radius:5px;}
+.gbar .gval{width:2.2rem;text-align:right;font-size:.72rem;color:var(--muted);flex-shrink:0;}
+.g-wood .gfill{background:var(--wood);}
+.g-fire .gfill{background:var(--fire);}
+.g-earth .gfill{background:var(--earth);}
+.g-metal .gfill{background:var(--metal);}
+.g-water .gfill{background:var(--water);}
+
+.daiun-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.daiun{width:100%;border-collapse:collapse;font-size:.78rem;min-width:19rem;}
+.daiun th{
+  font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.05em;
+  padding:.4rem .3rem;border-bottom:1px solid var(--line);text-align:center;
+}
+.daiun td{padding:.5rem .3rem;text-align:center;border-bottom:1px solid rgba(42,51,70,.5);color:var(--text);}
+.daiun td:first-child{color:var(--muted2);font-size:.72rem;white-space:nowrap;}
+.daiun .tc-cell{color:var(--bad);font-size:.68rem;}
+.daiun .now-row td{background:linear-gradient(90deg,rgba(140,160,106,.12),transparent);}
+.daiun .now-row td:first-child{color:var(--accent);font-weight:600;}
+.daiun .now-cell{color:var(--accent);font-size:.68rem;font-weight:600;}
+
+.tl{position:relative;padding-left:1.1rem;margin-top:.3rem;}
+.tl::before{content:"";position:absolute;left:3px;top:.4rem;bottom:.4rem;width:2px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:1rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before{content:"";position:absolute;left:-1.1rem;top:.45rem;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--night2);}
+.tl-item.tc::before{background:var(--bad);}
+.tl-when{font-size:.76rem;color:var(--accent);font-weight:600;letter-spacing:.06em;}
+.tl-item.tc .tl-when{color:var(--bad);}
+.tl-body{font-size:.82rem;color:var(--text);margin-top:.15rem;}
+
+.recipe{counter-reset:r;}
+.recipe .item{display:flex;gap:.75rem;margin-bottom:1rem;}
+.recipe .item:last-child{margin-bottom:0;}
+.recipe .num{
+  flex-shrink:0;width:1.7rem;height:1.7rem;border-radius:50%;
+  background:linear-gradient(160deg,var(--accent),var(--accent-soft));
+  color:var(--night);font-weight:700;font-size:.85rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.recipe .rbody{font-size:.83rem;}
+.recipe .rbody b{color:var(--accent);font-weight:600;}
+
+.pull{
+  border-left:3px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:1rem 0;
+  font-size:.9rem;color:var(--muted2);font-style:normal;
+}
+
+.closing{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--accent-soft);border-radius:18px;padding:1.6rem 1.25rem;text-align:center;
+  box-shadow:0 0 30px rgba(140,160,106,.08);
+}
+.closing p{font-size:.88rem;margin-bottom:.9rem;}
+.closing p:last-child{margin-bottom:0;}
+.closing .big{font-size:1.05rem;color:var(--accent);font-weight:500;letter-spacing:.06em;}
+
+.koyomi-link{
+  display:block;text-align:center;margin-top:1.5rem;padding:1rem;
+  background:var(--night2);border:1px solid var(--line);border-radius:14px;
+  color:var(--text);text-decoration:none;font-size:.86rem;transition:border-color .3s;
+}
+.koyomi-link:hover{border-color:var(--accent-soft);}
+.koyomi-link .arrow{color:var(--accent);}
+.koyomi-link small{display:block;color:var(--muted);font-size:.7rem;margin-top:.3rem;}
+
+.door{display:block;text-align:center;padding:2.2rem 0 .5rem;margin-top:1.5rem;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.door-gate{position:relative;width:210px;height:132px;margin:0 auto 1rem;border-radius:4px;overflow:hidden;border:3px solid var(--accent-soft);box-shadow:0 4px 18px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.06);background:var(--sink);}
+.door-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.05rem;letter-spacing:.28em;text-indent:.28em;color:var(--accent);text-decoration:none;font-weight:500;background:radial-gradient(120% 90% at 50% 120%,rgba(140,160,106,.22) 0%,var(--sink) 62%);}
+.door-leaf{position:absolute;top:0;width:50%;height:100%;background:repeating-linear-gradient(90deg,rgba(0,0,0,.14) 0 1px,transparent 1px 26px),linear-gradient(170deg,var(--panel) 0%,#141B29 100%);transition:transform .55s cubic-bezier(.65,0,.35,1);z-index:2;}
+.door-leaf-l{left:0;border-right:1px solid var(--line);}
+.door-leaf-r{right:0;border-left:1px solid var(--line);}
+.door-pull{position:absolute;top:50%;width:8px;height:26px;border-radius:3px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);transform:translateY(-50%);}
+.door-leaf-l .door-pull{right:8px;} .door-leaf-r .door-pull{left:8px;}
+.door.open .door-leaf-l{transform:translateX(-100%);}
+.door.open .door-leaf-r{transform:translateX(100%);}
+.door.open .door-inner{text-shadow:0 0 12px rgba(140,160,106,.3);}
+.door-note{font-size:.68rem;color:var(--muted);line-height:1.8;margin-top:.35rem;}
+
+footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
+footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">㐂占 　 命 術 本鑑定書</p>
+  <h1><span class="nm">麻美子</span> さんへ</h1>
+  <p class="tagline">荒地に根を張る草。一人で立つ力を、決める力に変えていく</p>
+  <p class="date">1975年3月20日 生　／　鑑定 2026.08.31</p>
+</header>
+
+<div class="profile">
+  <div class="full">魂の本質（日の宿命）<b>乙丑（きのとうし）― 荒地に生える草</b></div>
+  <div>中心の星<b>貫索星</b></div>
+  <div>天中殺<b>戌亥（北西）</b></div>
+  <div>才能の星<b>禄存星</b></div>
+  <div>今の大運<b>甲申・石門星（45〜54歳）</b></div>
+  <div class="full">運気の位置<b>拡大の大運（35〜44歳）を終え、仕組みを固める10年の真ん中にいる</b></div>
+</div>
+
+<div class="card" style="border-color:var(--accent-soft);">
+  <p>おおきにです、麻美子さん☺️</p>
+  <p>顧客ゼロから半年で満席、月商100万超え。それを25年、休みを削ってでも守り抜いてきはった。簡単なことやないです。無料鑑定でお伝えしたのは入口だけでした。ここからはその奥、麻美子さんの人生の言葉に翻訳して、隠さず全部お渡しします。</p>
+  <p>Meetでお話しした内容も含めて、まとめてあります。気になったところは、いつでもLINEで掘ってください。</p>
+</div>
+
+<!-- 命式盤 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">命 式</span><span class="sec-title">麻美子さんの設計図</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.6rem;">陰占 ― 生まれ持った気の柱</p>
+    <div class="meishiki">
+      <div class="pillar">
+        <div class="lbl">日柱（自分・家庭）</div>
+        <div class="yomi">きのと</div><div class="kan">乙</div>
+        <div class="shi">丑</div><div class="yomi">うし</div>
+        <div class="zou">蔵干　己・癸・辛</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">月柱（仕事・家系）</div>
+        <div class="yomi">つちのと</div><div class="kan">己</div>
+        <div class="shi">卯</div><div class="yomi">う</div>
+        <div class="zou">蔵干　乙</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">年柱（社会・先祖）</div>
+        <div class="yomi">きのと</div><div class="kan">乙</div>
+        <div class="shi">卯</div><div class="yomi">う</div>
+        <div class="zou">蔵干　乙</div>
+      </div>
+    </div>
+    <p class="meishiki-note">日柱 乙丑 ／ 月柱 己卯 ／ 年柱 乙卯</p>
+
+    <div class="divider" style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p class="soft" style="margin-bottom:.2rem;">陽占 ― 心のかたち（人体星図）</p>
+    <div class="jintai">
+      <div class="jcell jusei-cell"><span class="pos">伴星（先祖）</span><span class="star">牽牛星</span></div>
+      <div class="jcell"><span class="pos">目上（北）</span><span class="star">貫索星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">初年運</span><span class="star gold">天禄星</span></div>
+      <div class="jcell"><span class="pos">配偶者（西）</span><span class="star">禄存星</span></div>
+      <div class="jcell center"><span class="pos">中心・本人</span><span class="star">貫索星</span></div>
+      <div class="jcell"><span class="pos">社会（東）</span><span class="star">貫索星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">晩年運</span><span class="star gold">天堂星</span></div>
+      <div class="jcell"><span class="pos">目下（南）</span><span class="star">禄存星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">中年運</span><span class="star gold">天禄星</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.7rem;">中央が本人。四隅は人生3時期のエネルギー（初年・中年・晩年）と、ご先祖の星（伴星）。貫索星が中心・北・東に三つ ―― 自分の軸で一人で立つ力が、この人の背骨です。</p>
+  </div>
+</div>
+
+<!-- 1 本質 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">壱</span><span class="sec-title">どういう魂か ― 荒地に生える草</span></div>
+  <div class="card">
+    <p class="lead">「派手やないけど、簡単には枯れへん人」</p>
+    <p>日の宿命「乙丑」は、昔の言葉で<span class="hl">「荒地に生える草」</span>。まだ何も整ってへん、荒れた土地に、それでも根を張って生える草です。目立つ木やのうて、地面すれすれで、しぶとく生き延びる質。</p>
+    <p>警句にはこう書いてあります。「陰鬱偏屈の弊に陥りやすく、強情の性格を持つ。修養のよろしきを得て、進取快活の気を養えば、案外大成する性質がある」。<b>強情＝一度決めたことは簡単には曲げへん</b>。そして「養えば大成する」――内にこもりがちな質を、外に開く方向に養えたら、大きく伸びるという意味です。<span class="hl">外に開く力が無いんやなくて、まだその方向に力を使い切ってへんだけ</span>。これが今日の鑑定の一番の軸です。</p>
+    <div class="card" style="background:var(--sink);border-color:var(--accent-soft);margin:1rem 0;">
+      <p class="lead" style="margin-bottom:.6rem;">この人の背骨 ―― 一人で立つ力（貫索星が三つ）</p>
+      <p style="margin-bottom:.7rem;">麻美子さんの魂のど真ん中、目上の場所、社会の場所 ―― この三つに、同じ<span class="hl">「個人志向・一人でやる・納得しないと動かない」</span>星（貫索星）が入っています。三重です。だから、一人でやりきる力が、生まれつき濃縮されてます。</p>
+      <p style="margin-bottom:0;">定休日も設けず、朝から夜まで一人で施術し続けてきたのは、根性やのうて、この構造がそのまま出た形です。<b>顧客ゼロから半年で満席にできたのは、地道な努力を重ねる持久力</b>、この一言そのままです。</p>
+    </div>
+    <p>もう一つ、五行のエネルギーを見ると、<span class="hl">木が120で最大、火はゼロ</span>。木は自分の軸・独立心・成長していく力。それが突出して多い一方、外に発信する力・表現する力（火）が、生まれつき薄いんです。<b>一人で立つ力は人並み以上に強いのに、それを人に伝えて仕組みにする力が薄い</b>――これが、麻美子さんの構造そのものです。</p>
+  </div>
+</div>
+
+<!-- 2 サロンと避けてる痛み -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">弐</span><span class="sec-title">サロンが教えてくれたこと</span></div>
+  <div class="card">
+    <p>帰国してから来店客数が半分になって、やる気も出ない――お客さんが離れたんやないです。<span class="hl">麻美子さんが張り付いてないと回らへん店を、自分の手で作ってしまってた</span>。旅に出て、そこが初めて見えただけです。</p>
+    <p>麻美子さんの中の判断基準は、いつも「自分がやるかどうか」。人に任せる、仕組みに預けるという発想自体が、命式の作りとして薄いんです。休んでる間、「誰かに任せよう」やのうて「早く戻らな」という気持ちの方が強かったんやないですか。それは弱さやのうて、エネルギーの設計そのものです。</p>
+    <div class="pull">戻らへんのは客やなくて、命を削る守り方に戻りたくない、麻美子さん自身。<br>今回のサロンの状況も、離婚も、お金の不安も、外側の不運やない。一人で立つ力が濃縮された宿命のエネルギーが、そのまま今の現実として形になっただけです。</div>
+    <p>Meetで教えてもらったこと――サロンを始めた本当のきっかけは、実は自分のためやなかったんですね。下のお子さんが不登校になって、45歳の時に環境を変えようと、五島列島で2年間、島暮らしをされた。「自分が箱を持ってれば、やりたいと思った人に"うちでやんなよ"と言える」。<span class="hl">配偶者・目下の位置にある禄存星――困ってる人を放っておけない、人のために動く力</span>が、サロンを始めた本当の動機だったんです。一人で立つ力（貫索星）だけやなくて、この禄存星の力が、そもそもの出発点にありました。</p>
+    <p>去年出された支店のことも、大事な経験です。後輩に任せて一人サロンにしたけれど、うまくいかず、閉店を選ばれた。「信頼しきれなかった」「育つのを待つのが我慢できなかった」――これも、命式の職人気質（自分のレベルまで届いてないと任せられない）がそのまま出たものです。悔やむ必要はないです。この経験があったからこそ、今度は違う任せ方を探せます。</p>
+  </div>
+</div>
+
+<!-- 3 十二大従星と天中殺 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">参</span><span class="sec-title">今の時期そのものを表す星</span></div>
+  <div class="card">
+    <p>人体星図の四隅、初年運・中年運はどちらも<span class="hl">天禄星</span>。「落ち着き・冒険せず安定・現実主義・じっくり実力をつける」星です。子供の頃から大人びていて、今の45〜54歳の時期も、堅実で用心深い運気そのもの。<b>一気に拡大するより、じっくり積み上げるのが、今の10年で一番力が出るやり方</b>です。</p>
+    <p>晩年運は<span class="hl">天堂星</span>――責任から解放されて余生を楽しむ星。諦めや悟り、自制心、潔さ。まだ先の話ですが、麻美子さんの晩年は「酸いも甘いも噛み分けた、心穏やかで誰からも好かれる」時期になる設計です。</p>
+    <p>天中殺は<span class="hl">戌亥天中殺</span>――精神性を高める使命。形のないもの・精神世界に向かうと陽転します。宿命天中殺（生日中殺）もあり、自分の意志を持ちづらい生まれでありながら、支配的な関わりから離れて自分の意志で生きると陽転する質を併せ持ちます。去年、離婚を切り出し、夫婦として住んでいた家から出られたのも、勢いやのうて、この宿命が実際に動いた形です。</p>
+  </div>
+</div>
+
+<!-- 4 才能と新しい動き -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">肆</span><span class="sec-title">才能の出口 ― 占い×経営相談という一手</span></div>
+  <div class="card">
+    <p>才能星は<span class="hl">禄存星</span>。剋線分布は中間型で、突き抜けた一点集中やのうてバランス型。人を惹きつける力・尽くす力が、才能の軸になってます。</p>
+    <p>Meetで伺った、アイリスト仲間・フォロワーに向けた「占い×経営相談」の新サービス――満月の日に思いついて、1週間で予約が入ったという話、まさにこの才能星がそのまま働いた動きです。<span class="hl">全く新しい分野を探しに行ったんやのうて、25年の実績とご縁の中から生まれてきたもの</span>。天中殺の陽転条件（精神世界に向かう）とも、きれいに噛み合っています。</p>
+    <div class="pull">新しいこと全部を今から探して始めるのはしんどい。今までやってきたことの延長で、回し方だけを変えていく――麻美子さんが今すでにやってることが、そのまま命式の答えです。</div>
+    <p>サロンは残しながら、この新しい形を少しずつ育てていく。これが、今の麻美子さんに一番合った広げ方です。</p>
+  </div>
+</div>
+
+<!-- 5 運気 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">伍</span><span class="sec-title">運気のリズム ― 今と、これから</span></div>
+
+  <div class="card">
+    <p class="soft" style="margin-bottom:.7rem;">大運 ― 10年ごとに巡る運気のテーマ（5歳運）</p>
+    <div class="daiun-scroll">
+      <table class="daiun">
+        <thead><tr><th>年齢</th><th>干支</th><th>主星</th><th>従星</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr><td>5〜14</td><td>庚辰</td><td>牽牛星</td><td>天南星</td><td></td></tr>
+          <tr><td>15〜24</td><td>辛巳</td><td>車騎星</td><td>天恍星</td><td></td></tr>
+          <tr><td>25〜34</td><td>壬午</td><td>玉堂星</td><td>天貴星</td><td></td></tr>
+          <tr><td>35〜44</td><td>癸未</td><td>龍高星</td><td>天印星</td><td>大発展・事業拡大の位相</td></tr>
+          <tr class="now-row"><td>45〜54</td><td>甲申</td><td>石門星</td><td>天報星</td><td class="now-cell">今ここ</td></tr>
+          <tr><td>55〜64</td><td>乙酉</td><td>貫索星</td><td>天馳星</td><td>半会で拡大期に入る</td></tr>
+          <tr><td>65〜74</td><td>丙戌</td><td>調舒星</td><td>天庫星</td><td class="tc-cell">大運天中殺（フィーバータイム）</td></tr>
+          <tr><td>75〜84</td><td>丁亥</td><td>鳳閣星</td><td>天極星</td><td class="tc-cell">大運天中殺（フィーバータイム）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:.9rem;font-size:.83rem;">顧客ゼロから半年で満席にできたのは、<span class="hl">35〜44歳（癸未）の大発展・事業拡大の位相</span>がそのまま働いていた時期やったからです。今の大運（甲申）は、前の十年みたいに勢いで一気に広げる後押しは強くない。<b>広げた形を、どう仕組みにして支えるかを作る時期</b>に入ってます。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">65歳から――人生後半の大きな山</p>
+    <p>65〜74歳、75〜84歳は<span class="hl">大運天中殺</span>。120年に20年しか来ない、運気の枠が外れる期間です。上にも下にも大きく振れやすい時期ですが、Meetでお話しした通り、これは<b>人生後半の「フィーバータイム」</b>にもなり得ます。今まで積み上げてきた経験・知識・関わってきた人の分だけ、後半で大きく花開く可能性がある10年です。</p>
+    <div class="pull">この星に乗るために一番大事なのは、その時代に元気な体を持っていけるかどうか。頑張ろう、やのうて、その時が来た時に自分が元気な体でいることを、今から持っていく。</div>
+    <p>55〜64歳（乙酉）は半会が続く拡大期。今の10年で仕組みを整えたら、そこから広げていくリズムが命式と噛み合います。</p>
+
+    <p class="soft" style="margin-top:1.2rem;">▼ 直近の動き方</p>
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-when">2026年9月 ― 丁酉</div>
+        <div class="tl-body">動きが出やすい月。任せる業務の書き出しなど、着手するならここ。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">2026年10〜11月 ― 月天中殺</div>
+        <div class="tl-body">大きい決め事（新しいスタッフを雇う・店の形を大きく変える等）はこの2ヶ月は避ける。9月に書き出したことを整理する時期に。11月後半のバリ島行きは問題なし、むしろ自分を見つめ直す時間として良い。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2026年12月 ― 庚子</div>
+        <div class="tl-body">干合・支合が出る、結びつきの月。整理した中から一つ選んで、実際に人に渡してみる動きどき。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年1〜2月</div>
+        <div class="tl-body">落ち着いた配置。12月に渡した一つがちゃんと回ってるか、様子を見る期間に。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 6 処方 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">陸</span><span class="sec-title">今日から動ける処方</span></div>
+  <div class="card recipe">
+    <div class="item"><div class="num">1</div><div class="rbody"><b>今の仕事を「任せられるもの」と「自分にしかできないもの」に分ける。</b><br>予約管理・会計・SNSの更新・施術の一部など、手順が決まってる作業から任せる候補になります。紙に書き出すだけでいい。</div></div>
+    <div class="item"><div class="num">2</div><div class="rbody"><b>才能星（禄存星）で集まった、既存のご縁から任せてみる。</b><br>いきなり新しいスタッフを雇わなくても、麻美子さんを慕ってくれてる人が既にいてはるはず。そこから頼ってみる。</div></div>
+    <div class="item"><div class="num">3</div><div class="rbody"><b>小さく一つずつ、渡してみる。</b><br>初年運・中年運の天禄星は、一気に変えるより少しずつ試して確かめる質。一つ渡して様子を見て、次の一つへ。うまくいかなければ無理に続けなくていい。</div></div>
+    <div class="item"><div class="num">4</div><div class="rbody"><b>占い×経営相談は、焦らず育てる。</b><br>才能星がそのまま働いてる動き。全く新しい分野を探しに行くんやのうて、今までの延長にあるものやから、命式と噛み合ってます。</div></div>
+    <div class="item"><div class="num">5</div><div class="rbody"><b>この10年は仕組みを固める。65歳からの大きな山に、元気な体で乗る。</b><br>頑張ろう、やのうて、体を大事にすることが、そのまま将来への一番の備えです。旅先（宮古島・バリ島）ではスイッチを切って、自分を見つめ直す時間として使ってください。</div></div>
+  </div>
+</div>
+
+<!-- 締め -->
+<div class="closing">
+  <p>麻美子さんは、<span class="hl">荒地に根を張る草</span>です。<br>派手やないけど、簡単には枯れません。</p>
+  <p>顧客ゼロから半年で満席にした力は、もう証明済み。<br>25年、休みを削ってでも守り抜いてきたその強さは、本物です。</p>
+  <p class="big">これからは、一人で全部やる人やなくて、決める人として店に立つ。</p>
+  <p>今年後半で任せ方を整理して、来年から少しずつ形にしていく。<br>65歳からの大きな山に向けて、体を持っていく。<br>全部、同じ一枚の設計図の上にあります。</p>
+</div>
+
+<a class="koyomi-link" href="/mamiko">
+  <span class="arrow">▶</span> 麻美子の暦（日々の運気カレンダー）をひらく
+  <small>毎日の運気が天気予報のように見られます。傘を持つくらいの気持ちで、楽しんで。</small>
+</a>
+
+<div class="door" onclick="this.classList.toggle('open')">
+  <div class="door-gate">
+    <a class="door-inner" href="/menu">鑑定目録</a>
+    <div class="door-leaf door-leaf-l"><span class="door-pull"></span></div>
+    <div class="door-leaf door-leaf-r"><span class="door-pull"></span></div>
+  </div>
+  <p class="door-note">戸をあけると、鑑定の目録があります</p>
+</div>
+
+<footer>
+  <p>いつもおおきにです☺️　またゆっくり話しましょう</p>
+  <p class="sig">㐂</p>
+</footer>
+
+</div>
+</body>
+</html>

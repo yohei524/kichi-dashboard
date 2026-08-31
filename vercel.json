@@ -297,6 +297,10 @@
     {
       "source": "/mamiko",
       "destination": "/view.html?client=mamiko"
+    },
+    {
+      "source": "/mamiko-kanteisho",
+      "destination": "/clients/mamiko-kanteisho.html"
     }
   ]
 }
