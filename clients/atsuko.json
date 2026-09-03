@@ -84,6 +84,14 @@
     "endDay": 3,
     "endYear": 2027
   },
+  "fortuneTimeline": [
+    { "label": "9月", "level": -1, "note": "丁酉・年柱害。見直しの月" },
+    { "label": "10月", "level": 2, "note": "戊戌・年月日で大半会（三合）。一番動ける月" },
+    { "label": "11月", "level": 1, "note": "己亥・月柱支合。落ち着いた流れ" },
+    { "label": "12月", "level": -2, "note": "庚子・月天中殺。大きな決断は避ける" },
+    { "label": "1月", "level": -2, "note": "辛丑・月天中殺。静かに過ごす" },
+    { "label": "2月", "level": 2, "note": "壬寅・年月日で大半会（三合）。天中殺明けの高まり" }
+  ],
   "design": {
     "accentColor": "#C77B2E",
     "headerSub": "― 戊午・貫索星の時代 ―",

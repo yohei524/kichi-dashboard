@@ -69,6 +69,7 @@ if('serviceWorker' in navigator){
     .then(function (data) {
       // 画像パスはクライアントごとのフォルダを見に行く（images/はclients/images/を指す）
       initDashboard(data);
+      if (data.fortuneTimeline && data.fortuneTimeline.length) insertFortuneTimeline(data);
       if (isPreview) {
         applyPreviewLock();
         if (client === 'demo') insertPaletteNote(data);
@@ -77,6 +78,74 @@ if('serviceWorker' in navigator){
     .catch(function (err) {
       app.innerHTML = '<p class="text-center text-sm" style="color:var(--color-brown);padding:2rem 0">' + err.message + '</p>';
     });
+
+  // 半年ほどの運気の流れを、折れ線グラフとして簡易に見せる。
+  // data.fortuneTimeline がある client だけ表示（他clientには影響しない）。
+  // レベルは -2〜+2 の5段階（-2=月天中殺等の低調期、+2=大半会等の最高潮）。
+  function insertFortuneTimeline(data) {
+    var points = data.fortuneTimeline;
+    if (!points || !points.length) return;
+    var w = 320, h = 120, padX = 24, padY = 18;
+    var stepX = (w - padX * 2) / (points.length - 1);
+    var levelToY = function (lv) {
+      // level: -2..2 -> y: (h-padY)..padY
+      var t = (lv + 2) / 4; // 0..1
+      return (h - padY) - t * (h - padY * 2);
+    };
+    var coords = points.map(function (p, i) {
+      return { x: padX + stepX * i, y: levelToY(p.level) };
+    });
+    var pathD = coords.map(function (c, i) {
+      return (i === 0 ? 'M' : 'L') + c.x.toFixed(1) + ',' + c.y.toFixed(1);
+    }).join(' ');
+    var accent = (data.design && data.design.accentColor) || '#C77B2E';
+
+    var dots = coords.map(function (c, i) {
+      var p = points[i];
+      var isLow = p.level <= -2;
+      var r = isLow ? 5 : 4;
+      var fill = isLow ? '#C97A6A' : accent;
+      return '<circle cx="' + c.x.toFixed(1) + '" cy="' + c.y.toFixed(1) + '" r="' + r + '" fill="' + fill + '"></circle>';
+    }).join('');
+
+    var labels = coords.map(function (c, i) {
+      return '<text x="' + c.x.toFixed(1) + '" y="' + (h - 2) + '" font-size="9" text-anchor="middle" fill="var(--color-brown)">' + points[i].label + '</text>';
+    }).join('');
+
+    var svg =
+      '<svg viewBox="0 0 ' + w + ' ' + h + '" style="width:100%;height:auto;display:block;">' +
+      '<line x1="' + padX + '" y1="' + levelToY(0) + '" x2="' + (w - padX) + '" y2="' + levelToY(0) + '" stroke="var(--color-line,#ddd)" stroke-dasharray="3,3"></line>' +
+      '<path d="' + pathD + '" fill="none" stroke="' + accent + '" stroke-width="2"></path>' +
+      dots + labels +
+      '</svg>';
+
+    var notesHTML = points.map(function (p) {
+      var mark = p.level <= -2 ? '▽' : (p.level >= 2 ? '▲' : '・');
+      return '<p class="text-xs" style="color:var(--color-brown);margin-top:.2rem">' + mark + ' <b>' + p.label + '</b>　' + p.note + '</p>';
+    }).join('');
+
+    var card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML =
+      '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>この先の運気の流れ（半年）</span></div>' +
+      svg +
+      '<div style="margin-top:.4rem">' + notesHTML + '</div>';
+
+    // 「本日の運気」カードの直後に差し込む（一番上の日付カードの次）。
+    // app 直下の子要素を順に見て、最初の .card（日付）の次に挿入。無ければ先頭に追加。
+    var firstCard = null;
+    for (var i = 0; i < app.children.length; i++) {
+      if (app.children[i].className && app.children[i].className.indexOf('card') !== -1) {
+        firstCard = app.children[i];
+        break;
+      }
+    }
+    if (firstCard) {
+      app.insertBefore(card, firstCard.nextSibling);
+    } else {
+      app.insertBefore(card, app.firstChild);
+    }
+  }
 
   // デモページ用：配色は命式の五行エネルギーに合わせて一人ずつ決めている、という設計思想を
   // 一言添えて伝える（選べる機能ではなく、命式ごとに㐂が調整しているという説明）
