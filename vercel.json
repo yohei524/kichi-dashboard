@@ -55,6 +55,10 @@
       "destination": "/view.html?client=atsuko"
     },
     {
+      "source": "/atsuko-kanteisho",
+      "destination": "/clients/atsuko-kanteisho.html"
+    },
+    {
       "source": "/noriko",
       "destination": "/view.html?client=noriko"
     },

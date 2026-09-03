@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATSUKOさん 鑑定書 ｜ 㐂占</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --night:#0B0F1A; --night2:#131A28; --sink:#171F30; --panel:#1B2334;
+  --line:#2A3346; --accent:#C77B2E; --accent-soft:#A8641F; --accent-glow:rgba(199,123,46,.14);
+  --gold:#C9A24A; --text:#ECEAE4; --muted:#8A96AC; --muted2:#A9B3C6;
+  --water:#6E9BC4; --fire:#D08A5A; --wood:#7FA86B; --metal:#C4C9D2; --earth:#C9A24A;
+  --bad:#C97A6A; --good:#6E9BC4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Serif JP',serif; color:var(--text); line-height:1.95; letter-spacing:.045em;
+  background:
+    radial-gradient(1200px 620px at 50% -12%, rgba(199,123,46,.10), transparent 60%),
+    linear-gradient(180deg,#0B0F1A 0%,#0D1220 45%,#080B14 100%);
+  background-attachment:fixed; min-height:100vh;
+}
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.05rem 4rem;}
+
+header{text-align:center;padding:3rem 1rem 1.4rem;}
+header .kicker{font-size:.68rem;letter-spacing:.32em;color:var(--accent);opacity:.9;margin-bottom:.9rem;}
+header h1{font-size:1.5rem;font-weight:500;letter-spacing:.08em;margin-bottom:.5rem;}
+header h1 .nm{color:var(--accent);}
+header .tagline{font-size:.8rem;color:var(--muted2);letter-spacing:.1em;line-height:1.7;}
+header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:.12em;}
+
+.profile{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem .8rem;
+}
+.profile div{font-size:.74rem;color:var(--muted);}
+.profile div b{display:block;font-size:.9rem;color:var(--text);font-weight:500;margin-top:.1rem;letter-spacing:.06em;}
+.profile div.full{grid-column:1/3;}
+
+.sec{margin-bottom:1.65rem;}
+.sec-head{
+  display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;
+  padding-bottom:.6rem;border-bottom:1px solid var(--line);
+}
+.sec-no{font-size:.72rem;color:var(--accent);letter-spacing:.18em;font-weight:600;}
+.sec-title{font-size:1.02rem;font-weight:500;letter-spacing:.08em;}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  padding:1.25rem 1.15rem;box-shadow:0 4px 24px rgba(0,0,0,.32);margin-bottom:1rem;
+}
+.card p{font-size:.87rem;margin-bottom:.9rem;color:var(--text);}
+.card p:last-child{margin-bottom:0;}
+.card .lead{color:var(--accent);font-size:.9rem;font-weight:500;}
+.hl{color:var(--accent);font-weight:500;}
+.soft{color:var(--muted2);font-size:.8rem;}
+
+.meishiki{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.2rem 0 .3rem;
+}
+.pillar{
+  background:var(--sink);border:1px solid var(--line);border-radius:12px;
+  padding:.7rem .4rem;text-align:center;
+}
+.pillar .lbl{font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.55rem;}
+.pillar .yomi{font-size:.58rem;color:var(--muted);letter-spacing:.04em;line-height:1.3;}
+.pillar .kan{font-size:1.85rem;font-weight:600;color:var(--text);line-height:1.15;}
+.pillar .shi{font-size:1.85rem;font-weight:600;color:var(--accent);line-height:1.15;margin-top:.2rem;}
+.pillar .zou{font-size:.62rem;color:var(--muted2);margin-top:.55rem;letter-spacing:.04em;}
+.meishiki-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;}
+
+.jintai{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:19rem;margin:.4rem auto .2rem;}
+.jcell{
+  background:var(--sink);border:1px solid var(--line);border-radius:11px;
+  aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;
+}
+.jcell .pos{font-size:.58rem;color:var(--muted);letter-spacing:.05em;}
+.jcell .star{font-size:.92rem;font-weight:600;color:var(--text);letter-spacing:.03em;}
+.jcell.center{background:linear-gradient(160deg,rgba(199,123,46,.18),var(--sink));border-color:var(--accent-soft);}
+.jcell.center .star{color:var(--accent);}
+.jcell.jusei-cell{background:var(--night2);}
+.jcell .star.gold{color:var(--gold);}
+
+.gogyo{margin-top:.3rem;}
+.gbar{display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;}
+.gbar .gname{width:2.6rem;font-size:.76rem;color:var(--muted2);flex-shrink:0;}
+.gbar .gtrack{flex:1;height:9px;background:var(--sink);border-radius:5px;overflow:hidden;}
+.gbar .gfill{height:100%;border-radius:5px;}
+.gbar .gval{width:2.2rem;text-align:right;font-size:.72rem;color:var(--muted);flex-shrink:0;}
+.g-wood .gfill{background:var(--wood);}
+.g-fire .gfill{background:var(--fire);}
+.g-earth .gfill{background:var(--earth);}
+.g-metal .gfill{background:var(--metal);}
+.g-water .gfill{background:var(--water);}
+
+.daiun-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.daiun{width:100%;border-collapse:collapse;font-size:.78rem;min-width:19rem;}
+.daiun th{
+  font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.05em;
+  padding:.4rem .3rem;border-bottom:1px solid var(--line);text-align:center;
+}
+.daiun td{padding:.5rem .3rem;text-align:center;border-bottom:1px solid rgba(42,51,70,.5);color:var(--text);}
+.daiun td:first-child{color:var(--muted2);font-size:.72rem;white-space:nowrap;}
+.daiun .tc-cell{color:var(--bad);font-size:.68rem;}
+.daiun .now-row td{background:linear-gradient(90deg,rgba(199,123,46,.12),transparent);}
+.daiun .now-row td:first-child{color:var(--accent);font-weight:600;}
+.daiun .now-cell{color:var(--accent);font-size:.68rem;font-weight:600;}
+
+.tl{position:relative;padding-left:1.1rem;margin-top:.3rem;}
+.tl::before{content:"";position:absolute;left:3px;top:.4rem;bottom:.4rem;width:2px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:1rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before{content:"";position:absolute;left:-1.1rem;top:.45rem;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--night2);}
+.tl-item.tc::before{background:var(--bad);}
+.tl-when{font-size:.76rem;color:var(--accent);font-weight:600;letter-spacing:.06em;}
+.tl-item.tc .tl-when{color:var(--bad);}
+.tl-body{font-size:.82rem;color:var(--text);margin-top:.15rem;}
+
+.dodont{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.dobox,.dontbox{border-radius:12px;padding:.85rem .8rem;border:1px solid var(--line);}
+.dobox{background:rgba(110,155,196,.08);}
+.dontbox{background:rgba(201,122,106,.08);}
+.dobox .h,.dontbox .h{font-size:.78rem;font-weight:600;margin-bottom:.5rem;letter-spacing:.06em;}
+.dobox .h{color:var(--good);}
+.dontbox .h{color:var(--bad);}
+.dodont ul{list-style:none;}
+.dodont li{font-size:.75rem;color:var(--text);padding-left:.9rem;position:relative;margin-bottom:.45rem;line-height:1.6;}
+.dodont li:last-child{margin-bottom:0;}
+.dobox li::before{content:"○";position:absolute;left:0;color:var(--good);font-size:.7rem;}
+.dontbox li::before{content:"×";position:absolute;left:0;color:var(--bad);font-size:.7rem;}
+@media(max-width:400px){.dodont{grid-template-columns:1fr;}}
+
+.recipe{counter-reset:r;}
+.recipe .item{display:flex;gap:.75rem;margin-bottom:1rem;}
+.recipe .item:last-child{margin-bottom:0;}
+.recipe .num{
+  flex-shrink:0;width:1.7rem;height:1.7rem;border-radius:50%;
+  background:linear-gradient(160deg,var(--accent),var(--accent-soft));
+  color:var(--night);font-weight:700;font-size:.85rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.recipe .rbody{font-size:.83rem;}
+.recipe .rbody b{color:var(--accent);font-weight:600;}
+
+.pull{
+  border-left:3px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:1rem 0;
+  font-size:.9rem;color:var(--muted2);font-style:normal;
+}
+
+.closing{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--accent-soft);border-radius:18px;padding:1.6rem 1.25rem;text-align:center;
+  box-shadow:0 0 30px rgba(199,123,46,.08);
+}
+.closing p{font-size:.88rem;margin-bottom:.9rem;}
+.closing p:last-child{margin-bottom:0;}
+.closing .big{font-size:1.05rem;color:var(--accent);font-weight:500;letter-spacing:.06em;}
+
+.koyomi-link{
+  display:block;text-align:center;margin-top:1.5rem;padding:1rem;
+  background:var(--night2);border:1px solid var(--line);border-radius:14px;
+  color:var(--text);text-decoration:none;font-size:.86rem;transition:border-color .3s;
+}
+.koyomi-link:hover{border-color:var(--accent-soft);}
+.koyomi-link .arrow{color:var(--accent);}
+.koyomi-link small{display:block;color:var(--muted);font-size:.7rem;margin-top:.3rem;}
+
+.door{display:block;text-align:center;padding:2.2rem 0 .5rem;margin-top:1.5rem;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.door-gate{position:relative;width:210px;height:132px;margin:0 auto 1rem;border-radius:4px;overflow:hidden;border:3px solid var(--accent-soft);box-shadow:0 4px 18px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.06);background:var(--sink);}
+.door-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.05rem;letter-spacing:.28em;text-indent:.28em;color:var(--accent);text-decoration:none;font-weight:500;background:radial-gradient(120% 90% at 50% 120%,rgba(199,123,46,.22) 0%,var(--sink) 62%);}
+.door-leaf{position:absolute;top:0;width:50%;height:100%;background:repeating-linear-gradient(90deg,rgba(0,0,0,.14) 0 1px,transparent 1px 26px),linear-gradient(170deg,var(--panel) 0%,#141B29 100%);transition:transform .55s cubic-bezier(.65,0,.35,1);z-index:2;}
+.door-leaf-l{left:0;border-right:1px solid var(--line);}
+.door-leaf-r{right:0;border-left:1px solid var(--line);}
+.door-pull{position:absolute;top:50%;width:8px;height:26px;border-radius:3px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);transform:translateY(-50%);}
+.door-leaf-l .door-pull{right:8px;} .door-leaf-r .door-pull{left:8px;}
+.door.open .door-leaf-l{transform:translateX(-100%);}
+.door.open .door-leaf-r{transform:translateX(100%);}
+.door.open .door-inner{text-shadow:0 0 12px rgba(199,123,46,.3);}
+.door-note{font-size:.68rem;color:var(--muted);line-height:1.8;margin-top:.35rem;}
+
+footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
+footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">㐂占 　 命 術 本鑑定書</p>
+  <h1><span class="nm">ATSUKO</span> さんへ</h1>
+  <p class="tagline">明るい真夏の山。自分のやり方を貫いて、新しい分野を切り開く人</p>
+  <p class="date">1970年（昭和45年）2月7日 生　／　鑑定 2026.09.03</p>
+</header>
+
+<div class="profile">
+  <div class="full">魂の本質（日の宿命）<b>戊午（つちのえうま）― 明るい真夏の山</b></div>
+  <div>中心の星<b>貫索星</b></div>
+  <div>天中殺<b>子丑（北方）</b></div>
+  <div>才能の星<b>龍高星</b></div>
+  <div>今の大運<b>壬申・禄存星（51〜60歳）</b></div>
+  <div class="full">運気の位置<b>今年2026年、命式内の三合構造が丸ごと年運に降りる年</b></div>
+</div>
+
+<div class="card" style="border-color:var(--accent-soft);">
+  <p>おおきにです、ATSUKOさん☺️</p>
+  <p>今日は長いお時間、たくさんのお話を聞かせてもらって、ほんまにありがとうございました。26年、映画の配給と宣伝を続けてこられた道のり、魂と宿命、運気、じっくり見させてもらいました。</p>
+  <p>LINEでは、入口だけをお伝えしました。ここからはその奥です。ATSUKOさんの人生の言葉に翻訳して、隠さず全部お渡しします。気になったところは、いつでもLINEで聞いてください。</p>
+</div>
+
+<!-- 命式盤 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">命 式</span><span class="sec-title">ATSUKOさんの設計図</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.6rem;">陰占 ― 生まれ持った気の柱</p>
+    <div class="meishiki">
+      <div class="pillar">
+        <div class="lbl">日柱（自分・家庭）</div>
+        <div class="yomi">つちのえ</div><div class="kan">戊</div>
+        <div class="shi">午</div><div class="yomi">うま</div>
+        <div class="zou">蔵干　丁・己</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">月柱（目標・目上）</div>
+        <div class="yomi">つちのえ</div><div class="kan">戊</div>
+        <div class="shi">寅</div><div class="yomi">とら</div>
+        <div class="zou">蔵干　甲・丙・戊</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">年柱（社会・対外）</div>
+        <div class="yomi">かのえ</div><div class="kan">庚</div>
+        <div class="shi">戌</div><div class="yomi">いぬ</div>
+        <div class="zou">蔵干　戊・辛・丁</div>
+      </div>
+    </div>
+    <p class="meishiki-note">日柱 戊午 ／ 月柱 戊寅 ／ 年柱 庚戌</p>
+
+    <div class="divider" style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p class="soft" style="margin-bottom:.2rem;">陽占 ― 心のかたち（人体星図）</p>
+    <div class="jintai">
+      <div class="jcell jusei-cell"><span class="pos">伴星（先祖）</span><span class="star">牽牛星</span></div>
+      <div class="jcell"><span class="pos">目上（北）</span><span class="star">鳳閣星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">初年運</span><span class="star gold">天庫星</span></div>
+      <div class="jcell"><span class="pos">配偶者（西）</span><span class="star">龍高星</span></div>
+      <div class="jcell center"><span class="pos">中心・本人</span><span class="star">貫索星</span></div>
+      <div class="jcell"><span class="pos">社会（東）</span><span class="star">調舒星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">晩年運</span><span class="star gold">天将星</span></div>
+      <div class="jcell"><span class="pos">目下（南）</span><span class="star">貫索星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">中年運</span><span class="star gold">天貴星</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.7rem;">中央が本人。四隅は人生3時期のエネルギー（初年・中年・晩年）と、ご先祖の星（伴星）。中心と目下に貫索星が二つ ―― 一人でもやり抜く力が、この人の背骨です。</p>
+  </div>
+</div>
+
+<!-- 壱 本質 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">壱</span><span class="sec-title">どういう魂か ― 明るい真夏の山</span></div>
+  <div class="card">
+    <p class="lead">「朗らかに見えて、中身は知的で冷静。自分のスタイルを貫いて新分野を切り開く人」</p>
+    <p>日の宿命「戊午」は、昔の言葉で<span class="hl">「明るい真夏の山」</span>。戊は山、午は夏。どっしりとした存在感と、燃えるような情熱が同居しています。</p>
+    <p>警句にはこうあります。「闊達な性質でよく人気を呼ぶが、わがままな振る舞いがあるので人気を落とすことがある。気の強い性質のため、目上の人に逆らい運気に支障が出る」。<b>ATSUKOさんの命式が抱えてる一番の課題は、能力ではなく、自分のやり方を貫くあまり、人との折り合いのところで支障が出やすい</b>ということです。今日の鑑定は、この一文のためにやるようなものでした。</p>
+    <div class="card" style="background:var(--sink);border-color:var(--accent-soft);margin:1rem 0;">
+      <p class="lead" style="margin-bottom:.6rem;">この人の背骨 ―― 一人でもやり抜く力（貫索星が二つ）</p>
+      <p style="margin-bottom:.7rem;">ATSUKOさんの中心と、目下（スタッフ・後輩の場所）、この二つに、同じ<span class="hl">「個人志向・自分や自分の仲間を守る・納得しないと動かない」</span>星（貫索星）が入っています。だから、一人でも納得したことをやり抜ける。26年、誰の下にもつかず、自分の会社を作って、自分のやり方を貫いてこられたのは、この型がそのまま出ているからです。</p>
+      <p style="margin-bottom:0;">目下にも同じ星があるということは、スタッフに対しても<b>「自分でやり抜けるかどうか」を無意識に求めてしまう構造</b>があります。新人が「一人で仕事を続けるのは嫌だ」と言った時、ATSUKOさんの中で人一倍強く反応したはずです。これは新人が悪いわけでも、ATSUKOさんの接し方が悪いわけでもなく、<span class="hl">命式の当たり前が、そもそも違う</span>というだけのことです。</p>
+    </div>
+    <p>組織を率いる力もありますが、命式には<span class="hl">「一代運」</span>とも出ています。次に引き継ぐというより、自分の代でやり切る設計です。26年、会社を続けてこられたこと自体、この一代運の性質がそのまま出た形です。</p>
+  </div>
+</div>
+
+<!-- 弐 人間関係 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">弐</span><span class="sec-title">人との関わり方 ― 選ばれた縁だけを大事にする</span></div>
+  <div class="card">
+    <p>社会の場所には調舒星。こだわりが強く、本音は隠す、波長や価値観が合う相手を選ぶ星です。表向きは経営者として社交的に振る舞っていても、本音のところでは誰にでも心を開いているわけではないはずです。</p>
+    <p>伴星、ご先祖様の場所には牽牛星が出ています。これは<span class="hl">「責任あるポジションに身を置きなさい、皆のお手本になる生き方をしなさい」</span>という使命です。26年、会社の代表として立ち続けてこられたこと自体が、この使命に沿った生き方です。</p>
+    <div class="pull">会社名を頼んでいないのに、繋がりの中で自然にもらえたこと。運動会で大好きなバンドのマネージャーさんとたまたま出会えたこと。22年前に宣伝した監督が来日して、また新作に関わることになったこと。今回の菅田将暉さんの案件。<br>全部、戦略的に取りに行ったのではなく、26年かけて丁寧に築いてきた繋がりが、向こうから来た結果です。</div>
+    <p>これは無計画ではありません。ATSUKOさんにしかできない、はっきりした強みです。<span class="hl">狙って探すより、目の前に来た縁と丁寧に向き合う</span>――このやり方を、これからも自信を持って続けてください。</p>
+  </div>
+</div>
+
+<!-- 参 才能 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">参</span><span class="sec-title">才能と、その活かし方</span></div>
+  <div class="card">
+    <p>才能星は配偶者の場所と同じ<span class="hl">龍高星</span>。放浪・改革・新しいものを取り入れる力が、ATSUKOさんの才能の出口です。北天運・精神領域・思考優先で、考えて満足し動きにくい面もありますが、中心の貫索星の「まず行動する」性質と組み合わさると、しっかり動ける形になります。</p>
+    <p>五行を見ると、水がゼロ。<span class="hl">先を読んで戦略を立てる力は、構造的に薄い</span>命式です。その代わり土が123と圧倒的に厚く、目の前の現実をその都度コツコツ固めていく力が強い。26年、「半年先のことだけをなんとかする」というやり方で会社を続けてこられたのは、この土の力がそのまま出ていたということです。会社運営や人材配置、お金のやりくりに向いていない、と感じてこられたのも、能力が足りないのではなく、命式にそもそも入っていない部分だからです。</p>
+    <div class="pull">先を読む戦略を新しく身につける必要はありません。目の前の現実を固める力は、ATSUKOさんの一番の武器です。</div>
+  </div>
+</div>
+
+<!-- 肆 運気 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">肆</span><span class="sec-title">運気のリズム ― 拡大の三合が、今年もう一度降りる</span></div>
+
+  <div class="card">
+    <p class="soft" style="margin-bottom:.7rem;">大運 ― 10年ごとに巡る運気のテーマ（1歳運）</p>
+    <div class="daiun-scroll">
+      <table class="daiun">
+        <thead><tr><th>年齢</th><th>干支</th><th>主星</th><th>従星</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr><td>1〜10</td><td>丁丑</td><td>玉堂星</td><td>天印星</td><td class="tc-cell">大運天中殺</td></tr>
+          <tr><td>11〜20</td><td>丙子</td><td>龍高星</td><td>天報星</td><td class="tc-cell">大運天中殺</td></tr>
+          <tr><td>21〜30</td><td>乙亥</td><td>牽牛星</td><td>天馳星</td><td></td></tr>
+          <tr><td>31〜40</td><td>甲戌</td><td>車騎星</td><td>天庫星</td><td>三合発動・会社設立期</td></tr>
+          <tr><td>41〜50</td><td>癸酉</td><td>司禄星</td><td>天極星</td><td>方三位</td></tr>
+          <tr class="now-row"><td>51〜60</td><td>壬申</td><td>禄存星</td><td>天胡星</td><td class="now-cell">今ここ・方三位</td></tr>
+          <tr><td>61〜70</td><td>辛未</td><td>調舒星</td><td>天堂星</td><td></td></tr>
+          <tr><td>71〜80</td><td>庚午</td><td>鳳閣星</td><td>天将星</td><td>三合再発動</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:.9rem;font-size:.83rem;">31歳から40歳の甲戌大運では、月柱・日柱、そして年月日すべてで大半会（三合）が実際に発動していました。これが<span class="hl">2000年に会社を立ち上げて、一番広がっていった時期</span>です。宿命の設計図が、大運の巡りで実際に形になった証拠です。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">51〜60歳・壬申の10年 ― 摩擦の位相と、拡大の型が同居する10年</p>
+    <p>今の大運には、月柱に<span class="hl">生刑</span>と<span class="hl">天剋地冲</span>という二つの位相が出ています。生刑は下の立場の人との摩擦、天剋地冲は表面は魅力的でも内側に強い葛藤を抱え、決断の前に強い揺れが起きる位相です。月柱は目標・仕事のやり方・目上との関係を表す場所。つまり今の10年は、仕事のやり方そのものと、新人やスタッフとの間で摩擦が出やすく、決断の前に強い葛藤を抱えやすい時期です。新人育成のしんどさが続いているのは、ATSUKOさんの接し方が悪いのではなく、今の10年そのものがこの位相を持っているからです。</p>
+    <p>もう一つ、流動占技を見ると、41〜50歳・51〜60歳と2代続けて<span class="hl">方三位＝薄利多売型</span>の位相が出ています。これは規模を小さくする意味ではなく、<b>「体制は一人が窓口になる形に絞り、関わる相手や案件は広げる」</b>という二段構えの意味です。実際、コロナ前、事務所が大人数を抱えて回らなくなった時期があり、一度手放して三人ほどで小さく始め直したことで、コロナ禍を乗り切ることができました。これはまさに、この命式の型が実際に機能した証拠です。</p>
+    <div class="pull">体制はATSUKOさん一人が窓口になる形を保ち、関わる相手・案件は広げていく。これが命式からの答えです。</div>
+
+    <p class="soft" style="margin-top:1.2rem;">▼ この先の動き方（年ごと）</p>
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-when">2026年（56歳）― 三合の設計図が丸ごと降りる年</div>
+        <div class="tl-body">年柱・月柱が半会、年月日すべてで大半会（三合）が完成する年。宿命の設計図そのものが丸ごと年運に降りてきます。ただし日柱は自刑（戊午×丙午）。拡大の力が最大級に働くと同時に、その勢いのまま頑張りすぎて自分で自分にブレーキをかけやすい年でもあります。無理をしすぎないことが今年一番の注意点です。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">2026年12月〜2027年1月 ― 唯一の月天中殺</div>
+        <div class="tl-body">新しい契約・大きな決断はこの2ヶ月を避けてください。拡大の年の中に、年末年始をまたいで一回だけブレーキがかかる時期です。10月・11月のうちに、発信や体制の土台を固めておくと、この期間も安心して過ごせます。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年以降 ― 庫刑・害の位相が出てくる年も</div>
+        <div class="tl-body">庫刑は目上との問題が長引きやすい位相。取引先とのやり取りは丁寧に、記録を残しながら進めるのが安全です。害はうまく噛み合っていた関係が少しずつズレていく位相。契約や取り決めは書面で残しておくと安心です。どちらも日々の丁寧さで避けられる位相です。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">晩年運・天将星（12点・十二大従星最強）</div>
+        <div class="tl-body">50代からの晩年運は天将星。十二大従星の中で最強のエネルギーを持つ、リーダーの星です。若い時の苦労が必要な大器晩成型で、現役で仕事を続けるほど長生きするタイプ。人生のハイライトは、まだこれからです。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 伍 相談テーマ -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">伍</span><span class="sec-title">今日の相談への答え ― 発信と、事務所のこと</span></div>
+  <div class="card">
+    <p class="lead">営業ではなく、繋がりを届ける発信を</p>
+    <p>26年間の「営業」は、実は営業ではなく、関わった人との関係がそのまま次の仕事に繋がる形でした。担当者の異動・退職で今その繋がりが途切れがちなのは、事実として起きていることです。ですが、新しく営業の技術を身につける必要はありません。<span class="hl">丙（龍高星）の発信力</span>――太陽のように開放的に発信する力を使えば、担当者が変わっても新しい人に届く形が作れます。</p>
+    <p>発信の場の準備（スケジュール・投稿の型）はスタッフに任せていい。実際に書く言葉――作品との出会い、監督との出会い、22年前に大切に取っておいた資料――そこはATSUKOさんにしか書けないことです。今回の菅田将暉さんの案件のような「どうしてもこれをやりたいと任せてもらえた」という物語は、ATSUKOさんの一番の強みです。</p>
+    <div class="pull">10月は月柱・日柱・年柱すべてで大半会（三合）が揃う月。ここに向けて、少しずつ発信の準備を進めておいてください。</div>
+    <p class="lead" style="margin-top:1rem;">事務所は、閉じずに続けてください</p>
+    <p>才能星の龍高星は、人や物事が出入りする場所でこそ活きる星です。「人がいっぱい出入りしないといいことに結びつかない」というATSUKOさんの感覚は、命式にどんぴしゃで合っています。運営費が重ければ、事務所を閉じる・閉じないの二択ではなく、体制の中身（人数・固定費）を見直すところから整えていきましょう。</p>
+    <p class="lead" style="margin-top:1rem;">アニメ会社との提携の相談について</p>
+    <p>ここは大事な分かれ道です。中心と目下の貫索星は「自分が納得しないと動かない」星。人に勧められたから行くのではなく、<span class="hl">自分がその話に本当に納得できるかを軸に決めてください</span>。もし進めるなら、話を詰めて決めるのは11月中、それが難しければ2027年2月以降に持ち越すのが安全です。</p>
+  </div>
+</div>
+
+<!-- 陸 処方 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">陸</span><span class="sec-title">今日から動ける処方</span></div>
+  <div class="card recipe">
+    <div class="item"><div class="num">1</div><div class="rbody"><b>今の仕事に丸バツをつける。</b><br>今の体制の中で、「これは自分が納得して選んだ仕事か」「これは一人でも回せる範囲か」を、抱えている仕事一つひとつに丸バツをつけてみてください。バツがついたところから、10月に向けて少しずつ整理する準備をする。それだけで十分です。</div></div>
+    <div class="item"><div class="num">2</div><div class="rbody"><b>作品との出会いのエピソードを、月に一度でもいい、自分の言葉で発信する。</b><br>大きな発信でなくていい。関わった作品や仕事について、SNSやメールで短く感想を書いて送る。発信の場の準備（スケジュール・投稿の型）はスタッフに任せて、書く中身は自分の言葉で。</div></div>
+    <div class="item"><div class="num">3</div><div class="rbody"><b>庚（鳳閣星）の切る力 ― 依頼は24時間以内に決める。</b><br>今すぐ大きな契約を切るのではなく、来た仕事の依頼を一件、「受ける・受けない」を24時間以内に決めるというルールを自分で決めてみてください。</div></div>
+    <div class="item"><div class="num">4</div><div class="rbody"><b>新人採用の面接は、一回で一旦決める。</b><br>「この人と一緒にこの仕事を続けたいと自分が思えるか」を、最初の一回の面接で決める。迷ったまま何度も会い直さない。</div></div>
+    <div class="item"><div class="num">5</div><div class="rbody"><b>10月に向けて、発信と体制の土台を組む。12月〜1月は静かに過ごす。</b><br>10月は大半会（三合）が揃う、一番動きやすい月。ここに向けて準備を進め、11月中に固めておく。12月から1月の月天中殺は、新しい契約や大きな決断を避け、無理せず静かに過ごしてください。</div></div>
+  </div>
+</div>
+
+<!-- 締め -->
+<div class="closing">
+  <p>ATSUKOさんは、朗らかに見えて中身は知的で冷静、<span class="hl">自分のスタイルを貫いて新しい分野を切り開いてきた人</span>です。<br>26年、戦略ではなく、丁寧に築いてきた繋がりが、その都度答えを運んできました。</p>
+  <p>会社名を頼んでいないのに自然にもらえたこと、運動会での偶然の出会い、22年前に宣伝した監督との再会、今回の菅田将暉さんの案件。<br><span class="hl">これは無計画ではなく、ATSUKOさんにしかできない、はっきりした強みです。</span></p>
+  <p>今年2026年、命式全体の拡大の設計図が、もう一度丸ごと年運に降りています。<br>10月に向けて、今までのやり方の届け方だけを変える ―― それだけで十分です。</p>
+  <p class="big">乗り切れます。心配しすぎず、今まで通り、来た縁を大事に受け取ってください。</p>
+  <p>晩年運は、十二大従星の中で最強のエネルギー。<br>人生のハイライトは、まだこれからです。</p>
+</div>
+
+<a class="koyomi-link" href="/atsuko">
+  <span class="arrow">▶</span> ATSUKOの暦（日々の運気カレンダー）をひらく
+  <small>毎日の運気が天気予報のように見られます。傘を持つくらいの気持ちで、楽しんで。</small>
+</a>
+
+<div class="door" onclick="this.classList.toggle('open')">
+  <div class="door-gate">
+    <a class="door-inner" href="/menu">鑑定目録</a>
+    <div class="door-leaf door-leaf-l"><span class="door-pull"></span></div>
+    <div class="door-leaf door-leaf-r"><span class="door-pull"></span></div>
+  </div>
+  <p class="door-note">戸をあけると、鑑定の目録があります</p>
+</div>
+
+<footer>
+  <p>いつもおおきにです😆　またゆっくり話しましょう💬</p>
+  <p class="sig">㐂</p>
+</footer>
+
+</div>
+</body>
+</html>
