@@ -51,6 +51,10 @@
   ],
   "rewrites": [
     {
+      "source": "/kanaya-kanteisho",
+      "destination": "/clients/kanaya-kanteisho.html"
+    },
+    {
       "source": "/kanaya",
       "destination": "/view.html?client=kanaya"
     },
