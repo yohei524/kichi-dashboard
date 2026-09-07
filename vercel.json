@@ -51,6 +51,10 @@
   ],
   "rewrites": [
     {
+      "source": "/kanaya",
+      "destination": "/view.html?client=kanaya"
+    },
+    {
       "source": "/kumi",
       "destination": "/view.html?client=kumi"
     },
