@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>かなやさん 鑑定書 ｜ 㐂占</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --night:#0B0F1A; --night2:#131A28; --sink:#171F30; --panel:#1B2334;
+  --line:#2A3346; --accent:#D98A41; --accent-soft:#B5502C; --accent-glow:rgba(217,138,65,.14);
+  --gold:#C9A24A; --text:#ECEAE4; --muted:#8A96AC; --muted2:#A9B3C6;
+  --water:#6E9BC4; --fire:#D08A5A; --wood:#7FA86B; --metal:#C4C9D2; --earth:#C9A24A;
+  --bad:#C97A6A; --good:#6E9BC4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Serif JP',serif; color:var(--text); line-height:1.95; letter-spacing:.045em;
+  background:
+    radial-gradient(1200px 620px at 50% -12%, rgba(217,138,65,.10), transparent 60%),
+    linear-gradient(180deg,#0B0F1A 0%,#0D1220 45%,#080B14 100%);
+  background-attachment:fixed; min-height:100vh;
+}
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.05rem 4rem;}
+
+/* header */
+header{text-align:center;padding:3rem 1rem 1.4rem;}
+header .kicker{font-size:.68rem;letter-spacing:.32em;color:var(--accent);opacity:.9;margin-bottom:.9rem;}
+header h1{font-size:1.5rem;font-weight:500;letter-spacing:.08em;margin-bottom:.5rem;}
+header h1 .nm{color:var(--accent);}
+header .tagline{font-size:.8rem;color:var(--muted2);letter-spacing:.1em;line-height:1.7;}
+header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:.12em;}
+
+/* profile strip */
+.profile{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem .8rem;
+}
+.profile div{font-size:.74rem;color:var(--muted);}
+.profile div b{display:block;font-size:.9rem;color:var(--text);font-weight:500;margin-top:.1rem;letter-spacing:.06em;}
+.profile div.full{grid-column:1/3;}
+
+/* section */
+.sec{margin-bottom:1.65rem;}
+.sec-head{
+  display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;
+  padding-bottom:.6rem;border-bottom:1px solid var(--line);
+}
+.sec-no{font-size:.72rem;color:var(--accent);letter-spacing:.18em;font-weight:600;}
+.sec-title{font-size:1.02rem;font-weight:500;letter-spacing:.08em;}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  padding:1.25rem 1.15rem;box-shadow:0 4px 24px rgba(0,0,0,.32);margin-bottom:1rem;
+}
+.card p{font-size:.87rem;margin-bottom:.9rem;color:var(--text);}
+.card p:last-child{margin-bottom:0;}
+.card .lead{color:var(--accent);font-size:.9rem;font-weight:500;}
+.hl{color:var(--accent);font-weight:500;}
+.soft{color:var(--muted2);font-size:.8rem;}
+
+/* 陰占盤 */
+.meishiki{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.2rem 0 .3rem;
+}
+.pillar{
+  background:var(--sink);border:1px solid var(--line);border-radius:12px;
+  padding:.7rem .4rem;text-align:center;
+}
+.pillar .lbl{font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.55rem;}
+.pillar .yomi{font-size:.58rem;color:var(--muted);letter-spacing:.04em;line-height:1.3;}
+.pillar .kan{font-size:1.85rem;font-weight:600;color:var(--text);line-height:1.15;}
+.pillar .shi{font-size:1.85rem;font-weight:600;color:var(--accent);line-height:1.15;margin-top:.2rem;}
+.pillar .zou{font-size:.62rem;color:var(--muted2);margin-top:.55rem;letter-spacing:.04em;}
+.meishiki-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;}
+
+/* 人体星図 */
+.jintai{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:19rem;margin:.4rem auto .2rem;}
+.jcell{
+  background:var(--sink);border:1px solid var(--line);border-radius:11px;
+  aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;
+}
+.jcell .pos{font-size:.58rem;color:var(--muted);letter-spacing:.05em;}
+.jcell .star{font-size:.92rem;font-weight:600;color:var(--text);letter-spacing:.03em;}
+.jcell.center{background:linear-gradient(160deg,rgba(217,138,65,.18),var(--sink));border-color:var(--accent-soft);}
+.jcell.center .star{color:var(--accent);}
+.jcell.jusei-cell{background:var(--night2);}
+.jcell .star.gold{color:var(--gold);}
+
+/* 五行バー */
+.gogyo{margin-top:.3rem;}
+.gbar{display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;}
+.gbar .gname{width:2.6rem;font-size:.76rem;color:var(--muted2);flex-shrink:0;}
+.gbar .gtrack{flex:1;height:9px;background:var(--sink);border-radius:5px;overflow:hidden;}
+.gbar .gfill{height:100%;border-radius:5px;}
+.gbar .gval{width:2.2rem;text-align:right;font-size:.72rem;color:var(--muted);flex-shrink:0;}
+.g-wood .gfill{background:var(--wood);}
+.g-fire .gfill{background:var(--fire);}
+.g-earth .gfill{background:var(--earth);}
+.g-metal .gfill{background:var(--metal);}
+.g-water .gfill{background:var(--water);}
+
+/* 大運テーブル */
+.daiun-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.daiun{width:100%;border-collapse:collapse;font-size:.78rem;min-width:19rem;}
+.daiun th{
+  font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.05em;
+  padding:.4rem .3rem;border-bottom:1px solid var(--line);text-align:center;
+}
+.daiun td{padding:.5rem .3rem;text-align:center;border-bottom:1px solid rgba(42,51,70,.5);color:var(--text);}
+.daiun td:first-child{color:var(--muted2);font-size:.72rem;white-space:nowrap;}
+.daiun .tc-cell{color:var(--bad);font-size:.68rem;}
+.daiun .now-row td{background:linear-gradient(90deg,rgba(217,138,65,.12),transparent);}
+.daiun .now-row td:first-child{color:var(--accent);font-weight:600;}
+.daiun .now-cell{color:var(--accent);font-size:.68rem;font-weight:600;}
+
+/* timeline */
+.tl{position:relative;padding-left:1.1rem;margin-top:.3rem;}
+.tl::before{content:"";position:absolute;left:3px;top:.4rem;bottom:.4rem;width:2px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:1rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before{content:"";position:absolute;left:-1.1rem;top:.45rem;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--night2);}
+.tl-item.tc::before{background:var(--bad);}
+.tl-when{font-size:.76rem;color:var(--accent);font-weight:600;letter-spacing:.06em;}
+.tl-item.tc .tl-when{color:var(--bad);}
+.tl-body{font-size:.82rem;color:var(--text);margin-top:.15rem;}
+
+/* do / dont */
+.dodont{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.dobox,.dontbox{border-radius:12px;padding:.85rem .8rem;border:1px solid var(--line);}
+.dobox{background:rgba(110,155,196,.08);}
+.dontbox{background:rgba(201,122,106,.08);}
+.dobox .h,.dontbox .h{font-size:.78rem;font-weight:600;margin-bottom:.5rem;letter-spacing:.06em;}
+.dobox .h{color:var(--good);}
+.dontbox .h{color:var(--bad);}
+.dodont ul{list-style:none;}
+.dodont li{font-size:.75rem;color:var(--text);padding-left:.9rem;position:relative;margin-bottom:.45rem;line-height:1.6;}
+.dodont li:last-child{margin-bottom:0;}
+.dobox li::before{content:"○";position:absolute;left:0;color:var(--good);font-size:.7rem;}
+.dontbox li::before{content:"×";position:absolute;left:0;color:var(--bad);font-size:.7rem;}
+@media(max-width:400px){.dodont{grid-template-columns:1fr;}}
+
+/* 処方 */
+.recipe{counter-reset:r;}
+.recipe .item{display:flex;gap:.75rem;margin-bottom:1rem;}
+.recipe .item:last-child{margin-bottom:0;}
+.recipe .num{
+  flex-shrink:0;width:1.7rem;height:1.7rem;border-radius:50%;
+  background:linear-gradient(160deg,var(--accent),var(--accent-soft));
+  color:var(--night);font-weight:700;font-size:.85rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.recipe .rbody{font-size:.83rem;}
+.recipe .rbody b{color:var(--accent);font-weight:600;}
+
+/* pull quote */
+.pull{
+  border-left:3px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:1rem 0;
+  font-size:.9rem;color:var(--muted2);font-style:normal;
+}
+
+/* closing */
+.closing{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--accent-soft);border-radius:18px;padding:1.6rem 1.25rem;text-align:center;
+  box-shadow:0 0 30px rgba(217,138,65,.08);
+}
+.closing p{font-size:.88rem;margin-bottom:.9rem;}
+.closing p:last-child{margin-bottom:0;}
+.closing .big{font-size:1.05rem;color:var(--accent);font-weight:500;letter-spacing:.06em;}
+
+/* link to koyomi */
+.koyomi-link{
+  display:block;text-align:center;margin-top:1.5rem;padding:1rem;
+  background:var(--night2);border:1px solid var(--line);border-radius:14px;
+  color:var(--text);text-decoration:none;font-size:.86rem;transition:border-color .3s;
+}
+.koyomi-link:hover{border-color:var(--accent-soft);}
+.koyomi-link .arrow{color:var(--accent);}
+.koyomi-link small{display:block;color:var(--muted);font-size:.7rem;margin-top:.3rem;}
+
+/* 日本風の引き戸（襖）― タップで左右に開く */
+.door{display:block;text-align:center;padding:2.2rem 0 .5rem;margin-top:1.5rem;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.door-gate{position:relative;width:210px;height:132px;margin:0 auto 1rem;border-radius:4px;overflow:hidden;border:3px solid var(--accent-soft);box-shadow:0 4px 18px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.06);background:var(--sink);}
+.door-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.05rem;letter-spacing:.28em;text-indent:.28em;color:var(--accent);text-decoration:none;font-weight:500;background:radial-gradient(120% 90% at 50% 120%,rgba(217,138,65,.22) 0%,var(--sink) 62%);}
+.door-leaf{position:absolute;top:0;width:50%;height:100%;background:repeating-linear-gradient(90deg,rgba(0,0,0,.14) 0 1px,transparent 1px 26px),linear-gradient(170deg,var(--panel) 0%,#141B29 100%);transition:transform .55s cubic-bezier(.65,0,.35,1);z-index:2;}
+.door-leaf-l{left:0;border-right:1px solid var(--line);}
+.door-leaf-r{right:0;border-left:1px solid var(--line);}
+.door-pull{position:absolute;top:50%;width:8px;height:26px;border-radius:3px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);transform:translateY(-50%);}
+.door-leaf-l .door-pull{right:8px;} .door-leaf-r .door-pull{left:8px;}
+.door.open .door-leaf-l{transform:translateX(-100%);}
+.door.open .door-leaf-r{transform:translateX(100%);}
+.door.open .door-inner{text-shadow:0 0 12px rgba(217,138,65,.3);}
+.door-note{font-size:.68rem;color:var(--muted);line-height:1.8;margin-top:.35rem;}
+
+footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
+footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">㐂占 　 命 術 本鑑定書</p>
+  <h1><span class="nm">かなや</span> さんへ</h1>
+  <p class="tagline">余燼の炭火。炎より、長く、強く残る火</p>
+  <p class="date">1971年（昭和46年）7月31日 生　／　鑑定 2026.09.07</p>
+</header>
+
+<!-- プロフィール -->
+<div class="profile">
+  <div class="full">魂の本質（日の宿命）<b>丁巳（ひのとみ）― 裁断を飾る松明</b></div>
+  <div>中心の星<b>鳳閣星</b></div>
+  <div>天中殺<b>子丑（北方）</b></div>
+  <div>才能の星<b>鳳閣星</b></div>
+  <div>今の大運<b>庚寅・司禄星（48〜57歳）</b></div>
+  <div class="full">運気の位置<b>58歳から77歳まで、大運天中殺の20年。晩年運は天将星12点</b></div>
+</div>
+
+<div class="card" style="border-color:var(--accent-soft);">
+  <p>おおきにです、かなやさん☺️</p>
+  <p>7月に「9月になったら個人鑑定を依頼します」と書いてくれはって、ほんまに8月末に来てくれはりました。一度決めたら曲げん人ですね、とあの時書きましたけど、鑑定を始める前にもう証明されてしまってました。</p>
+  <p>90分、お話しさせてもらった内容を、ここに全部まとめてあります。当日お伝えできひんかったことも足してます。気になったところは、いつでもLINEで掘ってください。</p>
+</div>
+
+<!-- 命式盤 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">命 式</span><span class="sec-title">かなやさんの設計図</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.6rem;">陰占 ― 生まれ持った気の柱</p>
+    <div class="meishiki">
+      <div class="pillar">
+        <div class="lbl">日柱（自分・家庭）</div>
+        <div class="yomi">ひのと</div><div class="kan">丁</div>
+        <div class="shi">巳</div><div class="yomi">み</div>
+        <div class="zou">蔵干　丙・庚・戊</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">月柱（仕事・家系）</div>
+        <div class="yomi">きのと</div><div class="kan">乙</div>
+        <div class="shi">未</div><div class="yomi">ひつじ</div>
+        <div class="zou">蔵干　己・丁・乙</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">年柱（社会・先祖）</div>
+        <div class="yomi">かのと</div><div class="kan">辛</div>
+        <div class="shi">亥</div><div class="yomi">い</div>
+        <div class="zou">蔵干　壬・甲</div>
+      </div>
+    </div>
+    <p class="meishiki-note">日柱 丁巳 ／ 月柱 乙未 ／ 年柱 辛亥<br>日柱と年柱が<span class="hl">天剋地冲</span>（上下とも正面衝突）／ 月柱と年柱が大半会</p>
+
+    <div class="divider" style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p class="soft" style="margin-bottom:.2rem;">陽占 ― 心のかたち（人体星図）</p>
+    <div class="jintai">
+      <div class="jcell jusei-cell"><span class="pos">伴星（先祖）</span><span class="star">石門星</span></div>
+      <div class="jcell"><span class="pos">目上（北）</span><span class="star">禄存星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">初年運</span><span class="star gold">天報星 3</span></div>
+      <div class="jcell"><span class="pos">配偶者（西）</span><span class="star">石門星</span></div>
+      <div class="jcell center"><span class="pos">中心・本人</span><span class="star">鳳閣星</span></div>
+      <div class="jcell"><span class="pos">社会（東）</span><span class="star">牽牛星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">晩年運</span><span class="star gold">天将星 12</span></div>
+      <div class="jcell"><span class="pos">目下（南）</span><span class="star">龍高星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">中年運</span><span class="star gold">天南星 10</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.7rem;">中央が本人。四隅は人生3時期のエネルギー（初年・中年・晩年）と、ご先祖の星（伴星）。<span class="hl">石門星が二つ（配偶者・伴星）</span>、そして<span class="hl">晩年に天将星12点</span> ―― ここが今日の話の背骨です。</p>
+
+    <div class="divider" style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p class="soft" style="margin-bottom:.5rem;">五行のバランス（総エネルギー 221・安定バランス型）</p>
+    <div class="gogyo">
+      <div class="gbar g-wood"><span class="gname">木</span><span class="gtrack"><span class="gfill" style="width:68%"></span></span><span class="gval">48</span></div>
+      <div class="gbar g-fire"><span class="gname">火</span><span class="gtrack"><span class="gfill" style="width:100%"></span></span><span class="gval">70</span></div>
+      <div class="gbar g-earth"><span class="gname">土</span><span class="gtrack"><span class="gfill" style="width:64%"></span></span><span class="gval">45</span></div>
+      <div class="gbar g-metal"><span class="gname">金</span><span class="gtrack"><span class="gfill" style="width:57%"></span></span><span class="gval">40</span></div>
+      <div class="gbar g-water"><span class="gname">水</span><span class="gtrack"><span class="gfill" style="width:26%"></span></span><span class="gval">18</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.7rem;">欠けている五行はなし。占いに来られる方では珍しいくらい整った形です。ただ<span class="hl">水だけが一段低い</span> ―― ここが今日いちばん効いてきた数字でした。</p>
+  </div>
+</div>
+
+<!-- 五つの視点 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">五つの視点</span><span class="sec-title">ぐるりと見る</span></div>
+  <div class="card">
+    <p class="lead">【壱】時間軸で視る</p>
+    <p>今は庚寅・天極星の10年（48〜57歳）の後半です。天極星は、十二大従星でいちばんエネルギーが低い部類。しかも日柱に害と生刑がかかっています。<span class="hl">一番体力が落ちている時期に、一番重いことが全部来た10年</span>でした。流動占技も「速度は遅い・一つをじっくり」と出ています。思うように進まへん感じがあるとしたら、それはかなやさんの力の問題やなくて、時期です。そして残りは2年。58歳から、人生で一番エネルギーが強い20年に入ります。今は底やなくて、上がる直前の助走区間です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">【弐】人間関係で視る</p>
+    <p>家庭の場所と、ご先祖から受け継いだ場所 ―― 両方に石門星が入っています。人を集め、輪を作り、繋ぎ止める星が二つ。<span class="hl">集めるのは、集めたくなくても集まるくらい得意</span>です。ただしこの星は「切る」を持っていません。だから、もう形が変わってしまった縁でも、自分から終わらせるのは命式の作りに逆らう動きになります。意志の弱さやなくて、構造です。そこは責めるところやないです。</p>
+  </div>
+  <div class="card">
+    <p class="lead">【参】才能で視る</p>
+    <p>才能星は鳳閣星 ―― 伝達・表現の火の星で、命式の真ん中と同じ星です。八門法は朱雀型で「教える・伝える・奉仕精神」、向く職業に教育者・カウンセラーが並びます。南の龍高星には「人材育成がうまい」、伴星の石門星には「人脈が財産になる」。守護神は一本立てて大きく動かす形。<span class="hl">全部が同じ方向を指しています</span> ―― 自分の手で削る側やなくて、伝えて、育てて、人を集める側。これだけ揃うのは、正直、珍しいです。</p>
+  </div>
+  <div class="card">
+    <p class="lead">【肆】課題で視る</p>
+    <p>日干支の警句にこう書かれています ――「一芸に達し注意の行き届いた性質だから年長者の愛護を受け成功。<span class="hl">しかし時々無気力になって自分を忘れることがあるから注意</span>」。能力の話やないです。一芸に達する力も、注意が行き届く性質も、もう証明済み。課題は、火が一度落ちた時にどうやってまた点けるか、そこだけです。中心の鳳閣星は無理をする星やなくて、筋が通らん場所に長くいると火が落ちます。</p>
+  </div>
+  <div class="card">
+    <p class="lead">【伍】使命で視る（総括）</p>
+    <p>壱〜肆が同じ方を向いています。そして当日はっきりしたのは、<span class="hl">立てるものは、もう決まっている</span>ということでした。カウンセリングをして、治療計画を作って、患者さんにプレゼンして、難しいところは専門医に振って、最後に自分がまとめる ―― 今やっているこの形が、そのまま命式の答えです。一人で全部やらない（水18）、伝えて教える（朱雀型・鳳閣星）、一つに絞る（五宮同均）。全部すでに満たしています。<b>あとは、それを診療室の外へ横に広げるだけ。</b></p>
+  </div>
+</div>
+
+<!-- 壱 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">壱</span><span class="sec-title">どういう魂か ― 余燼の炭火</span></div>
+  <div class="card">
+    <p>日干支は丁巳。六十干支の五十四番目で、<b>「裁断を飾る松明」</b>、別名を<b>余燼（よじん）の炭火</b>といいます。</p>
+    <p>丁は太陽やないんです。松明の火。<span class="hl">自分が燃えて、周りを照らす灯り</span>です。その火が、同じ火の巳の上に乗っている ―― 天干も地支も火という、火でできた日干支です。</p>
+    <p>そして余燼の炭火。炎はぶわっと上がってすぐ消えますが、炭は夜明けまで燃えています。<span class="hl">静かに、長く、強く残る</span>。かなやさんの55歳が、ちょうどここです。</p>
+    <div class="pull">一芸に達し注意の行き届いた性質だから年長者の愛護を受け成功。<br>しかし時々無気力になって自分を忘れることがあるから注意。色情にも用心。</div>
+    <p>この警句、三つに分かれます。<b>一つ目「一芸に達し、注意の行き届いた性質」</b> ―― 歯科医師で、しかも保険から自費に切り替えてはる。注意が行き届かんとできん仕事を30年です。そのままですね。</p>
+    <p><b>二つ目「年長者の愛護を受け成功」</b> ―― 目上に引き上げられる形を持ってはります。0→1を4回やってきはった話、全部「目上から振られてきた」と言うてはりました。破産の直後に雇われ院長のポジションがあったのも、当たり前のことやないです。</p>
+    <p><b>三つ目「時々無気力になって、自分を忘れる」</b> ―― ここが本命でした。一芸に達する人で、注意も行き届く人なのに、ふっと無気力になる。<span class="hl">かなやさんの命式が抱えてる一番の課題は、能力やないんです。火が一回落ちた時に、どうやってもう一回つけるか。ここだけです。</span></p>
+    <p>性格の詳細には「気難しく、筋が通らないと譲らない。自信過剰で他人に任せられないため、首を突っ込みたがる」。保険から自費に切り替えはったのも、患者さんが減っても戻さんかったのも、これですね。<b>悪いことやないです。だからこそ、ここから伸びます。</b></p>
+    <p>もう一つ大事な記述 ――<b>「親や親類から仕事を継ぐと大成しにくく、一代で築く運の人」</b>。継いだ医院やなくて、自分で開業しはった。<span class="hl">それが命式どおりの、正しい動き</span>やったんです。</p>
+  </div>
+</div>
+
+<!-- 弐 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">弐</span><span class="sec-title">壊れることは起きるのに、自分からは切れない</span></div>
+  <div class="card">
+    <p>陰占の一番上、日柱の丁と年柱の辛、日柱の巳と年柱の亥 ―― 上も下も真正面からぶつかっています。<b>天剋地冲</b>といいます。</p>
+    <p>タロットで言うと <b>The Tower</b>。<span class="hl">完全破壊と再生</span>。一回徹底的に壊れて、そこから作り直す。その形を、生まれた時から魂に備えて生まれてきはった、ということです。</p>
+    <p>そして日柱は自分の場所、年柱はご先祖・家系の場所。<b>自分の場所と家系の場所が、生まれつき正面衝突する形</b>で入っています。</p>
+    <p>在日韓国人3世で、日本人でありながら日本人でなく、韓国人でもない。親からは隠した方がいいと言われて、名前を見て言われたこともある。親戚には成り上がった人も、潰れた人もいる ―― <span class="hl">その話を伺って、この天剋地冲は比喩やなくて、そのまま出生の構造やったんやと思いました。</span></p>
+    <p>ここに、石門星が二つ重なります。集める星、繋ぎ止める星。<b>ただし「切る」を持っていない。</b></p>
+    <div class="pull">天剋地冲 ＝ 壊れることが起きる<br>石門星が二つ ＝ 自分からは切れない<br>　→ 壊れることは起きるのに、自分からは切れない</div>
+    <p>医院の売却も、自己破産も、かなやさんが選んで終わらせたんやなくて、<span class="hl">外側からの力で終わっています</span>。ご結婚も、今、同じ形をなぞってます。相手が条件を出して、かなやさんは動かれへん。</p>
+    <p><b>性格の問題やないです。構造です。</b>だから、自分を責めるところやない。構造やから、構造で対処します。</p>
+  </div>
+</div>
+
+<!-- 参 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">参</span><span class="sec-title">水が18 ― 一人でやり直すと枯れる</span></div>
+  <div class="card">
+    <p>五行は木48・火70・土45・金40・水18。欠けはなく、安定バランス型です。整った命式です。</p>
+    <p>ただ<b>水だけが18</b>。一つだけ落ちています。水は、下の目下の星 ―― <b>龍高星</b>。改革・破壊と再構築の星です。</p>
+    <p>つまり、<span class="hl">壊して作り直す力はちゃんとある。ただ、その燃料が一番薄い。</span></p>
+    <p>2018年に医院を手放して、そこから一人で背負って返してきはった。相談しはりましたか、と聞いた時「一応しました、弁護士さんを紹介してもらったり」と答えてくれはりましたけど、<b>あんまり相談してはらへんな</b>、というのが正直な読みでした。</p>
+    <p>力がないんやないです。力はある。<span class="hl">燃料の持ちが悪いんです。</span>だから次の再構築は、一人でやらんことが条件になります。信用できる人、再構築のためのパートナーが、いた方がいい。</p>
+    <div class="pull">水を増やす方法は、二つあります。</div>
+    <p><b>一つは、人を育てること。</b>人間はほとんど水でできています。エネルギーが全部バランスを取ってうまく回り出すのが、水を入れること。かなやさんの命式で水にあたるのは龍高星＝人材育成です。<span class="hl">教えることで、かなやさんの一番薄いところが埋まります。</span>これは精神論やなくて、命式の構造の話です。</p>
+    <p>「育成能力あるのかな、と疑ってる」と言うてはりましたけど、あれは<b>破壊と再構築の、破壊の方が出ていた</b>だけやと思います。ぶつかって、言い過ぎて、辞められて。最近ご機嫌を伺いながらうまくやる方に変わってきた、と言うてはりました。そっちが本来です。喋るのが得意で、その場で言葉が出る人は、基本的に人材育成が上手くなっていきます。辞めた後に「喧嘩別れしたけど、あの先生の言うてたことは役に立った」と思ってる人、絶対いてると思います。</p>
+    <p><b>もう一つは、そのまま水に触れること。</b>海、川、水辺。</p>
+    <p><span class="hl">サーフィン、めちゃくちゃいいです。開運行動そのものです。</span>19歳から始めて、医院を手放してから8年止まっている ―― その再開の狼煙を、この秋の連休に高知の須崎で上げる。仁淀川の近く。<b>水が一番薄い人が、水を取りに行く</b>。しかも先輩というご縁を通って。これ以上ない形です。</p>
+    <p>守護神の壬（大河・大きく動かす・運ぶ）とも、まっすぐ重なります。若い頃から水を求めてはったのは、たぶん体が分かってたんやと思います。</p>
+  </div>
+</div>
+
+<!-- 肆 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">肆</span><span class="sec-title">立てるものは、もう決まっている</span></div>
+  <div class="card">
+    <p>八門法は<b>朱雀型</b>（南が最大・火性・伝達本能）。特徴が「表現力・明朗・奉仕精神・教える・伝える・美意識」。向く職業に教育者・芸能・クリエイター・カウンセラー・料理人。気図法も「行動と表現の世界。ビジネス・芸能・発信業界に向く」。</p>
+    <p><span class="hl">歯科医師という技術職を30年やってきた人に、命式が出している答えが「教える・伝える」なんです。</span>どこから見ても、伝える側です。</p>
+    <p>守護神は第一が<b>甲</b>（大樹・真っ直ぐ立つ・リーダー意識）、第二が<b>壬</b>（大河・大きく動く・運ぶ）。合わせると<b>「一本、真っ直ぐ立てて、それを大きく動かす」</b>。小さくまとめる方向やないです。</p>
+    <p>才能占技は五宮同均。剋線が2・2・2・2・2で完全に均等 ―― 器用に何でもできてしまうぶん、<b>絞らんと突き抜けない</b>形です。日干支の「一つに専念してゆっくり伸びる」、中年運の「自制をきかせて一つに集中できれば仕事で大成する」と、三つとも同じことを言うてます。<span class="hl">いろいろできるけど、いろいろやるな。一個に絞るとドカンと抜ける。</span></p>
+    <div class="pull">当日、かなやさんが自分で答えを出さはりました。</div>
+    <p>「カウンセリングして、治療計画を作って、患者さんにプレゼンして、クロージングして、難しい治療は専門医に振って、最後に自分がまとめる ―― これって一人でやらないと合致してますか？」</p>
+    <p><b>めっちゃ合致してます。がっちりです。</b></p>
+    <p>一人で全部やらない（水18）。伝えて、教える（朱雀型・鳳閣星）。一つに絞る（五宮同均）。<span class="hl">今のスタイルは、自然に導き出しておられるんですけど、命式の中で全部説明がつきます。</span></p>
+    <p>そして、かなやさんが自分で言わはった一言 ――<b>「僕のフォーカスは、治療計画を作って、喋って、プレゼンして、患者さんを教育する」</b>。それです。<b>教育するところが、一番いいです。</b>専門医に振るのも、とてもいい。</p>
+    <p>自費に切り替えはったのも、実は根っこはここやったんちゃいますか。一人ひとりにちゃんと説明して、納得してもらって、時間をかけて診る ―― <span class="hl">あれは削る仕事やなくて、伝える仕事です。方向は、合ってたんです。</span></p>
+    <p>合ってへんかったのは、それを一人で、しかも自分の医院ひとつで背負ったこと。水18の人が、一人で。そこが枯れた理由でした。</p>
+    <p><b>だから破産は、失敗やないです。</b>一代で築く運の人が一代で築いて、天剋地冲で一回壊れて、<span class="hl">天将星の起動条件を払い終わった。</span>今、その直後におられます。</p>
+  </div>
+</div>
+
+<!-- 伍 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">伍</span><span class="sec-title">58歳からの20年 ― 確変の中身</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.7rem;">大運（10年ごとの大きな運気）／ 立運 8歳・逆行</p>
+    <div class="daiun-scroll">
+      <table class="daiun">
+        <tr><th>年齢</th><th>干支</th><th>主星</th><th>従星</th><th>位相・状態</th></tr>
+        <tr><td>8〜17</td><td>甲午</td><td>玉堂星</td><td>天禄星</td><td>支合・方三位</td></tr>
+        <tr><td>18〜27</td><td>癸巳</td><td>車騎星</td><td>天将星</td><td>対冲</td></tr>
+        <tr><td>28〜37</td><td>壬辰</td><td>牽牛星</td><td>天堂星</td><td>干合</td></tr>
+        <tr><td>38〜47</td><td>辛卯</td><td>禄存星</td><td>天胡星</td><td>大半会（三合）</td></tr>
+        <tr class="now-row"><td>48〜57</td><td>庚寅</td><td>司禄星</td><td>天極星</td><td class="now-cell">今ここ・害／生刑</td></tr>
+        <tr><td>58〜67</td><td>己丑</td><td>鳳閣星</td><td>天庫星</td><td class="tc-cell">大運天中殺・大半会</td></tr>
+        <tr><td>68〜77</td><td>戊子</td><td>調舒星</td><td>天馳星</td><td class="tc-cell">大運天中殺</td></tr>
+        <tr><td>78〜87</td><td>丁亥</td><td>貫索星</td><td>天報星</td><td>刑・対冲</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="lead">その前に ― 38〜47歳に何が起きていたか</p>
+    <p>2009年から2018年。流動占技では<b>「大発展型。事業拡大・人脈拡大。ただし資金・技術・人脈の3拍子が必須」</b>。大発展の形が来ていました。</p>
+    <p>ところが、この10年の従星は<b>天胡星</b> ―― 病人の星といわれる、エネルギーの低い星です。<span class="hl">大発展の形が来てるのに、そこに乗せる体力の設定やなかった。</span></p>
+    <p>3拍子でいうと、技術はあった。資金は切り替えで細った。人脈は、事実上ひとりで背負ってはった。<b>かなやさんが弱かったんやないです。この10年は、最初から一人でやるようにはできてなかったんです。</b></p>
+  </div>
+
+  <div class="card">
+    <p class="lead">今の10年（48〜57歳）― よう耐えてはります</p>
+    <p>従星が<b>天極星</b>。十二大従星でいちばんエネルギーが低い、あの世の星です。弱いという意味やなくて、冷静さ・感覚的なところが高まる星でもあります（かなやさんは直感がかなり鋭い人です。後々もっと気づいていかはると思います）。</p>
+    <p>位相は、年柱と支合、月柱と干合、そして<b>日柱に害と生刑</b>。日柱は自分と家庭の場所です。別居も、離婚が動かんのも、破産も、全部この10年に収まっています。</p>
+    <p><span class="hl">普通は、天将星や天南星みたいな強い星の時にハードモードが来るもんです。かなやさんは、運気の体力が一番ない時期に、一番重いことが全部来てます。</span></p>
+    <p><b>これは、後の仕込みです。</b>天将星が来た時に爆発するやつです。よう耐えてはります。あと2年です。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">58〜77歳 ― 大運天中殺の20年</p>
+    <p>天中殺というのは、悪い時期やないです。<b>運気の枠が外れる時期</b>です。セルフイメージの枠が外れる。普通に考えたら無理なことが通ったり、逆に堅いはずのところが崩れたりする。<span class="hl">振れ幅が、人生でいちばん大きくなる20年</span>です。120年に20年だけ来ます。</p>
+    <p>陽転すると、意味が分からんことが起こります。80歳で百貨店に週1で値段を気にせず買い物に行くのが趣味になったり、家が欲しいと思って戻った土地で地主と知り合って、その地主が銀行の支店長に話を通してくれて、借りられんはずのお金が借りられたり。<b>「何それ」の連続で前に吹き上げられていく</b>ような形です。</p>
+    <p>そして<b>陰転すると、パッとせえへん人生になります。</b>どちらに振れるかは決まっていません。</p>
+    <div class="pull">乗るための条件は、絞られています。<br>そして、かなやさんはもう<b>クリア済み</b>です。</div>
+    <p>大運天中殺に入る前が幸せやった人は、逆に陰転していきます。<span class="hl">それまでの人生で陰を歩いた人が、陽転する。</span>離婚、別居、自己破産 ―― それを通ってきたことが、そのまま条件になっています。</p>
+    <p>そこに三つ重なります。</p>
+    <p><b>一つ。晩年運が天将星12点。</b>十二大従星で最強。一節には、昔の王族・貴族が命がけで帝王切開してでも狙ったと言われる星です。それくらいの運気が晩年に来ます。「若い時の苦労が必要」が起動条件で、<span class="hl">かなやさんは先払い済み</span>です。</p>
+    <p><b>二つ。子丑天中殺の使命が「何かを始めること」。</b>陽転条件は「ゼロから新しい何かを立ち上げる」。</p>
+    <p><b>三つ。58歳からの大運が己丑、68歳からが戊子。</b>支が丑と子 ―― <span class="hl">かなやさん自身の天中殺の支そのもの</span>です。</p>
+    <p>つまり、<b>ゼロから始めることが使命の人に、その使命の支が、人生で一番エネルギーが強い時期に回ってくる。</b>これが確変の中身です。</p>
+    <p>乗れたら、規模が桁で変わります。<span class="hl">歯科医院の雇われ院長で終わる話やないです。偉大な人物になれる作りです。</span></p>
+    <p>乗り損ねたら、同じ力が全部内側に向きます。12点が余って行き場をなくして、無気力になって自分を忘れる ―― 警句のあの一文に戻ります。<b>良いと決まった訳ではない、と7月に書いたのはこの意味です。振れ幅が大きい、それだけが決まってます。</b></p>
+    <p>もう一つ。58歳の大運は中心星が<b>鳳閣星</b>。かなやさんの本体と同じ星です。<span class="hl">借り物やない、生まれ持った自分そのもので走る20年</span>になります。</p>
+    <p>流動占技は<b>方三位</b>。異次元融合と言われる大半会が三角形になった形で、非常に強い、横に広がるエネルギーです。縦にドーンやなくて<b>横広がり・薄利多売型</b>。一人の患者さんを深く診て大きく稼ぐ形やなくて、<span class="hl">多くの人に、薄く、広く届ける形</span>。68〜77歳も同じ方三位で、20年これが続きます。</p>
+    <p>朱雀型（教える・伝える）、龍高星（人材育成）、伴星の石門星（人脈が財産）、守護神（大きく動かして運ぶ）―― 全部この横広がりと同じ方向です。</p>
+  </div>
+</div>
+
+<!-- 陸 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">陸</span><span class="sec-title">かなやさんにしか、語れないもの</span></div>
+  <div class="card">
+    <p>当日、こう言うてはりました。</p>
+    <div class="pull">周りはみんな成功してる。何億も売り上げて、ネームバリューも轟いてる。<br>下の世代から上の世代までバーッと走り始めてる中で、僕が同じことをやってどうすんだろう。<br>俺にしかできないことも、もうないな。ここから出るもの、別にないな。</div>
+    <p>ここは、はっきり言います。<b>出るものは、あります。</b></p>
+    <p>その先生方が持ってへんものを、かなやさんは一つ持ってはります。<span class="hl">自費に切り替えて、患者さんが減って、医院を手放して、返しきれずに自己破産した</span> ―― その経験です。</p>
+    <p>なぜ自費で診療をやろうと思ったのか。何が起きたのか。<b>失敗したところまで含めて伝えられる人は、いません。</b>成功した話をする人はたくさんいても、落ちた側から語れる人はいない。<b>一回失敗して、それでも立った歯科医師というポジションは、空いています。</b></p>
+    <p>ここだけ、牽牛星のプライドを少しだけ横に置く必要があります。牽牛星は「他の人と違う特別意識」「地位や名誉」の星なので、そこがいちばん抵抗するところやと思います。でも、<span class="hl">そこがそのまま、他の誰にも取れない一点になります。</span></p>
+    <p>五宮同均が言うてる「絞らんと突き抜けない」の、絞る先はここです。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">構想しなくていい ― 出し方の話</p>
+    <p>「アイデアが湧いてこない」と言うてはりましたけど、<b>事業アイデアを構想するという形で出そうとするから出てこない</b>だけやと思います。</p>
+    <p>ご自身で言うてはりました ――「準備してこの話題で喋ってと言われると、構成して話せない」「感覚派。ロジカルに仕込んでやっていくのがとにかく不得意」。そして<b>患者さんとマンツーで喋るのは得意で、褒められる</b>。準備なしで、溜め込んでた考えをその人にぶつけてるだけ、と。</p>
+    <p><span class="hl">水が18の人は、綿密な計画を立てて行動するのが弱いんです。やらん方がいい。</span>行き当たりばったりと割り切ってやってる方が、うまくいったりします。事業計画をきっちり立てる、みたいなやり方は向いてないです。</p>
+    <p>だから出し方は、<b>「聞かれて答える」</b>形にする。インタビュー形式。誰かが聞いて、その場で即興で答えるスタイル。これなら難なくできますし、そっちの方が見られやすいです。</p>
+    <p><b>そしてもう一つ、順番の話です。</b>「結果を出してから発信しないと話にならない」と言うてはりましたけど、<span class="hl">逆です。</span></p>
+    <p>フォロワーを作ってしまえば、誰も何も言いません。それはかなやさんのこだわりで、職人肌の専門職の方によくあることです。僕も映像屋なんで、映像1本1本にこだわって、いい内容を作ることにこだわってきましたけど、<b>全部間違いでした。30点でいいから数を出す方が正解</b>なんです。</p>
+    <p>権威のある素晴らしい人しか発信したらあかんのやったら、SNSはこんなに流行ってません。</p>
+    <p>石門星を持ってはって、発信力もある。馬鹿にされても、何も分かってないと言われても、どんどん続けていくと ―― <span class="hl">何万人もフォロワーができて、かなやさんの言葉だけが響く人が出てきます。</span>素晴らしい技術と実績がある先生の話やからやなくて、<b>かなやさんの話やから聞く</b>、という人が必ず出てきます。</p>
+    <p>専門的にすごい先生のことは、業界の人は知ってても、一般の人は知りません。<b>かなやさんの場合は、一般の人も知ってる歯科医師の方になります。</b>それができる器です。</p>
+  </div>
+</div>
+
+<!-- 漆 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">漆</span><span class="sec-title">ご家族のこと ― 順番だけ、決めておく</span></div>
+  <div class="card">
+    <p>離婚するべきかどうかは、僕が決めることやないです。かなやさんが決めることです。渡せるのは、構造と、時期と、順番だけです。</p>
+    <p><b>構造。</b>石門星が二つ入ってる人が自分から縁を切るのは、命式に逆らう動きです。5年以上別居して、夫婦の実態がない状態でも離婚が動かへん ―― それは意志が弱いからでも、優柔不断やからでもないです。そこは責めんといてください。</p>
+    <p><b>パートナーができるかどうか。</b>そこは、そんなに心配してません。かなやさんは<span class="hl">人が寄ってくる人</span>です。場を作るのが得意で、人が集まる場所を作るのが得意。人とはどんどん繋がっていきます。繋がることと結婚に結びつくことは別の話ですけど、<b>打席にはいっぱい立てます。</b>その気があれば、難なくクリアできることやと思います。50代60代からの結婚も、今どき全く珍しくないです。</p>
+    <p><b>順番。</b>ここが一番大事なところです。</p>
+    <div class="pull">いきなり全部外してゼロから、やなくて ――<br>今の状態はそのままで、場を作って、人と繋がって、<br>「これいけるかも」となってから、こっちを畳んでいく。</div>
+    <p>これは卑怯とかやないです。<span class="hl">かなやさんは、安定・体裁がある上で次を進める形が向いてる</span>んです。仕事の立て方とまったく同じ形です（診療を柱に残したまま、横に一本立てる）。お子さんもいてはりますし、この順番の方が、命式に合ってます。</p>
+    <p>日干支の警句の三つ目、「色情にも用心」―― これは当たっていた、と言うてはりました。だからこそ、まだ結婚している身分のうちは、ややこしくなる形は避けて、<b>一度清算してから</b>、の方が安全です。</p>
+    <p>ご家族の話は、今すぐどうこうする話やないです。パッキリ切る話でもないです。<b>考えつつ、新しい柱を立てる。そちらが動き出したら、こっちを畳む。</b>それが一番いい形やと思います。</p>
+    <p class="soft">※お相手の方の命式を視るのは、別の鑑定になります。誕生日が分かったら、いつでも言うてください。ほんまに相性のいい相手は千分の一くらいで、そういう縁は年齢差も関係なく引き合います。</p>
+  </div>
+</div>
+
+<!-- 捌 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">捌</span><span class="sec-title">時期 ― いつ動くか</span></div>
+  <div class="card">
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-when">2025年（54歳）｜ 乙巳・天将星</div>
+        <div class="tl-body">年柱に<b>天剋地冲</b>。生まれ持った天剋地冲と、年運の天剋地冲が重なった年。一番大きい破壊が、ここでプログラムされていました。自己破産が12月。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2026年（55歳）｜ 丙午・天禄星 ★今年</div>
+        <div class="tl-body">年柱と干合、月柱と支合、月柱＋日柱で<b>方三位（南方火）</b>。<b>火が揃う年</b>です。本体の鳳閣星は火、五行でも火70が最大。その火が三つ揃います。従星も天禄星で、去年の底からエネルギーが戻ってきています。<span class="hl">今年は動ける年。何をやってもすぐ芽吹きます。</span>仕事でも遊びでも、うまくいきます。決めるのは「誰に、何を、どういう形で伝えるか」。決めるだけでもいいですが、動けるならその方が動きが出ます。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年（56歳）｜ 丁未・天南星 ★追い風が一番強い</div>
+        <div class="tl-body">年柱と<b>大半会</b>（異次元融合）。従星は中年運と同じ天南星10点 ―― 目標に向かって一直線、行動力の星。エネルギーが今年よりさらに上がります。<b>この2年でやらんと手遅れ、とは言いません。</b>ただ追い風は一番強いです。今年から動き出して、来年に形になっていく流れが、一番噛み合います。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">2026年12月7日 〜 2027年2月3日 ｜ 月天中殺</div>
+        <div class="tl-body">毎年この2ヶ月（節入りで区切るので12月上旬〜2月上旬）が月天中殺です。運気が悪いという話やなくて、<b>新しい契約・新規の立ち上げは外した方が無難</b>。判断が移りやすく、集中も切れやすい時期です。ここで始めたことは、後々終わってしまいやすい。天中殺には対処法がないので、ここは素直に外してください。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2028年（57歳）｜ 戊申・天恍星</div>
+        <div class="tl-body">従星が少し落ちます。大きく広げるより、それまでに立てたものを整える年。足元を固める時期と思ってください。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2029年（58歳）〜 ｜ 大運天中殺スタート</div>
+        <div class="tl-body">枠が外れる20年に入ります。いきなり何かが変わるわけやないです。それまでに立てたものが、ここから20年かけて横に広がっていきます。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2031年（60歳）｜ 辛亥・天報星</div>
+        <div class="tl-body">日柱に<b>天剋地冲</b>、年柱に自刑と律音。三回目の天剋地冲です。壊れるという話やなくて、律音は<b>原点に戻る</b>形。「これでええんか」をもう一回自分に問う年になります。その時に立てた一本があるかどうかで、答えが変わります。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">2032〜2033年 ｜ 年天中殺</div>
+        <div class="tl-body">大運天中殺の中に、年単位の天中殺が重なる2年。<b>広げるんやなくて、守る時期</b>です。それまでに作ったものを、じっと持っておく2年間。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2038年（67歳）まで ｜ 58〜67歳の大運の中で</div>
+        <div class="tl-body">月柱に天剋地冲と庫刑、日柱に大半会。<b>もう一度、何かがひっくり返る動き</b>があります。今の法人との関係かもしれませんし、ご家族のことかもしれません。専門医の先生から「別組織で立ち上げましょう」という話が来ているのも、この流れの入口に見えます。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">78歳〜 ｜ 丁亥・貫索星</div>
+        <div class="tl-body">流動占技では「刑。孤独的な仕事向き」。20年横に広げた後、最後は自分の世界に戻る形。<span class="hl">だからこそ、自分がおらんくなっても回るものを作っておく必要があります。</span>育てる、というのはそういう意味でもあります。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 玖 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">玖</span><span class="sec-title">今日から動ける処方</span></div>
+  <div class="card recipe">
+    <div class="item"><div class="num">1</div><div class="rbody"><b>「誰に、何を伝えるか」を一行だけ決める。</b><br>今年のうちに。若い歯科医師なのか、これから開業する人なのか、自費に切り替えたい先生なのか。<span class="hl">構想せんでいいです。一行だけ。</span>それが決まったら、次にすることは自動的に決まります。</div></div>
+    <div class="item"><div class="num">2</div><div class="rbody"><b>構想せず、聞かれて答える形で出す。</b><br>水18の人は、綿密な計画を立てるのが向いてません。事業計画から入ると止まります。インタビュー形式・質問に答える形・その場で喋る形にしてください。<b>30点でいいから数を出す。</b>完璧に仕上げてから、は逆効果です。</div></div>
+    <div class="item"><div class="num">3</div><div class="rbody"><b>絞る先は「潰して、それでも立った歯科医師」。</b><br>成功譚は市場に溢れてます。溢れてないのは落ちた側の話です。なぜ自費をやろうと思ったのか、何が起きたのか、失敗したところまで含めて。<span class="hl">牽牛星のプライドを少しだけ横に置く。そこが一番の武器になります。</span></div></div>
+    <div class="item"><div class="num">4</div><div class="rbody"><b>今の仕事の形は、変えなくていい。</b><br>カウンセリング → 治療計画 → プレゼン → 専門医に振る → 自分がまとめる。この形が命式の答えそのものです。診療は収入の柱として続けたまま、<b>その横に一本立てる</b>。開業に戻る必要はないです（また一人で背負う形は、水18の人には合いません）。</div></div>
+    <div class="item"><div class="num">5</div><div class="rbody"><b>水を足す ― 人を育てる／水辺に行く。</b><br>教えることが、そのまま一番薄いところを埋めます。そして海・川・水辺。<span class="hl">サーフィン再開は、開運行動そのものです。</span>8年止まっていた分、これから取り戻せます。守護神の壬（大河）とも重なります。</div></div>
+    <div class="item"><div class="num">6</div><div class="rbody"><b>目上から来た話は、受け取る。</b><br>0→1を4回、全部「振られてきた話」でした。禄存星が働いています。天中殺の20年は<b>「探しに行く」より「来たものを受け取る」</b>が噛み合います。専門医の先生からの「別組織で立ち上げましょう」も、この形です。こちらから働きかけて、いい話が来るようにしておく ―― それで十分です。</div></div>
+    <div class="item"><div class="num">7</div><div class="rbody"><b>遊びも、やってください。</b><br>プライベートにエネルギーが向いているのは、逃げやないです。鳳閣星は「遊びの人」「自然体で生きていきたい」星で、<span class="hl">それがちゃんと働いてる証拠</span>です。今年は仕事でも遊びでもうまくいく年なので、人生を充実させる選択として全然いいです。ただし遊びも<b>一本に絞る</b>と、ドカンといきます。</div></div>
+    <div class="item"><div class="num">8</div><div class="rbody"><b>外す時期だけ、覚えておく。</b><br>毎年12月上旬〜2月上旬（月天中殺）は新規の契約・立ち上げを外す。2032〜2033年は守る2年。日ごとの動きやすい日・慎重にしたい日は、<b>かなやの暦</b>に入れてあります。</div></div>
+  </div>
+</div>
+
+<!-- 締め -->
+<div class="closing">
+  <p>かなやさんは、<span class="hl">余燼の炭火</span>です。<br>炎みたいにぶわっと上がって消える火やなくて、<br>夜明けまで、静かに、長く、強く残る火です。</p>
+  <p>一代で築く運の人が、一代で築いて、<br>天剋地冲で一回壊れて、天将星の起動条件を払い終わった。<br><span class="hl">その直後に、今おられます。</span></p>
+  <p>離婚も、別居も、自己破産も、在日3世として抱えてきたものも ――<br>俯瞰して見ると、<b>大運天中殺と天将星をここに持ってくるために、<br>全部ご自身で用意してきはった</b>ようにしか、僕には見えません。</p>
+  <p class="big">人生のハイライトは、まだ来てません。</p>
+  <p>敵は、空虚感です。<br>「俺にしかできないことは、もうない」―― あれだけが、違います。<br>落ちた側から語れる歯科医師は、かなやさんしかいません。</p>
+  <p>今年と来年は、ほんまにいい年です。<br>構想せんでいいです。一行決めて、聞かれたら答える。<br>それだけで、58歳からの20年が全部、育てる時間になります。</p>
+  <p>まずは高知で、サーフィンの狼煙を上げてきてください🏄<br>あれは遊びやなくて、いちばん薄いところを埋めに行く動きです。</p>
+  <p>ガンガン行こうぜ、で。<br>発信のアイデアが出てきたら、いつでも言うてください。そっちも僕の本業なんで。</p>
+</div>
+
+<a class="koyomi-link" href="/kanaya">
+  <span class="arrow">▶</span> かなやの暦（日々の運気カレンダー）をひらく
+  <small>毎日の運気が天気予報のように見られます。傘を持つくらいの気持ちで、楽しんで。</small>
+</a>
+
+<footer>
+  <p>いつもおおきにです😆　またゆっくり話しましょう💬</p>
+  <p class="sig">㐂</p>
+</footer>
+
+</div>
+</body>
+</html>
