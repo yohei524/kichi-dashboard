@@ -777,6 +777,18 @@ function buildMonthGridHTML(year, month, todayM, todayD, todayY) {
       var dStageNum = TRAVEL_STAGES.indexOf(dStg) + 1;
       html += '<span class="cal-stage">' + dStageNum + '段</span>';
     }
+    // ★パートナーのマーク（D.partner があるときだけ）
+    if (D && D.partner && D.partner.my) {
+      var pfc = ptFortune(year, month, d);
+      var pjc = ptJudge(pfc), sjc = ptJudge(f);
+      if (pfc) {
+        var mark = '';
+        if (pjc.net >= 2 && sjc && sjc.net >= 2) mark = '◎二人';
+        else if (pjc.net <= -3) mark = '◆夫';
+        else if (pjc.net >= 2) mark = '○夫';
+        if (mark) html += '<span class="cal-pt">' + mark + '</span>';
+      }
+    }
     html += '</div>';
   }
   html += '</div>';
@@ -957,6 +969,31 @@ function render() {
       html += '</div></div>';
     }
     html += '</div>';
+
+    // ★パートナー併記（D.partner があるときだけ）
+    if (D.partner && D.partner.my) {
+      var pf = ptFortune(y, m, d);
+      var pj = ptJudge(pf), sj = selfJudge(todayF);
+      if (pf) {
+        var bothGood = (pj && pj.net >= 2 && sj && sj.net >= 2);
+        html += '<div class="pt-box">';
+        html += '<div class="pt-head">' + (D.partner.label || 'パートナーの今日') + '</div>';
+        html += '<div class="pt-row">';
+        html += '<span class="pt-kanshi">' + pf.kanshi + '</span>';
+        html += '<span class="pt-star">' + pf.mainStar + '／' + pf.jyusei + '</span>';
+        if (bothGood) html += '<span class="pt-tag pt-tag-both">お二人そろってええ日</span>';
+        else if (pj && pj.net <= -3) html += '<span class="pt-tag pt-tag-warn">要注意</span>';
+        else if (pj && pj.net >= 2) html += '<span class="pt-tag pt-tag-good">ええ日</span>';
+        html += '</div>';
+        var msg = '';
+        if (bothGood) msg = D.partner.bothNote || '';
+        else if (pj && pj.net <= -3) msg = D.partner.warnNote || '';
+        else if (pj && pj.net >= 2) msg = D.partner.goodNote || '';
+        if (msg) html += '<p class="pt-msg">' + msg + '</p>';
+        if (pj && pj.words.length) html += '<p class="pt-msg" style="opacity:0.75">（' + pj.words.join('・') + '）</p>';
+        html += '</div>';
+      }
+    }
 
     html += '</div>';
   }
@@ -1302,6 +1339,37 @@ function buildDoorHTML() {
 }
 
 // ---------- 初期化 ----------
+
+// ── パートナー併記（夫婦で1ページを見る場合・260911制定） ──
+// D.partner があるときだけ動く。MYを一時的に相手の命式へ差し替えて日運を計算し、必ず戻す。
+function ptFortune(y, m, d) {
+  if (!D || !D.partner || !D.partner.my) return null;
+  var save = MY;
+  try {
+    var p = D.partner.my;
+    MY = { ds:p.ds, db:p.db, ms:p.ms, mb:p.mb, ys:p.ys, yb:p.yb, tc:p.tc };
+    return computeFortune(y, m, d);
+  } finally { MY = save; }
+}
+// 日柱に効くものだけで吉凶を判定する（庫刑・方三位・月柱年柱の位相は日々の吉凶に数えない）
+function ptJudge(f) {
+  if (!f) return null;
+  var a = Array.isArray(f.aspects) ? f.aspects.join('・') : String(f.aspects || '');
+  var bad = 0, good = 0, w = [];
+  if (f.isTenchu) { bad += 3; w.push('日天中殺'); }
+  if (a.indexOf('日柱：天剋地冲') >= 0) { bad += 3; w.push('天剋地冲'); }
+  if (a.indexOf('日柱：対冲') >= 0) { bad += 2; w.push('対冲'); }
+  if (a.indexOf('日柱：害') >= 0) { bad += 2; w.push('害'); }
+  if (a.indexOf('日柱：自刑') >= 0) { bad += 1; w.push('自刑'); }
+  if (a.indexOf('日柱：大半会') >= 0) { good += 3; w.push('大半会'); }
+  else if (a.indexOf('日柱：半会') >= 0) { good += 2; w.push('半会'); }
+  if (a.indexOf('日柱：支合') >= 0) { good += 2; w.push('支合'); }
+  if (a.indexOf('日柱：干合') >= 0) { good += 2; w.push('干合'); }
+  if (a.indexOf('日柱：律音') >= 0) { good += 2; w.push('律音'); }
+  return { net: good - bad, words: w };
+}
+function selfJudge(f) { return ptJudge(f); }
+
 var D = null;
 
 function initDashboard(clientData) {
