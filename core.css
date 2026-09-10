@@ -791,3 +791,17 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
 }
 .k-card-front-inner .kf-marker { color: var(--color-accent); }
 .k-card-front-inner .kf-label { color: var(--color-brown); }
+
+/* ── パートナー併記（夫婦で1ページを見る場合・260911） ── */
+.pt-box { margin-top: 0.9rem; padding: 0.85rem 1rem; background: rgba(74,123,142,0.06); border: 1px solid rgba(74,123,142,0.22); border-radius: 4px; }
+.pt-head { font-size: 0.7rem; letter-spacing: 0.15em; color: var(--color-brown); margin-bottom: 0.5rem; }
+.pt-row { display: flex; align-items: baseline; gap: 0.5rem; flex-wrap: wrap; }
+.pt-kanshi { font-size: 0.95rem; font-weight: 500; color: var(--color-water); }
+.pt-star { font-size: 0.75rem; color: var(--color-brown-dark); }
+.pt-msg { font-size: 0.75rem; color: var(--color-brown-dark); line-height: 1.7; margin-top: 0.45rem; }
+.pt-tag { display: inline-block; font-size: 0.62rem; padding: 0.1rem 0.45rem; border-radius: 999px; margin-left: 0.3rem; }
+.pt-tag-warn { background: rgba(196,122,64,0.2); color: #8A4A10; border: 1px solid rgba(196,122,64,0.4); }
+.pt-tag-good { background: rgba(143,184,150,0.25); color: #3A6B47; border: 1px solid rgba(143,184,150,0.5); }
+.pt-tag-both { background: rgba(184,150,79,0.22); color: #7A5A10; border: 1px solid rgba(184,150,79,0.5); }
+.cal-cell .cal-pt { font-size: 0.5rem; margin-top: 1px; letter-spacing: 0; color: var(--color-water); }
+.cal-cell.pt-both-good { box-shadow: inset 0 0 0 1.5px rgba(184,150,79,0.55); }
