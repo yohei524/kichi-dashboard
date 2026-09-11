@@ -751,18 +751,17 @@ function buildMonthGridHTML(year, month, todayM, todayD, todayY) {
     if (isToday) cls += ' today';
     if (f && f.isTenchu) cls += ' tenchu-day';
 
-    // 夫婦モード：二層で表示する
+    // 運気合流モード：二層（上＝ご本人／下＝ご主人）。名前は出さず ◎○△✕ で即読
     if (duo) {
       var pf = ptFortune(year, month, d);
-      var sj = ptJudge(f), pj = ptJudge(pf);
-      var sNet = sj ? sj.net : 0, pNet = pj ? pj.net : 0;
-      var bothGood = (sNet >= 2 && pNet >= 2);
-      if (bothGood) cls += ' duo-both';
+      var ms = duoMark(f), mp = duoMark(pf);
+      var gou = isGouryu(f, pf);
+      if (gou) cls += ' duo-both';
       html += '<div class="' + cls + '" onclick="openDetail(' + year + ',' + month + ',' + d + ')">';
-      html += '<span class="cal-day">' + d + '</span>';
+      html += '<span class="cal-day">' + d + (gou ? '<span class="gou">🤲</span>' : '') + '</span>';
       html += '<div class="duo-rows">';
-      html += duoRowHTML('k', (D.client.shortName || '私'), sNet);
-      html += duoRowHTML('o', (D.partner.shortName || '夫'), pNet);
+      html += '<div class="duo-row k ' + ms.cls + '">' + ms.mk + '</div>';
+      html += '<div class="duo-row o ' + mp.cls + '">' + mp.mk + '</div>';
       html += '</div>';
       html += '</div>';
       continue;
@@ -801,14 +800,6 @@ function buildMonthGridHTML(year, month, todayM, todayD, todayY) {
   return html;
 }
 
-// 二層セルの1行分。net値で ◎（良い）／◆（要注意）／・（普通）を出し分ける
-function duoRowHTML(who, label, net) {
-  var mk = '・', st = '';
-  if (net >= 2) { mk = '◎'; st = ' good'; }
-  else if (net <= -3) { mk = '◆'; st = ' warn'; }
-  return '<div class="duo-row ' + who + st + '"><span class="duo-who">' + label + '</span><span class="duo-mk">' + mk + '</span></div>';
-}
-
 function switchCalMonth(idx) {
   currentCalIdx = idx;
   for (var i = 0; i < calMonths.length; i++) {
@@ -829,6 +820,9 @@ function openDetail(year, month, day) {
 
   var html = '<button class="detail-close" onclick="closeDetail()">×</button>';
   html += '<p class="detail-date-stars">' + year + '年' + month + '月' + day + '日<span class="detail-day-stars"> ' + f.kanshi + ' / ' + f.mainStar + '・' + f.jyusei + '</span></p>';
+  var pfd = (D && D.partner && D.partner.my) ? ptFortune(year, month, day) : null;
+  if (pfd) html += duoSummaryHTML(f, pfd);
+  if (pfd) html += '<p class="detail-label" style="margin-top:.2rem">ご本人</p>';
   if (f.aspects && f.aspects !== '-') {
     html += '<div class="detail-section"><p class="detail-label">位相法</p><p class="detail-text">' + f.aspects + '</p></div>';
   }
@@ -840,6 +834,7 @@ function openDetail(year, month, day) {
   if (f.advice) {
     html += '<div class="detail-section"><p class="detail-label">㐂からの一言</p><p class="detail-text">' + f.advice + '</p></div>';
   }
+  if (pfd) html += ptBriefHTML(pfd, 'ご主人');
   document.getElementById('detailContent').innerHTML = html;
   document.getElementById('detailModal').classList.add('active');
 }
@@ -984,27 +979,19 @@ function render() {
     }
     html += '</div>';
 
-    // ★パートナー併記（D.partner があるときだけ）
+    // ★運気合流：ご主人の今日（D.partner があるときだけ）
     if (D.partner && D.partner.my) {
       var pf = ptFortune(y, m, d);
-      var pj = ptJudge(pf), sj = selfJudge(todayF);
       if (pf) {
-        var bothGood = (pj && pj.net >= 2 && sj && sj.net >= 2);
+        var mkS = duoMark(todayF), mkP = duoMark(pf), gouT = isGouryu(todayF, pf);
         html += '<div class="pt-box">';
-        html += '<div class="pt-head">' + (D.partner.label || 'パートナーの今日') + '</div>';
-        html += '<div class="pt-row">';
-        html += '<span class="pt-kanshi">' + pf.kanshi + '</span>';
-        html += '<span class="pt-star">' + pf.mainStar + '／' + pf.jyusei + '</span>';
-        if (bothGood) html += '<span class="pt-tag pt-tag-both">お二人そろってええ日</span>';
-        else if (pj && pj.net <= -3) html += '<span class="pt-tag pt-tag-warn">要注意</span>';
-        else if (pj && pj.net >= 2) html += '<span class="pt-tag pt-tag-good">ええ日</span>';
+        html += '<div class="pt-head">' + (D.partner.label || 'ご主人の今日') + '</div>';
+        html += '<div class="pt-row"><span class="pt-kanshi">' + pf.kanshi + '</span><span class="pt-star">' + pf.mainStar + '／' + pf.jyusei + '</span>';
+        html += '<span class="mk o ' + mkP.cls + '" style="font-weight:700;font-size:1rem">' + mkP.mk + '</span><span class="pt-star">' + mkP.name + '</span>';
+        if (gouT) html += '<span class="pt-tag pt-tag-both">🤲 合流日</span>';
         html += '</div>';
-        var msg = '';
-        if (bothGood) msg = D.partner.bothNote || '';
-        else if (pj && pj.net <= -3) msg = D.partner.warnNote || '';
-        else if (pj && pj.net >= 2) msg = D.partner.goodNote || '';
+        var msg = gouT ? (D.partner.bothNote || '') : (mkP.cls === 'm-warn' ? (D.partner.warnNote || '') : (mkP.cls === 'm-good' ? (D.partner.goodNote || '') : ''));
         if (msg) html += '<p class="pt-msg">' + msg + '</p>';
-        if (pj && pj.words.length) html += '<p class="pt-msg" style="opacity:0.75">（' + pj.words.join('・') + '）</p>';
         html += '</div>';
       }
     }
@@ -1052,11 +1039,9 @@ function render() {
   }
   if (D && D.partner && D.partner.my) {
     html += '<div class="duo-legend">';
-    html += '<div class="ll"><span class="sw k"></span>' + (D.client.shortName || '私') + 'のええ日</div>';
-    html += '<div class="ll"><span class="sw o"></span>' + (D.partner.shortName || '夫') + 'のええ日</div>';
-    html += '<div class="ll"><span class="sw b"></span>お二人そろってええ日</div>';
-    html += '<div class="ll">◆ … 気をつける日</div>';
-    html += '<div class="full">◎＝流れが合う日　◆＝正面からぶつかる日　・＝普通の日。金の枠が付いた日は、お二人そろってええ日です。大事な話はそこに。</div>';
+    html += '<div class="row"><span><span class="sw k"></span>上の段＝ご本人</span><span><span class="sw o"></span>下の段＝ご主人</span><span><span class="sw b"></span>金枠 🤲＝合流日（お二人とも◎）</span></div>';
+    html += '<div class="row"><span>◎ 吉日</span><span>○ 普通の日</span><span>△ やや注意（日天中殺など）</span><span>✕ 注意日</span></div>';
+    html += '<div style="margin-top:.3rem;color:var(--color-brown)">日付をタップすると、お二人それぞれの巡りが見られます。</div>';
     html += '</div>';
   }
   html += '<div class="cal-legend">';
@@ -1077,6 +1062,14 @@ function render() {
     html += '<div class="card">';
     html += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>今日どう動くか</span></div>';
     html += renderGuidanceHTML('', guidance);
+    if (D.partner && D.partner.my) {
+      var pfg = ptFortune(y, m, d);
+      if (pfg) {
+        html += duoSummaryHTML(todayF, pfg);
+        html += ptBriefHTML(pfg, 'ご主人は、こういう日');
+        if (isGouryu(todayF, pfg) && D.partner.bothNote) html += '<p class="detail-text" style="margin-top:.5rem;color:#7A5A10;font-weight:500">🤲 ' + D.partner.bothNote + '</p>';
+      }
+    }
     html += '</div>';
   }
 
@@ -1392,6 +1385,51 @@ function ptJudge(f) {
   return { net: good - bad, words: w };
 }
 function selfJudge(f) { return ptJudge(f); }
+// ◎吉日／○普通／△やや注意／✕注意日。日天中殺は軸がぶれる日なので最低でも△。
+function duoMark(f) {
+  var j = ptJudge(f);
+  if (!j) return { mk: '', cls: 'm-flat', name: '' };
+  if (f.isTenchu) {
+    return (j.net <= -2) ? { mk: '✕', cls: 'm-warn', name: '注意日' } : { mk: '△', cls: 'm-care', name: 'やや注意（日天中殺）' };
+  }
+  if (j.net >= 2)  return { mk: '◎', cls: 'm-good', name: '吉日' };
+  if (j.net <= -3) return { mk: '✕', cls: 'm-warn', name: '注意日' };
+  if (j.net <= -1) return { mk: '△', cls: 'm-care', name: 'やや注意' };
+  return { mk: '○', cls: 'm-flat', name: '普通の日' };
+}
+function isGouryu(fSelf, fPt) { var a = duoMark(fSelf), b = duoMark(fPt); return a.cls === 'm-good' && b.cls === 'm-good'; }
+// ご主人側の簡略説明（クリック詳細・今日どう動くか で共用）
+function ptBriefHTML(pf, label) {
+  if (!pf) return '';
+  var m = duoMark(pf);
+  var dshi = pf.kanshi.charAt(1);
+  var stg = getTravelStage(null, dshi);
+  var stageNum = TRAVEL_STAGES.indexOf(stg) + 1;
+  var asp = Array.isArray(pf.aspects) ? pf.aspects.join('、') : (pf.aspects || '');
+  var h = '<div class="pt-detail">';
+  h += '<p class="detail-label">' + (label || 'ご主人のこの日') + '　<span class="mk ' + m.cls + '">' + m.mk + '</span> ' + m.name + '</p>';
+  h += '<p class="detail-text">' + pf.kanshi + '　主星 ' + pf.mainStar + '／従星 ' + pf.jyusei + (asp && asp !== '-' ? '<br>位相法：' + asp : '') + '</p>';
+  h += '<p class="detail-text">天中殺サイクル ' + stageNum + '段階目　' + stg.emoji + ' ' + stg.name + '（' + stg.sub + '）' + (pf.isTenchu ? '　🌀日天中殺' : '') + '</p>';
+  var note = '';
+  if (D.partner) {
+    if (m.cls === 'm-warn') note = D.partner.warnNote || '';
+    else if (m.cls === 'm-good') note = D.partner.goodNote || '';
+    else if (m.cls === 'm-care') note = D.partner.careNote || '大きい決めごとは翌日に。';
+  }
+  if (note) h += '<p class="detail-text" style="color:var(--color-water)">' + note + '</p>';
+  h += '</div>';
+  return h;
+}
+function duoSummaryHTML(fSelf, fPt) {
+  var a = duoMark(fSelf), b = duoMark(fPt);
+  var g = isGouryu(fSelf, fPt);
+  var h = '<div class="duo-summary">';
+  h += '<span class="who">ご本人</span><span class="mk ' + a.cls + '">' + a.mk + '</span>';
+  h += '<span class="who" style="margin-left:.4rem">ご主人</span><span class="mk o ' + b.cls + '">' + b.mk + '</span>';
+  if (g) h += '<span class="gouryu">🤲 合流日</span>';
+  h += '</div>';
+  return h;
+}
 
 var D = null;
 
