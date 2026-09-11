@@ -805,3 +805,36 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
 .pt-tag-both { background: rgba(184,150,79,0.22); color: #7A5A10; border: 1px solid rgba(184,150,79,0.5); }
 .cal-cell .cal-pt { font-size: 0.5rem; margin-top: 1px; letter-spacing: 0; color: var(--color-water); }
 .cal-cell.pt-both-good { box-shadow: inset 0 0 0 1.5px rgba(184,150,79,0.55); }
+
+/* ── 夫婦カレンダー：二層セル（260912・パッと見て二人の吉凶が分かる形） ── */
+.cal-grid.duo .cal-cell {
+  min-height: 3.6rem; padding: 0.28rem 0.12rem 0.2rem; justify-content: flex-start; gap: 1px;
+}
+.cal-grid.duo .cal-cell .cal-day { font-size: 0.72rem; line-height: 1.2; }
+.duo-rows { display: flex; flex-direction: column; gap: 2px; width: 100%; margin-top: 2px; }
+.duo-row {
+  display: flex; align-items: center; justify-content: center; gap: 2px;
+  font-size: 0.48rem; line-height: 1.25; border-radius: 3px; padding: 1px 0;
+  background: rgba(0,0,0,0.03);
+}
+.duo-row .duo-who { font-size: 0.44rem; opacity: 0.75; letter-spacing: 0; }
+.duo-row .duo-mk { font-size: 0.58rem; font-weight: 700; letter-spacing: 0; }
+/* 公子さん段＝暖色 */
+.duo-row.k { background: rgba(185,98,47,0.10); color: #8A4A10; }
+.duo-row.k.good { background: rgba(185,98,47,0.26); }
+.duo-row.k.warn { background: rgba(185,98,47,0.14); color: #A03A10; }
+/* ご主人段＝寒色 */
+.duo-row.o { background: rgba(74,123,142,0.10); color: #2C5C72; }
+.duo-row.o.good { background: rgba(74,123,142,0.26); }
+.duo-row.o.warn { background: rgba(74,123,142,0.14); color: #1C4A72; }
+/* 二人そろって良い日はセル全体を金枠で */
+.cal-cell.duo-both { box-shadow: inset 0 0 0 2px rgba(184,150,79,0.7); background: rgba(184,150,79,0.10) !important; }
+.cal-cell.duo-both .cal-day { font-weight: 700; color: #7A5A10; }
+/* 凡例 */
+.duo-legend { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem 0.6rem; font-size: 0.62rem; color: var(--color-brown); margin-top: 0.6rem; padding: 0.6rem; background: var(--color-cream); border-radius: 6px; }
+.duo-legend .ll { display: flex; align-items: center; gap: 0.3rem; }
+.duo-legend .sw { display: inline-block; width: 0.9rem; height: 0.9rem; border-radius: 3px; flex-shrink: 0; }
+.duo-legend .sw.k { background: rgba(185,98,47,0.26); }
+.duo-legend .sw.o { background: rgba(74,123,142,0.26); }
+.duo-legend .sw.b { background: rgba(184,150,79,0.10); box-shadow: inset 0 0 0 2px rgba(184,150,79,0.7); }
+.duo-legend .full { grid-column: 1/3; color: var(--color-brown-dark); line-height: 1.6; }

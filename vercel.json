@@ -295,6 +295,10 @@
       "destination": "/kanteisho.html?c=kimiko"
     },
     {
+      "source": "/kimiko-otto-kanteisho",
+      "destination": "/clients/kimiko-otto-kanteisho.html"
+    },
+    {
       "source": "/toshiko",
       "destination": "/view.html?client=toshiko"
     },
