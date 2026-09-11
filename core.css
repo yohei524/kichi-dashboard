@@ -806,35 +806,37 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
 .cal-cell .cal-pt { font-size: 0.5rem; margin-top: 1px; letter-spacing: 0; color: var(--color-water); }
 .cal-cell.pt-both-good { box-shadow: inset 0 0 0 1.5px rgba(184,150,79,0.55); }
 
-/* ── 夫婦カレンダー：二層セル（260912・パッと見て二人の吉凶が分かる形） ── */
-.cal-grid.duo .cal-cell {
-  min-height: 3.6rem; padding: 0.28rem 0.12rem 0.2rem; justify-content: flex-start; gap: 1px;
-}
+/* ── 運気合流カレンダー：二層セル（260912改・名前なし／◎○△✕で吉凶を即読） ── */
+.cal-grid.duo .cal-cell { min-height: 3.5rem; padding: 0.25rem 0.1rem 0.2rem; justify-content: flex-start; gap: 1px; }
 .cal-grid.duo .cal-cell .cal-day { font-size: 0.72rem; line-height: 1.2; }
+.cal-grid.duo .cal-cell .cal-day .gou { font-size: 0.6rem; margin-left: 1px; }
 .duo-rows { display: flex; flex-direction: column; gap: 2px; width: 100%; margin-top: 2px; }
-.duo-row {
-  display: flex; align-items: center; justify-content: center; gap: 2px;
-  font-size: 0.48rem; line-height: 1.25; border-radius: 3px; padding: 1px 0;
-  background: rgba(0,0,0,0.03);
-}
-.duo-row .duo-who { font-size: 0.44rem; opacity: 0.75; letter-spacing: 0; }
-.duo-row .duo-mk { font-size: 0.58rem; font-weight: 700; letter-spacing: 0; }
-/* 公子さん段＝暖色 */
-.duo-row.k { background: rgba(185,98,47,0.10); color: #8A4A10; }
-.duo-row.k.good { background: rgba(185,98,47,0.26); }
-.duo-row.k.warn { background: rgba(185,98,47,0.14); color: #A03A10; }
-/* ご主人段＝寒色 */
-.duo-row.o { background: rgba(74,123,142,0.10); color: #2C5C72; }
-.duo-row.o.good { background: rgba(74,123,142,0.26); }
-.duo-row.o.warn { background: rgba(74,123,142,0.14); color: #1C4A72; }
-/* 二人そろって良い日はセル全体を金枠で */
-.cal-cell.duo-both { box-shadow: inset 0 0 0 2px rgba(184,150,79,0.7); background: rgba(184,150,79,0.10) !important; }
+.duo-row { display: flex; align-items: center; justify-content: center; font-size: 0.78rem; line-height: 1.15; border-radius: 3px; padding: 0 0; font-weight: 700; letter-spacing: 0; }
+/* 上段＝ご本人（暖色の下地）／下段＝ご主人（寒色の下地） */
+.duo-row.k { background: rgba(185,98,47,0.09); }
+.duo-row.o { background: rgba(74,123,142,0.09); }
+/* 印の色：◎吉 ○普通 △やや注意 ✕注意 */
+.duo-row.m-good  { color: #B5641F; }
+.duo-row.o.m-good{ color: #2C6A8A; }
+.duo-row.m-flat  { color: rgba(75,45,31,0.45); font-weight: 500; }
+.duo-row.m-care  { color: #A0782A; }
+.duo-row.m-warn  { color: #B03A2A; background: rgba(176,58,42,0.10); }
+/* 合流日＝お二人とも◎：セル全体を金枠 */
+.cal-cell.duo-both { box-shadow: inset 0 0 0 2px rgba(184,150,79,0.75); background: rgba(184,150,79,0.12) !important; }
 .cal-cell.duo-both .cal-day { font-weight: 700; color: #7A5A10; }
 /* 凡例 */
-.duo-legend { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem 0.6rem; font-size: 0.62rem; color: var(--color-brown); margin-top: 0.6rem; padding: 0.6rem; background: var(--color-cream); border-radius: 6px; }
-.duo-legend .ll { display: flex; align-items: center; gap: 0.3rem; }
-.duo-legend .sw { display: inline-block; width: 0.9rem; height: 0.9rem; border-radius: 3px; flex-shrink: 0; }
-.duo-legend .sw.k { background: rgba(185,98,47,0.26); }
-.duo-legend .sw.o { background: rgba(74,123,142,0.26); }
-.duo-legend .sw.b { background: rgba(184,150,79,0.10); box-shadow: inset 0 0 0 2px rgba(184,150,79,0.7); }
-.duo-legend .full { grid-column: 1/3; color: var(--color-brown-dark); line-height: 1.6; }
+.duo-legend { font-size: 0.66rem; color: var(--color-brown-dark); margin-top: 0.6rem; padding: 0.65rem 0.7rem; background: var(--color-cream); border-radius: 6px; line-height: 1.8; }
+.duo-legend .row { display: flex; gap: 0.35rem 0.9rem; flex-wrap: wrap; }
+.duo-legend .sw { display: inline-block; width: 0.85rem; height: 0.85rem; border-radius: 3px; vertical-align: -2px; margin-right: 0.2rem; }
+.duo-legend .sw.k { background: rgba(185,98,47,0.22); }
+.duo-legend .sw.o { background: rgba(74,123,142,0.22); }
+.duo-legend .sw.b { background: rgba(184,150,79,0.12); box-shadow: inset 0 0 0 2px rgba(184,150,79,0.75); }
+/* クリック詳細・今日どう動くか のご主人ブロック */
+.pt-detail { margin-top: 0.9rem; padding-top: 0.8rem; border-top: 1px dashed var(--color-beige); }
+.pt-detail .detail-label { color: var(--color-water); }
+.duo-summary { display: flex; gap: 0.5rem; align-items: center; font-size: 0.8rem; margin: 0.4rem 0 0.7rem; padding: 0.45rem 0.6rem; border-radius: 6px; background: var(--color-cream); }
+.duo-summary .who { font-size: 0.68rem; color: var(--color-brown); }
+.duo-summary .mk { font-weight: 700; font-size: 0.95rem; }
+.duo-summary .mk.m-good { color: #B5641F; } .duo-summary .mk.o.m-good { color: #2C6A8A; }
+.duo-summary .mk.m-warn { color: #B03A2A; } .duo-summary .mk.m-care { color: #A0782A; } .duo-summary .mk.m-flat { color: rgba(75,45,31,0.5); }
+.duo-summary .gouryu { margin-left: auto; font-size: 0.72rem; color: #7A5A10; font-weight: 600; }
