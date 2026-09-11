@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ご主人の鑑定書 ｜ 㐂占</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --night:#0B0F1A; --night2:#131A28; --sink:#171F30; --panel:#1B2334;
+  --line:#2A3346; --accent:#8FA8C4; --accent-soft:#5E7D9E; --accent-glow:rgba(143,168,196,.14);
+  --gold:#C9A24A; --text:#ECEAE4; --muted:#8A96AC; --muted2:#A9B3C6;
+  --water:#6E9BC4; --fire:#D08A5A; --wood:#7FA86B; --metal:#C4C9D2; --earth:#C9A24A;
+  --bad:#C97A6A; --good:#6E9BC4; --kimi:#C98A5A;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Serif JP',serif; color:var(--text); line-height:1.95; letter-spacing:.045em;
+  background:
+    radial-gradient(1200px 620px at 50% -12%, rgba(143,168,196,.10), transparent 60%),
+    linear-gradient(180deg,#0B0F1A 0%,#0D1220 45%,#080B14 100%);
+  background-attachment:fixed; min-height:100vh;
+}
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.05rem 4rem;}
+
+header{text-align:center;padding:3rem 1rem 1.4rem;}
+header .kicker{font-size:.68rem;letter-spacing:.32em;color:var(--accent);opacity:.9;margin-bottom:.9rem;}
+header h1{font-size:1.5rem;font-weight:500;letter-spacing:.08em;margin-bottom:.5rem;}
+header h1 .nm{color:var(--accent);}
+header .tagline{font-size:.8rem;color:var(--muted2);letter-spacing:.1em;line-height:1.7;}
+header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:.12em;}
+
+.profile{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem .8rem;
+}
+.profile div{font-size:.74rem;color:var(--muted);}
+.profile div b{display:block;font-size:.9rem;color:var(--text);font-weight:500;margin-top:.1rem;letter-spacing:.06em;}
+.profile div.full{grid-column:1/3;}
+
+.sec{margin-bottom:1.65rem;}
+.sec-head{
+  display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;
+  padding-bottom:.6rem;border-bottom:1px solid var(--line);
+}
+.sec-no{font-size:.72rem;color:var(--accent);letter-spacing:.18em;font-weight:600;}
+.sec-title{font-size:1.02rem;font-weight:500;letter-spacing:.08em;}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  padding:1.25rem 1.15rem;box-shadow:0 4px 24px rgba(0,0,0,.32);margin-bottom:1rem;
+}
+.card p{font-size:.87rem;margin-bottom:.9rem;color:var(--text);}
+.card p:last-child{margin-bottom:0;}
+.card .lead{color:var(--accent);font-size:.9rem;font-weight:500;}
+.hl{color:var(--accent);font-weight:500;}
+.hk{color:var(--kimi);font-weight:500;}
+.soft{color:var(--muted2);font-size:.8rem;}
+
+.meishiki{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.2rem 0 .3rem;}
+.pillar{background:var(--sink);border:1px solid var(--line);border-radius:12px;padding:.7rem .4rem;text-align:center;}
+.pillar .lbl{font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.55rem;}
+.pillar .yomi{font-size:.58rem;color:var(--muted);letter-spacing:.04em;line-height:1.3;}
+.pillar .kan{font-size:1.85rem;font-weight:600;color:var(--text);line-height:1.15;}
+.pillar .shi{font-size:1.85rem;font-weight:600;color:var(--accent);line-height:1.15;margin-top:.2rem;}
+.pillar .zou{font-size:.62rem;color:var(--muted2);margin-top:.55rem;letter-spacing:.04em;}
+.meishiki-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;}
+
+.jintai{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:19rem;margin:.4rem auto .2rem;}
+.jcell{background:var(--sink);border:1px solid var(--line);border-radius:11px;aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;}
+.jcell .pos{font-size:.58rem;color:var(--muted);letter-spacing:.05em;}
+.jcell .star{font-size:.92rem;font-weight:600;color:var(--text);letter-spacing:.03em;}
+.jcell.center{background:linear-gradient(160deg,rgba(143,168,196,.18),var(--sink));border-color:var(--accent-soft);}
+.jcell.center .star{color:var(--accent);}
+.jcell.jusei-cell{background:var(--night2);}
+.jcell .star.gold{color:var(--gold);}
+
+.gogyo{margin-top:.3rem;}
+.gbar{display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;}
+.gbar .gname{width:2.6rem;font-size:.76rem;color:var(--muted2);flex-shrink:0;}
+.gbar .gtrack{flex:1;height:9px;background:var(--sink);border-radius:5px;overflow:hidden;}
+.gbar .gfill{height:100%;border-radius:5px;}
+.gbar .gval{width:2.2rem;text-align:right;font-size:.72rem;color:var(--muted);flex-shrink:0;}
+.g-wood .gfill{background:var(--wood);}
+.g-fire .gfill{background:var(--fire);}
+.g-earth .gfill{background:var(--earth);}
+.g-metal .gfill{background:var(--metal);}
+.g-water .gfill{background:var(--water);}
+
+.daiun-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.daiun{width:100%;border-collapse:collapse;font-size:.78rem;min-width:19rem;}
+.daiun th{font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.05em;padding:.4rem .3rem;border-bottom:1px solid var(--line);text-align:center;}
+.daiun td{padding:.5rem .3rem;text-align:center;border-bottom:1px solid rgba(42,51,70,.5);color:var(--text);}
+.daiun td:first-child{color:var(--muted2);font-size:.72rem;white-space:nowrap;}
+.daiun .tc-cell{color:var(--bad);font-size:.68rem;}
+.daiun .now-row td{background:linear-gradient(90deg,rgba(143,168,196,.12),transparent);}
+.daiun .now-row td:first-child{color:var(--accent);font-weight:600;}
+.daiun .now-cell{color:var(--accent);font-size:.68rem;font-weight:600;}
+
+.tl{position:relative;padding-left:1.1rem;margin-top:.3rem;}
+.tl::before{content:"";position:absolute;left:3px;top:.4rem;bottom:.4rem;width:2px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:1rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before{content:"";position:absolute;left:-1.1rem;top:.45rem;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--night2);}
+.tl-item.tc::before{background:var(--bad);}
+.tl-when{font-size:.76rem;color:var(--accent);font-weight:600;letter-spacing:.06em;}
+.tl-item.tc .tl-when{color:var(--bad);}
+.tl-body{font-size:.82rem;color:var(--text);margin-top:.15rem;}
+
+.dodont{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.dobox,.dontbox{border-radius:12px;padding:.85rem .8rem;border:1px solid var(--line);}
+.dobox{background:rgba(110,155,196,.08);}
+.dontbox{background:rgba(201,122,106,.08);}
+.dobox .h,.dontbox .h{font-size:.78rem;font-weight:600;margin-bottom:.5rem;letter-spacing:.06em;}
+.dobox .h{color:var(--good);}
+.dontbox .h{color:var(--bad);}
+.dodont ul{list-style:none;}
+.dodont li{font-size:.75rem;color:var(--text);padding-left:.9rem;position:relative;margin-bottom:.45rem;line-height:1.6;}
+.dodont li:last-child{margin-bottom:0;}
+.dobox li::before{content:"○";position:absolute;left:0;color:var(--good);font-size:.7rem;}
+.dontbox li::before{content:"×";position:absolute;left:0;color:var(--bad);font-size:.7rem;}
+@media(max-width:400px){.dodont{grid-template-columns:1fr;}}
+
+.recipe{counter-reset:r;}
+.recipe .item{display:flex;gap:.75rem;margin-bottom:1rem;}
+.recipe .item:last-child{margin-bottom:0;}
+.recipe .num{flex-shrink:0;width:1.7rem;height:1.7rem;border-radius:50%;background:linear-gradient(160deg,var(--accent),var(--accent-soft));color:var(--night);font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;}
+.recipe .rbody{font-size:.83rem;}
+.recipe .rbody b{color:var(--accent);font-weight:600;}
+
+.pull{border-left:3px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:1rem 0;font-size:.9rem;color:var(--muted2);}
+
+/* 攻略パート用 */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:.3rem 0 .2rem;}
+.tbox{border-radius:12px;padding:.85rem .8rem;border:1px solid var(--line);background:var(--sink);}
+.tbox .th{font-size:.72rem;font-weight:600;margin-bottom:.45rem;letter-spacing:.05em;}
+.tbox.ng .th{color:var(--bad);}
+.tbox.ok .th{color:var(--good);}
+.tbox p{font-size:.75rem;line-height:1.7;margin:0;color:var(--text);}
+@media(max-width:400px){.two{grid-template-columns:1fr;}}
+.hook{background:linear-gradient(160deg,rgba(201,138,90,.14),var(--sink));border:1px solid rgba(201,138,90,.45);border-radius:14px;padding:1rem .95rem;margin:.9rem 0;}
+.hook .hh{font-size:.8rem;color:var(--kimi);font-weight:600;margin-bottom:.5rem;letter-spacing:.06em;}
+.hook p{font-size:.82rem;margin-bottom:.6rem;}
+.hook p:last-child{margin-bottom:0;}
+.daybox{background:var(--night2);border:1px solid var(--line);border-radius:12px;padding:.9rem;margin-top:.6rem;}
+.dayrow{display:flex;gap:.6rem;align-items:baseline;margin-bottom:.5rem;font-size:.8rem;}
+.dayrow:last-child{margin-bottom:0;}
+.dayrow .dl{flex-shrink:0;width:4.6rem;font-size:.72rem;color:var(--muted);}
+.dayrow .dv{color:var(--text);}
+.dayrow .dv b{color:var(--accent);}
+.dayrow .dv b.k{color:var(--kimi);}
+.dayrow .dv b.g{color:var(--gold);}
+
+.closing{background:linear-gradient(180deg,var(--panel),var(--sink));border:1px solid var(--accent-soft);border-radius:18px;padding:1.6rem 1.25rem;text-align:center;box-shadow:0 0 30px rgba(143,168,196,.08);}
+.closing p{font-size:.88rem;margin-bottom:.9rem;}
+.closing p:last-child{margin-bottom:0;}
+.closing .big{font-size:1.05rem;color:var(--accent);font-weight:500;letter-spacing:.06em;}
+
+.koyomi-link{display:block;text-align:center;margin-top:1.5rem;padding:1rem;background:var(--night2);border:1px solid var(--line);border-radius:14px;color:var(--text);text-decoration:none;font-size:.86rem;transition:border-color .3s;}
+.koyomi-link:hover{border-color:var(--accent-soft);}
+.koyomi-link .arrow{color:var(--accent);}
+.koyomi-link small{display:block;color:var(--muted);font-size:.7rem;margin-top:.3rem;}
+
+footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
+footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">㐂占 　 命 術 本鑑定書</p>
+  <h1><span class="nm">ご主人</span> の鑑定書</h1>
+  <p class="tagline">聖水に洗われる玉。絶え間なく磨かれ続けている人</p>
+  <p class="date">1962年（昭和37年）1月13日 生　／　鑑定 2026.09.09</p>
+</header>
+
+<div class="profile">
+  <div class="full">魂の本質（日の宿命）<b>辛亥（かのとい）― 聖水に洗われる玉</b></div>
+  <div>中心の星<b>鳳閣星</b></div>
+  <div>天中殺<b>寅卯（東方）</b></div>
+  <div>今の運気（64歳）<b>天恍星　7点</b></div>
+  <div>今の大運<b>甲午・司禄星（62〜71歳）</b></div>
+  <div class="full">運気の位置<b>腕は全盛期のまま、体だけが「無理のきかん側」に切り替わった十年</b></div>
+</div>
+
+<div class="card" style="border-color:var(--accent-soft);">
+  <p>公子さん、おおきにです☺️</p>
+  <p>9月9日にお話しした、ご主人の鑑定をここにまとめてあります。当日話しきれんかったことも足してます。</p>
+  <p>後半は、<span class="hl">「ご主人に動いてもらうには、どうしたらええか」</span>という攻略のページです。言うことを聞いてもらうための手練手管やのうて、<b>ご主人という人が、どういう時に動く作りになっているか</b>の説明書やと思ってください。</p>
+</div>
+
+<!-- 命式盤 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">命 式</span><span class="sec-title">ご主人の設計図</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.6rem;">陰占 ― 生まれ持った気の柱</p>
+    <div class="meishiki">
+      <div class="pillar">
+        <div class="lbl">日柱（自分・家庭）</div>
+        <div class="yomi">かのと</div><div class="kan">辛</div>
+        <div class="shi">亥</div><div class="yomi">い</div>
+        <div class="zou">蔵干　壬</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">月柱（仕事・家系）</div>
+        <div class="yomi">かのと</div><div class="kan">辛</div>
+        <div class="shi">丑</div><div class="yomi">うし</div>
+        <div class="zou">蔵干　己・癸・辛</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">年柱（社会・先祖）</div>
+        <div class="yomi">かのと</div><div class="kan">辛</div>
+        <div class="shi">丑</div><div class="yomi">うし</div>
+        <div class="zou">蔵干　己・癸・辛</div>
+      </div>
+    </div>
+    <p class="meishiki-note">日柱 辛亥 ／ 月柱 辛丑 ／ 年柱 辛丑　―― 上の段が、辛・辛・辛</p>
+
+    <div style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p class="soft" style="margin-bottom:.2rem;">陽占 ― 心のかたち（人体星図）</p>
+    <div class="jintai">
+      <div class="jcell jusei-cell"><span class="pos">伴星（先祖）</span><span class="star">牽牛星</span></div>
+      <div class="jcell"><span class="pos">目上（北）</span><span class="star">貫索星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">初年運</span><span class="star gold">天印星</span></div>
+      <div class="jcell"><span class="pos">配偶者（西）</span><span class="star">司禄星</span></div>
+      <div class="jcell center"><span class="pos">中心・本人</span><span class="star">鳳閣星</span></div>
+      <div class="jcell"><span class="pos">社会（東）</span><span class="star">鳳閣星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">晩年運（今ここ）</span><span class="star gold">天恍星</span></div>
+      <div class="jcell"><span class="pos">目下（南）</span><span class="star">貫索星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">中年運</span><span class="star gold">天印星</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.7rem;">鳳閣星が中心と社会に二つ。貫索星が目上と目下に二つ。同じ星が二つ揃うと質が変わって強くなります。それが二組。公子さんと同じ「二組持ち」です。</p>
+
+    <div style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p class="soft" style="margin-bottom:.7rem;">五行のバランス（総エネルギー 241）</p>
+    <div class="gogyo">
+      <div class="gbar g-wood"><span class="gname">木</span><span class="gtrack"><span class="gfill" style="width:12%"></span></span><span class="gval">29</span></div>
+      <div class="gbar g-fire"><span class="gname">火</span><span class="gtrack"><span class="gfill" style="width:0%"></span></span><span class="gval">0</span></div>
+      <div class="gbar g-earth"><span class="gname">土</span><span class="gtrack"><span class="gfill" style="width:11%"></span></span><span class="gval">26</span></div>
+      <div class="gbar g-metal"><span class="gname">金</span><span class="gtrack"><span class="gfill" style="width:39%"></span></span><span class="gval">95</span></div>
+      <div class="gbar g-water"><span class="gname">水</span><span class="gtrack"><span class="gfill" style="width:38%"></span></span><span class="gval">91</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.6rem;">金が突出。火がゼロ。この二つが、ご主人を読む鍵になります。</p>
+  </div>
+</div>
+
+<!-- 1 本質 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">壱</span><span class="sec-title">どういう人か ― 聖水に洗われる玉</span></div>
+  <div class="card">
+    <p class="lead">「感じ取ってしまう人。そして、それを言わない人」</p>
+    <p>ご主人の日の宿命「辛亥」は、昔の言葉で<span class="hl">「聖水に洗われる玉」</span>。きれいな水で、絶え間なく磨かれ続けている宝石です。辛というのは、磨き上げた金属。宝石とか、精密な刃物の金属のことです。</p>
+    <p>それが、上の段に<b>三本まっすぐ並んでいます</b>。こういう命式は、めったに見ません。同じ質が三本、命式の全部を貫いているということです。</p>
+    <div class="pull">辛の質は「感覚」です。人の気持ち、場の空気、隠れている危うさ。<br>そういうものを、理屈より先にパッと感じ取る直観。</div>
+    <p>本質のところには、こう出ています。<span class="hl">「スタイリッシュで不思議に目立つ。負けず嫌いだがナイーブで身内を大事にする。霊感に近いくらい感覚が鋭く、そのセンスでナンバー2、参謀役で輝く」</span>。</p>
+    <p>数字や理屈ではなく、直観です。現場の空気、人の本音、危ういもの。説明される前に感じ取ってしまう。その感覚で、自分が先頭で旗を振るより、全体を見て、間に立って支える。<b>そこでいちばん輝く干支</b>です。市役所と協力会社の間に立って、設計して、現場を確認する ―― ご主人のお仕事そのものです。</p>
+    <p>性格のところは、<span class="hl">「義理人情に厚い親分肌。強そうに見えて寂しがり。駆け引きは苦手だが政治力は高め。早合点のあわて者」</span>。</p>
+    <p>「強そうに見えて寂しがり」。外では頼られる人やけど、家に帰ったら「何か食べる物ある？」と言う人です。</p>
+    <div class="card" style="background:var(--sink);border-color:var(--accent-soft);margin:1rem 0;">
+      <p class="lead" style="margin-bottom:.6rem;">大事な注意書き ―― 体の傷のこと</p>
+      <p style="margin-bottom:0;">この辛亥という干支には、感受性がずば抜けて優れているという質と同時に、<span class="hl">「体にできた傷が痕になりやすい。怪我や手術の判断は慎重に」</span>と書かれています。生まれつき、体の傷が残りやすい質を持っておられます。今回の鑑定が体と事故の話を中心にしたのは、公子さんが心配してはるからだけやのうて、<b>ご主人の命式自体が、最初からそれを言うている</b>からです。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 2 家の顔と外の顔 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">弐</span><span class="sec-title">家の顔と、外の顔は別もの</span></div>
+  <div class="card">
+    <p>命式には、「家庭で見せる顔」と「外で見せる顔」が、別々に置かれています。</p>
+    <p>ご主人の場合、<b>家庭の場所にあるのは司禄星</b>。「堅実で質素。子供のために、老後のために備える。真面目一本」。公子さんが毎日見てはるご主人は、たぶんこちらです。</p>
+    <p>でも、<b>外の顔と、真ん中の核は鳳閣星</b>。自然体の星です。「明朗。遊び。食。ストレスを溜めない。裏表がない。苦しい状況でも工夫して楽しめる」。</p>
+    <div class="pull">事故の翌日に、部下と鳥取で飲み直せる。<br>あれが、ご主人の核のほうの顔です。</div>
+    <p>公子さんが「仕事では上司にも周りにも可愛がられていた」「部下のことも可愛がってると思う」と言うてはったの、そのままです。社長さんにゴルフの運転を頼まれる、というのも同じ。<span class="hl">外では、人に好かれる人</span>なんです。</p>
+    <p>一方で、プライベートの友達はほとんどおられない。年賀状も「いらない」。これは冷たいのではなく、<b>目上と目下に二つある貫索星</b>の質です。「頑固・マイペース・<span class="hl">狭く深い交友</span>・単独行動」。人間関係を広げない代わりに、決めた場所の人は大事にする。部下と飲みに行くのは、その「決めた場所」の中の話です。</p>
+    <p>目下の貫索星には、こうも書かれています。<span class="hl">「部下や後輩、子供には本音を見せることがある」</span>。お子さん二人ともお父さんに懐いてはるのは、ここです。<b>ご主人が本音を見せられる相手が、下の世代なんです。</b>これは後半の攻略のところで、いちばん大事な鍵になります。</p>
+  </div>
+</div>
+
+<!-- 3 大丈夫の正体 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">参</span><span class="sec-title">「大丈夫」の正体 ― 火がゼロということ</span></div>
+  <div class="card">
+    <p>五行を見ると、金が95で突出しています。判断・分析・見抜く力。ここが人の何倍もあります。</p>
+    <p>そして、<b>火がゼロ</b>です。火は、表現・発信・外に出す力。</p>
+    <p>おもしろいのは、ご主人の中心の星である鳳閣星は<span class="hl">火の星</span>だということ。明るくて自然体な人やのに、五行では火がいちばん少ない。</p>
+    <div class="pull">外に見せている明るさの、燃料が細いんです。<br>外は明るい。中の燃料は少ない。</div>
+    <p>だからご主人は、<b>疲れが表に出にくい</b>。明るいまま、中で消耗していきます。倒れる時は、周りから見たら突然に見えるやつです。</p>
+    <div class="card" style="background:var(--sink);border-color:var(--bad);margin:1rem 0;">
+      <p class="lead" style="color:var(--bad);margin-bottom:.6rem;">「大丈夫、大丈夫」と言う時は、もうだいぶ来てます</p>
+      <p style="margin-bottom:0;">公子さんが言うてはった<span class="hl">「"大丈夫"が口癖。説明するのも嫌い。でも全然大丈夫じゃないことが何度もある」</span> ―― あれは、この構造そのものです。性格の問題やのうて、<b>疲れが表に出ない作りで生まれてきてはる</b>。やから、ご主人の「大丈夫」は、状態の報告やなくて口癖やと思って聞いてください。判断はこちらでしてあげる必要があります。</p>
+    </div>
+    <p>それと、「興味が持てないことにはノータッチ。根気はない」。これも鳳閣星の注意書きです。体のこと、健康管理、目に見えない世界の話 ―― 興味の外にあるものは、ほんまにノータッチになる質です。<b>公子さんが食べ物や体のことを言うても響かへんのは、性格やのうてこの星の作り</b>です。</p>
+  </div>
+</div>
+
+<!-- 4 今の運気 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">肆</span><span class="sec-title">今の運気 ― 腕は全盛期、体は切り替わった</span></div>
+
+  <div class="card">
+    <p class="soft" style="margin-bottom:.7rem;">大運 ― 十年ごとに巡る運気のテーマ（2歳運）</p>
+    <div class="daiun-scroll">
+      <table class="daiun">
+        <thead><tr><th>年齢</th><th>干支</th><th>主星</th><th>従星</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr><td>32〜41歳</td><td>丁酉</td><td>車騎星</td><td>天禄星</td><td></td></tr>
+          <tr><td>42〜51歳</td><td>丙申</td><td>牽牛星</td><td>天将星</td><td>いちばん力の出た十年</td></tr>
+          <tr><td>52〜61歳</td><td>乙未</td><td>禄存星</td><td>天堂星</td><td class="tc-cell">天剋地冲　壊れて作り直す</td></tr>
+          <tr class="now-row"><td>62〜71歳</td><td>甲午</td><td>司禄星</td><td>天胡星</td><td class="now-cell">今ここ　害が重なる</td></tr>
+          <tr><td>72〜81歳</td><td>癸巳</td><td>鳳閣星</td><td>天極星</td><td>静かな十年</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="meishiki-note" style="margin-top:.7rem;">※ 64歳の今の実運は、晩年運の<b>天恍星（7点）</b>です。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">52〜61歳 ―― 壊れて、作り直した十年</p>
+    <p>一つ前の大運に、<span class="hl">天剋地冲</span>という、いちばん強い配置が二重に出ていました。意味は「完全な破壊と再生」。公子さんが言うてはった、リストラ、会社が銀行に返せなくなって倒産した話、定年前後の環境の変化 ―― 全部この十年に当たります。</p>
+    <p>そしてご主人は、<b>「業績が悪かったからやない」形で職を失ってきはった</b>。これは寅卯天中殺の「既存の事業に入って発展させる」「引き継ぎ・継承の使命」とぴったり重なります。ゼロから立ち上げる人やないから、会社が潰れても、腕があるから毎回拾われてきた。<span class="hl">壊れることと、必要とされることが、セットで来る人生</span>です。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">62〜71歳 ―― 今の十年に何が書いてあるか</p>
+    <p>今の大運（甲午）には、二つ大事なことが出ています。</p>
+    <p>一つ目。年柱とも月柱とも<span class="hl">「害」</span>という配置になっています。害は、正面からドカンとぶつかる配置やないんです。足元に小さい引っかかりが増える配置。段差、うっかり、すれ違い、<b>もらい事故</b>。自分は何も間違えてへんのに、横から来るやつです。</p>
+    <p>9月1日、運転してはったのはご主人やなかったですよね。まさにこれです。</p>
+    <p>二つ目。この大運の従星が<span class="hl">天胡星</span>。体を担当する星としては、いちばん弱いクラスです。元気が無くなるという意味やのうて、<b>「体の無理が、そのまま体に残る十年」</b>ということ。若い頃なら一晩寝たら消えた疲れが残る。ちょっとの怪我が長引く。辛亥の「傷が痕になりやすい」と、二重になっています。</p>
+    <div class="pull">ご主人は今、腕は全盛期のまま、<br>体だけが「もう無理はきかん側」に切り替わった時期にいてはります。</div>
+    <p>本人の感覚では、まだ全部できるんです。直観も技術も衰えてへんから。<b>でも体のほうの設定が変わっている。</b>そこに「人を疑わない」性質（中年運の天印星）が乗って、部下の運転にも現場の段取りにもすっと乗ってしまう。</p>
+    <p>9月1日は、その構造が、いちばん出やすい日に出た。それだけです。<span class="hl">ご主人が悪いんでも、部下の方が悪いんでもない。構造と、日付の問題</span>です。</p>
+    <p>やから答えは、仕事を辞めることやないです。<b>日付を、こちらで選ぶこと</b>です。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">64歳の今 ―― 天恍星の時代</p>
+    <p>人体星図の従星は、それぞれ担当する年代があります。初年運と中年運の天印星は、若い頃から40代くらいまでの話。<b>64歳の今の実運は、晩年運の天恍星（7点）</b>です。</p>
+    <p>天恍星は、思春期の星。<span class="hl">「常に何かを求めて迷う・現状を変えるエネルギー・親元を離れる・精神的に不安定になりがち・苦労を越えて華やかな人生」</span>。</p>
+    <p>定年を迎えたのに、現場に駆り出されている。部下に引き継がないと辞められない。この落ち着かなさは、今の運気そのものです。<b>「このままでええんやろか」という揺れを、ご主人は今、内側に持ってはります。</b>口には出さはらへんと思いますけど。</p>
+    <p>ここが大事なところで ―― <span class="hl">天恍星は「現状を変えるエネルギー」の星</span>です。外から押されて変わるのは嫌がるけど、<b>自分の中には、変わりたい力がちゃんとある</b>。後半の攻略は、この力に火をつける話です。</p>
+  </div>
+</div>
+
+<!-- 5 これから -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">伍</span><span class="sec-title">これから三年 ― 渡す側に回る</span></div>
+  <div class="card">
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-when">2026年（今年・64歳）</div>
+        <div class="tl-body">大運の害と年運の害が二重。体の星も二重に弱い、この十年でいちばんの注意年です。ただし ―― <b>9月1日に、車が大破して全員無事で通過してはります。</b>いちばんの山は、最悪やない形でもう越えました。残りは日を選んで、丁寧に過ごすだけです。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年（65歳）★ お孫さんの年</div>
+        <div class="tl-body">年柱・月柱に<span class="hl">天剋地冲</span>。今度は体やのうて<b>「形」が動く年</b>です。働き方、契約、役割。仕事の形が大きく変わる流れが来やすい年。そして2月に、お孫さんが生まれます。<b>この二つが同じ年に来るのは、偶然やないと思ってます。</b><br>※2月と3月はご主人の月天中殺。新しい契約ごとは4月以降に。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2028年（66歳）</div>
+        <div class="tl-body">従星が<b>天将星</b>。十二の中でいちばん強い星です。体の力が戻ってくる年。2027年に形を整えたら、2028年は新しい役割で力を出す年になります。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">72歳から</div>
+        <div class="tl-body">害も天剋地冲もない、静かな十年に入ります。<b>そこまでこの体を無傷で運ぶ</b>。それが今の十年の仕事です。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="lead">出口は、もう見えています</p>
+    <p>寅卯天中殺の本質は<span class="hl">「引き継ぎ・継承の使命」</span>。そして月柱と年柱が同じ辛丑で重なる<b>律音</b>という配置 ―― 「家系・親の世代から受け継ぐ」。二重に、同じ方向を指しています。</p>
+    <p>継承は、受け取る側だけの話やないです。<b>渡す側の仕事でもあります。</b></p>
+    <p>今、若い部下を連れて現場に行ってはる。公子さんが「その子に引き継がないと自分が辞められない」と言うてはった、あれです。<span class="hl">命式で見たら、"渡す側の仕事"はもう始まっています。</span></p>
+    <p>八門法は朱雀型（伝える・教える型）。守護神は丙（太陽）で、足りない火を外から取りに行くのが正解。才能の型は北天運で、現場で体を張るより頭で全体を組むほうが本領。<b>三つとも矢印は同じ方向</b>です。</p>
+    <div class="pull">体で現場に立つ、より、<br>頭と口で、次の世代に渡す。</div>
+    <p>「引き継がないと辞められない」は、しんどい足かせに見えます。でも命式から見たら、<b>ご主人の使命そのもの</b>です。そして引き継ぎが終わった時が、辞める時です。<span class="hl">2027年は、その形を組み直すのにいちばん合っている年</span>です。</p>
+  </div>
+</div>
+
+<!-- 6 攻略 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">陸</span><span class="sec-title">攻略編 ― ご主人が動く条件</span></div>
+
+  <div class="card">
+    <p>ここからは、公子さんが使うための実用の話です。</p>
+    <p>まず前提として。お二人の命式を並べて見ると、<b>ぶつかる配置が一つもありません</b>。対冲も、害も、刑も、破もゼロ。代わりに<span class="hl">半会が四つ、大半会が二つ</span>。これだけ合法が多くて散法がゼロという組み合わせは、そうそうないです。</p>
+    <div class="pull">「話が合わへん」と感じてはるのは、<br>ぶつかってるからやのうて、<b>噛み合う場所が違う</b>だけです。</div>
+    <p>公子さんが書いてくれはった<span class="hk">「相容れない感性のまま、やっつけ合わないで、上手くやれる距離感を探りながら」</span> ―― あれが、お二人の命式にとっていちばん正しい形です。分かり合おうとせんでいい。この距離のまま、うまく回せばいい。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">動く条件は、三つだけ</p>
+    <div class="two">
+      <div class="tbox ng"><div class="th">動かない言い方</div><p>「体に気をつけて」<br>「そろそろ辞めたら」<br>「野菜食べて」<br>―― 正論・心配・健康の話。<b>興味の外は入らない</b>（鳳閣星）</p></div>
+      <div class="tbox ok"><div class="th">動く言い方</div><p>「楽しそう」「面白そう」<br>「孫が」「息子が」<br>「自分で決めた」<br>―― 情・下の世代・自分の話</p></div>
+    </div>
+    <p style="margin-top:.9rem;margin-bottom:.5rem;">理由は三つです。</p>
+    <p><b>①鳳閣星</b>＝理屈では動かない。「楽しい」「面白い」でしか動かない星。正しさで押すと、そこがいちばん響かない場所です。</p>
+    <p><b>②天恍星（今の運気）</b>＝現状を変えたい力を、内側に持ってはる。ただし<span class="hl">外から押されるより、自分で見つけたい</span>人。公子さんが決めた形を持っていくと固まります。<b>ご主人が自分で思いついた形にする</b>のが要です。</p>
+    <p><b>③貫索星（目下）</b>＝子・孫・部下には本音を見せる。<span class="hl">下の世代からの働きかけだけが通る回路</span>です。公子さんが正面から言うより、お子さんやお孫さんの話として置くほうが、はるかに入ります。</p>
+    <p>それと、これは覚えておいてください。お二人は<b>互いに剋し合う関係</b>です。公子さんが押せば、ご主人も押し返します。押した側も同じだけ消耗する。だから<span class="hl">正面から押さずに、回り込む</span>。それが今回の攻略の全部です。</p>
+  </div>
+
+  <div class="hook">
+    <div class="hh">フック１　2027年2月、お孫さん</div>
+    <p>ご主人にとって、これ以上ないフックです。<b>三つの条件を全部満たしています。</b></p>
+    <p>孫は「楽しい」（鳳閣星）。下の世代（貫索星）。そして中年運の天印星 ―― <span class="hk">「人を疑わない」「憎めない」「情で動く」</span>質。<b>まず間違いなく、夢中になります。</b></p>
+    <p>やから「体に気をつけて」ではなく、<span class="hk">「孫と長く遊びたいやろ」</span>。「辞めたら」ではなく、<span class="hk">「孫が大きくなるまで元気でおってほしい」</span>。同じことを言うてるんですけど、入り口が全然違います。</p>
+    <p>しかも2027年は、<b>仕事の形が動く年</b>と重なっています。孫が生まれる年に、働き方を考え直す ―― ご主人の中で、この二つは自然に繋がるはずです。</p>
+  </div>
+
+  <div class="hook">
+    <div class="hh">フック２　淡路の家は、ご主人の家</div>
+    <p>公子さんが「主人名義の淡路の家」と書いてくれはって、設計が一つ増えました。</p>
+    <p>淡路は、公子さんが行きたい場所であると同時に、<b>ご主人自身の家であり、ご主人のご両親の場所であり、息子さんに繋ぐ話</b>です。</p>
+    <p>これは寅卯天中殺の<span class="hk">「引き継ぎ・継承」「父親との縁が深い」</span>と、まっすぐ重なります。<b>ご主人にとっての当事者の話</b>なんです。</p>
+    <p>やから「淡路に引っ越したい」ではなく、<span class="hk">「あの家、どうする？　お父さんお母さんのことも、息子に渡すことも、そろそろ考えなあかんね」</span>。ご主人が自分の問題として考え始めたら、そこからは早いです。<b>守護神の庚は「決める力」</b>。決めた瞬間に回り出す人です。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">言い方の置き換え表</p>
+    <div class="dodont">
+      <div class="dobox">
+        <div class="h">通る形</div>
+        <ul>
+          <li>孫・子供の話として出す</li>
+          <li>「楽しそう」「面白そう」から入る</li>
+          <li>ご主人の家・親・息子の話にする</li>
+          <li>結論を言わず、問いだけ置いて待つ</li>
+          <li>下の世代（お子さん）から言ってもらう</li>
+          <li>その日の体調は、こちらで判断する</li>
+        </ul>
+      </div>
+      <div class="dontbox">
+        <div class="h">固まる形</div>
+        <ul>
+          <li>健康・体の正論で押す</li>
+          <li>公子さんが決めた形を持っていく</li>
+          <li>期限を切って返事を迫る</li>
+          <li>「私のために」で頼む</li>
+          <li>同じことを繰り返し言う</li>
+          <li>「大丈夫」を額面通りに受け取る</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:.9rem;margin-bottom:0;">それと、鑑定の時にお伝えした通りです。<span class="hl">真剣に、深刻にやると消耗します。</span>「今日はどう言うたら響くかな」くらいの、ゲームみたいな気持ちで。公子さんの中心は禄存星で、尽くしすぎる質があります。<b>反応がなくても、こちらが減らない距離</b>でやってください。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">日を選ぶ ― いつ話すか</p>
+    <p>何を言うかと同じくらい、<b>いつ言うか</b>が効きます。</p>
+    <div class="daybox">
+      <div class="dayrow"><span class="dl">ご主人 注意</span><span class="dv"><b>寅の日・卯の日</b>（判断がぶれやすい）／<b>巳の日</b>（月に一度・正面からぶつかる）</span></div>
+      <div class="dayrow"><span class="dl">公子さん 注意</span><span class="dv"><b class="k">酉の日</b>（月に一度・正面からぶつかる）</span></div>
+      <div class="dayrow"><span class="dl">★ 合流日</span><span class="dv"><b class="g">未の日</b>　十二日に一度。お二人そろってええ日</span></div>
+    </div>
+    <p style="margin-top:.9rem;">合流日の理由は、ご主人の日柱の<b>亥</b>と、公子さんの日柱の<b>卯</b>。そこに<b>未</b>が揃うと、<span class="hl">三合</span>といういちばん大きい調和の形になります。お二人の日柱を足して初めて完成する形やから、<b>未の日は、お二人同時にええ日</b>になるんです。</p>
+    <p>大事な話は、この日に置いてください。淡路の話も、働き方の話も、孫のことも。<span class="hl">同じ言葉でも、通り方が変わります。</span></p>
+    <p style="margin-bottom:0;">逆に、ご主人の巳の日と、寅卯の日は、決めごとを持っていかないこと。その日は「決めない日」と思ってください。<b>日付は公子さんの暦のページで、毎日確認できます。</b></p>
+  </div>
+</div>
+
+<!-- 7 処方 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">漆</span><span class="sec-title">今日から動ける処方</span></div>
+  <div class="card recipe">
+    <div class="item"><div class="num">1</div><div class="rbody"><b>9月28日と10月10日を、カレンダーに印。</b><br>ご主人の日柱と正面からぶつかる日です。車の運転、遠出、高い所、無理な工程。ずらせるならずらす。ずらせなければ「今日は丁寧にいく日」と思ってもらうだけで十分です。<span class="hl">この先も月に一度、巳の日に回ってきます。</span></div></div>
+    <div class="item"><div class="num">2</div><div class="rbody"><b>10月12日に、法要の話をする。</b><br>お二人そろってええ日です。10月18日のご法要の前の、いちばん通る日。段取りも、当日どう動くかも、この日に。</div></div>
+    <div class="item"><div class="num">3</div><div class="rbody"><b>「大丈夫」は聞き流さない。</b><br>ご主人の「大丈夫」は口癖であって、状態の報告やないです。疲れが顔に出ている時は、<b>もうだいぶ来てます</b>。判断はこちらでしてあげてください。ただし正面から言うと固まるので、<span class="hl">予定のほうを減らす</span>形で。</div></div>
+    <div class="item"><div class="num">4</div><div class="rbody"><b>淡路の話は「ご主人の家の話」として出す。</b><br>ご主人名義、ご主人のご両親、息子さんに渡す話。<span class="hl">当事者の問題として置けば、ご主人自身が考え始めます。</span>公子さんの希望として出すと、そこで止まります。結論は言わず、問いだけ置いて待ってください。</div></div>
+    <div class="item"><div class="num">5</div><div class="rbody"><b>2027年2月、お孫さんが生まれたら、全部そこに繋ぐ。</b><br>体のことも、働き方のことも、淡路のことも。<span class="hl">「孫と長く過ごすため」</span>という入口だけで、ご主人の中では全部繋がります。命式的に、これ以上のフックはありません。</div></div>
+    <div class="item"><div class="num">6</div><div class="rbody"><b>2027年に、働き方を組み直す。</b><br>仕事の形が動く年です。「引き継がないと辞められない」は、命式では<b>使命</b>です。引き継ぎが終わった時が、辞める時。焦らず、その順番で。<span class="hl">2月と3月は月天中殺なので、契約ごとは4月以降に。</span></div></div>
+    <div class="item"><div class="num">7</div><div class="rbody"><b>お子さんの口から言ってもらう。</b><br>ご主人が本音を見せるのは、下の世代です。公子さんが三回言うより、お子さんが一回言うほうが通ることがあります。<b>これはずるいことやないです。</b>そういう作りの人なんです。</div></div>
+    <div class="item"><div class="num">8</div><div class="rbody"><b>ご主人には「言わない」ままで大丈夫。</b><br>この鑑定のことも、日の話も、伝えんでええです。占いを信じない人に説明しても、鳳閣星の「興味の外」に入るだけ。<span class="hl">公子さんが知っていて、静かに使う。</span>それがいちばん効きます。</div></div>
+  </div>
+</div>
+
+<!-- 締め -->
+<div class="closing">
+  <p>ご主人は、<span class="hl">聖水に洗われる玉</span>です。<br>絶え間なく磨かれ続けて、<br>感覚だけは、今も全盛期のまま。</p>
+  <p>体だけが、無理のきかん側に切り替わった。<br>それに本人が気づいてへん。<br><b>それだけの話です。</b></p>
+  <p>9月1日のことは、誰のせいでもありません。<br>構造と、日付の問題でした。<br><span class="hl">そして、いちばん強い日に、全員無事で通過してはります。</span></p>
+  <p class="big">知ってたら、防げます。</p>
+  <p>公子さんが「主人のことは見ないようにしてきた」と<br>言うてはったのが、あの事故で変わりました。<br>今、ご主人の地図は、公子さんの手元にあります。</p>
+  <p>分かり合わんでいいです。<br>やっつけ合わんでいい。<br><b>十二日に一度、同じ方向を向く日が来ます。</b><br>そこに、大事な話を置いていきましょう。</p>
+  <p>お孫さんが生まれる日を、<br>お二人そろって、元気で迎えてください☺️</p>
+</div>
+
+<a class="koyomi-link" href="/kimiko">
+  <span class="arrow">▶</span> 運気暦（日々の運気カレンダー）をひらく
+  <small>ご主人の運気も一緒に出ます。◆は要注意、◎はお二人そろってええ日です。</small>
+</a>
+
+<footer>
+  <p>いつもおおきにです😊　気になったところは、いつでもLINEで掘ってください💬</p>
+  <p class="sig">㐂</p>
+</footer>
+
+</div>
+</body>
+</html>

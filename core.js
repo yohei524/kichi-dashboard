@@ -736,10 +736,11 @@ function initCalMonths() {
 }
 
 function buildMonthGridHTML(year, month, todayM, todayD, todayY) {
+  var duo = !!(D && D.partner && D.partner.my);
   var firstDay = new Date(year, month - 1, 1).getDay();
   var startOffset = (firstDay === 0) ? 6 : firstDay - 1;
   var daysInMonth = new Date(year, month, 0).getDate();
-  var html = '<div class="cal-grid">';
+  var html = '<div class="cal-grid' + (duo ? ' duo' : '') + '">';
   var days = ['月','火','水','木','金','土','日'];
   for (var i = 0; i < 7; i++) html += '<div class="cal-header">' + days[i] + '</div>';
   for (var i = 0; i < startOffset; i++) html += '<div class="cal-cell empty"></div>';
@@ -749,6 +750,24 @@ function buildMonthGridHTML(year, month, todayM, todayD, todayY) {
     var cls = 'cal-cell';
     if (isToday) cls += ' today';
     if (f && f.isTenchu) cls += ' tenchu-day';
+
+    // 夫婦モード：二層で表示する
+    if (duo) {
+      var pf = ptFortune(year, month, d);
+      var sj = ptJudge(f), pj = ptJudge(pf);
+      var sNet = sj ? sj.net : 0, pNet = pj ? pj.net : 0;
+      var bothGood = (sNet >= 2 && pNet >= 2);
+      if (bothGood) cls += ' duo-both';
+      html += '<div class="' + cls + '" onclick="openDetail(' + year + ',' + month + ',' + d + ')">';
+      html += '<span class="cal-day">' + d + '</span>';
+      html += '<div class="duo-rows">';
+      html += duoRowHTML('k', (D.client.shortName || '私'), sNet);
+      html += duoRowHTML('o', (D.partner.shortName || '夫'), pNet);
+      html += '</div>';
+      html += '</div>';
+      continue;
+    }
+
     var bg = '';
     if (f) {
       if (f.aspects.indexOf('律音') >= 0) bg = 'background:rgba(91,143,102,0.15);';
@@ -771,28 +790,23 @@ function buildMonthGridHTML(year, month, todayM, todayD, todayY) {
       else if (f.aspects.indexOf('害') >= 0) shortAspect = '💫';
       else if (f.aspects.indexOf('刑') >= 0) shortAspect = '⚡';
       if (shortAspect) html += '<span class="cal-aspect">' + shortAspect + '</span>';
-      // 天中殺サイクル（12段階）の何日目かを小さく併記
       var dDshi = f.kanshi.charAt(1);
       var dStg = getTravelStage(null, dDshi);
       var dStageNum = TRAVEL_STAGES.indexOf(dStg) + 1;
       html += '<span class="cal-stage">' + dStageNum + '段</span>';
     }
-    // ★パートナーのマーク（D.partner があるときだけ）
-    if (D && D.partner && D.partner.my) {
-      var pfc = ptFortune(year, month, d);
-      var pjc = ptJudge(pfc), sjc = ptJudge(f);
-      if (pfc) {
-        var mark = '';
-        if (pjc.net >= 2 && sjc && sjc.net >= 2) mark = '◎二人';
-        else if (pjc.net <= -3) mark = '◆夫';
-        else if (pjc.net >= 2) mark = '○夫';
-        if (mark) html += '<span class="cal-pt">' + mark + '</span>';
-      }
-    }
     html += '</div>';
   }
   html += '</div>';
   return html;
+}
+
+// 二層セルの1行分。net値で ◎（良い）／◆（要注意）／・（普通）を出し分ける
+function duoRowHTML(who, label, net) {
+  var mk = '・', st = '';
+  if (net >= 2) { mk = '◎'; st = ' good'; }
+  else if (net <= -3) { mk = '◆'; st = ' warn'; }
+  return '<div class="duo-row ' + who + st + '"><span class="duo-who">' + label + '</span><span class="duo-mk">' + mk + '</span></div>';
 }
 
 function switchCalMonth(idx) {
@@ -1034,6 +1048,15 @@ function render() {
     var cm = calMonths[i];
     html += '<div id="cal-grid-' + i + '" style="' + (i === currentCalIdx ? '' : 'display:none') + '">';
     html += buildMonthGridHTML(cm.y, cm.m, m, d, y);
+    html += '</div>';
+  }
+  if (D && D.partner && D.partner.my) {
+    html += '<div class="duo-legend">';
+    html += '<div class="ll"><span class="sw k"></span>' + (D.client.shortName || '私') + 'のええ日</div>';
+    html += '<div class="ll"><span class="sw o"></span>' + (D.partner.shortName || '夫') + 'のええ日</div>';
+    html += '<div class="ll"><span class="sw b"></span>お二人そろってええ日</div>';
+    html += '<div class="ll">◆ … 気をつける日</div>';
+    html += '<div class="full">◎＝流れが合う日　◆＝正面からぶつかる日　・＝普通の日。金の枠が付いた日は、お二人そろってええ日です。大事な話はそこに。</div>';
     html += '</div>';
   }
   html += '<div class="cal-legend">';
