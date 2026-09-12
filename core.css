@@ -840,3 +840,12 @@ footer p { font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.15e
 .duo-summary .mk.m-good { color: #B5641F; } .duo-summary .mk.o.m-good { color: #2C6A8A; }
 .duo-summary .mk.m-warn { color: #B03A2A; } .duo-summary .mk.m-care { color: #A0782A; } .duo-summary .mk.m-flat { color: rgba(75,45,31,0.5); }
 .duo-summary .gouryu { margin-left: auto; font-size: 0.72rem; color: #7A5A10; font-weight: 600; }
+
+/* ── 運気の波（年・月・日）：天中殺サイクル12段階を2本線で（260912） ── */
+.wave-card .wave-title { font-size: 0.72rem; letter-spacing: 0.15em; color: var(--color-brown); margin: 0.2rem 0 0.35rem; }
+.wave-svg { width: 100%; height: auto; display: block; }
+.wave-legend { display: flex; gap: 0.9rem; flex-wrap: wrap; justify-content: center; font-size: 0.64rem; color: var(--color-brown); margin-top: 0.35rem; }
+.wave-legend .dot { display: inline-block; width: 0.55rem; height: 0.55rem; border-radius: 50%; vertical-align: -1px; margin-right: 0.25rem; }
+.wave-legend .dot.k { background: #B5641F; } .wave-legend .dot.o { background: #2C6A8A; }
+.wave-legend .dot.tc { background: #B03A2A; } .wave-legend .band { display:inline-block; width:0.9rem; height:0.55rem; background: rgba(184,150,79,0.35); vertical-align:-1px; margin-right:0.25rem; }
+.wave-note { font-size: 0.7rem; color: var(--color-brown-dark); line-height: 1.7; margin-top: 0.5rem; }

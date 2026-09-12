@@ -1056,6 +1056,10 @@ function render() {
   html += '</div>';
   html += '<p class="text-xs text-center mt-2" style="color:var(--color-brown);font-size:0.65rem">日付をタップで詳細</p>';
   html += '</div>';
+  if (D.partner && D.partner.my && todayF) {
+    html += renderWaveCardHTML('運気の波 ― 今日から12日', buildWavePoints('day', y, m, d),
+      '天中殺サイクルの高低です。線が上にあるほど動きやすい日、赤い点が天中殺の日。二本とも上にある日（🤲）が合流日で、大事な話に向きます。');
+  }
 
   // 今日どう動くか（詳細版。巡ってきてる星・位相法の観点・天中殺サイクルを見出しで分けて深掘り）
   if (todayF && guidance) {
@@ -1075,6 +1079,12 @@ function render() {
 
   // 今月の流れ（月単位＝日単位の下に置く）
   html += monthFlowHtml;
+  if (D.partner && D.partner.my) {
+    html += renderWaveCardHTML('運気の波 ― 今月から12ヶ月', buildWavePoints('month', y, m, d),
+      '月ごとの天中殺サイクル。谷が月天中殺（ご本人10〜11月・ご主人2〜3月）。お二人は周期が四つずれているので、月の波で山が重なることはありません。片方の谷を、もう片方が支える形です。');
+    html += renderWaveCardHTML('運気の波 ― 今年から12年', buildWavePoints('year', y, m, d),
+      '年ごとの天中殺サイクル。谷が年天中殺（ご本人2030〜31年・ご主人2034〜35年）。年の波も山は重なりません。ご本人の谷の年はご主人が上、ご主人の谷の年はご本人が上。合流は日の波で見てください。');
+  }
 
   // ここから下は「宿命」セクション（命式・日柱・星図＝“鑑定の中身”）。
   // 暦（koyomiOnly）は「毎日見る運気カレンダー」なので、宿命は出さない。
@@ -1417,6 +1427,75 @@ function ptBriefHTML(pf, label) {
     else if (m.cls === 'm-care') note = D.partner.careNote || '大きい決めごとは翌日に。';
   }
   if (note) h += '<p class="detail-text" style="color:var(--color-water)">' + note + '</p>';
+  h += '</div>';
+  return h;
+}
+// ── 運気の波：天中殺サイクル12段階レベルを、ご本人・ご主人の2本線で描く（年・月・日の三層） ──
+function stageForMy(my, branchChar) {
+  var save = MY;
+  try {
+    MY = { ds:my.ds, db:my.db, ms:my.ms, mb:my.mb, ys:my.ys, yb:my.yb, tc:my.tc };
+    var st = getTravelStage(null, branchChar);
+    var idx = st ? TRAVEL_STAGES.indexOf(st) : -1;
+    return { level: st ? st.level : 0, tc: (idx === 10 || idx === 11), st: st };
+  } finally { MY = save; }
+}
+function buildWavePoints(kind, y, m, d) {
+  var pts = [], sm = D.client.my, pm = D.partner.my;
+  for (var i = 0; i < 12; i++) {
+    var label, br, a, b, gou;
+    if (kind === 'year') {
+      var yy = y + i; br = BRANCHES[(((yy - 4) % 12) + 12) % 12]; label = String(yy);
+      a = stageForMy(sm, br); b = stageForMy(pm, br); gou = (a.level >= 10 && b.level >= 10);
+    } else if (kind === 'month') {
+      var dt = new Date(y, m - 1 + i, 15); var mf = computeMonthFortune(dt.getFullYear(), dt.getMonth() + 1, 15);
+      br = mf.kanshi.charAt(1); label = (dt.getMonth() + 1) + '月';
+      a = stageForMy(sm, br); b = stageForMy(pm, br); gou = (a.level >= 10 && b.level >= 10);
+    } else {
+      var dd = new Date(y, m - 1, d + i); var fy = dd.getFullYear(), fm = dd.getMonth() + 1, fd = dd.getDate();
+      var fs = computeFortune(fy, fm, fd), fp = ptFortune(fy, fm, fd);
+      br = fs.kanshi.charAt(1); label = fm + '/' + fd;
+      a = stageForMy(sm, br); b = stageForMy(pm, br);
+      a.mk = duoMark(fs); b.mk = duoMark(fp); gou = isGouryu(fs, fp);
+    }
+    pts.push({ label: label, a: a, b: b, gou: gou, first: (i === 0) });
+  }
+  return pts;
+}
+function renderWaveSVG(pts) {
+  var W = 360, H = 132, pl = 12, pr = 12, pt = 14, pb = 26, n = pts.length;
+  var iw = W - pl - pr, ih = H - pt - pb, cw = iw / (n - 1);
+  var X = function(i){ return pl + cw * i; }, Y = function(lv){ return pt + ih * (1 - (lv - 1) / 11); };
+  var s = '<svg class="wave-svg" viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg">';
+  // 合流の帯
+  for (var i = 0; i < n; i++) if (pts[i].gou) s += '<rect x="' + (X(i) - cw / 2) + '" y="' + pt + '" width="' + cw + '" height="' + ih + '" fill="rgba(184,150,79,0.22)"/>';
+  // 目盛り線（低・中・高）
+  [1, 6, 12].forEach(function(lv){ s += '<line x1="' + pl + '" y1="' + Y(lv) + '" x2="' + (W - pr) + '" y2="' + Y(lv) + '" stroke="rgba(0,0,0,0.07)" stroke-width="1"/>'; });
+  // 2本線
+  var pa = pts.map(function(p, i){ return X(i) + ',' + Y(p.a.level); }).join(' ');
+  var pb2 = pts.map(function(p, i){ return X(i) + ',' + Y(p.b.level); }).join(' ');
+  s += '<polyline points="' + pa + '" fill="none" stroke="#B5641F" stroke-width="2.2" stroke-linejoin="round"/>';
+  s += '<polyline points="' + pb2 + '" fill="none" stroke="#2C6A8A" stroke-width="2.2" stroke-linejoin="round" stroke-dasharray="0"/>';
+  // 点（天中殺は赤）
+  for (var i = 0; i < n; i++) {
+    var p = pts[i];
+    s += '<circle cx="' + X(i) + '" cy="' + Y(p.a.level) + '" r="3.2" fill="' + (p.a.tc ? '#B03A2A' : '#B5641F') + '"/>';
+    s += '<circle cx="' + X(i) + '" cy="' + Y(p.b.level) + '" r="3.2" fill="' + (p.b.tc ? '#B03A2A' : '#2C6A8A') + '"/>';
+    if (p.gou) s += '<text x="' + X(i) + '" y="' + (pt - 3) + '" font-size="9" text-anchor="middle">🤲</text>';
+  }
+  // ラベル
+  for (var i = 0; i < n; i++) {
+    s += '<text x="' + X(i) + '" y="' + (H - 12) + '" font-size="8.5" text-anchor="middle" fill="' + (pts[i].first ? '#B5641F' : '#6b5a4a') + '" font-weight="' + (pts[i].first ? '700' : '400') + '">' + pts[i].label + '</text>';
+  }
+  s += '</svg>';
+  return s;
+}
+function renderWaveCardHTML(title, pts, note) {
+  var h = '<div class="card wave-card">';
+  h += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>' + title + '</span></div>';
+  h += renderWaveSVG(pts);
+  h += '<div class="wave-legend"><span><span class="dot k"></span>ご本人</span><span><span class="dot o"></span>ご主人</span><span><span class="dot tc"></span>天中殺</span><span><span class="band"></span>🤲 合流（お二人とも高い）</span></div>';
+  if (note) h += '<p class="wave-note">' + note + '</p>';
   h += '</div>';
   return h;
 }
