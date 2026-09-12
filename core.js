@@ -1238,7 +1238,7 @@ function render() {
   // 詳しい鑑定書（2ページ目）への導線。kanteishoHref があるクライアントだけ出す。
   if (D.kanteishoHref) {
     html += '<a class="kanteisho-link" href="' + D.kanteishoHref + '">';
-    html += '<span class="kanteisho-arrow">📖</span> ' + D.client.name + 'さんの鑑定書をひらく';
+    html += '<span class="kanteisho-arrow">📖</span> ' + (/さん$/.test(D.client.name) ? D.client.name : D.client.name + 'さん') + 'の鑑定書をひらく';
     html += '<small>命式・本質・この先の生き方まで、じっくり読む用</small>';
     html += '</a>';
   }
