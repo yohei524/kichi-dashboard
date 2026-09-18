@@ -325,6 +325,10 @@
     {
       "source": "/mamiko-kanteisho",
       "destination": "/clients/mamiko-kanteisho.html"
+    },
+    {
+      "source": "/kumi-kanteisho",
+      "destination": "/clients/kumi-kanteisho.html"
     }
   ]
 }
