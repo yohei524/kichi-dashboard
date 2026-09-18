@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>kumiさん 鑑定書 ｜ 㐂占</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --night:#0B0F1A; --night2:#131A28; --sink:#171F30; --panel:#1B2334;
+  --line:#2A3346; --accent:#8FA8C4; --accent-soft:#5E7D9E; --accent-glow:rgba(143,168,196,.14);
+  --gold:#C9A24A; --text:#ECEAE4; --muted:#8A96AC; --muted2:#A9B3C6;
+  --water:#6E9BC4; --fire:#D08A5A; --wood:#7FA86B; --metal:#C4C9D2; --earth:#C9A24A;
+  --bad:#C97A6A; --good:#6E9BC4; --kimi:#C98A5A;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Serif JP',serif; color:var(--text); line-height:1.95; letter-spacing:.045em;
+  background:
+    radial-gradient(1200px 620px at 50% -12%, rgba(143,168,196,.10), transparent 60%),
+    linear-gradient(180deg,#0B0F1A 0%,#0D1220 45%,#080B14 100%);
+  background-attachment:fixed; min-height:100vh;
+}
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.05rem 4rem;}
+
+header{text-align:center;padding:3rem 1rem 1.4rem;}
+header .kicker{font-size:.68rem;letter-spacing:.32em;color:var(--accent);opacity:.9;margin-bottom:.9rem;}
+header h1{font-size:1.5rem;font-weight:500;letter-spacing:.08em;margin-bottom:.5rem;}
+header h1 .nm{color:var(--accent);}
+header .tagline{font-size:.8rem;color:var(--muted2);letter-spacing:.1em;line-height:1.7;}
+header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:.12em;}
+
+.profile{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem .8rem;
+}
+.profile div{font-size:.74rem;color:var(--muted);}
+.profile div b{display:block;font-size:.9rem;color:var(--text);font-weight:500;margin-top:.1rem;letter-spacing:.06em;}
+.profile div.full{grid-column:1/3;}
+
+.sec{margin-bottom:1.65rem;}
+.sec-head{
+  display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;
+  padding-bottom:.6rem;border-bottom:1px solid var(--line);
+}
+.sec-no{font-size:.72rem;color:var(--accent);letter-spacing:.18em;font-weight:600;}
+.sec-title{font-size:1.02rem;font-weight:500;letter-spacing:.08em;}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  padding:1.25rem 1.15rem;box-shadow:0 4px 24px rgba(0,0,0,.32);margin-bottom:1rem;
+}
+.card p{font-size:.87rem;margin-bottom:.9rem;color:var(--text);}
+.card p:last-child{margin-bottom:0;}
+.card .lead{color:var(--accent);font-size:.9rem;font-weight:500;}
+.hl{color:var(--accent);font-weight:500;}
+.hk{color:var(--kimi);font-weight:500;}
+.soft{color:var(--muted2);font-size:.8rem;}
+
+.meishiki{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.2rem 0 .3rem;}
+.pillar{background:var(--sink);border:1px solid var(--line);border-radius:12px;padding:.7rem .4rem;text-align:center;}
+.pillar .lbl{font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.55rem;}
+.pillar .yomi{font-size:.58rem;color:var(--muted);letter-spacing:.04em;line-height:1.3;}
+.pillar .kan{font-size:1.85rem;font-weight:600;color:var(--text);line-height:1.15;}
+.pillar .shi{font-size:1.85rem;font-weight:600;color:var(--accent);line-height:1.15;margin-top:.2rem;}
+.pillar .zou{font-size:.62rem;color:var(--muted2);margin-top:.55rem;letter-spacing:.04em;}
+.meishiki-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;}
+
+.jintai{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:19rem;margin:.4rem auto .2rem;}
+.jcell{background:var(--sink);border:1px solid var(--line);border-radius:11px;aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;}
+.jcell .pos{font-size:.58rem;color:var(--muted);letter-spacing:.05em;}
+.jcell .star{font-size:.92rem;font-weight:600;color:var(--text);letter-spacing:.03em;}
+.jcell.center{background:linear-gradient(160deg,rgba(143,168,196,.18),var(--sink));border-color:var(--accent-soft);}
+.jcell.center .star{color:var(--accent);}
+.jcell.jusei-cell{background:var(--night2);}
+.jcell .star.gold{color:var(--gold);}
+
+.gogyo{margin-top:.3rem;}
+.gbar{display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;}
+.gbar .gname{width:2.6rem;font-size:.76rem;color:var(--muted2);flex-shrink:0;}
+.gbar .gtrack{flex:1;height:9px;background:var(--sink);border-radius:5px;overflow:hidden;}
+.gbar .gfill{height:100%;border-radius:5px;}
+.gbar .gval{width:2.2rem;text-align:right;font-size:.72rem;color:var(--muted);flex-shrink:0;}
+.g-wood .gfill{background:var(--wood);}
+.g-fire .gfill{background:var(--fire);}
+.g-earth .gfill{background:var(--earth);}
+.g-metal .gfill{background:var(--metal);}
+.g-water .gfill{background:var(--water);}
+
+.daiun-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.daiun{width:100%;border-collapse:collapse;font-size:.78rem;min-width:19rem;}
+.daiun th{font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.05em;padding:.4rem .3rem;border-bottom:1px solid var(--line);text-align:center;}
+.daiun td{padding:.5rem .3rem;text-align:center;border-bottom:1px solid rgba(42,51,70,.5);color:var(--text);}
+.daiun td:first-child{color:var(--muted2);font-size:.72rem;white-space:nowrap;}
+.daiun .tc-cell{color:var(--bad);font-size:.68rem;}
+.daiun .now-row td{background:linear-gradient(90deg,rgba(143,168,196,.12),transparent);}
+.daiun .now-row td:first-child{color:var(--accent);font-weight:600;}
+.daiun .now-cell{color:var(--accent);font-size:.68rem;font-weight:600;}
+
+.tl{position:relative;padding-left:1.1rem;margin-top:.3rem;}
+.tl::before{content:"";position:absolute;left:3px;top:.4rem;bottom:.4rem;width:2px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:1rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before{content:"";position:absolute;left:-1.1rem;top:.45rem;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--night2);}
+.tl-item.tc::before{background:var(--bad);}
+.tl-when{font-size:.76rem;color:var(--accent);font-weight:600;letter-spacing:.06em;}
+.tl-item.tc .tl-when{color:var(--bad);}
+.tl-body{font-size:.82rem;color:var(--text);margin-top:.15rem;}
+
+.dodont{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.dobox,.dontbox{border-radius:12px;padding:.85rem .8rem;border:1px solid var(--line);}
+.dobox{background:rgba(110,155,196,.08);}
+.dontbox{background:rgba(201,122,106,.08);}
+.dobox .h,.dontbox .h{font-size:.78rem;font-weight:600;margin-bottom:.5rem;letter-spacing:.06em;}
+.dobox .h{color:var(--good);}
+.dontbox .h{color:var(--bad);}
+.dodont ul{list-style:none;}
+.dodont li{font-size:.75rem;color:var(--text);padding-left:.9rem;position:relative;margin-bottom:.45rem;line-height:1.6;}
+.dodont li:last-child{margin-bottom:0;}
+.dobox li::before{content:"○";position:absolute;left:0;color:var(--good);font-size:.7rem;}
+.dontbox li::before{content:"×";position:absolute;left:0;color:var(--bad);font-size:.7rem;}
+@media(max-width:400px){.dodont{grid-template-columns:1fr;}}
+
+.recipe{counter-reset:r;}
+.recipe .item{display:flex;gap:.75rem;margin-bottom:1rem;}
+.recipe .item:last-child{margin-bottom:0;}
+.recipe .num{flex-shrink:0;width:1.7rem;height:1.7rem;border-radius:50%;background:linear-gradient(160deg,var(--accent),var(--accent-soft));color:var(--night);font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;}
+.recipe .rbody{font-size:.83rem;}
+.recipe .rbody b{color:var(--accent);font-weight:600;}
+
+.pull{border-left:3px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:1rem 0;font-size:.9rem;color:var(--muted2);}
+
+/* 攻略パート用 */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:.3rem 0 .2rem;}
+.tbox{border-radius:12px;padding:.85rem .8rem;border:1px solid var(--line);background:var(--sink);}
+.tbox .th{font-size:.72rem;font-weight:600;margin-bottom:.45rem;letter-spacing:.05em;}
+.tbox.ng .th{color:var(--bad);}
+.tbox.ok .th{color:var(--good);}
+.tbox p{font-size:.75rem;line-height:1.7;margin:0;color:var(--text);}
+@media(max-width:400px){.two{grid-template-columns:1fr;}}
+.hook{background:linear-gradient(160deg,rgba(201,138,90,.14),var(--sink));border:1px solid rgba(201,138,90,.45);border-radius:14px;padding:1rem .95rem;margin:.9rem 0;}
+.hook .hh{font-size:.8rem;color:var(--kimi);font-weight:600;margin-bottom:.5rem;letter-spacing:.06em;}
+.hook p{font-size:.82rem;margin-bottom:.6rem;}
+.hook p:last-child{margin-bottom:0;}
+.daybox{background:var(--night2);border:1px solid var(--line);border-radius:12px;padding:.9rem;margin-top:.6rem;}
+.dayrow{display:flex;gap:.6rem;align-items:baseline;margin-bottom:.5rem;font-size:.8rem;}
+.dayrow:last-child{margin-bottom:0;}
+.dayrow .dl{flex-shrink:0;width:4.6rem;font-size:.72rem;color:var(--muted);}
+.dayrow .dv{color:var(--text);}
+.dayrow .dv b{color:var(--accent);}
+.dayrow .dv b.k{color:var(--kimi);}
+.dayrow .dv b.g{color:var(--gold);}
+
+.closing{background:linear-gradient(180deg,var(--panel),var(--sink));border:1px solid var(--accent-soft);border-radius:18px;padding:1.6rem 1.25rem;text-align:center;box-shadow:0 0 30px rgba(143,168,196,.08);}
+.closing p{font-size:.88rem;margin-bottom:.9rem;}
+.closing p:last-child{margin-bottom:0;}
+.closing .big{font-size:1.05rem;color:var(--accent);font-weight:500;letter-spacing:.06em;}
+
+.koyomi-link{display:block;text-align:center;margin-top:1.5rem;padding:1rem;background:var(--night2);border:1px solid var(--line);border-radius:14px;color:var(--text);text-decoration:none;font-size:.86rem;transition:border-color .3s;}
+.koyomi-link:hover{border-color:var(--accent-soft);}
+.koyomi-link .arrow{color:var(--accent);}
+.koyomi-link small{display:block;color:var(--muted);font-size:.7rem;margin-top:.3rem;}
+
+footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
+footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">㐂占 　 命 術 本鑑定書</p>
+  <h1><span class="nm">kumi</span> さんの鑑定書</h1>
+  <p class="tagline">滔々とした大河。止まらずに流れ続ける人</p>
+  <p class="date">1983年10月11日 生　／　紡の席 2026.09.17</p>
+</header>
+
+<div class="profile">
+  <div class="full">魂の本質（日の宿命）<b>壬申（みずのえさる）― 滔々とした大河</b></div>
+  <div>中心の星<b>玉堂星</b></div>
+  <div>天中殺<b>戌亥（北西）</b></div>
+  <div>今の運気（42歳）<b>天南星　10点</b></div>
+  <div>今の大運<b>丙寅（39〜48歳）</b></div>
+  <div class="full">宿命の特記<b>宿命天中殺が二重（生年中殺＋生月中殺）― 自分の代で、自分の形を作る宿命</b></div>
+</div>
+
+<div class="card" style="border-color:var(--accent-soft);">
+  <p>kumiさん、おおきにです☺️</p>
+  <p>9月17日にお話ししたことを、ここにまとめました。<b>当日話しきれんかったことも、だいぶ足してあります。</b></p>
+  <p>特に<span class="hl">後半の「時期」のところ</span>。あの日は回線が何度も切れてしまって、最後まで行ききれませんでした。そこをきっちり書いてあります。</p>
+  <p style="margin-bottom:0;">読む順番は気にせんでください。気になったところから開いてもらって大丈夫です。</p>
+</div>
+
+<!-- 命式盤 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">命 式</span><span class="sec-title">kumiさんの設計図</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.6rem;">陰占 ― 生まれ持った気の柱</p>
+    <div class="meishiki">
+      <div class="pillar">
+        <div class="lbl">日柱（自分・家庭）</div>
+        <div class="yomi">みずのえ</div><div class="kan">壬</div>
+        <div class="shi">申</div><div class="yomi">さる</div>
+        <div class="zou">蔵干　庚・壬・戊</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">月柱（仕事・家系）</div>
+        <div class="yomi">みずのえ</div><div class="kan">壬</div>
+        <div class="shi">戌</div><div class="yomi">いぬ</div>
+        <div class="zou">蔵干　戊・辛・丁</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">年柱（社会・先祖）</div>
+        <div class="yomi">みずのと</div><div class="kan">癸</div>
+        <div class="shi">亥</div><div class="yomi">い</div>
+        <div class="zou">蔵干　壬・甲</div>
+      </div>
+    </div>
+    <p class="meishiki-note">日柱 壬申 ／ 月柱 壬戌 ／ 年柱 癸亥　―― 上の段が、壬・壬・癸。<b>三つとも水</b>です</p>
+
+    <div style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p class="soft" style="margin-bottom:.2rem;">陽占 ― 心のかたち（人体星図）</p>
+    <div class="jintai">
+      <div class="jcell jusei-cell"><span class="pos">伴星（先祖）</span><span class="star">車騎星</span></div>
+      <div class="jcell"><span class="pos">目上（北）</span><span class="star">石門星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">初年運</span><span class="star gold">天禄星</span></div>
+      <div class="jcell"><span class="pos">家庭（西）</span><span class="star">車騎星</span></div>
+      <div class="jcell center"><span class="pos">中心・本人</span><span class="star">玉堂星</span></div>
+      <div class="jcell"><span class="pos">社会（東）</span><span class="star">車騎星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">晩年運</span><span class="star gold">天貴星</span></div>
+      <div class="jcell"><span class="pos">目下（南）</span><span class="star">貫索星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">中年運（今ここ）</span><span class="star gold">天南星</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.7rem;">真ん中が<b>考える星</b>。そのまわりを<b>動く星が三つ</b>取り囲んでいます。この形が、kumiさんの全部を説明します。</p>
+
+    <div style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p class="soft" style="margin-bottom:.7rem;">五行のバランス（総エネルギー 246）</p>
+    <div class="gogyo">
+      <div class="gbar g-wood"><span class="gname">木</span><span class="gtrack"><span class="gfill" style="width:7%"></span></span><span class="gval">16</span></div>
+      <div class="gbar g-fire"><span class="gname">火</span><span class="gtrack"><span class="gfill" style="width:7%"></span></span><span class="gval">16</span></div>
+      <div class="gbar g-earth"><span class="gname">土</span><span class="gtrack"><span class="gfill" style="width:8%"></span></span><span class="gval">20</span></div>
+      <div class="gbar g-metal"><span class="gname">金</span><span class="gtrack"><span class="gfill" style="width:21%"></span></span><span class="gval">52</span></div>
+      <div class="gbar g-water"><span class="gname">水</span><span class="gtrack"><span class="gfill" style="width:58%"></span></span><span class="gval">142</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.6rem;">水が142。ほとんど水でできています。木16・火16・土20が薄い。<b>ここが、今日いちばん大事なところ</b>です。</p>
+  </div>
+</div>
+
+<!-- 壱 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">壱</span><span class="sec-title">「自信がない」の正体</span></div>
+  <div class="card">
+    <p class="lead">持ってへんのやないです。持ってることに、気づいてないだけです。</p>
+    <p>kumiさんは、LINEで<b>「自信がない」と三回書いてはりました。</b>社長さんの要求に何ができるかピンとこない。起業のことも、自信がない気持ちが勝っている。</p>
+    <p>日の宿命「壬申」の本質に、こう書いてあります。</p>
+    <div class="pull">知的で決断力や統率力もあるが、<b>お気軽で自分の実力を自覚しにくい</b>。<br>素直で人の影響も受けやすい。困難にぶつかって本領発揮、技術に秀でる。</div>
+    <p><span class="hl">決断力も統率力も、命式にはっきり入っています。</span>入っているのに、自覚できひん。そういう作りで生まれてきてはるんです。</p>
+    <p>これは、三つの要素が重なって起きています。</p>
+    <p><b>一つ目。水が142。</b>水は考える力です。kumiさんの思考力は桁違いに強い。人の何段階も先まで考えられます。</p>
+    <p><b>二つ目。才能の領域が「北天運」。</b>ここには<span class="hl">「考えて満足し、動きにくい面」</span>と出ています。</p>
+    <p><b>三つ目。壬申の「実力を自覚しにくい」。</b></p>
+    <p>この三つが重なると、何が起きるか。<b>頭の中で全部、考え尽くしてしまう</b>んです。シミュレーションして、リスクも洗い出して、答えも出している。ほぼ完成している。</p>
+    <p>でも、それが頭の中で終わるから、<span class="hl">「やった」という実感が残らへん。</span>実績として、自分の中に積まれへんのです。</p>
+    <p>だから、二年準備してきたのに「まだ自信がない」になる。社長さんの要求にも「何ができるかピンとこない」になる。</p>
+    <div class="card" style="background:var(--sink);border-color:var(--accent-soft);margin:1rem 0;">
+      <p class="lead" style="margin-bottom:.6rem;">当日、kumiさんが言うてはった言葉</p>
+      <p style="margin-bottom:0;">「何をやったらいいかが、あんまりはっきりしてない」<br>「<b>当てがない</b>、っていう感じがすごいわかる」</p>
+      <p style="margin-top:.7rem;margin-bottom:0;">あれです。<span class="hl">どこまで努力しても「できた」という区切りがつかへんから、ずっと努力し続けてしまう。</span>普通なら「ここまでできた、もうええわ」と区切りをつけられるところを、kumiさんは区切れへん。だから、みんなが思うゴールのずっと先まで行ってしまう。</p>
+    </div>
+    <p style="margin-bottom:0;">これ、めちゃくちゃええところでもあります。ただ、<b>自分では一生わからん</b>。だから、そこは「自分はそういう作りなんや」と知っておくだけでいいです。<span class="hl">周りから見たら、もう十分なレベルです。</span></p>
+  </div>
+</div>
+
+<!-- 弐 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">弐</span><span class="sec-title">考える星のまわりを、動く星が囲んでいる</span></div>
+  <div class="card">
+    <p class="lead">考える力と、動く力。両方めちゃくちゃ強い人です。</p>
+    <p>人体星図の真ん中が<b>玉堂星</b>。学問の星です。知性、伝統、古典、教える力。座学の星。</p>
+    <p>そして<span class="hl">母性の星</span>でもあります。LINEでお伝えした「kumiさんの命式の真ん中に母性の星が座ってます」は、ここのことです。</p>
+    <p><b>お母さんになりたいという気持ちは、後付けやないです。</b>kumiさんの芯そのものです。三年間、しんどい治療を続けてこられたのは、意地でも焦りでもない。真ん中にあるものが、そうさせているだけです。</p>
+    <p>だから、諦められへんのは当たり前です。<span class="hl">kumiさんが弱いからやないです。</span></p>
+    <p>そのまわりを、<b>車騎星が三つ</b>取り囲んでいます。金の星。攻撃本能。一本気、勝負運、行動派、スピード。<b>とにかくよく動く。じっとしていられない。</b></p>
+    <div class="pull">真ん中は「考える」玉堂星。<br>まわりは「動く」車騎星が三つ。</div>
+    <p>そして、ここが<b>治療の三年間の答え</b>です。</p>
+    <p><span class="hl">じっとしていられへん人が、三年間、「待つ」しかない状況に置かれました。</span></p>
+    <p>治療は、自分でコントロールできひんことの連続です。どんだけ動いても、どんだけ考えても、結果が自分の手の中にない。<b>kumiさんにとって、これが一番しんどい形</b>です。</p>
+    <p style="margin-bottom:0;">焦りの正体は、治療そのものやのうて、<b>自分の力で取りに行けへんものを、初めて目の前にしていること</b>やったと思います。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">玉堂星の陰転 ―― 環境の変化に弱い</p>
+    <p>玉堂星がよくない方に出ると、こうなります。<span class="hl">「環境の変化に弱い。育った環境が刷り込まれる。頭はいいけど応用力が弱い」</span>。</p>
+    <p>今、退職と渡米と移植と起業が、全部いっぺんに来ています。<b>人生で一番大きい環境の変化</b>の時期です。</p>
+    <p style="margin-bottom:0;">不安になるのは、性格のせいやないです。<b>真ん中の星が、環境の変化を一番苦手にしている。</b>構造です。だから当然なんです。「私、こんな不安でええんかいな」やのうて、<span class="hl">「あ、不安に感じて当然なんやな」</span>と、自分を客観的に見てあげてください。</p>
+  </div>
+</div>
+
+<!-- 参 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">参</span><span class="sec-title">「支配から逃れたい」は、宿命です</span></div>
+  <div class="card">
+    <p class="lead">わがままでも、我慢が足りひんのでもないです。</p>
+    <p>人体星図の左上、<b>伴星</b>。ご先祖様から受け継いだ使命が出る場所です。kumiさんはここも<b>車騎星</b>。使命は、こう書かれています。</p>
+    <div class="pull">行動力が武器となる。<b>いつでも自由に動ける身軽な環境の中で生活しなさい。</b><br><b>自分の行動が束縛されるような環境は避けなさい。</b><br>考えるより行動が先という人ですから、チャンスは絶対に見逃さないように。</div>
+    <p>kumiさんはLINEで、こう書いてはりました。「自分が正しいと思う事をできるようになる為だったり、<b>支配から逃れる為に、なんとか独立しなきゃ</b>という気持ちに動かされています」。</p>
+    <p><span class="hl">「束縛される環境は避けなさい」と、命式に書いてあるんです。</span>ご先祖様から預かっている使命が、そのまま言葉になって出てきているだけです。</p>
+    <p>そして、もう一つ。<b>宿命天中殺が二重</b>にあります。これは珍しいです。</p>
+    <p>生年中殺 ――<span class="hl">「両親・先祖の援助に頼らず独立すると陽転」</span><br>生月中殺 ――<span class="hl">「家系・親族から離れて生きると陽転。生家との縁が薄い」</span></p>
+    <p><b>「自分の代で、自分の形を作りなさい」と、二重に書いてある</b>ということです。</p>
+    <p>宿命天中殺が二重にある人が、誰かの決めた枠の中で働き続けると、命式的にしんどくなります。当日「いずれ絶対に離れなきゃいけないという気持ちが自分の中にあった」と言うてはりましたよね。<b>あれは、ここから来ています。</b></p>
+    <div class="card" style="background:var(--sink);border-color:var(--accent-soft);margin:1rem 0;">
+      <p class="lead" style="margin-bottom:.6rem;">渡米も、同じ方向です</p>
+      <p style="margin-bottom:0;">「家系・親族から離れて生きると陽転」。<b>日本を離れてアメリカに行くのは、逆風やないです。</b><span class="hl">むしろ、陽転する方向に動いています。</span>生まれた場所から離れるほど開く。kumiさんの宿命は、そういう形をしています。</p>
+    </div>
+    <p style="margin-bottom:0;">退職が「夫の転勤という流れで、無理やり解き放たれた」形になったのも、<b>宿命の側から見れば筋が通っています。</b>自分では決めきれんかったものが、外から来た流れで外れた。そういうことが起きる年でした。</p>
+  </div>
+</div>
+
+<!-- 肆 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">肆</span><span class="sec-title">足りひんのは、考える力やない</span></div>
+  <div class="card">
+    <p class="lead">考えたことを、外に出す力です。</p>
+    <p>水が142に対して、<b>木16・火16・土20</b>。ここが薄い。</p>
+    <p>木は<b>始める力</b>。火は<b>出す力・表現する力</b>。土は<b>地に足をつける力</b>。</p>
+    <p>kumiさんに足りひんのは、考える力やないです。<span class="hl">考えたことを、外に出す力</span>です。</p>
+    <p>具体的には、こうです。<b>紙に書く。人に話す。形にする。</b></p>
+    <p>業務委託の社長さんに「こう考えてます」と、<b>まとまってなくても言うてみる</b>。人から見たら「それ、もう十分まとまってるやん」という状態になってますから。</p>
+    <p>起業の準備も、頭の中で完成させんと、<b>小さくていいから外に出す。</b>起業はまだ全然先やけど、インスタのアカウントだけ取ってしまう。そのくらいでいいんです。</p>
+    <div class="pull">出した数だけ、自信がつきます。<br><b>考えた数やないです。</b></div>
+    <p>そして、守護神です。kumiさんを助ける五行は<b>第一が甲（木）、第二が丙（火）</b>。</p>
+    <p><span class="hl">一番足りひん二つが、そのまま守護神になっています。</span>算命学は、こういう形をよく取ります。足りひんものが、お守りになる。</p>
+    <p>甲は大きな木。まっすぐ伸びる、リーダー意識、頑固さを活かす。丙は太陽。明るく開放的に、発信する、影響力を持つ。</p>
+    <p>並べると――<b>まっすぐ立つ。自分で決める。外に出す。人に見せる。</b></p>
+    <p style="margin-bottom:0;">これ、会社員の動き方やないです。<span class="hl">自分で看板を立てる人の動き方です。</span>守護神が、独立の方を向いています。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">暮らしの中で、木・火・土を足す</p>
+    <p><b>木</b>　観葉植物を置く。朝に少し歩く。緑を目に入れる。</p>
+    <p><b>火</b>　赤や暖色を身につける。人前で気持ちを出す。</p>
+    <p><b>土</b>　地に足をつける。土に触る。陶器を使う。<span class="hl">体を温める。</span></p>
+    <p>特に<b>温めること</b>。水が強い人は、放っておくと冷えます。岩盤浴、めっちゃええです。</p>
+    <p style="margin-bottom:0;">アメリカに行ってからもできます。お金もかからんし、道具も要りません。<b>渡米までの間に、習慣にしておいてください。</b></p>
+  </div>
+</div>
+
+<!-- 伍 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">伍</span><span class="sec-title">今の十年 ― 形が作り変わる</span></div>
+  <div class="card">
+    <p class="lead">偶然こんなに重なっているんやないです。</p>
+    <p>大運という、十年ごとの区切りがあります。kumiさんは9歳から始まる形で、今は<b>39歳〜48歳の丙寅</b>のところにいます。</p>
+    <div class="daiun-scroll">
+      <table class="daiun">
+        <tr><th>年齢</th><th>干支</th><th>主星</th><th>位相・意味</th></tr>
+        <tr><td>29〜38歳</td><td>乙丑</td><td>調舒星</td><td class="tc-cell">蓄える・準備の十年</td></tr>
+        <tr class="now-row"><td>39〜48歳</td><td>丙寅</td><td>鳳閣星</td><td class="now-cell">天剋地冲／大半会／支合<br>形が作り変わる</td></tr>
+        <tr><td>49〜58歳</td><td>丁卯</td><td>調舒星</td><td>三合・半会<br><b>大発展・事業拡大</b></td></tr>
+        <tr><td>59〜68歳</td><td>戊辰</td><td>禄存星</td><td>―</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:1rem;">今の十年が、<b>kumiさんの人生で一番インパクトの大きい十年</b>です。理由は、生まれた日の柱とこの大運の間に<span class="hl">天剋地冲</span>という関係が出ているからです。上も下も、両方ぶつかる形。</p>
+    <p>これは「壊れる」という意味やないです。<b>形が作り変わる</b>という意味です。タロットで言うと、タワーが崩れて、もう一回建て直すような。</p>
+    <p>今、何が起きていますか。<b>二十年近く勤めた会社を辞めます。住む国が変わります。働き方が雇われから業務委託に変わります。自分の会社を作ろうとしています。</b></p>
+    <p><span class="hl">全部、形が変わっています。</span>偶然こんなに重なっているんやないです。そういう十年に、自分でセットして生まれてきてはるんです。</p>
+    <p>そして、この十年には<b>大半会と支合</b>も重なっています。両方とも「つながる・結ばれる・拡大する」形です。</p>
+    <p style="margin-bottom:0;"><b>壊すだけの十年やないです。</b>壊れた後に、ちゃんとつながって拡大していく十年です。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">治療を始めたのが39歳 ―― 大運の切り替わりと一致します</p>
+    <p>一つ前の十年（29〜38歳）は、<b>蓄える時期</b>でした。準備して、力を貯める十年。</p>
+    <p>そして39歳から今の十年に入って、<b>貯めたものを形にしていく</b>十年になりました。</p>
+    <p style="margin-bottom:0;">当日「治療を始めたのは39歳だと思います」と言うてはりましたよね。<span class="hl">大運の切り替わりと、ぴったり一致しています。</span>起業を考え始めたのも、だいたいこの十年に入ってからやと思います。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">次の十年（49歳〜）が、本番です</p>
+    <p>49歳から58歳の丁卯。ここに<span class="hl">三合・半会 ―― 大発展型・事業拡大・人脈拡大</span>と出ています。</p>
+    <p><b>kumiさんの人生で、事業が一番大きくなる十年が49歳からです。</b>今42歳なので、あと七年。</p>
+    <p>そして今の十年には、こう書いてあります。<span class="hl">「支合 ― 手堅い発展・速度は遅い・<b>女性起業家向き</b>・一つをじっくり」</span>。</p>
+    <p>「女性起業家向き」と、そのまま書いてあるんです。</p>
+    <p style="margin-bottom:0;">だから、<b>今の十年でいきなり大きくしようとせんでも大丈夫です。</b>一つに絞って、じっくり育てる。それがこの十年の正しい使い方です。49歳から、否応なく大きくなります。<span class="hl">今は、形を決める時期です。</span></p>
+  </div>
+</div>
+
+<!-- 陸 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">陸</span><span class="sec-title">これからの時間割</span></div>
+  <div class="card">
+    <p class="lead">当日、回線が切れて話しきれんかったところです。</p>
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-when">2026年（43歳）　丙午・禄存星</div>
+        <div class="tl-body">人が集まる年。しかも丙は<b>第二の守護神</b>です。<span class="hl">守護神の年に、退職と渡米が来ています。</span>とてもいい時に動いてはります。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">2026年10月8日〜12月6日　月天中殺</div>
+        <div class="tl-body">渡米がここに入ります。<b>これは問題ないです。</b>渡米は一年前から決まっていた流れなので、「新しく探しに行く」動きやないからです。<br>気をつけるのは、この二ヶ月に<b>新しい分野へ手を広げること</b>。向こうから来た話を受け取るのはOKです。<br><span class="hl">大きな決断は、ご主人に任せる。</span>この期間は、自分の軸がブレやすい時期です。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2026年12月　庚子・龍高星＋天将星</div>
+        <div class="tl-body">月天中殺が明けます。そして<b>十二段階で一番エネルギーの強い星</b>が巡る月。<span class="hl">向こうでの生活を本格的に組み立てるなら、ここからです。</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年（44歳）　丁未・司禄星</div>
+        <div class="tl-body">積み上げる年。<b>日常を整えるのにとても向いています。</b>アメリカでの生活の基礎を作る年です。派手に動く年やないと思ってください。<br><b>そして、起業の形をこの年のうちに決める。</b></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2028年（45歳）　戊申・車騎星</div>
+        <div class="tl-body">kumiさんの命式にある星と<b>同じ星</b>が巡ります。動く年。実際に形を作りに行く年です。取りに行っていい年。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2029年（46歳）　己酉・牽牛星　★決め事の期限</div>
+        <div class="tl-body">責任・立場・名前を背負う星。<b>ここが期限です。</b>起業の形を決めて動き出すのは、この年までに済ませておく。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">2030年〜2031年（47〜48歳）　年天中殺</div>
+        <div class="tl-body">二年間。<b>新しいことを一から探しに行くのには向いていません。</b>逆に、それまでに作った形を守る・学ぶ・整えるのには、ええ時期です。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2032年〜（49歳）　大発展の十年</div>
+        <div class="tl-body"><span class="hl">ここから、事業が一番大きくなる十年に入ります。</span></div>
+      </div>
+    </div>
+    <div class="pull" style="margin-top:1.2rem;">2029年までに形を決める。<br>2030〜31で足場を固める。<br><b>2032年から、本番。</b></div>
+    <p style="margin-bottom:0;">これが、kumiさんの設計図です。</p>
+  </div>
+</div>
+
+<!-- 漆 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">漆</span><span class="sec-title">10月の移植と、これからの巡り</span></div>
+  <div class="card">
+    <p class="lead">当日うかがった、いちばん大きい報せのことです。</p>
+    <p>半年以上ずっと検査を続けて、三日前に、ついに移植できる受精卵が見つかった。<b>10月に移植の予定。</b></p>
+    <p>先に、はっきりさせておきます。<span class="hl">「この時期に授かります」とは、僕は言いません。</span>そこは医療の領域で、僕が断定していいことやないです。治療を続けるか、どう進めるかも、お医者さんとkumiさんが決めることです。</p>
+    <p><b>そのうえで、命式から読めることを書きます。</b>体と環境が整いやすい巡りが、どこに来ているか。ここは読めます。</p>
+
+    <div class="card" style="background:var(--sink);border-color:var(--accent-soft);margin:1rem 0;">
+      <p class="lead" style="margin-bottom:.6rem;">10月の移植について</p>
+      <p>10月は月天中殺の期間に入ります。ただ、<b>これは止める理由になりません。</b></p>
+      <p style="margin-bottom:0;">天中殺で気をつけるのは<b>「今まで関わってこなかった分野を、新しく探しに行くこと」</b>です。三年治療を続けて、半年検査を重ねて、やっと見つかった一つの受精卵を移植する ―― これは<span class="hl">完全に「これまでの延長」</span>です。新規探しやないです。渡米と同じ扱いになります。</p>
+    </div>
+
+    <p>そして、<b>その先の巡りです。</b></p>
+    <p>算命では、<b>水は受け入れて育てる場</b>、<b>火は生命が外に出てくる方向</b>のエネルギーと見ます。そして<b>鳳閣星・調舒星</b>という星を、子どもを表す星として読みます。</p>
+
+    <div class="tl" style="margin-top:1rem;">
+      <div class="tl-item">
+        <div class="tl-when">2026年12月　龍高星＋天将星／水</div>
+        <div class="tl-body">龍高星は<b>体質を整えたり、専門的なサポートを受けて形にしていく星</b>です。そこに一番強いエネルギーが重なります。日の支と水でつながる配置も出ています。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年2月・3月　水が続く</div>
+        <div class="tl-body">特に3月は、生まれた月の支と<b>支合</b>。月の支は家庭と体の土台を表す場所です。支合は、ちぐはぐやったものが噛み合う配置です。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年4月・5月　★鳳閣星 → 調舒星</div>
+        <div class="tl-body"><span class="hl">子どもを表す星が、二ヶ月続けて巡ります。</span>この二つが続けて来ることは、めったにありません。<br>しかも5月は、生まれた日の支と支合。<b>日の支は配偶者の場所</b>です。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年6月・7月　火が続く</div>
+        <div class="tl-body">6月は、生まれた月の支と火でつながる配置。4月から7月まで、<b>火の気が四ヶ月続きます。</b></div>
+      </div>
+    </div>
+
+    <p style="margin-top:1.2rem;">整理すると、こうです。</p>
+    <div class="pull"><b>2026年12月〜2027年3月</b>　整う時期<br><b>2027年4月〜7月</b>　山が来る</div>
+    <p>渡米して、生活を作りながら、ちょうどこの流れの中にいはります。</p>
+    <p><b>年で見ても、2026年と2027年は火の気が続いています。</b>年と月が、同じ方向を向いています。</p>
+    <p>そして4月から巡ってくる火は、<span class="hl">kumiさんに一番足りひん気</span>です。だからこそ、<b>それまでに体を温めておく</b>ほうがいいです。肆で書いた「温めること」は、ここに繋がります。</p>
+    <p style="margin-bottom:0;">医療の力を借りることを、算命学は「自然に反すること」とは見ません。<b>科学技術も、その時代に与えられた環境の一つ</b>と考えます。12月の龍高星は、まさに<span class="hl">サポートを受けて形にする星</span>です。自分の力だけでやることが偉い、という考え方は、算命にはないです。</p>
+  </div>
+</div>
+
+<!-- 捌 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">捌</span><span class="sec-title">今日から動ける処方</span></div>
+  <div class="card recipe">
+    <div class="item"><div class="num">1</div><div class="rbody"><b>考えたら、小さく出す。</b><br>これが全部の土台です。紙に書く、人に話す、形にする。<span class="hl">出した数だけ自信がつきます。考えた数やないです。</span>まとまってなくても出す。まとまるまで待つと、一生出ません。</div></div>
+    <div class="item"><div class="num">2</div><div class="rbody"><b>体を温める。それだけは毎日。</b><br>水142で、放っておくと冷えます。岩盤浴、湯船、腹巻き、温かい飲み物。<b>アメリカでもできることを、渡米前に習慣にしておく。</b>2027年の春に火が巡ってくる時、体が受け取れる状態にしておくためです。</div></div>
+    <div class="item"><div class="num">3</div><div class="rbody"><b>渡米までに「自分は何屋さんになるか」を一行で書く。</b><br>完璧やなくていいです。後で変えてもいい。<span class="hl">頭の中やのうて、紙に。</span>二年動いてきたことに、区切りをつけるためです。壬申の警句にある「物事の締めくくりがないため失敗しやすい」の、ちょうど逆をやることになります。</div></div>
+    <div class="item"><div class="num">4</div><div class="rbody"><b>10月8日〜12月6日は、大きな決断をご主人に任せる。</b><br>家具でも住まいでも、大きい買い物の判断です。この期間は自分の軸がブレやすい時期なので、<b>決めること自体を減らす</b>。向こうから来た話を受け取るのは問題ないです。</div></div>
+    <div class="item"><div class="num">5</div><div class="rbody"><b>不安になったら「構造やな」と言ってみる。</b><br>真ん中の玉堂星が、環境の変化を一番苦手にしています。<span class="hl">不安になるのは性格やのうて構造です。</span>「私、こんなに不安でええんかな」やのうて「あ、不安に感じて当然なんやな」と、一段上から自分を見る。それだけで軽くなります。</div></div>
+    <div class="item"><div class="num">6</div><div class="rbody"><b>2027年中に、起業の形を一つに絞る。</b><br>2028年が動く年、2029年が期限です。そして2030〜31は天中殺なので、<b>その前に形を決めておく。</b>今の十年は「一つをじっくり」が正しい使い方です。大きくしようとせんでいいです。</div></div>
+    <div class="item"><div class="num">7</div><div class="rbody"><b>社長さんには「まとまってません」と前置きして話す。</b><br>業務委託で求められている「ハイレベルなサポート」は、<span class="hl">もう頭の中にあります。</span>出てへんだけです。前置きさえあれば出せるなら、前置きを使ってください。目上の助けを得る配置も出ています。</div></div>
+    <div class="item"><div class="num">8</div><div class="rbody"><b>暦を毎日ひらく。</b><br>「今日はこういう日か」と見るだけでいいです。<span class="hl">「あの日しんどかったな、何の星やったっけ」</span>と後から見返すと、自分のパターンが見えてきます。二回三回と重なったら、それがkumiさんの癖です。先に手が打てるようになります。</div></div>
+  </div>
+</div>
+
+<!-- 締め -->
+<div class="closing">
+  <p>kumiさんは、<span class="hl">滔々とした大河</span>です。<br>止まらずに、流れ続ける人。</p>
+  <p>「自信がない」は、能力の問題やないです。<br><b>自覚の問題です。</b><br>持ってへんのやのうて、持ってることに気づいてないだけ。</p>
+  <p>「支配から逃れて独立したい」は、<br>わがままやないです。<br><b>宿命に、二重に書いてあることです。</b></p>
+  <p class="big">今は、形が作り変わる十年。</p>
+  <p>退職も、渡米も、移植も、起業も、<br>全部いっぺんに来ているのは、偶然やないです。<br><span class="hl">そういう十年に、自分でセットして生まれてきてはります。</span></p>
+  <p>三年、ようここまで続けてこられたと思います。<br>働きながら、結果の出えへん時間を。<br><b>誰にでもできることやないです。</b></p>
+  <p>10月、いってらっしゃい。<br>向こうで、体を温めて、生活を作って、<br>考えたことを小さく出していく。</p>
+  <p>それだけで、この命式は回り出します☺️</p>
+</div>
+
+<a class="koyomi-link" href="/kumi">
+  <span class="arrow">▶</span> 運気暦（日々の運気カレンダー）をひらく
+  <small>毎日の運気が出ます。アメリカに行ってからも見られます。</small>
+</a>
+
+<footer>
+  <p>いつもおおきにです😊　気になったところは、いつでもLINEで掘ってください💬</p>
+  <p class="sig">㐂</p>
+</footer>
+
+</div>
+</body>
+</html>
