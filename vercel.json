@@ -329,6 +329,10 @@
     {
       "source": "/kumi-kanteisho",
       "destination": "/clients/kumi-kanteisho.html"
+    },
+    {
+      "source": "/sanae",
+      "destination": "/view.html?client=sanae"
     }
   ]
 }
