@@ -147,8 +147,8 @@
       "destination": "/view.html?client=syuko"
     },
     {
-      "source": "/syuko-kanteisho",
-      "destination": "/clients/syuko-kanteisho.html"
+      "source": "/mikoto-kanteisho",
+      "destination": "/clients/mikoto-kanteisho.html"
     },
     {
       "source": "/masami",
