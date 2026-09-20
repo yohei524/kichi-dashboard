@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sanaeさん 鑑定書 ｜ 㐂占</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --night:#0B0F1A; --night2:#131A28; --sink:#171F30; --panel:#1B2334;
+  --line:#2A3346; --accent:#D9A441; --accent-soft:#B8842C; --accent-glow:rgba(217,164,65,.14);
+  --gold:#C9A24A; --text:#ECEAE4; --muted:#8A96AC; --muted2:#A9B3C6;
+  --water:#6E9BC4; --fire:#D08A5A; --wood:#7FA86B; --metal:#C4C9D2; --earth:#C9A24A;
+  --bad:#C97A6A; --good:#6E9BC4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Serif JP',serif; color:var(--text); line-height:1.95; letter-spacing:.045em;
+  background:
+    radial-gradient(1200px 620px at 50% -12%, rgba(217,164,65,.10), transparent 60%),
+    linear-gradient(180deg,#0B0F1A 0%,#0D1220 45%,#080B14 100%);
+  background-attachment:fixed; min-height:100vh;
+}
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.05rem 4rem;}
+
+/* header */
+header{text-align:center;padding:3rem 1rem 1.4rem;}
+header .kicker{font-size:.68rem;letter-spacing:.32em;color:var(--accent);opacity:.9;margin-bottom:.9rem;}
+header h1{font-size:1.5rem;font-weight:500;letter-spacing:.08em;margin-bottom:.5rem;}
+header h1 .nm{color:var(--accent);}
+header .tagline{font-size:.8rem;color:var(--muted2);letter-spacing:.1em;line-height:1.7;}
+header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:.12em;}
+
+/* profile strip */
+.profile{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem .8rem;
+}
+.profile div{font-size:.74rem;color:var(--muted);}
+.profile div b{display:block;font-size:.9rem;color:var(--text);font-weight:500;margin-top:.1rem;letter-spacing:.06em;}
+.profile div.full{grid-column:1/3;}
+
+/* section */
+.sec{margin-bottom:1.65rem;}
+.sec-head{
+  display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;
+  padding-bottom:.6rem;border-bottom:1px solid var(--line);
+}
+.sec-no{font-size:.72rem;color:var(--accent);letter-spacing:.18em;font-weight:600;}
+.sec-title{font-size:1.02rem;font-weight:500;letter-spacing:.08em;}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  padding:1.25rem 1.15rem;box-shadow:0 4px 24px rgba(0,0,0,.32);margin-bottom:1rem;
+}
+.card p{font-size:.87rem;margin-bottom:.9rem;color:var(--text);}
+.card p:last-child{margin-bottom:0;}
+.card .lead{color:var(--accent);font-size:.9rem;font-weight:500;}
+.hl{color:var(--accent);font-weight:500;}
+.soft{color:var(--muted2);font-size:.8rem;}
+
+/* 陰占盤 */
+.meishiki{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.2rem 0 .3rem;
+}
+.pillar{
+  background:var(--sink);border:1px solid var(--line);border-radius:12px;
+  padding:.7rem .4rem;text-align:center;
+}
+.pillar .lbl{font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.55rem;}
+.pillar .yomi{font-size:.58rem;color:var(--muted);letter-spacing:.04em;line-height:1.3;}
+.pillar .kan{font-size:1.85rem;font-weight:600;color:var(--text);line-height:1.15;}
+.pillar .shi{font-size:1.85rem;font-weight:600;color:var(--accent);line-height:1.15;margin-top:.2rem;}
+.pillar .zou{font-size:.62rem;color:var(--muted2);margin-top:.55rem;letter-spacing:.04em;}
+.meishiki-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;}
+
+/* 人体星図 */
+.jintai{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:19rem;margin:.4rem auto .2rem;}
+.jcell{
+  background:var(--sink);border:1px solid var(--line);border-radius:11px;
+  aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;
+}
+.jcell .pos{font-size:.58rem;color:var(--muted);letter-spacing:.05em;}
+.jcell .star{font-size:.92rem;font-weight:600;color:var(--text);letter-spacing:.03em;}
+.jcell.center{background:linear-gradient(160deg,rgba(217,164,65,.18),var(--sink));border-color:var(--accent-soft);}
+.jcell.center .star{color:var(--accent);}
+.jcell.jusei-cell{background:var(--night2);}
+.jcell .star.gold{color:var(--gold);}
+
+/* 五行バー */
+.gogyo{margin-top:.3rem;}
+.gbar{display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;}
+.gbar .gname{width:2.6rem;font-size:.76rem;color:var(--muted2);flex-shrink:0;}
+.gbar .gtrack{flex:1;height:9px;background:var(--sink);border-radius:5px;overflow:hidden;}
+.gbar .gfill{height:100%;border-radius:5px;}
+.gbar .gval{width:2.2rem;text-align:right;font-size:.72rem;color:var(--muted);flex-shrink:0;}
+.g-wood .gfill{background:var(--wood);}
+.g-fire .gfill{background:var(--fire);}
+.g-earth .gfill{background:var(--earth);}
+.g-metal .gfill{background:var(--metal);}
+.g-water .gfill{background:var(--water);}
+
+/* 大運テーブル */
+.daiun-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.daiun{width:100%;border-collapse:collapse;font-size:.78rem;min-width:19rem;}
+.daiun th{
+  font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.05em;
+  padding:.4rem .3rem;border-bottom:1px solid var(--line);text-align:center;
+}
+.daiun td{padding:.5rem .3rem;text-align:center;border-bottom:1px solid rgba(42,51,70,.5);color:var(--text);}
+.daiun td:first-child{color:var(--muted2);font-size:.72rem;white-space:nowrap;}
+.daiun .tc-cell{color:var(--bad);font-size:.68rem;}
+.daiun .now-row td{background:linear-gradient(90deg,rgba(217,164,65,.12),transparent);}
+.daiun .now-row td:first-child{color:var(--accent);font-weight:600;}
+.daiun .now-cell{color:var(--accent);font-size:.68rem;font-weight:600;}
+
+/* timeline */
+.tl{position:relative;padding-left:1.1rem;margin-top:.3rem;}
+.tl::before{content:"";position:absolute;left:3px;top:.4rem;bottom:.4rem;width:2px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:1rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before{content:"";position:absolute;left:-1.1rem;top:.45rem;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--night2);}
+.tl-item.tc::before{background:var(--bad);}
+.tl-when{font-size:.76rem;color:var(--accent);font-weight:600;letter-spacing:.06em;}
+.tl-item.tc .tl-when{color:var(--bad);}
+.tl-body{font-size:.82rem;color:var(--text);margin-top:.15rem;}
+
+/* do / dont */
+.dodont{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.dobox,.dontbox{border-radius:12px;padding:.85rem .8rem;border:1px solid var(--line);}
+.dobox{background:rgba(110,155,196,.08);}
+.dontbox{background:rgba(201,122,106,.08);}
+.dobox .h,.dontbox .h{font-size:.78rem;font-weight:600;margin-bottom:.5rem;letter-spacing:.06em;}
+.dobox .h{color:var(--good);}
+.dontbox .h{color:var(--bad);}
+.dodont ul{list-style:none;}
+.dodont li{font-size:.75rem;color:var(--text);padding-left:.9rem;position:relative;margin-bottom:.45rem;line-height:1.6;}
+.dodont li:last-child{margin-bottom:0;}
+.dobox li::before{content:"○";position:absolute;left:0;color:var(--good);font-size:.7rem;}
+.dontbox li::before{content:"×";position:absolute;left:0;color:var(--bad);font-size:.7rem;}
+@media(max-width:400px){.dodont{grid-template-columns:1fr;}}
+
+/* 処方 */
+.recipe{counter-reset:r;}
+.recipe .item{display:flex;gap:.75rem;margin-bottom:1rem;}
+.recipe .item:last-child{margin-bottom:0;}
+.recipe .num{
+  flex-shrink:0;width:1.7rem;height:1.7rem;border-radius:50%;
+  background:linear-gradient(160deg,var(--accent),var(--accent-soft));
+  color:var(--night);font-weight:700;font-size:.85rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.recipe .rbody{font-size:.83rem;}
+.recipe .rbody b{color:var(--accent);font-weight:600;}
+
+/* pull quote */
+.pull{
+  border-left:3px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:1rem 0;
+  font-size:.9rem;color:var(--muted2);font-style:normal;
+}
+
+/* closing */
+.closing{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--accent-soft);border-radius:18px;padding:1.6rem 1.25rem;text-align:center;
+  box-shadow:0 0 30px rgba(217,164,65,.08);
+}
+.closing p{font-size:.88rem;margin-bottom:.9rem;}
+.closing p:last-child{margin-bottom:0;}
+.closing .big{font-size:1.05rem;color:var(--accent);font-weight:500;letter-spacing:.06em;}
+
+/* link to koyomi */
+.koyomi-link{
+  display:block;text-align:center;margin-top:1.5rem;padding:1rem;
+  background:var(--night2);border:1px solid var(--line);border-radius:14px;
+  color:var(--text);text-decoration:none;font-size:.86rem;transition:border-color .3s;
+}
+.koyomi-link:hover{border-color:var(--accent-soft);}
+.koyomi-link .arrow{color:var(--accent);}
+.koyomi-link small{display:block;color:var(--muted);font-size:.7rem;margin-top:.3rem;}
+
+/* 日本風の引き戸（襖）― タップで左右に開く */
+.door{display:block;text-align:center;padding:2.2rem 0 .5rem;margin-top:1.5rem;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.door-gate{position:relative;width:210px;height:132px;margin:0 auto 1rem;border-radius:4px;overflow:hidden;border:3px solid var(--accent-soft);box-shadow:0 4px 18px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.06);background:var(--sink);}
+.door-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.05rem;letter-spacing:.28em;text-indent:.28em;color:var(--accent);text-decoration:none;font-weight:500;background:radial-gradient(120% 90% at 50% 120%,rgba(217,164,65,.22) 0%,var(--sink) 62%);}
+.door-leaf{position:absolute;top:0;width:50%;height:100%;background:repeating-linear-gradient(90deg,rgba(0,0,0,.14) 0 1px,transparent 1px 26px),linear-gradient(170deg,var(--panel) 0%,#141B29 100%);transition:transform .55s cubic-bezier(.65,0,.35,1);z-index:2;}
+.door-leaf-l{left:0;border-right:1px solid var(--line);}
+.door-leaf-r{right:0;border-left:1px solid var(--line);}
+.door-pull{position:absolute;top:50%;width:8px;height:26px;border-radius:3px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);transform:translateY(-50%);}
+.door-leaf-l .door-pull{right:8px;} .door-leaf-r .door-pull{left:8px;}
+.door.open .door-leaf-l{transform:translateX(-100%);}
+.door.open .door-leaf-r{transform:translateX(100%);}
+.door.open .door-inner{text-shadow:0 0 12px rgba(217,164,65,.3);}
+.door-note{font-size:.68rem;color:var(--muted);line-height:1.8;margin-top:.35rem;}
+
+footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
+footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header>
+  <p class="kicker">㐂占 　 命 術 本鑑定書</p>
+  <h1><span class="nm">sanae</span> さんへ</h1>
+  <p class="tagline">炉から出された金。焼かれて、形になる</p>
+  <p class="date">1967年（昭和42年）11月2日 生　／　鑑定 2026.09.20</p>
+</header>
+
+<!-- プロフィール -->
+<div class="profile">
+  <div class="full">魂の本質（日の宿命）<b>庚午（かのえうま）― 溶かされる金</b></div>
+  <div>中心の星<b>龍高星</b></div>
+  <div>天中殺<b>戌亥（北西）</b></div>
+  <div>才能の星<b>貫索星</b></div>
+  <div>今の大運<b>丙辰・車騎星（52〜61歳）</b></div>
+  <div class="full">運気の位置<b>仕事の柱が根から揺さぶられる10年の、ちょうど真ん中</b></div>
+</div>
+
+<div class="card" style="border-color:var(--accent-soft);">
+  <p>おおきにです、sanaeさん☺️</p>
+  <p>あの長い文章を、全部読ませてもらいました。担任のこと、体のこと、10月末の期限、お父さんのこと、宮古島のお母さんのこと。バラバラの悩みに見えて、根っこは同じところから出ています。</p>
+  <p>この鑑定書には、Meetでお話しした内容に加えて、その場では触れきれなかったところまで入れています。何度でも読み返してください。気になったところは、いつでもLINEで掘ってください。</p>
+</div>
+
+<!-- 命式盤 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">命 式</span><span class="sec-title">sanaeさんの設計図</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.6rem;">陰占 ― 生まれ持った気の柱</p>
+    <div class="meishiki">
+      <div class="pillar">
+        <div class="lbl">日柱（自分・家庭）</div>
+        <div class="yomi">かのえ</div><div class="kan">庚</div>
+        <div class="shi">午</div><div class="yomi">うま</div>
+        <div class="zou">蔵干　丁・己</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">月柱（仕事・家系）</div>
+        <div class="yomi">かのえ</div><div class="kan">庚</div>
+        <div class="shi">戌</div><div class="yomi">いぬ</div>
+        <div class="zou">蔵干　戊・辛・丁</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">年柱（社会・先祖）</div>
+        <div class="yomi">ひのと</div><div class="kan">丁</div>
+        <div class="shi">未</div><div class="yomi">ひつじ</div>
+        <div class="zou">蔵干　己・丁・乙</div>
+      </div>
+    </div>
+    <p class="meishiki-note">日柱 庚午 ／ 月柱 庚戌 ／ 年柱 丁未</p>
+
+    <div class="divider" style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p class="soft" style="margin-bottom:.2rem;">陽占 ― 心のかたち（人体星図）</p>
+    <div class="jintai">
+      <div class="jcell jusei-cell"><span class="pos">伴星（先祖）</span><span class="star">鳳閣星</span></div>
+      <div class="jcell"><span class="pos">目上（北）</span><span class="star">牽牛星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">初年運</span><span class="star gold">天南星</span></div>
+      <div class="jcell"><span class="pos">配偶者（西）</span><span class="star">牽牛星</span></div>
+      <div class="jcell center"><span class="pos">中心・本人</span><span class="star">龍高星</span></div>
+      <div class="jcell"><span class="pos">社会（東）</span><span class="star">玉堂星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">晩年運</span><span class="star gold">天恍星</span></div>
+      <div class="jcell"><span class="pos">目下（南）</span><span class="star">貫索星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">中年運</span><span class="star gold">天堂星</span></div>
+    </div>
+
+    <div class="divider" style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p class="soft" style="margin-bottom:.5rem;">五行のエネルギー配分</p>
+    <div class="gogyo">
+      <div class="gbar g-wood"><span class="gname">木</span><span class="gtrack"><span class="gfill" style="width:18%"></span></span><span class="gval">20</span></div>
+      <div class="gbar g-fire"><span class="gname">火</span><span class="gtrack"><span class="gfill" style="width:100%"></span></span><span class="gval">108</span></div>
+      <div class="gbar g-earth"><span class="gname">土</span><span class="gtrack"><span class="gfill" style="width:73%"></span></span><span class="gval">79</span></div>
+      <div class="gbar g-metal"><span class="gname">金</span><span class="gtrack"><span class="gfill" style="width:67%"></span></span><span class="gval">72</span></div>
+      <div class="gbar g-water"><span class="gname">水</span><span class="gtrack"><span class="gfill" style="width:0%"></span></span><span class="gval">0</span></div>
+    </div>
+    <p class="soft" style="margin-top:.7rem;">総エネルギー 279 ― 量としては十分。偏りが、そのまま人生の形になっています。</p>
+  </div>
+</div>
+
+<!-- 壱 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">壱</span><span class="sec-title">庚午 ― 焼かれて形になる金</span></div>
+  <div class="card">
+    <p>日の宿命は <span class="hl">庚午</span>。六十干支の七番目で、<span class="hl">「溶かされる金」</span>、別名を「出炉の金」といいます。炉から出されたばかりの、まだ熱を持った金属です。</p>
+    <p>金属は、焼かれるから形になります。焼かれなければ、ただの鉱石のままです。<span class="hl">sanaeさんが厳しい場所でこそ伸びてきたのは、この形そのもの</span>です。ただし火が強すぎると、形になる前に溶けてしまう。ここが、この宿命の分かれ目です。</p>
+    <p class="soft">以下が、庚午の本質です。</p>
+    <p>単純明快で裏表のない性格。いつも何かに全力投球する熱中型。独自の世界を切り開く。馴染むのに時間はかかるが、周囲を明るくする才能がある。結論を急ぎがちで、利害の計算は巧み。長所と短所が赤裸々なところが、魅力的だと評価される。</p>
+    <p>女性の場合は、こう示されています。<span class="hl">勝ちを求めて、負けることを嫌う。</span>堂々と自己主張する。機敏さが売り。真面目に見えて、ユニークでマイペース。</p>
+
+    <div class="pull">迷い心が多く心騒がしく落ち着かない。煩悶・軽率のため散在が多い。<br><span class="hl">和協心を養えば、盛衰変動があっても晩年に成果を全うできる。</span></div>
+
+    <p>これが庚午に伝わる警句です。前半は厳しいことが書かれていますが、大事なのは後半です。<span class="hl">この宿命の人が晩年に成果を全うする条件として、たった一つだけ名指しされているのが「和協心」</span>――人と力を合わせる心です。</p>
+    <p>そして「盛衰変動があっても」と置かれているところ。上がったり下がったりする前提で、それでも全うできる、と示されています。<span class="hl">波があることは、この宿命では失敗ではありません。</span>条件は、一人で背負わないこと、それだけです。</p>
+  </div>
+</div>
+
+<!-- 弐 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">弐</span><span class="sec-title">五つの星 ― 出せるものと、出せないもの</span></div>
+  <div class="card">
+    <p><span class="hl">中心・龍高星。</span>経験で学ぶ星です。知識に貪欲で、まず行動する。十大主星の中で最強の忍耐と努力を持つ星です。人から言われたことをそのままは受け取らず、自分で調べて、経験して、腑に落ちてから動く。</p>
+    <p>本を読み、講演を観て、検診の結果を鵜呑みにしない。あれは性格ではなく、ここから出ています。<span class="hl">この進め方自体は、sanaeさんに合っています。変える必要はありません。</span></p>
+    <p>ただし龍高星には、もう一つの面があります。<span class="hl">「何を考えているか分からない」と思われがちな星</span>だということ。陽転すれば、誰にも縛られない自由な発想と立体思考になります。陰転すると、目的を見失って無意味に動き回る。そして――<span class="hl">中身を、外に出しにくい。</span></p>
+    <p><span class="hl">目上・牽牛星。</span>実を捨てて名を取る星です。お金よりも他人からの評価。名誉、名声、地位。「名誉の花」と呼ばれます。陽転すれば、筋を通して信頼を集める人になります。この星には注意書きが付いていて、<span class="hl">持ち上げられだしたら、健康に注意</span>。3年担任、学年主任、進路担当――重要ポジションで、残業が80時間を超える。この星が最も危うくなる形が、そのまま出ています。</p>
+    <p><span class="hl">配偶者・牽牛星。</span>同じ星が、家庭という一番近い場所にも入っています。自分にも家族にも厳しく、理想の形を持ってそこに合わせようとする。<span class="hl">名誉と、自分への厳しさ。この二つがsanaeさんの中で二重になっています。</span></p>
+    <p><span class="hl">社会・玉堂星。</span>学問、伝統、古典、知性、母性、そして「教える」。知的な職業に向き、仕事に役立つ知恵が働く星です。金運が開ける働き方も、ここでは「教えること」と示されています。<span class="hl">教員という仕事は、sanaeさんの命式に正面から合っています。</span>30年以上続いたのは、根性ではなく、合っていたからです。</p>
+    <p>ここは大事なところなので、もう一段書きます。玉堂星は<span class="hl">「補佐役として力を発揮する」</span>星です。事務局が何度も回ってくること、裏方でこそ力が出ること――<span class="hl">あれは我慢して引き受けているのではなく、この星が最も機能している形</span>です。人と組めない人ではない、ということです。</p>
+    <p>ただし玉堂星が指しているのは「教える」ことであって、「管理する」ことでも「荒れた現場を抑える」ことでもありません。<span class="hl">同じ学校の中でも、疲弊する仕事と、力が出る仕事が分かれる理由がここです。</span></p>
+    <p><span class="hl">目下・貫索星。</span>忍耐強く、嵐が過ぎ去るまでじっと待つ。相手とは揉めないポリシー。マイペースで、狭く深い交友。そして<span class="hl">「独立心に火が付けばやり抜く」</span>と示されています。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">出せないのは「中身」の方です</p>
+    <p>この五つを並べると、sanaeさんの形がはっきり出ます。</p>
+    <p><span class="hl">役割は、受け取れる人です。</span>玉堂星が補佐役として回り、事務局も部活も引き受けてきた。人と組むこと自体は、まったく問題がない。</p>
+    <p>出せないのは、<span class="hl">「しんどい」という中身の方</span>です。龍高星が中身を外に出さず、貫索星が揉めずに自分で持つ。だから職場で、sanaeさんが何をしんどいと思っているかを、本当のところは誰も知らない。</p>
+    <p>そして、断るのが苦手。<span class="hl">受け取る側の扉は開いていて、返す側の扉だけが閉まっている状態</span>です。これが30年続けば、量が合わなくなるのは当たり前です。</p>
+    <p>東洋占術の思想には、<span class="hl">関係性の中で自分がどうあるか、という考え方があります。サポートを受ける時は受ける、が正解です。</span>一人で背負うことが偉い、という発想はここにはありません。</p>
+  </div>
+</div>
+
+<!-- 参 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">参</span><span class="sec-title">火108・水0 ― 走れる体と、冷ませない体</span></div>
+  <div class="card">
+    <p>五行を見ると、<span class="hl">火が108で突出し、水は0</span>です。</p>
+    <p>火は、燃やす力であり、走る力です。<span class="hl">激務で30年以上走ってこられたのは、この火があるから</span>です。これはsanaeさんの財産であって、消すものではありません。</p>
+    <p>ただし、走れることと、冷やせることは別の話です。<span class="hl">冷ます側が、0なのです。</span></p>
+    <p>血圧が高い。心臓が肥大している。大動脈が蛇行している。9時に帰って、そこから炭水化物が増える。10キロ単位のリバウンドを繰り返す。<span class="hl">意志が弱いのでも、自己管理ができていないのでもありません。冷ます装置が、もともと入っていないだけ</span>です。</p>
+    <p>東洋思想・占術では、<span class="hl">足りない五行は「弱さ」ではなく「飢え」</span>と見ます。満タンの水槽に水を注いでも溢れるだけですが、空のコップに一滴入れば、その一滴が大きく効く。<span class="hl">水を足すことが、sanaeさんには最も効率よく効きます。</span></p>
+    <p>そしてもう一つ。八門法で見ると <span class="hl">白虎型</span>。褒められるより、厳しくされることで伸びる形です。自尊心が強く、プライドを刺激されるとそれをバネにして上がっていく。</p>
+    <p>ここは誤解されやすいところなので、はっきり書きます。<span class="hl">この「自尊心が強い」は、自己肯定感が高いという意味ではありません。</span>「自分はこれでは足りていない」と感じる力が強い、という意味です。</p>
+    <p>短大・夜間部で足りないと思い、働きながら夏休みに通って大卒資格を取った。そこで止まらず、同時通訳の講座、カウンセラーの免許。コンプレックスの中で、国の代表として半年の派遣まで行った。<span class="hl">満たされている人は、わざわざ足しに行きません。足りないと感じたからこそ、補い続けられた。</span>それが白虎型の正体です。</p>
+    <p>そこに火108が乗ります。<span class="hl">補う燃料は十分にあるのに、「もう十分だ」と自分に言う機能が入っていない。</span>だから走り出すと止まらない。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">派遣から戻った時に崩れた理由</p>
+    <p>30代で1年休まれたこと。あれは派遣の最中ではなく、<span class="hl">終わって戻ってきた時</span>でした。</p>
+    <p>ここが、この命式のいちばん大事な読みどころです。<span class="hl">火が走っている間は走れる。止まった瞬間に、冷ます水がないから崩れる。</span>初年運の天南星（10点）には「崩れるともろい」と示されていて、それがそのまま出た形です。</p>
+    <p>強い人間ではない、のではありません。<span class="hl">強さの種類が、走ることの方に全部入っている</span>のです。止まることの方には、もともと配分されていない。それを性格の弱さだと思って責める必要は、まったくありません。</p>
+  </div>
+</div>
+
+<!-- 肆 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">肆</span><span class="sec-title">天中殺と、組織との関わり方</span></div>
+  <div class="card">
+    <p>sanaeさんは <span class="hl">戌亥天中殺（北西天中殺）</span>。<span class="hl">精神性を高める使命</span>を持ちます。形のないもの――知識、教え、人の心。目に見えて手で触れるものより、そちら側に向かうと陽転します。教員という仕事が合っているのは、ここにも理由があります。</p>
+    <p>加えて <span class="hl">生月中殺</span>。月の柱に天中殺が重なる形で、これは<span class="hl">仕事・社会的な立場の領域</span>に出ます。</p>
+    <p>示されているのは、<span class="hl">組織の後ろ盾を受けにくい</span>ということ。陽転する条件は、<span class="hl">組織の敷いたレールに乗り切るのではなく、自分で役割を作る側に回ること</span>です。</p>
+    <p>校長先生に体調を相談しても話が深まらなかったこと。衛生委員会の面談を前に身構えてしまうこと。<span class="hl">これは職場の人が冷たいからではありません。</span>実際、みなさん良い方で、心配してくださっている。それでも<span class="hl">「組織がsanaeさんを守る形」にはなりにくい――それがこの宿命です。</span></p>
+    <p>だから、<span class="hl">組織に守ってもらう前提で設計しない方がいい。</span>これは働き方を選ぶときの、大事な前提になります。</p>
+    <p>もう一つ。月柱と年柱のあいだに <span class="hl">庫刑・破</span>が出ています。家系や、過去から受け継いだものが表に出やすい形です。ご家族と物理的な距離ができたこと、お父さまとお祖母さまの看取りを引き受けたこと――この配置が、実際の人生に出ています。</p>
+  </div>
+</div>
+
+<!-- 伍 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">伍</span><span class="sec-title">この命式で動ける条件</span></div>
+  <div class="card">
+    <p>ここまでを、一本にまとめます。</p>
+    <p>sanaeさんは、<span class="hl">走る力を持って生まれ、厳しい場所でこそ伸びてきた人</span>です。足りないと感じる力が強いから、補い続けられた。役割を受け取る力もある。ここまでは、全部うまく回ってきました。</p>
+    <p>詰まっているのは一箇所だけです。<span class="hl">しんどいという中身を、外に出す先がない。</span>龍高星が出さず、貫索星が揉めず、断るのが苦手。受け取る扉だけが開いていて、返す扉が閉まっている。</p>
+    <p>そこに火108・水0が重なると、<span class="hl">熱が出口のないまま溜まります。</span>血圧も、眠れない夜も、リバウンドも、10月末を決めきれないことも、全部ここから出ています。</p>
+
+    <div class="pull">針の穴は、<span class="hl">「しんどい」を一人分だけ外に出すこと</span>です。<br>全部を人に渡す必要はありません。一人に、一回、言えばいい。</div>
+
+    <p>これは理屈ではなく、<span class="hl">すでに一度、実際に起きています。</span></p>
+    <p>9月に、お金のことでLINEをくださいました。その後、「ここ数ヶ月で一番ぐっすり寝れました」と書いてくださいましたね。</p>
+    <p>あのとき、何も変わっていません。お金も増えていないし、体もそのままで、担任も続いていました。<span class="hl">変わったのは、一人で持っていた荷物を一回外に出したこと、それだけ</span>です。</p>
+    <p>そして sanaeさん自身が、その理由を言語化されています。「信頼できる人から情報をもらって、決められたから」と。<span class="hl">これが、和協心の実物です。</span>体の方が先に答えを出しています。</p>
+  </div>
+</div>
+
+<!-- 大運 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">運 気</span><span class="sec-title">10年ごとの流れ</span></div>
+  <div class="card">
+    <div class="daiun-scroll">
+      <table class="daiun">
+        <tr><th>年齢</th><th>干支</th><th>主星</th><th>従星</th><th>位相</th></tr>
+        <tr><td>42〜51</td><td>乙卯</td><td>司禄星</td><td>天報星</td><td class="tc-cell">干合・支合</td></tr>
+        <tr class="now-row"><td>52〜61</td><td>丙辰</td><td>車騎星</td><td>天印星</td><td class="now-cell">月柱と天剋地冲</td></tr>
+        <tr><td>62〜71</td><td>丁巳</td><td>牽牛星</td><td>天貴星</td><td class="tc-cell">方三位（南方火）</td></tr>
+        <tr><td>72〜81</td><td>戊午</td><td>龍高星</td><td>天恍星</td><td class="tc-cell">支合・半会</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:1rem;">今いるのは <span class="hl">52〜61歳・丙辰</span>。この10年は、命式の<span class="hl">月柱と天剋地冲</span>という関係になっています。天剋地冲は、上も下もぶつかる、最も強い衝突です。</p>
+    <p>ぶつかっているのが月柱――<span class="hl">仕事と社会的な立場の場所</span>です。</p>
+    <p>学校が荒れてきた。人員配置の話が出る。60歳で給与が3割カット。市外転勤がある。時短制度という新しい選択肢まで現れた。<span class="hl">次から次に来ているのは、sanaeさんが弱ったからではありません。この10年の中身が、それなのです。</span></p>
+    <p>そして、この10年に入っている星。主星が <span class="hl">車騎星</span>――動きながら考える、前進力の星。従星が <span class="hl">天印星（6点）</span>――待っていると来る、受け取る側の星です。</p>
+    <p><span class="hl">動けと言われる10年に、入っているエネルギーは待つ側。</span>アクセルとブレーキを同時に踏んでいる状態です。しんどいのは当然で、体力が落ちたという話ではありません。</p>
+    <p>従星も合わせて見ておきます。若い頃が <span class="hl">天南星10点</span>（目標に向かって一直線・崩れるともろい）、今が <span class="hl">天堂星8点</span>。天堂星は「責任から解放されて、後進を支援する」星で、経験に基づく的確な判断力を持つ相談役の質です。</p>
+    <p><span class="hl">今入っているのは「責任から解放される」エネルギー</span>です。夜遅くまで学校に残って担任を回す働き方は、10点の頃のやり方でした。体がついていかなくなったのは、年齢のせいではなく、<span class="hl">入っているエネルギーの種類が変わったから</span>です。</p>
+    <p>そして晩年が <span class="hl">天恍星7点</span>。肉体的にも精神的にも若々しい晩年で、若い人と一緒にいても違和感がない。美意識が高く、晩年まで華がある。<span class="hl">静かに枯れる形ではありません。</span></p>
+  </div>
+</div>
+
+<!-- 時間軸 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">時 期</span><span class="sec-title">これから数年の設計図</span></div>
+  <div class="card">
+    <div class="tl">
+      <div class="tl-item"><div class="tl-when">2026年 9月（〜10月7日）</div><div class="tl-body">従星が <b>天将星（12点）</b>。十二の中で最も強い月です。<span class="hl">決める力がいちばん高い時期がここ</span>。働き方の答えは、この期間のうちに出しておくのが最も軽く通れます。</div></div>
+      <div class="tl-item tc"><div class="tl-when">2026年 10月・11月　月天中殺</div><div class="tl-body">新しいことを決めると、後でひっくり返りやすい2ヶ月。<span class="hl">9月に決めたことを、運ぶだけの月に</span>してください。面談でその場の判断を求められても、持ち帰って構いません。10月は年柱に庫刑・破も重なり、過去から続いてきたことが表に出やすい時期です。</div></div>
+      <div class="tl-item"><div class="tl-when">2026年 12月</div><div class="tl-body">月天中殺が明けます。日柱と対冲・納音で、一度区切りがつく月。動かせなかったものが、ここから動き出します。従星は天極星で体力は低めなので、勢いをつけすぎないこと。</div></div>
+      <div class="tl-item"><div class="tl-when">2027年（60歳）　律音の年</div><div class="tl-body">年柱と <b>律音</b>。同じ音が重なり、家系からの後押しが来る年です。従星が <b>天南星（10点）</b>に変わり、<span class="hl">エネルギーが戻ります</span>。今年しんどい中で決めたことが、来年、形になっていく流れ。<span class="hl">今年が底で、来年は上がります。</span></div></div>
+      <div class="tl-item"><div class="tl-when">2027年 2月</div><div class="tl-body">月柱と大半会、日柱と半会。<b>三合が揃う拡大の配置</b>です。決めたことの結果が見え始める時期。ここでも全部を自分で抱えないこと。</div></div>
+      <div class="tl-item"><div class="tl-when">2028年・2029年</div><div class="tl-body">準備と足場固めの2年。ここで無理に大きく動かず整えておくと、次の10年がきれいに開きます。</div></div>
+      <div class="tl-item tc"><div class="tl-when">2030年〜2031年　年天中殺</div><div class="tl-body">12年に2年の巡り。<span class="hl">怖い時期ではありません。</span>新しい決断・大きな買い物・急なチャンスに飛び乗ることだけを外し、<span class="hl">自分を整えることに使う時期</span>です。神社参り、ご先祖のこと、体のケア。伊勢神宮に行きたいというお気持ちは、まさにこの時期の正しい使い方です。</div></div>
+      <div class="tl-item"><div class="tl-when">62歳〜71歳　丁巳・牽牛星</div><div class="tl-body">年柱と日柱を合わせて <b>方三位（南方火）</b>。火がさらに強まる10年に、<span class="hl">牽牛星が10年運として正面から巡ります</span>。ここが晩年の本番です（次の項）。</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 62歳から -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">本 番</span><span class="sec-title">62歳からの10年</span></div>
+  <div class="card">
+    <p>62歳からの10年に巡るのが <span class="hl">牽牛星</span>――人体星図に二つ出ている、あの名誉の星です。</p>
+    <p>ここで、名誉の種類が変わります。</p>
+    <p><span class="hl">今の名誉は、前線に立って、しんどい現場を持つことで得ているもの</span>です。3年担任、学年主任、進路担当。62歳からのものは、そうではありません。</p>
+    <p>社会の位置にある玉堂星は「教える」星でした。そこに、62歳からの牽牛星。<span class="hl">教える側・伝える側に立って得る名誉</span>です。</p>
+    <p>そしてこの10年は、方三位で火がさらに強まります。<span class="hl">火が強くなる10年に前線へ立つと、庚午は溶けます。</span>同じ火を教える方向に向ければ、そこが本番になります。</p>
+    <p>晩年の従星は天恍星でした。<span class="hl">若い人の中に混じって、華やかにやっている形</span>。教員を続けておられるかどうかに関わらず、何らかの形で「教える人」になっている――そういう設計になっています。</p>
+    <p>62歳は、ちょうど転勤の年でもあります。支援員でも、市役所でも、まったく別の場所でも構いません。<span class="hl">大事なのは肩書きではなく、「教える側に立っているかどうか」</span>です。そこさえ外さなければ、この10年は本番になります。</p>
+  </div>
+</div>
+
+<!-- 働き方 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">選 択</span><span class="sec-title">働き方の四つの道</span></div>
+  <div class="card">
+    <p>どれが正解で、どれが間違い、という話ではありません。<span class="hl">決めるのはsanaeさんです。</span>それぞれを選んだ時に何が起きるかだけ、命式から見えるぶんを置いておきます。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">① あと1年、フルで担任</p>
+    <p>60歳前の、100％もらえる最後の年。<span class="hl">お金の面では一番大きい</span>。これは事実です。</p>
+    <p>命式から見ると――今年は自刑で自分を追い込む形が出ていて、今の10年は動けと言われながらエネルギーは待つ側。火108・水0で冷ませない。牽牛星は「持ち上げられだしたら健康に注意」。この状態で残業80時間超えを1年やると、<span class="hl">体に出ます。</span></p>
+    <p>脅しではありません。6センチの卵巣嚢腫があり、心臓が肥大し、大動脈が蛇行し、血圧の薬を飲んでいない状態で、もう1年それをやる、という話です。</p>
+    <p>それでもこれを選ぶなら、<span class="hl">三つの条件をセットにしてください。</span></p>
+    <p class="soft">一つ。血圧の薬について、納得できるまで医師と話す。納得できないなら別の医師でも構いません。一人で判断しないこと。<br>二つ。9時帰宅をやめる。せめて週に2日、8時前に出る日を作る。<br>三つ。しんどい時に言える相手を、職場に一人つくる。養護教諭の先生、衛生委員会の先生――気にかけてくださる方が、すでにおられます。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">② 時短制度</p>
+    <p>手取りが10万円ちょっと。担任も部活も持たず、土日が休める。<span class="hl">体には一番いい選択</span>で、今の天堂星8点のエネルギーにも最も合っています。</p>
+    <p>命式から一つだけ引っかかるのは、<span class="hl">牽牛星が二つある人にとって、立場が下がることはお金が減ること以上にこたえる</span>という点です。同じ職場で、担任も部活も持たず、給与も半分で働く。それを周りが見ている。</p>
+    <p>体は楽になり、名誉の側が削れる。<span class="hl">そこに耐えられるかどうかが、この道の分かれ目</span>です。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">③ 退職して、近隣校で支援員</p>
+    <p>フルで10万円ちょっと。市外転勤がなくなり、体の負担は軽くなる。</p>
+    <p>生月中殺の「組織のレールに乗り切るより、自分で役割を作る」という方向には、<span class="hl">この道が一番近い</span>です。</p>
+    <p>ただし、今は天剋地冲で根から揺さぶられている最中です。<span class="hl">揺さぶられている最中に全部降りると、降りた先でもう一度組み直しが要ります。</span>そして住宅ローンが180万残り、65歳まで取り崩しながらという設計では、ここが一番きつくなります。</p>
+  </div>
+
+  <div class="card" style="border-color:var(--accent-soft);">
+    <p class="lead">④ 副担任でフル、または支援学級</p>
+    <p>sanaeさんご自身が書いてくださった道です。<span class="hl">命式から見ると、ここが一番きれいに噛み合います。</span></p>
+    <p><span class="hl">一つ。</span>給与がフルのまま残る。60歳前の100％を取れて、お金の問題が解決に近づきます。</p>
+    <p><span class="hl">二つ。</span>担任と部活の負担が外れる。夜9時帰宅と80時間残業から降りられて、今のエネルギーの形に合います。</p>
+    <p><span class="hl">三つ。</span>社会の玉堂星は「教える」星で、62歳からの10年は教える側で立つ牽牛星。<span class="hl">支援学級は、教えることそのものです。</span>管理でも、荒れた現場を抑えることでもない。62歳からの本番に、そのまま繋がります。</p>
+    <p>楽な仕事ではありません。精神的に疲弊することもあると思います。ただ、<span class="hl">sanaeさんが疲弊してきたのは、生徒に向き合うことではなく、保護者対応と生徒間トラブルの処理と夜の残業でした。</span>そこは外れます。</p>
+    <p class="soft">※ 担任か副担任かと、主任を持つかどうかは別の軸です。副担任でも重要ポジションを任されれば、残業の量は変わらないことがあります。<b>「担任を外れる」だけでなく「どの役割まで持つか」まで含めて決めてください。</b>ここを曖昧にすると、降りたつもりで量が変わらない、ということが起こります。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">降りることは、負けではありません</p>
+    <p>厳しい場所でこそ伸びてきた人だから、楽になる選択が逃げに見える。<span class="hl">それはsanaeさんの作りがそうだからで、弱さではありません。</span></p>
+    <p>そして庚午の条件は「和協心を養えば、<span class="hl">盛衰変動があっても</span>晩年に成果を全うできる」でした。上がり下がりはある前提です。</p>
+    <p><span class="hl">降りるかどうかではなく、降りた先で何をするか。</span>62歳から、教える側で本番が来ています。そこに繋がる形で、この1年を選んでください。</p>
+  </div>
+</div>
+
+<!-- 体のこと -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">体</span><span class="sec-title">検査と、10月の面談について</span></div>
+  <div class="card">
+    <p>検査を受けた方がいいか、受けない方がいいか。<span class="hl">そこは医師の領域で、僕の領域ではありません。</span>決め方の話だけ書きます。</p>
+    <p>中心が龍高星のsanaeさんは、自分で調べて納得してから動く人です。本を読み、講演を観て、自分で考える。<span class="hl">これはsanaeさんの正しいやり方です。</span></p>
+    <p>一つだけ、今その材料に欠けているものがあります。<span class="hl">ご自身の体のデータです。</span></p>
+    <p>本も講演も当たっている。けれど、脾臓に何があるかはまだ分かっていない。<span class="hl">材料が一つ足りない状態で判断するのは、龍高星の人のやり方ではありません。</span></p>
+    <p><span class="hl">知った上で受けないのと、知らないまま受けないのは、別のことです。</span>前者はsanaeさんが決めたこと。後者は、まだ決めていないだけです。どちらを選ぶにしても、そこだけは分けておいてください。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">10月3週の面談は「材料を取りに行く場」に</p>
+    <p>責められそうだ、と書いておられました。おそらく責められません。<span class="hl">先生の仕事は、sanaeさんが働き続けられるかどうかを見ることだからです。</span></p>
+    <p>そして、あの先生はご自分から<span class="hl">「意見書を書こうか」と言ってくださっている。</span>ここが大きいところです。</p>
+    <p>意見書があれば、<span class="hl">sanaeさんが「降りたい」と言うのではなく、医師が「降ろした方がいい」と言う形になります。</span>楽になる選択が逃げに見えてしまう人にとって、これは形を変える一枚です。</p>
+    <p>そして――<span class="hl">書いてもらうというのは、人に助けてもらうことです。</span>庚午の警句にあった和協心の、いちばん具体的な実物がこれです。</p>
+    <p>面談は月天中殺の中にあたります。その場で何かを決めるよう求められても、<span class="hl">持ち帰って構いません。</span>聞いてくるのは材料だけで十分です。</p>
+    <p class="soft">聞いてくることの例：①今の体の状態で担任をあと1年やることをどう見るか　②時短・副担任・支援学級のどれが体に合うと思うか　③校長先生への意見書を書いてもらえるか</p>
+  </div>
+</div>
+
+<!-- 処方 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">処 方</span><span class="sec-title">ここから動ける形</span></div>
+  <div class="card recipe">
+    <div class="item"><div class="num">1</div><div class="rbody"><b>決めるのは、9月のうちに。</b><br>10月・11月は月天中殺です。そこで新しく決めると、後でひっくり返りやすくなります。<span class="hl">10月は「もう決まっていることを伝える月」に。</span>連休のあいだに答えを出しておけば、受験や進路業務が始まっても、後回しにならずに済みます。</div></div>
+    <div class="item"><div class="num">2</div><div class="rbody"><b>決める前に、一人だけでいいので先に話す。</b><br>相談して答えをもらうためではなく、口に出すためです。<span class="hl">9月に一度、それで眠れた夜がありました。</span>同じことを、働き方の決断でも一回やってみてください。</div></div>
+    <div class="item"><div class="num">3</div><div class="rbody"><b>水を足す。</b>（火108・水0）<br>水場に行く。温泉でも、川でも、海でも。<span class="hl">宮古島に帰ること自体が、sanaeさんには効きます。</span>黒や濃紺を身につける。水分を今より意識して多めに。寒くなる時期なので、温かいスープ類で構いません。手を洗うときに水を意識する、その程度でも積み重なります。</div></div>
+    <div class="item"><div class="num">4</div><div class="rbody"><b>木を足す。</b>（木20）<br>観葉植物を置く。木製のものを増やす。緑や青緑のものを身につける。<span class="hl">朝の早い時間に歩く。</span>――海沿いを週に一度、朝6時から1時間歩いて3ヶ月で10キロ落とされた。<span class="hl">あれは水と木を同時に足す行為で、命式的にいちばん効く形をすでにご自分で引き当てておられます。</span>ベランダのパイナップルも、そのまま木のエネルギーです。</div></div>
+    <div class="item"><div class="num">5</div><div class="rbody"><b>減らすより、足す方を先に。</b><br>火が強い人が我慢すると、余計に熱がこもります。<span class="hl">減らす方向のダイエットは、sanaeさんの作りには合いません。</span>リバウンドを繰り返してきたのは意志の問題ではなく、方向の問題です。</div></div>
+    <div class="item"><div class="num">6</div><div class="rbody"><b>守護神は、甲（大樹）。</b><br>第一守護神は甲。大樹のように真っ直ぐで、<span class="hl">真ん中に立って周りに任せる形</span>です。全部の枝を自分で支えるのではありません。木は命式で足りない五行でもあるので、<span class="hl">一番足りないものが、そのまま守護神になっています。</span>第二守護神は丁（灯火）。温かさで照らす質で、これは年柱にすでに入っています。生徒に向けてこられた灯りが、それです。</div></div>
+    <div class="item"><div class="num">7</div><div class="rbody"><b>断る練習を、小さく一つ。</b><br>断るのが苦手なのは性格ではなく、受け取る扉だけが開いている構造です。<span class="hl">五行が整うと、断ることのハードルは実際に下がります。</span>まずは小さいもの一つから。全部断る必要はありません。</div></div>
+  </div>
+</div>
+
+<!-- do/dont -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">指 針</span><span class="sec-title">この時期の、する・しない</span></div>
+  <div class="card">
+    <div class="dodont">
+      <div class="dobox">
+        <div class="h">向いていること</div>
+        <ul>
+          <li>連休のうちに働き方を決めておく</li>
+          <li>決めたことを、誰か一人に先に話す</li>
+          <li>意見書を書いてもらう（受け取る）</li>
+          <li>水場に行く・水分を多めに取る</li>
+          <li>植物を置く・朝の早い時間に歩く</li>
+          <li>言える相手を職場に一人つくる</li>
+          <li>面談では材料だけ受け取って帰る</li>
+        </ul>
+      </div>
+      <div class="dontbox">
+        <div class="h">外しておくこと</div>
+        <ul>
+          <li>10月・11月に新しく決める</li>
+          <li>その場で結論を出すよう求められて応じる</li>
+          <li>調べたことを全部一人で抱えて判断する</li>
+          <li>減らす・我慢する方向で体を整える</li>
+          <li>今年の体感のまま10年の判断をする</li>
+          <li>降りることを「負け」と数える</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 締め -->
+<div class="closing">
+  <p>sanaeさんは、<span class="hl">焼かれて形になる金</span>です。<br>厳しい場所に置かれるたびに、形を作ってこられました。<br>その火は、30年以上走り続けるための燃料でした。消すものではありません。</p>
+  <p>足りないのは、冷ます側だけです。<br>そして冷ますというのは、休むことだけを指すのではありません。<br><span class="hl">抱えているものを、一人分だけ外に出すこと。</span>それも冷ますことです。</p>
+  <p>お父さまが59歳で旅立たれた。その年齢に、ご自身が並びます。<br>並んだ年に、これから10年の働き方を決めようとしておられる。<br>決めるのは今年で構いません。ただ、<span class="hl">今年の体感で決めないでください。</span><br>今年は自刑の年で、実際より重く感じるようにできています。<br>来年、エネルギーは戻ります。</p>
+  <p class="big">降りることは、負けではありません。</p>
+  <p>62歳から、教える側で本番が来ています。<br>晩年は静かに枯れる形ではなく、<br>若い人の中に混じって、華やかにやっている形です。<br><span class="hl">そこまで、体を持たせてください。</span></p>
+  <p>58歳でノックができるようになった人です。<br>島で習った空手が、海を越えて繋がった人です。<br><span class="hl">何かに繋がっている</span>――そう感じてこられた勘は、正しいです。<br>命式も、そういう形で出ています。</p>
+</div>
+
+<a class="koyomi-link" href="/sanae">
+  <span class="arrow">▶</span> sanaeの暦（日々の運気カレンダー）をひらく
+  <small>毎日の運気が天気予報のように見られます。傘を持つくらいの気持ちで、楽しんで。</small>
+</a>
+
+<footer>
+  <p>いつもおおきにです😆　気になったことは、いつでもLINEで💬</p>
+  <p class="sig">㐂</p>
+</footer>
+
+</div>
+</body>
+</html>

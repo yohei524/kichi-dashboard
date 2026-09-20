@@ -333,6 +333,10 @@
     {
       "source": "/sanae",
       "destination": "/view.html?client=sanae"
+    },
+    {
+      "source": "/sanae-kanteisho",
+      "destination": "/clients/sanae-kanteisho.html"
     }
   ]
 }
