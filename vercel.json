@@ -337,6 +337,10 @@
     {
       "source": "/sanae-kanteisho",
       "destination": "/clients/sanae-kanteisho.html"
+    },
+    {
+      "source": "/harumi",
+      "destination": "/view.html?client=harumi"
     }
   ]
 }
