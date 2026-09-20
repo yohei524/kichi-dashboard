@@ -148,7 +148,7 @@
     },
     {
       "source": "/syuko-kanteisho",
-      "destination": "/kanteisho.html?c=syuko"
+      "destination": "/clients/syuko-kanteisho.html"
     },
     {
       "source": "/masami",

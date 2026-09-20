@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>就子さん 鑑定書 ｜ 㐂占</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --night:#0B0F1A; --night2:#131A28; --sink:#171F30; --panel:#1B2334;
+  --line:#2A3346; --accent:#D9A441; --accent-soft:#B8842C; --accent-glow:rgba(217,164,65,.14);
+  --gold:#C9A24A; --text:#ECEAE4; --muted:#8A96AC; --muted2:#A9B3C6;
+  --water:#6E9BC4; --fire:#D08A5A; --wood:#7FA86B; --metal:#C4C9D2; --earth:#C9A24A;
+  --bad:#C97A6A; --good:#6E9BC4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Serif JP',serif; color:var(--text); line-height:1.95; letter-spacing:.045em;
+  background:
+    radial-gradient(1200px 620px at 50% -12%, rgba(217,164,65,.10), transparent 60%),
+    linear-gradient(180deg,#0B0F1A 0%,#0D1220 45%,#080B14 100%);
+  background-attachment:fixed; min-height:100vh;
+}
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.05rem 4rem;}
+
+/* header */
+header{text-align:center;padding:3rem 1rem 1.4rem;}
+header .kicker{font-size:.68rem;letter-spacing:.32em;color:var(--accent);opacity:.9;margin-bottom:.9rem;}
+header h1{font-size:1.5rem;font-weight:500;letter-spacing:.08em;margin-bottom:.5rem;}
+header h1 .nm{color:var(--accent);}
+header .tagline{font-size:.8rem;color:var(--muted2);letter-spacing:.1em;line-height:1.7;}
+header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:.12em;}
+
+/* profile strip */
+.profile{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem .8rem;
+}
+.profile div{font-size:.74rem;color:var(--muted);}
+.profile div b{display:block;font-size:.9rem;color:var(--text);font-weight:500;margin-top:.1rem;letter-spacing:.06em;}
+.profile div.full{grid-column:1/3;}
+
+/* section */
+.sec{margin-bottom:1.65rem;}
+.sec-head{
+  display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;
+  padding-bottom:.6rem;border-bottom:1px solid var(--line);
+}
+.sec-no{font-size:.72rem;color:var(--accent);letter-spacing:.18em;font-weight:600;}
+.sec-title{font-size:1.02rem;font-weight:500;letter-spacing:.08em;}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  padding:1.25rem 1.15rem;box-shadow:0 4px 24px rgba(0,0,0,.32);margin-bottom:1rem;
+}
+.card p{font-size:.87rem;margin-bottom:.9rem;color:var(--text);}
+.card p:last-child{margin-bottom:0;}
+.card .lead{color:var(--accent);font-size:.9rem;font-weight:500;}
+.hl{color:var(--accent);font-weight:500;}
+.soft{color:var(--muted2);font-size:.8rem;}
+
+/* 陰占盤 */
+.meishiki{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.2rem 0 .3rem;
+}
+.pillar{
+  background:var(--sink);border:1px solid var(--line);border-radius:12px;
+  padding:.7rem .4rem;text-align:center;
+}
+.pillar .lbl{font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.55rem;}
+.pillar .yomi{font-size:.58rem;color:var(--muted);letter-spacing:.04em;line-height:1.3;}
+.pillar .kan{font-size:1.85rem;font-weight:600;color:var(--text);line-height:1.15;}
+.pillar .shi{font-size:1.85rem;font-weight:600;color:var(--accent);line-height:1.15;margin-top:.2rem;}
+.pillar .zou{font-size:.62rem;color:var(--muted2);margin-top:.55rem;letter-spacing:.04em;}
+.meishiki-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;}
+
+/* 人体星図 */
+.jintai{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:19rem;margin:.4rem auto .2rem;}
+.jcell{
+  background:var(--sink);border:1px solid var(--line);border-radius:11px;
+  aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;
+}
+.jcell .pos{font-size:.58rem;color:var(--muted);letter-spacing:.05em;}
+.jcell .star{font-size:.92rem;font-weight:600;color:var(--text);letter-spacing:.03em;}
+.jcell.center{background:linear-gradient(160deg,rgba(217,164,65,.18),var(--sink));border-color:var(--accent-soft);}
+.jcell.center .star{color:var(--accent);}
+.jcell.jusei-cell{background:var(--night2);}
+.jcell .star.gold{color:var(--gold);}
+
+/* 五行バー */
+.gogyo{margin-top:.3rem;}
+.gbar{display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;}
+.gbar .gname{width:2.6rem;font-size:.76rem;color:var(--muted2);flex-shrink:0;}
+.gbar .gtrack{flex:1;height:9px;background:var(--sink);border-radius:5px;overflow:hidden;}
+.gbar .gfill{height:100%;border-radius:5px;}
+.gbar .gval{width:2.2rem;text-align:right;font-size:.72rem;color:var(--muted);flex-shrink:0;}
+.g-wood .gfill{background:var(--wood);}
+.g-fire .gfill{background:var(--fire);}
+.g-earth .gfill{background:var(--earth);}
+.g-metal .gfill{background:var(--metal);}
+.g-water .gfill{background:var(--water);}
+
+/* 大運テーブル */
+.daiun-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.daiun{width:100%;border-collapse:collapse;font-size:.78rem;min-width:19rem;}
+.daiun th{
+  font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.05em;
+  padding:.4rem .3rem;border-bottom:1px solid var(--line);text-align:center;
+}
+.daiun td{padding:.5rem .3rem;text-align:center;border-bottom:1px solid rgba(42,51,70,.5);color:var(--text);}
+.daiun td:first-child{color:var(--muted2);font-size:.72rem;white-space:nowrap;}
+.daiun .tc-cell{color:var(--bad);font-size:.68rem;}
+.daiun .now-row td{background:linear-gradient(90deg,rgba(217,164,65,.12),transparent);}
+.daiun .now-row td:first-child{color:var(--accent);font-weight:600;}
+.daiun .now-cell{color:var(--accent);font-size:.68rem;font-weight:600;}
+
+/* timeline */
+.tl{position:relative;padding-left:1.1rem;margin-top:.3rem;}
+.tl::before{content:"";position:absolute;left:3px;top:.4rem;bottom:.4rem;width:2px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:1rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before{content:"";position:absolute;left:-1.1rem;top:.45rem;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--night2);}
+.tl-item.tc::before{background:var(--bad);}
+.tl-when{font-size:.76rem;color:var(--accent);font-weight:600;letter-spacing:.06em;}
+.tl-item.tc .tl-when{color:var(--bad);}
+.tl-body{font-size:.82rem;color:var(--text);margin-top:.15rem;}
+
+/* do / dont */
+.dodont{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.dobox,.dontbox{border-radius:12px;padding:.85rem .8rem;border:1px solid var(--line);}
+.dobox{background:rgba(110,155,196,.08);}
+.dontbox{background:rgba(201,122,106,.08);}
+.dobox .h,.dontbox .h{font-size:.78rem;font-weight:600;margin-bottom:.5rem;letter-spacing:.06em;}
+.dobox .h{color:var(--good);}
+.dontbox .h{color:var(--bad);}
+.dodont ul{list-style:none;}
+.dodont li{font-size:.75rem;color:var(--text);padding-left:.9rem;position:relative;margin-bottom:.45rem;line-height:1.6;}
+.dodont li:last-child{margin-bottom:0;}
+.dobox li::before{content:"○";position:absolute;left:0;color:var(--good);font-size:.7rem;}
+.dontbox li::before{content:"×";position:absolute;left:0;color:var(--bad);font-size:.7rem;}
+@media(max-width:400px){.dodont{grid-template-columns:1fr;}}
+
+/* 処方 */
+.recipe{counter-reset:r;}
+.recipe .item{display:flex;gap:.75rem;margin-bottom:1rem;}
+.recipe .item:last-child{margin-bottom:0;}
+.recipe .num{
+  flex-shrink:0;width:1.7rem;height:1.7rem;border-radius:50%;
+  background:linear-gradient(160deg,var(--accent),var(--accent-soft));
+  color:var(--night);font-weight:700;font-size:.85rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.recipe .rbody{font-size:.83rem;}
+.recipe .rbody b{color:var(--accent);font-weight:600;}
+
+/* pull quote */
+.pull{
+  border-left:3px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:1rem 0;
+  font-size:.9rem;color:var(--muted2);font-style:normal;
+}
+
+/* closing */
+.closing{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--accent-soft);border-radius:18px;padding:1.6rem 1.25rem;text-align:center;
+  box-shadow:0 0 30px rgba(217,164,65,.08);
+}
+.closing p{font-size:.88rem;margin-bottom:.9rem;}
+.closing p:last-child{margin-bottom:0;}
+.closing .big{font-size:1.05rem;color:var(--accent);font-weight:500;letter-spacing:.06em;}
+
+/* link to koyomi */
+.koyomi-link{
+  display:block;text-align:center;margin-top:1.5rem;padding:1rem;
+  background:var(--night2);border:1px solid var(--line);border-radius:14px;
+  color:var(--text);text-decoration:none;font-size:.86rem;transition:border-color .3s;
+}
+.koyomi-link:hover{border-color:var(--accent-soft);}
+.koyomi-link .arrow{color:var(--accent);}
+.koyomi-link small{display:block;color:var(--muted);font-size:.7rem;margin-top:.3rem;}
+
+/* 日本風の引き戸（襖）― タップで左右に開く */
+.door{display:block;text-align:center;padding:2.2rem 0 .5rem;margin-top:1.5rem;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.door-gate{position:relative;width:210px;height:132px;margin:0 auto 1rem;border-radius:4px;overflow:hidden;border:3px solid var(--accent-soft);box-shadow:0 4px 18px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.06);background:var(--sink);}
+.door-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.05rem;letter-spacing:.28em;text-indent:.28em;color:var(--accent);text-decoration:none;font-weight:500;background:radial-gradient(120% 90% at 50% 120%,rgba(217,164,65,.22) 0%,var(--sink) 62%);}
+.door-leaf{position:absolute;top:0;width:50%;height:100%;background:repeating-linear-gradient(90deg,rgba(0,0,0,.14) 0 1px,transparent 1px 26px),linear-gradient(170deg,var(--panel) 0%,#141B29 100%);transition:transform .55s cubic-bezier(.65,0,.35,1);z-index:2;}
+.door-leaf-l{left:0;border-right:1px solid var(--line);}
+.door-leaf-r{right:0;border-left:1px solid var(--line);}
+.door-pull{position:absolute;top:50%;width:8px;height:26px;border-radius:3px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);transform:translateY(-50%);}
+.door-leaf-l .door-pull{right:8px;} .door-leaf-r .door-pull{left:8px;}
+.door.open .door-leaf-l{transform:translateX(-100%);}
+.door.open .door-leaf-r{transform:translateX(100%);}
+.door.open .door-inner{text-shadow:0 0 12px rgba(217,164,65,.3);}
+.door-note{font-size:.68rem;color:var(--muted);line-height:1.8;margin-top:.35rem;}
+
+footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
+footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">㐂占 　 命 術 本鑑定書</p>
+  <h1><span class="nm">就子</span> さんへ</h1>
+  <p class="tagline">美允さんの宿命と、お二人の縁のかたち</p>
+  <p class="date">鑑定 2026.09.20　／　紡の席（二席目）</p>
+</header>
+
+<!-- プロフィール -->
+<div class="profile">
+  <div class="full">鑑定の対象<b>佐井 美允（さい みこと）さん　2006年6月18日生</b></div>
+  <div>魂の本質<b>戊寅 ― 残雪の残る春の山</b></div>
+  <div>中心の星<b>石門星</b></div>
+  <div>天中殺<b>申酉（西方）</b></div>
+  <div>才能の星<b>石門星・車騎星</b></div>
+  <div class="full">今の大運<b>壬辰（14〜23歳）― 年柱と天剋地冲。外の基準を壊す十年</b></div>
+  <div class="full">次の大運<b>辛卯（24〜33歳）― 同じ場所が干合・支合へ。ぶつかりが和合に変わる</b></div>
+</div>
+
+<div class="card" style="border-color:var(--accent-soft);">
+  <p>おおきにです、就子さん☺️</p>
+  <p>六月にご自身を視させてもらって、三か月。今回は美允さんを、二時間じっくり見ていきました。</p>
+  <p>結論から書きます。<b>就子さんの接し方が悪かったから、こうなったんやないです。</b>美允さんが生まれた瞬間から、二人の命式にそう書いてありました。今日はその根拠を、順番に置いていきます。</p>
+</div>
+
+<!-- 命式盤 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">命 式</span><span class="sec-title">美允さんの設計図</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.6rem;">陰占 ― 生まれ持った気の柱</p>
+    <div class="meishiki">
+      <div class="pillar">
+        <div class="lbl">日柱（自分・家庭）</div>
+        <div class="yomi">つちのえ</div><div class="kan">戊</div>
+        <div class="shi">寅</div><div class="yomi">とら</div>
+        <div class="zou">蔵干　甲・丙・戊</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">月柱（目標・目上）</div>
+        <div class="yomi">きのえ</div><div class="kan">甲</div>
+        <div class="shi">午</div><div class="yomi">うま</div>
+        <div class="zou">蔵干　丁・己</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">年柱（社会・対外）</div>
+        <div class="yomi">ひのえ</div><div class="kan">丙</div>
+        <div class="shi">戌</div><div class="yomi">いぬ</div>
+        <div class="zou">蔵干　戊・辛・丁</div>
+      </div>
+    </div>
+    <p class="meishiki-note">日柱 戊寅 ／ 月柱 甲午 ／ 年柱 丙戌</p>
+    <p class="meishiki-note" style="color:var(--accent);margin-top:.5rem;">下段が 寅・午・戌 ―― 三合火局が、この子ひとりの命式で完成しています</p>
+
+    <div class="divider" style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p class="soft" style="margin-bottom:.2rem;">陽占 ― 心のかたち（人体星図）</p>
+    <div class="jintai">
+      <div class="jcell jusei-cell"><span class="pos">伴星（先祖）</span><span class="star">調舒星</span></div>
+      <div class="jcell"><span class="pos">目上（北）</span><span class="star">龍高星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">初年運</span><span class="star gold">天庫星</span></div>
+      <div class="jcell"><span class="pos">配偶者（西）</span><span class="star">龍高星</span></div>
+      <div class="jcell center"><span class="pos">中心・本人</span><span class="star">石門星</span></div>
+      <div class="jcell"><span class="pos">社会（東）</span><span class="star">玉堂星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">晩年運</span><span class="star gold">天貴星</span></div>
+      <div class="jcell"><span class="pos">目下（南）</span><span class="star">車騎星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">中年運</span><span class="star gold">天将星</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.7rem;">中年期に天将星（十二点）― 十二大従星でいちばん強いエネルギー。目上と配偶者の両方に龍高星（離れる星）。</p>
+  </div>
+</div>
+
+<!-- 1 三合 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">壱</span><span class="sec-title">ひとりで輪が閉じている ― 三合火局</span></div>
+  <div class="card">
+    <p class="lead">「頑固やのうて、もう自分の中で答えが出てしもてる」</p>
+    <p>十二支を円に並べたとき、正三角形で結ばれる三つの組み合わせを<span class="hl">三合</span>といいます。申子辰で水、亥卯未で木、<b>寅午戌で火</b>、巳酉丑で金。この四組だけです。</p>
+    <p>美允さんは、その寅・午・戌が、<b>日柱・月柱・年柱に一つずつ、きれいに揃っています</b>。ふつうは何人か分の命式を合わせてようやく揃うものが、この子は<span class="hl">ひとりで完成している</span>。僕も初めて見ました。</p>
+    <p>三合会局は、合法の中でいちばん強い結びつきです。意味は「展開が速い。起承転結が短い時間で出る」。三つの支が自分の中だけで輪になっているので、<b>外から意見をもらわんでも、自分の中で結論が出ます</b>。</p>
+    <div class="pull">就子さんが「とにかく頑固」と感じてはったのは、性格やのうて構造です。<br>人の言うことを聞かへんのやなくて、<b>聞く必要を感じてへん</b>形で出来てます。</div>
+    <p>日の宿命「戊寅」の警句にも、こうあります。<span class="hl">「剛毅と勇猛でわがままが強いため自分だけで勝手にやり世間から受け入れられにくい」</span>。同じことを言うてます。ただ、その警句は<b>「中庸を心がければ必ず進取大成を見る」</b>で終わっています。ここが本命です。</p>
+  </div>
+
+  <div class="card" style="background:var(--sink);border-color:var(--accent-soft);">
+    <p class="lead" style="margin-bottom:.6rem;">就子さんの見立ては、当たってました</p>
+    <p>「想像力に欠けてて、現実を体感して生きてくタイプ」と書いてはりましたね。<b>あれ、命式にそのまま出てます。</b></p>
+    <p>三合には二種類あって、<span class="hl">土（辰戌丑未）が入るかどうか</span>で変わります。寅と午だけなら土がなく、現実離れした発想の「思想の主」になる。美允さんは<b>戌（土）が入っています</b>。土は現実・着地点・損得を表します。</p>
+    <p style="margin-bottom:0;">つまりこの子の三合は、<b>現実の側に足がついている三合</b>。頭で想像して動くんやのうて、<span class="hl">体で当たって覚える形</span>です。技法を知らずに現象だけで見抜いてはったことになります。</p>
+  </div>
+</div>
+
+<!-- 2 支の質 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">弐</span><span class="sec-title">三つの支が、同時に動いている</span></div>
+  <div class="card">
+    <p><b>日支の寅 ― 美允さん本人。</b>この支には<span class="hl">「虎視眈々」</span>という言葉が付いています。細心に準備して、大胆に動く、という意味です。</p>
+    <p>急に思いついて出ていったんやないと思います。<b>前から準備してはった</b>。四年生になってから嘘をついて休んでいたこと、「友達と旅行に行く」と言って出たこと ―― 全部この支です。</p>
+    <p><b>年支の戌 ― 社会との関わりの場所。</b>戌は<span class="hl">白黒つけんと気が済まん支</span>です。曖昧なまま戻る、ができません。今帰ってこれへんのは、気持ちが固まってへんからやのうて、<b>白黒がついてへんから</b>です。</p>
+    <p><b>月支の午 ― 目標の場所。</b>午は<span class="hl">持続性がない。飽きっぽい支</span>です。</p>
+    <div class="pull">準備して出ていって、白黒つくまで戻れへん。<br>でも中身は飽きっぽい。<b>この三つが同時に動いてます。</b></div>
+  </div>
+
+  <div class="card">
+    <p class="lead">宿命の位相法 ― 三つの半会</p>
+    <p><b>月支と年支の半会。</b>「いいな」と一度思うと、<span class="hl">必ずいつかのタイミングで実行する</span>形です。必要だと思えば命をかけられる、<b>未来のために自ら傷を負える</b>人、とまで出ています。</p>
+    <p><b>年支と日支の半会。</b><span class="hl">すぐ結果を求める</span>形です。根回しや、本音と建前に時間を使うことを「勿体ない」と感じます。だから<b>待てません</b>。時間をかけて分かってもらう、ができひんのです。</p>
+    <p style="margin-bottom:0;">就子さんが「痛い目に遭わんと気付けんのやろな」と書いてはった、そのとおりです。<b>この子は、体で当たって結果を取りに行きます。</b></p>
+  </div>
+
+  <div class="card" style="border-color:var(--accent-soft);">
+    <p class="lead" style="margin-bottom:.6rem;">忘れられへん作り ―― けど、誰のせいでもない</p>
+    <p><b>月支と日支の半会。</b>基本は「物事を後始末する力に長けている」という読みです。そのうえで、こう書いてあります。</p>
+    <p><span class="hl">「小さい頃に極端に傷ついたことがあると、一生忘れず持ち続ける。調舒星や天庫星を併せ持つと、一生根に持つ」</span></p>
+    <p>美允さんは、<b>調舒星も天庫星も両方持っています</b>。つまりこの子は、忘れられへん作りになってます。</p>
+    <p style="margin-bottom:0;">何がその傷かは、本人にしか分かりません。ただ、就子さんに言うときたいのは ―― <b>忘れられへんのは、就子さんが何かしたからやないです。</b>同じことがあっても、忘れる子は忘れます。<span class="hl">美允さんは、持ち続ける側に生まれてきた</span>。それだけのことです。</p>
+  </div>
+</div>
+
+<!-- 3 相性 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">参</span><span class="sec-title">お二人の縁 ― なぜ就子さんにぶつかるのか</span></div>
+  <div class="card">
+    <p class="lead">律音 ― 同じ干支が、親子で並んでいる</p>
+    <p>就子さんの<b>日柱</b>が 丙戌。美允さんの<b>年柱</b>が 丙戌。<span class="hl">同じです。律音といいます。</span></p>
+    <p>日柱は、その人自身。就子さん本人そのものです。年柱は、社会・外の世界との関係を見る場所。つまり<b>美允さんにとっての「外の世界の基準」の位置に、就子さん本人がそのまま入っている</b>ことになります。</p>
+    <p>律音は「全く同じ気質・同化しやすい・縁が深い」。ただし<span class="hl">「似た者同士なので、長い時間を共にすると衝突が増えやすい。ライバル関係になりやすい」</span>とも書いてあります。以前どなたかに「娘さんはお母さんをライバルだと思っている」と言われたそうですが、ここです。悪い意味やのうて、対等・同志の関係になりやすいということです。</p>
+    <div class="pull">同じもんが二つあるから、ぶつかるんです。<br>離婚も、アレルギーも、育て方も、関係ないです。<br><b>同じ干支が親子で並んだ時点で、ぶつかることは決まってました。</b></div>
+    <p style="margin-bottom:0;">赤ちゃんの頃、就子さんから離れず、ご主人にも預けられへんかった ―― <b>あれも律音です。</b>同じものが、密着として出ていた。今は同じものが、衝突として出ている。<span class="hl">形が変わっただけ</span>です。</p>
+  </div>
+
+  <div class="card" style="background:var(--sink);border-color:var(--accent-soft);">
+    <p class="lead" style="margin-bottom:.8rem;">守る星と、離れる星 ―― 向きが、最初から逆だった</p>
+    <p>親子鑑定では、<b>親が子に向ける星（親の南方・目下）</b>と、<b>子が親に向ける星（子の北方・目上）</b>の噛み合わせを見ます。これが日々の接し方にそのまま出ます。</p>
+    <p><b>就子さんの南方・目下 ＝ 貫索星。</b>守備本能。単独・自我・マイペース。キーワードがそのまま<span class="hl">「守る」</span>です。陽転する環境は<b>「人命・物を守る環境で完全燃焼」</b>。</p>
+    <p><b>美允さんの北方・目上 ＝ 龍高星。</b>習得本能。探検・冒険・破壊と建設。核心は<span class="hl">「故郷を離れる星」</span>。陽転する環境は「変化と挑戦がある環境」。</p>
+    <div class="pull" style="margin:1.1rem 0;">就子さんが、守る。<br>美允さんが、離れる。<br><b>真逆です。</b></div>
+    <p>守れば守るほど離れ、離れるから また守ろうとする。しかも<b>どちらも星が正しく働いている陽転の形</b>です。正しいもん同士が、真逆を向いてぶつかってました。</p>
+    <p>アレルギーと闘っていた十五年 ―― 「自分が何とかしなくちゃ、守らなくちゃ」「体がいつも戦闘モードだった」と書いてはりましたね。<b>あれは、就子さんの貫索星が完全燃焼していた期間です。</b>間違った接し方をしてはったんやのうて、<span class="hl">星のとおりに命を守り抜いてはった</span>。</p>
+    <p style="margin-bottom:0;">ただ、龍高星には大事な注意書きがあります。<span class="hl">「知性は後天的（育ちに依存する）」</span>。目的を持てば花を咲かせ、目的がなければ放浪になる星。<b>その目的をどこで持つかは、育ちで決まる</b>ということです。就子さんが守ってきたもんは消えてません。この子が目的を見つけたときに、そこから出てきます。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">ほかに結ばれているところ</p>
+    <p><b>対冲</b>（就子さんの月支 申 × 美允さんの日支 寅）― 就子さんが現実的に立とうとする場所と、美允さん本人が真正面からぶつかる形。<span class="hl">働いて踏ん張るほど、ぶつかる位置関係</span>でした。どっちが悪いとかやなく、構造です。</p>
+    <p><b>火生土</b>（就子さん 丙・火 → 美允さん 戊・土）― 就子さんのエネルギーが娘さんに流れ、<b>娘さんが上がって、就子さんが下がる</b>形。</p>
+    <p><b>木剋土</b>（中心星 石門星・木 → 禄存星・土）― 剋の向きは<span class="hl">美允さんが就子さんを剋す</span>側。与えながら、剋されてもいる。</p>
+    <p style="margin-bottom:0;"><b>支合</b>（就子さんの年支 亥 × 美允さんの日支 寅）と<b>半会</b>（就子さんの日支 戌 × 美允さんの月支 午）も出ています。<b>ぶつかるばかりの縁やないです。</b>切れへん縁でもあります。</p>
+  </div>
+</div>
+
+<!-- 4 五行 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">肆</span><span class="sec-title">水が一滴もない ― そして、それが守護神</span></div>
+  <div class="card">
+    <div class="gogyo">
+      <div class="gbar g-wood"><span class="gname">木</span><span class="gtrack"><span class="gfill" style="width:39%"></span></span><span class="gval">38</span></div>
+      <div class="gbar g-fire"><span class="gname">火</span><span class="gtrack"><span class="gfill" style="width:93%"></span></span><span class="gval">90</span></div>
+      <div class="gbar g-earth"><span class="gname">土</span><span class="gtrack"><span class="gfill" style="width:100%"></span></span><span class="gval">97</span></div>
+      <div class="gbar g-metal"><span class="gname">金</span><span class="gtrack"><span class="gfill" style="width:18%"></span></span><span class="gval">17</span></div>
+      <div class="gbar g-water"><span class="gname">水</span><span class="gtrack"><span class="gfill" style="width:2%"></span></span><span class="gval">0</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-bottom:1rem;">総エネルギー 242</p>
+    <p><b>水が一滴も入ってません。</b>水は知恵・流れを読む力・情報を溜める力です。<span class="hl">先を読む材料を、命式に持ってへん</span>。だから火（90）と土（97）の勢いだけで動きます。</p>
+    <p>就子さんが「想像力に欠けてて」と書いてはったのは、想像力というより<b>先を読む材料がない</b>ということです。</p>
+    <p>八門法では<span class="hl">螣蛇型</span>（中央97が最大）。自分の意志を最優先し、揺るがず、周りに流されにくい型。そしてこう書いてあります ―― <b>「他者に頼りすぎると自立性が損なわれる。自力で状況を切り開く環境に身を置くことが成功の鍵」</b>。</p>
+    <p style="margin-bottom:0;"><b>助けすぎたら、この子の型は崩れます。</b></p>
+  </div>
+
+  <div class="card" style="border-color:var(--accent-soft);">
+    <p class="lead" style="margin-bottom:.6rem;">守護神は 癸（水）― 一滴も持ってないもの</p>
+    <p>美允さんの調候守護神は、<b>第一も第二も 癸</b>。癸は水です。<span class="hl">いちばん足りてないものが、この子を助ける鍵として命式に入ってます。</span></p>
+    <p>癸を星に直すと<b>司禄星</b>。その中身を、そのまま読みます。</p>
+    <p style="padding-left:1rem;border-left:2px solid var(--accent-soft);color:var(--muted2);">コツコツ積み重ねる（貯金思考）／努力や継続を大事に／庶民的な価値観を大事にする／安全第一で準備を怠らない／人との信頼関係を構築する／<b style="color:var(--accent);">時間がかかることを覚悟する</b>／<b style="color:var(--accent);">家庭や地元を大事にする</b>／生活の基盤を固める</p>
+    <p style="margin-top:1rem;"><b>家を出ている子の守護神が、「家庭を大事にしろ」と言うてます。</b></p>
+    <p style="margin-bottom:0;">この子が助かる道は、<span class="hl">時間をかけることと、帰る場所を持つこと</span>です。今はその逆をやってます。だから苦しいんです。</p>
+  </div>
+</div>
+
+<!-- 5 才能 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">伍</span><span class="sec-title">才能は、ひとりでは出ない</span></div>
+  <div class="card">
+    <p>美允さんの才能星は<b>石門星と車騎星</b>の二つ。車騎星のほうに、こう書いてあります。</p>
+    <div class="pull"><b>「師」となる人を持つこと。<br>体を動かすこと。常に目標を掲げること。<br>人のマネから始めること（0から始めない）。</b></div>
+    <p>三合で、ひとりで完結できる子です。<b>でも才能は、ひとりでやったら出ぇへんのです。</b></p>
+    <p><span class="hl">自分で勝手にやると才能が出ん命式 ―― ここが、この子のいちばんの落とし穴です。</span>今、誰にも相談せんと一人で動いてます。それが、いちばん才能から遠いやり方になります。</p>
+    <p>才能の領域は<b>北天運</b>。「考える時も行動する時も思考する人。行動すべき時に先に考えてしまう。日常生活外に才能（文学・絵画・芸術）」。<b>動きは速いのに、才能は考える側にあります。</b>だから動いた先で本人が満足しません。体で結果を取りに行くけど、才能はそこにない。だからまた動く ―― その繰り返しです。</p>
+    <p style="margin-bottom:0;">中年期の<b>天将星（十二点）</b>にも、こうあります。<span class="hl">「活かすためには若いときの苦労が必要。過保護に育てられると自己中心的になる。若いときに苦労した人は無双できる」</span>。今通っているしんどさは、この星を使えるようにするために要るもんです。<b>守り切ってしまったら、逆に活きひん星</b>なんです。</p>
+  </div>
+</div>
+
+<!-- 6 天中殺 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">陸</span><span class="sec-title">助けが来ぇへん設計 ― 申酉天中殺</span></div>
+  <div class="card">
+    <p>美允さんは<b>申酉天中殺</b>。今は年天中殺には入ってません（次は2028年2月から）。宿命天中殺もなしです。<b>今回のことは、天中殺では説明がつきません。</b></p>
+    <p>ただ、申酉天中殺の家系の読みに、大事なことが書いてあります。</p>
+    <p style="padding-left:1rem;border-left:2px solid var(--bad);color:var(--muted2);">もともと側近のスタッフやパートナーに恵まれにくい宿命。身内に助けを求めても期待どおりの支援を得ることが難しく、自分一人で物事をこなしていく必要がある。<b style="color:var(--bad);">周囲の支援に恵まれる環境は、申酉天中殺にとって運気が下降する要因となる。</b></p>
+    <p style="margin-top:1rem;"><b>助けが来ぇへんのが、この子にとっては正常なんです。</b>手を出すほど、運が下がる形です。</p>
+    <p style="margin-bottom:0;"><span class="hl">就子さんが「助けてあげられへん」と思う必要はないです。</span>助けが来ぇへん設計で生まれてきてます。</p>
+  </div>
+</div>
+
+<!-- 7 大運 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">漆</span><span class="sec-title">いつ変わるのか ― 二十四歳で、真逆に振れる</span></div>
+  <div class="card">
+    <div class="daiun-scroll">
+      <table class="daiun">
+        <thead><tr><th>年齢</th><th>干支</th><th>主星</th><th>年柱との位相</th></tr></thead>
+        <tbody>
+          <tr><td>4〜13歳</td><td>癸巳</td><td>司禄星</td><td>―</td></tr>
+          <tr class="now-row"><td>14〜23歳</td><td>壬辰</td><td>禄存星</td><td class="tc-cell">天剋地冲</td></tr>
+          <tr><td>24〜33歳</td><td>辛卯</td><td>調舒星</td><td class="now-cell">干合＋支合</td></tr>
+          <tr><td>34〜43歳</td><td>庚寅</td><td>鳳閣星</td><td>大半会（三合）</td></tr>
+          <tr><td>44〜53歳</td><td>己丑</td><td>石門星</td><td>―</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:1rem;">今いる大運は<b>壬辰（14〜23歳）</b>。これが美允さんの年柱 丙戌と<span class="hl">天剋地冲</span>になっています。上の干は壬と丙、どちらも陽干で水が火を剋す。下の支は辰と戌で真正面の対冲。<b>上も下も両方ぶつかる、いちばん強い衝突の形</b>です。</p>
+    <p>年柱は、社会・外の世界との関係を見る場所。つまり<b>今の十年は、美允さんが「外の世界の基準」を壊しにいく十年</b>なんです。</p>
+    <p>そして ―― <b>その年柱 丙戌は、就子さんご本人と同じ干支でした。</b></p>
+    <div class="pull">律音で、就子さんが美允さんの「社会の基準」の位置に入ってる。<br>その位置に、今の大運が真正面からぶつかってる。<br><b>だから、いま就子さんにぶつかってきてるんです。</b></div>
+    <p>美允さんからしたら、<b>外の基準を壊してる感覚</b>です。就子さんを狙ってるわけやないんです。ただ、その基準の位置に、たまたま就子さんが丸ごと入ってはった。</p>
+    <p>アクセルとブレーキを同時に踏んでる状態です。外へ出ていく力と、基準を壊す力が、同時に働いている。<b>それが、家出という形で出ました。</b></p>
+    <p><span class="hl">就子さんが何をしても、二十歳前後でここは通ってました。</span>美允さんが生まれた瞬間に、この大運は決まってましたから。</p>
+    <p style="margin-bottom:0;">そして<b>二十四歳から三十三歳、辛卯</b>に変わります。上の干は辛と丙で<b>干合</b>。下の支は卯と戌で<b>支合</b>。さっきまで真正面でぶつかってた同じ場所が、<span class="hl">今度は上も下も結びつく形</span>に変わります。<b>天剋地冲から、干合支合へ。真逆に振れます。</b>あと三年から四年です。</p>
+  </div>
+</div>
+
+<!-- 8 年運 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">捌</span><span class="sec-title">これからの流れ</span></div>
+  <div class="card">
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-when">2026年（20歳）丙午　― いちばん大きく動く年</div>
+        <div class="tl-body">年柱・日柱と大半会。もともと持っている寅午戌の火局に、さらに午が重なります。<b>火が最大まで膨らんでいる状態</b>。同時に月柱の午と午午の自刑にもなり、<b>内側で空回りする力</b>も同じ年に来ています。「とんでもないことになり過ぎてる」のは、動く年に当たってるからです。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年（21歳）丁未　― 一度締まる</div>
+        <div class="tl-body">年柱と庫刑、それに破。今年の激しさが収束する方向に向かいます。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">2028年（22歳）戊申　― 申酉天中殺に入る</div>
+        <div class="tl-body">日柱と対冲・生刑が重なります。もう一段の転換。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2030年（24歳）　― 大運が辛卯に変わる</div>
+        <div class="tl-body"><b>天剋地冲から干合支合へ。ぶつかる形から、結びつく形に切り替わります。</b></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 9 前回の回収 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">玖</span><span class="sec-title">六月にお伝えしたこと ― あれは、外れてません</span></div>
+  <div class="card" style="border-color:var(--accent-soft);">
+    <p>六月の席で、就子さんは午未天中殺で南（子供）が欠ける、<span class="hl">「離れてるのが正しい距離」「距離があることで縁が深くなる型」</span>とお伝えしました。</p>
+    <p>あれから三か月でこんなことになって、<b>「僕の言うたことは何やってん」</b>と思わはっても無理ないです。</p>
+    <p>ただ、今回じっくり視た限りでは、<b>あれは外れてません。</b></p>
+    <p>南が欠けるというのは、<span class="hl">手元に置いて守る形にはならん</span>、という意味です。今、美允さんは物理的に離れました。形としては、そっちに寄ってます。</p>
+    <div class="pull">問題は、離れたことやのうて、<b>離れ方が荒かったこと</b>だけです。</div>
+    <p>なんで荒くなったか ―― 美允さんが、外の基準を壊す十年に入ってたからです。穏やかに離れるはずやったところに、天剋地冲が重なった。だから、こういう出方になりました。</p>
+    <p style="margin-bottom:0;"><b>就子さんが手放し方を間違えたんやないです。出方が激しかっただけです。</b></p>
+  </div>
+</div>
+
+<!-- 10 処方 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">拾</span><span class="sec-title">ここからやること</span></div>
+
+  <div class="dodont" style="margin-bottom:1.1rem;">
+    <div class="dobox">
+      <div class="h">やること</div>
+      <ul>
+        <li>帰る場所を保つ</li>
+        <li>連絡が来たら普通に出る</li>
+        <li>ご主人と同じことを言う</li>
+        <li>就子さんご自身を立て直す</li>
+        <li>待つ（あと3〜4年）</li>
+      </ul>
+    </div>
+    <div class="dontbox">
+      <div class="h">やらないこと</div>
+      <ul>
+        <li>探しに行く・捕まえる</li>
+        <li>説得する・正論を言う</li>
+        <li>口座を追い続ける</li>
+        <li>どちらかの味方につかせる</li>
+        <li>自分を責める</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card recipe">
+    <div class="item"><div class="num">1</div><div class="rbody"><b>探しに行かん。説得せん。</b><br>申酉天中殺は<span class="hl">支援されるほど運が下がります</span>。螣蛇型は<b>管理されると自立性が損なわれます</b>。ご主人が関空で捕まえようとした結果、梅田で消えました。<b>同じことが、もう一度起きます。</b>才能星は「師を持て」と言うてますが、今は聞ける時期やないです。聞ける時期が来るまで、待つしかないです。</div></div>
+    <div class="item"><div class="num">2</div><div class="rbody"><b>口座の件は、先に自分から言う。</b><br>ここがいちばん危ないところです。美允さんは<span class="hl">一生根に持つ作り</span>（月支×日支の半会＋調舒星＋天庫星）。<b>「あの時、親に監視されてた」は一生残ります。</b>二十四歳で繋がり直す設計になってるのに、そこで扉が閉まります。バレる前に、こちらから言うてしまうほうが軽いです。</div></div>
+    <div class="item"><div class="num">3</div><div class="rbody"><b>帰る場所を、無くさん。</b><br>この子の守護神は<span class="hl">癸（司禄星）＝「家庭や地元を大事にする」「時間がかかることを覚悟する」</span>。今その逆をやってるから苦しいんです。いつ戻ってきてもええ場所が残ってたら、それが効きます。<b>就子さんには電話がかかってきてます。それが答えです。</b>追わへんから、かかってくるんです。</div></div>
+    <div class="item"><div class="num">4</div><div class="rbody"><b>ご主人と、同じことを言う。</b><br>美允さんの中心星は石門星 ―― 和合・平等の星ですが、陰転すると<b>打算的</b>になります。両親を天秤にかける形は、その陰転を強化し続けます。<span class="hl">お二人が同じことを言えば、天秤が成立しなくなる</span>。それが石門星を陽転側に戻す条件です。「親という立場で協力する」と決めはったこと、命式にきれいに合ってます。</div></div>
+    <div class="item"><div class="num">5</div><div class="rbody"><b>就子さんご自身を、立て直す。</b><br>火が土を生む形で、就子さんが減り続けます。そのうえ中心星は<b>美允さんが就子さんを剋す向き</b>。<span class="hl">就子さんが減ったままやと、美允さんも重くなります。</span>今は待つ時期なんで、自分のほうに使ってください。<b>ストレスは体に溜めんと、外に出す</b>。泣く・歌う・体を動かす。これが効きます。</div></div>
+  </div>
+</div>
+
+<!-- 11 就子さんの体 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">拾壱</span><span class="sec-title">就子さんの体のこと</span></div>
+  <div class="card">
+    <p>四月から崩れて、八月に出血・救急。あれも、命式に出ています。</p>
+    <p>就子さんは宿命に<b>申と亥の害</b>（月支 申 × 年支 亥）を持ってはります。この害は<span class="hl">西方金地 ― 消化器系</span>に対応し、<b>「現実的行動が起因」</b>と読みます。無理の重ね方・働き方から出るということです。</p>
+    <p>時期を見ると、<b>四月（壬辰）は日柱と天剋地冲</b>。日柱は自分自身・身体の場所です。<b>いちばん強い衝突が、身体の場所に来ていました。</b>そして<b>八月（丙申）</b>― 申が巡ってきて、<span class="hl">宿命の害がそのまま発動</span>しています。</p>
+    <p>不摂生のせいやないです。<b>宿命の弱点と、運気が重なった時期でした。</b></p>
+    <div class="pull"><b>次の注意は、2026年11月（己亥）。</b><br>年柱と自刑、月柱と害が重なります。</div>
+    <p style="margin-bottom:0;">分かってたら、備えられます。夏に海へ行くために筋トレするのと同じで、<b>二、三か月前から体を整えておく</b>。これがいちばんええ使い方やと思います。</p>
+  </div>
+</div>
+
+<!-- 締め -->
+<div class="closing">
+  <p>今日いちばんお伝えしたかったことを、もう一度だけ書きます。</p>
+  <p class="big">就子さんの接し方が悪かったから、<br>こうなったんやないです。</p>
+  <p>同じ干支が親子で並んだ時点で、ぶつかることは決まってました。<br>守る星と離れる星が、最初から真逆を向いてました。<br>そして今、外の基準を壊す十年のど真ん中にいます。<br><span class="hl">就子さんが何をしても、ここは通ってました。</span></p>
+  <p>赤ちゃんの頃に誰にも預けられへんかったのも、<br>アレルギーと十五年闘ったのも、<br>身体が戦闘モードやったのも ―― <br><b>全部、就子さんの星が正しく燃えていた証拠です。</b></p>
+  <p>ご主人から「みことの親になれてよかった」と言われたそうですね。<br>離婚してから初めて、誕生日の連絡も来た。<br><span class="hl">美允さんが起こした嵐が、二十年動かへんかったものを動かしました。</span></p>
+  <p>あと三年から四年で、大運が変わります。<br>ぶつかる形から、結びつく形へ。<br><b>この親子は、繋がり直す設計になってます。</b></p>
+  <p class="big">今は、待つ時期です。</p>
+  <p>追わへんでください。扉だけ、開けといてください。<br>そして就子さんご自身を、ちゃんと立て直してください。<br>それがいちばん、美允さんに効きます。</p>
+</div>
+
+<div class="door" onclick="this.classList.toggle('open')">
+  <div class="door-gate">
+    <a class="door-inner" href="/menu">鑑定目録</a>
+    <div class="door-leaf door-leaf-l"><span class="door-pull"></span></div>
+    <div class="door-leaf door-leaf-r"><span class="door-pull"></span></div>
+  </div>
+  <p class="door-note">戸をあけると、鑑定の目録があります</p>
+</div>
+
+<footer>
+  <p>いつもおおきにです😆　またゆっくり話しましょう💬</p>
+  <p class="sig">㐂</p>
+</footer>
+
+</div>
+</body>
+</html>
