@@ -100,6 +100,8 @@ header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:
 .g-earth .gfill{background:var(--earth);}
 .g-metal .gfill{background:var(--metal);}
 .g-water .gfill{background:var(--water);}
+.gbar.zero .gtrack{border:1px dashed var(--water);background:transparent;}
+.gbar.zero .gval{color:var(--water);font-weight:600;}
 
 /* 大運テーブル */
 .daiun-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
@@ -271,11 +273,11 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
 
     <p class="soft" style="margin-bottom:.5rem;">五行のエネルギー配分</p>
     <div class="gogyo">
-      <div class="gbar g-wood"><span class="gname">木</span><span class="gtrack"><span class="gfill" style="width:18%"></span></span><span class="gval">20</span></div>
-      <div class="gbar g-fire"><span class="gname">火</span><span class="gtrack"><span class="gfill" style="width:100%"></span></span><span class="gval">108</span></div>
-      <div class="gbar g-earth"><span class="gname">土</span><span class="gtrack"><span class="gfill" style="width:73%"></span></span><span class="gval">79</span></div>
-      <div class="gbar g-metal"><span class="gname">金</span><span class="gtrack"><span class="gfill" style="width:67%"></span></span><span class="gval">72</span></div>
-      <div class="gbar g-water"><span class="gname">水</span><span class="gtrack"><span class="gfill" style="width:0%"></span></span><span class="gval">0</span></div>
+      <div class="gbar g-wood"><div class="gname">木</div><div class="gtrack"><div class="gfill" style="width:18%"></div></div><div class="gval">20</div></div>
+      <div class="gbar g-fire"><div class="gname">火</div><div class="gtrack"><div class="gfill" style="width:100%"></div></div><div class="gval">108</div></div>
+      <div class="gbar g-earth"><div class="gname">土</div><div class="gtrack"><div class="gfill" style="width:73%"></div></div><div class="gval">79</div></div>
+      <div class="gbar g-metal"><div class="gname">金</div><div class="gtrack"><div class="gfill" style="width:67%"></div></div><div class="gval">72</div></div>
+      <div class="gbar g-water zero"><div class="gname">水</div><div class="gtrack"><div class="gfill" style="width:0%"></div></div><div class="gval">0</div></div>
     </div>
     <p class="soft" style="margin-top:.7rem;">総エネルギー 279 ― 量としては十分。偏りが、そのまま人生の形になっています。</p>
   </div>
