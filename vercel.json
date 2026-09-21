@@ -345,6 +345,10 @@
     {
       "source": "/harumi-kanteisho",
       "destination": "/clients/harumi-kanteisho.html"
+    },
+    {
+      "source": "/miurama",
+      "destination": "/view.html?client=miurama"
     }
   ]
 }
