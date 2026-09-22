@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>章江さん 鑑定書 ｜ 㐂占</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --night:#0B0F1A; --night2:#131A28; --sink:#171F30; --panel:#1B2334;
+  --line:#2A3346; --accent:#C4A0A6; --accent-soft:#9E7A82; --accent-glow:rgba(196,160,166,.14);
+  --gold:#C9A24A; --text:#ECEAE4; --muted:#8A96AC; --muted2:#A9B3C6;
+  --water:#6E9BC4; --fire:#D08A5A; --wood:#7FA86B; --metal:#C4C9D2; --earth:#C9A24A;
+  --bad:#C97A6A; --good:#6E9BC4; --kimi:#C98A5A;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Serif JP',serif; color:var(--text); line-height:1.95; letter-spacing:.045em;
+  background:
+    radial-gradient(1200px 620px at 50% -12%, rgba(196,160,166,.10), transparent 60%),
+    linear-gradient(180deg,#0B0F1A 0%,#0D1220 45%,#080B14 100%);
+  background-attachment:fixed; min-height:100vh;
+}
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.05rem 4rem;}
+
+header{text-align:center;padding:3rem 1rem 1.4rem;}
+header .kicker{font-size:.68rem;letter-spacing:.32em;color:var(--accent);opacity:.9;margin-bottom:.9rem;}
+header h1{font-size:1.5rem;font-weight:500;letter-spacing:.08em;margin-bottom:.5rem;}
+header h1 .nm{color:var(--accent);}
+header .tagline{font-size:.8rem;color:var(--muted2);letter-spacing:.1em;line-height:1.7;}
+header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:.12em;}
+
+.profile{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem .8rem;
+}
+.profile div{font-size:.74rem;color:var(--muted);}
+.profile div b{display:block;font-size:.9rem;color:var(--text);font-weight:500;margin-top:.1rem;letter-spacing:.06em;}
+.profile div.full{grid-column:1/3;}
+
+.sec{margin-bottom:1.65rem;}
+.sec-head{
+  display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;
+  padding-bottom:.6rem;border-bottom:1px solid var(--line);
+}
+.sec-no{font-size:.72rem;color:var(--accent);letter-spacing:.18em;font-weight:600;}
+.sec-title{font-size:1.02rem;font-weight:500;letter-spacing:.08em;}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  padding:1.25rem 1.15rem;box-shadow:0 4px 24px rgba(0,0,0,.32);margin-bottom:1rem;
+}
+.card p{font-size:.87rem;margin-bottom:.9rem;color:var(--text);}
+.card p:last-child{margin-bottom:0;}
+.card .lead{color:var(--accent);font-size:.9rem;font-weight:500;}
+.hl{color:var(--accent);font-weight:500;}
+.hk{color:var(--kimi);font-weight:500;}
+.soft{color:var(--muted2);font-size:.8rem;}
+
+.meishiki{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.2rem 0 .3rem;}
+.pillar{background:var(--sink);border:1px solid var(--line);border-radius:12px;padding:.7rem .4rem;text-align:center;}
+.pillar .lbl{font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.55rem;}
+.pillar .yomi{font-size:.58rem;color:var(--muted);letter-spacing:.04em;line-height:1.3;}
+.pillar .kan{font-size:1.85rem;font-weight:600;color:var(--text);line-height:1.15;}
+.pillar .shi{font-size:1.85rem;font-weight:600;color:var(--accent);line-height:1.15;margin-top:.2rem;}
+.pillar .zou{font-size:.62rem;color:var(--muted2);margin-top:.55rem;letter-spacing:.04em;}
+.meishiki-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;}
+
+.jintai{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:19rem;margin:.4rem auto .2rem;}
+.jcell{background:var(--sink);border:1px solid var(--line);border-radius:11px;aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;}
+.jcell .pos{font-size:.58rem;color:var(--muted);letter-spacing:.05em;}
+.jcell .star{font-size:.92rem;font-weight:600;color:var(--text);letter-spacing:.03em;}
+.jcell.center{background:linear-gradient(160deg,rgba(196,160,166,.18),var(--sink));border-color:var(--accent-soft);}
+.jcell.center .star{color:var(--accent);}
+.jcell.jusei-cell{background:var(--night2);}
+.jcell .star.gold{color:var(--gold);}
+
+.gogyo{margin-top:.3rem;}
+.gbar{display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;}
+.gbar .gname{width:2.6rem;font-size:.76rem;color:var(--muted2);flex-shrink:0;}
+.gbar .gtrack{flex:1;height:9px;background:var(--sink);border-radius:5px;overflow:hidden;}
+.gbar .gfill{height:100%;border-radius:5px;}
+.gbar .gval{width:2.2rem;text-align:right;font-size:.72rem;color:var(--muted);flex-shrink:0;}
+.g-wood .gfill{background:var(--wood);}
+.g-fire .gfill{background:var(--fire);}
+.g-earth .gfill{background:var(--earth);}
+.g-metal .gfill{background:var(--metal);}
+.g-water .gfill{background:var(--water);}
+
+.daiun-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.daiun{width:100%;border-collapse:collapse;font-size:.78rem;min-width:19rem;}
+.daiun th{font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.05em;padding:.4rem .3rem;border-bottom:1px solid var(--line);text-align:center;}
+.daiun td{padding:.5rem .3rem;text-align:center;border-bottom:1px solid rgba(42,51,70,.5);color:var(--text);}
+.daiun td:first-child{color:var(--muted2);font-size:.72rem;white-space:nowrap;}
+.daiun .tc-cell{color:var(--bad);font-size:.68rem;}
+.daiun .now-row td{background:linear-gradient(90deg,rgba(196,160,166,.12),transparent);}
+.daiun .now-row td:first-child{color:var(--accent);font-weight:600;}
+.daiun .now-cell{color:var(--accent);font-size:.68rem;font-weight:600;}
+
+.tl{position:relative;padding-left:1.1rem;margin-top:.3rem;}
+.tl::before{content:"";position:absolute;left:3px;top:.4rem;bottom:.4rem;width:2px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:1rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before{content:"";position:absolute;left:-1.1rem;top:.45rem;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--night2);}
+.tl-item.tc::before{background:var(--bad);}
+.tl-when{font-size:.76rem;color:var(--accent);font-weight:600;letter-spacing:.06em;}
+.tl-item.tc .tl-when{color:var(--bad);}
+.tl-body{font-size:.82rem;color:var(--text);margin-top:.15rem;}
+
+.recipe{counter-reset:r;}
+.recipe .item{display:flex;gap:.75rem;margin-bottom:1rem;}
+.recipe .item:last-child{margin-bottom:0;}
+.recipe .num{flex-shrink:0;width:1.7rem;height:1.7rem;border-radius:50%;background:linear-gradient(160deg,var(--accent),var(--accent-soft));color:var(--night);font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;}
+.recipe .rbody{font-size:.83rem;}
+.recipe .rbody b{color:var(--accent);font-weight:600;}
+
+.pull{border-left:3px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:1rem 0;font-size:.9rem;color:var(--muted2);}
+
+.closing{background:linear-gradient(180deg,var(--panel),var(--sink));border:1px solid var(--accent-soft);border-radius:18px;padding:1.6rem 1.25rem;text-align:center;box-shadow:0 0 30px rgba(196,160,166,.08);}
+.closing p{font-size:.88rem;margin-bottom:.9rem;}
+.closing p:last-child{margin-bottom:0;}
+.closing .big{font-size:1.05rem;color:var(--accent);font-weight:500;letter-spacing:.06em;}
+
+.koyomi-link{display:block;text-align:center;margin-top:1.5rem;padding:1rem;background:var(--night2);border:1px solid var(--line);border-radius:14px;color:var(--text);text-decoration:none;font-size:.86rem;transition:border-color .3s;}
+.koyomi-link:hover{border-color:var(--accent-soft);}
+.koyomi-link .arrow{color:var(--accent);}
+.koyomi-link small{display:block;color:var(--muted);font-size:.7rem;margin-top:.3rem;}
+
+footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
+footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">㐂占 　 命 術 本鑑定書</p>
+  <h1><span class="nm">章江</span>さんの鑑定書</h1>
+  <p class="tagline">溶かされる金。形を変えて、使いものになる人</p>
+  <p class="date">1976年5月18日 生　／　紡の席 2026.09.22</p>
+</header>
+
+<div class="profile">
+  <div class="full">魂の本質（日の宿命）<b>庚午（かのえうま）― 溶かされる金</b></div>
+  <div>中心の星<b>貫索星</b></div>
+  <div>天中殺<b>戌亥（北西）</b></div>
+  <div>今の運気（50歳）<b>龍高星</b></div>
+  <div>今の大運<b>戊子（44〜53歳）</b></div>
+  <div class="full">宿命の特記<b>宿命天中殺：なし ― 後から来る天中殺の時期に、影響が集中する</b></div>
+</div>
+
+<div class="card" style="border-color:var(--accent-soft);">
+  <p>章江さん、おおきにです☺️</p>
+  <p>9月22日にお話ししたことを、ここにまとめました。<b>お話しした内容に、さらに書き足してあります。</b></p>
+  <p>特に<span class="hl">後半の「54歳からの二十年」のところ</span>。お話しした二〇二九年までの組み立てを、年ごとに分けてまとめています。あとから何度でも見返せるように。</p>
+  <p style="margin-bottom:0;">読む順番は気にせんでください。気になったところから開いてもらって大丈夫です。</p>
+</div>
+
+<!-- 命式盤 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">命 式</span><span class="sec-title">章江さんの設計図</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.6rem;">陰占 ― 生まれ持った気の柱</p>
+    <div class="meishiki">
+      <div class="pillar">
+        <div class="lbl">日柱（自分・家庭）</div>
+        <div class="yomi">かのえ</div><div class="kan">庚</div>
+        <div class="shi">午</div><div class="yomi">うま</div>
+        <div class="zou">蔵干　己</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">月柱（仕事・家系）</div>
+        <div class="yomi">みずのと</div><div class="kan">癸</div>
+        <div class="shi">巳</div><div class="yomi">み</div>
+        <div class="zou">蔵干　庚</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">年柱（社会・先祖）</div>
+        <div class="yomi">ひのえ</div><div class="kan">丙</div>
+        <div class="shi">辰</div><div class="yomi">たつ</div>
+        <div class="zou">蔵干　戊</div>
+      </div>
+    </div>
+    <p class="meishiki-note">日柱 庚午 ／ 月柱 癸巳 ／ 年柱 丙辰　―― 下の段は午・巳・辰、上には丙。<b>火にぐるっと囲まれています</b></p>
+
+    <div style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p class="soft" style="margin-bottom:.2rem;">陽占 ― 心のかたち（人体星図）</p>
+    <div class="jintai">
+      <div class="jcell jusei-cell"><span class="pos">伴星（先祖）</span><span class="star">石門星</span></div>
+      <div class="jcell"><span class="pos">目上（北）</span><span class="star">車騎星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">初年運</span><span class="star gold">天印星</span></div>
+      <div class="jcell"><span class="pos">家庭（西）</span><span class="star">玉堂星</span></div>
+      <div class="jcell center"><span class="pos">中心・本人</span><span class="star">貫索星</span></div>
+      <div class="jcell"><span class="pos">社会（東）</span><span class="star">龍高星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">晩年運</span><span class="star gold">天恍星</span></div>
+      <div class="jcell"><span class="pos">目下（南）</span><span class="star">調舒星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">中年運（今ここ）</span><span class="star gold">天貴星</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.7rem;">真ん中が<b>納得しないと動かない星</b>。社会の位置に<b>自分にしかできないものを探す星</b>。この二つが、章江さんの全部を説明します。</p>
+
+    <div style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p class="soft" style="margin-bottom:.7rem;">五行のバランス（総エネルギー 284）</p>
+    <div class="gogyo">
+      <div class="gbar g-wood"><span class="gname">木</span><span class="gtrack"><span class="gfill" style="width:9%"></span></span><span class="gval">26</span></div>
+      <div class="gbar g-fire"><span class="gname">火</span><span class="gtrack"><span class="gfill" style="width:34%"></span></span><span class="gval">97</span></div>
+      <div class="gbar g-earth"><span class="gname">土</span><span class="gtrack"><span class="gfill" style="width:34%"></span></span><span class="gval">97</span></div>
+      <div class="gbar g-metal"><span class="gname">金</span><span class="gtrack"><span class="gfill" style="width:15%"></span></span><span class="gval">44</span></div>
+      <div class="gbar g-water"><span class="gname">水</span><span class="gtrack"><span class="gfill" style="width:7%"></span></span><span class="gval">20</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.6rem;">火97・土97に対して、水は20。<b>ここが、章江さんを読むうえでいちばん大事なところ</b>です。</p>
+  </div>
+</div>
+
+<!-- 壱 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">壱</span><span class="sec-title">「納得しないと動かない」の正体</span></div>
+  <div class="card">
+    <p class="lead">不安で聞いてはるんやなくて、納得できてないから動けてないだけです。</p>
+    <p>章江さんの相談は「今の流れに乗っていって大丈夫でしょうか」でした。責任ある立場に変わる話に、乗っていいのかどうか。</p>
+    <p>以下が、人体星図の中心にある貫索星の質です。</p>
+    <div class="pull">自分のやり方にこだわる。まっすぐ。流されない芯の強さがある。<br><b>最後までやり遂げる。</b>周りからの評価は、あんまり気にならない。<b>納得しないと動かない。</b></div>
+    <p><span class="hl">章江さんは、納得したら勝手に動く作りです。</span>今回聞いてこられたのは、不安の相談というより、<b>まだ納得できていない、という状態そのもの</b>です。</p>
+    <p>そして、この星にはもう一つ、大事な質があります。</p>
+    <div class="pull">常に自責思考。何かあった時に、まず自分のせいやと思う。<br>人のせいにしない。だから「この人は守ってくれる」という印象になる。</div>
+    <p>申し込みの時、「一方的なお願いで恥ずかしかった」と書いてくれてました。<b>誰にも責められてないのに、自分で先に責めてしまう。</b>これは弱さやなくて、貫索星の質そのものです。</p>
+    <p style="margin-bottom:0;">去年の出来事のあと沈んだままなのも、<span class="hl">出来事そのものより、それを自分の側で何回も引き受け直しているところがある</span>んやないかと、僕は見ています。今年は特に、その傾向が強く出やすい年でした。</p>
+  </div>
+</div>
+
+<!-- 弐 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">弐</span><span class="sec-title">熱の強さと、潤いの薄さ</span></div>
+  <div class="card">
+    <p class="lead">性格が弱いのではなく、構造の話です。</p>
+    <p>日柱・月柱・年柱、下の段は午・巳・辰。上の段にも丙。<b>章江さんは、生まれた時点で火にぐるっと囲まれています。</b></p>
+    <p>そして章江さん自身を表す日柱の上は「庚」。金属です。<span class="hl">硬い金属が、火に囲まれている。</span>これが日の宿命「庚午」の姿です。</p>
+    <div class="pull">硬い金属が、火で溶かされて、柔らかいうちに新しい形に打ち直される。<br>打たれるのは悪いことやないです。<b>形が変わるからこそ、使いものになる。</b></div>
+    <p>この日干支には、警句という注意書きがあります。</p>
+    <div class="pull">迷い心が多く、心騒がしく落ち着かない。煩悶・軽率のため、散在が多い。<br>和協心を養えば、<b>盛衰変動があっても、晩年に成果を全うできる</b>。</div>
+    <p>「迷い心が多く、落ち着かない」は、性格の弱さではないです。火に囲まれた金属やから、<b>熱が続いていて落ち着く間がない</b>という構造です。</p>
+    <p style="margin-bottom:0;">そして五行を見ると、火97・土97に対して<b>水は20</b>です。水は知性と滋養をあらわす気です。この気の注意書きには「火が多いと渇水」とあります。<span class="hl">熱と、現実を回す力はたっぷりある。その分、潤いが戻る時間が、意識して作らないとなかなか来ない作りです。</span>去年から沈んだままなのは、<b>潤いが戻る回路が、命式に薄いから</b>です。</p>
+  </div>
+</div>
+
+<!-- 参 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">参</span><span class="sec-title">ご主人との別れについて</span></div>
+  <div class="card">
+    <p class="lead">霊魂の視点で見ると、経験には意味があります。</p>
+    <p>去年、ご主人と死別されました。二人三脚でいろんなことを描きながら来ていて、楽しみにしていたところで、亡くなられた。「死んだみたいな感じ」というお話を、うかがいました。</p>
+    <p>思考が止まって、そのことを思い出しても何も考えられない。<span class="hl">それは弱さではないです。</span>先に書いた通り、章江さんは火に囲まれた金属で、水（潤い・整理する力）が命式にいちばん薄い。<b>沈んだ状態から、自分の力だけで浮き上がる回路が薄いのは、構造としてそうなっています。</b></p>
+    <p>年運で見ると、去年2025年は乙巳。<b>日柱と干合</b>という配置が出ています。干合は、自分の柱が外から来たものと結びついて、性質が一回変わる配置です。<span class="hl">自分で選んだ変化やなくて、向こうから来た変化です。</span></p>
+    <p>東洋占術の思想では、魂は生きているあいだにいろんな経験をして、それを磨いて帰っていくものと見ます。現世的な望み――一緒に描いていた未来とは別に、<b>この経験そのものに意味があるという見方</b>です。今すぐ「良かった」と思えなくても、いいと思っています。</p>
+    <p style="margin-bottom:0;">今、形が決まっていないから、宙ぶらりんな感じがしているだけです。<span class="hl">沈んでいるのではなく、まだ固まっていないだけ</span>やと、僕は見ています。打ち直された金属は、前より使いものになります。それが、この日の宿命です。</p>
+  </div>
+</div>
+
+<!-- 肆 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">肆</span><span class="sec-title">責任ある立場は、乗って大丈夫</span></div>
+  <div class="card">
+    <p class="lead">分かれ道は「受けるかどうか」ではないです。</p>
+    <p>社会の位置には龍高星。仕事や外での動き方を表す場所です。</p>
+    <div class="pull">サラリーマンには不向き。体制に従わない。<br><b>自分にしかできないものを探す。</b>人生の目標を早めに見つけることがカギ。</div>
+    <p>この星には、もう一つ注意書きがあります。</p>
+    <div class="pull"><b>目的さえ持てば、花を咲かすことができる。</b><br>目的がないと、放浪する。</div>
+    <p>同じ星で、真逆に出ます。目的がある時は誰にも真似できない形を作り、目的が見えていない時は動いているのに何も積み上がりません。</p>
+    <p><span class="hl">つまり、責任ある立場を受けるかどうかは、実は分かれ道ではないです。</span>分かれ道は、その立場を「与えられた役割」として受けるか、「自分の目的」として受けるか。ここです。</p>
+    <p>目上の位置には車騎星。「将軍の気質」「気合で結果を出す」と出ています。<b>気合でなんとかなってしまう</b>質なので、限界が来ていることに自分で気づきにくい面もあります。去年から沈んだままでも役職の話が進むのは、外から見たら元気にやっている人に見えるからです。</p>
+    <p style="margin-bottom:0;">末っ子で、実家のことは兄姉が担ってくれていて、章江さんには振りかかっていないとうかがいました。<span class="hl">それは、それで良いことです。</span>この星を持つ人は、上が全部抜けて自分が見ることになるケースも多いのですが、見なくていいならそれに越したことはないです。</p>
+  </div>
+</div>
+
+<!-- 伍 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">伍</span><span class="sec-title">54歳から始まる二十年</span></div>
+  <div class="card">
+    <p class="lead">今の役職は、上がりではないです。</p>
+    <p>大運という、十年ごとの区切りがあります。章江さんは4歳から始まる形で、今は<b>44歳〜53歳の戊子</b>のところにいます。</p>
+    <div class="daiun-scroll">
+      <table class="daiun">
+        <tr><th>年齢</th><th>干支</th><th>主星</th><th>位相・意味</th></tr>
+        <tr class="now-row"><td>44〜53歳</td><td>戊子</td><td>龍高星</td><td class="now-cell">日柱：対冲<br>このままでええんかなの十年</td></tr>
+        <tr><td>54〜63歳</td><td>丁亥</td><td>牽牛星</td><td class="tc-cell">大運天中殺（1年目）</td></tr>
+        <tr><td>64〜73歳</td><td>丙戌</td><td>車騎星</td><td class="tc-cell">大運天中殺（2年目）</td></tr>
+        <tr><td>74〜83歳</td><td>乙酉</td><td>司禄星</td><td>天中殺明け・晩年の本番</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:1rem;">章江さんの天中殺は戌亥です。<b>54歳からの大運が、そのまま戌亥に入ります。</b>つまり54歳から73歳までの20年、大運そのものが天中殺になります。</p>
+    <p>怖い話ではないです。<span class="hl">ルールが変わる20年</span>という意味です。</p>
+    <div class="pull">自分のために大きく広げようとすると、空回りしやすい<br>誰かのために動くと、結果が出る<br>新しく立ち上げるより、今あるものを深める方に流れが向く</div>
+    <p>つまり54歳からは、<b>受け取る側から渡す側に、役割が変わります。</b>だから、今からの4年間――2026年から2029年は、その時に渡せるものを作っておく期間です。</p>
+    <p style="margin-bottom:0;">よく言われる要点条件があります。大運天中殺に入る前の数年間、大変な思いをした人ほど、天中殺の後で伸びる、というクロスする形です。<span class="hl">今つらい時期が続いているとしたら、それが後の章江さんのためになっている</span>と、僕は見ています。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">今の十年に乗るための、感覚のコツ</p>
+    <p>今回の相談にあった「店長になる話」を、もう少し具体的に見ます。</p>
+    <p><b>自分がなりたいと言って動いたわけではなく、人に頼まれて、断る理由がなくて引き受けている。</b>この形が、実は今の十年をいちばんうまく乗る感覚です。</p>
+    <p style="margin-bottom:0;">自分のためではなく、<span class="hl">人のために引き受けた結果、うまくいく</span>――これが、天中殺に入る前の要点の乗り方です。感覚として覚えておくと、後で役立ちます。</p>
+  </div>
+
+  <div class="card" style="border-color:var(--accent-soft);">
+    <p class="lead">54歳からの20年に、何を渡すか</p>
+    <p>天中殺は戌亥。<span class="hl">精神性を高める使命</span>です。形あるもの（お金・地位・物）で満たそうとすると、なんとなく足りない感じがして探し求めてしまいます。形のないもの（知識・経験・人に伝えるもの）に向かうと、しっくりくる。そういう宿命です。家系の精神性を受け継ぐという意味も含みます。</p>
+    <p>中年期の星・天貴星には「人に教える才能に長ける」と出ています。才能の領域も、思考を優先する北天運。</p>
+    <p style="margin-bottom:0;"><b>戌亥天中殺・天貴星・才能の領域。この二つが同じ方を指しています。</b>54歳からの20年は、章江さんが通ってきた道を、後ろの人に渡す20年です。今の4年は、渡せるものを作る準備期間になります。</p>
+  </div>
+</div>
+
+<!-- 陸 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">陸</span><span class="sec-title">2029年までの時間割</span></div>
+  <div class="card">
+    <p class="lead">54歳に入る前の、4年間の組み立てです。</p>
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-when">2026年（50歳）　丙午・車騎星</div>
+        <div class="tl-body">日柱と<b>自刑</b>。自分の中でぶつかりやすい年です。火97の命式に、今年は上からも下からも火が来ています。<span class="hl">決着をつける年ではなく、「この4年で自分は何を残すか」を考える年</span>として使ってください。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年（51歳）　丁未・牽牛星</div>
+        <div class="tl-body">日柱と支合、月+日柱で方三位（南方火）。<b>まとまりの配置</b>です。今年決めた方向を、実際の形にしていく年です。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2028年（52歳）　戊申・龍高星　★いちばん広げられる年</div>
+        <div class="tl-body">年柱と<b>大半会</b>。拡大の配置です。<span class="hl">大運天中殺に入る前で、いちばん広げられる年</span>がここです。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2029年（53歳）　己酉・玉堂星</div>
+        <div class="tl-body">育てる星、教える星が巡ります。大運天中殺に入る前、最後の1年。<b>作ったものを、渡せる形に整える年</b>です。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">2030年（54歳）　庚戌　★切り替わり</div>
+        <div class="tl-body">年柱と<b>天剋地冲</b>。上も下もぶつかる、強い切り替わりの配置です。ここから、大運天中殺の20年が始まります。4年の使い方が、ここから<b>影響してきます</b>。</div>
+      </div>
+    </div>
+    <div class="pull" style="margin-top:1.2rem;">2026年　決める<br>2027年　形にする<br>2028年　広げる<br>2029年　整える<br><b>2030年〜　渡す</b></div>
+    <p style="margin-bottom:0;">この順番が、章江さんの命式と噛み合います。</p>
+  </div>
+</div>
+
+<!-- 漆 五つの視点 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">漆</span><span class="sec-title">五つの視点から観る</span></div>
+
+  <div class="card">
+    <p class="soft" style="margin-bottom:.8rem;">同じ命式を、深さの違う五つの角度から観ます。同じ結論に別の道から辿り着く時、それが本物です。</p>
+
+    <p class="lead">［壱］ 本質と才能の視点</p>
+    <p>日の宿命が庚午「溶かされる金」。中心が貫索星。八門法では<b>玄武型</b>――北がいちばん大きい形です。<span class="hl">学者気質・研究熱心・知性・目上の助けを得る</span>。</p>
+    <p style="margin-bottom:0;">才能の出方を見ると、才能星は調舒星。型は<b>順殿の型</b>――突出した一芸ではなく、複数の才能をバランスよく持つ手堅い形です。領域は<b>北天運</b>。考える方に才能がありますが、<b>考えて満足し、動きにくい面</b>もあります。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">［弐］ 家系と宿命の視点</p>
+    <p>宿命天中殺はなしです。生まれつき魂に抱えている天中殺はなく、<span class="hl">後から来る天中殺の時期にだけ、影響が集中します。</span></p>
+    <p>伴星は石門星。ご先祖様から受け継いだ使命は<b>「人脈が財産になる」</b>という質です。</p>
+    <p style="margin-bottom:0;">天中殺は戌亥――<b>精神性を高める使命。家系の精神性を継承する宿命</b>です。同じ方向を、54歳からの大運天中殺の質とも重ねて読むことができます。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">［参］ 今の運気の構造から観る視点</p>
+    <p>44〜53歳の大運・戊子。日柱と<b>対冲</b>。正面からぶつかる配置です。自分の場所に、外から強い力がかかる十年です。</p>
+    <p style="margin-bottom:0;">去年の出来事も、この配置の中で起きています。<b>章江さんが弱かったからでも、選択を間違えたからでもないです。</b>この10年、そういう力がかかる季節やったということです。そして54歳から、大運そのものが天中殺に入る。<span class="hl">「壊れる十年」から「形が渡る20年」へ切り替わる、大きな転換点</span>に今います。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">［肆］ 関係性と環境の視点</p>
+    <p>五行は火97・土97に対し水20。守護神は<b>第一が壬、第二が癸</b>――<span class="hl">いちばん足りない水が、そのまま助けになる</span>形です。</p>
+    <p style="margin-bottom:0;">東洋思想・占術では、こういう形をよく取ります。足りないものが、お守りになる。<b>ひとりで抱えるのではなく、一人で黙って考える時間を、意識して環境の中に作ること</b>――これが、章江さんの命式の使い方です。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">［伍］ 霊魂の設計という視点 ―― 総括</p>
+    <p>壱から肆まで、全部が同じ方向を向いています。<b>今は形が定まらない時期で、その先に渡す側の20年がある</b>と。</p>
+    <p>でも、<span class="hl">「だから宿命通りにじっと待ちなさい」で終わる話ではないです。</span></p>
+    <p><b>この命式で実際に動ける条件は、一つだけです。</b></p>
+    <div class="pull">潤いが戻る時間を、<b>自分で予定に入れること</b>。<br>それ以外に、この命式が回り出す入口はありません。</div>
+    <p style="margin-bottom:0;">火97・土97で、熱と現実を回す力はたっぷりあります。でも水20で、潤いが戻る時間は意識しないと来ません。<b>つまり、立ち止まる時間を作らないかぎり、いつまでも熱に持っていかれる構造</b>です。<span class="hl">その時間さえ確保できれば、この命式は回ります。</span></p>
+  </div>
+</div>
+
+<!-- 捌 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">捌</span><span class="sec-title">ここから動ける処方</span></div>
+  <div class="card recipe">
+    <div class="item"><div class="num">1</div><div class="rbody"><b>一人で黙って考える時間を、予定に入れる。</b><br>週に一回でも、朝の10分でもいいです。<span class="hl">意識して作らないと、なかなか来ません。</span>水20を、外から足す作業です。</div></div>
+    <div class="item"><div class="num">2</div><div class="rbody"><b>水場に行く。黒や濃紺を身につける。</b><br>守護神の壬・癸を暮らしに足す方法です。読書や知識を蓄えること、水分を多めに取ることも含まれます。</div></div>
+    <div class="item"><div class="num">3</div><div class="rbody"><b>「この4年で、自分は何を残すか」を、今年いっぱいかけて考える。</b><br>すぐに答えが出なくても大丈夫です。2026年は決める年です。</div></div>
+    <div class="item"><div class="num">4</div><div class="rbody"><b>2028年に、いちばん広げる。</b><br>大運天中殺に入る前で、いちばん広げられる年です。2027年に形にしたことを、この年に大きくしてください。</div></div>
+    <div class="item"><div class="num">5</div><div class="rbody"><b>責任ある立場は、「自分の目的」として受け直す。</b><br>与えられた役割としてなぞるのではなく、章江さんにしかできない形にアレンジする。同じ役職でも、この一点で行き先が変わります。</div></div>
+    <div class="item"><div class="num">6</div><div class="rbody"><b>自分を責める力を、人を育てる方に使う。</b><br>誰にも責められてないのに先に責めてしまう力は、責任ある立場では人の分まで働きます。中年期の星にある「人に教える才能」の方向に、少しずつ振り向けてください。</div></div>
+    <div class="item"><div class="num">7</div><div class="rbody"><b>暦を毎日ひらく。</b><br>「今日はこういう日か」と見るだけでいいです。日天中殺の日は、大きな決断より整理に向く日です。</div></div>
+  </div>
+</div>
+
+<!-- 締め -->
+<div class="closing">
+  <p>章江さんは、<span class="hl">溶かされる金</span>です。<br>硬い金属が、火で溶かされて、新しい形に打ち直される。</p>
+  <p>去年から沈んだままなのは、<br>性格が弱いからやないです。<br><b>潤いが戻る回路が、構造として薄いだけです。</b></p>
+  <p>ご主人との別れは、<br>自分で選んだ変化やなくて、<br><b>向こうから来た変化でした。</b></p>
+  <p class="big">今は、まだ固まっていないだけです。</p>
+  <p>打ち直された金属は、<br>前より使いものになります。<br><span class="hl">それが、この日の宿命です。</span></p>
+  <p>今の役職は、上がりやないです。<br>章江さんの本番は、<br><b>54歳から始まる20年です。</b></p>
+  <p>今からの4年は、<br>その時に渡せるものを作る期間。<br><span class="hl">この4年で何を残すか、それだけ考えてください。</span></p>
+  <p>一人で黙って考える時間を、<br>予定に入れる。<br>それだけで、この命式は回り出します☺️</p>
+</div>
+
+<a class="koyomi-link" href="/akie">
+  <span class="arrow">▶</span> 運気暦（日々の運気カレンダー）をひらく
+  <small>今日の運気と、これから1年分の月の流れが出ます。</small>
+</a>
+
+<footer>
+  <p>いつもおおきにです😊　気になったところは、いつでもLINEで掘ってください💬</p>
+  <p class="sig">㐂</p>
+</footer>
+
+</div>
+</body>
+</html>
