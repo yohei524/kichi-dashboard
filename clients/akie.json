@@ -136,7 +136,8 @@
   "koyomiOnly": true,
   "koyomiNoDestiny": true,
   "expiresAt": "2027-09-30",
-  "doorHref": "",
-  "doorLabel": "",
-  "doorNote": ""
+  "doorHref": "/akie-kanteisho",
+  "doorLabel": "鑑定書をひらく",
+  "doorNote": "9月22日の紡の席で観たこと、話しきれんかったことも含めてまとめてあります",
+  "kanteishoHref": "/akie-kanteisho"
 }

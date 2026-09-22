@@ -51,6 +51,10 @@
   ],
   "rewrites": [
     {
+      "source": "/akie-kanteisho",
+      "destination": "/clients/akie-kanteisho.html"
+    },
+    {
       "source": "/akie",
       "destination": "/view.html?client=akie"
     },
