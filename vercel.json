@@ -59,6 +59,14 @@
       "destination": "/view.html?client=akie"
     },
     {
+      "source": "/kato-kazuko-kanteisho",
+      "destination": "/clients/kato-kazuko-kanteisho.html"
+    },
+    {
+      "source": "/kato-kazuko",
+      "destination": "/view.html?client=kato-kazuko"
+    },
+    {
       "source": "/kanaya-kanteisho",
       "destination": "/clients/kanaya-kanteisho.html"
     },
