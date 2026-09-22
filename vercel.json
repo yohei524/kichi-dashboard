@@ -357,6 +357,10 @@
     {
       "source": "/miurama",
       "destination": "/view.html?client=miurama"
+    },
+    {
+      "source": "/miurama-kanteisho",
+      "destination": "/clients/miurama-kanteisho.html"
     }
   ]
 }
