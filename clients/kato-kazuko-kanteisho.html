@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>華子さん 鑑定書 ｜ 㐂占</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --night:#0B0F1A; --night2:#131A28; --sink:#171F30; --panel:#1B2334;
+  --line:#2A3346; --accent:#C4A06A; --accent-soft:#9E7F52; --accent-glow:rgba(196,160,106,.14);
+  --gold:#C9A24A; --text:#ECEAE4; --muted:#8A96AC; --muted2:#A9B3C6;
+  --water:#6E9BC4; --fire:#D08A5A; --wood:#7FA86B; --metal:#C4C9D2; --earth:#C9A24A;
+  --bad:#C97A6A; --good:#6E9BC4; --kimi:#C98A5A;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Serif JP',serif; color:var(--text); line-height:1.95; letter-spacing:.045em;
+  background:
+    radial-gradient(1200px 620px at 50% -12%, rgba(196,160,106,.10), transparent 60%),
+    linear-gradient(180deg,#0B0F1A 0%,#0D1220 45%,#080B14 100%);
+  background-attachment:fixed; min-height:100vh;
+}
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.05rem 4rem;}
+
+header{text-align:center;padding:3rem 1rem 1.4rem;}
+header .kicker{font-size:.68rem;letter-spacing:.32em;color:var(--accent);opacity:.9;margin-bottom:.9rem;}
+header h1{font-size:1.5rem;font-weight:500;letter-spacing:.08em;margin-bottom:.5rem;}
+header h1 .nm{color:var(--accent);}
+header .tagline{font-size:.8rem;color:var(--muted2);letter-spacing:.1em;line-height:1.7;}
+header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:.12em;}
+
+.profile{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem .8rem;
+}
+.profile div{font-size:.74rem;color:var(--muted);}
+.profile div b{display:block;font-size:.9rem;color:var(--text);font-weight:500;margin-top:.1rem;letter-spacing:.06em;}
+.profile div.full{grid-column:1/3;}
+
+.sec{margin-bottom:1.65rem;}
+.sec-head{
+  display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;
+  padding-bottom:.6rem;border-bottom:1px solid var(--line);
+}
+.sec-no{font-size:.72rem;color:var(--accent);letter-spacing:.18em;font-weight:600;}
+.sec-title{font-size:1.02rem;font-weight:500;letter-spacing:.08em;}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  padding:1.25rem 1.15rem;box-shadow:0 4px 24px rgba(0,0,0,.32);margin-bottom:1rem;
+}
+.card p{font-size:.87rem;margin-bottom:.9rem;color:var(--text);}
+.card p:last-child{margin-bottom:0;}
+.card .lead{color:var(--accent);font-size:.9rem;font-weight:500;}
+.hl{color:var(--accent);font-weight:500;}
+.hk{color:var(--kimi);font-weight:500;}
+.soft{color:var(--muted2);font-size:.8rem;}
+
+.meishiki{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.2rem 0 .3rem;}
+.pillar{background:var(--sink);border:1px solid var(--line);border-radius:12px;padding:.7rem .4rem;text-align:center;}
+.pillar .lbl{font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.55rem;}
+.pillar .yomi{font-size:.58rem;color:var(--muted);letter-spacing:.04em;line-height:1.3;}
+.pillar .kan{font-size:1.85rem;font-weight:600;color:var(--text);line-height:1.15;}
+.pillar .shi{font-size:1.85rem;font-weight:600;color:var(--accent);line-height:1.15;margin-top:.2rem;}
+.pillar .zou{font-size:.62rem;color:var(--muted2);margin-top:.55rem;letter-spacing:.04em;}
+.meishiki-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;}
+
+.jintai{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:19rem;margin:.4rem auto .2rem;}
+.jcell{background:var(--sink);border:1px solid var(--line);border-radius:11px;aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;}
+.jcell .pos{font-size:.58rem;color:var(--muted);letter-spacing:.05em;}
+.jcell .star{font-size:.92rem;font-weight:600;color:var(--text);letter-spacing:.03em;}
+.jcell.center{background:linear-gradient(160deg,rgba(196,160,106,.18),var(--sink));border-color:var(--accent-soft);}
+.jcell.center .star{color:var(--accent);}
+.jcell.jusei-cell{background:var(--night2);}
+.jcell .star.gold{color:var(--gold);}
+
+.gogyo{margin-top:.3rem;}
+.gbar{display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;}
+.gbar .gname{width:2.6rem;font-size:.76rem;color:var(--muted2);flex-shrink:0;}
+.gbar .gtrack{flex:1;height:9px;background:var(--sink);border-radius:5px;overflow:hidden;}
+.gbar .gfill{display:block;height:100%;border-radius:5px;}
+.gbar .gval{width:2.2rem;text-align:right;font-size:.72rem;color:var(--muted);flex-shrink:0;}
+.g-wood .gfill{background:var(--wood);}
+.g-fire .gfill{background:var(--fire);}
+.g-earth .gfill{background:var(--earth);}
+.g-metal .gfill{background:var(--metal);}
+.g-water .gfill{background:var(--water);}
+
+.daiun-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.daiun{width:100%;border-collapse:collapse;font-size:.78rem;min-width:19rem;}
+.daiun th{font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.05em;padding:.4rem .3rem;border-bottom:1px solid var(--line);text-align:center;}
+.daiun td{padding:.5rem .3rem;text-align:center;border-bottom:1px solid rgba(42,51,70,.5);color:var(--text);}
+.daiun td:first-child{color:var(--muted2);font-size:.72rem;white-space:nowrap;}
+.daiun .tc-cell{color:var(--bad);font-size:.68rem;}
+.daiun .now-row td{background:linear-gradient(90deg,rgba(196,160,106,.12),transparent);}
+.daiun .now-row td:first-child{color:var(--accent);font-weight:600;}
+.daiun .now-cell{color:var(--accent);font-size:.68rem;font-weight:600;}
+
+.tl{position:relative;padding-left:1.1rem;margin-top:.3rem;}
+.tl::before{content:"";position:absolute;left:3px;top:.4rem;bottom:.4rem;width:2px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:1rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before{content:"";position:absolute;left:-1.1rem;top:.45rem;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--night2);}
+.tl-item.tc::before{background:var(--bad);}
+.tl-when{font-size:.76rem;color:var(--accent);font-weight:600;letter-spacing:.06em;}
+.tl-item.tc .tl-when{color:var(--bad);}
+.tl-body{font-size:.82rem;color:var(--text);margin-top:.15rem;}
+
+.recipe{counter-reset:r;}
+.recipe .item{display:flex;gap:.75rem;margin-bottom:1rem;}
+.recipe .item:last-child{margin-bottom:0;}
+.recipe .num{flex-shrink:0;width:1.7rem;height:1.7rem;border-radius:50%;background:linear-gradient(160deg,var(--accent),var(--accent-soft));color:var(--night);font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;}
+.recipe .rbody{font-size:.83rem;}
+.recipe .rbody b{color:var(--accent);font-weight:600;}
+
+.pull{border-left:3px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:1rem 0;font-size:.9rem;color:var(--muted2);}
+
+.closing{background:linear-gradient(180deg,var(--panel),var(--sink));border:1px solid var(--accent-soft);border-radius:18px;padding:1.6rem 1.25rem;text-align:center;box-shadow:0 0 30px rgba(196,160,106,.08);}
+.closing p{font-size:.88rem;margin-bottom:.9rem;}
+.closing p:last-child{margin-bottom:0;}
+.closing .big{font-size:1.05rem;color:var(--accent);font-weight:500;letter-spacing:.06em;}
+
+.koyomi-link{display:block;text-align:center;margin-top:1.5rem;padding:1rem;background:var(--night2);border:1px solid var(--line);border-radius:14px;color:var(--text);text-decoration:none;font-size:.86rem;transition:border-color .3s;}
+.koyomi-link:hover{border-color:var(--accent-soft);}
+.koyomi-link .arrow{color:var(--accent);}
+.koyomi-link small{display:block;color:var(--muted);font-size:.7rem;margin-top:.3rem;}
+
+footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
+footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">㐂占 　 命 術 本鑑定書</p>
+  <h1><span class="nm">華子</span>さんの鑑定書</h1>
+  <p class="tagline">薄暮の街灯。暗くなってから、人の足元を照らす灯り</p>
+  <p class="date">1976年4月15日 生　／　紡の席 2026.09.23</p>
+</header>
+
+<div class="profile">
+  <div class="full">魂の本質（日の宿命）<b>丁酉（ひのととり）― 薄暮の街灯</b></div>
+  <div>中心の星<b>車騎星</b></div>
+  <div>天中殺<b>辰巳（南東）</b></div>
+  <div>今の運気（50歳）<b>貫索星</b></div>
+  <div>今の大運<b>丁亥（43〜52歳）</b></div>
+  <div class="full">宿命の特記<b>宿命天中殺：生年中殺＋生月中殺 ― 二つ揃う、珍しい形</b></div>
+</div>
+
+<div class="card" style="border-color:var(--accent-soft);">
+  <p>華子さん、おおきにです☺️</p>
+  <p>9月23日にお話ししたことを、ここにまとめました。<b>お話しした内容に、さらに書き足してあります。</b></p>
+  <p>特に<span class="hl">後半の「53歳・63歳・73歳から」のところ</span>。通信が切れて飛んでしまった部分も、ここで全部埋めてあります。あとから何度でも見返せるように。</p>
+  <p style="margin-bottom:0;">読む順番は気にせんでください。気になったところから開いてもらって大丈夫です。</p>
+</div>
+
+<!-- 命式盤 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">命 式</span><span class="sec-title">華子さんの設計図</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.6rem;">陰占 ― 生まれ持った気の柱</p>
+    <div class="meishiki">
+      <div class="pillar">
+        <div class="lbl">日柱（自分・家庭）</div>
+        <div class="yomi">ひのと</div><div class="kan">丁</div>
+        <div class="shi">酉</div><div class="yomi">とり</div>
+        <div class="zou">蔵干　辛</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">月柱（仕事・家系）</div>
+        <div class="yomi">みずのえ</div><div class="kan">壬</div>
+        <div class="shi">辰</div><div class="yomi">たつ</div>
+        <div class="zou">蔵干　戊</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">年柱（社会・先祖）</div>
+        <div class="yomi">ひのえ</div><div class="kan">丙</div>
+        <div class="shi">辰</div><div class="yomi">たつ</div>
+        <div class="zou">蔵干　戊</div>
+      </div>
+    </div>
+    <p class="meishiki-note">日柱 丁酉 ／ 月柱 壬辰 ／ 年柱 丙辰　―― 下の段に<b>辰が二つ並びます</b></p>
+
+    <div style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p class="soft" style="margin-bottom:.2rem;">陽占 ― 心のかたち（人体星図）</p>
+    <div class="jintai">
+      <div class="jcell jusei-cell"><span class="pos">伴星（先祖）</span><span class="star">禄存星</span></div>
+      <div class="jcell"><span class="pos">目上（北）</span><span class="star">石門星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">初年運</span><span class="star gold">天堂星</span></div>
+      <div class="jcell"><span class="pos">家庭（西）</span><span class="star">禄存星</span></div>
+      <div class="jcell center"><span class="pos">中心・本人</span><span class="star">車騎星</span></div>
+      <div class="jcell"><span class="pos">社会（東）</span><span class="star">車騎星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">晩年運</span><span class="star gold">天貴星</span></div>
+      <div class="jcell"><span class="pos">目下（南）</span><span class="star">牽牛星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">中年運（今ここ）</span><span class="star gold">天堂星</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.7rem;">真ん中と社会、両方に<b>考えるより先に動く星</b>。そして初年も中年も<b>同じ天堂星</b>。この組み合わせが、華子さんの全部を説明します。</p>
+
+    <div style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p class="soft" style="margin-bottom:.7rem;">五行のバランス（総エネルギー 203）</p>
+    <div class="gogyo">
+      <div class="gbar g-wood"><span class="gname">木</span><span class="gtrack"><span class="gfill" style="width:86%"></span></span><span class="gval">42</span></div>
+      <div class="gbar g-fire"><span class="gname">火</span><span class="gtrack"><span class="gfill" style="width:96%"></span></span><span class="gval">47</span></div>
+      <div class="gbar g-earth"><span class="gname">土</span><span class="gtrack"><span class="gfill" style="width:90%"></span></span><span class="gval">44</span></div>
+      <div class="gbar g-metal"><span class="gname">金</span><span class="gtrack"><span class="gfill" style="width:43%"></span></span><span class="gval">21</span></div>
+      <div class="gbar g-water"><span class="gname">水</span><span class="gtrack"><span class="gfill" style="width:100%"></span></span><span class="gval">49</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.6rem;"><b>安定バランス型。不足している五行はありません。</b>四つが42〜49にきれいに並ぶのは、なかなかない形です。</p>
+  </div>
+</div>
+
+<!-- 壱 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">壱</span><span class="sec-title">「成した実感がない」の正体</span></div>
+  <div class="card">
+    <p class="lead">成していないからではないです。物差しの方が合っていないだけです。</p>
+    <p>華子さんの相談は「何かを成したか、という実感や成果が無いからモヤモヤする」でした。三億五千万を動かしてきて、それでも成した実感がない、と。</p>
+    <p>人体星図の右側に、人生の三つの時期をあらわす星が入っています。<b>初年運が天堂星。中年運も天堂星。</b>若い頃から今まで、ずっと同じ質で来ています。</p>
+    <p>以下が、天堂星の質です。</p>
+    <div class="pull">老人の時代。責任からの解放。諦めと悟り。自制心。潔さ。<br><b>自己を前面に出さない。後進を支援する。</b></div>
+    <p>表に出ている星は車騎星です。考えるより先に動く。三億五千万を動かす。<span class="hl">でも内側にあるエネルギーの質は、もともと「自分が前に出て成果を取る」形ではありません。</span></p>
+    <p>初年運の天堂星には、こうも示されています。</p>
+    <div class="pull">後方サポートに徹する。生まれ育った環境で我慢や苦労が多く、自己肯定感が低くなりがち。<br><b>社会に出てもなかなか自信が持てないが、晩年に安定する。</b></div>
+    <p style="margin-bottom:0;">三億五千万を動かしてきた人が「成した実感がない」と書いてくる。<span class="hl">その理由が、ここに示されています。</span>前に出て取りにいく物差しで測るかぎり、どれだけ動いても足りないになります。</p>
+  </div>
+</div>
+
+<!-- 弐 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">弐</span><span class="sec-title">ご先祖様から渡されている使命</span></div>
+  <div class="card">
+    <p class="lead">華子さんの「成す」は、額ではないです。</p>
+    <p>人体星図の左上、ご先祖様の位置に禄存星。ここにある星は、家系から受け継いだ質であり、<b>華子さんに渡されている使命</b>として読みます。</p>
+    <p>以下が、その使命です。</p>
+    <div class="pull">人を助ける喜びを胸に。困っている人がいたら、助けてあげなさい。<br>やってもらうより、やってあげるほうに生きがいを感じる人です。<br>誰にも平等に愛を注ぎなさい。<b>頼りにされればされるほど大成します。</b><br>自己愛に傾くと孤立しやすいので注意しなさい。</div>
+    <p><span class="hl">「頼りにされればされるほど大成します」。</span>これが、華子さんの「成す」の定義です。事業の数字ではないです。動かした額でもないです。<b>頼られた数で数えるものです。</b></p>
+    <p>お話しした時、「照らすとしたら誰か」という問いに、華子さんは<b>「困ってる人、迷ってる人」</b>と答えられました。</p>
+    <p style="margin-bottom:0;"><span class="hl">その言葉が、使命に示されている言葉と同じでした。</span>探して見つけるものではなく、もともと持っていたものを、言葉にしただけです。</p>
+  </div>
+</div>
+
+<!-- 参 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">参</span><span class="sec-title">漠然とした不安の出どころ</span></div>
+  <div class="card">
+    <p class="lead">性格が後ろ向きなのではなく、構造の話です。</p>
+    <p>「なんのために生まれた人生なのか、これからどうなるのか、漠然とした不安をいつも抱えています」――最初にいただいた相談です。</p>
+    <p>まず、日の宿命 丁酉の質に、こう示されています。</p>
+    <div class="pull">女性は明るく行動的。<b>神経過敏で取り越し苦労。</b>熱しやすく冷めやすい。家族思いで平和主義。</div>
+    <p>「根がネガティブ」と言われていましたが、これは丁酉という干支の、もともとの作りです。</p>
+    <p>そして、陰占の下の段。<b>月柱と年柱に、辰が二つ並んでいます。</b>これは自刑という配置です。</p>
+    <div class="pull">自刑 ― 自分を傷つける刑。同じ支同士。自責。<br>外の誰かとぶつかるのではなく、<b>自分の中で起きる。</b></div>
+    <p>月柱と年柱は、家系や親世代から受け継ぐ場所です。<span class="hl">そこに、自分で自分を追い込む配置が入っています。</span></p>
+    <p style="margin-bottom:0;">誰にも何も言われていないのに、自分の中で「このままでいいのか」が勝手に立ち上がってくる。<b>不安の出どころは、外ではなく構造の方です。</b>華子さんが弱いからではないです。</p>
+  </div>
+</div>
+
+<!-- 肆 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">肆</span><span class="sec-title">会社を閉めて、離れること</span></div>
+  <div class="card">
+    <p class="lead">その動きは、宿命と同じ向きです。</p>
+    <p>宿命天中殺が、生年と生月。<b>両方に出ています。</b>一つあるだけでも珍しい形ですが、華子さんは二つです。</p>
+    <div class="pull"><b>生年中殺</b> ― 両親・先祖の援助に頼らず独立すると陽転<br><b>生月中殺</b> ― 家系・親族から離れて生きると陽転。生家との縁が薄い</div>
+    <p>この二つが揃うと、こう読みます。</p>
+    <div class="pull">親・家系・社会の影響をほぼ受けない。<br><b>自力で人生を作る力が非常に強い。</b></div>
+    <p>創業50年の会社を今年末で閉めて、そこから解放されたら変わるんじゃないか――そう話されました。<span class="hl">解放されたら変わるか、という問いの答えは、宿命の側にあります。変わります。</span>というより、華子さんの宿命自体が、二重にその方を向いています。</p>
+    <p>お父様の資産という土台はありました。でも、<b>その先を実際に動かしてきたのは華子さん自身です。</b>土台を置かれただけの人には、三億五千万は動かせません。</p>
+    <p style="margin-bottom:0;">そして天中殺は辰巳。<span class="hl">人と違う道を行く使命。既存の枠に収まらない宿命。</span>陽転の条件は「独自の哲学・専門性を磨くこと」です。家業という枠から出て、自分の形を作る動きは、ここにもそのまま重なります。</p>
+  </div>
+</div>
+
+<!-- 伍 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">伍</span><span class="sec-title">何を、どの順で仕込むか</span></div>
+  <div class="card">
+    <p class="lead">先に切るのではないです。先に、軸を一本立てる。</p>
+    <p>「これまで積み上げてきたものを整理して、必要なものだけを残す時期かな」「何をどの順で仕込むのか、大切ですね」――そう書いてくださいました。</p>
+    <p>その順番が、守護神に示されています。守護神とは、その人の命式がいちばん良い状態になる気のことです。</p>
+    <div class="pull"><b>第一守護神　甲（きのえ）</b><br>大樹のように真っ直ぐ。リーダー意識。頑固さを活かす。<br><br><b>第二守護神　庚（かのえ）</b><br>鋭く切る・即断。武断的な強さ。決める力。</div>
+    <p>第一が<b>軸を立てる力</b>。第二が<b>切る力</b>です。<span class="hl">この順番が、そのまま整理の手順になります。</span></p>
+    <p>順番が逆だと、うまくいきません。先に切ろうとすると、何を基準に切るかが分からなくなります。切った後で「これは残しておくべきだったか」が出てきます。</p>
+    <p><b>軸が先。切るのは後です。</b></p>
+    <p>そして、日の宿命の警句にも、同じことが示されています。</p>
+    <div class="pull">活気の盛んな、案外器用な人だが、人を軽蔑する癖があり、折り合いを悪くする。<br><b>虚を去り実を採り、真実性を養えば、信用が高まり必ず大成。</b></div>
+    <p style="margin-bottom:0;">虚は中身のないもの。実は中身のあるもの。<span class="hl">何が実かを決めるのが「軸」で、それ以外を切るのが「庚」です。</span>華子さんが書かれた「整理して必要なものだけを残す」と、この警句は同じことを言っています。</p>
+  </div>
+
+  <div class="card" style="border-color:var(--accent-soft);">
+    <p class="lead">では、軸とは何か</p>
+    <p>命式の中に、もう答えが出ています。三つとも、同じ方を指しています。</p>
+    <div class="pull"><b>伴星の使命</b> ― 頼りにされればされるほど大成します<br><b>晩年の星（天貴星）</b> ― 人に教える才能に長ける<br><b>華子さんご自身の言葉</b> ― 自分を照らせたら人様も照らせるかも</div>
+    <p><span class="hl">軸は「誰を照らすか」です。</span></p>
+    <p style="margin-bottom:0;">それが決まれば、今持っているもののうち、そこに繋がるものが実。繋がらないものが虚です。<b>切る基準は、それだけです。</b></p>
+  </div>
+</div>
+
+<!-- 陸 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">陸</span><span class="sec-title">不動産と、トレードを突き詰めること</span></div>
+  <div class="card">
+    <p class="lead">どちらも、命式と噛み合っています。</p>
+    <p><b>まず不動産について。</b>53歳から始まる大運に、石門星が巡ります。人を集めて、まとめる星です。</p>
+    <p>そして華子さんの才能占技を見ると、才能星も<b>石門星</b>。型は<b>点欽の型</b>――才能の線が一点に集中する形です。<span class="hl">才能が集中している星が、次の10年で人生の表に出てきます。</span></p>
+    <p>才能が出る領域は<b>南天運</b>。「現実領域・忍耐強い現実派・自分基準の環境最適・理屈より情」と出ています。<b>現実の資産を、腰を据えて扱う形</b>です。</p>
+    <p>ただし、53歳からの配置は強めです。詳しくは次の章にまとめますが、<b>自分から打って出るのではなく、来たものを受けて手堅くやる10年</b>になります。仕込んだものを回していく形が、この時期と噛み合います。</p>
+
+    <div style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p><b>次に、トレードを突き詰めて、人に共有することについて。</b></p>
+    <p>こちらは、さらにはっきり出ています。順番に並べます。</p>
+    <div class="pull"><b>突き詰める形</b><br>気図法 ― 学問・精神世界に秀でた研究型<br>八門法 ― 白虎型。専門性追求・目標達成型<br>日の宿命 ― 集中力はあり専門職向き／組織での掌握力は乏しいので専門職に向く</div>
+    <p>一人で、専門的に特化していく形。ここはかなり合っています。「褒められることに重きを置いていない、できて当たり前と思っている」と話されたのも、白虎型の質そのものです。</p>
+    <div class="pull"><b>教える形</b><br>晩年運 天貴星 ― <b>人に教える才能に長ける</b><br>63歳からの大運にも、同じ天貴星が巡ります</div>
+    <p><span class="hl">突き詰める（研究型・白虎型）→ 教える（天貴星）→ 困っている人を助ける（使命）。</span>三つとも、同じ方を向いています。</p>
+    <p style="margin-bottom:0;">トレードを突き詰めて、それをお金で困っている人・迷っている人に渡す。<b>この形なら、華子さんの命式が全部乗ります。</b>「誰を照らすか」の答えが、ここにありそうです。</p>
+  </div>
+</div>
+
+<!-- 漆 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">漆</span><span class="sec-title">53歳・63歳・73歳 ― 仕込みは最後ではない</span></div>
+  <div class="card">
+    <p class="lead">「仕込む時期、最後の」ではなく、仕込む時期の始まりです。</p>
+    <p>大運という、十年ごとの区切りがあります。華子さんは3歳から始まる形で、今は<b>43歳〜52歳の丁亥</b>のところです。</p>
+    <div class="daiun-scroll">
+      <table class="daiun">
+        <tr><th>年齢</th><th>干支</th><th>主星</th><th>位相・意味</th></tr>
+        <tr><td>33〜42歳</td><td>戊子</td><td>調舒星</td><td>年柱・月柱とも半会<br>拡大の10年</td></tr>
+        <tr class="now-row"><td>43〜52歳</td><td>丁亥</td><td>貫索星</td><td class="now-cell">月柱：干合<br>軸を固め、まとめ直す</td></tr>
+        <tr><td>53〜62歳</td><td>丙戌</td><td>石門星</td><td>年柱：対冲・納音／月柱：天剋地冲<br>受けて手堅く</td></tr>
+        <tr><td>63〜72歳</td><td>乙酉</td><td>龍高星</td><td>年柱・月柱とも支合<br>一つをじっくり</td></tr>
+        <tr><td>73〜82歳</td><td>甲申</td><td>玉堂星</td><td>年柱・月柱とも大半会<br>最大の拡大</td></tr>
+      </table>
+    </div>
+
+    <p style="margin-top:1rem;"><b>今の大運（43〜52歳）丁亥 ― 貫索星と天報星</b></p>
+    <p>貫索星は、自分の軸を固める星。天報星は、これまで積み上げてきたものを一回まとめ直す星です。<span class="hl">華子さんが書かれた「整理して必要なものだけを残す時期」と、大運がそのまま同じことを指しています。</span>感覚で自分を見ておられる方だと思いました。</p>
+    <p>40代半ばから動けなくなった、という感覚についても、この切り替わりと時期が重なります。前の大運（33〜42歳）は年柱・月柱とも半会で、拡大のエネルギーが働く10年でした。そこから、軸を固める季節に入っています。<b>動く量が減ったのではなく、季節が「広げる」から「固める」に変わった。</b>体の方が先に気づいたとも言えます。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">53歳からの10年 ― 才能が表に出る。ただし受け身で</p>
+    <p>53歳から丙戌。主星が<b>石門星</b>。才能が集中している星が、人生の表に出てきます。</p>
+    <p>ただし配置を見ると、<b>年柱と対冲・納音、月柱と天剋地冲、日柱と害</b>。強い配置が重なっています。対冲も天剋地冲も、正面からぶつかる配置です。</p>
+    <p>この時期の動き方は、こう示されています。</p>
+    <div class="pull">受動的。手堅く用心深い。単独・受身型業務向き。<b>方針変更注意。</b></div>
+    <p><span class="hl">才能の星が出ているのに、動き方は受け身。</span>少し矛盾して聞こえますが、ここが大事なところです。自分から新しく打って出るのではなく、<b>来たものを受けて、手堅くやる10年</b>になります。</p>
+    <p style="margin-bottom:0;">だからこそ、<b>仕込みは今の大運のうちに</b>です。特に2028年が、その山になります。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">63歳からの10年 ― 一つを、じっくり育てる</p>
+    <p>63歳から乙酉。主星が<b>龍高星</b>、従星が<b>天貴星</b>です。</p>
+    <p>龍高星は、改革・学び直し・新天地の星。旅行や海外に向かいたくなるような、自由な質の運気が10年吹きます。そこに天貴星――<b>人に教える才能</b>の星が重なります。</p>
+    <p>配置は、年柱・月柱とも<b>支合</b>。結びつきの配置です。この時期の動き方は、こう示されています。</p>
+    <div class="pull">手堅い発展。速度は遅い。<b>女性起業家向き。</b>一つをじっくり。</div>
+    <p style="margin-bottom:0;"><span class="hl">「女性起業家向き」と、はっきり出ています。</span>53歳からの10年で手堅く回したものを、ここで一つに絞ってじっくり育てる。<b>教える形に移っていくなら、この10年です。</b></p>
+  </div>
+
+  <div class="card" style="border-color:var(--accent-soft);">
+    <p class="lead">73歳からの10年 ― 人生でいちばん大きく広がる</p>
+    <p>73歳から甲申。主星が<b>玉堂星</b>――学問の星、人を育てる星です。</p>
+    <p>配置を見てください。<b>年柱と大半会。月柱とも大半会。</b>大半会は、拡大の配置の中でも強いものです。それが二つ重なります。</p>
+    <div class="pull">三合・半会 ― <b>大発展型。事業拡大・人脈拡大。</b></div>
+    <p><span class="hl">華子さんの人生で、いちばん大きく広がる配置がここです。</span></p>
+    <p style="margin-bottom:0;">「仕込む時期、最後の」と書かれていましたが、<b>最後ではないです。</b>53歳、63歳、73歳。それぞれ形の違う本番が、三つ続きます。薄暮の街灯が本番になるのは、ここからです。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">大運天中殺について</p>
+    <p style="margin-bottom:0;">120年に20年だけ巡ってくる「大運天中殺」という、運気の枠が外れる時期があります。<b>華子さんの大運には、これは来ません。</b><span class="hl">落ち着いて、じっくり積める設計です。</span>次の年天中殺も2036〜2037年で、まだ先です。</p>
+  </div>
+</div>
+
+<!-- 捌 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">捌</span><span class="sec-title">2030年までの時間割</span></div>
+  <div class="card">
+    <p class="lead">53歳に入る前の、組み立てです。</p>
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-when">2024〜2025年（48〜49歳）　★通過済み</div>
+        <div class="tl-body">年天中殺の2年でした。特に2024年は年柱・月柱とも<b>自刑</b>。もともと自刑を持つ命式に、自刑の年が重なりました。<span class="hl">自分で自分を追い込む力が、いちばん強く出た2年です。</span>しんどさがあったとすれば、構造としてそうなっていました。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2026年（50歳）　丙午・石門星　★軸を決める年</div>
+        <div class="tl-body">強い配置が何も入っていない年です。去年まで天中殺、来年からまた配置が動きます。<b>間の年</b>です。だから今年やることは一つだけ。<span class="hl">「誰を照らすか」を決める。</span>切るのは、まだしなくて大丈夫です。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年（51歳）　丁未・貫索星　★形にする年</div>
+        <div class="tl-body">月柱と<b>干合</b>。結びつきの配置です。決めたことを形にするのに向く年。<b>ただし4月と5月は月天中殺</b>なので、大きい契約・新しい立ち上げはこの2ヶ月を外してください。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2028年（52歳）　戊申・調舒星　★いちばん広げられる年</div>
+        <div class="tl-body">年柱と<b>大半会</b>、月柱とも<b>大半会</b>。拡大の配置が二つ重なります。<span class="hl">今の大運の最後の年であり、仕込みの山です。</span>不動産を仕込むなら、ここが軸になります。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2029年（53歳）　己酉・鳳閣星　★季節の変わり目</div>
+        <div class="tl-body">ここから大運が丙戌に変わります。年柱・月柱とも支合、日柱と自刑。<b>季節の切り替わりの年</b>です。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">2030年（54歳）　庚戌　★強い配置</div>
+        <div class="tl-body">年柱と<b>天剋地冲</b>、月柱と<b>対冲</b>、日柱と<b>害</b>。強い配置が重なります。<b>大きい決断は、この年は外してください。</b>2028年までに形を作っておいて、この年は守りに入る。そういう置き方が合います。</div>
+      </div>
+    </div>
+    <div class="pull" style="margin-top:1.2rem;">2026年　軸を決める<br>2027年　形にする（4〜5月は外す）<br><b>2028年　広げる ★山</b><br>2029年　季節の変わり目<br>2030年　守る</div>
+    <p style="margin-bottom:0;">この順番が、華子さんの命式と噛み合います。</p>
+  </div>
+</div>
+
+<!-- 玖 五つの視点 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">玖</span><span class="sec-title">五つの視点 ─ ぐるりと見る</span></div>
+
+  <div class="card">
+    <p class="soft" style="margin-bottom:.8rem;">同じ命式を、深さの違う五つの角度から観ます。同じ結論に別の道から辿り着く時、それが本物です。</p>
+
+    <p class="lead">［壱］ 本質と才能の視点</p>
+    <p>日の宿命が丁酉「薄暮の街灯」。丁は太陽ではなく灯火です。<span class="hl">自分のことは照らさない。暗くなってから、人の足元を照らして初めて意味が出る灯り。</span></p>
+    <p>中心と社会に車騎星が二つ。一本気で、考えるより行動。即断即決。リスクを取る。三億五千万を動かせるのは、性格が大胆だからではなく、この作りそのものです。</p>
+    <p style="margin-bottom:0;">才能星は石門星、型は<b>点欽の型</b>――一点集中の形です。人を集めて、まとめる方向に才能が集中しています。八門法は<b>白虎型</b>で、専門性追求・目標達成型。気図法は研究型。<b>専門を突き詰める形が、はっきり出ています。</b></p>
+  </div>
+
+  <div class="card">
+    <p class="lead">［弐］ 家系と宿命の視点</p>
+    <p>宿命天中殺が、生年と生月の両方。<span class="hl">一つでも珍しい形ですが、二つ揃っています。</span></p>
+    <p>親・家系・社会の影響をほぼ受けない。自力で人生を作る力が非常に強い、と読みます。お父様の土台はありましたが、<b>そこから先を動かしてきたのは華子さん自身です。</b></p>
+    <p>伴星は禄存星。ご先祖様から受け継いだ使命は<b>「頼りにされればされるほど大成する」</b>という質です。</p>
+    <p style="margin-bottom:0;">天中殺は辰巳――<b>人と違う道を行く使命。既存の枠に収まらない宿命。</b>会社を閉めて自分の形に移る動きと、同じ方を向いています。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">［参］ 今の運気の構造から観る視点</p>
+    <p>43〜52歳の大運・丁亥。主星が貫索星、従星が天報星。<b>軸を固めて、積み上げたものをまとめ直す10年</b>です。月柱と干合も出ています。</p>
+    <p>前の大運（33〜42歳・戊子）は年柱・月柱とも半会で、拡大の10年でした。<span class="hl">「広げる」から「固める」へ、季節が切り替わっています。</span></p>
+    <p style="margin-bottom:0;">大運天中殺は来ません。落ち着いて積める設計です。<b>そして53歳・63歳・73歳と、形の違う本番が三つ続きます。</b>成果が後ろに置かれた並びです。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">［肆］ 関係性と環境の視点</p>
+    <p>五行は木42・火47・土44・金21・水49で総203。<b>安定バランス型で、不足している五行はありません。</b>四つが42〜49に揃う形は、なかなかないです。</p>
+    <p>東洋思想・占術では、足りないものを補うという考え方をよく取りますが、<span class="hl">華子さんの場合は、無理に補う必要がありません。</span>動く力にも、人に向ける力にも、偏らずに使える土台があります。</p>
+    <p>守護神は第一が甲、第二が庚。<b>軸を立てる力と、切る力</b>です。足りないものを足すというより、<b>使う順番が示されている</b>形です。</p>
+    <p style="margin-bottom:0;">東洋占術の思想には、関係性の中で自分がどうあるか、という考え方があります。<b>一人で全部やることが偉い、という発想ではないです。</b>銀行との関係を作っておられるのも、この10年の動き方として噛み合っています。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">［伍］ 霊魂の設計という視点 ―― 総括</p>
+    <p>壱から肆まで、全部が同じ方向を向いています。<b>前に出て取る形ではなく、人に渡す形で満ちる。</b>そして成果は後ろに置かれている、と。</p>
+    <p>でも、<span class="hl">「だから宿命通りに待ちなさい」で終わる話ではないです。</span></p>
+    <p><b>この命式で実際に動ける条件は、一つだけです。</b></p>
+    <div class="pull"><b>「誰を照らすか」を、先に決めること。</b><br>それが決まらないかぎり、何を切っても手応えが残りません。</div>
+    <p>車騎星が二つで、動く力はもう証明済みです。五行も安定バランス型で、土台もあります。足りないものは、実は何もないです。</p>
+    <p><span class="hl">ただ一つ、軸だけが決まっていない。</span>そこが決まれば、切る基準が自動的にできます。整理は勝手に進みます。</p>
+    <p style="margin-bottom:0;">そして華子さんは、その軸をもう言葉にしておられました。<b>「困ってる人、迷ってる人」</b>。ご先祖様から渡されている使命と、同じ言葉です。<span class="hl">探しに行くものではなく、もう持っていたものです。</span></p>
+  </div>
+</div>
+
+<!-- 拾 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">拾</span><span class="sec-title">ここから動ける処方</span></div>
+  <div class="card recipe">
+    <div class="item"><div class="num">1</div><div class="rbody"><b>「誰を照らすか」を、年内に決める。</b><br>個人名でなくて大丈夫です。どういう人を照らすか、という輪郭で十分です。<span class="hl">2026年は配置が空いている年で、決めるのに向いています。</span></div></div>
+    <div class="item"><div class="num">2</div><div class="rbody"><b>軸を立ててから、切る。順番を守る。</b><br>先に切ろうとすると、基準が分からなくなります。第一守護神が甲（軸）、第二が庚（切る）。この順番が命式に示されています。</div></div>
+    <div class="item"><div class="num">3</div><div class="rbody"><b>成果は、額ではなく「頼られた数」で数える。</b><br>三億五千万はもう動かせています。次に数えるものを変えてください。使命にそう示されています。</div></div>
+    <div class="item"><div class="num">4</div><div class="rbody"><b>不動産の仕込みは、2028年までに。</b><br>年柱・月柱とも大半会で、今の大運でいちばん広げられる年です。53歳からは「来たものを受けて手堅く」の10年に変わります。</div></div>
+    <div class="item"><div class="num">5</div><div class="rbody"><b>2027年4〜5月と、2030年は外す。</b><br>4〜5月は月天中殺。2030年は年柱と天剋地冲・月柱と対冲。大きい契約や決断は、この時期を避けてください。</div></div>
+    <div class="item"><div class="num">6</div><div class="rbody"><b>トレードは、突き詰めていい。</b><br>研究型・白虎型・専門職向き。突き詰める形は命式と合っています。<span class="hl">そして、それを人に渡す形が「人に教える才能」と繋がります。</span></div></div>
+    <div class="item"><div class="num">7</div><div class="rbody"><b>不安が立ち上がってきたら、構造だと思い出す。</b><br>宿命天中殺が二つ、そこに自刑が重なっている。性格の問題ではないです。出どころが分かるだけで、扱いやすくなります。</div></div>
+    <div class="item"><div class="num">8</div><div class="rbody"><b>暦を毎日ひらく。</b><br>「今日はこういう日か」と見るだけで大丈夫です。日天中殺の日は、大きな決断より整理に向く日です。</div></div>
+  </div>
+</div>
+
+<!-- 締め -->
+<div class="closing">
+  <p>華子さんは、<span class="hl">薄暮の街灯</span>です。<br>自分のことは照らさない。<br>暗くなってから、人の足元を照らす灯り。</p>
+  <p>「成した実感がない」のは、<br>成していないからやないです。<br><b>物差しの方が、合っていないだけです。</b></p>
+  <p>三億五千万は、もう動かせています。<br>次に数えるのは、額やないです。</p>
+  <p class="big">頼りにされればされるほど、大成します。</p>
+  <p>ご先祖様から渡されている使命に、<br>そう示されています。<br><span class="hl">華子さんの「成した」は、そこで数えてください。</span></p>
+  <p>「仕込む時期、最後の」と<br>書いてくださいましたが、<br><b>最後やないです。</b></p>
+  <p>53歳、63歳、73歳。<br>形の違う本番が、三つ続きます。<br><span class="hl">この灯りが本番になるのは、ここからです。</span></p>
+  <p>まず自分の足元を照らせるようにしたい。<br>自分を照らせたら、人様も照らせるかも。<br><b>その順番で、合っています。</b></p>
+  <p>街灯は、自分の真下から<br>照らし始めるものです☺️</p>
+</div>
+
+<a class="koyomi-link" href="/kato-kazuko">
+  <span class="arrow">▶</span> 運気暦（日々の運気カレンダー）をひらく
+  <small>今日の運気と、これから1年分の月の流れが出ます。</small>
+</a>
+
+<footer>
+  <p>いつもおおきにです😊　気になったところは、いつでもLINEで掘ってください💬</p>
+  <p class="sig">㐂</p>
+</footer>
+
+</div>
+</body>
+</html>
