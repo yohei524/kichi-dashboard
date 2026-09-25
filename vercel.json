@@ -51,6 +51,10 @@
   ],
   "rewrites": [
     {
+      "source": "/chika-kanteisho",
+      "destination": "/clients/chika-kanteisho.html"
+    },
+    {
       "source": "/chika",
       "destination": "/view.html?client=chika"
     },

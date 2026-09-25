@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>chikaさん 鑑定書 ｜ 㐂占</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --night:#0B0F1A; --night2:#131A28; --sink:#171F30; --panel:#1B2334;
+  --line:#2A3346; --accent:#C48A4A; --accent-soft:#A06E38; --accent-glow:rgba(196,138,74,.14);
+  --gold:#C9A24A; --text:#ECEAE4; --muted:#8A96AC; --muted2:#A9B3C6;
+  --water:#6E9BC4; --fire:#D08A5A; --wood:#7FA86B; --metal:#C4C9D2; --earth:#C9A24A;
+  --bad:#C97A6A; --good:#6E9BC4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Serif JP',serif; color:var(--text); line-height:1.95; letter-spacing:.045em;
+  background:
+    radial-gradient(1200px 620px at 50% -12%, rgba(196,138,74,.10), transparent 60%),
+    linear-gradient(180deg,#0B0F1A 0%,#0D1220 45%,#080B14 100%);
+  background-attachment:fixed; min-height:100vh;
+}
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.05rem 4rem;}
+
+header{text-align:center;padding:3rem 1rem 1.4rem;}
+header .kicker{font-size:.68rem;letter-spacing:.32em;color:var(--accent);opacity:.9;margin-bottom:.9rem;}
+header h1{font-size:1.5rem;font-weight:500;letter-spacing:.08em;margin-bottom:.5rem;}
+header h1 .nm{color:var(--accent);}
+header .tagline{font-size:.8rem;color:var(--muted2);letter-spacing:.1em;line-height:1.7;}
+header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:.12em;}
+
+.profile{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem .8rem;
+}
+.profile div{font-size:.74rem;color:var(--muted);}
+.profile div b{display:block;font-size:.9rem;color:var(--text);font-weight:500;margin-top:.1rem;letter-spacing:.06em;}
+.profile div.full{grid-column:1/3;}
+
+.sec{margin-bottom:1.65rem;}
+.sec-head{
+  display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;
+  padding-bottom:.6rem;border-bottom:1px solid var(--line);
+}
+.sec-no{font-size:.72rem;color:var(--accent);letter-spacing:.18em;font-weight:600;}
+.sec-title{font-size:1.02rem;font-weight:500;letter-spacing:.08em;}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  padding:1.25rem 1.15rem;box-shadow:0 4px 24px rgba(0,0,0,.32);margin-bottom:1rem;
+}
+.card p{font-size:.87rem;margin-bottom:.9rem;color:var(--text);}
+.card p:last-child{margin-bottom:0;}
+.card .lead{color:var(--accent);font-size:.9rem;font-weight:500;}
+.hl{color:var(--accent);font-weight:500;}
+.soft{color:var(--muted2);font-size:.8rem;}
+
+.meishiki{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.2rem 0 .3rem;}
+.pillar{background:var(--sink);border:1px solid var(--line);border-radius:12px;padding:.7rem .4rem;text-align:center;}
+.pillar .lbl{font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.55rem;}
+.pillar .yomi{font-size:.58rem;color:var(--muted);letter-spacing:.04em;line-height:1.3;}
+.pillar .kan{font-size:1.85rem;font-weight:600;color:var(--text);line-height:1.15;}
+.pillar .shi{font-size:1.85rem;font-weight:600;color:var(--accent);line-height:1.15;margin-top:.2rem;}
+.pillar .zou{font-size:.62rem;color:var(--muted2);margin-top:.55rem;letter-spacing:.04em;}
+.meishiki-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;}
+
+.jintai{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:19rem;margin:.4rem auto .2rem;}
+.jcell{background:var(--sink);border:1px solid var(--line);border-radius:11px;aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;}
+.jcell .pos{font-size:.58rem;color:var(--muted);letter-spacing:.05em;}
+.jcell .star{font-size:.92rem;font-weight:600;color:var(--text);letter-spacing:.03em;}
+.jcell.center{background:linear-gradient(160deg,rgba(196,138,74,.18),var(--sink));border-color:var(--accent-soft);}
+.jcell.center .star{color:var(--accent);}
+.jcell.jusei-cell{background:var(--night2);}
+.jcell .star.gold{color:var(--gold);}
+
+.gogyo{margin-top:.3rem;}
+.gbar{display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;}
+.gbar .gname{width:2.6rem;font-size:.76rem;color:var(--muted2);flex-shrink:0;}
+.gbar .gtrack{flex:1;height:9px;background:var(--sink);border-radius:5px;overflow:hidden;}
+.gbar .gfill{display:block;height:100%;border-radius:5px;}
+.gbar .gval{width:2.2rem;text-align:right;font-size:.72rem;color:var(--muted);flex-shrink:0;}
+.g-wood .gfill{background:var(--wood);}
+.g-fire .gfill{background:var(--fire);}
+.g-earth .gfill{background:var(--earth);}
+.g-metal .gfill{background:var(--metal);}
+.g-water .gfill{background:var(--water);}
+
+.daiun-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.daiun{width:100%;border-collapse:collapse;font-size:.78rem;min-width:19rem;}
+.daiun th{font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.05em;padding:.4rem .3rem;border-bottom:1px solid var(--line);text-align:center;}
+.daiun td{padding:.5rem .3rem;text-align:center;border-bottom:1px solid rgba(42,51,70,.5);color:var(--text);}
+.daiun td:first-child{color:var(--muted2);font-size:.72rem;white-space:nowrap;}
+.daiun .tc-cell{color:var(--bad);font-size:.68rem;}
+.daiun .now-row td{background:linear-gradient(90deg,rgba(196,138,74,.12),transparent);}
+.daiun .now-row td:first-child{color:var(--accent);font-weight:600;}
+.daiun .now-cell{color:var(--accent);font-size:.68rem;font-weight:600;}
+
+.tl{position:relative;padding-left:1.1rem;margin-top:.3rem;}
+.tl::before{content:"";position:absolute;left:3px;top:.4rem;bottom:.4rem;width:2px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:1rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before{content:"";position:absolute;left:-1.1rem;top:.45rem;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--night2);}
+.tl-item.tc::before{background:var(--bad);}
+.tl-when{font-size:.76rem;color:var(--accent);font-weight:600;letter-spacing:.06em;}
+.tl-item.tc .tl-when{color:var(--bad);}
+.tl-body{font-size:.82rem;color:var(--text);margin-top:.15rem;}
+
+.recipe{counter-reset:r;}
+.recipe .item{display:flex;gap:.75rem;margin-bottom:1rem;}
+.recipe .item:last-child{margin-bottom:0;}
+.recipe .num{flex-shrink:0;width:1.7rem;height:1.7rem;border-radius:50%;background:linear-gradient(160deg,var(--accent),var(--accent-soft));color:var(--night);font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;}
+.recipe .rbody{font-size:.83rem;}
+.recipe .rbody b{color:var(--accent);font-weight:600;}
+
+.pull{border-left:3px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:1rem 0;font-size:.9rem;color:var(--muted2);font-style:normal;}
+
+.closing{background:linear-gradient(180deg,var(--panel),var(--sink));border:1px solid var(--accent-soft);border-radius:18px;padding:1.6rem 1.25rem;text-align:center;box-shadow:0 0 30px rgba(196,138,74,.08);}
+.closing p{font-size:.88rem;margin-bottom:.9rem;}
+.closing p:last-child{margin-bottom:0;}
+.closing .big{font-size:1.05rem;color:var(--accent);font-weight:500;letter-spacing:.06em;}
+
+.koyomi-link{display:block;text-align:center;margin-top:1.5rem;padding:1rem;background:var(--night2);border:1px solid var(--line);border-radius:14px;color:var(--text);text-decoration:none;font-size:.86rem;transition:border-color .3s;}
+.koyomi-link:hover{border-color:var(--accent-soft);}
+.koyomi-link .arrow{color:var(--accent);}
+.koyomi-link small{display:block;color:var(--muted);font-size:.7rem;margin-top:.3rem;}
+
+footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
+footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">㐂占 　 命 術 本鑑定書</p>
+  <h1><span class="nm">chika</span> さんへ</h1>
+  <p class="tagline">出炉の金。溶けている今は、形が決まっていないのが正常</p>
+  <p class="date">1983年6月11日 生　／　鑑定 2026.9.25</p>
+</header>
+
+<div class="profile">
+  <div class="full">魂の本質（日の宿命）<b>庚午（かのえうま）― 出炉の金</b></div>
+  <div>中心の星<b>車騎星</b></div>
+  <div>天中殺<b>戌亥（北西）</b></div>
+  <div>才能の星<b>調舒星・点欽の型</b></div>
+  <div>今の大運<b>壬戌・龍高星（39〜48歳）</b></div>
+  <div class="full">運気の位置<b>39歳から58歳までの20年、大運天中殺の5年目</b></div>
+</div>
+
+<div class="card" style="border-color:var(--accent-soft);">
+  <p>おおきにです、chikaさん☺️</p>
+  <p>LINEでは、入口だけをお伝えしました。ここからはその続きを、chikaさんの人生の言葉に翻訳して、全部お渡しします。気になったところは、いつでもLINEで掘ってください。</p>
+</div>
+
+<!-- 命式盤 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">命 式</span><span class="sec-title">chikaさんの設計図</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.6rem;">陰占 ― 生まれ持った気の柱</p>
+    <div class="meishiki">
+      <div class="pillar">
+        <div class="lbl">日柱（自分・家庭）</div>
+        <div class="yomi">かのえ</div><div class="kan">庚</div>
+        <div class="shi">午</div><div class="yomi">うま</div>
+        <div class="zou">蔵干　丁</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">月柱（仕事・家系）</div>
+        <div class="yomi">つちのえ</div><div class="kan">戊</div>
+        <div class="shi">午</div><div class="yomi">うま</div>
+        <div class="zou">蔵干　丁</div>
+      </div>
+      <div class="pillar">
+        <div class="lbl">年柱（社会・先祖）</div>
+        <div class="yomi">みずのと</div><div class="kan">癸</div>
+        <div class="shi">亥</div><div class="yomi">い</div>
+        <div class="zou">蔵干　壬</div>
+      </div>
+    </div>
+    <p class="meishiki-note">日柱 庚午 ／ 月柱 戊午 ／ 年柱 癸亥　―― 月支・日支が同じ午（自刑）</p>
+
+    <div style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+
+    <p class="soft" style="margin-bottom:.2rem;">陽占 ― 心のかたち（人体星図）</p>
+    <div class="jintai">
+      <div class="jcell"><span class="pos">目上（北）</span><span class="star">調舒星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">初年運</span><span class="star gold">天胡星</span></div>
+      <div class="jcell"><span class="pos">配偶者（西）</span><span class="star">車騎星</span></div>
+      <div class="jcell center"><span class="pos">中心・本人</span><span class="star">車騎星</span></div>
+      <div class="jcell"><span class="pos">社会（東）</span><span class="star">龍高星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">中年運</span><span class="star gold">天恍星</span></div>
+      <div class="jcell"><span class="pos">目下（南）</span><span class="star">龍高星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">晩年運</span><span class="star gold">天恍星</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.7rem;">中央が本人。四隅は人生3時期のエネルギー（初年・中年・晩年）。車騎星が中心・配偶者に二つ、龍高星が社会・目下に二つ ―― 「動く体」と「自分にしかできないものを探す目」が、chikaさんの骨格です。</p>
+  </div>
+</div>
+
+<!-- 1 本質 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">壱</span><span class="sec-title">どういう魂か ― 出炉の金</span></div>
+  <div class="card">
+    <p class="lead">「炉から出てきたばかりの、まだ形の決まっていない金属」</p>
+    <p>日の宿命「庚午」は、昔の言葉で<span class="hl">「出炉の金」「溶かされる金」</span>。硬い金属が火にさらされて、柔らかいうちに新しい形へ打ち直される干支です。金は火が当たって初めて動く。土が多すぎると、金は埋もれて動けなくなる ―― この二つが、そのままchikaさんの本体の性質です。</p>
+    <div class="card" style="background:var(--sink);border-color:var(--accent-soft);margin:1rem 0;">
+      <p class="lead" style="margin-bottom:.6rem;">この人の背骨 ―― 動ける金、ただし条件つき</p>
+      <p style="margin-bottom:.7rem;">この干支は、金の中で<span class="hl">唯一の液体の金</span>です。下から火であぶられて沸騰し、溶けている状態。硬いままの金は動けませんが、溶けているchikaさんは動けます。<b>ただし、火（熱・刺激）が当たっている時だけ</b>。ぬくぬくした場所に置かれると、土に埋もれて硬いまま止まります。</p>
+      <p style="margin-bottom:0;">もう一つ。この干支の説明には<span class="hl">「親元にいると陽転しない」</span>とはっきり出ています。後継ぎが親元を離れて修行して初めて育つのと同じで、守られた場所に留まっていては、この金は形になりません。<b>親兄弟との縁は薄い方に出やすい</b>とも書かれていますが、これは縁が悪いという意味ではなく、<span class="hl">頼らずに生きる方に向いている</span>という質です。そのぶん、知的な活躍で地位を得て、名誉・名声に恵まれるとも出ています。楽な干支ではなく、鍛えられて開いていく干支です。</p>
+    </div>
+    <p>性格の面では、単純明快で裏表がなく、何かに全力投球する熱中型。独自の世界を切り開き、馴染むのに時間はかかりますが周囲を明るくする才があります。日の宿命の警句には<span class="hl">「迷い心が多く、心騒がしく落ち着かない」</span>とあり、これはLINEでお伝えした「迷子です」と、そのまま重なります。ただしその先にもう一言、<b>「和協心を養えば、盛衰変動があっても晩年に成果を全うできる」</b>と続きます。今は途中の時期。成果は、もっと先に置かれています。</p>
+  </div>
+</div>
+
+<!-- 2 体の作り -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">弐</span><span class="sec-title">迷子の正体 ― 動きたい体と、考える頭</span></div>
+  <div class="card">
+    <p>中心と配偶者の位置に、同じ<span class="hl">車騎星</span>が二つ。一本気・即断即決・行動力に優れ、考えるより先に体が動く星です。二箇所に重なっているということは、この「動いてから分かる」性質が、chikaさんの中で一面ではなく体の作りそのものになっているということです。</p>
+    <p>そして社会・目下の位置に、同じ<span class="hl">龍高星</span>が二つ。「サラリーマンには不向き。体制に従わない。自分にしかできないものを探す」という星です。ここに大事な注意書きがあります ―― <b>「目的さえ持てば花を咲かすことができる。目的がないと放浪する」</b>。同じ星が、まったく逆に出るのです。</p>
+    <div class="pull">"なんとなく日々を過ごしてしまう"の正体は、ここにあります。<br>やりたいことが無いのではなく、「自分にしかできないものを探す」星が、まだ目的にたどり着いていないだけです。</div>
+    <p>そこに、北・目上の位置の<span class="hl">調舒星</span>――考える力の強い星が重なります。動きたい体と、探している目的と、動く前に考えようとする頭。この三つが、月支・日支の自刑（自分の内側でぶつかる配置）としてずっと綱引きしています。性格が弱いのではなく、体は動きたがっているのに、頭が「目的が決まってから」で止めにかかっている状態です。</p>
+  </div>
+</div>
+
+<!-- 3 五行と処方の芯 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">参</span><span class="sec-title">土に埋もれた金 ― 五行の作り</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.8rem;">木13　火50　土75　金18　水31（合計187）</p>
+    <div class="gogyo">
+      <div class="gbar g-wood"><span class="gname">木</span><span class="gtrack"><span class="gfill" style="width:17%"></span></span><span class="gval">13</span></div>
+      <div class="gbar g-fire"><span class="gname">火</span><span class="gtrack"><span class="gfill" style="width:67%"></span></span><span class="gval">50</span></div>
+      <div class="gbar g-earth"><span class="gname">土</span><span class="gtrack"><span class="gfill" style="width:100%"></span></span><span class="gval">75</span></div>
+      <div class="gbar g-metal"><span class="gname">金</span><span class="gtrack"><span class="gfill" style="width:24%"></span></span><span class="gval">18</span></div>
+      <div class="gbar g-water"><span class="gname">水</span><span class="gtrack"><span class="gfill" style="width:41%"></span></span><span class="gval">31</span></div>
+    </div>
+    <p style="margin-top:1rem;">日の宿命の説明どおり、<span class="hl">土が多いと金は埋もれて動けなくなります</span>。土75に対して、chikaさん自身を表す金はわずか18。数字の上でも、金が土にすっぽり埋もれている形です。「何かやらなきゃと思うのに、なんとなく日々を過ごしてしまう」は、やる気の問題ではなく、金が土に埋もれて動きにくい状態そのものです。</p>
+    <p>そこに、木13。木はゼロから芽を出す始まりの力で、「よし、これを始める」という最初の一押しを担当します。ここが生まれつき細いchikaさんは、埋もれている上に掘り出す力も細い、という二重に動きにくい作りを持っています。</p>
+    <div class="pull">救いは、火50。金は火で焼かれて初めて動く、と日の宿命に出ています。<br>chikaさんにとっての火は、人との関わり・頼まれごと・締切・場所を変えること・少し負荷のある環境です。</div>
+    <p style="margin-bottom:0;">火が当たると、土に埋もれていた金が溶けて動き出します。逆に、ぬくぬくした場所にいると、土に埋もれたまま固まります。<b>火に当たり続けること</b>が、この命式にとっていちばんの薬です。</p>
+  </div>
+</div>
+
+<!-- 4 才能 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">肆</span><span class="sec-title">才能と、働かされて開く形</span></div>
+  <div class="card">
+    <p>才能占技は<span class="hl">点欽の型</span>。五つの星をつなぐ剋線のうち四本が、北・調舒星の一点に集中しています。広く浅くではなく、<b>何か一つをとことん突き詰める</b>方向に才能がある型です。</p>
+    <p>この型にはもう一つ大事な注意があります。集中する星が調舒星のような伝達・引力系の場合、<span class="hl">周りの圧で削られやすく、穏やかな環境で初めて開花する</span>、と出ています。厳しい環境では才能が出る前に潰されやすく、自分のペースでできる環境では一点集中の才能がちゃんと形になっていきます。</p>
+    <p>そしてこの剋線四本は、日の宿命の説明にあった<span class="hl">「剋線が出るので働かされる」</span>の、その線でもあります。苦労は多く、働かされる干支です。ただし、その「働かされる」こと自体がchikaさんにとっての火であり、鍛えられて初めて形になる仕組みです。楽な場所では、才能も金も埋もれたままです。</p>
+    <p style="margin-bottom:0;">才能の出る領域は北天運――精神領域・思考優先・学問や専門性の方向。「考えて満足し、動きにくい面がある」とも出ています。動きたい体、探している目的、考える才能、細い一押し、土に埋もれた金。これが同時にchikaさんの中にあるのが、"迷子"の正体です。能力がないのではなく、才能があるからこそ考える方に力が入り、動き出す前で止まりやすいだけです。</p>
+  </div>
+</div>
+
+<!-- 5 大運天中殺 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">伍</span><span class="sec-title">39歳からの20年 ― 枠が外れる巡り</span></div>
+
+  <div class="card">
+    <p class="soft" style="margin-bottom:.7rem;">大運 ― 10年ごとに巡る運気のテーマ（9歳運）</p>
+    <div class="daiun-scroll">
+      <table class="daiun">
+        <thead><tr><th>年齢</th><th>干支</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr><td>9〜18</td><td>己未</td><td></td></tr>
+          <tr><td>19〜28</td><td>庚申</td><td></td></tr>
+          <tr><td>29〜38</td><td>辛酉</td><td></td></tr>
+          <tr class="now-row"><td>39〜48</td><td>壬戌</td><td class="now-cell">今ここ・大運天中殺</td></tr>
+          <tr><td>49〜58</td><td>癸亥</td><td class="tc-cell">大運天中殺</td></tr>
+          <tr><td>59〜68</td><td>甲子</td><td>天中殺明け</td></tr>
+          <tr><td>69〜78</td><td>乙丑</td><td></td></tr>
+          <tr><td>79〜88</td><td>丙寅</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:.9rem;font-size:.83rem;">chikaさんは、<span class="hl">39歳から58歳までの20年間、大運が丸ごとchikaさんの天中殺（戌亥）の場所に入っています</span>。今43歳。この20年の5年目です。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">大運天中殺は、悪い20年ではない</p>
+    <p>これは<span class="hl">「運勢の枠が外れる」20年</span>です。普段はその人の器の分だけ運が入りますが、その枠がこの20年は外れています。だから、行き先が二つに分かれます。今までの自分では届かないところまで運ばれていく側と、なんとなく過ぎて気づいたら元の場所に戻っている側。同じ20年で、中身が真逆になります。前者を陽転、後者を陰転といいます。</p>
+    <div class="pull">どっちに転ぶかを分けるのは、大運天中殺に入る直前5年間の過ごし方です。<br>経済的な苦労、大切な人との別れ、挫折、保護から離れて自立する経験 ―― そういう苦労があった人は、それがバネになって上に行きやすい。</div>
+    <p style="margin-bottom:0;">chikaさんは34〜38歳の頃、ご主人の浮気という出来事を経験し、離婚も考えた末に「自分が立ち上がる」と決めてパートに出るようになりました。まさに大運天中殺に入る直前の苦労であり、これがそのままジャンプ台になっています。俯瞰して見れば、あの時期があったからこそ、今のこの20年で上に行きやすい土台ができています。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">陽転の条件は、三つ</p>
+    <p><b>①誰かのために動く。</b>この20年は、自分のために大きくなろうとすると空回りし、誰かのために動くと評価されて結果が出ます。八門法は<span class="hl">螣蛇型</span>――人を引き寄せる魅力・蓄積・奉仕・信用が特徴です。目下の龍高星には人材育成がうまいと出ており、日の宿命の警句にも「和協心を養えば晩年に成果を全うできる」とあります。三箇所とも、同じ方向を指しています。</p>
+    <p>この条件は、すでに動き始めています。ご主人が23年勤めた会社を早期退職し、今年ドローンの資格を活かして農薬・肥料散布の自営業を起業されました。chikaさんはその手伝いという立場です。大運天中殺を陽転させる時は、「周りごと上げていく」動き方になります。旦那さんだけ不運で自分だけ運がいい、ということはあまりありません。chikaさんは「自分は動いていない」と感じているかもしれませんが、ご主人の状況が、もう動いています。手伝いという立場を軽く見ず、それ自体がすでに陽転側に乗った動き方です。</p>
+    <p><b>②来たものを受け取る。</b>この20年は、自分から強引に取りに行くより、周りから求められたことに応じる方がうまく回ります。木13で、ゼロから立ち上げる一押しが細いchikaさんにとって、ゼロから自分で作るより来たものに手を出す方が、ずっと動きやすいやり方です。ご主人の起業に乗ってサポートすることは、まさにこの条件そのものです。「思い立ったが吉日」という感覚は、"来たもの"に向けて使うと本領を発揮します。</p>
+    <p style="margin-bottom:0;"><b>③古い枠から一回出る。</b>年柱の亥がchikaさんの天中殺の支と重なっており（生年中殺）、「両親・先祖の援助に頼らず独立すると陽転」と出ています。加えて戌亥天中殺そのものが家系の流れから飛び出す初代運であり、中年期の星（天恍星）にも「親元を離れる。苦労を越えて華やかな人生」とあります。日の宿命の「親元にいると陽転しない」を含めると、四箇所が同じ方向を指しています。chikaさんは20歳で家を出て寮に入り、そのまま就職しました。判断の基準を自分の足に置いて生きてきたこと自体が、すでにこの条件をクリアしています。</p>
+  </div>
+</div>
+
+<!-- 6 五つの視点 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">陸</span><span class="sec-title">五つの視点 ─ ぐるりと見る</span></div>
+
+  <div class="card">
+    <p class="soft" style="margin-bottom:.8rem;">同じ命式を、深さの違う五つの角度から観ます。同じ結論に別の道から辿り着く時、それが本物です。</p>
+
+    <p class="lead">［壱］ 本質と才能の視点</p>
+    <p>日の宿命が庚午「出炉の金」。中心が車騎星――動く体そのもの。才能占技は点欽の型で、剋線が調舒星の一点に集中しています。<span class="hl">広く浅くではなく、一つを突き詰める才能</span>です。領域は北天運で、考える力は強いものの、考えて満足し動きにくい面もあります。</p>
+    <p style="margin-bottom:0;">この本質と才能を重ねると、<b>「動ける体を持ちながら、動く前に考えて止まりやすい」</b>という構造が、才能のレベルでも本質のレベルでも同じ形で出ています。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">［弐］ 家系と宿命の視点</p>
+    <p>宿命天中殺は、年柱の生年中殺です。<span class="hl">両親・先祖の援助に頼らず独立すると陽転</span>する宿命が、生まれつき魂に組み込まれています。</p>
+    <p style="margin-bottom:0;">天中殺は戌亥――<b>精神性を高める使命。家系の精神性を継承する宿命</b>です。生年中殺と戌亥天中殺の両方が、同じ「親元・古い枠から出る」方向を指しています。20歳での自立は、この宿命が最初から用意していた形です。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">［参］ 今の運気の構造から観る視点</p>
+    <p>39〜48歳の大運・壬戌。天中殺の20年の前半にいます。<span class="hl">運勢の枠が外れている時期</span>で、正解を先に決めてから動くやり方が一番うまくいきません。</p>
+    <p style="margin-bottom:0;">34〜38歳の苦労（ご主人の浮気・自立）が、この20年に入る直前のバネになっています。<b>今5年目、まだ15年ある</b>時期に、その苦労を土台として使える段階に立っています。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">［肆］ 関係性と環境の視点</p>
+    <p>五行は土75・火50に対して木13・金18。守護神は<span class="hl">第一が壬、第二が癸</span>――両方とも水です。じっくり考える時間そのものが支えになる形です。</p>
+    <p style="margin-bottom:0;">ただし考える時間が長すぎると木の細さと重なり、動き出しが遅くなります。<b>考える時間に区切りをつけること</b>が、chikaさんの守護神の正しい使い方です。ご主人の起業という「来た関係」に乗ることも、この視点と噛み合っています。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">［伍］ 霊魂の設計という視点 ―― 総括</p>
+    <p>壱から肆まで、全部が同じ方向を向いています。<b>動ける体と探している目的があるのに、細い一押しと考えすぎる質で止まりやすい</b>、という構造です。</p>
+    <p>でも、<span class="hl">「だから宿命通りにじっと待ちなさい」で終わる話ではないです。</span></p>
+    <p><b>この命式で実際に動ける条件は、一つだけです。</b></p>
+    <div class="pull">ゼロから探しに行くのではなく、<b>来たものに、考える前に、小さく手を出すこと</b>。<br>それ以外に、この命式が回り出す入口はありません。</div>
+    <p style="margin-bottom:0;">土75に金18が埋もれ、木13で一押しも細いchikaさんにとって、探しに行くことは構造的に不利です。でも火50はちゃんとあり、来たもの（頼まれごと・誘い・ご主人の起業）に触れた瞬間、金は動き出します。<span class="hl">来たものを受け取るだけで、この命式は回ります。</span></p>
+  </div>
+</div>
+
+<!-- 7 五つの占い視点 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">漆</span><span class="sec-title">深い五つの視点 ― in depth</span></div>
+
+  <div class="card">
+    <p class="soft" style="margin-bottom:.8rem;">通常の読みよりさらに深く、五つの切り口から命式を観ます。</p>
+
+    <p class="lead">陽転の視点</p>
+    <p style="margin-bottom:0;">大運天中殺は「悪い時期」ではなく「立場や名乗りが変わることで星が陽転する」時期として読むこともできます。chikaさんの場合、"手伝い"という立場そのものが、名乗りの変化です。「私は動いていない」という自己評価を「私はサポート役として動いている」と名乗り直すだけで、車騎星・龍高星の陽転が進みます。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">本質の視点</p>
+    <p style="margin-bottom:0;">出炉の金という干支は、本質的なキャラクターとして「炉から出たばかりで、まだ何にでもなれる」という性質を持ちます。飽きやすい・独学が続かないという自己評価は、欠点ではなく<b>複数の形を試している途中の姿</b>であり、この干支の本質そのものです。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">お役目の視点</p>
+    <p style="margin-bottom:0;">戌亥天中殺の使命は、目に見えないもの・精神性に向かうことです。占いへの関心、簿記という数字の裏にある会社の実態を学ぶこと ―― どちらも「形のないものを扱う」という使命の線上にあります。お役目を果たすこと自体が幸福感につながる質の人です。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">幸福感の視点</p>
+    <p style="margin-bottom:0;">社会的な成功の指標（続けた年数・肩書き）でchikaさんを測ると、転職を繰り返す姿は「続かない人」に見えます。しかし内的な充足で測ると、<b>一つずつ試して確かめる過程そのものが、chikaさんにとっての幸福感の源</b>です。続くかどうかより、動いた実感があるかどうかで自分を評価する方が、この命式には合っています。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">エネルギーの視点</p>
+    <p style="margin-bottom:0;">エネルギーの向く方向と、実際の活動量にズレがあると、"なんとなく過ごしている"感覚が強く出ます。chikaさんは車騎星でエネルギーは外向き・行動型なのに、才能の領域が北天運（内向き・思考型）というズレを持っています。意識して体を先に動かす時間を作ると、このズレが縮まり、迷子の感覚が薄れます。</p>
+  </div>
+</div>
+
+<!-- 8 処方 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">捌</span><span class="sec-title">ここから動ける処方</span></div>
+  <div class="card recipe">
+    <div class="item"><div class="num">1</div><div class="rbody"><b>「来たもの」に、考える前に、小さく手を出す。</b><br>頼まれごと・誘われたこと・気になって止まっていること。大きい決断でなくていいです。やってみて違ったら次に行く。その繰り返しの中で、好きなことが後から追いついてきます。</div></div>
+    <div class="item"><div class="num">2</div><div class="rbody"><b>ご主人の起業を、"来た形"として受け取る。</b><br>ゼロから自分で立ち上げるより、来た動きに乗る方がchikaさんには合っています。手伝いという立場を、小さな役割だと思わないでください。</div></div>
+    <div class="item"><div class="num">3</div><div class="rbody"><b>考える時間に、区切りをつける。</b><br>守護神は水――じっくり考える時間そのものが支えになりますが、長すぎると動き出しが遅くなります。一日、三日と区切って、「ここまで考えたら、あとは動きながら決める」を習慣にしてください。</div></div>
+    <div class="item"><div class="num">4</div><div class="rbody"><b>木のエネルギーを、生活で足す。</b><br>観葉植物を置く、緑を身につける、新しい場所に足を運ぶ。ゼロから始める一押しを、外から補う作業です。</div></div>
+    <div class="item"><div class="num">5</div><div class="rbody"><b>火に当たり続ける。ぬくぬくした場所に戻らない。</b><br>人との関わり、頼まれごと、少し負荷のある環境。それが金を動かす熱になります。楽な場所に留まると、才能も金も埋もれたままです。</div></div>
+    <div class="item"><div class="num">6</div><div class="rbody"><b>誰かのために動く場面を、意識して増やす。</b><br>この20年は、自分のためより誰かのために動いた時に結果が出ます。人材育成・人と組む・奉仕的な動き方が、chikaさんの命式と噛み合います。</div></div>
+    <div class="item"><div class="num">7</div><div class="rbody"><b>暦を毎日ひらく。</b><br>「今日はこういう日か」と見るだけでいいです。月天中殺の月は、新しく大きく形を決めるより、小さく試すところまでに留めてください。</div></div>
+  </div>
+</div>
+
+<!-- 締め -->
+<div class="closing">
+  <p>chikaさんは、<span class="hl">出炉の金</span>です。<br>炉から出てきたばかりの、まだ形の決まっていない金属。</p>
+  <p>迷子に感じるのは、<br>やりたいことが無いからやないです。<br><b>探す方向が、自分の中に向いていただけです。</b></p>
+  <p>ご主人の起業は、<br>自分で選んだ変化やなくて、<br><span class="hl">向こうから来た変化です。</span></p>
+  <p class="big">今は、まだ溶けている途中です。</p>
+  <p>形は、chikaさんが決めるんやなくて、<br>動いた先で決まります。<br><b>火に当たり続けてください。</b></p>
+  <p>それだけで、この金は<br>勝手に動きます☺️</p>
+</div>
+
+<a class="koyomi-link" href="/chika">
+  <span class="arrow">▶</span> chikaの暦（日々の運気カレンダー）をひらく
+  <small>今日の運気と、これから1年分の月の流れが出ます。</small>
+</a>
+
+<footer>
+  <p>いつもおおきにです😊　気になったところは、いつでもLINEで掘ってください💬</p>
+  <p class="sig">㐂</p>
+</footer>
+
+</div>
+</body>
+</html>
