@@ -21,7 +21,10 @@
       "mb": 6,
       "ys": 3,
       "yb": 5,
-      "tc": [0, 1]
+      "tc": [
+        0,
+        1
+      ]
     },
     "birth": "1977-06-28",
     "travelImgKey": "shichu"
@@ -103,9 +106,9 @@
   "koyomiOnly": true,
   "koyomiNoDestiny": true,
   "expiresAt": "2026-10-19",
-  "doorHref": "/menu",
-  "doorLabel": "鑑定目録",
-  "doorNote": "この先に もう少し深く視るための目録があります",
+  "doorHref": "",
+  "doorLabel": "",
+  "doorNote": "",
   "starChart": {
     "banse": "車騎星",
     "meue": "石門星",

@@ -140,5 +140,9 @@
   "doorHref": "/kato-kazuko-kanteisho",
   "doorLabel": "鑑定書をひらく",
   "doorNote": "9月23日の紡の席で観たこと、話しきれんかったことも含めてまとめてあります",
-  "kanteishoHref": "/kato-kazuko-kanteisho"
+  "kanteishoHref": "/kato-kazuko-kanteisho",
+  "goal": {
+    "main": "「誰を照らすか」を、先に決める",
+    "sub": "今年やることは一つだけ。切るのは、まだしなくて大丈夫。\n2027年は形にする年。53歳・63歳・73歳と、形の違う本番が三つ続く。"
+  }
 }

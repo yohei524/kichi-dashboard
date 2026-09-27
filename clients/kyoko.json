@@ -124,9 +124,9 @@
   "koyomiOnly": true,
   "kanteishoHref": "/kyoko-kanteisho",
   "expiresAt": "2026-10-17",
-  "doorHref": "/menu",
-  "doorLabel": "鑑定目録",
-  "doorNote": "戸をあけると、鑑定の目録があります",
+  "doorHref": "/kyoko-kanteisho",
+  "doorLabel": "鑑定書をひらく",
+  "doorNote": "観たこと、話しきれんかったことも含めてまとめてあります",
   "starChart": {
     "banse": "車騎星",
     "meue": "調舒星",

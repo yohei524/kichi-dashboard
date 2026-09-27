@@ -91,9 +91,9 @@
   "koyomiOnly": true,
   "kanteishoHref": "/naoko-kanteisho",
   "expiresAt": "2027-08-04",
-  "doorHref": "/menu",
-  "doorLabel": "鑑定目録",
-  "doorNote": "戸をあけると、鑑定の目録があります",
+  "doorHref": "/naoko-kanteisho",
+  "doorLabel": "鑑定書をひらく",
+  "doorNote": "観たこと、話しきれんかったことも含めてまとめてあります",
   "starChart": {
     "banse": "龍高星",
     "meue": "調舒星",

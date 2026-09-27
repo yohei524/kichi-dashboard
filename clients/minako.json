@@ -170,9 +170,9 @@
   "koyomiNoDestiny": true,
   "kanteishoHref": "/minako-kanteisho",
   "expiresAt": "2027-02-24",
-  "doorHref": "/menu",
-  "doorLabel": "鑑定目録",
-  "doorNote": "この先に もう少し深く視るための目録があります",
+  "doorHref": "/minako-kanteisho",
+  "doorLabel": "鑑定書をひらく",
+  "doorNote": "観たこと、話しきれんかったことも含めてまとめてあります",
   "starChart": {
     "banse": "車騎星",
     "meue": "調舒星",

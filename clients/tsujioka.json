@@ -92,9 +92,9 @@
   "koyomiOnly": true,
   "kanteishoHref": "/tsujioka-kanteisho",
   "expiresAt": "2027-08-06",
-  "doorHref": "/menu",
-  "doorLabel": "鑑定目録",
-  "doorNote": "戸をあけると、鑑定の目録があります",
+  "doorHref": "/tsujioka-kanteisho",
+  "doorLabel": "鑑定書をひらく",
+  "doorNote": "観たこと、話しきれんかったことも含めてまとめてあります",
   "starChart": {
     "banse": "禄存星",
     "meue": "玉堂星",
