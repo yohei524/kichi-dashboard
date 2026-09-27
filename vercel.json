@@ -67,6 +67,10 @@
       "destination": "/view.html?client=akie"
     },
     {
+      "source": "/nakao-kanteisho",
+      "destination": "/clients/nakao-kanteisho.html"
+    },
+    {
       "source": "/nakao",
       "destination": "/view.html?client=nakao"
     },
