@@ -137,7 +137,7 @@
   "koyomiOnly": true,
   "koyomiNoDestiny": true,
   "kanteishoHref": "/mamiko-kanteisho",
-  "doorHref": "/menu",
-  "doorLabel": "鑑定目録",
-  "doorNote": "この先に もう少し深く視るための目録があります"
+  "doorHref": "/mamiko-kanteisho",
+  "doorLabel": "鑑定書をひらく",
+  "doorNote": "観たこと、話しきれんかったことも含めてまとめてあります"
 }

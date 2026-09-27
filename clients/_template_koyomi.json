@@ -1,0 +1,69 @@
+{
+  "_template": "㐂暦-1.0 唯一の型（260927制定）。新しい暦はこのファイルをコピーして作る。直近の人のJSONをコピー元にしない。仕様＝skill deploy-kichi ルール7",
+  "client": {
+    "name": "○○さん",
+    "dayStem": "乙",
+    "dayStemReading": "きのと",
+    "element": "木",
+    "elementNote": "日干支の名前と質を2〜4文。五行の偏りと守護神まで。鑑定文にしない",
+    "tenchu": "午未天中殺",
+    "travelImgKey": "gohitsuji",
+    "_travelImgKeyの対応": "子丑=shichu／寅卯=inbo／辰巳=tatsumi／午未=gohitsuji／申酉=shinyu／戌亥=inui（無いと天中殺サイクルの画像が出ない）",
+    "tenchuNote": "チェッカーの天中殺の本質・陽転条件を1〜2文",
+    "specialStructure": "宿命天中殺：なし",
+    "my": {
+      "ds": 0,
+      "db": 0,
+      "ms": 0,
+      "mb": 0,
+      "ys": 0,
+      "yb": 0,
+      "tc": [
+        0,
+        1
+      ]
+    },
+    "birth": "YYYY-MM-DD"
+  },
+  "yearTenchuNote": "次の年天中殺・大運天中殺の有無と、今から数年の順番を短く",
+  "monthlyFortunes": [
+    {
+      "period": "2026/9/8〜2026/10/8",
+      "kanshi": "丁酉",
+      "mainStar": "鳳閣星",
+      "jyusei": "天馳星",
+      "aspects": "年柱：対冲／月柱：半会／日柱：自刑",
+      "isTenchu": false,
+      "advice": "日柱に自刑が出る月です。自分で自分を追い込みやすく、考えが同じところを回りやすい配置。眠りが浅くなりやすい時期なので、予定を詰めず、眠る時間を先に確保しましょう。"
+    }
+  ],
+  "monthlyTenchuPeriod": {
+    "startMonth": 6,
+    "startDay": 6,
+    "endMonth": 8,
+    "endDay": 7,
+    "endYear": 2027
+  },
+  "design": {
+    "accentColor": "#5E7A4A",
+    "headerSub": "― 乙酉・禄存星の暦 ―",
+    "headerTitle": "運㐂暦",
+    "headerTagline": "日干支の一行",
+    "footerText": "― 持ち帰りの一行 ―",
+    "needElement": "火",
+    "needElementNote": "不足五行の数値と足し方"
+  },
+  "goal": {
+    "main": "紡の席で決めた持ち帰り（鑑定書の「動ける条件は、一つだけです」と同じもの）",
+    "sub": "時期の組み立てを2行まで。紡の席前は goal ごと null にしておき、Meet後に入れる"
+  },
+  "dailyAdvice": {},
+  "koyomiOnly": true,
+  "koyomiNoDestiny": true,
+  "expiresAt": "YYYY-MM-DD",
+  "doorHref": "",
+  "doorLabel": "",
+  "doorNote": "",
+  "_door": "鑑定書がある人だけ doorHref=kanteishoHref／doorLabel=鑑定書をひらく。無い人は3つとも空文字",
+  "kanteishoHref": ""
+}

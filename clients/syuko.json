@@ -149,9 +149,9 @@
   },
   "dailyAdvice": {},
   "expiresAt": "2026-11-30",
-  "doorHref": "/menu",
-  "doorLabel": "鑑定目録",
-  "doorNote": "この先に もう少し深く視るための目録があります",
+  "doorHref": "/mikoto-kanteisho",
+  "doorLabel": "鑑定書をひらく",
+  "doorNote": "観たこと、話しきれんかったことも含めてまとめてあります",
   "fiveOccultists": [
     {
       "name": "陽転の視点",

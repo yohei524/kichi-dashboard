@@ -97,7 +97,7 @@
   "koyomiOnly": true,
   "koyomiNoDestiny": true,
   "expiresAt": "2026-10-21",
-  "doorHref": "",
+  "doorHref": "/harumi-kanteisho",
   "goal": {
     "main": "和を極める ― 三十年積んだものを、渡せる形にする",
     "sub": "新しく始めることは、何もありません。\n茶道が軸、書・日本画・易が枝。全部「和」の一本です。\n2029年に整えて、2031年から渡す側へ。"
@@ -127,5 +127,7 @@
     "2027年の2月・3月は月天中殺。入学・契約・大きな手続きは、この二ヶ月を外して4月以降に置いてください。",
     "2029年までの三年を、待つ時間にしない。決めて、動いて、それから整える。この順番だけ、逆にしないでください。"
   ],
-  "kanteishoHref": "/harumi-kanteisho"
+  "kanteishoHref": "/harumi-kanteisho",
+  "doorLabel": "鑑定書をひらく",
+  "doorNote": "観たこと、話しきれんかったことも含めてまとめてあります"
 }

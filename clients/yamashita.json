@@ -162,9 +162,9 @@
   "koyomiNoDestiny": true,
   "kanteishoHref": "/yamashita-kanteisho",
   "expiresAt": "2026-11-14",
-  "doorHref": "/menu",
-  "doorLabel": "鑑定目録",
-  "doorNote": "この先に もう少し深く視るための目録があります",
+  "doorHref": "/yamashita-kanteisho",
+  "doorLabel": "鑑定書をひらく",
+  "doorNote": "観たこと、話しきれんかったことも含めてまとめてあります",
   "starChart": {
     "banse": "調舒星",
     "meue": "龍高星",

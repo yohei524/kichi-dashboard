@@ -21,7 +21,10 @@
       "mb": 10,
       "ys": 6,
       "yb": 8,
-      "tc": [0, 1]
+      "tc": [
+        0,
+        1
+      ]
     },
     "birth": "1980-10-14",
     "travelImgKey": "shichu"
@@ -68,9 +71,9 @@
   "koyomiNoDestiny": true,
   "kanteishoHref": "/noriko-kanteisho",
   "expiresAt": "2026-11-27",
-  "doorHref": "",
-  "doorLabel": "",
-  "doorNote": "",
+  "doorHref": "/noriko-kanteisho",
+  "doorLabel": "鑑定書をひらく",
+  "doorNote": "観たこと、話しきれんかったことも含めてまとめてあります",
   "starChart": {
     "banse": "司禄星",
     "meue": "貫索星",

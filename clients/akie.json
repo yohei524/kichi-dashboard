@@ -140,5 +140,9 @@
   "doorHref": "/akie-kanteisho",
   "doorLabel": "鑑定書をひらく",
   "doorNote": "9月22日の紡の席で観たこと、話しきれんかったことも含めてまとめてあります",
-  "kanteishoHref": "/akie-kanteisho"
+  "kanteishoHref": "/akie-kanteisho",
+  "goal": {
+    "main": "潤いが戻る時間を、自分で予定に入れる",
+    "sub": "2026年は決める年、2027年は形にする年、2028年がいちばん広げられる年、2029年で整える。\n54歳からの二十年は、受け取る側から渡す側へ。"
+  }
 }

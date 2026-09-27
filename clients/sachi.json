@@ -21,7 +21,10 @@
       "mb": 0,
       "ys": 0,
       "yb": 2,
-      "tc": [6, 7]
+      "tc": [
+        6,
+        7
+      ]
     },
     "birth": "1974-12-17",
     "travelImgKey": "gohitsuji"
@@ -68,9 +71,9 @@
   "koyomiNoDestiny": true,
   "kanteishoHref": "/sachi-kanteisho",
   "expiresAt": "2026-10-20",
-  "doorHref": "/menu",
-  "doorLabel": "鑑定目録",
-  "doorNote": "この先に もう少し深く視るための目録があります",
+  "doorHref": "/sachi-kanteisho",
+  "doorLabel": "鑑定書をひらく",
+  "doorNote": "観たこと、話しきれんかったことも含めてまとめてあります",
   "starChart": {
     "banse": "牽牛星",
     "meue": "鳳閣星",
