@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>atsukoさん 鑑定書 ｜ 㐂占</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --night:#0B0F1A; --night2:#131A28; --sink:#171F30; --panel:#1B2334;
+  --line:#2A3346; --accent:#9CC9A4; --accent-soft:#5F8F6C; --accent-glow:rgba(156,201,164,.14);
+  --gold:#C9A24A; --text:#ECEAE4; --muted:#8A96AC; --muted2:#A9B3C6;
+  --water:#6E9BC4; --fire:#D08A5A; --wood:#7FA86B; --metal:#C4C9D2; --earth:#C9A24A;
+  --bad:#C97A6A; --good:#6E9BC4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Serif JP',serif; color:var(--text); line-height:1.95; letter-spacing:.045em;
+  background:
+    radial-gradient(1200px 620px at 50% -12%, rgba(156,201,164,.10), transparent 60%),
+    linear-gradient(180deg,#0B0F1A 0%,#0D1220 45%,#080B14 100%);
+  background-attachment:fixed; min-height:100vh;
+}
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.05rem 4rem;}
+
+header{text-align:center;padding:3rem 1rem 1.4rem;}
+header .kicker{font-size:.68rem;letter-spacing:.32em;color:var(--accent);opacity:.9;margin-bottom:.9rem;}
+header h1{font-size:1.5rem;font-weight:500;letter-spacing:.08em;margin-bottom:.5rem;}
+header h1 .nm{color:var(--accent);}
+header .tagline{font-size:.8rem;color:var(--muted2);letter-spacing:.1em;line-height:1.7;}
+header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:.12em;}
+
+.profile{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem .8rem;
+}
+.profile div{font-size:.74rem;color:var(--muted);}
+.profile div b{display:block;font-size:.9rem;color:var(--text);font-weight:500;margin-top:.1rem;letter-spacing:.06em;}
+.profile div.full{grid-column:1/3;}
+
+.sec{margin-bottom:1.65rem;}
+.sec-head{
+  display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;
+  padding-bottom:.6rem;border-bottom:1px solid var(--line);
+}
+.sec-no{font-size:.72rem;color:var(--accent);letter-spacing:.18em;font-weight:600;}
+.sec-title{font-size:1.02rem;font-weight:500;letter-spacing:.08em;}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  padding:1.25rem 1.15rem;box-shadow:0 4px 24px rgba(0,0,0,.32);margin-bottom:1rem;
+}
+.card p{font-size:.87rem;margin-bottom:.9rem;color:var(--text);}
+.card p:last-child{margin-bottom:0;}
+.card .lead{color:var(--accent);font-size:.9rem;font-weight:500;}
+.hl{color:var(--accent);font-weight:500;}
+.soft{color:var(--muted2);font-size:.8rem;}
+
+.meishiki{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.2rem 0 .3rem;}
+.pillar{background:var(--sink);border:1px solid var(--line);border-radius:12px;padding:.7rem .4rem;text-align:center;}
+.pillar .lbl{font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.55rem;}
+.pillar .yomi{font-size:.58rem;color:var(--muted);letter-spacing:.04em;line-height:1.3;}
+.pillar .kan{font-size:1.85rem;font-weight:600;color:var(--text);line-height:1.15;}
+.pillar .shi{font-size:1.85rem;font-weight:600;color:var(--accent);line-height:1.15;margin-top:.2rem;}
+.pillar .zou{font-size:.62rem;color:var(--muted2);margin-top:.55rem;letter-spacing:.04em;}
+.meishiki-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;}
+
+.jintai{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:19rem;margin:.4rem auto .2rem;}
+.jcell{background:var(--sink);border:1px solid var(--line);border-radius:11px;aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;}
+.jcell .pos{font-size:.58rem;color:var(--muted);letter-spacing:.05em;}
+.jcell .star{font-size:.92rem;font-weight:600;color:var(--text);letter-spacing:.03em;}
+.jcell.center{background:linear-gradient(160deg,rgba(156,201,164,.18),var(--sink));border-color:var(--accent-soft);}
+.jcell.center .star{color:var(--accent);}
+.jcell.jusei-cell{background:var(--night2);}
+.jcell .star.gold{color:var(--gold);}
+
+.gogyo{margin-top:.3rem;}
+.gbar{display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;}
+.gbar .gname{width:2.6rem;font-size:.76rem;color:var(--muted2);flex-shrink:0;}
+.gbar .gtrack{flex:1;height:9px;background:var(--sink);border-radius:5px;overflow:hidden;}
+.gbar .gfill{display:block;height:100%;border-radius:5px;}
+.gbar .gval{width:2.2rem;text-align:right;font-size:.72rem;color:var(--muted);flex-shrink:0;}
+.g-wood .gfill{background:var(--wood);}
+.g-fire .gfill{background:var(--fire);}
+.g-earth .gfill{background:var(--earth);}
+.g-metal .gfill{background:var(--metal);}
+.g-water .gfill{background:var(--water);}
+
+.daiun-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.daiun{width:100%;border-collapse:collapse;font-size:.78rem;min-width:19rem;}
+.daiun th{font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.05em;padding:.4rem .3rem;border-bottom:1px solid var(--line);text-align:center;}
+.daiun td{padding:.5rem .3rem;text-align:center;border-bottom:1px solid rgba(42,51,70,.5);color:var(--text);}
+.daiun td:first-child{color:var(--muted2);font-size:.72rem;white-space:nowrap;}
+.daiun .tc-cell{color:var(--bad);font-size:.68rem;}
+.daiun .now-row td{background:linear-gradient(90deg,rgba(156,201,164,.12),transparent);}
+.daiun .now-row td:first-child{color:var(--accent);font-weight:600;}
+.daiun .now-cell{color:var(--accent);font-size:.68rem;font-weight:600;}
+
+.tl{position:relative;padding-left:1.1rem;margin-top:.3rem;}
+.tl::before{content:"";position:absolute;left:3px;top:.4rem;bottom:.4rem;width:2px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:1rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before{content:"";position:absolute;left:-1.1rem;top:.45rem;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--night2);}
+.tl-item.tc::before{background:var(--bad);}
+.tl-when{font-size:.76rem;color:var(--accent);font-weight:600;letter-spacing:.06em;}
+.tl-item.tc .tl-when{color:var(--bad);}
+.tl-body{font-size:.82rem;color:var(--text);margin-top:.15rem;}
+
+.recipe{counter-reset:r;}
+.recipe .item{display:flex;gap:.75rem;margin-bottom:1rem;}
+.recipe .item:last-child{margin-bottom:0;}
+.recipe .num{flex-shrink:0;width:1.7rem;height:1.7rem;border-radius:50%;background:linear-gradient(160deg,var(--accent),var(--accent-soft));color:var(--night);font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;}
+.recipe .rbody{font-size:.83rem;}
+.recipe .rbody b{color:var(--accent);font-weight:600;}
+
+.pull{border-left:3px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:1rem 0;font-size:.9rem;color:var(--muted2);font-style:normal;}
+
+.closing{background:linear-gradient(180deg,var(--panel),var(--sink));border:1px solid var(--accent-soft);border-radius:18px;padding:1.6rem 1.25rem;text-align:center;box-shadow:0 0 30px rgba(156,201,164,.08);}
+.closing p{font-size:.88rem;margin-bottom:.9rem;}
+.closing p:last-child{margin-bottom:0;}
+.closing .big{font-size:1.05rem;color:var(--accent);font-weight:500;letter-spacing:.06em;}
+
+.koyomi-link{display:block;text-align:center;margin-top:1.5rem;padding:1rem;background:var(--night2);border:1px solid var(--line);border-radius:14px;color:var(--text);text-decoration:none;font-size:.86rem;transition:border-color .3s;}
+.koyomi-link:hover{border-color:var(--accent-soft);}
+.koyomi-link .arrow{color:var(--accent);}
+.koyomi-link small{display:block;color:var(--muted);font-size:.7rem;margin-top:.3rem;}
+
+footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
+footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
+
+.sangou svg{width:100%;height:auto;max-width:21rem;display:block;margin:.2rem auto .4rem;}
+.sangou .ring{fill:none;stroke:var(--line);stroke-width:1.5}
+.sangou .tri{fill:var(--accent-glow);stroke:var(--accent);stroke-width:3;stroke-linejoin:round}
+.sangou .node{fill:var(--sink);stroke:var(--line);stroke-width:1.5}
+.sangou .node-on{fill:var(--accent);stroke:var(--accent)}
+.sangou .t-on{fill:var(--night);font-weight:700;font-size:24px;text-anchor:middle}
+.sangou .t-off{fill:var(--muted);font-size:15px;text-anchor:middle}
+.sangou .t-center{fill:var(--accent);font-weight:700;font-size:30px;text-anchor:middle}
+.sangou .t-sub{fill:var(--muted2);font-size:12px;text-anchor:middle;letter-spacing:.1em}
+.sangou .t-pillar{fill:var(--text);font-weight:600;font-size:14px;text-anchor:middle}
+.sangou .t-season{fill:var(--accent);font-size:12px;text-anchor:middle}
+.three{display:grid;gap:.6rem;margin-top:.2rem}
+.three .m{background:var(--sink);border:1px solid var(--line);border-radius:12px;padding:.8rem .9rem;font-size:.84rem}
+.three .m b{display:block;color:var(--accent);font-size:.9rem;margin-bottom:.15rem;letter-spacing:.06em}
+.daiun td.isou{font-size:.66rem;color:var(--muted2);text-align:left;line-height:1.5}
+</style>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">㐂占 　 命 術 本鑑定書</p>
+  <h1><span class="nm">atsuko</span> さんへ</h1>
+  <p class="tagline">静かに燃え続ける火を、届いてほしい人に向けて上げる</p>
+  <p class="date">1971年3月23日 生　／　鑑定 2026.9.30</p>
+</header>
+
+<div class="profile">
+  <div class="full">魂の本質（日の宿命）<b>丁未（ひのとひつじ）― 異国への狼煙</b></div>
+  <div>中心の星<b>龍高星</b></div>
+  <div>天中殺<b>寅卯（東方）・生月中殺</b></div>
+  <div>才能の星<b>龍高星・了殿の型</b></div>
+  <div>今の大運<b>丁酉・貫索星（54〜63歳）</b></div>
+  <div class="full">命式のかたち<b>年・月・日の支が亥・卯・未でそろう三合会局（木局）</b></div>
+  <div class="full">運気の位置<b>2026年は結びつきの配置が三本そろう年。次の年天中殺は2034〜2035年</b></div>
+</div>
+
+<div class="card" style="border-color:var(--accent-soft);">
+  <p>おおきにです、atsukoさん☺️</p>
+  <p>9月30日にお話ししたことを、ここにまとめました。お話しした内容に、さらに書き足してあります。特に<span class="hl">三合会局の図</span>と、<span class="hl">見極めの三つの物差し</span>、<span class="hl">この命式を陽転させる三つの条件</span>は、あとから何度でも見返せるように分けて書いています。</p>
+  <p>読む順番は気にせんでください。気になったところから開いてもらって大丈夫です。ここがスタートです。</p>
+</div>
+
+<!-- 命式盤 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">命 式</span><span class="sec-title">atsukoさんの設計図</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.6rem;">陰占 ― 生まれ持った気の柱</p>
+    <div class="meishiki">
+      <div class="pillar"><div class="lbl">日柱（自分・家庭）</div><div class="yomi">ひのと</div><div class="kan">丁</div><div class="shi">未</div><div class="yomi">ひつじ</div><div class="zou">蔵干　己・丁・乙</div></div>
+      <div class="pillar"><div class="lbl">月柱（目標・仕事の立場）</div><div class="yomi">かのと</div><div class="kan">辛</div><div class="shi">卯</div><div class="yomi">う</div><div class="zou">蔵干　乙</div></div>
+      <div class="pillar"><div class="lbl">年柱（社会・対外）</div><div class="yomi">かのと</div><div class="kan">辛</div><div class="shi">亥</div><div class="yomi">い</div><div class="zou">蔵干　壬・甲</div></div>
+    </div>
+    <p class="meishiki-note">日柱 丁未 ／ 月柱 辛卯 ／ 年柱 辛亥<br>下の段の亥・卯・未がそろって三合会局（木局）<br>月柱の卯は天中殺の支 ＝ 生月中殺</p>
+    <div style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+    <p class="soft" style="margin-bottom:.2rem;">陽占 ― 心のかたち（人体星図）</p>
+    <div class="jintai">
+      <div class="jcell jusei-cell"><span class="pos">伴星（先祖）</span><span class="star">石門星</span></div>
+      <div class="jcell"><span class="pos">目上（北）</span><span class="star">禄存星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">初年運</span><span class="star gold">天報星</span></div>
+      <div class="jcell"><span class="pos">配偶者（西）</span><span class="star">鳳閣星</span></div>
+      <div class="jcell center"><span class="pos">中心・本人</span><span class="star">龍高星</span></div>
+      <div class="jcell"><span class="pos">社会（東）</span><span class="star">牽牛星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">晩年運</span><span class="star gold">天南星</span></div>
+      <div class="jcell"><span class="pos">目下（南）</span><span class="star">禄存星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">中年運</span><span class="star gold">天胡星</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.7rem;">中央が本人。四隅は人生3時期の心の在り方（初年・中年・晩年）と、ご先祖の星（伴星）。真ん中に自由な旅人の龍高星、上と下に尽くす星の禄存星 ―― 「外では尽くし、中は自分のやり方で立つ」のが、atsukoさんの骨格です。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">一</span><span class="sec-title">どういう魂か ― 異国への狼煙</span></div>
+  <div class="card">
+    <p class="lead">静かに、消えずに燃え続ける火</p>
+    <p>日の宿命「丁未」には、<span class="hl">「異国への狼煙」</span>という名前がついています。丁は灯火の火。ろうそくやランプのように、派手に燃え広がらず、静かに、消えずに燃え続ける火です。その火が、遠くの国に向けて上がる狼煙になっている。ここにいながら、遠くを見ている。それがatsukoさんの本体です。</p>
+    <p>以下が、丁未の本質です。<span class="hl">「おとなしそうでも中身は情熱的で持続力もあり、どこでも目立つ。野心も底力もあり、必要なことはストレートに口にし行動するが、やや気取り屋」</span>。</p>
+    <p>性格の面では「多才でユーモアがあり気取り屋。膝を突き合わせて人を説得する。経験を背景に感覚的に処理。能力や努力の評価が厳しめ」。</p>
+    <div class="pull">女性は、内に激しさを秘めながら、楽しい社交家を振る舞う。</div>
+    <p>「社交家ではそもそもないけど、振る舞うのはわかる」。atsukoさんはそう話してくれました。職場では、しっかりした人に見られる。元気やねと言われる。でも本人は疲れているし、中身はポンコツやのに、と思っている。<b>外に見せている姿と、中にあるものを、分けて持っている人</b>です。</p>
+    <p style="margin-bottom:0;">もう一つ。「思ったことは言っている。でも周りと話が合わない。ここを変えるだけやのに、が進まない」。本質の「必要なことはストレートに口にし行動する」は、そのまま出ています。言えていないのではなく、<b>言うても周りが動かない方のしんどさ</b>です。</p>
+  </div>
+  <div class="card" style="background:var(--sink);border-color:var(--accent-soft);">
+    <p class="lead" style="margin-bottom:.6rem;">警句 ―― 二つの大事なところ</p>
+    <div class="pull" style="margin-top:0;">人情に厚く思慮深く独立心があるから、何事にも熱意をもって運ぶ力を持っている。細心の注意を欠くと大変な困難を招き、流浪の憂き目を見ることがある。</div>
+    <p><b>一つ目、「人情に厚い」と「独立心」が並んでいること。</b>人に厚い。でも、一人で立つ。その両方を持っているから、熱意をもって物事を運べる。これがatsukoさんの力の元です。</p>
+    <p style="margin-bottom:0;"><b>二つ目、「細心の注意」。</b>僕は、こう見ています。人情に厚い人が、<span class="hl">誰に心を預けるか、どこに力を注ぐか</span>。そこを丁寧に選べるかどうかです。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">二</span><span class="sec-title">亥・卯・未がそろって、三合会局</span></div>
+  <div class="card">
+    <p class="lead">生まれた年・月・日の支が、正三角形になっている</p>
+    <div class="sangou"><svg viewBox="0 0 510 440" role="img" aria-label="十二支の輪の上で亥・卯・未が正三角形を作る図">
+<circle cx="230" cy="215" r="150" class="ring" />
+<polygon points="155.0,85.1 380.0,215.0 155.0,344.9" class="tri" />
+<circle cx="230.0" cy="65.0" r="17" class="node" /><text x="230.0" y="70.5" class="t-off">子</text>
+<circle cx="305.0" cy="85.1" r="17" class="node" /><text x="305.0" y="90.6" class="t-off">丑</text>
+<circle cx="359.9" cy="140.0" r="17" class="node" /><text x="359.9" y="145.5" class="t-off">寅</text>
+<circle cx="380.0" cy="215.0" r="27" class="node-on" /><text x="380.0" y="223.0" class="t-on">卯</text>
+<circle cx="359.9" cy="290.0" r="17" class="node" /><text x="359.9" y="295.5" class="t-off">辰</text>
+<circle cx="305.0" cy="344.9" r="17" class="node" /><text x="305.0" y="350.4" class="t-off">巳</text>
+<circle cx="230.0" cy="365.0" r="17" class="node" /><text x="230.0" y="370.5" class="t-off">午</text>
+<circle cx="155.0" cy="344.9" r="27" class="node-on" /><text x="155.0" y="352.9" class="t-on">未</text>
+<circle cx="100.1" cy="290.0" r="17" class="node" /><text x="100.1" y="295.5" class="t-off">申</text>
+<circle cx="80.0" cy="215.0" r="17" class="node" /><text x="80.0" y="220.5" class="t-off">酉</text>
+<circle cx="100.1" cy="140.0" r="17" class="node" /><text x="100.1" y="145.5" class="t-off">戌</text>
+<circle cx="155.0" cy="85.1" r="27" class="node-on" /><text x="155.0" y="93.1" class="t-on">亥</text>
+<text x="252" y="213" class="t-center">木局</text><text x="252" y="235" class="t-sub">三合会局</text>
+<text x="119.0" y="35.1" class="t-pillar">年柱 辛亥</text><text x="119.0" y="51.1" class="t-season">初冬・始まり</text>
+<text x="414" y="211" class="t-pillar" style="text-anchor:start">月柱 辛卯</text><text x="414" y="228" class="t-season" style="text-anchor:start">春・ピーク</text>
+<text x="119.0" y="392.9" class="t-pillar">日柱 丁未</text><text x="119.0" y="408.9" class="t-season">晩夏・終わり</text>
+</svg></div>
+    <p>十二支を輪に並べると、atsukoさんの年柱の亥・月柱の卯・日柱の未は、四つおきの位置にあります。結ぶと正三角形。三つそろうと、<b>三合会局（さんごうかいきょく）</b>という形になります。干支同士の関係を見る位相法の中で、結びつきがいちばん強い形です。</p>
+    <p>亥は初冬、卯は春、未は晩夏。<span class="hl">季節の始まり・ピーク・終わりが、一人の中にそろっています。</span>物事の起こりから結びまでを、自分の中で回しきれる作りです。</p>
+    <p style="margin-bottom:0;">三合会局には「三合完成・最強拡大。異次元で立体的に広がる」「物事の行動が早く、起承転結が短時間で現れる」という意味があります。人と人の間で三つがそろうと強いチームになる配置ですが、atsukoさんはそれを、生まれた時から自分の中に持っています。</p>
+  </div>
+  <div class="card">
+    <p class="lead">五行 ―― 欠けがなく、木がいちばん大きい</p>
+    <p class="soft" style="margin-bottom:.8rem;">木64　火34　土17　金32　水19（合計166）</p>
+    <div class="gogyo">
+      <div class="gbar g-wood"><span class="gname">木</span><span class="gtrack"><span class="gfill" style="width:100%"></span></span><span class="gval">64</span></div>
+      <div class="gbar g-fire"><span class="gname">火</span><span class="gtrack"><span class="gfill" style="width:53%"></span></span><span class="gval">34</span></div>
+      <div class="gbar g-earth"><span class="gname">土</span><span class="gtrack"><span class="gfill" style="width:27%"></span></span><span class="gval">17</span></div>
+      <div class="gbar g-metal"><span class="gname">金</span><span class="gtrack"><span class="gfill" style="width:50%"></span></span><span class="gval">32</span></div>
+      <div class="gbar g-water"><span class="gname">水</span><span class="gtrack"><span class="gfill" style="width:30%"></span></span><span class="gval">19</span></div>
+    </div>
+    <p style="margin-top:1rem;">五つの気が全部そろっていて、<b>不足している五行はありません</b>。バランスの取れた、安定した作りです。その中で木がいちばん大きいのは、亥・卯・未の三合会局が木の局だからです。</p>
+    <p style="margin-bottom:0;">atsukoさんの本体は丁、火です。五行で火を生むのが木。自分を生み、育ててくれる気で、星でいうと<span class="hl">学ぶ本能</span>にあたります。真ん中の龍高星も、経験で学ぶ星。<b>経験して、学んで、自分の中に貯めていく力が、五行の中でいちばん大きく出ている</b>命式です。</p>
+  </div>
+  <div class="card" style="background:var(--sink);border-color:var(--accent-soft);">
+    <p class="lead" style="margin-bottom:.6rem;">三つの柱の結びつきを、一本ずつ見る</p>
+    <p>三合会局は、柱ごとに見ると三本の半会（はんかい）でできています。それぞれ、こう見ます。</p>
+    <p><b>年柱の亥と月柱の卯。</b>未来を自分で切り拓く力。将来性を感じたものには、未経験でも臆せず踏み出せる柔軟さと行動力。</p>
+    <p><b>月柱の卯と日柱の未。</b>物事を整理し、まとめ上げる力。過去の経験やデータを丁寧に見直すことで、形になりやすい。</p>
+    <p><b>年柱の亥と日柱の未。</b><span class="hl">理想の世界を思い描いているため、現実だけでは心が満たされにくい。</span></p>
+    <p style="margin-bottom:0;">三本目は、あとで出てくる中年期の星の「現実の生活にしっくりこない」と同じ向きです。生活は回っているのに、なんか違う。その感覚は、わがままではなく、命式のかたちから来ています。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">三</span><span class="sec-title">外では尽くし、中は自由な旅人</span></div>
+  <div class="card">
+    <p class="lead">中心の龍高星 ―― 自由な旅人</p>
+    <p>中心の龍高星は、<span class="hl">「経験で学ぶ。知識に貪欲。まず行動する。放浪して開拓する。黙々と前進。十大主星で最強の忍耐と努力。ロマンを感じられないと良さを発揮できない」</span>星です。中心にある時は「自由な旅人。束縛を嫌う。常識にも縛られない。弱音は吐かない。忍耐と努力。常に新しいものを求める。何を考えているか分からないと思われがち」。</p>
+    <p><b>陽転すると</b>、「創造的破壊。立体思考。誰にも縛られずに自由な発想」。変えた方がいいところが見えて、実際に変えていける力です。</p>
+    <p><b>陰転すると</b>、「目的やロマンを見失うと無意味に放浪する」。力はあるのに、向ける先がない。</p>
+    <div class="pull">「疲れてるんやけどな、と思いながら、元気やねと言われる」。<br>弱音を吐かない星なので、中で起きていることが外から見えないだけです。</div>
+    <p style="margin-bottom:0;">職場で「ここを変えるだけやのに」と感じるのも、この星です。変わらないこと、止まっていることは、改革の星にとってそのまま負荷になります。</p>
+  </div>
+  <div class="card">
+    <p class="lead">目上と目下の禄存星 ―― 尽くす星が二つ</p>
+    <p>目上の位置と目下の位置に、同じ禄存星があります。禄存星は<span class="hl">「奉仕精神が旺盛。愛に満ちている。人に尽くす。愛と財を引き寄せる」</span>星。目上の位置では「大きな包容力。お人好し」、目下の位置では「困っている人や気の毒な人を放っておけない。博愛主義者」。上の人にも、下の人にも尽くす人です。介護の仕事が好き、というのは、この星のとおりです。</p>
+    <p><b>陽転すると</b>、「奉仕精神で人に尽くすことができる。善行を積む。徳が高い」。尽くした分が、自分にも返ってきて回ります。</p>
+    <p><b>陰転すると</b>、「騙されやすい。利用されやすい。八方美人」。どの方向にも同じだけ尽くせてしまうので、返ってこない相手にも流れ続けます。atsukoさんの言葉では「吸い取られる感じ。タイヤの空気が抜けるような感じ」。</p>
+    <p style="margin-bottom:0;">同じ星が二つそろうと、自分を守る芯の質も加わる、という見方があります。尽くす一方ではなく、自分を守る線もちゃんと持っている人です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">社会の牽牛星 ―― しっかり者に見える理由</p>
+    <p>社会の位置は牽牛星。責任感の星で、「仕事にプライドを持つ。人を立てられる」。この位置では「他の人と違うという特別意識。表面上とっつきにくくなりがち。実際に付き合うとそんなことはない」。</p>
+    <p style="margin-bottom:0;"><b>陽転すると</b>、任された役割を責任をもってやり切る、信頼される人。<b>陰転すると</b>、しっかりしていなければ、という力みで自分を縛る。</p>
+  </div>
+  <div class="card">
+    <p class="lead">ご先祖様から渡されている使命 ―― 伴星・石門星</p>
+    <p>左上の伴星は、atsukoさんが直接使う星というより、ご先祖様から渡されている使命です。石門星の使命は、こうです。</p>
+    <div class="pull">人脈が財産になる。人との繋がりを大切にしなさい。できるだけたくさんの人と交流して楽しい人生を送りなさい。一期一会を大切にしなさい。感謝の気持ちを忘れなければ、平穏で豊かな人生を送ることができます。</div>
+    <p style="margin-bottom:0;">「ずっと続いている友人はいないけれど、その時その時で、必要な時に助けてくれる人が現れる。環境が変わると消えていく」。atsukoさんが話してくれたこの形は、<span class="hl">一期一会</span>そのものです。人を避けて生きる作りではなく、その時に要る人と出会える作りです。</p>
+  </div>
+  <div class="card" style="background:var(--sink);border-color:var(--accent-soft);">
+    <p class="lead">三つの時期の心の在り方</p>
+    <p><b>初年期は天報星。</b>変化の星です。小さい頃は体が弱く、年とともに丈夫になってきた、という話と重なります。</p>
+    <p><b>今の中年期は天胡星。</b>「人と争いたくない。優れた美意識と繊細な感性」。この時期の出方は<span class="hl">「現実の生活にしっくりこない。ある時突然、ガラっと違った考えや行動を起こす場合がある。夢を与える仕事で才能を発揮できる。ハードスケジュールに注意」</span>。繊細な感性の人が、夜勤のある仕事で人に尽くしている。疲れが抜けにくいのは、この作りのとおりです。</p>
+    <p style="margin-bottom:0;"><b>晩年期は天南星。</b>「老いを知らない晩年期になる」。後半は、自分の足で前に出ていける時期です。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">四</span><span class="sec-title">狭く、深く ― 寅卯天中殺</span></div>
+  <div class="card">
+    <p class="lead">陽転の条件は「狭く深い友人関係」</p>
+    <p>atsukoさんの天中殺は寅卯。本質は<span class="hl">「引き継ぎ・継承の使命」</span>。誰かが作ったものを受け継いで、育てて広げる使命です。陽転の条件は、こう示されています。</p>
+    <div class="pull">狭く深い友人関係。丁寧さ・几帳面さ。精神性を高める学び。</div>
+    <p>警句の「細心の注意」と、ここの「丁寧さ」は、同じ方向を指しています。そしてご先祖様の使命は「たくさんの人と交流しなさい。一期一会を大切に」でした。</p>
+    <p style="margin-bottom:0;"><span class="hl">出会うのは、広く。心を預けるのは、狭く深く。</span>僕は、atsukoさんの命式をそう見ています。atsukoさんは今、友だちはほとんどいないと話してくれました。「狭く」は、もう出来ています。残っているのは「深く」の方です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">毎年2月・3月は、休む月</p>
+    <p>寅卯天中殺の人は、毎年2月と3月が月の天中殺です。「2月3月は毎年調子が悪い」という実感は、命式のとおりです。この二ヶ月は、新しく始めること・大きな契約は外して、体のメンテナンスと片づけに使う月と決めてしまいましょう。2027年は2月4日〜4月4日です。</p>
+    <p>年の天中殺は、前回が2022〜2023年。疲れて職場を離れ、誘われた別の職場に移ったものの、最初から「ここは違う」という感覚が消えず、一年で元の職場に戻った時期でした。天中殺の間に新しい場所へ移ると、こういう出方をしやすいです。そこから元の場所へ戻れたのは、呼び戻してくれる人が現れたから。ここにも、必要な時に助けが現れる形が出ています。</p>
+    <p style="margin-bottom:0;">次の年の天中殺は、2034〜2035年です。</p>
+  </div>
+  <div class="card" style="background:var(--sink);border-color:var(--accent-soft);">
+    <p class="lead">生月中殺 ―― 自分の足で立つ形で回る</p>
+    <p style="margin-bottom:0;">月柱の卯は、ちょうど天中殺の支です。これを生月中殺といいます。組織の後ろ盾や決まった枠に頼るより、<b>自分の足で立つ形の方がうまく回る</b>宿命です。後ろ盾がないのは弱点ではなく、そういう道の方が開く作りです。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">五</span><span class="sec-title">お守りは「決める力」</span></div>
+  <div class="card">
+    <p class="lead">守護神は、庚と甲</p>
+    <p>atsukoさんの命式をいちばん良い状態に回すお守りの気（調候守護神）は、<span class="hl">第一が庚</span>（鋭く切る・即断・決める力）、<span class="hl">第二が甲</span>（大樹のように真っ直ぐ）です。</p>
+    <div class="pull">尽くす星が二つある人の、一番目のお守りが「決める力」。</div>
+    <p style="margin-bottom:0;">誰に尽くすかを、自分で決める。全員に同じだけではなく、ここ、と決める。それをやった時に、この命式はいちばん良い状態になる、という読みができます。気合いを入れて何かを切り捨てる話ではなく、ここ、と決めるだけです。</p>
+  </div>
+  <div class="card">
+    <p class="lead">了殿の型 ―― ペースを保つことが陽転の条件</p>
+    <p>才能の星は、真ん中と同じ龍高星。型は了殿の型（りょうでんのかた）。才能が真ん中に集まっていて、大きな力を出せる型です。</p>
+    <div class="pull">才能と生命力が反比例しやすい。全力疾走で体を壊す傾向。ペースを保つことが陽転条件。</div>
+    <p>中年期の天胡星にも「ハードスケジュールに注意」とありました。二つとも、同じことを示しています。以前は、気持ちより先に体にストップがかかって、めまいや胃腸の不調で休むことがあった。そこからマッサージや鍼で体のメンテナンスを始めて、ストップがかかる回数が減った。<b>これは、陽転の条件を一つ、もう満たしている形です。</b></p>
+    <p style="margin-bottom:0;">疲れやストレスが肌に出た時は、ペースを守る合図として受け取ってください。ペースを守ることは甘えではなく、atsukoさんの場合は陽転の条件です。</p>
+  </div>
+  <div class="card" style="background:var(--sink);border-color:var(--accent-soft);">
+    <p class="lead" style="margin-bottom:.6rem;">八門法・気図法・才能の領域 ―― 学ぶ方向がいちばん太い</p>
+    <p>八門法は玄武型（北が最大）。「学者気質。研究熱心。知性。目上の助けを得る」。気図法では「現実社会への適応力が強く世渡り上手」。外では世渡り上手にやれて、中は学者気質。ここにも、外と中の二つの顔が出ています。</p>
+    <p style="margin-bottom:0;">才能が出る領域は北天運。<span class="hl">学問・研究・専門性。考えることを優先する方向</span>です。天中殺の陽転条件の「精神性を高める学び」とも同じ向き。降りてくる感覚で見る占いより、星や言葉の意味を一つずつ調べて積んでいく占いに惹かれる、という話は、この命式のとおりです。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">六</span><span class="sec-title">パートナーのご縁 ― 配偶者の位置の鳳閣星</span></div>
+  <div class="card">
+    <p class="lead">家庭の場所にあるのは、のんびりの星</p>
+    <p>配偶者の位置は鳳閣星。<span class="hl">「子供のようにのんびり。遊びの人。太陽のように明るい。無邪気な笑顔。ストレスをためにくい」</span>星です。この位置では「多趣味になる。家族にも無理をさせたくない。衣食住の価値観を重視」。</p>
+    <p>これは相手の人物像というより、<b>パートナーと暮らす場面でatsukoさん自身が求めるかたち</b>です。おいしいものを食べて、のんびりして、お互いに無理をさせない暮らし。</p>
+    <p style="margin-bottom:0;"><b>陽転すると</b>、自然体でいられる相手と、暮らしそのものを楽しめる。<b>陰転すると</b>、自分がのびのびしたいのに、相手の方がのびのびして、こちらがしっかり者の役に回る。</p>
+  </div>
+  <div class="card" style="background:var(--sink);border-color:var(--accent-soft);">
+    <p class="lead">外の顔と、家庭の場所が求めるもののズレ</p>
+    <p>外で見せている姿は、自由な旅人で、しっかりした人。その姿に惹かれて近づいてくる相手は、頼りたい人になりやすい。でも家庭の場所の星が求めているのは、のんびりで、無理をさせない、暮らしの感覚が合う相手です。僕は、ここに噛み合わなさがあったと見ています。</p>
+    <p>「最初は、頼っていいよ、とおおらかに近づいてくる。付き合ううちに、相手ばかりが甘えてきて、束縛や執着が強くなっていく」。困っている人を放っておけない禄存星が、尽くす側に回る。束縛を嫌う龍高星が、苦しくなる。その流れです。</p>
+    <div class="pull">「ポンコツをさらけ出していられる人がいい」。<br>答えは、atsukoさんの口からもう出ています。</div>
+    <p style="margin-bottom:0;">しっかり者の姿を作らなくていい相手。それが、鳳閣星の求めているご縁です。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">七</span><span class="sec-title">見極めの三つの物差し</span></div>
+  <div class="card">
+    <p>少数でも深く分かり合える相手を、どう選ぶか。命式から作った物差しが三つあります。パートナーにも、職場の人にも、これから出会う人にも、同じ三つが使えます。</p>
+    <div class="three">
+      <div class="m"><b>一、顔の物差し</b>その人の前で、しっかり者の顔を作っているか。素のままでいられるか。丁未は「楽しい社交家を振る舞う」干支です。振る舞っている相手の前では、中身は出てきません。</div>
+      <div class="m"><b>二、帰り道の物差し</b>その人と会った後、帰り道で体が重いか、軽いか。尽くす星が二つ、ペースを保つことが陽転条件の人です。尽くしっぱなしの相手だと、帰り道にどっと来ます。</div>
+      <div class="m"><b>三、暮らしの物差し</b>ご飯や休みの過ごし方、暮らしの感覚が合うか。お互いに無理をさせないでいられるか。配偶者の位置の鳳閣星が見ているところです。パートナーを選ぶ時は、ここを一番見てください。</div>
+    </div>
+    <p style="margin-top:1rem;">頭で考える物差しではありません。<b>人と会った日の夜に、三つに丸かバツをつけるだけ</b>。手帳でも、スマホのメモでも。今は仕事以外で人と会うことが少ないので、「仕事終わりに疲れたか」「その日よく一緒にいた人はどうだったか」からで十分です。</p>
+    <p>遊びのようにやってください。真剣にやりすぎると、続きません。しばらく続けると、丸が多い人が見えてきます。その人たちが、atsukoさんの「狭く深く」の相手です。atsukoさんが無理に決めなくても、記録が教えてくれます。</p>
+    <p style="margin-bottom:0;">素の出し方が分からない、という話もありました。上手にやらなくて大丈夫です。「今日は疲れてる」を一言、そのまま言う。必要なことをストレートに口にする力は、日の宿命にもう入っています。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">八</span><span class="sec-title">この命式を陽転させる三つの条件</span></div>
+  <div class="card">
+    <p class="lead">力の大きさは決まっている。決まっていないのは、向き</p>
+    <p>運気カレンダーを読んで、atsukoさんは「自分は陰の方、閉じている時の方やと思う」と話してくれました。僕は、そこまで陰に振れているとは見ていません。ひどくなる前に体のメンテナンスを始めている。人に任せられるようになっている。必要な時に助けが現れている。崩れきる前に戻ってこられる安定感が、この命式にはあります。</p>
+    <p>ただ、もったいない、とは思います。三合会局は、力が大きくて、速くて、人を巻き込む配置です。<span class="hl">力の大きさは生まれつき決まっていて、決まっていないのは向きです。</span>その力が今は、職場で任された分を全部引き受ける方に流れています。</p>
+    <p style="margin-bottom:0;">向きを変える条件が三つあります。陽転の条件は、一つずつ満たしていけばいいものです。</p>
+  </div>
+  <div class="card">
+    <p class="lead">一、向かう先を一つ決める</p>
+    <p>龍高星は「ロマンを感じられないと良さを発揮できない」星で、「目的やロマンを見失うと無意味に放浪する」。三合木局は、スケールの大きな目標を持つことで、さらに高いところへ伸びていく局です。先に決めるのは、やり方より行き先です。</p>
+    <p style="margin-bottom:0;">「時間もお金も気にしなくていいなら、何を極めたいか」。atsukoさんの答えは、<span class="hl">占いに没頭してみたい</span>でした。介護やマッサージで人にしてあげるのは好き。でも体力的に続けるのが厳しくなってきた。中年期の天胡星は「肉体労働では活躍しにくい」星でもあります。体で尽くす形から、学んだことで人の役に立つ形へ。陽転条件の「精神性を高める学び」、学者気質の玄武型、考えることを優先する北天運。学ぶ方向は、この命式のいちばん太いところです。</p>
+  </div>
+  <div class="card">
+    <p class="lead">二、力を預ける相手を絞る</p>
+    <p>三合木局には「誰かを助けるためなら、自分でもびっくりするような力を出す」という質があります。尽くす力は長所です。</p>
+    <p>「誰の役に立ちたいか」への答えは、不特定多数に、広く浅く、でした。目下の禄存星の「博愛主義者」、ご先祖様の使命の「一期一会」。<span class="hl">役に立つ相手は、広く一期一会でいいんです。</span>絞るのは、心を預ける相手と、日々の力を注ぐ相手の方です。</p>
+    <p style="margin-bottom:0;">エネルギーが返ってくる相手と回していると、自分に返ってくる方が大きくなる。返ってこない相手に流し続けると、すり減るだけになる。今「この人のためなら動ける」と思えるのは家族、という答えでした。それで十分です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">三、少数の仲間と組む</p>
+    <p>atsukoさんは、一人でも進められる人です。五行に欠けがないので、一人でやっても抜け落ちるところが少ない。そのうえで三合木局には、人と協力することで、さらに大きな力を得られるという質があります。</p>
+    <p style="margin-bottom:0;">「一人でするよりは、協力し合える人がいた方が、自分ははかどると思う」。これも、atsukoさんの口から出た言葉です。今年に入って、全部一人で抱えていた仕事を「これはお願い」と任せられるようになった。それは、もう陽の向きに動き始めている形です。広く出会って、組むのは少数。</p>
+  </div>
+  <div class="card" style="background:var(--sink);border-color:var(--accent-soft);">
+    <p class="lead" style="margin-bottom:.6rem;">職場のこと</p>
+    <p>今の職場は、すり減る感じが出てきていて、長く続けるのは厳しいかもしれない、という話がありました。呼び戻してくれた人と一緒に頑張りたい、という気持ちが、違和感を感じるようになってから消えた、とも。</p>
+    <p style="margin-bottom:0;">辞める・辞めないは、急いで決めなくて大丈夫です。学びを先に始めて、職場にも同じ三つの丸バツをつけてみる。動く時は、2月と3月だけは外す。それで、命式と噛み合います。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">九</span><span class="sec-title">大運 ― 少数を守る十年に入った</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.7rem;">大運 ― 10年ごとに巡る運気のテーマ（4歳運・順行）</p>
+    <div class="daiun-scroll">
+      <table class="daiun">
+        <thead><tr><th>年齢</th><th>干支</th><th>星</th><th>命式との位相</th></tr></thead>
+        <tbody>
+          <tr><td>4〜13</td><td>壬辰</td><td>牽牛星</td><td class="isou">月柱と害／日柱と干合</td></tr>
+          <tr><td>14〜23</td><td>癸巳</td><td>車騎星</td><td class="isou">年柱と対冲</td></tr>
+          <tr><td>24〜33</td><td>甲午</td><td>玉堂星</td><td class="isou">日柱と支合</td></tr>
+          <tr><td>34〜43</td><td>乙未</td><td>龍高星</td><td class="isou">年柱と大半会／月柱と半会／三合会局</td></tr>
+          <tr><td>44〜53</td><td>丙申</td><td>石門星</td><td class="isou">年柱と干合・害／月柱と干合</td></tr>
+          <tr class="now-row"><td>54〜63</td><td>丁酉</td><td>貫索星</td><td class="isou"><span class="now-cell">今ここ</span>　月柱と天剋地冲</td></tr>
+          <tr><td>64〜73</td><td>戊戌</td><td>調舒星</td><td class="isou">月柱と支合／日柱と庫刑・破</td></tr>
+          <tr><td>74〜83</td><td>己亥</td><td>鳳閣星</td><td class="isou">年柱と自刑／月柱と半会／日柱と大半会／三合会局</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <p><b>44〜53歳・丙申。</b>年柱と害（がい）が出ていた十年です。害は「我慢・素直に生きられない・ストレス」の配置で、人との関係では裏切りのような形で出ることがあります。尽くして、返ってこない。この十年にお付き合いしていた人と別れた、という話がありました。atsukoさんの選び方が悪かったのではなく、そういう配置の十年でした。途中の2022〜2023年には、年の天中殺も重なっていました。ここは、もう抜けています。</p>
+    <p><b>54〜63歳・丁酉（今）。</b>星は貫索星。自分を守る星です。「個人志向が強い。自分や自分の家族や仲間を守る。納得しないと動かない」。キーワードは<span class="hl">「狭く深い交友」</span>。天中殺の陽転条件「狭く深い友人関係」と、同じ向きです。全員に尽くす十年ではなく、自分と、自分の大事な少数を守る十年です。</p>
+    <p>この大運は、月柱と天剋地冲（てんこくちちゅう）。「破壊と再生。改革と転換点」の配置です。月柱は目標や仕事の立場の場所。合わなくなった形をいったん崩して、作り直す十年です。去年から今年にかけて、呼び戻してくれた人との間に違和感が出て距離が空いたこと、今年4月から仕事へのやる気がぱったり落ちたこと。どちらも、作り直しが始まっている形です。どうせ作り直すなら、自分から形を変えていく方が、穏やかに進みます。</p>
+    <p><b>64〜73歳・戊戌。</b>調舒星。感性と、一人で深める星の十年です。</p>
+    <p style="margin-bottom:0;"><b>74〜83歳・己亥。</b>星は鳳閣星。配偶者の位置と同じ、のんびり・自然体の星です。そしてこの十年は、命式の年・月・日の三つと<span class="hl">もう一度、三合会局が組まれる配置</span>です。晩年期は「老いを知らない」天南星。山場は、まだ先にあります。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">十</span><span class="sec-title">年と月の時間割</span></div>
+  <div class="card">
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-when">2025年（54歳）乙巳</div>
+        <div class="tl-body">年柱と天剋地冲・対冲。年柱は社会・外との関わりの場所です。外の人間関係が大きく動く配置の年でした。距離が空いた人、離れていった人。下の娘さんとの一悶着と、そのあと仲良くなれたこと。崩れて、作り直されています。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2026年（55歳）丙午 ・ 石門星</div>
+        <div class="tl-body">日柱と支合、月柱と干合、年柱と干合。<b>結びつきの配置が、三つの柱すべてに出ている年</b>です。力を入れなくても、まとまる方へ転がりやすい。敬老会の件も、連絡を忘れた件も「結果オーライ」になったのは、この配置の年だからです。星は石門星。ご先祖様の位置と同じ、人とのつながり・仲間づくりの星です。<span class="hl">年内は、出会いは広く。三つの丸バツをつけ始める時期です。</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2026年10月8日〜11月6日 ・ 戊戌（調舒星）</div>
+        <div class="tl-body">日柱と庫刑、月柱と支合。庫刑は、過去の問題が表に出やすい配置。体にも無理が出やすいので、ペースを守る月です。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2026年11月7日〜12月6日 ・ 己亥（鳳閣星）</div>
+        <div class="tl-body">配偶者の位置と同じ鳳閣星の月。日柱と半会、月柱と大半会で、広がる配置です。年柱に自刑も出ているので、自分を追い込みすぎないこと。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2026年12月7日〜2027年1月4日 ・ 庚子（司禄星）</div>
+        <div class="tl-body">第一守護神と同じ庚の月。決める力の月です。日柱と害、月柱と旺刑も出ているので、人との行き違いには言葉を選んで。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年1月5日〜2月3日 ・ 辛丑（禄存星）</div>
+        <div class="tl-body">日柱と天剋地冲。自分の場所が強く動く月です。人の誘いに流されず、自分の納得を優先しましょう。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">2027年2月4日〜4月4日 ・ 月の天中殺</div>
+        <div class="tl-body">休む二ヶ月。新しく始めること・大きな契約は外して、体のメンテナンスと片づけに。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年（56歳）丁未 ・ 貫索星</div>
+        <div class="tl-body">atsukoさんの日の宿命と、まったく同じ干支の年。律音（りっちん）といいます。<span class="hl">原点回帰。自分に戻る時期。</span>月柱と半会、年柱と大半会で、広がる配置も重なります。年内につけた丸バツで見えてきた相手と、自分のままで一緒にいる。その形を始めるのに合う年です。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2028年〜2033年</div>
+        <div class="tl-body">2028年は年柱と害（外の場で我慢が出やすい）。2029年は月柱と対冲（目標・立場の場所が動く）。2030年は日柱と庫刑、月柱と支合。2031年は月柱と大半会、日柱と半会、年柱と律音。2032年は日柱と干合と害。2033年は日柱と天剋地冲。細かい流れは、運㐂暦に月ごとに出ます。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">2034〜2035年 ・ 年の天中殺</div>
+        <div class="tl-body">一緒に暮らす、籍を入れるなど、形として大きいことを決めるなら、その前の方が合います。形の大きい決め事は、2033年までに。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">十一</span><span class="sec-title">五つの視点 ─ ぐるりと見る</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.8rem;">同じ命式を、深さの違う五つの角度から観ます。同じ結論に別の道から辿り着く時、それが本物です。</p>
+    <p class="lead">［壱］ 本質と才能の視点</p>
+    <p>日の宿命は丁未「異国への狼煙」。中心は龍高星 ―― 自由な旅人で、最強の忍耐。才能の星も龍高星で、了殿の型。才能が出る領域は北天運、<span class="hl">学問・研究・専門性</span>です。</p>
+    <p style="margin-bottom:0;"><b>経験して、学んで、貯めていく力が、いちばん太い。</b>力は真ん中に集まっていて、出し切ると体に来る。だから、ペースを保つことが条件になります。</p>
+  </div>
+  <div class="card">
+    <p class="lead">［弐］ 家系と宿命の視点</p>
+    <p>天中殺は寅卯 ――「引き継ぎ・継承の使命」。宿命天中殺は生月中殺で、組織の後ろ盾に頼らず自分の足で立つ形で開く生まれです。</p>
+    <p style="margin-bottom:0;">伴星の石門星は「人脈が財産になる。一期一会を大切に」。<b>誰かが積み上げてきたものを受け継いで、人との縁の中で育てていく。</b>家系から渡された向きは、そこを指しています。</p>
+  </div>
+  <div class="card">
+    <p class="lead">［参］ 今の運気の構造から観る視点</p>
+    <p>今の大運は丁酉・貫索星 ―― 少数を守る十年。月柱と天剋地冲で、目標と仕事の立場が作り直される十年でもあります。その中で、2026年は結びつきが三本そろう年、2027年は日の宿命と同じ干支が巡る原点回帰の年。</p>
+    <p style="margin-bottom:0;"><span class="hl">作り直しの十年の入口に、結びつきの年と、自分に戻る年が続けて置かれています。</span>次の年の天中殺は2034年。動ける時間は、十分にあります。</p>
+  </div>
+  <div class="card">
+    <p class="lead">［肆］ 関係性と環境の視点</p>
+    <p>目上と目下に尽くす星。社会の位置は、しっかり者に見える牽牛星。配偶者の位置は、のんびりの鳳閣星。天中殺の陽転条件は「狭く深い友人関係」。</p>
+    <p style="margin-bottom:0;"><b>外では尽くして引き受け、家ではのんびりしたい。</b>その両方を成り立たせるのが、力を預ける相手を選ぶことです。東洋占術の思想には、関係性の中で自分がどうあるか、という事が大事、という考え方があります。任せる時は任せる、が正解です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">［伍］ 霊魂の設計という視点 ―― 総括</p>
+    <p>壱から肆まで、全部が同じ方向を向いています。<b>経験して学んだものを、縁のある人に渡していく人</b>、という構造です。</p>
+    <p>でも、<span class="hl">「恵まれた命式やから、このままで大丈夫」で終わる話ではないです。</span></p>
+    <p><b>この命式の力が出る条件は、一つだけです。</b></p>
+    <div class="pull">向きを、自分で決めていること。<br>向かう先が決まっている間だけ、三合会局の力は一本にまとまります。</div>
+    <p>そしてatsukoさんは、もう動き始めています。体のメンテナンスで、ペースを保つ条件を満たしている。一人で抱えていた仕事を、人に任せ始めている。命式を読む占いに惹かれて、没頭してみたいと口にしている。</p>
+    <p style="margin-bottom:0;">無理に探しに行かなくて大丈夫です。<span class="hl">惹かれたものを一つ選んで、そこに火を向ける。</span>それだけで、この命式は回り始めます。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">十二</span><span class="sec-title">深い五つの視点 ― in depth</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.8rem;">通常の読みよりさらに深く、五つの切り口から命式を観ます。</p>
+    <p class="lead">陽転の視点</p>
+    <p style="margin-bottom:0;">中年期の星は、立場や名乗りが変わることで陽転していきます。中年期の天胡星は「夢を与える仕事で才能を発揮できる」星。<b>体で尽くす人</b>から、<b>学んだことで人の道を照らす人</b>へ。名乗りがそちらに移ると、真ん中の龍高星の学ぶ力と、目上・目下の禄存星の尽くす力が、同じ一つの役割の中に収まると、僕は見ています。</p>
+  </div>
+  <div class="card">
+    <p class="lead">本質の視点</p>
+    <p style="margin-bottom:0;">丁未は、内に激しさを秘めた灯火の干支です。本質的なキャラクターとして、<b>おとなしく見えて、中身は情熱的で、どこにいても目立つ</b>という性質を持っています。目立たないようにしていても、火は見えています。隠す方に力を使うより、どこへ向けて上げるかを選ぶ方が、この干支らしい使い方です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">お役目の視点</p>
+    <p style="margin-bottom:0;">寅卯天中殺の本質は「引き継ぎ・継承」。ゼロから一人で立ち上げるより、<b>すでにあるものを受け継いで、育てて、次へ渡す</b>のが、atsukoさんの魂のお役目です。長く伝わってきた学びを受け取り、自分の経験を通して、縁のある人に手渡していく。そういう役割と、向きが合っています。</p>
+  </div>
+  <div class="card">
+    <p class="lead">幸福感の視点</p>
+    <p style="margin-bottom:0;">友だちの数や、外から見たにぎやかさで測ると、今の暮らしは静かすぎるように見えるかもしれません。でも内的な充足で測ると、atsukoさんの幸福の源は<b>素のままでいられる時間と、学びに没頭している時間</b>です。寅卯天中殺の人は、どれだけ忙しくしていても静かな生活に憧れる、といいます。静かであることは、欠けているのではなく、合っています。</p>
+  </div>
+  <div class="card">
+    <p class="lead">エネルギーの視点</p>
+    <p style="margin-bottom:0;">三合会局の大きな力と、繊細な天胡星・全力疾走で体に来る了殿の型。力の大きさと、体の受け皿の間にズレがあります。<b>量をこなす働き方から、回数を絞って一回を深くする働き方へ</b>移すと、このズレは縮まります。「ペースを保つこと」は、そのための条件です。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">十三</span><span class="sec-title">ここから動ける処方</span></div>
+  <div class="card recipe">
+    <div class="item"><div class="num">1</div><div class="rbody"><b>三つの丸バツを、夜につける。</b><br>顔・帰り道・暮らし。まずは「仕事終わりに疲れたか」「その日よく一緒にいた人はどうだったか」から。遊びのように。</div></div>
+    <div class="item"><div class="num">2</div><div class="rbody"><b>向かう先を、一行で書く。</b><br>「時間もお金も気にしなくていいなら、何に没頭したいか」。完璧でなくていいです。一行書けたら、そこに火が向きます。</div></div>
+    <div class="item"><div class="num">3</div><div class="rbody"><b>学びを、小さく始める。</b><br>星や言葉の意味を一つ調べる、からで十分です。陽転条件の「精神性を高める学び」です。</div></div>
+    <div class="item"><div class="num">4</div><div class="rbody"><b>任せることを、続ける。</b><br>「これはお願い」と言えるようになったのは、陽の向きです。全部を一人で引き受ける形には戻さない。</div></div>
+    <div class="item"><div class="num">5</div><div class="rbody"><b>素を、一言だけ出してみる。</b><br>「今日は疲れてる」をそのまま言う。上手にやらなくて大丈夫です。</div></div>
+    <div class="item"><div class="num">6</div><div class="rbody"><b>体のメンテナンスを続ける。</b><br>マッサージや鍼は、そのまま続けてください。疲れが肌に出た時は、ペースを守る合図です。</div></div>
+    <div class="item"><div class="num">7</div><div class="rbody"><b>2月・3月は、休む月と決める。</b><br>新しく始めること・大きな契約はこの二ヶ月を外す。職場のことを動かす時も、ここは外します。</div></div>
+    <div class="item"><div class="num">8</div><div class="rbody"><b>形の大きい決め事は、2033年までに。</b><br>2034〜2035年は年の天中殺です。</div></div>
+  </div>
+</div>
+
+<div class="closing">
+  <p>atsukoさんは、<span class="hl">異国への狼煙</span>の人です。<br>静かに、消えずに燃える火で、遠くを見ている。</p>
+  <p>しんどかったのは、<br>人付き合いが下手やからではなく、<br><b>全員に向けて、同じだけ火を上げてきたから。</b></p>
+  <p>全員に向けて上げなくていいんです。<br>届いてほしい少数に向けて上げる。<br>それで、ちゃんと届く作りです。</p>
+  <p class="big">向きを決めたら、<br>三角形の力は一本になります。</p>
+  <p>まずは夜に、丸バツを三つ☺️</p>
+</div>
+
+<a class="koyomi-link" href="/takahashi-atsuko">
+  <span class="arrow">▶</span> 運㐂暦（日々の運気カレンダー）をひらく
+  <small>毎日の運気と、月の流れ、三つの物差しが出ます。</small>
+</a>
+
+<footer>
+  <p>いつもおおきにです😊　ここからがスタートです。気になったところは、いつでもLINEで掘ってください💬</p>
+  <p class="sig">㐂</p>
+</footer>
+
+</div>
+</body>
+</html>
