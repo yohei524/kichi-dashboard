@@ -111,6 +111,10 @@
       "destination": "/clients/takahashi-atsuko-kanteisho.html"
     },
     {
+      "source": "/mika",
+      "destination": "/view.html?client=mika"
+    },
+    {
       "source": "/noriko",
       "destination": "/view.html?client=noriko"
     },
