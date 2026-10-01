@@ -383,6 +383,10 @@
       "destination": "/view.html?client=sanae"
     },
     {
+      "source": "/maya-hasumi",
+      "destination": "/view.html?client=maya-hasumi"
+    },
+    {
       "source": "/sanae-kanteisho",
       "destination": "/clients/sanae-kanteisho.html"
     },
