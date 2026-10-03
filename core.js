@@ -71,15 +71,18 @@ function _asp(s,b){
   for(var hg=0;hg<hoSanGroups.length;hg++){
     var grp=hoSanGroups[hg];
     if(grp.indexOf(b)>=0){
-      var hasDay=(grp.indexOf(MY.db)>=0), hasMonth=(grp.indexOf(MY.mb)>=0), hasYear=(grp.indexOf(MY.yb)>=0);
-      var members=[];
-      if(hasDay&&MY.db!==b)members.push('日柱');
-      if(hasMonth&&MY.mb!==b)members.push('月柱');
-      if(hasYear&&MY.yb!==b)members.push('年柱');
-      if(MY.db===b&&members.indexOf('日柱')<0&&hasDay)members.push('日柱');
-      if(MY.mb===b&&members.indexOf('月柱')<0&&hasMonth)members.push('月柱');
-      if(MY.yb===b&&members.indexOf('年柱')<0&&hasYear)members.push('年柱');
-      if(members.length>=2){a.push(members.join('+')+' 方三位');}
+      // 261003修正：成立は「後天運の支＋命式の日支・月支・年支」にグループの3支が“全種類”揃う時だけ。
+      //   旧実装は柱がグループに属する数を数えていたため、命式に同じ支が重なると不成立でも方三位と出ていた
+      //   （例：annさん 子・子・丑＝亥が無いのに、子の日に方三位と出た）。チェッカー260814修正・位相法.md「異なる3種類が揃う」と一致。
+      var hsSet=[b,MY.db,MY.mb,MY.yb];
+      var hsOk=grp.every(function(x){return hsSet.indexOf(x)>=0;});
+      if(hsOk){
+        var members=[];
+        if(grp.indexOf(MY.db)>=0)members.push('日柱');
+        if(grp.indexOf(MY.mb)>=0)members.push('月柱');
+        if(grp.indexOf(MY.yb)>=0)members.push('年柱');
+        a.push(members.join('+')+' 方三位');
+      }
       break;
     }
   }
