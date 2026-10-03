@@ -45,7 +45,10 @@ function _asp(s,b){
     if(CL[aw]===pw||CL[pw]===aw){for(var t=0;t<tc.length;t++){if((b===tc[t][0]&&p.b===tc[t][1])||(b===tc[t][1]&&p.b===tc[t][0])){a.push(p.n+'：天剋地冲');break}}}
     for(var g=0;g<go.length;g++){if((s===go[g][0]&&p.s===go[g][1])||(s===go[g][1]&&p.s===go[g][0])){a.push(p.n+'：干合');break}}
     for(var x=0;x<sg.length;x++){if((b===sg[x][0]&&p.b===sg[x][1])||(b===sg[x][1]&&p.b===sg[x][0])){a.push(p.n+'：支合');break}}
-    // 半会・大半会（261001修正）：旺支(子午卯酉)を含むペア=半会／三合の両端ペア=大半会。
+    // 半会・大半会（261003再修正）：三合の仲間の2支なら、天干が同じ時だけ大半会・それ以外は半会。
+    //   261001の「両端ペア＝大半会」は誤り。算命学Stockの大運表66行で「天干が同じ＝大半会」が全一致（両端ペアでも天干が違えば半会）。
+    //   以下4行は261001時点の説明（判定は下のコードが正）：
+    // （旧）旺支(子午卯酉)を含むペア=半会／三合の両端ペア=大半会。
     //   旧実装は支の引き算(距離4/8)で判定していたため、同じ組み合わせでも引く向きで半会と大半会が逆転していた
     //   （例：後天運寅×命式戌=半会／後天運戌×命式寅=大半会）。三合24通りのうち12通りが命式チェッカーと食い違っていた。
     //   正：知識ベース 位相法.md「正気半会＝申-子、亥-卯、寅-午、巳-酉」「旺支を含む2支のみ」＋チェッカー(算命学stock準拠)と一致。
@@ -54,8 +57,7 @@ function _asp(s,b){
     for(var h=0;h<hk.length&&!sanGoHit;h++){
       var gi=hk[h].indexOf(b), gj=hk[h].indexOf(p.b);
       if(gi>=0&&gj>=0&&b!==p.b){
-        var useOh=(gi===1||gj===1);   // どちらかが旺支（グループの真ん中）
-        a.push(p.n+'：'+(useOh?'半会':'大半会'));sanGoHit=true;
+        a.push(p.n+'：'+(s===p.s?'大半会':'半会'));sanGoHit=true;   // 天干が同じ＝大半会
       }
     }
     for(var t2=0;t2<tc.length;t2++){if((b===tc[t2][0]&&p.b===tc[t2][1])||(b===tc[t2][1]&&p.b===tc[t2][0])){a.push(p.n+'：対冲');break}}
@@ -99,6 +101,8 @@ function _asp(s,b){
         if(sgrp.indexOf(MY.db)>=0)sgMem.push('日柱');
         if(sgrp.indexOf(MY.mb)>=0)sgMem.push('月柱');
         if(sgrp.indexOf(MY.yb)>=0)sgMem.push('年柱');
+        // 揃った柱の半会は別に出さない（大半会は残す）＝算命学Stockの表示と同じ
+        a=a.filter(function(x){ return !sgMem.some(function(m){ return x===m+'：半会'; }); });
         a.push(sgMem.join('+')+' 三合会局');
       }
       break;
