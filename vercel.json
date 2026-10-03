@@ -115,6 +115,10 @@
       "destination": "/view.html?client=mika"
     },
     {
+      "source": "/yukkie",
+      "destination": "/view.html?client=yukkie"
+    },
+    {
       "source": "/mika-kanteisho",
       "destination": "/clients/mika-kanteisho.html"
     },
