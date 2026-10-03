@@ -23,7 +23,9 @@
         1
       ]
     },
-    "birth": "YYYY-MM-DD"
+    "birth": "YYYY-MM-DD",
+    "sex": "F",
+    "_sex": "'M'/'F'。大運の順逆に使う（無いと「今年と、いまの十年」に大運が出ない）"
   },
   "yearTenchuNote": "次の年天中殺・大運天中殺の有無と、今から数年の順番を短く",
   "monthlyFortunes": [
@@ -65,5 +67,9 @@
   "doorLabel": "",
   "doorNote": "",
   "_door": "鑑定書がある人だけ doorHref=kanteishoHref／doorLabel=鑑定書をひらく。無い人は3つとも空文字",
-  "kanteishoHref": ""
+  "kanteishoHref": "",
+  "plan": null,
+  "_plan": "月額購読の人だけ {\"name\":\"base\",\"renewHref\":\"再開用の決済URL\"}。あると expiresAt を過ぎた時に暦を閉じる。紡の席の既存クライアントは null のまま（閉じない）",
+  "parts": {},
+  "_parts": "追加購入したパーツと期限 例 {\"money\":\"2026-11-30\"}。core.js の hasPart(key) で出し分ける"
 }

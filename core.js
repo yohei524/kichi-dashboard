@@ -205,6 +205,68 @@ function _findTermDate(y,m,d,dir){
   return{y:y, m:m, d:d};
 }
 
+// ---------- 年運・大運（260929追加） ----------
+// 月運・日運を「大運（器）→年運（中身）」の枠の中で読むため（知識/補完_大運年運月運.md「単独で見ない」）。
+// 年柱は立春で切り替わる（computeMonthFortune と同じ判定）。
+function computeYearFortune(y,m,d){
+  var sl=_monthBranch(y,m,d).sunLon, sY=y;
+  if(m===1||(m===2&&sl>=270&&sl<315))sY=y-1;
+  var idx=(((sY-1984)%60)+60)%60, si=idx%10, bi=idx%12;
+  var asp=_asp(si,bi).filter(function(a){return a!=='日天中殺';});
+  return{ year:sY, kanshi:STEMS[si]+BRANCHES[bi], mainStar:_ms(MY.ds,si), jyusei:_bs(MY.ds,bi),
+    aspects:asp, isTenchu:(MY.tc.indexOf(bi)>=0) };
+}
+// 大運はナナフシ命式チェッカーの calcDaiun と同一ロジック（大運は過去に壊れた実績があるため独自実装しない）。
+// 順逆：男×陽干=順行／男×陰干=逆行／女×陽干=逆行／女×陰干=順行（年干の陰陽）
+// 立運：誕生日から進行方向の節入りまでの実日数を四捨五入 → ÷3 を四捨五入（0→1・11以上→10）
+// 誕生JDはチェッカーに合わせて UT0時（hUT=0）で取る。年齢は満年齢。
+var DAIUN_TERMS=[315,345,15,45,75,105,135,165,195,225,255,285];
+function _findSetsuiriJD(birthJD, forward){
+  var step=forward?0.25:-0.25, cur=birthJD;
+  for(var k=0;k<400;k++){
+    var l1=_sunLon(cur), l2=_sunLon(cur+step);
+    for(var t=0;t<DAIUN_TERMS.length;t++){
+      var target=DAIUN_TERMS[t];
+      var hit=forward
+        ? ((l1<l2)?(l1<target&&target<=l2):(target>l1||target<=l2))
+        : ((l2<l1)?(l2<=target&&target<l1):(target>=l2||target<l1));
+      if(hit){
+        var lo=cur, hi=cur+step;
+        for(var j=0;j<50;j++){
+          var mid=(lo+hi)/2;
+          var dd=((_sunLon(mid)-target+540)%360)-180;
+          if((dd<0)===(step>0))lo=mid; else hi=mid;
+        }
+        return (lo+hi)/2;
+      }
+    }
+    cur+=step;
+  }
+  return null;
+}
+// client.birth（YYYY-MM-DD）と client.sex（'M'/'F'）が揃っている時だけ出す。無ければ null。
+function computeDaiun(y,m,d){
+  var c=D.client||{};
+  if(!c.birth||(c.sex!=='M'&&c.sex!=='F'))return null;
+  var b=String(c.birth).split('-'), by=+b[0], bm=+b[1], bd=+b[2];
+  if(!by||!bm||!bd)return null;
+  var yang=(MY.ys%2===0);
+  var forward=(c.sex==='M')?yang:!yang;
+  var bJD=_jd(by,bm,bd,0);
+  var sJD=_findSetsuiriJD(bJD,forward);
+  var startAge=(sJD===null)?7:Math.round(Math.round(Math.abs(sJD-bJD))/3);
+  if(startAge===0)startAge=1;
+  if(startAge>=11)startAge=10;
+  var age=y-by; if(m<bm||(m===bm&&d<bd))age--;
+  if(age<startAge)return{ startAge:startAge, age:age, before:true };
+  var n=Math.floor((age-startAge)/10);
+  var mIdx=0; for(var i=0;i<60;i++){ if(i%10===MY.ms&&i%12===MY.mb){mIdx=i;break;} }
+  var idx=((mIdx+(forward?1:-1)*(n+1))%60+60)%60, si=idx%10, bi=idx%12;
+  return{ startAge:startAge, age:age, ageFrom:startAge+n*10, ageTo:startAge+n*10+9,
+    kanshi:STEMS[si]+BRANCHES[bi], mainStar:_ms(MY.ds,si), jyusei:_bs(MY.ds,bi),
+    isTenchu:(MY.tc.indexOf(bi)>=0) };
+}
+
 // ---------- 12段階旅フロー（無料版天中殺チェッカー相当） ----------
 // level: 運気の強さ（12=最強〜1=最弱）。六星占術の12運気（種子→緑生→立花→健弱→
 // 達成→乱気→再会→財成→安定→陰影→停止→減退）の強弱順を踏まえて割り当てている。
@@ -967,6 +1029,12 @@ function render() {
   var app = document.getElementById('app');
   var html = '';
 
+  // 購読が切れた人は、運気を出さずに再開の案内だけ出す
+  if (isPlanLocked()) {
+    app.innerHTML = buildPlanLockHTML();
+    return;
+  }
+
   // ①日付表示
   html += '<div class="card">';
   html += '<div class="text-center">';
@@ -1115,6 +1183,8 @@ function render() {
 
   // 今月の流れ（月単位＝日単位の下に置く）
   html += monthFlowHtml;
+  // 今年と大運（長い単位ほど下）
+  html += buildYearFrameHTML(y, m, d);
   if (D.partner && D.partner.my) {
     html += renderWaveCardHTML('運気の波 ― 今月から12ヶ月', buildWavePoints('month', y, m, d),
       '月ごとの天中殺サイクル。谷が月天中殺（ご本人10〜11月・ご主人2〜3月）。お二人は周期が四つずれているので、月の波で山が重なることはありません。片方の谷を、もう片方が支える形です。');
@@ -1352,11 +1422,83 @@ function openStarDetail(star, pos) {
   document.getElementById('detailModal').classList.add('active');
 }
 
+// ---------- 今年と大運の枠（260929追加） ----------
+// 月の流れを「大運＝器／年運＝中身」の中で読めるようにする1枚。点数で吉凶を付けない。
+// 器の読み（大運×年運の高低）は 知識/補完_大運年運月運.md §2 の表に沿う。
+// 高＝従星エネルギー10以上（天南・天禄・天将）／低＝3以下（天報・天極・天馳）。中間は断定しない。
+function buildYearFrameHTML(y, m, d) {
+  var yf = computeYearFortune(y, m, d);
+  var du = computeDaiun(y, m, d);
+  var h = '<div class="card">';
+  h += '<div class="card-header"><span style="color:var(--color-accent)">◆</span><span>今年と、いまの十年</span></div>';
+  h += '<p class="text-sm mb-1 text-center"><span style="color:var(--color-brown)">' + yf.year + '年（立春から）</span><span style="margin:0 0.5rem">|</span><span style="color:var(--color-accent);font-weight:500">' + yf.kanshi + ' ' + yf.mainStar + '／' + yf.jyusei + '</span></p>';
+  if (yf.isTenchu) h += '<p class="text-center"><span class="badge badge-tenchu">年天中殺</span></p>';
+  var hasDu = du && !du.before;
+  if (hasDu) {
+    h += '<p class="text-sm mb-1 text-center"><span style="color:var(--color-brown)">大運 ' + du.ageFrom + '〜' + du.ageTo + '歳</span><span style="margin:0 0.5rem">|</span><span style="color:var(--color-accent);font-weight:500">' + du.kanshi + ' ' + du.mainStar + '／' + du.jyusei + '</span></p>';
+    if (du.isTenchu) h += '<p class="text-center"><span class="badge badge-tenchu">大運天中殺</span></p>';
+  }
+
+  var lines = [];
+  if (hasDu && du.isTenchu) {
+    lines.push('いまの十年は大運天中殺です。自分のために広げるより、誰かのために働く・既にあるものを深めるほうが結果につながる十年です。');
+  }
+  if (yf.isTenchu) {
+    lines.push('今年は年天中殺。新しく大きく始めるより、今あるものを整える一年にすると無理がありません。');
+  }
+  var yE = JYUSEI_ENERGY[yf.jyusei] || 0;
+  if (hasDu) {
+    var dE = JYUSEI_ENERGY[du.jyusei] || 0;
+    var dHi = dE >= 10, dLo = dE > 0 && dE <= 3, yHi = yE >= 10, yLo = yE > 0 && yE <= 3;
+    if (dHi && yHi) lines.push('十年の器が大きく、今年も中身が満ちています。月ごとの流れに乗って、そのまま動ける年です。');
+    else if (dHi && yLo) lines.push('十年の器は大きく、今年はその中で力が絞られる年です。つまずきがあっても傷は浅く、地力は残っています。');
+    else if (dLo && yHi) lines.push('今年は力が出やすい年ですが、十年の器としては小さめです。今年の勢いは、広げるより足場を固めるほうに使うと残ります。');
+    else if (dLo && yLo) lines.push('十年も一年も、力が絞られる時期です。月ごとに力の出る月があっても、受け身で整えるほうが無理がありません。');
+  }
+  lines.push('上の「今月の流れ」は、この一年と十年の枠の中での話です。');
+
+  h += '<div class="today-guidance">';
+  for (var i = 0; i < lines.length; i++) h += '<p class="today-guidance-line">' + lines[i] + '</p>';
+  h += '</div>';
+  h += '</div>';
+  return h;
+}
+
+// ---------- 購読（月額）とパーツ（260929追加） ----------
+// D.plan がある人＝月額で暦を購読している人。expiresAt を「支払い済みの期限」として扱い、
+// 過ぎたら日運・月運を閉じる。D.plan が無い既存クライアントは今まで通り（閉じない）。
+//   "plan": { "name": "base", "renewHref": "再開用の決済ページURL" }
+// パーツは期限を個別に持つ："parts": { "money": "2026-11-30" }。hasPart('money') で出し分ける。
+function _isPast(ymd) {
+  var p = String(ymd || '').split('-');
+  if (p.length !== 3) return false;
+  var t = getToday();
+  return new Date(t.year, t.month - 1, t.day).getTime() > new Date(+p[0], +p[1] - 1, +p[2]).getTime();
+}
+function isPlanLocked() {
+  return !!(D.plan && D.expiresAt && _isPast(D.expiresAt));
+}
+function hasPart(key) {
+  var until = (D.parts || {})[key];
+  return !!until && !_isPast(until);
+}
+function buildPlanLockHTML() {
+  var href = (D.plan && D.plan.renewHref) || '';
+  var h = '<div class="card"><div class="expiry-box expiry-over" style="margin:0">';
+  h += '<p class="expiry-title">購読の期間が終わりました</p>';
+  h += '<p class="expiry-body">続けて日々の運気を見る場合は、購読を再開してください。再開すると、このページがそのまま開きます。</p>';
+  if (href) h += '<p class="text-center mt-2"><a href="' + href + '" style="color:var(--color-accent);font-weight:500">購読を再開する</a></p>';
+  h += '</div></div>';
+  return h;
+}
+
 // ---------- 閲覧期限 ----------
 // D.expiresAt（"YYYY-MM-DD"）が無ければ何も出さない。
 // 押し売りにしないため、期限がまだ遠いうちは黙っている。残り30日を切ってから静かに出す。
 function buildExpiryHTML() {
   if (!D.expiresAt) return '';
+  // 購読者は毎月の決済で延びるので「残り◯日」は出さない（閉じる処理は isPlanLocked 側）
+  if (D.plan) return '';
   var p = String(D.expiresAt).split('-');
   if (p.length !== 3) return '';
   var ey = +p[0], em = +p[1], ed = +p[2];
