@@ -86,6 +86,24 @@ function _asp(s,b){
       break;
     }
   }
+  // 三合会局（261003追加）：後天運の支＋命式の日支・月支・年支に、三合の3支が“全種類”揃う時だけ成立。
+  //   これまで暦には三合会局の判定が無く、命式チェッカー（大半会(三合)）では出るのに暦では出なかった。
+  //   成立条件は方三位と同じく「異なる3種類が揃う」（知識ベース 位相法.md「三合会局…3つ揃うと成立」）。
+  var sanGouGroups=[[8,0,4],[11,3,7],[2,6,10],[5,9,1]];  // 申子辰・亥卯未・寅午戌・巳酉丑
+  for(var sg2=0;sg2<sanGouGroups.length;sg2++){
+    var sgrp=sanGouGroups[sg2];
+    if(sgrp.indexOf(b)>=0){
+      var sgSet=[b,MY.db,MY.mb,MY.yb];
+      if(sgrp.every(function(x){return sgSet.indexOf(x)>=0;})){
+        var sgMem=[];
+        if(sgrp.indexOf(MY.db)>=0)sgMem.push('日柱');
+        if(sgrp.indexOf(MY.mb)>=0)sgMem.push('月柱');
+        if(sgrp.indexOf(MY.yb)>=0)sgMem.push('年柱');
+        a.push(sgMem.join('+')+' 三合会局');
+      }
+      break;
+    }
+  }
   if(MY.tc.indexOf(b)>=0)a.push('日天中殺');
   return a;
 }
@@ -442,6 +460,11 @@ var ASPECT_ACTION = {
     text:'内側と深く繋がりやすい日。本音で話す・自分の考えを言葉にするのに向いた日です。',
     action:'言いにくかったことを言葉にしてみる、自分の考えを文章や会話でまとめてみる。今日出した言葉は相手に届きやすい。',
     monthText:'内側と深く繋がりやすい月。本音で話す・自分の考えを言葉にするのに向いた月です。' },
+  '三合会局': { tone:'good',
+    why:'円状の十二支が正三角形で結びつく配置（申子辰・亥卯未・寅午戌・巳酉丑）。3つ揃って成立し、合法の中で最も強い。',
+    text:'物事の動きが早く、始まりから結果までが短い間に出やすい日。進めたいことを形にするところまで一気に持っていきやすいです。',
+    action:'途中で止まっていたことを一つ選んで、今日のうちに区切りまで進める。人と組む話は具体的な段取りまで決めておく。',
+    monthText:'物事の動きが早く、始まりから結果までが短い間に出やすい月。進めたいことを形にするところまで持っていきやすい月です。' },
   '方三位':   { tone:'good',
     why:'寅卯辰・巳午未など三支が揃う配置。守備本能が突出し、専門性・一業専念に力が結集しやすい。',
     text:'一つのことに力が結集しやすい日。一業専念・専門性を深める動きが噛み合いやすいです。',
@@ -617,6 +640,7 @@ function emojiForAspects(aspStr) {
     else if (a.indexOf('天剋地冲') >= 0) emoji = '🌊';
     else if (a.indexOf('干合') >= 0) emoji = '🔗';
     else if (a.indexOf('支合') >= 0) emoji = '🤝';
+    else if (a.indexOf('三合会局') >= 0) emoji = '🔺';
     else if (a.indexOf('半会') >= 0 || a.indexOf('大半会') >= 0) emoji = '🌼';
     else if (a.indexOf('対冲') >= 0) emoji = '🌊';
     else if (a.indexOf('害') >= 0) emoji = '💫';
