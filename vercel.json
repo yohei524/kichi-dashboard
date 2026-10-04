@@ -429,6 +429,14 @@
     {
       "source": "/take",
       "destination": "/view.html?client=take"
+    },
+    {
+      "source": "/sasaki-yuka",
+      "destination": "/view.html?client=sasaki-yuka"
+    },
+    {
+      "source": "/hono",
+      "destination": "/view.html?client=hono"
     }
   ]
 }
