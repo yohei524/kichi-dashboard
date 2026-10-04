@@ -421,6 +421,10 @@
     {
       "source": "/nana-kanteisho",
       "destination": "/clients/nana-kanteisho.html"
+    },
+    {
+      "source": "/take",
+      "destination": "/view.html?client=take"
     }
   ]
 }
