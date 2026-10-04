@@ -431,6 +431,10 @@
       "destination": "/view.html?client=take"
     },
     {
+      "source": "/take-kanteisho",
+      "destination": "/clients/take-kanteisho.html"
+    },
+    {
       "source": "/sasaki-yuka",
       "destination": "/view.html?client=sasaki-yuka"
     },
