@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>三合会局と陽転の三条件</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+/* layout: 一枚目は図が主役。二枚目は「同じ力・二つの向き」→陽転の三条件とMeetで出た答え */
+:root{
+  --bg:#f1f4ef; --surface:#fbfcfa; --fg:#1c2823; --muted:#5d6b64; --line:#cfd8d1;
+  --wood:#2c6e5a; --wood-soft:#dcebe3; --on-wood:#ffffff;
+  --yin:#46557a; --yin-soft:#e4e8f1; --yang:#8f5c0f; --yang-soft:#f5ead3;
+  --display:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --body:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121a17; --surface:#1a2420; --fg:#e7eee9; --muted:#9aaba2; --line:#33423b;
+  --wood:#5fbf9f; --wood-soft:#1f3a31; --on-wood:#0d1613;
+  --yin:#a4b3dc; --yin-soft:#232b40; --yang:#e0b25c; --yang-soft:#3a2f17; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121a17; --surface:#1a2420; --fg:#e7eee9; --muted:#9aaba2; --line:#33423b;
+  --wood:#5fbf9f; --wood-soft:#1f3a31; --on-wood:#0d1613;
+  --yin:#a4b3dc; --yin-soft:#232b40; --yang:#e0b25c; --yang-soft:#3a2f17; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.8}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:20px;padding-block:28px 56px;display:flex;flex-direction:column;gap:48px}
+.kicker{margin:0;color:var(--muted);font-size:13px;letter-spacing:.12em}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(26px,4.5vw,40px);line-height:1.35;margin:.2em 0 .3em;text-wrap:balance}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(22px,3.4vw,30px);line-height:1.4;margin:0;text-wrap:balance}
+h3{font-size:16px;margin:0}
+p{margin:0}
+nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+nav a{color:var(--wood);border:1px solid var(--wood);border-radius:999px;padding:4px 16px;text-decoration:none;font-weight:500;font-size:14px}
+nav a:focus-visible{outline:2px solid var(--wood);outline-offset:2px}
+section{display:flex;flex-direction:column;gap:22px;scroll-margin-top:16px}
+.fig{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;align-items:center}
+@media (max-width:760px){.fig{grid-template-columns:minmax(0,1fr)}}
+.fig svg{width:100%;height:auto;max-width:520px;display:block;margin:0 auto}
+.ring{fill:none;stroke:var(--line);stroke-width:1.5}
+.tri{fill:var(--wood-soft);stroke:var(--wood);stroke-width:3;stroke-linejoin:round}
+.node{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.node-on{fill:var(--wood);stroke:var(--wood);stroke-width:1}
+.t-on{fill:var(--on-wood);font-family:var(--display);font-weight:700;font-size:24px;text-anchor:middle}
+.t-off{fill:var(--muted);font-family:var(--display);font-size:15px;text-anchor:middle}
+.t-center{fill:var(--wood);font-family:var(--display);font-weight:700;font-size:30px;text-anchor:middle}
+.t-sub{fill:var(--muted);font-family:var(--body);font-size:12px;text-anchor:middle;letter-spacing:.1em}
+.t-pillar{fill:var(--fg);font-family:var(--body);font-weight:700;font-size:14px;text-anchor:middle}
+.t-season{fill:var(--wood);font-family:var(--body);font-weight:500;font-size:12px;text-anchor:middle}
+.read{display:flex;flex-direction:column;gap:18px;min-width:0}
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.pillars div{border:1px solid var(--line);background:var(--surface);padding:10px 6px;text-align:center}
+.pillars small{display:block;color:var(--muted);font-size:12px}
+.pillars b{font-family:var(--display);font-size:26px;font-weight:500}
+.pillars b em{font-style:normal;color:var(--wood);font-weight:700}
+.steps{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:6px}
+.bars{display:grid;grid-template-columns:2em minmax(0,1fr) 2.5em;gap:6px 10px;align-items:center;font-variant-numeric:tabular-nums}
+.bars i{display:block;height:14px;background:var(--line)}
+.bars i.w{background:var(--wood)}
+.bars span:nth-child(3n){text-align:right}
+.note{color:var(--muted);font-size:14px}
+.src{flex:none;display:inline-block;font-size:11px;letter-spacing:.04em;border:1px solid var(--line);color:var(--muted);padding:0 7px;line-height:1.8;white-space:nowrap;align-self:flex-start;margin-top:4px}
+.src.g{border-style:dashed}
+.answer{border-left:4px solid var(--wood);padding:4px 0 4px 16px;font-size:18px;line-height:1.8;display:flex;flex-direction:column;gap:8px}
+.answer b{font-family:var(--display);font-size:22px}
+.flow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;border:1px solid var(--line)}
+.flow .top{grid-column:1/-1;background:var(--wood);color:var(--on-wood);padding:14px 18px;text-align:center}
+.flow .top b{font-family:var(--display);font-size:20px;display:block}
+.flow .top span{font-size:14px}
+.flow .side{padding:16px 18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.flow .side h3{font-family:var(--display);font-size:19px}
+.flow .yin{background:var(--yin-soft)} .flow .yin h3{color:var(--yin)}
+.flow .yang{background:var(--yang-soft)} .flow .yang h3{color:var(--yang)}
+.flow ul{margin:0;padding-left:1.2em}
+.flow .res{font-weight:700;margin-top:4px}
+@media (max-width:620px){.flow{grid-template-columns:minmax(0,1fr)}}
+.conds{display:flex;flex-direction:column;gap:0;border-top:2px solid var(--yang)}
+.cond{display:grid;grid-template-columns:3.2em minmax(0,1fr);column-gap:8px;row-gap:8px;padding:20px 0;border-bottom:1px solid var(--line)}
+.cond .num{grid-row:1/span 4;font-family:var(--display);font-size:34px;line-height:1.2;color:var(--yang);font-weight:700}
+.cond h3{font-family:var(--display);font-size:22px;line-height:1.4}
+.cond .lead{font-size:16px}
+.ev{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:15px}
+.ev li{display:flex;gap:8px;min-width:0}
+.ev li span:last-child{min-width:0}
+.got{background:var(--wood-soft);border-left:3px solid var(--wood);padding:10px 14px;margin-top:4px}
+.got b{display:block;font-size:12px;letter-spacing:.1em;color:var(--wood)}
+@media (max-width:620px){.cond{grid-template-columns:minmax(0,1fr)}.cond .num{grid-row:auto}}
+.keep{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:620px){.keep{grid-template-columns:minmax(0,1fr)}}
+.keep div{border-top:2px solid var(--wood);padding-top:10px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.sign{color:var(--muted);font-size:14px;text-align:center}
+.sign b{display:block;color:var(--wood);font-family:var(--display);font-size:20px;margin-top:4px}
+</style>
+<style>*{box-sizing:border-box}body{margin:0}</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="kicker">㐂占　紡の席　2026.9.30</p>
+  <h1>亥・卯・未がそろって、三合会局</h1>
+  <p>生まれた年・月・日の支が、十二支の輪の上で正三角形になっています。Meetの画面ではお見せできなかった図を、ここにまとめました。</p>
+  <nav><a href="#sangou">一枚目　三合会局</a><a href="#youten">二枚目　陽転の三条件</a></nav>
+</header>
+
+<section id="sangou">
+  <div class="fig">
+    <div><svg viewBox="0 0 510 440" role="img" aria-label="十二支の輪の上で亥・卯・未が正三角形を作る図">
+<circle cx="230" cy="215" r="150" class="ring" />
+<polygon points="155.0,85.1 380.0,215.0 155.0,344.9" class="tri" />
+<circle cx="230.0" cy="65.0" r="17" class="node" /><text x="230.0" y="70.5" class="t-off">子</text>
+<circle cx="305.0" cy="85.1" r="17" class="node" /><text x="305.0" y="90.6" class="t-off">丑</text>
+<circle cx="359.9" cy="140.0" r="17" class="node" /><text x="359.9" y="145.5" class="t-off">寅</text>
+<circle cx="380.0" cy="215.0" r="27" class="node-on" /><text x="380.0" y="223.0" class="t-on">卯</text>
+<circle cx="359.9" cy="290.0" r="17" class="node" /><text x="359.9" y="295.5" class="t-off">辰</text>
+<circle cx="305.0" cy="344.9" r="17" class="node" /><text x="305.0" y="350.4" class="t-off">巳</text>
+<circle cx="230.0" cy="365.0" r="17" class="node" /><text x="230.0" y="370.5" class="t-off">午</text>
+<circle cx="155.0" cy="344.9" r="27" class="node-on" /><text x="155.0" y="352.9" class="t-on">未</text>
+<circle cx="100.1" cy="290.0" r="17" class="node" /><text x="100.1" y="295.5" class="t-off">申</text>
+<circle cx="80.0" cy="215.0" r="17" class="node" /><text x="80.0" y="220.5" class="t-off">酉</text>
+<circle cx="100.1" cy="140.0" r="17" class="node" /><text x="100.1" y="145.5" class="t-off">戌</text>
+<circle cx="155.0" cy="85.1" r="27" class="node-on" /><text x="155.0" y="93.1" class="t-on">亥</text>
+<text x="252" y="213" class="t-center">木局</text><text x="252" y="235" class="t-sub">三合会局</text>
+<text x="119.0" y="35.1" class="t-pillar">年柱 辛亥</text><text x="119.0" y="51.1" class="t-season">初冬・始まり</text>
+<text x="414" y="211" class="t-pillar" style="text-anchor:start">月柱 辛卯</text><text x="414" y="228" class="t-season" style="text-anchor:start">春・ピーク</text>
+<text x="119.0" y="392.9" class="t-pillar">日柱 丁未</text><text x="119.0" y="408.9" class="t-season">晩夏・終わり</text>
+</svg></div>
+    <div class="read">
+      <div class="pillars">
+        <div><small>年柱</small><b>辛<em>亥</em></b></div>
+        <div><small>月柱</small><b>辛<em>卯</em></b></div>
+        <div><small>日柱</small><b>丁<em>未</em></b></div>
+      </div>
+      <ol class="steps">
+        <li>十二支を輪に並べると、亥・卯・未は四つおきの位置にあり、結ぶと正三角形になります。</li>
+        <li>亥は初冬、卯は春、未は晩夏。季節の始まり・ピーク・終わりが、一人の中にそろっています。</li>
+        <li>三つそろうと三合会局。亥・卯・未は木局で、三つの支が木のエネルギーにまとまります。</li>
+      </ol>
+      <div>
+        <h3>五行のエネルギー（合計166）</h3>
+        <div class="bars">
+          <span>木</span><i class="w" style="width:100%"></i><span>64</span>
+          <span>火</span><i style="width:53.1%"></i><span>34</span>
+          <span>土</span><i style="width:26.6%"></i><span>17</span>
+          <span>金</span><i style="width:50%"></i><span>32</span>
+          <span>水</span><i style="width:29.7%"></i><span>19</span>
+        </div>
+        <p class="note">木がいちばん大きいのは、この三合会局のためです。五つの気が全部そろっていて、欠けている五行はありません。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="ev">
+    <li><span class="src">命式の解説</span><span>三合完成・最強拡大。異次元で立体的に広がる。</span></li>
+    <li><span class="src">命式の解説</span><span>物事の行動が早く、起承転結が短時間で現れる。結びつきの配置の中で、いちばん強い形です。</span></li>
+    <li><span class="src g">三合の解説</span><span>命式の中にぴたりとそろう人はごく少数。周囲を巻き込む力が強く、本人の意志以上に事が動いてしまうこともある。</span></li>
+  </ul>
+</section>
+
+<section id="youten">
+  <h2>三角形の力を、陽の向きに使う</h2>
+  <div class="answer">
+    <b>力の大きさは、生まれつき決まっています。決まっていないのは、向きです。</b>
+    <p>三合会局は、良くも悪くもスケールが大きい配置です。向きを決めた時に、三角形の力は一本にまとまります。</p>
+  </div>
+
+  <div class="flow">
+    <div class="top"><b>三合木局の力</b><span>大きい・速い・人を巻き込む</span></div>
+    <div class="side yin">
+      <h3>これまでの向き</h3>
+      <ul><li>任された分を、全部一人で引き受ける</li><li>しっかり者の顔を作って、周りに合わせる</li><li>行き先を決めないまま、走り続ける</li></ul>
+      <p class="res">空気が抜けるように削れる。疲れているのに「元気だね」と言われる。</p>
+    </div>
+    <div class="side yang">
+      <h3>これからの向き</h3>
+      <ul><li>向かう先を一つ決める</li><li>力を預ける相手を選ぶ</li><li>少数の仲間と組む</li></ul>
+      <p class="res">誰かのために、自分でも驚く力が出る。素のままでいられる関係の中で、ご縁が育つ。</p>
+    </div>
+  </div>
+
+  <div class="conds">
+    <article class="cond"><p class="num">一</p><h3>向かう先を一つ決める</h3><p class="lead">行き先が決まっていない時、この命式の力は向ける先を失います。先に決めるのは、やり方より行き先です。</p><ul class="ev"><li><span class="src">命式の解説</span><span>龍高星「ロマンを感じられないと良さを発揮できない」「目的やロマンを見失うと無意味に放浪する」</span></li><li><span class="src g">三合の解説</span><span>三合木局「スケールの大きな目標を持つことで、さらなる高みへと成長していきます」</span></li><li><span class="src g">三合の解説</span><span>年支と日支の半会「理想の世界を思い描いているため、現実だけでは心が満たされにくい」</span></li><li><span class="src">命式の解説</span><span>中年期の天胡星「現実の生活にしっくりこない」</span></li></ul><p class="got"><b>Meetで出てきた答え</b>「時間もお金も気にしなくていいなら、占いに没頭してみたい」。学ぶ方向は、この命式でいちばん太いところです。天中殺の陽転条件に「精神性を高める学び」、型には「学者気質・研究熱心」と出ています。</p></article>
+    <article class="cond"><p class="num">二</p><h3>力を預ける相手を選ぶ</h3><p class="lead">尽くす力は長所です。役に立つ相手は、広く一期一会でかまいません。選ぶのは、心を預ける相手と、日々の力を注ぐ相手の方です。</p><ul class="ev"><li><span class="src g">三合の解説</span><span>三合木局「誰かを助けるためなら自分でもびっくりするような力を出すことも」</span></li><li><span class="src">命式の解説</span><span>禄存星が二つ。陰に出ると「騙されやすい。利用されやすい。八方美人」／陽に出ると「奉仕精神で人に尽くすことができる。徳が高い」</span></li><li><span class="src">命式の解説</span><span>ご先祖様の位置の石門星「一期一会を大切にしなさい」</span></li><li><span class="src">命式の解説</span><span>天中殺の陽転条件「狭く深い友人関係」／今の十年の星のキーワード「狭く深い交友」</span></li></ul><p class="got"><b>Meetで出てきた答え</b>役に立ちたいのは「不特定多数に、広く浅く」。この人のためなら動けると思えるのは「家族」。会っている時は楽しいのに、帰ったら疲れる相手のことも話してくれました。その違いを測るのが、鑑定書の三つの物差しです。</p></article>
+    <article class="cond"><p class="num">三</p><h3>少数の仲間と組む</h3><p class="lead">一人でも進められる人です。組むと、もっと大きく動きます。広く出会って、組むのは少数。</p><ul class="ev"><li><span class="src g">三合の解説</span><span>三合木局「自分ひとりでも進められますが、他の人と協力することでさらなる大きなパワーを得られます」</span></li><li><span class="src g">三合の解説</span><span>三合会局「同年代の仲間と協力することで、物事が急速に拡大していく」</span></li><li><span class="src">命式の解説</span><span>ご先祖様の位置の石門星の使命「人脈が財産になる」</span></li></ul><p class="got"><b>Meetで出てきた答え</b>「一人でするよりは、協力し合える人がいた方が、私は仕事がはかどると思う」。今年、一人で抱えていた仕事を「これはお願い」と任せられるようになったのは、もう陽の向きに動き始めている形です。</p></article>
+  </div>
+
+  <div class="keep">
+    <div><h3>守ること　ペース</h3><p>力が大きい分、走り続けると体に来る作りです。マッサージや鍼で整えているのは、条件を一つもう満たしている形です。</p>
+      <ul class="ev"><li><span class="src">命式の解説</span><span>了殿の型「ペースを保つことが陽転条件」</span></li><li><span class="src">命式の解説</span><span>中年期の天胡星「ハードスケジュールに注意」</span></li></ul></div>
+    <div><h3>時期</h3><p>今の十年は、自分と大事な少数を守る星の十年です。</p>
+      <ul class="ev"><li><span class="src">運気</span><span>2026年は、結びつきの配置が三つの柱すべてに出ている年。星は人とのつながりの石門星</span></li><li><span class="src">運気</span><span>2027年は丁未。日の宿命と同じ干支で、自分に戻る年</span></li><li><span class="src">運気</span><span>毎年2月・3月は休む月。次の年の天中殺は2034〜2035年</span></li></ul></div>
+  </div>
+
+  <p class="note">「命式の解説」は命式帳に出ている解説、「三合の解説」は三合会局について調べた解説の言葉です。陽転の条件は、一つずつ満たしていけば大丈夫です。</p>
+  <p class="sign">くわしい読みは鑑定書に、日々の流れは運㐂暦に入っています。<br>気になったところは、いつでもLINEで☺️<b>㐂</b></p>
+</section>
+</div>
+</body>
+</html>

@@ -111,6 +111,10 @@
       "destination": "/clients/takahashi-atsuko-kanteisho.html"
     },
     {
+      "source": "/takahashi-atsuko-sangou",
+      "destination": "/clients/takahashi-atsuko-sangou.html"
+    },
+    {
       "source": "/mika",
       "destination": "/view.html?client=mika"
     },
