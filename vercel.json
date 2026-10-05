@@ -445,6 +445,10 @@
     {
       "source": "/hono",
       "destination": "/view.html?client=hono"
+    },
+    {
+      "source": "/hono-kanteisho",
+      "destination": "/clients/hono-kanteisho.html"
     }
   ]
 }
