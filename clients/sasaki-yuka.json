@@ -143,15 +143,18 @@
     "needElement": "",
     "needElementNote": "五行は安定バランス型・不足なし（木47／火52／土79／金46／水38・総262）。無理に補う必要はありません。守護神は壬（大河のように流れる・大きく動く）と甲（大樹のように真っ直ぐ）です。"
   },
-  "goal": null,
+  "goal": {
+    "main": "会の占術を使わずに、自分の言葉で、一人を見る",
+    "sub": "ご主人でも、誰でもいい。習った手順ではなく、貯めてきたものから。12月6日までに。完成してから出るのではなく、出ながら磨かれる。\n\n【時期】今年は準備と、外していい自分ルール探し。2027年は自分の場所が強く切り替わる年（4月5日〜6月5日の月天中殺は、大きく決めない）。2029年に大きく広がる。2035年までに形にする。"
+  },
   "dailyAdvice": {},
   "koyomiOnly": true,
   "koyomiNoDestiny": true,
   "expiresAt": "2027-10-04",
-  "doorHref": "",
-  "doorLabel": "",
-  "doorNote": "",
-  "kanteishoHref": "",
+  "doorHref": "/sasaki-yuka-kanteisho",
+  "doorLabel": "鑑定書をひらく",
+  "doorNote": "10月5日にお話ししたことを、まとめてあります",
+  "kanteishoHref": "/sasaki-yuka-kanteisho",
   "plan": null,
   "parts": {}
 }
