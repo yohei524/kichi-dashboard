@@ -439,6 +439,10 @@
       "destination": "/view.html?client=sasaki-yuka"
     },
     {
+      "source": "/sasaki-yuka-kanteisho",
+      "destination": "/clients/sasaki-yuka-kanteisho.html"
+    },
+    {
       "source": "/hono",
       "destination": "/view.html?client=hono"
     }

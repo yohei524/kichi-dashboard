@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ゆかさん 鑑定書 ｜ 㐂占</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --night:#0A101A; --night2:#111A27; --sink:#152030; --panel:#192535;
+  --line:#28374B; --accent:#9CCBBE; --accent-soft:#5F8F83; --accent-glow:rgba(156,203,190,.14);
+  --gold:#C9A24A; --text:#ECEAE4; --muted:#8A96AC; --muted2:#A9B3C6;
+  --water:#6E9BC4; --fire:#D08A5A; --wood:#7FA86B; --metal:#C4C9D2; --earth:#C9A24A;
+  --bad:#C97A6A; --good:#6E9BC4; --void:#7E8798;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Serif JP',serif; color:var(--text); line-height:1.95; letter-spacing:.045em;
+  background:
+    radial-gradient(1200px 620px at 50% -12%, rgba(156,203,190,.12), transparent 60%),
+    linear-gradient(180deg,#0A101A 0%,#0C1422 45%,#070B13 100%);
+  background-attachment:fixed; min-height:100vh;
+}
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.05rem 4rem;}
+
+header{text-align:center;padding:3rem 1rem 1.4rem;}
+header .kicker{font-size:.68rem;letter-spacing:.32em;color:var(--accent);opacity:.9;margin-bottom:.9rem;}
+header h1{font-size:1.5rem;font-weight:500;letter-spacing:.08em;margin-bottom:.5rem;}
+header h1 .nm{color:var(--accent);}
+header .tagline{font-size:.8rem;color:var(--muted2);letter-spacing:.1em;line-height:1.7;}
+header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:.12em;}
+
+.profile{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem .8rem;
+}
+.profile div{font-size:.74rem;color:var(--muted);}
+.profile div b{display:block;font-size:.9rem;color:var(--text);font-weight:500;margin-top:.1rem;letter-spacing:.06em;}
+.profile div.full{grid-column:1/3;}
+
+.sec{margin-bottom:1.65rem;}
+.sec-head{display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;padding-bottom:.6rem;border-bottom:1px solid var(--line);}
+.sec-no{font-size:.72rem;color:var(--accent);letter-spacing:.18em;font-weight:600;flex-shrink:0;}
+.sec-title{font-size:1.02rem;font-weight:500;letter-spacing:.08em;}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:1.25rem 1.15rem;box-shadow:0 4px 24px rgba(0,0,0,.32);margin-bottom:1rem;}
+.card p{font-size:.87rem;margin-bottom:.9rem;color:var(--text);}
+.card p:last-child{margin-bottom:0;}
+.card .lead{color:var(--accent);font-size:.9rem;font-weight:500;}
+.hl{color:var(--accent);font-weight:500;}
+.soft{color:var(--muted2);font-size:.8rem;}
+
+.meishiki{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.2rem 0 .3rem;}
+.pillar{background:var(--sink);border:1px solid var(--line);border-radius:12px;padding:.7rem .4rem;text-align:center;}
+.pillar .lbl{font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.55rem;}
+.pillar .yomi{font-size:.58rem;color:var(--muted);letter-spacing:.04em;line-height:1.3;}
+.pillar .kan{font-size:1.85rem;font-weight:600;color:var(--text);line-height:1.15;}
+.pillar .shi{font-size:1.85rem;font-weight:600;color:var(--accent);line-height:1.15;margin-top:.2rem;}
+.pillar .shi.vd{color:var(--void);}
+.pillar .zou{font-size:.62rem;color:var(--muted2);margin-top:.55rem;letter-spacing:.04em;}
+.meishiki-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;}
+
+.jintai{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:19rem;margin:.4rem auto .2rem;}
+.jcell{background:var(--sink);border:1px solid var(--line);border-radius:11px;aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;}
+.jcell .pos{font-size:.58rem;color:var(--muted);letter-spacing:.05em;}
+.jcell .star{font-size:.92rem;font-weight:600;color:var(--text);letter-spacing:.03em;}
+.jcell.center{background:linear-gradient(160deg,rgba(156,203,190,.2),var(--sink));border-color:var(--accent-soft);}
+.jcell.center .star{color:var(--accent);}
+.jcell.jusei-cell{background:var(--night2);}
+.jcell .star.gold{color:var(--gold);}
+
+.gogyo{margin-top:.3rem;}
+.gbar{display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;}
+.gbar .gname{width:2.6rem;font-size:.76rem;color:var(--muted2);flex-shrink:0;}
+.gbar .gtrack{flex:1;height:9px;background:var(--sink);border-radius:5px;overflow:hidden;}
+.gbar .gfill{display:block;height:100%;border-radius:5px;}
+.gbar .gval{width:2.2rem;text-align:right;font-size:.72rem;color:var(--muted);flex-shrink:0;}
+.g-wood .gfill{background:var(--wood);} .g-fire .gfill{background:var(--fire);} .g-earth .gfill{background:var(--earth);} .g-metal .gfill{background:var(--metal);} .g-water .gfill{background:var(--water);}
+
+.ryo svg, .kinkyoku svg{width:100%;height:auto;max-width:21rem;display:block;margin:.2rem auto .4rem;}
+.ryo .bx{fill:var(--sink);stroke:var(--line);stroke-width:1.5}
+.ryo .bx.c{fill:rgba(156,203,190,.16);stroke:var(--accent);stroke-width:2.5}
+.ryo .s{fill:var(--text);font-size:16px;font-weight:600;text-anchor:middle}
+.ryo .s.c{fill:var(--accent);font-size:18px}
+.ryo .p{fill:var(--muted);font-size:10.5px;text-anchor:middle}
+.ryo .k{fill:var(--muted2);font-size:12px;text-anchor:middle;font-weight:600}
+.ryo .k.c{fill:var(--accent);font-size:14px}
+
+.kinkyoku .ring{fill:none;stroke:var(--line);stroke-width:1.5}
+.kinkyoku .tri{stroke:var(--accent);stroke-width:3;stroke-linejoin:round;fill:none}
+.kinkyoku .tri-dash{stroke:var(--accent);stroke-width:3;stroke-dasharray:7 6;opacity:.75}
+.kinkyoku .opp{stroke:var(--bad);stroke-width:2.5;stroke-dasharray:3 6}
+.kinkyoku .node{fill:var(--sink);stroke:var(--line);stroke-width:1.5}
+.kinkyoku .node-on{fill:var(--accent);stroke:var(--accent)}
+.kinkyoku .node-un{fill:var(--night2);stroke:var(--accent);stroke-width:2.5;stroke-dasharray:5 4}
+.kinkyoku .node-vd{fill:var(--night2);stroke:var(--void);stroke-width:2}
+.kinkyoku .t-on{fill:var(--night);font-weight:700;font-size:24px;text-anchor:middle}
+.kinkyoku .t-off{fill:var(--muted);font-size:17px;text-anchor:middle}
+.kinkyoku .t-un{fill:var(--accent);font-weight:700;font-size:24px;text-anchor:middle}
+.kinkyoku .t-vd{fill:var(--void);font-weight:700;font-size:22px;text-anchor:middle}
+.kinkyoku .t-center{fill:var(--accent);font-weight:700;font-size:26px;text-anchor:middle}
+.kinkyoku .t-sub{fill:var(--muted2);font-size:12px;text-anchor:middle;letter-spacing:.06em}
+.kinkyoku .t-cap{fill:var(--accent);font-size:11px;text-anchor:middle;font-weight:600}
+.kinkyoku .t-cap.v{fill:var(--void)}
+
+.daiun-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.daiun{width:100%;border-collapse:collapse;font-size:.78rem;min-width:19rem;}
+.daiun th{font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.05em;padding:.4rem .3rem;border-bottom:1px solid var(--line);text-align:center;}
+.daiun td{padding:.5rem .3rem;text-align:center;border-bottom:1px solid rgba(40,55,75,.5);color:var(--text);}
+.daiun td:first-child{color:var(--muted2);font-size:.72rem;white-space:nowrap;}
+.daiun .tc-cell{color:var(--bad);font-size:.68rem;}
+.daiun .now-row td{background:linear-gradient(90deg,rgba(156,203,190,.14),transparent);}
+.daiun .now-row td:first-child{color:var(--accent);font-weight:600;}
+.daiun .now-cell{color:var(--accent);font-size:.68rem;font-weight:600;}
+.daiun td.isou{font-size:.66rem;color:var(--muted2);text-align:left;line-height:1.5}
+
+.tl{position:relative;padding-left:1.1rem;margin-top:.3rem;}
+.tl::before{content:"";position:absolute;left:3px;top:.4rem;bottom:.4rem;width:2px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:1rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before{content:"";position:absolute;left:-1.1rem;top:.45rem;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--night2);}
+.tl-item.tc::before{background:var(--bad);}
+.tl-when{font-size:.76rem;color:var(--accent);font-weight:600;letter-spacing:.06em;}
+.tl-item.tc .tl-when{color:var(--bad);}
+.tl-body{font-size:.82rem;color:var(--text);margin-top:.15rem;}
+
+.recipe .item{display:flex;gap:.75rem;margin-bottom:1rem;}
+.recipe .item:last-child{margin-bottom:0;}
+.recipe .num{flex-shrink:0;width:1.7rem;height:1.7rem;border-radius:50%;background:linear-gradient(160deg,var(--accent),var(--accent-soft));color:var(--night);font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;}
+.recipe .rbody{font-size:.83rem;}
+.recipe .rbody b{color:var(--accent);font-weight:600;}
+
+.pull{border-left:3px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:1rem 0;font-size:.9rem;color:var(--muted2);}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:.2rem 0 .9rem;}
+.two .m{background:var(--sink);border:1px solid var(--line);border-radius:12px;padding:.8rem .9rem;font-size:.8rem;min-width:0;}
+.two .m b{display:block;font-size:.84rem;margin-bottom:.2rem;letter-spacing:.06em;}
+.two .ok b{color:var(--accent);} .two .ng b{color:var(--void);}
+.three{display:grid;gap:.6rem;margin-top:.2rem}
+.three .m{background:var(--sink);border:1px solid var(--line);border-radius:12px;padding:.8rem .9rem;font-size:.84rem}
+.three .m b{display:block;color:var(--accent);font-size:.9rem;margin-bottom:.15rem;letter-spacing:.06em}
+
+.closing{background:linear-gradient(180deg,var(--panel),var(--sink));border:1px solid var(--accent-soft);border-radius:18px;padding:1.6rem 1.25rem;text-align:center;box-shadow:0 0 30px rgba(156,203,190,.09);}
+.closing p{font-size:.88rem;margin-bottom:.9rem;}
+.closing p:last-child{margin-bottom:0;}
+.closing .big{font-size:1.05rem;color:var(--accent);font-weight:500;letter-spacing:.06em;}
+
+.koyomi-link{display:block;text-align:center;margin-top:1.5rem;padding:1rem;background:var(--night2);border:1px solid var(--line);border-radius:14px;color:var(--text);text-decoration:none;font-size:.86rem;}
+.koyomi-link:hover{border-color:var(--accent-soft);}
+.koyomi-link .arrow{color:var(--accent);}
+.koyomi-link small{display:block;color:var(--muted);font-size:.7rem;margin-top:.3rem;}
+
+footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
+footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
+@media (max-width:380px){ .two{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">㐂占 　 命 術 本鑑定書</p>
+  <h1><span class="nm">ゆか</span> さんへ</h1>
+  <p class="tagline">池地の精霊 ―― 奥地の池の宝石を、一代で外へ</p>
+  <p class="date">1977年4月14日 生　／　鑑定 2026.10.5</p>
+</header>
+
+<div class="profile">
+  <div class="full">魂の本質（日の宿命）<b>辛丑（かのとうし）― 池地の精霊・胎恩の金</b></div>
+  <div>中心の星<b>禄存星</b></div>
+  <div>天中殺<b>辰巳（南東）</b></div>
+  <div>才能の星<b>石門星・順殿の型</b></div>
+  <div>今の大運<b>己酉・龍高星（47〜56歳）</b></div>
+  <div class="full">宿命の天中殺<b>宿命二中殺（生年中殺・生月中殺）と互換中殺。三つそろう形</b></div>
+  <div class="full">運気の位置<b>2024〜2025年の年天中殺は、2026年2月の立春に明けた。次の年天中殺は2036〜2037年</b></div>
+</div>
+
+<div class="card" style="border-color:var(--accent-soft);">
+  <p>おおきにです、ゆかさん☺️</p>
+  <p>10月5日にお話ししたことを、ここにまとめました。Meetの中で、ゆかさんの口から出てきたことを中心に、書き足してあります。特に厚くしたのは、<span class="hl">宿命の天中殺が三つあること</span>、<span class="hl">冬の宝石が土から出る方法</span>、<span class="hl">今の十年の三合会局と、動く順番</span>の三つです。</p>
+  <p>読む順番は気にしなくて大丈夫です。気になったところから開いてください。ここがスタートです。</p>
+</div>
+
+<!-- 命式盤 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">命 式</span><span class="sec-title">ゆかさんの設計図</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.6rem;">陰占 ― 生まれ持った気の柱</p>
+    <div class="meishiki">
+      <div class="pillar"><div class="lbl">日柱（自分・家庭）</div><div class="yomi">かのと</div><div class="kan">辛</div><div class="shi">丑</div><div class="yomi">うし</div><div class="zou">蔵干　己・癸・辛</div></div>
+      <div class="pillar"><div class="lbl">月柱（目標・仕事）</div><div class="yomi">きのえ</div><div class="kan">甲</div><div class="shi vd">辰</div><div class="yomi">たつ</div><div class="zou">蔵干　戊・乙・癸</div></div>
+      <div class="pillar"><div class="lbl">年柱（社会・対外）</div><div class="yomi">ひのと</div><div class="kan">丁</div><div class="shi vd">巳</div><div class="yomi">み</div><div class="zou">蔵干　丙・庚・戊</div></div>
+    </div>
+    <p class="meishiki-note">日柱 辛丑 ／ 月柱 甲辰 ／ 年柱 丁巳<br>月柱の辰と年柱の巳は、天中殺の支です（五章）。丑と巳は半会で結ばれています（六章）</p>
+    <div style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+    <p class="soft" style="margin-bottom:.2rem;">陽占 ― 心のかたち（人体星図）</p>
+    <div class="jintai">
+      <div class="jcell jusei-cell"><span class="pos">伴星（先祖）</span><span class="star">調舒星</span></div>
+      <div class="jcell"><span class="pos">目上（北）</span><span class="star">車騎星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">初年運</span><span class="star gold">天極星</span></div>
+      <div class="jcell"><span class="pos">家庭（西）</span><span class="star">鳳閣星</span></div>
+      <div class="jcell center"><span class="pos">中心・本人</span><span class="star">禄存星</span></div>
+      <div class="jcell"><span class="pos">社会（東）</span><span class="star">石門星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">晩年運</span><span class="star gold">天印星</span></div>
+      <div class="jcell"><span class="pos">目下（南）</span><span class="star">司禄星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">中年運</span><span class="star gold">天庫星</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.7rem;">中央が本人。真ん中に、人に尽くして人を引き寄せる禄存星。社会の位置（兄弟・友人の場所）に、仲間作りの石門星。ご先祖様から渡された使命の星（伴星）は、オンリーワンを作る調舒星です</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">一</span><span class="sec-title">どういう魂か ― 冬の泥に沈む宝石</span></div>
+  <div class="card">
+    <p class="lead">本物だからこそ、奥地の池に隠されている</p>
+    <p>日の宿命「辛丑」には、<span class="hl">「池地の精霊」</span>という名前がついています。「胎恩の金」という呼び方もあります。六十干支の三十八番目です。</p>
+    <p>辛は、宝石の金です。丑は冬、春の手前のいちばん寒い時期の土。冬の土は冷たく、水を含んで、泥になっています。日柱の中にも、己（土）と癸（水）が入っています。</p>
+    <p>そこに宝石がある。放っておくと、泥の中に沈んでいく。凍ってしまえば、表からは見えなくなる。誰にも気づかれずに、そこにある。<b>大事なものだから、本物だから、奥地の池に隠されている</b>。それが、池地の精霊という名前の意味です。</p>
+    <p style="margin-bottom:0;">Meetでは、生まれは日本海側の京都で、内向きの土地で育ったこと、寒いのが体質的にダメで、冬は調子を崩すことを話してくれました。ハワイのような、あたたかくて開放的な場所に惹かれる。<b>冬の宝石が、泥の乾くあたたかい場所に惹かれるのは、命式の向きと合っています。</b></p>
+  </div>
+  <div class="card">
+    <p class="lead">頭がいい。でも、静かに見られる</p>
+    <p>以下が、辛丑の本質です。<span class="hl">「とても利発でマイペース。ピュアだがやや内向的。多趣味で凝り性、好き嫌いも激しいが、バランス感覚に優れているため堅実な道を歩む」</span>。</p>
+    <p>性格の面では<span class="hl">「自尊心が高く、風流人を気取りたがる。好き嫌いが激しい。客観的な視野に乏しいが仕事には忠実。気分にムラがある」</span>。女性の説明には<span class="hl">「素朴で深みのある嗜好」</span>と出ています。</p>
+    <p style="margin-bottom:0;">辛丑は、頭はいいけれど、季節が冬なので、根暗と言われやすい干支でもあります。「やや内向的」も同じ方向です。<b>でも、そこに着目しなくていい</b>、というのが辛丑の読み方のポイントです。</p>
+  </div>
+  <div class="card">
+    <p class="lead">ポイントは、笑顔</p>
+    <p>普段は頭がよくて、静かで、目立たない。でも、<b>笑った時に、人の心を掴める</b>。それが辛丑です。</p>
+    <p>社会の位置の石門星は<span class="hl">「超がつくほど社交的。苦手な人にも明るく優しく接する」</span>。中身は冬の宝石で、外に出る時の顔は明るい。</p>
+    <p style="margin-bottom:0;">Meetで、鑑定のお客様から「会えてよかった」「ホッとする」と言われる、と話してくれました。ゆかさん自身は「自分は結構冷たい人間だと思っている」ので、驚くそうです。<b>その差が、冬の宝石と笑顔の差です。</b>お客様が受け取っているのは、当たることだけではありません。</p>
+  </div>
+  <div class="card">
+    <p class="lead">考えすぎると、埋もれる</p>
+    <p>冬の土に水が増えすぎると、凍って、もっと埋もれます。水は、知性、考えること。<b>頭を使いすぎると、かえって才能が埋もれる</b>、という読み方があります。</p>
+    <p style="margin-bottom:0;">奥地の池の水は、手つかずできれいです。考えすぎて濁らせなければ、<span class="hl">透明感のある思考</span>が、ゆかさんの生きるヒントになります。人の裏を読んでいる、と気づいたら、そこで一度止まる。それだけで、池は澄みます。</p>
+  </div>
+  <div class="card">
+    <p class="lead">どうやって土から出るか ―― 同じ金と、ぶつかる</p>
+    <p>宝石が泥から出るには、<b>同じ金と、ぶつかること</b>。金と金がぶつかって、泥が落ちて、宝石が出てくる。同じ金は、兄弟のこと。兄弟がいなければ、兄弟のような親友。ぶつかり合える相手と磨き合って、土から出る、という読み方です。</p>
+    <p style="margin-bottom:0;">ゆかさんの命式では、<b>社会の位置が、兄弟・友人の場所</b>です。そこに、仲間作りの石門星が入っています。兄弟のようにぶつかれる仲間の場所が、ちゃんと用意されています。この話は、後の章（七）で、もう一度使います。</p>
+  </div>
+  <div class="card">
+    <p class="lead">見抜いてくれる人</p>
+    <p style="margin-bottom:0;">池地の精霊には、<b>宝石の光を見抜いてくれる人がいることが、開運の鍵</b>、という読みもあります。いくら泥に埋もれていても、「こんなところに」と見つけてもらえると、宝石は光るところに出ていけます。</p>
+  </div>
+  <div class="card" style="background:var(--sink);border-color:var(--accent-soft);">
+    <p class="lead" style="margin-bottom:.6rem;">警句 ―― 前提にしてほしい一文</p>
+    <div class="pull" style="margin-top:0;">陰鬱で邪推深いため、陰険に見られ悪者に見られることがある。陽気に精神を養い、何事にも熱心になれば、案外信用を得られ、晩成でも成果が挙げられる。</div>
+    <p>前半は、内にこもった時の出方です。考えすぎて、人の裏まで読みすぎる。奥地の池で言えば、池が濁った時です。陽気に精神を養うと、池が澄みます。</p>
+    <p><b>この一文は、後ろの半分が全部です。</b>「晩成でも成果が挙げられる」。成果まで示されている警句です。</p>
+    <p style="margin-bottom:0;">LINEに書いてくれた「ワクワク生きたい衝動」は、<span class="hl">「陽気に精神を養い」</span>そのものです。来年50歳。ここからが、ゆかさんの晩成の入口だと僕は見ています。この旅のハイライトは、もっと後ろに置かれています。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">二</span><span class="sec-title">人体星図 ― 場所ごとに出る顔</span></div>
+  <div class="card">
+    <p class="lead">中心 ―― 禄存星。人に尽くして、人を引き寄せる</p>
+    <p>以下が、禄存星の説明です。<span class="hl">「奉仕精神が旺盛。愛に満ちている。人に尽くす。愛と財を引き寄せる。お金がなくなると入ってくる。回転財」</span>。</p>
+    <p>良い方に出ると、<b>奉仕精神で人に尽くすことができる。善行を積む。徳が高い</b>。偏ると、騙されやすい、利用されやすい、八方美人、と出ます。尽くす相手を選ばないと、こちらが削れてしまう星です。</p>
+    <p style="margin-bottom:0;">そして「回転財」。貯め込む星ではなく、回す星です。<b>鑑定でお金を受け取ることに、遠慮しなくていい</b>命式です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">伴星 ―― 調舒星。ご先祖様から渡された使命</p>
+    <p>以下が、使命です。<span class="hl">「孤独を味方にする。孤独に強い人間になりなさい。特別な感性と才能を持った人です。芸術的な仕事を目指しなさい。自分にしかできないオンリーワンを作りなさい。自分自身と向き合い、研鑽する心を保ちなさい」</span>。</p>
+    <p>LINEで「お客様には当たると喜んでいただけるけれど、自分を深掘りするには物足りない」と書いてくれました。人から習った占術を、習ったとおりに使う。<b>それでは物足りなくできている人です。</b>ご先祖様から渡されているのが「オンリーワンを作りなさい」なので。</p>
+    <p style="margin-bottom:0;">Meetでは、人とつながることが嫌になっている時期だ、とも話してくれました。<b>責めることではありません。</b>使命が、そもそも「孤独を味方にする」です。全員とつながらなくていい。ぶつかれる少数だけで、十分です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">社会 ―― 石門星。兄弟・友人の場所の、仲間の星</p>
+    <p><span class="hl">「超がつくほど社交的。苦手な人にも明るく優しく接する。相手を勘違いさせやすい」</span>。</p>
+    <p style="margin-bottom:0;">ゆかさんの才能星でもあります（三章）。人と組むと、力が出る星です。一章で書いた「同じ金とぶつかって、土から出る」は、この場所で起こります。</p>
+  </div>
+  <div class="card">
+    <p class="lead">家庭 ―― 鳳閣星。楽しむ、味わう星</p>
+    <p><span class="hl">「多趣味になる。飽きっぽい。家族にも無理をさせたくない。衣食住の価値観を重視」</span>。結婚相手の特徴は<span class="hl">「明るく自由な家庭・干渉しない・食卓が中心」</span>と出ています。</p>
+    <p>専業主婦として幸せに暮らしている、と書いてくれました。<b>今の暮らしが幸せなのは、命式どおりです。</b>ご夫婦で旅をする夢も、この家庭の星とはぶつかっていません。</p>
+    <p style="margin-bottom:0;">Meetで、自分の機嫌を取ろうとすると、一日中ソファでゴロゴロしてしまう、と話してくれました。鳳閣星は、楽しい・おいしい・気持ちいい、を求める星です。ただ、ずっとゴロゴロしているだけでは、おいしい思いはなかなか味わえません。<b>少し体を動かした後のほうが、鳳閣星はよく満たされます。</b></p>
+  </div>
+  <div class="card">
+    <p class="lead">目上 ―― 車騎星。行動の星</p>
+    <p><span class="hl">「将軍の気質が出る。気合で結果を出す。過労になりやすい。交通事故とケガに注意」</span>。</p>
+    <p>Meetで、勝ち負けには全く興味がない、練習は好きでも試合は嫌い、と話してくれました。<b>ゆかさんの車騎星は、勝負で満たす星ではなく、体を動かすことで外に出す星</b>だと見ています。目上の位置にある星なので、真ん中の性格そのものではありません。</p>
+    <p style="margin-bottom:0;">ずっと踊りを続けてきたこと、練習が好きなこと、毎朝の禊と神社への散歩。体を動かすことは、もうゆかさんの暮らしの中にあります。近くにできたピラティスも、一人でできて、内側を鍛えられるものです。旅をする時は、急がない旅で。車で回るなら、詰め込まずに。</p>
+  </div>
+  <div class="card">
+    <p class="lead">目下 ―― 司禄星</p>
+    <p style="margin-bottom:0;"><span class="hl">「几帳面。常識人。約束の時間を守る。誠実。頼りがいがある」</span>。Meetで「常識人でいたい自分を捨てきれない」と話してくれた、その常識人の顔は、この星から出ています。</p>
+  </div>
+  <div class="card">
+    <p class="lead">初年運・中年運・晩年運</p>
+    <p><b>初年運（天極星）</b>は<span class="hl">「欲がなく、束縛されない水の流れのように柔軟。現実に密着した仕事は不向き。哲学、宗教、心理学などの分野で活躍できる」</span>。哲学・宗教・心理学は「大好きです」と話してくれました。命学に惹かれたのは、子どもの頃からの星の向きです。労働意欲がない、と書いてくれましたが、怠けではなく、<b>現実にべったりの仕事より、心の世界で力が出る人</b>です。</p>
+    <p><b>中年運（天庫星）</b>は<span class="hl">「凝り性で探求心も旺盛。他人の忠告は聞かない。守護霊の加護が強い」</span>。そして<span class="hl">「奉仕的な生き方をしていると、仕事も家庭も安定した穏やかな中年期になる」</span>。毎朝の禊と神社参拝は、守護霊の加護が強い中年期の過ごし方として、とても合っています。</p>
+    <p style="margin-bottom:0;"><b>晩年運（天印星）</b>は<span class="hl">「若者たちに囲まれて好き放題できる幸せな晩年」</span>。可愛がられて、憎まれない晩年です。赤ちゃんの星なので、疑うことを知らない分、騙されることにだけは注意が要ります。</p>
+  </div>
+</div>
+
+<div class="sec ryo">
+  <div class="sec-head"><span class="sec-no">三</span><span class="sec-title">順殿の型 ― 才能の出口は、人と組むこと</span></div>
+  <div class="card">
+    <p class="lead">社会の石門星に、力が集まっている</p>
+    <svg viewBox="0 0 360 330" role="img" aria-label="順殿の型。東の石門星に剋線3本、北の車騎星に2本、他は1本ずつ">
+      <rect class="bx" x="125" y="10" width="110" height="64" rx="10"/>
+      <text class="p" x="180" y="27">北　目上</text><text class="s" x="180" y="48">車騎星</text><text class="k" x="180" y="67">2</text>
+      <rect class="bx" x="10" y="133" width="110" height="64" rx="10"/>
+      <text class="p" x="65" y="150">西　家庭</text><text class="s" x="65" y="171">鳳閣星</text><text class="k" x="65" y="190">1</text>
+      <rect class="bx" x="125" y="133" width="110" height="64" rx="10"/>
+      <text class="p" x="180" y="150">中心</text><text class="s" x="180" y="171">禄存星</text><text class="k" x="180" y="190">1</text>
+      <rect class="bx c" x="240" y="125" width="110" height="80" rx="12"/>
+      <text class="p" x="295" y="143">東　社会</text><text class="s c" x="295" y="166">石門星</text><text class="k c" x="295" y="192">剋線 3</text>
+      <rect class="bx" x="125" y="256" width="110" height="64" rx="10"/>
+      <text class="p" x="180" y="273">南　目下</text><text class="s" x="180" y="294">司禄星</text><text class="k" x="180" y="313">1</text>
+    </svg>
+    <p>才能占技です。五つの星のうち、社会の位置の石門星に、剋線が三本集まっています。型は<b>順殿の型</b>。<span class="hl">「バランス良く複数の才能。突出しないが手堅い」</span>と示されています。</p>
+    <p>才能の領域は東天運。<span class="hl">「現実領域・現実重視・成果志向・現場主義」</span>。才能の出口は、頭の中ではなく、現実の、人の世界です。</p>
+    <p>金運を上げる働き方は<span class="hl">「人と組む・チーム運営・コミュニティ作り」</span>。<b>一人で頑張って売る形ではなく、人と組んだ時に、お金が回る作り</b>です。</p>
+    <p style="margin-bottom:0;">心を満たす生き方は<span class="hl">「コツコツ蓄積・日常を守る・家族との時間・平和で安定」</span>。家族との時間を大事にしながら、人と組んで外に出す。どちらかを捨てる話ではありません。</p>
+  </div>
+  <div class="card">
+    <p class="lead">学者の中身と、世渡りの外側</p>
+    <p>八門法は、北がいちばん大きい<b>玄武型</b>。<span class="hl">「学者気質・研究熱心・知性・改革と伝統・目上の助けを得る」</span>。向いている職業に、研究者・学者・芸術家・コンサル、と出ています。気図法は<span class="hl">「現実社会への適応力が強く世渡り上手。経済・ビジネス・対人の世界で力を発揮」</span>。</p>
+    <p style="margin-bottom:0;">中は学者で、外は世渡りができる。<b>研究したものを、人の世界に出していける作り</b>です。Meetで、人と組むなら「助言してくれる目上の人がいいのか」と聞いてくれました。玄武型には「目上の助けを得る」とあります。属するのではなく、助言をもらえる人を持つ。その形なら、宿命ともぶつかりません。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">四</span><span class="sec-title">五行と守護神 ― 大きく動く、運ぶ</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.7rem;">五行のエネルギー（総量262・安定バランス型）</p>
+    <div class="gogyo">
+      <div class="gbar g-wood"><span class="gname">木</span><span class="gtrack"><span class="gfill" style="width:59%"></span></span><span class="gval">47</span></div>
+      <div class="gbar g-fire"><span class="gname">火</span><span class="gtrack"><span class="gfill" style="width:66%"></span></span><span class="gval">52</span></div>
+      <div class="gbar g-earth"><span class="gname">土</span><span class="gtrack"><span class="gfill" style="width:100%"></span></span><span class="gval">79</span></div>
+      <div class="gbar g-metal"><span class="gname">金</span><span class="gtrack"><span class="gfill" style="width:58%"></span></span><span class="gval">46</span></div>
+      <div class="gbar g-water"><span class="gname">水</span><span class="gtrack"><span class="gfill" style="width:48%"></span></span><span class="gval">38</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <p>欠けている五行はありません。<span class="hl">安定バランス型</span>です。無理に補う必要はありません。</p>
+    <p style="margin-bottom:0;">いちばん大きいのは土です。ゆかさんは辛、金。東洋思想では、土が金を生みます。自分を生み、育ててくれるもの。星で言えば、学ぶ本能です。<b>学んで、自分の中に貯めていく力が、五行でいちばん大きい</b>。何年も命学を学んできて、中にはたくさん貯まっています。今は、それを統合する段階です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">守護神 ―― 壬と甲</p>
+    <p>第一守護神は<b>壬</b>。<span class="hl">「大河のように流れる。大きく動く・運ぶ」</span>。第二守護神は<b>甲</b>。<span class="hl">「大樹のように真っ直ぐ。リーダー意識。頑固さを活かす」</span>。</p>
+    <p>ひとところに留まって枠の中にいるより、<b>流れて、動いて、運んでいく時に、命式がいい状態になる</b>、と僕は見ています。海、川、大きな水。Meetで「大好きです」と話してくれたものが、そのまま守護神のエネルギーです。</p>
+    <p style="margin-bottom:0;">甲は、動きながらも、軸は一本、真っ直ぐ立てておくこと。守護神はお守りのようなもので、このエネルギーがあると、命式全体がうまく回り始めます。</p>
+  </div>
+</div>
+
+<div class="sec kinkyoku">
+  <div class="sec-head"><span class="sec-no">五</span><span class="sec-title">宿命の天中殺が三つ ― 人生のテーマ</span></div>
+  <div class="card">
+    <p class="lead">辰巳天中殺 ―― 人と違う道を行く使命</p>
+    <p>以下が、辰巳天中殺（南東天中殺）の説明です。<span class="hl">「人と違う道を行く使命。家系の繋がりは、既存の枠に収まらない宿命。陽転条件は、独自の哲学・専門性を磨く」</span>。</p>
+    <p style="margin-bottom:0;">誰かが作った枠の中にいる限り、いつかは合わなくなる作りです。会の在り方が合わなかったことも、踊りの教室で「そこそこできてしまって、属せなくなった」ことも、同じところから来ています。<b>会が悪いのでも、ゆかさんの我慢が足りないのでもありません。</b></p>
+  </div>
+  <div class="card">
+    <svg viewBox="0 0 360 360" role="img" aria-label="十二支の輪。辰と巳が天中殺。月柱の辰、年柱の巳がそこに入っている。年柱の丁巳から見た天中殺は子丑で、日柱の丑が入っている">
+    <circle class="ring" cx="180" cy="180" r="128"/>
+    <circle class="node" cx="180.0" cy="52.0" r="19"/><text class="t-off" x="180.0" y="58.0">子</text>
+    <circle class="node node-un" cx="244.0" cy="69.1" r="25"/><text class="t-un" x="244.0" y="77.1">丑</text>
+    <circle class="node" cx="290.9" cy="116.0" r="19"/><text class="t-off" x="290.9" y="122.0">寅</text>
+    <circle class="node" cx="308.0" cy="180.0" r="19"/><text class="t-off" x="308.0" y="186.0">卯</text>
+    <circle class="node node-vd" cx="290.9" cy="244.0" r="25"/><text class="t-vd" x="290.9" y="252.0">辰</text>
+    <circle class="node node-vd" cx="244.0" cy="290.9" r="25"/><text class="t-vd" x="244.0" y="298.9">巳</text>
+    <circle class="node" cx="180.0" cy="308.0" r="19"/><text class="t-off" x="180.0" y="314.0">午</text>
+    <circle class="node" cx="116.0" cy="290.9" r="19"/><text class="t-off" x="116.0" y="296.9">未</text>
+    <circle class="node" cx="69.1" cy="244.0" r="19"/><text class="t-off" x="69.1" y="250.0">申</text>
+    <circle class="node" cx="52.0" cy="180.0" r="19"/><text class="t-off" x="52.0" y="186.0">酉</text>
+    <circle class="node" cx="69.1" cy="116.0" r="19"/><text class="t-off" x="69.1" y="122.0">戌</text>
+    <circle class="node" cx="116.0" cy="69.1" r="19"/><text class="t-off" x="116.0" y="75.1">亥</text>
+    <text class="t-cap v" x="248" y="214">月柱</text>
+    <text class="t-cap v" x="214" y="262">年柱</text>
+    <text class="t-cap" x="222" y="112">日柱</text>
+    <text class="t-center" x="180" y="170">辰巳</text><text class="t-sub" x="180" y="192">ゆかさんの天中殺</text>
+    <text class="t-sub" x="180" y="214" style="font-size:11px">丑は、年柱 丁巳から見た天中殺</text>
+    </svg>
+    <p class="meishiki-note">灰色の辰と巳が、ゆかさんの天中殺。月柱の辰、年柱の巳が、そこに入っています。点線の丑は、年柱の丁巳から見た天中殺で、日柱にあります</p>
+  </div>
+  <div class="card">
+    <p class="lead">生まれた時から、命式の中に天中殺がある</p>
+    <p>天中殺は、ふつうは12年に一度、二年続けて巡ってくる時期のことです。ゆかさんの場合は、それとは別に、<b>生まれた時の命式の中に、天中殺の支が入っています</b>。宿命天中殺と言います。しかも、一つではなく、三つです。</p>
+    <div class="three">
+      <div class="m"><b>生年中殺（年柱の巳）</b>両親・先祖の援助に頼らず、独立すると陽転。</div>
+      <div class="m"><b>生月中殺（月柱の辰）</b>家系・親族から離れて生きると陽転。組織の後ろ盾に頼らない働き方、とも読めます。</div>
+      <div class="m"><b>互換中殺（年柱と日柱）</b>年柱の丁巳から見た天中殺（子丑）が日柱の丑に、日柱の辛丑から見た天中殺（辰巳）が年柱の巳に。年と日が、お互いの天中殺を持ち合っている形です。</div>
+    </div>
+    <p style="margin-top:.9rem;">生年中殺と生月中殺がそろう形を<b>宿命二中殺</b>と言います。そこに互換中殺が重なっています。</p>
+    <p style="margin-bottom:0;">命式チェッカーの判定で、1935年から2015年までの全29,585日を数えると、この三つがそろう生まれは<b>162日、0.55%。およそ180人に1人</b>です。僕がこれまで鑑定してきた中でも、二つまでの人はいましたが、三つそろう人は、ほとんど初めてでした。</p>
+  </div>
+  <div class="card">
+    <p class="lead">宿命二中殺 ―― 精神世界において大成する</p>
+    <p>東洋占術の思想では、宿命二中殺を持つ人は<span class="hl">「自分以外に頼れるものはない。そのかわり、精神世界において大成する」</span>と言われています。精神面での成長が目まぐるしい人生になり、精神世界に身を投じて、自分を高めようとする。</p>
+    <p style="margin-bottom:0;">Meetで、小さい頃から、困りごとは親ではなく、<b>心の中の神様と相談してきた</b>と話してくれました。命学に惹かれたこと、自分を深掘りしたくなること、毎朝の禊。<b>深掘りすること自体が、ゆかさんの人生の本業</b>です。物足りなさを感じるのは、まだ深められるからです。</p>
+  </div>
+  <div class="card">
+    <p class="lead">互換中殺 ―― 初代の気</p>
+    <p>互換中殺は、親との間で価値観が噛み合いにくい形です。お互いに助け合いたくても、うまく噛み合わない。Meetで話してくれた、ご両親とのことは、この形が強く出ていたのだと思います。<b>一人で、それを抱えてきた子ども時代だった</b>と思います。</p>
+    <p>そのかわり、互換中殺は<span class="hl">「初代の気」</span>とも言われます。<span class="hl">「一代で新しい家系を生み出せるほどの、大きなエネルギーを持ち合わせている」</span>。</p>
+    <p style="margin-bottom:0;">誰かが作った会の、誰かが作った占術を受け継ぐ人ではなく、<b>ゆかさんが初代になる人</b>です。Meetでは「恐れ多い」と話してくれました。でも、そのくらいのエネルギーが、命式に用意されています。</p>
+  </div>
+  <div class="card">
+    <p class="lead">二つの道 ―― 受け身と、能動</p>
+    <p>互換中殺には、もう一つ大事な説明があります。<span class="hl">「生涯を通じて受け身に徹すれば、波乱を避けていくことも可能。しかし、波乱の中でも逞しく生きていける強大なエネルギーを持っているので、能動的な人生を選んだとしても、波乱の中で得られる非凡な経験から、大きな成果を上げる可能性も秘めている」</span>。</p>
+    <div class="two">
+      <div class="m ok"><b>受け身の道</b>波乱を避けて、穏やかに暮らす。</div>
+      <div class="m ok"><b>能動の道</b>波乱はあるけれど、非凡な経験から、大きな成果。</div>
+    </div>
+    <p>どちらが正解、という話ではありません。両方とも、命式に示されている道です。</p>
+    <p>ゆかさんは、37歳で結婚して、専業主婦として穏やかに暮らしてきました。Meetでは「スタンプラリーみたいに」と話してくれました。<b>受け身の道を、ちゃんと穏やかに生きてこられた。</b>それは命式どおりです。</p>
+    <p style="margin-bottom:0;">そのうえで、LINEに「命を使っている感覚は薄い」「ワクワク生きたい衝動だけが湧いてくる」「今の自分をぶち破って、突き抜けたい」と書いてくれました。<b>能動の道のエネルギーが、出たがっている</b>のだと僕は見ています。Meetの終わりに「安全地帯でほっこり生きてきたので、ぶち破るならそういう部分でもぶち破っていかないと」と話してくれた、その言葉どおりです。</p>
+  </div>
+  <div class="card">
+    <p class="lead">人生のテーマ</p>
+    <div class="pull" style="margin-top:0;">属さない。頼らない。一代で、新しいものを作る。</div>
+    <p style="margin-bottom:0;">ご先祖様の使命「孤独を味方にする。オンリーワンを作りなさい」と、同じことが示されています。<b>ゆかさんの人生のテーマは、ここです。</b></p>
+  </div>
+  <div class="card">
+    <p class="lead">年の天中殺 ―― 2024年・2025年</p>
+    <p>年の天中殺は、2024年と2025年でした。Meetで、会の中で本当にしんどかった二年間のことを話してくれました。知識が欲しくて続けたこと。分派だと知らされずにいたこと。<b>天中殺の二年は、合わないものがはっきり見える時期</b>です。その二年で淡いものがはっきり見えたのは、大きな収穫だったと思います。</p>
+    <p>2026年2月の立春で明けて、来年4月の免許更新をしない、と決めた。<b>順番として、合っています。</b></p>
+    <p style="margin-bottom:0;">次の年天中殺は、<b>2036年と2037年</b>（59歳・60歳）。そして毎年4月上旬から6月上旬の二か月は、月の天中殺です。来年は<b>2027年4月5日〜6月5日</b>。大きな契約や、新しく始める決め事は、この二か月を外してください。免許を更新しないことは、新しく始めることではなく、すでに決めたことの続きなので、慌てなくて大丈夫です。</p>
+  </div>
+</div>
+
+<div class="sec kinkyoku">
+  <div class="sec-head"><span class="sec-no">六</span><span class="sec-title">今の十年 己酉 ― 三合会局がそろう</span></div>
+  <div class="card">
+    <p class="lead">巳・酉・丑が揃う、金局</p>
+    <svg viewBox="0 0 360 360" role="img" aria-label="十二支の輪。丑と巳が実線、大運の酉が点線で結ばれ、巳・酉・丑の三角形になる">
+    <circle class="ring" cx="180" cy="180" r="128"/>
+    <line class="tri" x1="244.0" y1="290.9" x2="244.0" y2="69.1"/>
+    <line class="tri-dash" x1="244.0" y1="69.1" x2="52.0" y2="180.0"/>
+    <line class="tri-dash" x1="52.0" y1="180.0" x2="244.0" y2="290.9"/>
+    <circle class="node" cx="180.0" cy="52.0" r="19"/><text class="t-off" x="180.0" y="58.0">子</text>
+    <circle class="node node-on" cx="244.0" cy="69.1" r="25"/><text class="t-on" x="244.0" y="77.1">丑</text>
+    <circle class="node" cx="290.9" cy="116.0" r="19"/><text class="t-off" x="290.9" y="122.0">寅</text>
+    <circle class="node" cx="308.0" cy="180.0" r="19"/><text class="t-off" x="308.0" y="186.0">卯</text>
+    <circle class="node node-vd" cx="290.9" cy="244.0" r="22"/><text class="t-vd" x="290.9" y="251.0">辰</text>
+    <circle class="node node-on" cx="244.0" cy="290.9" r="25"/><text class="t-on" x="244.0" y="298.9">巳</text>
+    <circle class="node" cx="180.0" cy="308.0" r="19"/><text class="t-off" x="180.0" y="314.0">午</text>
+    <circle class="node" cx="116.0" cy="290.9" r="19"/><text class="t-off" x="116.0" y="296.9">未</text>
+    <circle class="node" cx="69.1" cy="244.0" r="19"/><text class="t-off" x="69.1" y="250.0">申</text>
+    <circle class="node node-un" cx="52.0" cy="180.0" r="25"/><text class="t-un" x="52.0" y="188.0">酉</text>
+    <circle class="node" cx="69.1" cy="116.0" r="19"/><text class="t-off" x="69.1" y="122.0">戌</text>
+    <circle class="node" cx="116.0" cy="69.1" r="19"/><text class="t-off" x="116.0" y="75.1">亥</text>
+    <text class="t-cap" x="216" y="112">日柱</text>
+    <text class="t-cap" x="214" y="262">年柱</text>
+    <text class="t-cap v" x="248" y="214">月柱</text>
+    <text class="t-cap" x="100" y="150">大運 己酉</text>
+    <text class="t-center" x="180" y="178">金局</text><text class="t-sub" x="180" y="200">巳 ・ 酉 ・ 丑</text>
+    </svg>
+    <p class="meishiki-note">実線は、生まれつきの半会（日柱の丑と年柱の巳）。点線の酉が、今の大運 己酉で加わります</p>
+  </div>
+  <div class="card">
+    <p>命式の中で、日柱の丑と年柱の巳が、半会で結ばれています。<span class="hl">「外向き・社会的な場面に出る。拡大・発展。発信・告知向き」</span>。半会は、三合という三つ組の、二つです。</p>
+    <p>そこに、2024年から始まった大運<b>己酉</b>の「酉」が加わって、巳・酉・丑の三つが揃います。<b>三合会局、金局</b>です。位相法の中でも、結びつきの強い形です。エネルギーが同じ方向を向いて、レーザーのように出ていくイメージだと、僕は伝えています。月柱とも、干合と支合が出ています。<b>命式の三つの柱、全部と結びつく十年</b>です。</p>
+    <p>流動占技でも、この47〜56歳の十年は<span class="hl">「大発展型・事業拡大・人脈拡大。資金・技術・人脈の三拍子が必須」</span>と出ています。組んで広げる十年です。技術はもうあります。必要になるのは、人脈です。</p>
+    <p style="margin-bottom:0;">Meetで三合会局の話をした時、「手汗がひどい」「体温が上がりました」と話してくれました。<b>今は、充填された力が、出し口を探している状態</b>です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">年と日が、一つの局で結ばれる</p>
+    <p>五章で見た互換中殺は、年柱と日柱が、お互いの天中殺を持ち合って、噛み合いにくい形でした。</p>
+    <p style="margin-bottom:0;">その<b>年柱と日柱が、今の十年で、三合会局で結ばれています</b>。生まれつき噛み合いにくかった年と日が、この十年で一つの局にまとまる。エネルギーが外に出やすい十年だと、僕は見ています。</p>
+  </div>
+  <div class="card">
+    <p class="lead">龍高星の十年 ―― 放浪と、破壊と建設</p>
+    <p>この十年の主星は<b>龍高星</b>。キーワードは<span class="hl">「探検冒険、破壊と建設、放浪」</span>。</p>
+    <p>LINEに書いてくれた「占い放浪」。そして「今の自分をぶち破って、突き抜けたい」。<b>今の十年の星と、同じ方向</b>です。</p>
+    <p style="margin-bottom:0;">龍高星は、目的が見つかると、そこに向かって強い力で進みます。目的が見つからないと、文字どおり放浪になり、アクセルだけを踏んでいるような状態になります。<b>だから、この十年は「何に向けるか」を決めることが、いちばん大事</b>です。最初の二年は年の天中殺と重なっていました。そこが明けて、今、本格的に動き出すところです。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">七</span><span class="sec-title">陽転の三つの条件 ― 会のあとの道</span></div>
+  <div class="card">
+    <p class="lead">手放すか、しがみつくか、ではなく</p>
+    <p>Meetで「占いを手放してしまうか、何かしらしがみつくのがいいのか、そろそろ決めたい」と話してくれました。</p>
+    <p style="margin-bottom:0;">命式で見ると、<b>どちらでもない三つ目の道</b>があります。占いを手放す作りではないし、誰かの占術にしがみつく作りでもない。<b>習ってきたものを全部自分の中に入れて、ゆかさんの観方を、一から作る人</b>です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">何と何を重ねるか</p>
+    <p>LINEで「何と何を重ねたら、ゆかさんの観方になるのか、命式に出ています」とお伝えしました。</p>
+    <div class="three">
+      <div class="m"><b>会で学んで覚えてきたこと</b>離れても、ゆかさんの中の理解として消えません。五行でいちばん大きいのが、学んで貯める土です。九星気学、四柱推命、日本神話。貯まっている量が多い人です。</div>
+      <div class="m"><b>公開されている占技</b>誰でも学べて、誰にでも教えられる、縛りのない型。</div>
+      <div class="m"><b>重ねる向き ―― 心の世界</b>初年運の天極星「哲学、宗教、心理学などの分野で活躍できる」。宿命二中殺の「精神世界において大成」と、同じ方向です。</div>
+    </div>
+    <p style="margin-top:.9rem;margin-bottom:0;">当てるための型と、心の世界の見方。その二つを、ゆかさんの言葉でつないだものが、ゆかさんの観方になる。<b>互換中殺の、初代の観方</b>です。Meetでは、学んできたものは「基礎だった」という見方を受け取ってくれました。東洋の占術は、陰陽五行という同じ土台の上に、時代ごとの人が組み立ててきたものです。基礎がある人は、組み立てる側に回れます。</p>
+  </div>
+  <div class="card">
+    <p class="lead">陽転の三つの条件</p>
+    <div class="three">
+      <div class="m"><b>一　属さずに、自分の専門を磨く</b>辰巳天中殺の陽転条件「独自の哲学・専門性を磨く」。宿命の天中殺「頼らずに独立すると陽転」。<br><span class="hl">会を離れると決めた時点で、ここはもう満たしています。</span></div>
+      <div class="m"><b>二　一人で深めて、オンリーワンを作る</b>伴星の使命「孤独を味方にする。オンリーワンを作りなさい」。宿命二中殺「精神世界に身を投じて、自分を高める」。<br>習ってきたものを全部いったん自分の中に入れて、ゆかさんの言葉で出し直す。LINEで書いてくれた「統合」です。</div>
+      <div class="m"><b>三　人と組んで、外に出す</b>才能星の石門星「人と組む・チーム運営・コミュニティ作り」。今の十年「資金・技術・人脈の三拍子が必須」。<br>宿命の天中殺は「頼らない」ですが、「組まない」とは示されていません。</div>
+    </div>
+    <p style="margin-top:.9rem;margin-bottom:0;">極めたいことは、今ははっきりしていない、と話してくれました。<b>探している途中で、十分です。</b>一つ目は満たしていて、二つ目の途中にいる。三つ目が、これからです。</p>
+  </div>
+  <div class="card">
+    <p class="lead">頼るのと、組むのは、別の話</p>
+    <p>友達という概念があまり分からない、人とのつながりがほとんどない、と話してくれました。宿命の天中殺が「頼らない」なので、<b>友達が少ないのは、おかしいことではありません。</b></p>
+    <p>ゆかさんに要るのは、友達というより、<b>同じ道を自分の足で歩いている人と、ぶつかって磨き合う、兄弟のような仕事仲間</b>です。一章で書いた「同じ金とぶつかって、土から出る」。社会の位置（兄弟・友人の場所）の石門星。自分の足で立った人同士が、組む。それが、ゆかさんの命式の組み方です。</p>
+    <p>Meetの終わりに、「何者でもない自分と組んでくれる人はいないと思っている。誰かが興味を持ってくれる自分まで引き上げてから出会いたい」と話してくれました。辛丑は、完成してから外に出る干支ではなく、<b>同じ金とぶつかることで、泥が落ちて光る干支</b>です。引き上がってから出会うより、出会いながら磨かれる方が、命式の向きに合っています。</p>
+    <p style="margin-bottom:0;">そして、組む相手は人だけではない時代になっていると、僕は考えています。考えを壁打ちする相手として、AIを使うのも、組み方の一つです。</p>
+  </div>
+  <div class="card">
+    <p class="lead">占い放浪</p>
+    <p>第一守護神の壬は「大きく動く・運ぶ」。家庭の星は、自由で干渉しない暮らしの鳳閣星。今の十年の星は、放浪の龍高星。そして、属さずに一代で作る宿命。</p>
+    <p style="margin-bottom:0;"><b>場所に縛られずに、旅をしながら鑑定する形は、命式とぶつかっていません。</b>むしろ、追い風を受けられる夢です。龍高星の十年は、目的が見つかった時に強く進みます。「占い放浪」は、その目的になり得るものです。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">八</span><span class="sec-title">大運 ― 十年ごとの流れ</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.7rem;">大運 ― 10年ごとに巡る運気のテーマ（7歳運）</p>
+    <div class="daiun-scroll">
+      <table class="daiun">
+        <thead><tr><th>年齢</th><th>干支</th><th>星</th><th>命式との位相</th></tr></thead>
+        <tbody>
+          <tr><td>7〜16</td><td>乙巳</td><td>禄存星</td><td class="isou"><span class="tc-cell">大運天中殺</span>　日柱と半会</td></tr>
+          <tr><td>17〜26</td><td>丙午</td><td>牽牛星</td><td class="isou">日柱と干合・害</td></tr>
+          <tr><td>27〜36</td><td>丁未</td><td>車騎星</td><td class="isou">日柱と庫刑・天剋地冲</td></tr>
+          <tr><td>37〜46</td><td>戊申</td><td>玉堂星</td><td class="isou">年柱と支合・生刑／月柱と半会</td></tr>
+          <tr class="now-row"><td>47〜56</td><td>己酉</td><td>龍高星</td><td class="isou"><span class="now-cell">今ここ</span>　年柱・日柱と三合会局／月柱と干合・支合</td></tr>
+          <tr><td>57〜66</td><td>庚戌</td><td>石門星</td><td class="isou">月柱と天剋地冲／日柱と庫刑</td></tr>
+          <tr><td>67〜76</td><td>辛亥</td><td>貫索星</td><td class="isou">年柱と天剋地冲</td></tr>
+          <tr><td>77〜86</td><td>壬子</td><td>調舒星</td><td class="isou">年柱と干合／月柱と半会／日柱と支合</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <p><b>7〜16歳・乙巳。</b>大運天中殺の十年でした。宿命の天中殺三つに、さらに大運の天中殺が重なった子ども時代です。「この子は何を考えているか分からない」と言われながら、心の中の神様と相談してきた時期と重なります。</p>
+    <p><b>37〜46歳・戊申。</b>主星は玉堂星、学ぶ星です。37歳で結婚して、踊りの指導をして、命学に出会った十年。学ぶ星の十年で、しっかり学んだ時期です。</p>
+    <p><b>47〜56歳・己酉（今）。</b>主星は龍高星。巳・酉・丑の金局が揃う、大発展型の十年です（六章）。</p>
+    <p><b>57〜66歳・庚戌。</b>主星は<b>石門星</b>。社会の位置と同じ、人と組む星が、十年まるごと巡ってきます。月柱と天剋地冲、日柱と庫刑。何かを崩しては立ち上げる、作り直しの十年です。自分から動いて起こすか、外から来るかは分かりませんが、<b>受け止められないものは来ない</b>と、僕は考えています。新しい人生を始めるために、自分で用意したものとして受け取ってください。</p>
+    <p><b>67〜76歳・辛亥。</b>主星は貫索星、自分を守る星。年柱と天剋地冲。</p>
+    <p style="margin-bottom:0;"><b>77〜86歳・壬子。</b>主星は<b>調舒星</b>。第一守護神の壬と、ご先祖様の使命の調舒星が、一緒に巡る十年です。年・月・日の三つの柱、全部と結びつきます。晩年運の天印星「若者たちに囲まれて好き放題できる、幸せな晩年」と合わせて、最後まで人に囲まれていく作りです。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">九</span><span class="sec-title">年と月の時間割</span></div>
+  <div class="card">
+    <div class="tl">
+      <div class="tl-item tc">
+        <div class="tl-when">2024年（47歳）甲辰・2025年（48歳）乙巳 ― 年の天中殺</div>
+        <div class="tl-body">今の十年の最初の二年。会の中で、いちばんしんどかった二年間。合わないものが、はっきり見えた時期です。2026年2月の立春で明けました。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2026年（49歳）丙午 ・ 牽牛星</div>
+        <div class="tl-body">日柱に干合と害。自分自身の場所に、結びつきと我慢が同時に出る年。Meetで「こうしなければならない、という自分ルールを、外していいものもあるのではと探し始めている」と話してくれました。今年のうちに、どのルールを外すかを探しておくと、来年の切り替えにそのまま使えます。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2026年10月8日〜11月6日 ・ 戊戌（玉堂星）</div>
+        <div class="tl-body">月柱に天剋地冲、日柱に庫刑。今までの形が切り替わりやすく、昔のことが表に出やすい月。無理に元へ戻さず、何を残して何を置いていくかを見ておく。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2026年11月7日〜12月6日 ・ 己亥（龍高星）</div>
+        <div class="tl-body">年柱に対冲、月柱に干合。外の予定は動きやすく、目指すものとは結びつきやすい月。外の揺れより、自分が向かう先を先に決める。<b>12月6日までに、自分の言葉で一人を見る</b>（十二章）。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2026年12月7日〜2027年1月4日 ・ 庚子（石門星）</div>
+        <div class="tl-body">月柱に半会、日柱に支合。人と組む星の月。仲間や身近な人と、地道に形を育てるのに向いています。一人を見た後の、次の一歩に。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年1月5日〜2月3日 ・ 辛丑（貫索星）</div>
+        <div class="tl-body">日干支と同じ辛丑が巡る、自分に戻る月。人に合わせるより、自分のペースと納得を先に置く。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年2月4日〜3月5日 ・ 壬寅（調舒星）</div>
+        <div class="tl-body">第一守護神の壬が巡る月。年柱に干合と、害・生刑。一人で深める時間を確保する。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">2027年4月5日〜6月5日 ・ 月の天中殺</div>
+        <div class="tl-body">甲辰・乙巳の二か月。大きな契約や、新しく始める決め事は、この二か月を外す。6月6日で明けます。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年（50歳）丁未 ・ 車騎星</div>
+        <div class="tl-body">日柱に庫刑と天剋地冲。自分自身の場所が、強く切り替わる年。価値観がひっくり返るようなことが起きやすい年です。受け身の道から能動の道へ乗り換える節目に。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2028年（51歳）戊申 ・ 玉堂星</div>
+        <div class="tl-body">年柱に支合、月柱に半会。外との縁がつながって、広がる配置。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2029年（52歳）己酉 ・ 龍高星</div>
+        <div class="tl-body">今の十年と同じ干支。年柱・日柱と三合会局、月柱と干合・支合。2028年までにやったことが、大きく広がる年。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2030年〜2035年</div>
+        <div class="tl-body">2030年（庚戌）は月柱に天剋地冲、日柱に庫刑。2031年（辛亥）は年柱に天剋地冲。2033年で己酉の十年が終わり、2034年から石門星の庚戌の十年に入ります。<b>2035年までに、ゆかさんの観方を形にする</b>。形にしやすい時期です。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">2036〜2037年 ・ 次の年の天中殺</div>
+        <div class="tl-body">59歳と60歳。作ったものを、守って深める二年。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">十</span><span class="sec-title">五つの視点 ─ ぐるりと見る</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.8rem;">同じ命式を、深さの違う五つの角度から観ます。同じ結論に別の道から辿り着く時、それが本物です。</p>
+    <p class="lead">［壱］ 本質と才能の視点</p>
+    <p>日の宿命は辛丑「池地の精霊」。冬の泥に沈む、本物の宝石。中心は禄存星、才能星は石門星、型は順殿の型。<span class="hl">頭がよくて静かな中身と、人の心を掴める笑顔</span>を、両方持っている人です。</p>
+    <p style="margin-bottom:0;"><b>才能の出口は、人と組むこと。</b>一人で抱えて考えすぎると、宝石は奥に沈みます。</p>
+  </div>
+  <div class="card">
+    <p class="lead">［弐］ 家系と宿命の視点</p>
+    <p>辰巳天中殺は「人と違う道を行く使命」。宿命二中殺と互換中殺が重なり、生まれた時から、属さず、頼らず、一代で作る設計になっています。伴星の調舒星は「オンリーワンを作りなさい」。</p>
+    <p style="margin-bottom:0;"><b>誰かの型を受け継ぐのではなく、初代になる。</b>ご先祖様から渡された向きは、そこを指しています。</p>
+  </div>
+  <div class="card">
+    <p class="lead">［参］ 今の運気の構造から観る視点</p>
+    <p>今の大運は己酉。巳・酉・丑の金局が揃う大発展型の十年で、年柱と日柱が一つの局で結ばれる十年。年の天中殺は明けて、次は2036年。</p>
+    <p style="margin-bottom:0;"><span class="hl">今年は準備、来年に切り替え、2029年に広がり、2035年までに形にする</span>。約十年の、天中殺のない時間が用意されています。</p>
+  </div>
+  <div class="card">
+    <p class="lead">［肆］ 関係性と環境の視点</p>
+    <p>社会の位置は兄弟・友人の場所で、そこに仲間作りの石門星。目上の助けを得る玄武型。家庭は、自由で干渉しない鳳閣星。</p>
+    <p style="margin-bottom:0;">友達が多い必要はありません。<b>ぶつかって磨き合える、兄弟のような少数と組む。</b>東洋占術の思想には、関係性の中で自分がどうあるか、という事が大事、サポートを受ける時は受ける、が正解という考え方があります。</p>
+  </div>
+  <div class="card">
+    <p class="lead">［伍］ 霊魂の設計という視点 ―― 総括</p>
+    <p>壱から肆まで、全部が同じ方向を向いています。<b>属さずに、自分にしかできない観方を作って、人と組んで外に出す</b>、という構造です。</p>
+    <p>でも、<span class="hl">「宿命どおりだから、自分のペースで、そのうち」という話ではありません。</span></p>
+    <p><b>この命式が、今、動ける条件は、一つだけです。</b></p>
+    <div class="pull">会の占術を使わずに、ゆかさんの言葉で、一人を見ること。<br>完成してから出るのではなく、出ながら磨かれる。</div>
+    <p>新しい占術を今から探しに行く必要はありません。ゆかさんの中には、学んできたものがもう貯まっています。<b>貯まっているものを、ゆかさんの言葉で一度、外に出す。</b>それが、受け身の道から能動の道への、最初の一歩です。</p>
+    <p style="margin-bottom:0;">そして、出した後に、<span class="hl">向こうから来たものを、受け取る。</span>反応も、人も、学びの場も、組む相手も。三合会局の十年は、出し口さえ見つかれば、エネルギーが勝手に流れていきます。それで、この命式は回り始めます。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">十一</span><span class="sec-title">深い五つの視点 ― in depth</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.8rem;">通常の読みよりさらに深く、五つの切り口から命式を観ます。</p>
+    <p class="lead">陽転の視点</p>
+    <p style="margin-bottom:0;">中年期の星は、立場や名乗りが変わることで陽転していきます。中年運の天庫星は、凝り性で探求心の強い星。<b>誰かの会の鑑定士</b>から、<b>自分の観方を持つ占い師</b>へ。名乗りが移るほど、探求心が仕事に回り始めます。</p>
+  </div>
+  <div class="card">
+    <p class="lead">本質の視点</p>
+    <p style="margin-bottom:0;">辛丑は、奥地の池に隠された宝石です。派手に打ち出す干支ではありません。<b>見抜いてくれる人に見つけられて、光るところに出ていく</b>干支です。だから、見てもらえる場所に、一度身を置くことが大事になります。</p>
+  </div>
+  <div class="card">
+    <p class="lead">お役目の視点</p>
+    <p style="margin-bottom:0;">宿命二中殺は「精神世界において大成する」。互換中殺は「初代の気」。小さい頃から心の中の神様と相談し、毎朝、禊と神社への参拝を続けてきた人です。<b>精神の世界を深めて、それを自分の言葉で人に手渡す</b>。それが、この命式に用意された役目だと、僕は見ています。</p>
+  </div>
+  <div class="card">
+    <p class="lead">幸福感の視点</p>
+    <p style="margin-bottom:0;">ゆかさんの幸福の源は、<b>あたたかい場所で、自分らしく、人と心を通わせること</b>です。ハワイで感じる「人間らしいコミュニケーション」。家庭の穏やかさ。そこに、自分の観方で人を観る手応えが加わった時に、「命を使っている」という感覚が戻ってくるのだと思います。</p>
+  </div>
+  <div class="card">
+    <p class="lead">エネルギーの視点</p>
+    <p style="margin-bottom:0;">五行は欠けのない安定バランス型で、学ぶ土がいちばん厚い。守護神は、大きく動く壬。<b>貯める力は十分にあって、流す力をどう使うか</b>、という配置です。海や川に行く、旅に出る、体を動かす。流れるほど、命式はいい状態になります。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">十二</span><span class="sec-title">ここから動ける処方</span></div>
+  <div class="card recipe">
+    <div class="item"><div class="num">1</div><div class="rbody"><b>会の占術を使わずに、自分の言葉で、一人を見る。</b><br>ご主人でも、誰でもいい。習った手順ではなく、貯めてきたものから、ゆかさんの言葉で。12月6日までに。初代の、最初の一人です。</div></div>
+    <div class="item"><div class="num">2</div><div class="rbody"><b>外していい「自分ルール」を、今年のうちに探しておく。</b><br>2027年の切り替えの年に、そのまま使えます。</div></div>
+    <div class="item"><div class="num">3</div><div class="rbody"><b>考えすぎたら、一度止まる。</b><br>人の裏を読んでいると気づいたら、そこで止める。池が澄むと、透明感のある思考に戻ります。</div></div>
+    <div class="item"><div class="num">4</div><div class="rbody"><b>ぶつかれる仲間を、少数でいいので持つ。</b><br>友達でなくていい。同じ道を自分の足で歩いている人。助言をくれる目上の人も、その一人です。</div></div>
+    <div class="item"><div class="num">5</div><div class="rbody"><b>体を動かす。勝負ではなく、気持ちを外に出すために。</b><br>毎朝の禊と神社への散歩を続けて、ピラティスや踊りを、属さない形で。</div></div>
+    <div class="item"><div class="num">6</div><div class="rbody"><b>水と、大きく動くことを、暮らしに入れる。</b><br>海、川、旅。第一守護神の壬のエネルギーです。</div></div>
+    <div class="item"><div class="num">7</div><div class="rbody"><b>2027年4月5日〜6月5日は、大きく決めない。</b><br>月の天中殺です。新しく始める決め事や契約は、6月6日以降に。</div></div>
+    <div class="item"><div class="num">8</div><div class="rbody"><b>学んできたものを、捨てずに整理する。</b><br>今の命学と、これからやりたいことを並べてみる。基礎として、必ず役に立ちます。</div></div>
+  </div>
+</div>
+
+<div class="closing">
+  <p>ゆかさんは、<span class="hl">池地の精霊</span>の人です。<br>奥地の池に隠された、本物の宝石。<br>池の水は、手つかずで、きれい。</p>
+  <p>宿命の天中殺が三つ。<br>属さず、頼らず、一代で作る人生です。</p>
+  <p>今は、三合会局の十年。<br>出し口を探しているエネルギーがあります。</p>
+  <p class="big">その宝石を、<br>ゆかさん一代で、外へ。</p>
+  <p>まずは、最初の一人から☺️</p>
+</div>
+
+<a class="koyomi-link" href="/sasaki-yuka">
+  <span class="arrow">▶</span> 運㐂暦（日々の運気カレンダー）をひらく
+  <small>毎日の運気と、月の流れ、天中殺の日が出ます。</small>
+</a>
+
+<footer>
+  <p>いつもおおきにです😊　ここからがスタートです。一人を見てみてどうだったか、組む相手のこと、迷ったことは、いつでもLINEで聞いてください💬</p>
+  <p class="sig">㐂</p>
+</footer>
+
+</div>
+</body>
+</html>
