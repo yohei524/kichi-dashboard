@@ -449,6 +449,10 @@
     {
       "source": "/hono-kanteisho",
       "destination": "/clients/hono-kanteisho.html"
+    },
+    {
+      "source": "/maya-hasumi-kanteisho",
+      "destination": "/clients/maya-hasumi-kanteisho.html"
     }
   ]
 }
