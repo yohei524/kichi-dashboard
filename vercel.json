@@ -79,6 +79,10 @@
       "destination": "/view.html?client=fumiko"
     },
     {
+      "source": "/fumiko-kanteisho",
+      "destination": "/clients/fumiko-kanteisho.html"
+    },
+    {
       "source": "/kato-kazuko-kanteisho",
       "destination": "/clients/kato-kazuko-kanteisho.html"
     },
