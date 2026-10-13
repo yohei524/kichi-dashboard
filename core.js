@@ -1496,6 +1496,9 @@ function buildPlanLockHTML() {
 // D.expiresAt（"YYYY-MM-DD"）が無ければ何も出さない。
 // 押し売りにしないため、期限がまだ遠いうちは黙っている。残り30日を切ってから静かに出す。
 function buildExpiryHTML() {
+  // 261013 㐂さん「そうゆう縛りも何もないですよ今は」→ 閲覧期限の表示（残り◯日・期間を過ぎました）は全員分出さない。
+  // expiresAt は内部の管理用（月ごとの更新の目安）としてだけ残す。
+  return '';
   if (!D.expiresAt) return '';
   // 購読者は毎月の決済で延びるので「残り◯日」は出さない（閉じる処理は isPlanLocked 側）
   if (D.plan) return '';
