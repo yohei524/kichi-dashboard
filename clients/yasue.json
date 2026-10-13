@@ -1,0 +1,66 @@
+{
+  "client": {
+    "name": "康江さん",
+    "dayStem": "丙",
+    "dayStemReading": "ひのえ",
+    "element": "火",
+    "elementNote": "丙午「異国まで照らす太陽」。遠くまで照らす、真昼の太陽です。命式は火121・土121がとても厚く、金17・水0と薄い形。第一守護神は壬（大河＝大きく流れる・動く）、第二守護神は庚（切る・決める）です。",
+    "tenchu": "寅卯天中殺",
+    "travelImgKey": "inbo",
+    "tenchuNote": "東方天中殺。引き継ぎ・継承の使命。狭く深いご縁、丁寧さ、精神性を高める学びで陽転します。",
+    "specialStructure": "宿命天中殺：生月中殺（自分の足で、自分の場所を持つと陽転）",
+    "my": {
+      "ds": 2,
+      "db": 6,
+      "ms": 4,
+      "mb": 2,
+      "ys": 1,
+      "yb": 5,
+      "tc": [
+        2,
+        3
+      ]
+    },
+    "birth": "1965-02-21",
+    "sex": "F"
+  },
+  "yearTenchuNote": "康江さんの次の年天中殺は2034〜2035年で、まだ先です。今の10年（54〜63歳）は、仕事の場が大きく動きやすい10年。2027年は人との結びつきが出やすい年、2028年は仕事の場にもう一度大きな動きが出る年です。月の天中殺は毎年2月〜3月（立春〜清明の前日）。",
+  "monthlyFortunes": [
+    {
+      "period": "2026/10/8〜2026/11/6",
+      "kanshi": "戊戌",
+      "mainStar": "鳳閣星",
+      "jyusei": "天庫星",
+      "aspects": "月柱：大半会／月柱+日柱：三合会局",
+      "isTenchu": false,
+      "advice": "楽しむ・味わう鳳閣星が巡る月です。仕事の場と自分自身の場所に三合会局が出て、仕事と自分が一つにまとまりやすい時期。出てきた話は、その場で決めずにメモしておくくらいで十分です。気持ちが追いつかない日は、好きなものを食べる、景色を見るなど、小さく味わうことを先に置きましょう。"
+    }
+  ],
+  "monthlyTenchuPeriod": {
+    "startMonth": 2,
+    "startDay": 4,
+    "endMonth": 4,
+    "endDay": 4,
+    "endYear": 2027
+  },
+  "design": {
+    "accentColor": "#B5543A",
+    "headerSub": "― 丙午・龍高星の暦 ―",
+    "headerTitle": "運㐂暦",
+    "headerTagline": "異国まで照らす太陽",
+    "footerText": "― 休むのも、予定のうち ―",
+    "needElement": "水",
+    "needElementNote": "水0・金17と薄め。水場に行く・濃紺や白を身につける・読書の時間で補えます"
+  },
+  "goal": null,
+  "dailyAdvice": {},
+  "koyomiOnly": true,
+  "koyomiNoDestiny": true,
+  "expiresAt": "2026-11-06",
+  "doorHref": "",
+  "doorLabel": "",
+  "doorNote": "",
+  "kanteishoHref": "",
+  "plan": null,
+  "parts": {}
+}
