@@ -41,6 +41,15 @@
       "advice": "日柱にまとまる配置が重なる月。頼られごとが増えやすい時期です。了殿の型は、才能が強く出るほど生命力が削られる構造なので、いつも通り「頑張りを半分に」を意識してください。求められたら全部応えるのではなく、軸は動かさず、届けたい相手にだけ照らす月にしていいです。"
     },
     {
+      "period": "2026/10/8〜2026/11/6",
+      "kanshi": "戊戌",
+      "mainStar": "車騎星",
+      "jyusei": "天南星",
+      "aspects": "年柱：半会／日柱：天剋地冲",
+      "isTenchu": false,
+      "advice": "行動力と勝負の星（車騎星）が巡る月です。年柱に半会が出て、外の場面は広がりやすい配置。ただし日柱に天剋地冲が出ていて、自分の場所そのものが大きく揺さぶられやすい月です。揺れをそのまま答えにせず、何が揺れているかを書き留めておきましょう。動く勢いはありますが、頑張りは半分に。年天中殺の2年の途中なので、新しいものは探しに行かず、来たものだけ受け取ってください。"
+    },
+    {
       "period": "2026/7/7〜2026/8/7",
       "kanshi": "乙未（月天中殺）",
       "mainStar": "調舒星",
@@ -51,11 +60,11 @@
     }
   ],
   "monthlyTenchuPeriod": {
-    "startMonth": 7,
-    "startDay": 7,
+    "startMonth": 6,
+    "startDay": 6,
     "endMonth": 8,
     "endDay": 6,
-    "endYear": 2026
+    "endYear": 2027
   },
   "design": {
     "accentColor": "#B8862C",
@@ -70,7 +79,7 @@
   "koyomiOnly": true,
   "koyomiNoDestiny": true,
   "kanteishoHref": "/sachi-kanteisho",
-  "expiresAt": "2026-10-20",
+  "expiresAt": "2026-11-06",
   "doorHref": "/sachi-kanteisho",
   "doorLabel": "鑑定書をひらく",
   "doorNote": "観たこと、話しきれんかったことも含めてまとめてあります",
