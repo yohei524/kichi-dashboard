@@ -83,6 +83,10 @@
       "destination": "/view.html?client=yasue"
     },
     {
+      "source": "/narumi",
+      "destination": "/view.html?client=narumi"
+    },
+    {
       "source": "/fumiko-kanteisho",
       "destination": "/clients/fumiko-kanteisho.html"
     },

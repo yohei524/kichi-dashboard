@@ -1,0 +1,66 @@
+{
+  "client": {
+    "name": "成美さん",
+    "dayStem": "己",
+    "dayStemReading": "つちのと",
+    "element": "土",
+    "elementNote": "己巳「初夏の田畑」。陽に温められて、作物がぐんぐん育つ畑です。命式は土104が厚く、火52・木47・水38・金33と続く、バランスの取れた形。第一守護神は丙（太陽＝外に出して照らす）、第二守護神は甲（大樹＝まっすぐ立つ）です。",
+    "tenchu": "戌亥天中殺",
+    "travelImgKey": "inui",
+    "tenchuNote": "北西天中殺。精神性を高める使命。形のないもの・精神の世界に向かうことで陽転します。",
+    "specialStructure": "宿命天中殺：なし",
+    "my": {
+      "ds": 5,
+      "db": 5,
+      "ms": 3,
+      "mb": 1,
+      "ys": 0,
+      "yb": 4,
+      "tc": [
+        10,
+        11
+      ]
+    },
+    "birth": "1965-01-15",
+    "sex": "F"
+  },
+  "yearTenchuNote": "成美さんの次の年天中殺は2030〜2031年です。今の10年（53〜62歳）は仕事の場が大きく動きやすい10年。2027年は仕事の形が切り替わりやすい年、2029年は大きく広がる年です。月の天中殺は毎年10月〜11月（寒露〜大雪の前日）で、今年は10/8〜12/6。",
+  "monthlyFortunes": [
+    {
+      "period": "2026/10/8〜2026/11/6",
+      "kanshi": "戊戌",
+      "mainStar": "石門星",
+      "jyusei": "天印星",
+      "aspects": "月天中殺／年柱：天剋地冲／月柱：庫刑",
+      "isTenchu": true,
+      "advice": "月の天中殺に入る月です（12/6まで）。社会の場所に天剋地冲、目標の場所に庫刑が重なり、外の立場や仕事の形が揺れやすい時期。新しい契約や大きな決断は外して、今あるものを整えましょう。人と組む石門星の月なので、一人で抱えず、話を聞いてもらう場を持つのに向いています。"
+    }
+  ],
+  "monthlyTenchuPeriod": {
+    "startMonth": 10,
+    "startDay": 8,
+    "endMonth": 12,
+    "endDay": 6,
+    "endYear": 2026
+  },
+  "design": {
+    "accentColor": "#7A8A3A",
+    "headerSub": "― 己巳・鳳閣星の暦 ―",
+    "headerTitle": "運㐂暦",
+    "headerTagline": "陽に温められて、畑は育つ",
+    "footerText": "― 守る力を、育てる力に ―",
+    "needElement": "金",
+    "needElementNote": "金33が五つの中で一番少なめ。白いもの・金属を身につける・決めたことを書き出して整理する、で補えます"
+  },
+  "goal": null,
+  "dailyAdvice": {},
+  "koyomiOnly": true,
+  "koyomiNoDestiny": true,
+  "expiresAt": "2026-11-06",
+  "doorHref": "",
+  "doorLabel": "",
+  "doorNote": "",
+  "kanteishoHref": "",
+  "plan": null,
+  "parts": {}
+}
