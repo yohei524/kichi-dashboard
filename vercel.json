@@ -473,6 +473,10 @@
     {
       "source": "/maya-hasumi-kanteisho",
       "destination": "/clients/maya-hasumi-kanteisho.html"
+    },
+    {
+      "source": "/narumi-kanteisho",
+      "destination": "/clients/narumi-kanteisho.html"
     }
   ]
 }
