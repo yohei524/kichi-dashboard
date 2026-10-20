@@ -1,0 +1,84 @@
+{
+  "client": {
+    "name": "hirokoさん",
+    "dayStem": "癸",
+    "dayStemReading": "みずのと",
+    "element": "水",
+    "elementNote": "癸巳「初夏のにわか雨」。遠くから澄んだ水が流れてくる、清らかな水です。命式は金65が厚く、火38・水38と続き、木16・土14がいちばん薄い形。第一守護神は丙（太陽＝外に出して照らす）、第二守護神は甲（大樹＝まっすぐ立つ）です。",
+    "tenchu": "午未天中殺",
+    "travelImgKey": "gohitsuji",
+    "tenchuNote": "南方天中殺。流れを断ち切る使命。陽転条件は「過去のしがらみを断ち切って、独自路線に進むこと」。",
+    "specialStructure": "宿命天中殺：生日中殺",
+    "my": {
+      "ds": 9,
+      "db": 5,
+      "ms": 7,
+      "mb": 11,
+      "ys": 3,
+      "yb": 9,
+      "tc": [
+        6,
+        7
+      ]
+    },
+    "birth": "1957-11-17",
+    "sex": "F"
+  },
+  "yearTenchuNote": "hirokoさんは今、67歳から86歳までの20年間、大運の天中殺の中にいます。そこに2026〜2027年の年天中殺が重なる巡りです。止まれ、という時期ではありません。新しいものを探しに行くより、これまでの延長を整えて、向こうから来たものを受け取る時期です。2027年6〜7月は月の天中殺です。",
+  "monthlyFortunes": [
+    {
+      "period": "2026/10/8〜2026/11/6",
+      "kanshi": "戊戌",
+      "mainStar": "牽牛星",
+      "jyusei": "天堂星",
+      "aspects": "年柱：害／日柱：干合",
+      "isTenchu": false,
+      "advice": "日柱に干合が出る月です。人との結びつきが生まれやすく、新しい縁が自分に関わってくる配置。年柱には害が出るので、外の場面で我慢が続きやすい時期です。無理に合わせず、休む時間を先に確保しましょう。"
+    },
+    {
+      "period": "2026/11/7〜2026/12/6",
+      "kanshi": "己亥",
+      "mainStar": "車騎星",
+      "jyusei": "天将星",
+      "aspects": "日柱：天剋地冲／月柱：自刑",
+      "isTenchu": false,
+      "advice": "日柱に天剋地冲が出る、大きく揺さぶられる月です。月柱にも自刑が重なり、自分を追い込みやすい配置。大きな決断や新しい契約は外して、体を休めることを優先してください。"
+    },
+    {
+      "period": "2026/12/7〜2027/1/4",
+      "kanshi": "庚子",
+      "mainStar": "玉堂星",
+      "jyusei": "天禄星",
+      "aspects": "—",
+      "isTenchu": false,
+      "advice": "位相のぶつかりが出ていない、静かな月です。落ち着いて、今あるものを整えるのに向いています。"
+    }
+  ],
+  "monthlyTenchuPeriod": {
+    "startMonth": 6,
+    "startDay": 6,
+    "endMonth": 8,
+    "endDay": 7,
+    "endYear": 2027
+  },
+  "design": {
+    "accentColor": "#4A6A8A",
+    "headerSub": "― 癸巳・調舒星の暦 ―",
+    "headerTitle": "運㐂暦",
+    "headerTagline": "初夏のにわか雨",
+    "footerText": "― 澄んだ水は、遠くから流れてくる ―",
+    "needElement": "土",
+    "needElementNote": "土14と木16がいちばん薄い形。地に足をつける時間（土の手仕事・地元とのつながり）と、朝の散歩を足してください。"
+  },
+  "goal": null,
+  "dailyAdvice": {},
+  "koyomiOnly": true,
+  "koyomiNoDestiny": true,
+  "expiresAt": "2026-11-06",
+  "doorHref": "",
+  "doorLabel": "",
+  "doorNote": "",
+  "kanteishoHref": "",
+  "plan": null,
+  "parts": {}
+}
