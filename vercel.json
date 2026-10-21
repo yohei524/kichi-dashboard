@@ -55,6 +55,10 @@
       "destination": "/view.html?client=hiroko"
     },
     {
+      "source": "/junko",
+      "destination": "/view.html?client=junko"
+    },
+    {
       "source": "/chika-kanteisho",
       "destination": "/clients/chika-kanteisho.html"
     },

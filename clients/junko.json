@@ -1,0 +1,67 @@
+{
+  "client": {
+    "name": "純子さん",
+    "dayStem": "乙",
+    "dayStemReading": "きのと",
+    "element": "木",
+    "elementNote": "乙酉「切り取られた牧草」。別名は盆栽の花です。命式は金137が突出していて、水23・土16と続き、木5・火0がいちばん薄い形。第一守護神は癸（雨のように静か）、第二守護神は丙（太陽＝外に出して照らす）です。",
+    "tenchu": "午未天中殺",
+    "travelImgKey": "gohitsuji",
+    "tenchuNote": "南方天中殺。流れを断ち切る使命。陽転条件は「過去のしがらみを断ち切って、独自路線に進むこと」。",
+    "specialStructure": "宿命天中殺：なし",
+    "my": {"ds": 1, "db": 9, "ms": 7, "mb": 9, "ys": 4, "yb": 8, "tc": [6, 7]},
+    "birth": "1968-09-12",
+    "sex": "F"
+  },
+  "yearTenchuNote": "純子さんは、2026〜2027年が年の天中殺です。大運の天中殺（11〜30歳）は、もう過ぎています。この二年は、大きな決断を外して、これまでのことを整える時期です。2027年6〜7月は月の天中殺です。",
+  "monthlyFortunes": [
+    {
+      "period": "2026/10/8〜2026/11/6",
+      "kanshi": "戊戌",
+      "mainStar": "司禄星",
+      "jyusei": "天庫星",
+      "aspects": "月柱：害／日柱：害／年＋月＋日柱：方三位（西方金）",
+      "isTenchu": false,
+      "advice": "日柱と月柱に害が出る月です。自分の内側でも、仕事の場でも、我慢がたまりやすい配置。三つの柱がそろって金の気が強まるので、言葉がきつく出やすい時期でもあります。予定を詰めず、休む時間を先に確保しましょう。"
+    },
+    {
+      "period": "2026/11/7〜2026/12/6",
+      "kanshi": "己亥",
+      "mainStar": "禄存星",
+      "jyusei": "天極星",
+      "aspects": "年柱：害",
+      "isTenchu": false,
+      "advice": "年柱に害が出る月です。外の人との場面で、引っかかりが出やすい配置。新しい場に出るより、今あるつながりを大事にしましょう。"
+    },
+    {
+      "period": "2026/12/7〜2027/1/4",
+      "kanshi": "庚子",
+      "mainStar": "牽牛星",
+      "jyusei": "天胡星",
+      "aspects": "年柱：半会／日柱：干合",
+      "isTenchu": false,
+      "advice": "日柱に干合、年柱に半会が出る月です。人との結びつきが生まれやすく、外に広がる力も出る配置。年の天中殺の中なので、大きな決断は外して、来たご縁を受け取る月にしましょう。"
+    }
+  ],
+  "monthlyTenchuPeriod": {"startMonth": 6, "startDay": 6, "endMonth": 8, "endDay": 7, "endYear": 2027},
+  "design": {
+    "accentColor": "#5E7A4A",
+    "headerSub": "― 乙酉・車騎星の暦 ―",
+    "headerTitle": "運㐂暦",
+    "headerTagline": "切り取られた牧草",
+    "footerText": "― 盆栽の花は、手をかけた分だけ咲く ―",
+    "needElement": "火",
+    "needElementNote": "火0と木5がいちばん薄い形。人前に出る・表現する時間と、暖かい灯り（キャンドル・暖色の照明）を足してください。"
+  },
+  "goal": null,
+  "dailyAdvice": {},
+  "koyomiOnly": true,
+  "koyomiNoDestiny": true,
+  "expiresAt": "2026-11-06",
+  "doorHref": "",
+  "doorLabel": "",
+  "doorNote": "",
+  "kanteishoHref": "",
+  "plan": null,
+  "parts": {}
+}
