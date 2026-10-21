@@ -481,6 +481,10 @@
     {
       "source": "/narumi-kanteisho",
       "destination": "/clients/narumi-kanteisho.html"
+    },
+    {
+      "source": "/hiroko-kanteisho",
+      "destination": "/clients/hiroko-kanteisho.html"
     }
   ]
 }
