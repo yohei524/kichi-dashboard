@@ -489,6 +489,10 @@
     {
       "source": "/hiroko-kanteisho",
       "destination": "/clients/hiroko-kanteisho.html"
+    },
+    {
+      "source": "/junko-kanteisho",
+      "destination": "/clients/junko-kanteisho.html"
     }
   ]
 }
