@@ -167,6 +167,10 @@
       "destination": "/clients/noriko-kanteisho.html"
     },
     {
+      "source": "/noriko-kanteisho-2",
+      "destination": "/clients/noriko-kanteisho-2.html"
+    },
+    {
       "source": "/minako",
       "destination": "/view.html?client=minako"
     },

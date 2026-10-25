@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>norikoさん 鑑定書2 ｜ 㐂占</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --night:#0B0F1A; --night2:#131A28; --sink:#171F30; --panel:#1B2334;
+  --line:#2A3346; --accent:#D9A441; --accent-soft:#B8842C; --accent-glow:rgba(217,164,65,.14);
+  --gold:#C9A24A; --text:#ECEAE4; --muted:#8A96AC; --muted2:#A9B3C6;
+  --water:#6E9BC4; --fire:#D08A5A; --wood:#7FA86B; --metal:#C4C9D2; --earth:#C9A24A;
+  --bad:#C97A6A; --good:#6E9BC4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Serif JP',serif; color:var(--text); line-height:1.95; letter-spacing:.045em;
+  background:
+    radial-gradient(1200px 620px at 50% -12%, rgba(217,164,65,.10), transparent 60%),
+    linear-gradient(180deg,#0B0F1A 0%,#0D1220 45%,#080B14 100%);
+  background-attachment:fixed; min-height:100vh;
+}
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.05rem 4rem;}
+
+header{text-align:center;padding:3rem 1rem 1.4rem;}
+header .kicker{font-size:.68rem;letter-spacing:.32em;color:var(--accent);opacity:.9;margin-bottom:.9rem;}
+header h1{font-size:1.5rem;font-weight:500;letter-spacing:.08em;margin-bottom:.5rem;}
+header h1 .nm{color:var(--accent);}
+header .tagline{font-size:.8rem;color:var(--muted2);letter-spacing:.1em;line-height:1.7;}
+header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:.12em;}
+
+.profile{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem .8rem;
+}
+.profile div{font-size:.74rem;color:var(--muted);}
+.profile div b{display:block;font-size:.9rem;color:var(--text);font-weight:500;margin-top:.1rem;letter-spacing:.06em;}
+.profile div.full{grid-column:1/3;}
+
+.sec{margin-bottom:1.65rem;}
+.sec-head{
+  display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;
+  padding-bottom:.6rem;border-bottom:1px solid var(--line);
+}
+.sec-no{font-size:.72rem;color:var(--accent);letter-spacing:.18em;font-weight:600;}
+.sec-title{font-size:1.02rem;font-weight:500;letter-spacing:.08em;}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  padding:1.25rem 1.15rem;box-shadow:0 4px 24px rgba(0,0,0,.32);margin-bottom:1rem;
+}
+.card p{font-size:.87rem;margin-bottom:.9rem;color:var(--text);}
+.card p:last-child{margin-bottom:0;}
+.card .lead{color:var(--accent);font-size:.9rem;font-weight:500;}
+.hl{color:var(--accent);font-weight:500;}
+.soft{color:var(--muted2);font-size:.8rem;}
+
+.meishiki{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.2rem 0 .3rem;
+}
+.pillar{
+  background:var(--sink);border:1px solid var(--line);border-radius:12px;
+  padding:.7rem .4rem;text-align:center;
+}
+.pillar .lbl{font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.55rem;}
+.pillar .yomi{font-size:.58rem;color:var(--muted);letter-spacing:.04em;line-height:1.3;}
+.pillar .kan{font-size:1.85rem;font-weight:600;color:var(--text);line-height:1.15;}
+.pillar .shi{font-size:1.85rem;font-weight:600;color:var(--accent);line-height:1.15;margin-top:.2rem;}
+.pillar .zou{font-size:.62rem;color:var(--muted2);margin-top:.55rem;letter-spacing:.04em;}
+.meishiki-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;}
+
+.jintai{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:19rem;margin:.4rem auto .2rem;}
+.jcell{
+  background:var(--sink);border:1px solid var(--line);border-radius:11px;
+  aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;
+}
+.jcell .pos{font-size:.58rem;color:var(--muted);letter-spacing:.05em;}
+.jcell .star{font-size:.92rem;font-weight:600;color:var(--text);letter-spacing:.03em;}
+.jcell.center{background:linear-gradient(160deg,rgba(217,164,65,.18),var(--sink));border-color:var(--accent-soft);}
+.jcell.center .star{color:var(--accent);}
+.jcell.jusei-cell{background:var(--night2);}
+.jcell .star.gold{color:var(--gold);}
+
+.gogyo{margin-top:.3rem;}
+.gbar{display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;}
+.gbar .gname{width:2.6rem;font-size:.76rem;color:var(--muted2);flex-shrink:0;}
+.gbar .gtrack{flex:1;height:9px;background:var(--sink);border-radius:5px;overflow:hidden;}
+.gbar .gfill{display:block;height:100%;border-radius:5px;}
+.gbar .gval{width:2.2rem;text-align:right;font-size:.72rem;color:var(--muted);flex-shrink:0;}
+.g-wood .gfill{background:var(--wood);}
+.g-fire .gfill{background:var(--fire);}
+.g-earth .gfill{background:var(--earth);}
+.g-metal .gfill{background:var(--metal);}
+.g-water .gfill{background:var(--water);}
+
+.daiun-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.daiun{width:100%;border-collapse:collapse;font-size:.78rem;min-width:19rem;}
+.daiun th{
+  font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.05em;
+  padding:.4rem .3rem;border-bottom:1px solid var(--line);text-align:center;
+}
+.daiun td{padding:.5rem .3rem;text-align:center;border-bottom:1px solid rgba(42,51,70,.5);color:var(--text);}
+.daiun td:first-child{color:var(--muted2);font-size:.72rem;white-space:nowrap;}
+.daiun .tc-cell{color:var(--bad);font-size:.68rem;}
+.daiun .now-row td{background:linear-gradient(90deg,rgba(217,164,65,.12),transparent);}
+.daiun .now-row td:first-child{color:var(--accent);font-weight:600;}
+.daiun .now-cell{color:var(--accent);font-size:.68rem;font-weight:600;}
+
+.tl{position:relative;padding-left:1.1rem;margin-top:.3rem;}
+.tl::before{content:"";position:absolute;left:3px;top:.4rem;bottom:.4rem;width:2px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:1rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before{content:"";position:absolute;left:-1.1rem;top:.45rem;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--night2);}
+.tl-item.tc::before{background:var(--bad);}
+.tl-when{font-size:.76rem;color:var(--accent);font-weight:600;letter-spacing:.06em;}
+.tl-item.tc .tl-when{color:var(--bad);}
+.tl-body{font-size:.82rem;color:var(--text);margin-top:.15rem;}
+
+.dodont{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.dobox,.dontbox{border-radius:12px;padding:.85rem .8rem;border:1px solid var(--line);}
+.dobox{background:rgba(110,155,196,.08);}
+.dontbox{background:rgba(201,122,106,.08);}
+.dobox .h,.dontbox .h{font-size:.78rem;font-weight:600;margin-bottom:.5rem;letter-spacing:.06em;}
+.dobox .h{color:var(--good);}
+.dontbox .h{color:var(--bad);}
+.dodont ul{list-style:none;}
+.dodont li{font-size:.75rem;color:var(--text);padding-left:.9rem;position:relative;margin-bottom:.45rem;line-height:1.6;}
+.dodont li:last-child{margin-bottom:0;}
+.dobox li::before{content:"○";position:absolute;left:0;color:var(--good);font-size:.7rem;}
+.dontbox li::before{content:"×";position:absolute;left:0;color:var(--bad);font-size:.7rem;}
+@media(max-width:400px){.dodont{grid-template-columns:1fr;}}
+
+.recipe{counter-reset:r;}
+.recipe .item{display:flex;gap:.75rem;margin-bottom:1rem;}
+.recipe .item:last-child{margin-bottom:0;}
+.recipe .num{
+  flex-shrink:0;width:1.7rem;height:1.7rem;border-radius:50%;
+  background:linear-gradient(160deg,var(--accent),var(--accent-soft));
+  color:var(--night);font-weight:700;font-size:.85rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.recipe .rbody{font-size:.83rem;}
+.recipe .rbody b{color:var(--accent);font-weight:600;}
+
+.pull{
+  border-left:3px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:1rem 0;
+  font-size:.9rem;color:var(--muted2);font-style:normal;
+}
+
+.closing{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--accent-soft);border-radius:18px;padding:1.6rem 1.25rem;text-align:center;
+  box-shadow:0 0 30px rgba(217,164,65,.08);
+}
+.closing p{font-size:.88rem;margin-bottom:.9rem;}
+.closing p:last-child{margin-bottom:0;}
+.closing .big{font-size:1.05rem;color:var(--accent);font-weight:500;letter-spacing:.06em;}
+
+.koyomi-link{
+  display:block;text-align:center;margin-top:1.5rem;padding:1rem;
+  background:var(--night2);border:1px solid var(--line);border-radius:14px;
+  color:var(--text);text-decoration:none;font-size:.86rem;transition:border-color .3s;
+}
+.koyomi-link:hover{border-color:var(--accent-soft);}
+.koyomi-link .arrow{color:var(--accent);}
+.koyomi-link small{display:block;color:var(--muted);font-size:.7rem;margin-top:.3rem;}
+
+footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
+footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
+
+.fig{display:block;width:100%;height:auto;margin:.4rem auto .6rem;}
+.fig text{font-family:'Noto Serif JP',serif;}
+.ft{fill:var(--muted2);font-size:11px;text-anchor:middle;} .fb{fill:var(--text);font-size:13px;font-weight:600;text-anchor:middle;}
+.fn{fill:var(--night);font-size:14px;font-weight:700;text-anchor:middle;}
+.fp{fill:var(--good);font-size:12px;font-weight:600;text-anchor:middle;} .fr{fill:var(--bad);font-size:12px;font-weight:600;text-anchor:middle;}
+.nher{fill:var(--accent);} .nhim{fill:var(--water);} .nplain{fill:var(--sink);stroke:var(--line);stroke-width:1.5;}
+.nhot{fill:rgba(201,122,106,.14);stroke:var(--bad);stroke-width:1.8;}
+.lpull{stroke:var(--good);stroke-width:3;fill:none;stroke-linecap:round;} .lrub{stroke:var(--bad);stroke-width:3;fill:none;stroke-dasharray:6 5;stroke-linecap:round;}
+.larr{stroke:var(--muted);stroke-width:2.5;fill:none;} .lmute{stroke:var(--line);stroke-width:2.5;fill:none;stroke-dasharray:4 4;}
+.marr{fill:var(--muted);}
+.cellr{fill:rgba(201,122,106,.14);stroke:var(--bad);} .cellt{fill:rgba(138,150,172,.16);stroke:var(--muted);} .cellb{fill:var(--sink);stroke:var(--line);}
+.boxhim{fill:none;stroke:var(--water);stroke-width:2;} .boxher{fill:none;stroke:var(--accent);stroke-width:2;} .boxn{fill:var(--sink);stroke:var(--line);stroke-width:1.2;}
+.why{font-size:.7rem;color:var(--muted);border-left:2px solid var(--line);padding:.35rem .7rem;margin-top:.7rem;line-height:1.75;border-radius:0 6px 6px 0;}
+.why b{color:var(--muted2);font-weight:600;letter-spacing:.06em;}
+.yy{display:grid;gap:.4rem;margin-top:.6rem;} .yy p{font-size:.78rem!important;margin:0!important;padding:.45rem .7rem;border-radius:9px;line-height:1.7;}
+.yy .yo{background:rgba(110,155,196,.1);} .yy .in{background:rgba(201,122,106,.1);}
+.yy b{font-weight:600;margin-right:.4rem;} .yy .yo b{color:var(--good);} .yy .in b{color:var(--bad);}
+.say{border-left:3px solid var(--accent);padding:.55rem 0 .55rem .9rem;margin:.9rem 0 0;font-size:.9rem;color:var(--text);}
+.dayg{display:grid;gap:.6rem;} .dayc{border-radius:12px;padding:.8rem .9rem;border:1px solid var(--line);background:var(--sink);}
+.dayc h4{font-size:.8rem;font-weight:600;margin-bottom:.35rem;letter-spacing:.06em;}
+.dayc.go h4{color:var(--good);} .dayc.stop h4{color:var(--muted2);} .dayc.shake h4{color:var(--bad);}
+.dayc p{font-size:.78rem!important;margin-bottom:.25rem!important;line-height:1.7;}
+.dayc .rs{font-size:.68rem;color:var(--muted);margin-top:.35rem;line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">㐂占　鑑定書　その二</div>
+  <h1><span class="nm">norikoさん</span>と彼　関係の設計図</h1>
+  <div class="tagline">二つの循環と、これからの運気</div>
+  <div class="date">2026年10月25日　続きの席のあとに</div>
+</header>
+  <div class="card">
+    <p class="lead">前回の鑑定書にある「彼との相性」を、更新します。</p>
+    <p>前回のあと、彼の生まれた日の柱を確かめ、二人の命式帳を並べ直して、検算しました。前回の「納音のブレーキ」と「中心の星が同じ」という読みは、検算の結果、取り下げます。この鑑定書の内容が、最新です。</p>
+    <p class="soft">前回の鑑定書は、norikoさん自身の設計図として、そのまま使えます。この二つ目は、彼との関係を、構造から見たものです。</p>
+  </div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">壱</span><span class="sec-title">8月から、ここまで の変化</span></div>
+  <div class="card">
+    <p>LINEの文面に残っている言葉を、並べます。</p>
+    <div class="tl">
+      <div class="tl-item"><div class="tl-when">8月23日</div><div class="tl-body">「不完全燃焼で終わらせていたことに、モヤモヤしていた」</div></div>
+      <div class="tl-item"><div class="tl-when">9月4日</div><div class="tl-body">「私が何を欲しいのか、どうしたいかは、もう少し見つめてみます」</div></div>
+      <div class="tl-item"><div class="tl-when">9月14日</div><div class="tl-body">「最終的に私が選ぶ」</div></div>
+      <div class="tl-item"><div class="tl-when">9月23日</div><div class="tl-body">「早く答えを出して、を一切出さなかった」「ここからは“待つ”に集中」。条件が合わない仕事は、自分で見送った。</div></div>
+      <div class="tl-item"><div class="tl-when">10月</div><div class="tl-body">朝の散歩を続け、メンターをつけ、相手をコントロールしたい気持ちが、なくなった。パートナーが欲しかった、という気持ちを、素直に受け入れられた。</div></div>
+    </div>
+    <p style="margin-top:1rem;">8月は、相手に合わせて、理屈で整理して手放しました。いまは、「自分がこうしたい」を軸にしています。動き方が変わった、ということが、言葉の並びから見えます。</p>
+    <div class="why"><b>占術の根拠</b>　庚申は、大義名分があれば動き、「なぜ」が立たないと動かない日干支です。「自分がこうしたい」が言葉になったことは、この「なぜ」が立ってきた形と読めます。</div>
+  </div>
+
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">弐</span><span class="sec-title">norikoさんの中の循環</span></div>
+  <div class="card">
+    <p class="lead">金が溜まって、木が空っぽ</p>
+    <svg class="fig" id="gogyo" viewBox="0 0 360 320" role="img" aria-label="五行の量。金154、水56、土39、火33、木0"></svg>
+    <p>日干支の庚申は、大きな金の柱。「軍人・戦いの守り神」で、三大戦いの神の中でも、総大将になる干支です。なかなか動かない。けれど、動き出したら止まらない。大義名分があれば動き、「なぜ動くのか」が分かって、初めて動きます。</p>
+    <p>五行は、金が圧倒的に多く、木がゼロ。東洋思想では、金は水を生み、水が木を育て、木が火を生みます。norikoさんは、金から水への流れはあっても、水から木へ渡る流れが細い形です。</p>
+    <div class="yy"><p class="yo"><b>陽</b>決めたら迷わず進める力が強い。理性で整理でき、守ると決めたものには、最も強く戦える。</p><p class="in"><b>陰</b>「なぜ」が立たない間は、動けない。金が溜まる一方で、木（動き出す力・成長）に渡っていかないと、内にこもって、同じところを回りやすい。</p></div>
+    <svg class="fig" id="loopA" viewBox="0 0 360 340" role="img" aria-label="寄り添う、なぜが立たない、待つ、金が溜まる、また彼を見る、の循環"></svg>
+    <p>この図のとおり、norikoさんの中では、「彼に寄り添う → “なぜ”が立たない → 彼に考えさせる時間を置く → 内にこもる → また彼を見る」という流れが回りやすい作りです。</p>
+    <div class="why"><b>占術の根拠</b>　五行のエネルギー：木0・火33・土39・金154・水56。調候守護神の第二は丁（鉄を溶かす火）。相生は 木→火→土→金→水→木。（循環の流れは、占い師の見立てです。）</div>
+  </div>
+
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">参</span><span class="sec-title">二人の構造</span></div>
+  <div class="card">
+    <p class="lead">引き合う形と、摩擦の形が、両方あります</p>
+    <svg class="fig" viewBox="0 0 360 330" role="img" aria-label="引き合う形と摩擦の形">
+      <circle cx="60" cy="34" r="26" class="nher"/><text x="60" y="39" class="fn">nori</text>
+      <circle cx="300" cy="34" r="26" class="nhim"/><text x="300" y="39" class="fn">彼</text>
+      <text x="180" y="26" class="fp">引き合う</text><line x1="90" y1="34" x2="270" y2="34" class="lpull"/>
+      <text x="180" y="72" class="fb">干合　norikoの日干・庚 × 彼の月干・乙</text>
+      <text x="180" y="94" class="fb">半会　日柱どうし　申 × 辰</text>
+      <text x="180" y="116" class="fb">守護神　彼の壬が、norikoの日柱の中に</text>
+      <text x="180" y="138" class="fb">守護神　norikoの丁が、彼の年干に</text>
+      <text x="180" y="176" class="fr">摩擦</text><line x1="90" y1="184" x2="270" y2="184" class="lrub"/>
+      <text x="180" y="214" class="fb">火が金を打つ　彼の丙 → norikoの庚</text>
+      <text x="180" y="236" class="fb">木が土を割る　石門星 → 禄存星</text>
+      <text x="180" y="258" class="fb">対冲　戌 × 辰　　合と刑　申 × 巳</text>
+      <text x="180" y="280" class="fb">結婚の向き　玉堂星（家庭）× 龍高星（自由）</text>
+      <text x="180" y="316" class="ft">引き合うのに、こすれる。両方あります。</text>
+    </svg>
+    <p>日干は、彼の丙（火）が、norikoさんの庚（金）を打つ形で、彼が刺激を与える側。中心の星は、norikoさんの石門星（木）が、彼の禄存星（土）に当たる形で、こちらが攻め手。攻守が入れ替わる、引っ張り合いの関係です。</p>
+    <div class="yy"><p class="yo"><b>陽</b>干合・半会・守護神と、引き合う形が三つ重なる。会えば楽しく、会うたびに整いやすい。</p><p class="in"><b>陰</b>対冲・刑と、結婚の向きの違いが重なる。近づくほど、向きの違いが見えてくる。</p></div>
+    <div class="why"><b>占術の根拠</b>　命式帳の位相：乙庚の干合、申×辰の半会、戌×辰の対冲、戌×丑の庫刑、申×巳の合と刑。守護神：彼の第一・壬と第二・庚、norikoさんの第二・丁。日干・中心星の関係。</div>
+    <p class="lead" style="margin-top:1.2rem;">結婚の位置と、子どもの位置</p>
+    <svg class="fig" id="cross" viewBox="0 0 360 330" role="img" aria-label="彼とnorikoさんの人体星図"></svg>
+    <p>彼は、配偶者の位置も、子どもを表す目下の位置も、同じ玉堂星です。学問・伝統・教える星で、家庭と子どもが、セットで強く出ています。norikoさんは、配偶者の位置も社会の位置も龍高星。自由・冒険・変化の星です。</p>
+    <p>どちらが悪い、という話ではありません。家庭に向かう向きと、自由に向かう向き。根本の向きが違う、ということです。「子どもが欲しい」の中にも、いろんな形があります。その形を、言葉にして確かめることが、大切になります。</p>
+    <div class="why"><b>占術の根拠</b>　人体星図。彼：配偶者＝玉堂星、目下＝玉堂星。norikoさん：配偶者＝龍高星、社会＝龍高星、目下＝車騎星。星の出方までの読みで、気持ちの断定はしません。</div>
+  </div>
+
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">肆</span><span class="sec-title">二人の間の循環</span></div>
+  <div class="card">
+    <svg class="fig" id="loopB" viewBox="0 0 360 340" role="img" aria-label="引き合う、会えば楽しい、向きの違い、答えが出ない、待つ、の循環"></svg>
+    <p>引き合う。会えば楽しい。向きの違いが、子どもの話で出る。答えが出ない。待つ。そしてまた、引き合う。</p>
+    <svg class="fig" viewBox="0 0 360 250" role="img" aria-label="二つの循環が重なる">
+      <circle cx="130" cy="110" r="82" class="lpull" style="stroke:var(--accent)"/><circle cx="230" cy="110" r="82" class="lrub"/>
+      <text x="86" y="104" class="fb" style="fill:var(--accent)">norikoさんの</text><text x="86" y="122" class="fb" style="fill:var(--accent)">中の循環</text>
+      <text x="274" y="104" class="fb" style="fill:var(--bad)">二人の間の</text><text x="274" y="122" class="fb" style="fill:var(--bad)">循環</text>
+      <text x="180" y="98" class="fb">待つ</text><text x="180" y="118" class="fb">答えが</text><text x="180" y="136" class="fb">出ない</text>
+      <text x="180" y="226" class="ft">同じところで、同じ向きに回っています</text>
+    </svg>
+    <p>norikoさんの中の循環と、二人の間の循環は、「待つ」「答えが出ない」のところで重なっています。彼の動きを読むようでいて、見えてくるのは、norikoさん自身のしくみです。</p>
+    <div class="why"><b>占術の根拠</b>　引き合う形（干合・半会・守護神）と、向きの違い（玉堂星×龍高星）。（循環の流れは、占い師の見立てです。）</div>
+  </div>
+
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">伍</span><span class="sec-title">これからの時期　10月から1月</span></div>
+  <div class="card">
+    <svg class="fig" id="mon" viewBox="0 0 360 230" role="img" aria-label="10月から1月の二人の月"></svg>
+    <p><span class="hl">11月</span>（11月7日の立冬から）は、己亥の月。彼の月柱の乙巳と、天剋地冲（乙×己、巳×亥）が出ます。上も下も同時にぶつかる形で、気持ちの置き場所が、大きく入れ替わりやすい月です。衝撃で切り替わる人も、ソフトに切り替わる人もいて、どちらの出方かは、命式帳からは決められません。</p>
+    <p>norikoさんは、年柱と日柱の申に、亥の害が出ます。年柱は外の場面、日柱は自分の中。内にこもりやすい月です。つまり11月は、彼が揺れる月に、norikoさんが内にこもりやすい。先に見た二つの循環が、いちばん強く回りやすい月です。</p>
+    <p><span class="hl">12月（12月7日〜）と1月（1月5日〜）</span>は、子丑天中殺の二人の、月天中殺です。気持ちが動きやすい形が出ても、結論を出すのに向かない月です。</p>
+    <div class="dayg">
+      <div class="dayc go"><h4>動きやすい日</h4><p><b>11月7日（土）</b>　二人に追い風が重なる日</p><p><b>11月19日（木）</b>　彼に追い風が出る日</p><div class="rs">根拠　11/7：彼は月柱が大半会、日柱が支合、年と月で三合会局。norikoさんは年柱と日柱が干合、年・月・日で方三位。11/19：彼は年柱が大半会、日柱が支合、年と月で三合会局。</div></div>
+      <div class="dayc stop"><h4>大事な話を避ける日　日天中殺</h4><p>10月29日（木）・30日（金）／11月10日（火）・11日（水）／11月22日（日）・23日（月）</p><div class="rs">根拠　子丑天中殺の二人は、子の日と丑の日が日天中殺。11月10日は、二人で行くライブの日です。ライブは楽しむ日にして、大事な話は持ち込まない形が合います。</div></div>
+      <div class="dayc shake"><h4>揺れやすい日</h4><p>11月12日（木）／11月14日（土）／11月21日（土）</p><div class="rs">根拠　11/12：norikoさんの日柱の申と寅が対冲・生刑。11/14：norikoさんの月柱の丙戌と壬辰が天剋地冲。11/21：彼の月柱の乙巳と己亥が天剋地冲、norikoさんは年・日に害。</div></div>
+    </div>
+    <div class="why"><b>占術の根拠</b>　月運・日運の位相（命式帳）。10月の彼は、戌が年柱の丑と庫刑、日柱の辰と対冲。norikoさんの10月は、位相が出ない静かな月。12月・1月の月天中殺（子丑）。</div>
+  </div>
+
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">陸</span><span class="sec-title">気持ちを伝える日と、伝え方</span></div>
+  <div class="card">
+    <p class="lead">自分の気持ちは、もう決まっている。その上で、伝える</p>
+    <p>norikoさんの方針は、「戻れるなら戻りたい。ただ、一緒にいたいだけで戻ると、また同じになる。だから、しっかり決めた上で」。そして、終わらせるにしても、自分の気持ちを伝え、彼の考えを聞いた上で、終わらせたい。この二つの根っこは、同じです。</p>
+    <p><b class="hl">伝える日の候補は、三つです。</b></p>
+    <div class="recipe">
+      <div class="item"><div class="num">一</div><div class="rbody"><b>11月7日（土）に、短く伝える。</b><br>二人に追い風が重なる日。決めたい気持ちが強いなら、この日です。</div></div>
+      <div class="item"><div class="num">二</div><div class="rbody"><b>11月19日（木）。</b><br>彼に追い風が出る日。</div></div>
+      <div class="item"><div class="num">三</div><div class="rbody"><b>年明けの、2月以降。</b><br>天中殺が抜けてから、もう一度見る。摩擦の11月を外したいなら、この選び方です。</div></div>
+    </div>
+    <p style="margin-top:.8rem;">どれも間違いではありません。選ぶのは、norikoさんです。</p>
+    <p><b class="hl">伝える中身は、三つで足ります。</b></p>
+    <div class="recipe">
+      <div class="item"><div class="num">一</div><div class="rbody"><b>戻れるなら戻りたい、という気持ち。</b></div></div>
+      <div class="item"><div class="num">二</div><div class="rbody"><b>話したいこと。</b><br>子どもの形のこと。別れの理由の残り。norikoさんの言動を、彼がどう思っていたか。</div></div>
+      <div class="item"><div class="num">三</div><div class="rbody"><b>「私の気持ちはこうです。あなたは、どう思う？」</b><br>彼の考えを、聞く。</div></div>
+    </div>
+    <p style="margin-top:.8rem;">一度に全部でなくて大丈夫です。短く、結論を迫らない。庚申は、「なぜ」が言葉になれば動きます。norikoさんの「なぜ」を、一言にして、持っていってください。</p>
+    <div class="why"><b>占術の根拠</b>　庚申は、「なぜ」が分かると動く日干支。11/7は二人の追い風が重なる日、11/10・11は二人とも日天中殺、12月・1月は月天中殺。</div>
+  </div>
+
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">視点</span><span class="sec-title">五つの視点 ─ ぐるりと見る</span></div>
+  <div class="card">
+    <p class="lead" style="margin-bottom:.6rem;">壱　魂の質</p>
+    <p style="margin-bottom:1rem;">庚申は総大将の干支。大義名分があれば動き、動き出したら止まらない。「なぜ」が立つまでは、情だけでは動かない人です。</p>
+    <p class="lead" style="margin-bottom:.6rem;">弐　二人の引力</p>
+    <p style="margin-bottom:1rem;">干合、半会、守護神。引き合う形が三つ重なっています。会えば楽しいことは、偶然ではありません。</p>
+    <p class="lead" style="margin-bottom:.6rem;">参　向きの違い</p>
+    <p style="margin-bottom:1rem;">彼は玉堂星（家庭・伝統）、norikoさんは龍高星（自由・冒険）。根本の向きが違うので、近づくほど、その違いが出てきます。</p>
+    <p class="lead" style="margin-bottom:.6rem;">肆　時期の重なり</p>
+    <p style="margin-bottom:1rem;">11月は、彼が切り替わる月に、norikoさんが内にこもりやすい。12月・1月は、二人とも月天中殺で、結論を出す月ではありません。</p>
+    <p class="lead" style="margin-bottom:.6rem;">伍　動ける条件　針の穴</p>
+    <p style="margin-bottom:0;">天中殺の月に、結論を出しに行く必要はありません。norikoさんが動ける形は、自分の気持ちを伝えることと、彼の考えを聞くこと。今までの延長で、できることです。「待つ」から、「伝える」へ。11月7日が、その入口です。探しに行かなくても、来たものは受け取れます。</p>
+  </div>
+
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">in depth</span><span class="sec-title">- in depth - ５つの視点</span></div>
+  <div class="card">
+    <p class="lead" style="margin-bottom:.6rem;">陽転の視点</p>
+    <p style="margin-bottom:1rem;">庚申が陽転するのは、守ると決めたものがはっきりした時です。「この人と一緒にいたい」という答えが、すでに出ています。その気持ちを、自分の言葉で伝えた時、庚申の力が前に出ます。</p>
+    <p class="lead" style="margin-bottom:.6rem;">本質の視点</p>
+    <p style="margin-bottom:1rem;">石門星は、広く浅くの人。深いところを渡す相手を持つことが、本質を形にする道です。42歳からの10年は、その本質を、一つ、じっくり形にする時期です。</p>
+    <p class="lead" style="margin-bottom:.6rem;">宿命の視点</p>
+    <p style="margin-bottom:1rem;">子丑天中殺は、何かを始める使命。陽転の条件は、ゼロから新しい何かを立ち上げること。彼との関係の形も、仕事の形も、norikoさん自身が、ゼロから作っていく側にいます。</p>
+    <p class="lead" style="margin-bottom:.6rem;">幸福の視点</p>
+    <p style="margin-bottom:1rem;">相手をコントロールしたい気持ちが、なくなったこと。パートナーが欲しい、と素直に認められたこと。内側の動きが、すでに整ってきています。</p>
+    <p class="lead" style="margin-bottom:.6rem;">エネルギーの視点</p>
+    <p style="margin-bottom:0;">金が溜まって、木が空っぽ。流れ道を作るのは、木と火です。朝の散歩は続いています。足りないのは火。人前に出る、発信する、暖色の灯りを使う。会社の制約に触れない形（料理の発信など）から、始められます。</p>
+  </div>
+
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">拾</span><span class="sec-title">ここから動ける処方</span></div>
+  <div class="card recipe">
+    <div class="item"><div class="num">1</div><div class="rbody"><b>12月・1月は、結論を出さない月と知っておく。</b><br>気持ちが動きやすくても、決めるのは年明け以降。11月は、気持ちを伝える月として使えます。</div></div>
+    <div class="item"><div class="num">2</div><div class="rbody"><b>自分の「なぜ」を、一言にする。</b><br>続けるにしても、終わりにするにしても、動く理由を言葉にします。</div></div>
+    <div class="item"><div class="num">3</div><div class="rbody"><b>伝える日を、三つの候補から選ぶ。</b><br>11月7日、11月19日、年明けの2月以降。11月10日のライブは、楽しむ日にします。</div></div>
+    <div class="item"><div class="num">4</div><div class="rbody"><b>木と火を、暮らしで足す。</b><br>朝の散歩はそのまま。火は、暖色の灯りや、人前に出ること、料理の発信で。</div></div>
+    <div class="item"><div class="num">5</div><div class="rbody"><b>じっとせず、動きながら待つ。</b><br>人と会う予定を減らさない。仕事を一つ、前に進める。</div></div>
+  </div>
+</div>
+<div class="closing">
+  <p>norikoさんの中の循環と、二人の間の循環は、同じところで回っています。</p>
+  <p class="big">変えられるのは、norikoさんの側の動き方です。</p>
+  <p>「戻りたい」という気持ちを、自分の言葉で伝える。彼の考えを、聞く。<br>その上で、続くにしても、終わるにしても、不完全燃焼ではない形で、区切りがつけられます。</p>
+  <p>何かあったら、いつでもLINEで聞いてください。</p>
+</div>
+
+<a class="koyomi-link" href="/noriko">
+  <span class="arrow">▶</span> norikoの暦（日々の運気カレンダー）をひらく
+  <small>11月7日と、日天中殺の日が、ひと目で分かります。</small>
+</a>
+
+<footer>
+  <p>いつもおおきにです😆　またゆっくり話しましょう💬</p>
+  <p class="sig">㐂</p>
+</footer>
+</div>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(n,a,p,txt){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;if(p)p.appendChild(e);return e;}
+function defs(s,id){var d=el('defs',{},s),m=el('marker',{id:id,viewBox:'0 0 10 10',refX:8,refY:5,markerWidth:7,markerHeight:7,orient:'auto-start-reverse'},d);el('path',{d:'M0 0L10 5L0 10z','class':'marr'},m);}
+(function(){var s=document.getElementById('gogyo'),cx=180,cy=160,R=104;defs(s,'ga');
+ var it=[['木',0,'#7FA86B'],['火',33,'#D08A5A'],['土',39,'#C9A24A'],['金',154,'#C4C9D2'],['水',56,'#6E9BC4']];
+ var P=it.map(function(x,i){var a=-Math.PI/2+i*2*Math.PI/5;return [cx+R*Math.cos(a),cy+R*Math.sin(a)];});
+ function rad(v){return v===0?19:15+Math.sqrt(v)*2.5;}
+ for(var i=0;i<5;i++){var a=P[i],b=P[(i+1)%5],ra=rad(it[i][1]),rb=rad(it[(i+1)%5][1]),dx=b[0]-a[0],dy=b[1]-a[1],L=Math.sqrt(dx*dx+dy*dy),ux=dx/L,uy=dy/L,weak=(i===4);
+  var at={x1:a[0]+ux*(ra+4),y1:a[1]+uy*(ra+4),x2:b[0]-ux*(rb+10),y2:b[1]-uy*(rb+10),'class':weak?'lmute':'larr'};if(!weak)at['marker-end']='url(#ga)';el('line',at,s);}
+ it.forEach(function(x,i){var p=P[i],r=rad(x[1]);
+  if(x[1]===0){el('circle',{cx:p[0],cy:p[1],r:r,fill:'none',stroke:x[2],'stroke-width':2.5,'stroke-dasharray':'5 4'},s);el('text',{x:p[0],y:p[1]+4,'class':'fb'},s,'木 0');}
+  else{el('circle',{cx:p[0],cy:p[1],r:r,fill:x[2]},s);el('text',{x:p[0],y:p[1]+5,'class':'fn'},s,x[0]+' '+x[1]);}});
+ el('text',{x:180,y:312,'class':'ft'},s,'水から木への流れは細い（点線）');})();
+function loop(id,labels,ca,cb,hot){var s=document.getElementById(id),cx=180,cy=168,R=112;defs(s,id+'a');var n=labels.length,pts=[];
+ for(var i=0;i<n;i++){var a=-Math.PI/2+i*2*Math.PI/n;pts.push([cx+R*Math.cos(a),cy+R*Math.sin(a)]);}
+ for(var j=0;j<n;j++){var a0=-Math.PI/2+j*2*Math.PI/n+0.42,a1=-Math.PI/2+(j+1)*2*Math.PI/n-0.42;
+  el('path',{d:'M'+(cx+R*Math.cos(a0))+' '+(cy+R*Math.sin(a0))+' A '+R+' '+R+' 0 0 1 '+(cx+R*Math.cos(a1))+' '+(cy+R*Math.sin(a1)),'class':'larr','marker-end':'url(#'+id+'a)'},s);}
+ labels.forEach(function(lb,i){var p=pts[i],h=hot.indexOf(i)>=0;el('circle',{cx:p[0],cy:p[1],r:38,'class':h?'nhot':'nplain'},s);
+  lb.forEach(function(ln,k){el('text',{x:p[0],y:p[1]+(k-(lb.length-1)/2)*14+4,'class':'fb',style:'font-size:12px'},s,ln);});});
+ el('text',{x:cx,y:cy-2,'class':'fb',style:'font-size:18px'},s,ca);el('text',{x:cx,y:cy+20,'class':'ft'},s,cb);}
+loop('loopA',[['彼に','寄り添う'],['“なぜ”が','立たない'],['待つ','内にこもる'],['金が溜まる','木に流れない'],['また','彼を見る']],'循環','norikoさんの中',[1,3]);
+loop('loopB',[['引き合う'],['会えば','楽しい'],['向きの違い','（子ども）'],['答えが','出ない'],['待つ']],'循環','二人の間',[2,3]);
+(function(){var s=document.getElementById('cross');
+ function cross(ox,who,cls,st){el('text',{x:ox+78,y:20,'class':'fb',style:'fill:'+(who==='彼'?'var(--water)':'var(--accent)')},s,who==='彼'?'彼':'norikoさん');
+  [['目上',st.n,1,0,false],['配偶者',st.w,0,1,st.hw],['中心',st.m,1,1,false],['社会',st.e,2,1,st.he],['目下',st.s,1,2,st.hs]].forEach(function(c){
+   var x=ox+c[2]*52,y=32+c[3]*82;el('rect',{x:x,y:y,width:48,height:76,rx:8,'class':c[4]?cls:'boxn'},s);
+   el('text',{x:x+24,y:y+22,'class':'ft',style:'font-size:10px'},s,c[0]);el('text',{x:x+24,y:y+48,'class':'fb',style:'font-size:13px'},s,c[1].slice(0,1));el('text',{x:x+24,y:y+64,'class':'ft',style:'font-size:10px'},s,c[1].slice(1));});}
+ cross(14,'彼','boxhim',{n:'石門星',w:'玉堂星',m:'禄存星',e:'牽牛星',s:'玉堂星',hw:true,he:false,hs:true});
+ cross(194,'nori','boxher',{n:'貫索星',w:'龍高星',m:'石門星',e:'龍高星',s:'車騎星',hw:true,he:true,hs:false});
+ el('text',{x:90,y:310,'class':'ft'},s,'結婚と子どもが同じ星');el('text',{x:270,y:310,'class':'ft'},s,'結婚も社会も、自由の星');})();
+(function(){var s=document.getElementById('mon');
+ ['10月','11月','12月','1月'].forEach(function(m,i){el('text',{x:76+i*72,y:20,'class':'ft',style:'font-size:12px'},s,m);});
+ function row(y,lab,d,st){el('text',{x:16,y:y+28,'class':'fb',style:'fill:'+st},s,lab);
+  d.forEach(function(c,i){el('rect',{x:42+i*72,y:y,width:66,height:42,rx:8,'class':c[1]==='r'?'cellr':(c[1]==='t'?'cellt':'cellb')},s);el('text',{x:75+i*72,y:y+25,'class':'ft',style:'font-size:10.5px;fill:var(--text)'},s,c[0]);});}
+ row(32,'彼',[['庫刑・対冲','r'],['天剋地冲','r'],['月天中殺','t'],['月天中殺','t']],'var(--water)');
+ row(90,'nori',[['静か','b'],['年日に害','r'],['月天中殺','t'],['月天中殺','t']],'var(--accent)');
+ el('rect',{x:42,y:156,width:30,height:18,rx:5,'class':'cellr'},s);el('text',{x:82,y:169,'class':'ft',style:'text-anchor:start'},s,'揺れる月（動く）');
+ el('rect',{x:42,y:182,width:30,height:18,rx:5,'class':'cellt'},s);el('text',{x:82,y:195,'class':'ft',style:'text-anchor:start'},s,'天中殺（結論の月ではない）');
+ el('text',{x:180,y:220,'class':'ft'},s,'11月は、二つの循環がいちばん強く回りやすい');})();
+})();
+</script>
+</body>
+</html>
