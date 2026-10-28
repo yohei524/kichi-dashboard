@@ -99,6 +99,14 @@
       "destination": "/view.html?client=yukiko"
     },
     {
+      "source": "/yukiko-kanteisho",
+      "destination": "/clients/yukiko-kanteisho.html"
+    },
+    {
+      "source": "/yukiko-yoten",
+      "destination": "/clients/yukiko-yoten.html"
+    },
+    {
       "source": "/fumiko-kanteisho",
       "destination": "/clients/fumiko-kanteisho.html"
     },
