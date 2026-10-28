@@ -70,14 +70,17 @@
     "needElement": "火",
     "needElementNote": "火7・土0がいちばん薄い形。体を温める・暖色の灯り・人前で気持ちを出す、が足し方です"
   },
-  "goal": null,
+  "goal": {
+    "main": "一日に一つだけ、決める。辞めるかどうかは急がず、材料を集める",
+    "sub": "陽転の条件は三つ。刃を向ける先を決める／手放すものを選んで断つ／人とつながって役に立つ。足りないのは能力ではなく、向ける先。\n\n【材料】数字（辞めたら何ヶ月暮らせるか）／人（話を聞いてくれる人を一人）／条件（次の場所に求めることを三つ）。\n\n【時期】年の天中殺は2028年の立春まで。大きな契約・退職の実行は後ろに置く。準備は今から。\n\n【体】早朝に目が覚める・頭痛が続く時は、産業医・相談窓口・医療機関を普通に使う。火と土を足す。"
+  },
   "dailyAdvice": {},
   "koyomiOnly": true,
   "koyomiNoDestiny": true,
   "expiresAt": "2026-11-06",
-  "doorHref": "/yukiko-yoten",
-  "doorLabel": "陽転の姿をひらく",
-  "doorNote": "10月28日にお話ししたことを、図にまとめてあります",
+  "doorHref": "/yukiko-kanteisho",
+  "doorLabel": "鑑定書をひらく",
+  "doorNote": "10月28日にお話ししたことを、まとめてあります",
   "kanteishoHref": "/yukiko-kanteisho",
   "plan": null,
   "parts": {}

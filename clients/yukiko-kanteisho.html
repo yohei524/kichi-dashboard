@@ -1,481 +1,624 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
-<title>有紀子さん 命式図</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700;900&display=swap" rel="stylesheet">
+<title>有紀子さん 鑑定書 ｜ 㐂占</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* 命式図（meishiki-zu スキルの型）：縦に流れる一枚物。1画面に1つの図。柱は日・月・年の順。陽転（出口）を最後に置く */
-:root {
-  --bg: #F2F3F0; --surface: #FFFFFF; --ink: #1B2230; --ink2: #566074; --line: #D8DCE2;
-  --hit: #B84A2C; --hit-bg: #F7E4DC; --calm: #2E6F8E; --calm-bg: #DDEBF1;
-  --joy: #3C7C50; --joy-bg: #DFEEE3; --void: #7A7F8A; --void-bg: #E7E8EB;
-  --focus: #2F4C8A; --focus-bg: #E3E9F6;
-  --moku: #5E9B6B; --ka: #D1604A; --do: #B9923E; --kon: #8D97A6; --sui: #4C84B8;
-  --serif: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
-  --sans: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #111621; --surface: #1A2130; --ink: #ECEAE4; --ink2: #A3AEC2; --line: #2C3548;
-    --hit: #EE8663; --hit-bg: #3A2620; --calm: #79B7D4; --calm-bg: #1C3340;
-    --joy: #86C698; --joy-bg: #1E3626; --void: #9AA1AF; --void-bg: #272D3A;
-    --focus: #93ABE0; --focus-bg: #22304F;
-    --moku: #79B586; --ka: #E67B65; --do: #D2AE5E; --kon: #AEB7C6; --sui: #6BA2D3;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #111621; --surface: #1A2130; --ink: #ECEAE4; --ink2: #A3AEC2; --line: #2C3548;
-  --hit: #EE8663; --hit-bg: #3A2620; --calm: #79B7D4; --calm-bg: #1C3340;
-  --joy: #86C698; --joy-bg: #1E3626; --void: #9AA1AF; --void-bg: #272D3A;
-  --focus: #93ABE0; --focus-bg: #22304F;
-  --moku: #79B586; --ka: #E67B65; --do: #D2AE5E; --kon: #AEB7C6; --sui: #6BA2D3;
+:root{
   color-scheme: dark;
+  --night:#0B0F16; --night2:#121823; --sink:#17202D; --panel:#1B2533;
+  --line:#2B3748; --accent:#8FB4D6; --accent-soft:#5C7E9E; --accent-glow:rgba(143,180,214,.14);
+  --gold:#C9A24A; --text:#ECEAE4; --muted:#8A96AC; --muted2:#A9B3C6;
+  --water:#6E9BC4; --fire:#D08A5A; --wood:#7FA86B; --metal:#C4C9D2; --earth:#C9A24A;
+  --bad:#C97A6A; --good:#6E9BC4; --void:#7E8798;
 }
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.7; padding-inline: 16px; padding-block: 0 56px; }
-.wrap { max-width: 640px; margin-inline: auto; }
-.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); margin-inline: -16px; padding: 8px 16px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
-.nav::-webkit-scrollbar { display: none; }
-.nav a { flex: none; text-decoration: none; font-size: 14px; font-weight: 500; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink2); background: var(--surface); }
-.nav a:focus-visible, .seg button:focus-visible, .cell:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
-header { padding-block: 28px 8px; display: grid; gap: 4px; }
-header .eyebrow { font-size: 13px; letter-spacing: .12em; color: var(--ink2); }
-header h1 { margin: 0; font-family: var(--serif); font-weight: 700; font-size: 28px; line-height: 1.3; text-wrap: balance; }
-header .meta { font-size: 15px; color: var(--ink2); }
-section { padding-block: 36px 8px; scroll-margin-top: 56px; }
-h2 { margin: 0 0 4px; font-family: var(--serif); font-size: 22px; font-weight: 700; line-height: 1.4; text-wrap: balance; }
-.lead { margin: 0 0 16px; color: var(--ink2); font-size: 15px; }
-.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
-.pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.pillar { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 6px 12px; text-align: center; display: grid; gap: 2px; min-width: 0; }
-.pillar.self { border-color: var(--focus); background: var(--focus-bg); }
-.pillar .role { font-size: 13px; color: var(--ink2); font-weight: 500; }
-.pillar .name { font-size: 14px; font-weight: 700; }
-.glyph { font-family: var(--serif); font-weight: 900; line-height: 1.05; font-size: clamp(56px, 19vw, 92px); display: block; }
-.glyph.mark { color: var(--hit); } .glyph.vd { color: var(--void); }
-.pillar .zou { font-size: 12px; color: var(--ink2); }
-.note { margin: 12px 0 0; font-size: 15px; color: var(--ink2); }
-.note b { color: var(--hit); font-weight: 700; } .note b.v { color: var(--void); }
-.ring { width: 100%; max-width: 420px; display: block; margin-inline: auto; height: auto; }
-.ring .base { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
-.ring .lbl { font-family: var(--serif); font-weight: 700; font-size: 22px; fill: var(--ink2); text-anchor: middle; dominant-baseline: central; }
-.ring .on circle { fill: var(--hit-bg); stroke: var(--hit); stroke-width: 3; }
-.ring .on text { fill: var(--hit); font-weight: 900; font-size: 26px; }
-.ring .vd circle { fill: var(--void-bg); stroke: var(--void); stroke-width: 2; stroke-dasharray: 4 4; }
-.ring .vd text { fill: var(--void); }
-.ring .vdon circle { fill: var(--void-bg); stroke: var(--void); stroke-width: 3; }
-.ring .vdon text { fill: var(--void); font-weight: 900; font-size: 26px; }
-.ring .arc { fill: none; stroke: var(--void); stroke-width: 44; stroke-linecap: round; opacity: .18; }
-.ring .ln { stroke-width: 3; fill: none; stroke-linejoin: round; }
-.ring .ln.g { stroke: var(--joy); } .ring .ln.b { stroke: var(--hit); } .ring .ln.c { stroke: var(--calm); }
-.ring .ln.later { stroke-dasharray: 7 6; opacity: 0; }
-.ring.full .ln.later { opacity: 1; }
-.ring .ghost circle { fill: var(--surface); stroke: var(--focus); stroke-width: 2; stroke-dasharray: 5 4; opacity: .6; }
-.ring .ghost text { fill: var(--focus); opacity: .7; font-weight: 700; }
-.ring.full .ghost circle { fill: var(--focus-bg); stroke-dasharray: none; stroke-width: 3; opacity: 1; }
-.ring.full .ghost text { opacity: 1; font-weight: 900; font-size: 26px; }
-.ring .cap { font-family: var(--sans); font-size: 12px; font-weight: 700; fill: var(--ink2); text-anchor: middle; }
-.ring .cap.h { fill: var(--hit); } .ring .cap.v { fill: var(--void); } .ring .cap.f { fill: var(--focus); }
-.ring .center { font-family: var(--serif); font-weight: 900; font-size: 28px; fill: var(--focus); text-anchor: middle; paint-order: stroke; stroke: var(--surface); stroke-width: 8px; stroke-linejoin: round; }
-.ring .center.v { fill: var(--void); }
-.ring .center2 { font-family: var(--sans); font-size: 14px; fill: var(--ink2); text-anchor: middle; paint-order: stroke; stroke: var(--surface); stroke-width: 6px; stroke-linejoin: round; }
-.seg { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 12px; }
-.seg button { appearance: none; font: inherit; font-weight: 700; font-size: 15px; padding: 12px 8px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink2); cursor: pointer; }
-.seg button[aria-pressed="true"] { background: var(--focus); border-color: var(--focus); color: var(--bg); }
-.explain { margin-top: 12px; display: grid; gap: 8px; }
-.explain p { margin: 0; font-size: 16px; }
-.explain .hl { background: var(--hit-bg); border-radius: 8px; padding: 10px 12px; }
-.explain .cl { background: var(--calm-bg); border-radius: 8px; padding: 10px 12px; }
-.explain .vl { background: var(--void-bg); border-radius: 8px; padding: 10px 12px; }
-.explain .gl { background: var(--joy-bg); border-radius: 8px; padding: 10px 12px; }
-.jintai { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-.cell { appearance: none; font: inherit; color: inherit; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 2px 12px; text-align: center; cursor: pointer; min-width: 0; display: grid; gap: 2px; }
-.cell .lb { font-size: 13px; color: var(--ink2); font-weight: 500; }
-.cell .st { font-family: var(--serif); font-weight: 700; font-size: clamp(20px, 6.2vw, 28px); line-height: 1.3; }
-.cell.center { background: var(--focus-bg); border-color: var(--focus); }
-.cell.ju { border-style: dashed; }
-.cell[aria-pressed="true"] { outline: 3px solid var(--focus); outline-offset: -1px; }
-.jdetail { margin-top: 10px; padding: 14px 16px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); min-height: 112px; display: grid; gap: 6px; }
-.jdetail .t { font-family: var(--serif); font-weight: 700; font-size: 20px; margin: 0; }
-.jdetail p { margin: 0; font-size: 16px; }
-.jdetail .yo { color: var(--joy); } .jdetail .in { color: var(--ink2); font-size: 15px; }
-.bars { display: grid; gap: 10px; }
-.bar { display: grid; grid-template-columns: 56px 1fr 44px; align-items: center; gap: 10px; }
-.bar .n { font-family: var(--serif); font-weight: 700; font-size: 24px; }
-.bar .track { height: 22px; border-radius: 6px; background: var(--void-bg); overflow: hidden; }
-.bar .fill { height: 100%; border-radius: 6px; }
-.bar .v { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
-.bar.lack .n { color: var(--hit); }
-.guard { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; }
-.guard > div { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px; text-align: center; min-width: 0; }
-.guard .lb { font-size: 13px; color: var(--ink2); }
-.guard .g { font-family: var(--serif); font-weight: 900; font-size: 44px; line-height: 1.1; display: block; }
-.guard .m { font-size: 14px; }
-.ryo { width: 100%; max-width: 360px; display: block; margin-inline: auto; height: auto; }
-.ryo .bx { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
-.ryo .bx.c { fill: var(--hit-bg); stroke: var(--hit); stroke-width: 3; }
-.ryo .s { font-family: var(--serif); font-weight: 700; font-size: 17px; fill: var(--ink); text-anchor: middle; dominant-baseline: central; }
-.ryo .s.c { fill: var(--hit); font-weight: 900; font-size: 19px; }
-.ryo .p { font-family: var(--sans); font-size: 11px; fill: var(--ink2); text-anchor: middle; }
-.ryo .k { font-family: var(--sans); font-size: 13px; font-weight: 700; fill: var(--ink2); text-anchor: middle; }
-.ryo .k.c { fill: var(--hit); font-size: 15px; }
-.band { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; }
-.band > div { border-radius: 8px; padding: 8px 2px; text-align: center; background: var(--surface); border: 1px solid var(--line); min-width: 0; }
-.band .y { font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; display: block; }
-.band .k { font-family: var(--serif); font-weight: 900; font-size: 22px; line-height: 1.2; display: block; }
-.band .t { font-size: 11px; color: var(--ink2); display: block; min-height: 1.2em; }
-.band .vd { background: var(--void-bg); border-color: var(--void); }
-.band .vd .k, .band .vd .y { color: var(--void); }
-.band .ex { background: var(--joy-bg); border-color: var(--joy); }
-.band .ex .k { color: var(--joy); }
-.band .nw { outline: 2px solid var(--hit); outline-offset: 1px; }
-.two { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
-.two > div { border-radius: 12px; padding: 12px 14px; min-width: 0; }
-.two h3 { margin: 0 0 6px; font-size: 15px; font-weight: 700; }
-.two ul { margin: 0; padding-left: 1.1em; font-size: 15px; display: grid; gap: 2px; }
-.two .ok { background: var(--joy-bg); } .two .ok h3 { color: var(--joy); }
-.two .ng { background: var(--void-bg); } .two .ng h3 { color: var(--void); }
-.stars { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
-.stars > div { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; min-width: 0; }
-.stars .y { font-size: 13px; color: var(--ink2); }
-.stars .n { font-family: var(--serif); font-weight: 700; font-size: 19px; display: block; margin-bottom: 4px; }
-.stars p { margin: 0; font-size: 14px; }
-.rows { display: grid; gap: 6px; }
-.row { display: grid; grid-template-columns: 78px auto 1fr; gap: 10px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; min-width: 0; }
-.row .age { font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.3; }
-.row .age small { display: block; font-weight: 400; font-size: 12px; color: var(--ink2); }
-.row .kan { font-family: var(--serif); font-weight: 900; font-size: 30px; line-height: 1.1; }
-.row .sub { font-size: 14px; color: var(--ink2); min-width: 0; }
-.row .sub b { color: var(--ink); font-weight: 700; font-size: 15px; }
-.row.now { border-color: var(--hit); background: var(--hit-bg); border-width: 2px; }
-.row.now .kan { color: var(--hit); }
-.row.void { background: var(--void-bg); }
-.row.void .kan, .row.void .age { color: var(--void); }
-.row.now.void { border-color: var(--hit); }
-.row.exit { border-color: var(--joy); background: var(--joy-bg); }
-.row.exit .kan { color: var(--joy); }
-.chip { display: inline-block; font-size: 12px; font-weight: 700; padding: 1px 8px; border-radius: 999px; margin: 3px 4px 0 0; white-space: nowrap; }
-.c-hit { background: var(--hit-bg); color: var(--hit); } .c-calm { background: var(--calm-bg); color: var(--calm); }
-.c-joy { background: var(--joy-bg); color: var(--joy); } .c-void { background: var(--void); color: var(--bg); }
-.c-now { background: var(--hit); color: var(--bg); }
-.sep { margin: 20px 0 8px; font-family: var(--serif); font-size: 18px; font-weight: 700; }
-.today { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; }
-.today .kan { grid-row: span 2; font-family: var(--serif); font-weight: 900; font-size: 40px; line-height: 1; }
-.today .d { font-size: 14px; color: var(--ink2); }
-.mrow { display: grid; grid-template-columns: 96px auto 1fr; gap: 10px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; min-width: 0; }
-.mrow .dt { font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.3; }
-.mrow .dt small { display: block; font-weight: 400; font-size: 12px; color: var(--ink2); }
-.mrow .kan { font-family: var(--serif); font-weight: 900; font-size: 26px; line-height: 1.1; }
-.mrow .sub { font-size: 14px; min-width: 0; }
-.mrow.void { background: var(--void-bg); }
-.mrow.now { border-color: var(--hit); border-width: 2px; }
-.nowtag { font-size: 12px; font-weight: 700; color: var(--hit); }
-.eq { display: grid; gap: 8px; }
-.eq .core { background: var(--focus-bg); border: 2px solid var(--focus); border-radius: 12px; padding: 14px; text-align: center; }
-.eq .core .g { font-family: var(--serif); font-weight: 900; font-size: 28px; color: var(--ink); line-height: 1.3; display: block; }
-.eq .core .s { font-size: 15px; color: var(--ink2); }
-.arrow { text-align: center; color: var(--ink2); font-size: 14px; line-height: 1; }
-.conds { display: grid; gap: 8px; }
-.cond { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: start; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; min-width: 0; }
-.cond .no { font-family: var(--serif); font-weight: 900; font-size: 30px; color: var(--joy); line-height: 1.1; text-align: center; }
-.cond .h { font-family: var(--serif); font-weight: 700; font-size: 19px; display: block; line-height: 1.4; }
-.cond .src { font-size: 13px; color: var(--ink2); display: block; margin-top: 2px; }
-.cond p { margin: 4px 0 0; font-size: 15px; }
-.taiou { display: grid; gap: 8px; }
-.taiou > div { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
-.taiou b { display: block; font-size: 15px; } .taiou p { margin: 4px 0 0; font-size: 15px; color: var(--ink2); }
-.exitbox { background: var(--joy-bg); border: 2px solid var(--joy); border-radius: 12px; padding: 14px; text-align: center; }
-.exitbox .g { font-family: var(--serif); font-weight: 900; font-size: 26px; color: var(--joy); display: block; line-height: 1.3; }
-.exitbox .s { font-size: 15px; }
-footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink2); }
-@media (max-width: 380px) {
-  .row { grid-template-columns: 70px auto 1fr; gap: 8px; padding-inline: 10px; }
-  .mrow { grid-template-columns: 84px auto 1fr; gap: 8px; padding-inline: 10px; }
-  .band { grid-template-columns: repeat(3, 1fr); }
-  .two, .stars { grid-template-columns: 1fr; }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Serif JP',serif; color:var(--text); line-height:1.95; letter-spacing:.045em;
+  background:
+    radial-gradient(1200px 620px at 50% -12%, rgba(143,180,214,.12), transparent 60%),
+    linear-gradient(180deg,#0B0F16 0%,#0D1420 45%,#070A11 100%);
+  background-attachment:fixed; min-height:100vh;
 }
-@media (prefers-reduced-motion: no-preference) { .ring .ln, .ring .ghost circle, .ring .ghost text { transition: opacity .4s, fill .4s; } }
-</style>
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.05rem 4rem;}
 
+header{text-align:center;padding:3rem 1rem 1.4rem;}
+header .kicker{font-size:.68rem;letter-spacing:.32em;color:var(--accent);opacity:.9;margin-bottom:.9rem;}
+header h1{font-size:1.5rem;font-weight:500;letter-spacing:.08em;margin-bottom:.5rem;}
+header h1 .nm{color:var(--accent);}
+header .tagline{font-size:.8rem;color:var(--muted2);letter-spacing:.1em;line-height:1.7;}
+header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:.12em;}
+
+.profile{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem .8rem;
+}
+.profile div{font-size:.74rem;color:var(--muted);}
+.profile div b{display:block;font-size:.9rem;color:var(--text);font-weight:500;margin-top:.1rem;letter-spacing:.06em;}
+.profile div.full{grid-column:1/3;}
+
+.sec{margin-bottom:1.65rem;}
+.sec-head{display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;padding-bottom:.6rem;border-bottom:1px solid var(--line);}
+.sec-no{font-size:.72rem;color:var(--accent);letter-spacing:.18em;font-weight:600;flex-shrink:0;}
+.sec-title{font-size:1.02rem;font-weight:500;letter-spacing:.08em;}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:1.25rem 1.15rem;box-shadow:0 4px 24px rgba(0,0,0,.32);margin-bottom:1rem;}
+.card p{font-size:.87rem;margin-bottom:.9rem;color:var(--text);}
+.card p:last-child{margin-bottom:0;}
+.card .lead{color:var(--accent);font-size:.9rem;font-weight:500;}
+.hl{color:var(--accent);font-weight:500;}
+.soft{color:var(--muted2);font-size:.8rem;}
+
+.meishiki{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.2rem 0 .3rem;}
+.pillar{background:var(--sink);border:1px solid var(--line);border-radius:12px;padding:.7rem .4rem;text-align:center;}
+.pillar .lbl{font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.55rem;}
+.pillar .yomi{font-size:.58rem;color:var(--muted);letter-spacing:.04em;line-height:1.3;}
+.pillar .kan{font-size:1.85rem;font-weight:600;color:var(--text);line-height:1.15;}
+.pillar .shi{font-size:1.85rem;font-weight:600;color:var(--accent);line-height:1.15;margin-top:.2rem;}
+.pillar .zou{font-size:.62rem;color:var(--muted2);margin-top:.55rem;letter-spacing:.04em;}
+.meishiki-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;}
+
+.jintai{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:19rem;margin:.4rem auto .2rem;}
+.jcell{background:var(--sink);border:1px solid var(--line);border-radius:11px;aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;}
+.jcell .pos{font-size:.58rem;color:var(--muted);letter-spacing:.05em;}
+.jcell .star{font-size:.92rem;font-weight:600;color:var(--text);letter-spacing:.03em;}
+.jcell.center{background:linear-gradient(160deg,rgba(143,180,214,.2),var(--sink));border-color:var(--accent-soft);}
+.jcell.center .star{color:var(--accent);}
+.jcell.jusei-cell{background:var(--night2);}
+.jcell .star.gold{color:var(--gold);}
+
+.gogyo{margin-top:.3rem;}
+.gbar{display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;}
+.gbar .gname{width:2.6rem;font-size:.76rem;color:var(--muted2);flex-shrink:0;}
+.gbar .gtrack{flex:1;height:9px;background:var(--sink);border-radius:5px;overflow:hidden;}
+.gbar .gfill{display:block;height:100%;border-radius:5px;}
+.gbar .gval{width:2.2rem;text-align:right;font-size:.72rem;color:var(--muted);flex-shrink:0;}
+.g-wood .gfill{background:var(--wood);} .g-fire .gfill{background:var(--fire);} .g-earth .gfill{background:var(--earth);} .g-metal .gfill{background:var(--metal);} .g-water .gfill{background:var(--water);}
+
+.ryo svg{width:100%;height:auto;max-width:21rem;display:block;margin:.2rem auto .4rem;}
+.ryo .bx{fill:var(--sink);stroke:var(--line);stroke-width:1.5}
+.ryo .bx.c{fill:rgba(143,180,214,.16);stroke:var(--accent);stroke-width:2.5}
+.ryo .s{fill:var(--text);font-size:16px;font-weight:600;text-anchor:middle}
+.ryo .s.c{fill:var(--accent);font-size:18px}
+.ryo .p{fill:var(--muted);font-size:10.5px;text-anchor:middle}
+.ryo .k{fill:var(--muted2);font-size:12px;text-anchor:middle;font-weight:600}
+.ryo .k.c{fill:var(--accent);font-size:14px}
+
+.daiun-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.daiun{width:100%;border-collapse:collapse;font-size:.78rem;min-width:19rem;}
+.daiun th{font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.05em;padding:.4rem .3rem;border-bottom:1px solid var(--line);text-align:center;}
+.daiun td{padding:.5rem .3rem;text-align:center;border-bottom:1px solid rgba(43,55,72,.5);color:var(--text);}
+.daiun td:first-child{color:var(--muted2);font-size:.72rem;white-space:nowrap;}
+.daiun .tc-cell{color:var(--bad);font-size:.68rem;}
+.daiun .now-row td{background:linear-gradient(90deg,rgba(143,180,214,.14),transparent);}
+.daiun .now-row td:first-child{color:var(--accent);font-weight:600;}
+.daiun .now-cell{color:var(--accent);font-size:.68rem;font-weight:600;}
+.daiun td.isou{font-size:.66rem;color:var(--muted2);text-align:left;line-height:1.5}
+
+.tl{position:relative;padding-left:1.1rem;margin-top:.3rem;}
+.tl::before{content:"";position:absolute;left:3px;top:.4rem;bottom:.4rem;width:2px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:1rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before{content:"";position:absolute;left:-1.1rem;top:.45rem;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--night2);}
+.tl-item.tc::before{background:var(--bad);}
+.tl-item.care::before{background:var(--void);}
+.tl-when{font-size:.76rem;color:var(--accent);font-weight:600;letter-spacing:.06em;}
+.tl-item.tc .tl-when{color:var(--bad);}
+.tl-item.care .tl-when{color:var(--muted2);}
+.tl-body{font-size:.82rem;color:var(--text);margin-top:.15rem;}
+
+.recipe .item{display:flex;gap:.75rem;margin-bottom:1rem;}
+.recipe .item:last-child{margin-bottom:0;}
+.recipe .num{flex-shrink:0;width:1.7rem;height:1.7rem;border-radius:50%;background:linear-gradient(160deg,var(--accent),var(--accent-soft));color:var(--night);font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;}
+.recipe .rbody{font-size:.83rem;}
+.recipe .rbody b{color:var(--accent);font-weight:600;}
+
+.pull{border-left:3px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:1rem 0;font-size:.9rem;color:var(--muted2);}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:.2rem 0 .9rem;}
+.two .m{background:var(--sink);border:1px solid var(--line);border-radius:12px;padding:.8rem .9rem;font-size:.8rem;min-width:0;}
+.two .m b{display:block;font-size:.84rem;margin-bottom:.2rem;letter-spacing:.06em;}
+.two .ok b{color:var(--accent);} .two .ng b{color:var(--void);}
+.three{display:grid;gap:.6rem;margin-top:.2rem}
+.three .m{background:var(--sink);border:1px solid var(--line);border-radius:12px;padding:.8rem .9rem;font-size:.84rem}
+.three .m b{display:block;color:var(--accent);font-size:.9rem;margin-bottom:.15rem;letter-spacing:.06em}
+
+.words dt{color:var(--accent);font-size:.84rem;font-weight:600;margin-top:.8rem;letter-spacing:.06em;}
+.words dt:first-child{margin-top:0;}
+.words dd{font-size:.8rem;color:var(--muted2);line-height:1.8;}
+
+.closing{background:linear-gradient(180deg,var(--panel),var(--sink));border:1px solid var(--accent-soft);border-radius:18px;padding:1.6rem 1.25rem;text-align:center;box-shadow:0 0 30px rgba(143,180,214,.09);}
+.closing p{font-size:.88rem;margin-bottom:.9rem;}
+.closing p:last-child{margin-bottom:0;}
+.closing .big{font-size:1.05rem;color:var(--accent);font-weight:500;letter-spacing:.06em;}
+
+.koyomi-link{display:block;text-align:center;margin-top:1.5rem;padding:1rem;background:var(--night2);border:1px solid var(--line);border-radius:14px;color:var(--text);text-decoration:none;font-size:.86rem;}
+.koyomi-link:hover{border-color:var(--accent-soft);}
+.koyomi-link .arrow{color:var(--accent);}
+.koyomi-link small{display:block;color:var(--muted);font-size:.7rem;margin-top:.3rem;}
+
+footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
+footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
+@media (max-width:380px){ .two{grid-template-columns:1fr;} }
+</style>
+</head>
 <body>
-<div class="wrap" id="app"></div>
+<div class="wrap">
 
-<script>
-(function () {
-  var D = {"birthText": "1971年12月28日生まれ　女性　54歳", "pillars": [{"role": "日柱", "kan": "丁", "shi": "亥", "zou": "壬・甲"}, {"role": "月柱", "kan": "庚", "shi": "子", "zou": "癸"}, {"role": "年柱", "kan": "辛", "shi": "亥", "zou": "壬・甲"}], "nikkan": {"no": "24", "kanshi": "丁亥", "name": "湖上の鬼火", "keiku": "果断英邁だが口数が少なくて愛嬌に乏しいから人に好かれにくい。天性の才能を生かし寛容の気を養えば必ず一方の長となり成功者となれる。", "honshitsu": "感覚が尖すぎて気持ちが不安定になりやすいためか、普段は理詰めで冷静な考え方をする。フレンドリーだが本当は一匹狼的。奉仕的な行動で運気が安定。", "seikaku": "回りくどくて凝り性でのんびり屋。勤勉実直。商才が少なく研究家肌。あくまでも合理的で理詰めなので直感型ではない。素朴。"}, "jintai": [{"lb": "伴星", "st": "石門星", "ju": false, "c": false, "d": "使命「人脈が財産になる」。人との繋がりを大切にしなさい。できるだけたくさんの人と交流して楽しい人生を送りなさい。一期一会を大切にしなさい。感謝の気持ちを忘れなければ、平穏で豊かな人生を送ることができます。", "yo": "", "in": ""}, {"lb": "目上", "st": "禄存星", "ju": false, "c": false, "d": "大きな包容力。自分の器が大きければ気前よくお金を使う。お金が使えなければ同情で気を引く。お人好しで目立ちたがり屋。", "yo": "", "in": ""}, {"lb": "初年運", "st": "天報星", "ju": true, "c": false, "d": "「変化」を表す。いうことや行動がクルクル変わる。時間の感覚が薄い。夢と空想の世界に生きる感覚派。心が揺れ動き一つの事に集中できない。親離れが遅い。人間関係も仕事も何をやっても満足しない。何に関しても広く浅くなる。22歳ころまでに一つの事に集中できるかが課題。", "yo": "", "in": ""}, {"lb": "家庭", "st": "牽牛星", "ju": false, "c": false, "d": "自己中心的。世間体を気にする。理想の家庭像を持ちがち。理想にはめ込む。自分にも家族にも厳しい。", "yo": "", "in": ""}, {"lb": "中心", "st": "車騎星", "ju": false, "c": true, "d": "一本気。最前線。行動力に優れる。即断即決。白黒はっきり。納得できなければ反抗する。体を動かすのが好き。", "yo": "正直。曲がったことが嫌い。良い師匠につけば技術習得に長ける。物事を引きずらない。暗記力に優れる。", "in": "短気。感情の起伏が激しい。短絡的な思考。お手本が必要。"}, {"lb": "社会", "st": "牽牛星", "ju": false, "c": false, "d": "他の人と違うという特別意識。表面上とっつきにくくなりがち。実際に付き合うとそんなことはない。地位や名誉を与えると張り切る。", "yo": "", "in": ""}, {"lb": "晩年運", "st": "天報星", "ju": true, "c": false, "d": "「変化」を表す。いうことや行動がクルクル変わる。時間の感覚が薄い。夢と空想の世界に生きる感覚派。心が揺れ動き一つの事に集中できない。いくつになっても夢を見ている。", "yo": "", "in": ""}, {"lb": "目下", "st": "司禄星", "ju": false, "c": false, "d": "几帳面。常識人。約束の時間を守る。誠実。頼りがいがある。面白みに欠けることもある。合理的。", "yo": "", "in": ""}, {"lb": "中年運", "st": "天馳星", "ju": true, "c": false, "d": "極限の無の世界。精神力の強さは最強。瞬発力に長けているが、持続力はない。社会の流れを変える、会社の方針を転換するときなどに才能を発揮できる。寝食を忘れて没頭できる。マルチタスクができる。予知能力のようなものがある。ハードスケジュールでこそ才能が輝く。運勢の谷間の時代。落ちた運気は反動で必ず上昇する。短気な行動を起こすと運気は停滞したまま。", "yo": "", "in": ""}], "tenchu": {"name": "午未天中殺", "honshitsu": "流れを断ち切る使命", "kakei": "古い流れを断ち、新しく始める", "youten": "過去のしがらみを断ち切って独自路線に", "nextYears": ["2026", "2027"], "shukumei": ""}, "gogyo": {"木": 50, "火": 7, "土": 0, "金": 33, "水": 103}, "gogyoTotal": 193, "lack": ["火", "土"], "lackHow": [["火", "発信・人前に出る／赤系の色／キャンドル・暖色照明／表現活動"], ["土", "地に足をつける／黄土色・茶系／陶器・土の手仕事／地元との繋がり"]], "shugo": [["甲", "玉堂星", "大樹のように真っ直ぐ／リーダー意識／頑固さを活かす"], ["庚", "司禄星", "鋭く切る・即断／武断的な強さ／決める力"]], "sainou": {"type": "無玄の型", "desc": "剋線ゼロ。豊かな才能があっても自身では気づきにくい。多様な可能性を秘めるが凝固しない。他者の反応・環境刺激で初めて才能が見える。穏やかな環境で伸びる。厳しさで潰されやすい。", "koku": {"北": ["禄存星", 0], "東": ["牽牛星", 0], "中心": ["車騎星", 0], "西": ["牽牛星", 0], "南": ["司禄星", 0]}, "area": "南天運 — 現実領域+坐型・忍耐強い現実派・自分基準の環境最適・理屈より情"}, "isouBorn": [["日柱", "年柱", "自刑"]], "ritsuun": "3歳運", "daiun": [{"a": "3〜12", "k": "辛丑", "s": "禄存星", "now": false, "v": false, "isou": "月柱：支合 年+月+日柱：方三位(北方水)"}, {"a": "13〜22", "k": "壬寅", "s": "牽牛星", "now": false, "v": false, "isou": "年柱：支合 日柱：干合、支合"}, {"a": "23〜32", "k": "癸卯", "s": "車騎星", "now": false, "v": false, "isou": "年柱：半会 月柱：旺刑 日柱：半会"}, {"a": "33〜42", "k": "甲辰", "s": "玉堂星", "now": false, "v": false, "isou": "月柱：半会"}, {"a": "43〜52", "k": "乙巳", "s": "龍高星", "now": false, "v": false, "isou": "年柱：天剋地冲 月柱：干合 日柱：対冲"}, {"a": "53〜62", "k": "丙午", "s": "石門星", "now": true, "v": true, "isou": "年柱：干合 月柱：天剋地冲"}, {"a": "63〜72", "k": "丁未", "s": "貫索星", "now": false, "v": true, "isou": "年柱：半会 月柱：害 日柱：大半会"}, {"a": "73〜82", "k": "戊申", "s": "調舒星", "now": false, "v": false, "isou": "年柱：害 月柱：半会 日柱：害"}], "nenun": [{"y": "2022", "a": "51", "k": "壬寅", "s": "牽牛星", "now": false, "v": false, "isou": "年柱：支合 日柱：干合、支合"}, {"y": "2023", "a": "52", "k": "癸卯", "s": "車騎星", "now": false, "v": false, "isou": "年柱：半会 月柱：旺刑 日柱：半会"}, {"y": "2024", "a": "53", "k": "甲辰", "s": "玉堂星", "now": false, "v": false, "isou": "月柱：半会"}, {"y": "2025", "a": "54", "k": "乙巳", "s": "龍高星", "now": false, "v": false, "isou": "年柱：天剋地冲 月柱：干合 日柱：対冲"}, {"y": "2026", "a": "55", "k": "丙午", "s": "石門星", "now": true, "v": true, "isou": "年柱：干合 月柱：天剋地冲"}, {"y": "2027", "a": "56", "k": "丁未", "s": "貫索星", "now": false, "v": true, "isou": "年柱：半会 月柱：害 日柱：大半会"}, {"y": "2028", "a": "57", "k": "戊申", "s": "調舒星", "now": false, "v": false, "isou": "年柱：害 月柱：半会 日柱：害"}, {"y": "2029", "a": "58", "k": "己酉", "s": "鳳閣星", "now": false, "v": false, "isou": "—"}, {"y": "2030", "a": "59", "k": "庚戌", "s": "司禄星", "now": false, "v": false, "isou": "—"}, {"y": "2031", "a": "60", "k": "辛亥", "s": "禄存星", "now": false, "v": false, "isou": "年柱：自刑、律音 日柱：自刑"}], "getsuun": [{"ym": "2026/10", "k": "戊戌", "s": "調舒星", "now": true, "v": false, "isou": "—", "d": "10/8〜11/6", "sy": "2026"}, {"ym": "2026/11", "k": "己亥", "s": "鳳閣星", "now": false, "v": false, "isou": "年柱：自刑 日柱：自刑", "d": "11/7〜12/6", "sy": "2026"}, {"ym": "2026/12", "k": "庚子", "s": "司禄星", "now": false, "v": false, "isou": "月柱：律音", "d": "12/7〜1/4", "sy": "2026"}, {"ym": "2027/1", "k": "辛丑", "s": "禄存星", "now": false, "v": false, "isou": "月柱：支合 年+月+日柱：方三位(北方水)", "d": "1/5〜2/3", "sy": "2027"}, {"ym": "2027/2", "k": "壬寅", "s": "牽牛星", "now": false, "v": false, "isou": "年柱：支合 日柱：干合、支合", "d": "2/4〜3/5", "sy": "2027"}, {"ym": "2027/3", "k": "癸卯", "s": "車騎星", "now": false, "v": false, "isou": "年柱：半会 月柱：旺刑 日柱：半会", "d": "3/6〜4/4", "sy": "2027"}, {"ym": "2027/4", "k": "甲辰", "s": "玉堂星", "now": false, "v": false, "isou": "月柱：半会", "d": "4/5〜5/5", "sy": "2027"}, {"ym": "2027/5", "k": "乙巳", "s": "龍高星", "now": false, "v": false, "isou": "年柱：天剋地冲 月柱：干合 日柱：対冲", "d": "5/6〜6/5", "sy": "2027"}, {"ym": "2027/6", "k": "丙午", "s": "石門星", "now": false, "v": true, "isou": "年柱：干合 月柱：天剋地冲", "d": "6/6〜7/6", "sy": "2027"}, {"ym": "2027/7", "k": "丁未", "s": "貫索星", "now": false, "v": true, "isou": "年柱：半会 月柱：害 日柱：大半会", "d": "7/7〜8/7", "sy": "2027"}, {"ym": "2027/8", "k": "戊申", "s": "調舒星", "now": false, "v": false, "isou": "年柱：害 月柱：半会 日柱：害", "d": "8/8〜9/7", "sy": "2027"}, {"ym": "2027/9", "k": "己酉", "s": "鳳閣星", "now": false, "v": false, "isou": "—", "d": "9/8〜10/7", "sy": "2027"}], "nichiun": [{"d": "10/26", "w": "月", "k": "癸酉", "s": "車騎星", "now": true, "v": false, "isou": "—"}, {"d": "10/27", "w": "火", "k": "甲戌", "s": "玉堂星", "now": false, "v": false, "isou": "—"}, {"d": "10/28", "w": "水", "k": "乙亥", "s": "龍高星", "now": false, "v": false, "isou": "年柱：自刑 月柱：干合 日柱：自刑"}, {"d": "10/29", "w": "木", "k": "丙子", "s": "石門星", "now": false, "v": false, "isou": "年柱：干合"}, {"d": "10/30", "w": "金", "k": "丁丑", "s": "貫索星", "now": false, "v": false, "isou": "月柱：支合 年+月+日柱：方三位(北方水)"}, {"d": "10/31", "w": "土", "k": "戊寅", "s": "調舒星", "now": false, "v": false, "isou": "年柱：支合 日柱：支合"}, {"d": "11/1", "w": "日", "k": "己卯", "s": "鳳閣星", "now": false, "v": false, "isou": "年柱：半会 月柱：旺刑 日柱：半会"}, {"d": "11/2", "w": "月", "k": "庚辰", "s": "司禄星", "now": false, "v": false, "isou": "月柱：大半会"}, {"d": "11/3", "w": "火", "k": "辛巳", "s": "禄存星", "now": false, "v": false, "isou": "年柱：対冲、納音 日柱：天剋地冲"}, {"d": "11/4", "w": "水", "k": "壬午", "s": "牽牛星", "now": false, "v": true, "isou": "月柱：対冲 日柱：干合"}, {"d": "11/5", "w": "木", "k": "癸未", "s": "車騎星", "now": false, "v": true, "isou": "年柱：半会 月柱：害 日柱：半会"}, {"d": "11/6", "w": "金", "k": "甲申", "s": "玉堂星", "now": false, "v": false, "isou": "年柱：害 月柱：半会 日柱：害"}, {"d": "11/7", "w": "土", "k": "乙酉", "s": "龍高星", "now": false, "v": false, "isou": "月柱：干合"}, {"d": "11/8", "w": "日", "k": "丙戌", "s": "石門星", "now": false, "v": false, "isou": "年柱：干合"}, {"d": "11/9", "w": "月", "k": "丁亥", "s": "貫索星", "now": false, "v": false, "isou": "年柱：自刑 日柱：自刑、律音"}, {"d": "11/10", "w": "火", "k": "戊子", "s": "調舒星", "now": false, "v": false, "isou": "—"}, {"d": "11/11", "w": "水", "k": "己丑", "s": "鳳閣星", "now": false, "v": false, "isou": "月柱：支合 年+月+日柱：方三位(北方水)"}, {"d": "11/12", "w": "木", "k": "庚寅", "s": "司禄星", "now": false, "v": false, "isou": "年柱：支合 日柱：支合"}, {"d": "11/13", "w": "金", "k": "辛卯", "s": "禄存星", "now": false, "v": false, "isou": "年柱：大半会 月柱：旺刑 日柱：半会"}, {"d": "11/14", "w": "土", "k": "壬辰", "s": "牽牛星", "now": false, "v": false, "isou": "月柱：半会 日柱：干合"}, {"d": "11/15", "w": "日", "k": "癸巳", "s": "車騎星", "now": false, "v": false, "isou": "年柱：対冲 日柱：天剋地冲"}, {"d": "11/16", "w": "月", "k": "甲午", "s": "玉堂星", "now": false, "v": true, "isou": "月柱：天剋地冲"}, {"d": "11/17", "w": "火", "k": "乙未", "s": "龍高星", "now": false, "v": true, "isou": "年柱：半会 月柱：干合、害 日柱：半会"}, {"d": "11/18", "w": "水", "k": "丙申", "s": "石門星", "now": false, "v": false, "isou": "年柱：干合、害 月柱：半会 日柱：害"}, {"d": "11/19", "w": "木", "k": "丁酉", "s": "貫索星", "now": false, "v": false, "isou": "—"}, {"d": "11/20", "w": "金", "k": "戊戌", "s": "調舒星", "now": false, "v": false, "isou": "—"}, {"d": "11/21", "w": "土", "k": "己亥", "s": "鳳閣星", "now": false, "v": false, "isou": "年柱：自刑 日柱：自刑"}, {"d": "11/22", "w": "日", "k": "庚子", "s": "司禄星", "now": false, "v": false, "isou": "月柱：律音"}, {"d": "11/23", "w": "月", "k": "辛丑", "s": "禄存星", "now": false, "v": false, "isou": "月柱：支合 年+月+日柱：方三位(北方水)"}, {"d": "11/24", "w": "火", "k": "壬寅", "s": "牽牛星", "now": false, "v": false, "isou": "年柱：支合 日柱：干合、支合"}], "pastTc": [], "tcYears": [{"y": 2026, "k": "丙午", "s": "石門星", "j": "天禄星", "rx": "人間関係のトラブルが増えやすい。広く浅く付き合う。共同経営の話には乗らない。"}, {"y": 2027, "k": "丁未", "s": "貫索星", "j": "天南星", "rx": "自分を通したくなる、独立したくなる。独立や大きな決断は控えて、人と歩調を合わせる。"}], "inTenchu": true, "band": [{"y": 2024, "k": "甲辰"}, {"y": 2025, "k": "乙巳"}, {"y": 2026, "k": "丙午"}, {"y": 2027, "k": "丁未"}, {"y": 2028, "k": "戊申"}, {"y": 2029, "k": "己酉"}], "name": "有紀子さん", "dateText": "2026年10月28日", "extra": null};
-  var BR = '子丑寅卯辰巳午未申酉戌亥'.split('');
-  var GO = { '木': 'moku', '火': 'ka', '土': 'do', '金': 'kon', '水': 'sui' };
-  var STEM_GO = { '甲':'moku','乙':'moku','丙':'ka','丁':'ka','戊':'do','己':'do','庚':'kon','辛':'kon','壬':'sui','癸':'sui' };
-  var GOOD = ['三合会局','方三位','大半会','半会','支合','干合'];
-  var CALM = ['律音','納音'];
-  var LN = { joy: 'g', hit: 'b', calm: 'c' };
-  var KYOKU = { '申子辰':'水局', '亥卯未':'木局', '寅午戌':'火局', '巳酉丑':'金局' };
-  var MEAN = {
-    '三合会局':'三つの支が揃う、合の形の中でいちばん強い形。物事が早く進む', '方三位':'横に広がる、強い合の形',
-    '大半会':'大きく広がる配置', '半会':'拡大・発展の配置', '支合':'調和・まとまる配置', '干合':'結びつき・変化の配置',
-    '対冲':'動く・入れ替わる配置。古いものが新しく替わる', '天剋地冲':'時間をかけて大きく作り替わる配置',
-    '庫刑':'目上との摩擦・詰まりが出やすい配置', '旺刑':'身近な人との摩擦が出やすい配置', '生刑':'目下との摩擦が出やすい配置',
-    '自刑':'自分の中で引っかかりが出やすい配置', '刑':'摩擦・詰まりが出やすい配置', '害':'ストレスが体に出やすい配置',
-    '破':'殻を破る、終わりと始まりの配置', '律音':'原点回帰・仕切り直しの配置', '納音':'折り返し・古いものとの別れの配置'
-  };
-  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function cls(t) { if (GOOD.some(function (g) { return t.indexOf(g) >= 0; })) return 'joy'; if (CALM.indexOf(t) >= 0) return 'calm'; return 'hit'; }
-  // 「月柱：庫刑、天剋地冲 年+日柱：三合会局」→ [{p:['月'],t:'庫刑'},…]
-  function parseIsou(s) {
-    var out = [];
-    if (!s || s === '—') return out;
-    var re = /((?:年|月|日)(?:\+(?:年|月|日))*)柱：([^\s]+)/g, m;  // 261005：年+月+日柱（三合会局）の3柱を取りこぼさない
-    while ((m = re.exec(s))) {
-      var ps = m[1].split('+');
-      m[2].split('、').forEach(function (t) { out.push({ p: ps, t: t }); });
-    }
-    return out;
-  }
-  function chipsOf(s) {
-    var list = parseIsou(s);
-    if (!list.length) return '<span class="chip c-calm">位相なし</span>';
-    return list.map(function (x) { return '<span class="chip c-' + cls(x.t) + '">' + x.p.join('・') + ' ' + esc(x.t) + '</span>'; }).join('');
-  }
+<header>
+  <p class="kicker">㐂占 　 命 術 本鑑定書</p>
+  <h1><span class="nm">有紀子</span> さんへ</h1>
+  <p class="tagline">風前の灯火 ―― 刃を、自分にではなく、決めたことに向ける</p>
+  <p class="date">1971年12月28日 生　／　鑑定 2026.10.28</p>
+</header>
 
-  var P = { '日': D.pillars[0], '月': D.pillars[1], '年': D.pillars[2] };
-  var TC = D.tenchu.name.replace('天中殺', '').split('');
-  var bornPairs = {};
-  D.isouBorn.forEach(function (x) { bornPairs[x[0][0]] = 1; bornPairs[x[1][0]] = 1; });
-  var nowDaiun = D.daiun.filter(function (x) { return x.now; })[0] || null;
-  var nowYear = D.nenun.filter(function (x) { return x.now; })[0] || null;
-  var today = D.nichiun.filter(function (x) { return x.now; })[0] || null;
-  var EX = D.extra || {};
+<div class="profile">
+  <div class="full">魂の本質（日の宿命）<b>丁亥（ひのとい）― 湖上の鬼火・風前の灯火</b></div>
+  <div>中心の星<b>車騎星</b></div>
+  <div>天中殺<b>午未（南方）</b></div>
+  <div>才能の型<b>無玄の型</b></div>
+  <div>今の大運<b>丙午・石門星（53〜62歳）</b></div>
+  <div class="full">宿命の天中殺<b>なし（後天運の天中殺だけ意識すればよい形）</b></div>
+  <div class="full">運気の位置<b>53歳から72歳までの二十年は、大運の天中殺。そこに2026〜2027年の年の天中殺が重なる。年の天中殺は2028年の立春で明ける</b></div>
+</div>
 
-  var h = [];
-  var nav = [['hashira','三つの柱'],['jintai','人体星図'],['sainou','才能の型'],['gogyo','五行'],['tenchu','天中殺'],['now','今の十年'],['nen','今年'],['daiun','大運'],['toki','年運と月運'],['youten','陽転']];
-  h.push('<nav class="nav" aria-label="目次">' + nav.map(function (n) { return '<a href="#' + n[0] + '">' + n[1] + '</a>'; }).join('') + '</nav>');
-  h.push('<header><div class="eyebrow">紡の席　' + esc(D.dateText) + ' 時点</div><h1>' + esc(D.name) + '　命式図</h1><div class="meta">' + esc(D.birthText) + '</div></header>');
+<div class="card" style="border-color:var(--accent-soft);">
+  <p>おおきにです、有紀子さん。</p>
+  <p>10月28日にお話ししたことを、一枚にまとめました。Meetの中で、有紀子さんの口から出てきた言葉を中心に、書き足してあります。特に厚くしたのは、<span class="hl">会社を辞めるか続けるか</span>、<span class="hl">家と投資のタイミング</span>、<span class="hl">体と気持ちの守り方</span>の三つです。</p>
+  <p>読む順番は気にしなくて大丈夫です。気になったところから開いてください。巻末には、今回出てきた言葉の小さな辞典を付けました。ここがスタートです。</p>
+</div>
 
-  // 三つの柱（日・月・年）
-  h.push('<section id="hashira"><h2>三つの柱</h2><p class="lead">生年月日を、干支に置き換えたものです。左から、日・月・年の順に並べています。</p><div class="pillars">');
-  [['日','自分・家庭',true],['月','目標・仕事'],['年','社会']].forEach(function (r) {
-    var p = P[r[0]], shiCls = TC.indexOf(p.shi) >= 0 ? 'vd' : (bornPairs[r[0]] ? 'mark' : '');
-    h.push('<div class="pillar' + (r[2] ? ' self' : '') + '"><div class="role">' + r[0] + '柱</div><div class="name">' + r[1] + '</div><span class="glyph">' + p.kan + '</span><span class="glyph ' + shiCls + '">' + p.shi + '</span><div class="zou">蔵干 ' + esc(p.zou) + '</div></div>');
-  });
-  h.push('</div>');
-  var bn = D.isouBorn.length ? D.isouBorn.map(function (x) { return x[0] + 'と' + x[1] + 'が<b>' + esc(x[2]) + '</b>'; }).join('、') + '。' : '命式の中の位相は出ていません。';
-  var tcIn = ['日','月','年'].filter(function (k) { return TC.indexOf(P[k].shi) >= 0; });
-  h.push('<p class="note">日柱は <b>' + esc(D.nikkan.kanshi) + '</b>（六十干支の' + esc(D.nikkan.no) + '番目）。「' + esc(D.nikkan.name) + '」。' + bn +
-    (tcIn.length ? tcIn.map(function (k) { return k + '柱の<b class="v">' + P[k].shi + '</b>'; }).join('・') + 'は、天中殺の支です。' : '') + '</p>');
-  h.push('<div class="explain"><p class="cl"><b>本質</b>：' + esc(D.nikkan.honshitsu) + '</p><p class="vl"><b>警句</b>：' + esc(D.nikkan.keiku) + '</p></div></section>');
+<!-- 命式帖 -->
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">命式帖</span><span class="sec-title">有紀子さんの設計図</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.6rem;">陰占 ― 生まれ持った気の柱</p>
+    <div class="meishiki">
+      <div class="pillar"><div class="lbl">日柱（自分・私生活）</div><div class="yomi">ひのと</div><div class="kan">丁</div><div class="shi">亥</div><div class="yomi">い</div><div class="zou">蔵干　壬・甲</div></div>
+      <div class="pillar"><div class="lbl">月柱（目標・仕事）</div><div class="yomi">かのえ</div><div class="kan">庚</div><div class="shi">子</div><div class="yomi">ね</div><div class="zou">蔵干　癸</div></div>
+      <div class="pillar"><div class="lbl">年柱（社会・対外）</div><div class="yomi">かのと</div><div class="kan">辛</div><div class="shi">亥</div><div class="yomi">い</div><div class="zou">蔵干　壬・甲</div></div>
+    </div>
+    <p class="meishiki-note">日柱 丁亥 ／ 月柱 庚子 ／ 年柱 辛亥</p>
+    <div style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+    <p class="soft" style="margin-bottom:.2rem;">陽占 ― 心のかたち（人体星図）</p>
+    <div class="jintai">
+      <div class="jcell"><span class="pos">伴星（先祖）</span><span class="star">石門星</span></div>
+      <div class="jcell"><span class="pos">目上（北）</span><span class="star">禄存星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">初年運</span><span class="star gold">天報星</span></div>
+      <div class="jcell"><span class="pos">配偶者（西）</span><span class="star">牽牛星</span></div>
+      <div class="jcell center"><span class="pos">中心・本人</span><span class="star">車騎星</span></div>
+      <div class="jcell"><span class="pos">社会（東）</span><span class="star">牽牛星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">晩年運</span><span class="star gold">天報星</span></div>
+      <div class="jcell"><span class="pos">目下（南）</span><span class="star">司禄星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">中年運</span><span class="star gold">天馳星</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.7rem;">中央が本人。真ん中は、一本気で即断即決の車騎星。社会の場所（東）と配偶者の場所（西）に、責任感の牽牛星。ご先祖様から渡された使命の星（伴星）は、人とのつながりの石門星。中年運は、瞬発力が最強の天馳星です</p>
+  </div>
+</div>
 
-  // 人体星図
-  h.push('<section id="jintai"><h2>人体星図</h2><p class="lead">命式を九つのマスに置いたものです。マスを押すと、命式帳の説明が出ます。</p><div class="jintai" id="jgrid"></div><div class="jdetail" id="jdetail" aria-live="polite"></div></section>');
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">一</span><span class="sec-title">どういう魂か ― 湖上の鬼火</span></div>
+  <div class="card">
+    <p class="lead">鉄砲水の上に浮かぶ、小さな灯</p>
+    <p>日の宿命「丁亥」には、<span class="hl">「湖上の鬼火」</span>という名前がついています。別名は「風前の灯火」。六十干支の二十四番目です。</p>
+    <p>丁は、火の陰。大きな炎ではなく、灯です。亥は、水。それも、勢いのある鉄砲水のような水です。その上に浮いている灯火。名前だけ聞くと、消えそうに聞こえます。でも、東洋占術では、<b>厳しい環境に置かれることで、特殊な力が出てくる</b>干支として読みます。別名は「九流の術士」。いくつもの術を使いこなせる、とされる人です。</p>
+    <p style="margin-bottom:0;">消えそうな灯、ではありません。<b>水の上でも消えずに、自分で光を保つ灯</b>です。会社に24年。入社の時から、今まで、続けてこられた。その力は、この作りから来ていると、僕は見ています。</p>
+  </div>
+  <div class="card">
+    <p class="lead">理詰めで冷静。でも本当は、一匹狼</p>
+    <p>以下が、丁亥の本質です。<span class="hl">「感覚が尖すぎて気持ちが不安定になりやすいためか、普段は理詰めで冷静な考え方をする。フレンドリーだが本当は一匹狼的。奉仕的な行動で運気が安定」</span>。</p>
+    <p>性格の面では<span class="hl">「回りくどくて凝り性でのんびり屋。勤勉実直。研究家肌。あくまでも合理的で理詰めなので直感型ではない。素朴」</span>と出ています。勤続24年。会社に恩義を感じて、一生懸命やってきた、と話してくれました。<b>勤勉実直</b>は、そのまま有紀子さんの24年です。</p>
+    <p style="margin-bottom:0;">女性の説明には<span class="hl">「飾り気がなく知的で情に流されない」</span>。そして<span class="hl">「好意があっても内に秘めるので、建前を気にすると好機を逃す」</span>。丁寧で控えめに見える有紀子さんの、内側の作りです。</p>
+  </div>
+  <div class="card">
+    <p class="lead">ふつうとは少し違う感性を、三つの柱に持つ</p>
+    <p>日柱の丁亥は、東洋占術で「異常干支」と呼ばれる干支です。異常は、悪い意味ではありません。<b>ふつうとは少し違う感性を持って生まれた</b>、という意味です。キレイなものや、本当のことだけを見ていたい。ものの見方が、ふつうとは少し違う。占いやヒーリングのような、目に見えないものを扱う分野と相性が良い、とされる干支でもあります。</p>
+    <p>年柱の辛亥にも、<span class="hl">「感受性・表現力に優れ、人の気持ちや隠し事を見抜くほどの直観」</span>があります。</p>
+    <p style="margin-bottom:0;">月柱の庚子は、頭脳明晰とされる干支で、<span class="hl">「数字に強い」</span>とも出ています。ただ、有紀子さん自身は、強い気はしない、と話してくれました。その代わりに、一番楽しかった仕事として、入社直後の在庫管理で、過剰と過少がピタッとはまった時を挙げてくれました。<b>数字そのものより、数字を整えて、ピタッと合わせる場面で力が出る</b>。僕は、そう読んでいます。</p>
+  </div>
+  <div class="card" style="background:var(--sink);border-color:var(--accent-soft);">
+    <p class="lead" style="margin-bottom:.6rem;">警句 ―― 前提にしてほしい一文</p>
+    <div class="pull" style="margin-top:0;">天性の才能を生かし、寛容の気を養えば、必ず一方の長となり、成功者となれる。</div>
+    <p>日柱の警句の、後ろの半分です。ここが、この鑑定書の芯になります。</p>
+    <p><b>この「寛容の気」は、人に対してだけではなく、自分への寛容のことだと、僕は見ています。</b>反対のことを言われるとカッとなる。そして、あとで泣いて「私が悪いのかな」になる。そう話してくれました。鋭い刃を持った人が、その刃を自分に向け続けると、自責になります。</p>
+    <p style="margin-bottom:0;">自分に寛容になれた時、刃は、外で使えるようになります。有紀子さんの刃は、折れていません。向く先が、ずれているだけです。</p>
+  </div>
+</div>
 
-  // 才能の型
-  var kk = D.sainou.koku, mx = 0, mk = '中心';
-  Object.keys(kk).forEach(function (k) { if (kk[k][1] > mx) { mx = kk[k][1]; mk = k; } });
-  function box(k, x, y, w, hh, posLabel) {
-    var it = kk[k] || ['', 0], c = (k === mk) ? ' c' : '';
-    return '<rect class="bx' + c + '" x="' + x + '" y="' + y + '" width="' + w + '" height="' + hh + '" rx="10"/>' +
-      '<text class="p" x="' + (x + w / 2) + '" y="' + (y + 17) + '">' + posLabel + '</text>' +
-      '<text class="s' + c + '" x="' + (x + w / 2) + '" y="' + (y + hh / 2 + 4) + '">' + esc(it[0]) + '</text>' +
-      '<text class="k' + c + '" x="' + (x + w / 2) + '" y="' + (y + hh - 8) + '">剋線 ' + it[1] + '</text>';
-  }
-  h.push('<section id="sainou"><h2>' + esc(D.sainou.type) + '</h2><p class="lead">才能占技。五つの星のうち、どこに剋線が集まっているかを見ます。</p><div class="panel">' +
-    '<svg class="ryo" viewBox="0 0 360 330" role="img" aria-label="才能占技の剋線の分布">' +
-    box('北', 125, 10, 110, 70, '北　目上') + box('西', 10, 128, 110, 74, '西　家庭') + box('中心', 125, 122, 110, 86, '中心') +
-    box('東', 240, 128, 110, 74, '東　社会') + box('南', 125, 250, 110, 70, '南　目下') + '</svg></div>' +
-    '<div class="explain"><p class="hl"><b>命式帳の説明</b>：' + esc(D.sainou.desc) + '</p>' + (D.sainou.area ? '<p class="cl"><b>才能の領域</b>：' + esc(D.sainou.area) + '</p>' : '') + '</div></section>');
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">二</span><span class="sec-title">命式帖の特徴 ― 水の厚みと、火と土を足すこと</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.7rem;">五行のエネルギー（総量193）</p>
+    <div class="gogyo">
+      <div class="gbar g-wood"><span class="gname">木</span><span class="gtrack"><span class="gfill" style="width:49%"></span></span><span class="gval">50</span></div>
+      <div class="gbar g-fire"><span class="gname">火</span><span class="gtrack"><span class="gfill" style="width:7%"></span></span><span class="gval">7</span></div>
+      <div class="gbar g-earth"><span class="gname">土</span><span class="gtrack"><span class="gfill" style="width:0%"></span></span><span class="gval">0</span></div>
+      <div class="gbar g-metal"><span class="gname">金</span><span class="gtrack"><span class="gfill" style="width:32%"></span></span><span class="gval">33</span></div>
+      <div class="gbar g-water"><span class="gname">水</span><span class="gtrack"><span class="gfill" style="width:100%"></span></span><span class="gval">103</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <p class="lead">水が突出して、灯が薄い</p>
+    <p>総量193のうち、<b>水が103</b>。半分以上が水です。日柱と年柱の亥、その蔵干の壬、月柱の子と癸。水がいくつも重なっています。そして、<b>火は7、土は0</b>。灯(丁)は、水に大きく取り囲まれている形です。</p>
+    <p style="margin-bottom:0;">ここは、僕の見立てです。水の中に灯がある形は、<span class="hl">キャパオーバーの感覚</span>が出やすい。毎日の残業、休日の仕事、終わらない業務。「処理能力が落ちたのかも」という不安は、能力の話ではなく、<b>火（灯）が薄い中で、水（負荷）が大きい</b>という、配置の話として読めます。</p>
+  </div>
+  <div class="card">
+    <p class="lead">火と土の、足し方</p>
+    <div class="two">
+      <div class="m ok"><b>火を足す</b>キャンドル。暖色の照明。赤系のもの。人前で気持ちを出す、発信や表現。低い声で話して、体の中が燃えるイメージを持つ。</div>
+      <div class="m ok"><b>土を足す</b>裸足で土の上に立つ。陶器。黄土色・茶系のもの。土の手仕事。地元とのつながり。</div>
+    </div>
+    <p style="margin-bottom:0;">この1週間ほど、キャンドルを灯して、お香もしていた、と話してくれました。<b>火を足す動きは、もう始まっています。</b>そのまま続けてください。土は、休日に公園や庭で、靴を脱いで立つだけでも足りていきます。陶器のカップを一つ選ぶ、という形もあります。</p>
+  </div>
+  <div class="card">
+    <p class="lead">命式帖の中の位相 ―― 自刑</p>
+    <p>日柱の亥と、年柱の亥。同じ支が二つ重なると、<b>自刑</b>になります。<span class="hl">「自分を傷つける刑。同じ支同士。自責」</span>。出方は<span class="hl">「外向き・社会的な場面に出る」</span>。</p>
+    <p>鋭く切る刃が、外の仕事の判断に向く時は、実行力になります。向ける先が見つからない時、通用しない環境にいる時、その刃は、自分に向きます。「私が弱いからだ」「処理能力が落ちたからだ」「上司の信頼がなくなったのは私のせいだ」。これは、事実の評価ではなく、<b>刃の向きの話</b>です。</p>
+    <p style="margin-bottom:0;">自刑は、頭痛や不眠の系統として読まれることもあります（十章）。職場のような社会的な場面で、自責が出やすい形です。</p>
+  </div>
+</div>
 
-  // 五行
-  var gmax = Math.max.apply(null, Object.keys(D.gogyo).map(function (k) { return D.gogyo[k]; }));
-  h.push('<section id="gogyo"><h2>五行と守護神</h2><p class="lead">木・火・土・金・水が、命式にどれだけあるか。エネルギーの値です（総量' + D.gogyoTotal + '）。</p><div class="panel"><div class="bars">');
-  '木火土金水'.split('').forEach(function (g) {
-    var v = D.gogyo[g];
-    h.push('<div class="bar' + (D.lack.indexOf(g) >= 0 ? ' lack' : '') + '"><div class="n">' + g + '</div><div class="track"><div class="fill" style="width:' + (gmax ? v / gmax * 100 : 0) + '%;background:var(--' + GO[g] + ')"></div></div><div class="v">' + v + '</div></div>');
-  });
-  h.push('</div></div>');
-  if (D.lack.length) h.push('<p class="note">不足しているのは ' + D.lack.map(function (g) { return '<b>' + g + '</b>'; }).join(' と ') + '。' + D.lackHow.map(function (x) { return x[0] + 'は「' + esc(x[1].replace(/／/g, '・')) + '」'; }).join('。') + '。</p>');
-  else h.push('<p class="note">不足している五行はありません。</p>');
-  h.push('<div class="guard">' + D.shugo.map(function (s, i) { return '<div><div class="lb">第' + (i ? '二' : '一') + '守護神</div><span class="g" style="color:var(--' + STEM_GO[s[0]] + ')">' + s[0] + '</span><div class="m">' + esc(s[2].replace(/／/g, '\n')).replace(/\n/g, '<br>') + '</div></div>'; }).join('') + '</div></section>');
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">三</span><span class="sec-title">人体星図 ― 場所ごとに出る顔</span></div>
+  <div class="card">
+    <p class="lead">中心 ―― 車騎星（一本気で、即断即決）</p>
+    <p>真ん中の星は<b>車騎星</b>。攻撃本能の星で、一本気、最前線、行動力。<span class="hl">「即断即決。白黒はっきり。納得できなければ反抗する。体を動かすのが好き」</span>。</p>
+    <p><b>陽転すると</b>、<span class="hl">「正直。曲がったことが嫌い。良い師匠につけば技術習得に長ける。物事を引きずらない。暗記力に優れる」</span>。<b>陰転すると</b>、<span class="hl">「短気。感情の起伏が激しい。トラブルも多い。短絡的な思考」</span>。反対のことを言われるとイラッとする。スローな場面でイラッとする。自分では、全部陰転の方、と話してくれました。陰転の面を自分で見られているのは、陽転に向かう、いちばん大事な入口です。</p>
+    <p style="margin-bottom:0;">LINEで、即断即決が苦手で、優柔不断だと思っていた、と書いてくれました。24年、一つの会社で結果を出してきた人は、<b>優柔不断ではありません</b>。外では抑えて、内で迷う。刃が内に向いている形です。反抗心は、若い頃に出せていた。今は、心の中にある。<b>消えたのではなく、内側に回っている</b>と、僕は見ています。</p>
+  </div>
+  <div class="card">
+    <p class="lead">社会と配偶者 ―― 牽牛星が、東と西に二つ</p>
+    <p><b>社会の場所（東）に、牽牛星。</b>責任感、プライド、名誉の星です。<span class="hl">「他の人と違うという特別意識。表面上とっつきにくくなりがち。実際に付き合うとそんなことはない。地位や名誉を与えると張り切る」</span>。予算に届かないことを、全部自分の責任にして苦しくなるのは、この星の陰転の形です。陽転すると、同じ責任感が、信頼として働きます。</p>
+    <p><b>配偶者の場所（西）にも、牽牛星。</b><span class="hl">「自己中心的。世間体を気にする。理想の家庭像を持ちがち。理想にはめ込む。自分にも家族にも厳しい」</span>。自分にも厳しい。これも、同じ星の向きです。</p>
+    <p style="margin-bottom:0;">東と西に、同じ星が入っている形は、東洋占術で<b>二度運</b>と呼ばれます。<span class="hl">一度リセットして、再出発することで、より良い形になることが多い</span>、という読みです。転職や離婚を示す、という意味ではありません。波乱だけでなく、再生や改善の意味を持つ配置です。さらに、同じ星が二つ重なるので<b>二連変化</b>も出ます。牽牛星が二つ重なると、自分の軸を通す、貫索星のような強さが、一つ上乗せされる形です。責任感に、自分で決めて立つ力が足される。これは、僕の読みです。</p>
+  </div>
+  <div class="card">
+    <p class="lead">目上と目下</p>
+    <p><b>目上の場所（北）に、禄存星。</b><span class="hl">「大きな包容力。自分の器が大きければ気前よくお金を使う。お人好しで目立ちたがり屋」</span>。人を引き寄せる星です。</p>
+    <p style="margin-bottom:0;"><b>目下の場所（南）に、司禄星。</b><span class="hl">「几帳面。常識人。約束の時間を守る。誠実。頼りがいがある」</span>。蓄積と用心深さの星です。FPの提案で、自分の分からないところにお金を預けるべきではない、と感じた感覚は、この司禄星の用心深さと合っています。</p>
+  </div>
+  <div class="card">
+    <p class="lead">伴星 ―― 石門星「人脈が財産になる」</p>
+    <p>左上の伴星は、ご先祖様から渡された使命を表す星です。有紀子さんの伴星は<b>石門星</b>。使命は<span class="hl">「人脈が財産になる」</span>。</p>
+    <div class="pull">人との繋がりを大切にしなさい。できるだけたくさんの人と交流して楽しい人生を送りなさい。一期一会を大切にしなさい。感謝の気持ちを忘れなければ、平穏で豊かな人生を送ることができます。</div>
+    <p style="margin-bottom:0;">丁寧で控えめな分、一人で抱えて、一人で決めようとしやすい。この使命は、その反対を向いています。<b>話せる人が一人いて、役に立てることが一つある</b>。それで足ります。七章の、陽転の三つ目の条件です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">十二大従星 ―― 人生の時期ごとの、エネルギーの出方</p>
+    <p><b>初年運（若い頃）は、天報星。</b>胎児の星で、「変化」を表します。<span class="hl">「言うことや行動がクルクル変わる。夢と空想の世界に生きる感覚派。一つの事に集中できない。22歳ころまでに一つの事に集中できるかが課題」</span>。</p>
+    <p><b>中年運は、天馳星。</b><span class="hl">「精神力の強さは最強。瞬発力に長けているが、持続力はない。寝食を忘れて没頭できる。マルチタスクができる。ハードスケジュールでこそ才能が輝く」</span>。会社の方針を転換する時のような、流れを変える場面で力を発揮する星です。一方で、持続力はない星です。毎日の残業や休日出勤を続けるのは、この星の作りと合っていません。そして、中年期は<span class="hl">「運勢の谷間の時代。中年期に運気が一度がくんと落ちて波乱が起きがち。落ちた運気は反動で必ず上昇する。短気な行動を起こすと運気は停滞したまま」</span>とも示されています。谷にいる。でも、谷は上がる。上がるまで、短気な動きを避ける。それだけです。</p>
+    <p style="margin-bottom:0;"><b>晩年運は、天報星。</b>若い頃と同じ星です。<span class="hl">「人生最後だからと一念発起しがち。住居の移転、財産の整理など波乱の多い晩年になる。いくつになっても夢を見ている」</span>。夢は持ち続けて、大きな決断は急がない。動くなら、順番を決めて動く。先に材料を集めて、そのあとで決めます。</p>
+  </div>
+</div>
 
-  // 天中殺
-  var tcStart = D.tcYears.length ? D.tcYears[0].y : null;
-  h.push('<section id="tenchu"><h2>' + esc(D.tenchu.name) + '</h2><p class="lead">十二支の輪のうち、' + TC.join('と') + 'の二つが空いている場所です。</p><div class="panel"><svg class="ring" viewBox="0 0 360 360" role="img" aria-label="十二支の輪と天中殺"><g id="ringT"></g></svg></div>');
-  h.push('<div class="explain"><p class="vl"><b>本質</b>：' + esc(D.tenchu.honshitsu) + '。家系の繋がりは「' + esc(D.tenchu.kakei) + '」。</p><p class="cl"><b>陽転条件</b>：' + esc(D.tenchu.youten) + '。</p>' +
-    (D.tenchu.shukumei ? '<p class="vl"><b>宿命天中殺</b>：' + esc(D.tenchu.shukumei) + '</p>' : '<p class="vl"><b>宿命天中殺</b>：なし</p>') + '</div>');
-  if (tcStart) {
-    h.push('<p class="sep">' + (D.inTenchu ? '年の天中殺はいま' : '次の年の天中殺') + '</p><div class="band">');
-    D.band.forEach(function (b) {
-      var isTc = D.tcYears.some(function (t) { return t.y === b.y; }), isEx = b.y === tcStart + 2, isNow = nowYear && +nowYear.y === b.y;
-      h.push('<div class="' + (isTc ? 'vd' : (isEx ? 'ex' : '')) + (isNow ? ' nw' : '') + '"><span class="y">' + b.y + '</span><span class="k">' + b.k + '</span><span class="t">' + (isTc ? '天中殺' : (isEx ? '明け' : '')) + '</span></div>');
-    });
-    h.push('</div><p class="note">' + tcStart + '年2月の立春から、' + (tcStart + 2) + '年2月の立春まで。' + (D.pastTc.length ? '前回は' + D.pastTc[0] + '〜' + D.pastTc[1] + '年でした。' : '') + '</p><div class="stars">');
-    D.tcYears.forEach(function (t) { h.push('<div><span class="y">' + t.y + '年　' + t.k + '</span><span class="n">' + t.s + 'が中殺される年</span><p>' + esc(t.rx) + '</p></div>'); });
-    h.push('</div>');
-  }
-  h.push('<div class="two"><div class="ok"><h3>天中殺に向いていること</h3><ul><li>勉強・学び</li><li>旅行</li><li>趣味を深める</li><li>整える・手放す</li><li>来たものを受け取る</li><li>続けてきたことを続ける</li></ul></div><div class="ng"><h3>明けまで待つこと</h3><ul><li>新しい事業</li><li>大きな投資・契約</li><li>収入を上げるための転職</li><li>大きな引っ越し</li></ul></div></div>');
-  h.push('<p class="note">天中殺は、悪い時期ではなく、枠が外れる時期。宿命どおりに生きていれば、大きな禍は出ないと読みます。</p></section>');
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">四</span><span class="sec-title">午未天中殺 ― 流れを断ち切る使命</span></div>
+  <div class="card">
+    <p class="lead">南方の天中殺 ―― 流れを断ち切る使命</p>
+    <p>天中殺は<b>午未</b>。本質は<span class="hl">「流れを断ち切る使命」</span>。家系のつながりでは<span class="hl">「古い流れを断ち、新しく始める」</span>。陽転の条件は<span class="hl">「過去のしがらみを断ち切って独自路線に」</span>です。</p>
+    <p style="margin-bottom:0;">全部を切る、ではありません。<b>24年の中で、不要になった「当たり前」を、選んで手放す</b>。その選び方が、この天中殺の使い方です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">宿命の天中殺は、なし</p>
+    <p>生まれ持った柱の中に、天中殺の場所にある干支はありません。後天運の天中殺（大運・年・月・日）だけを意識すれば大丈夫、という形です。</p>
+    <p style="margin-bottom:0;">その後天運の天中殺が、<b>今、二重に重なっています</b>。大運の天中殺が、53歳から72歳までの二十年。その中に、2026年と2027年の年の天中殺。八章と九章で、時期を詳しく見ます。</p>
+  </div>
+</div>
 
-  // 今の十年／今年（261005：年運にも同じ図を出す。三合会局などを年で見せるため）
-  var nowNen = D.nenun.filter(function (n) { return n.now; })[0];
-  function kyokuOf(u) {
-    var dshi = u.k[1], kk = '';
-    parseIsou(u.isou).forEach(function (x) { if (x.t === '三合会局') { var set = [dshi].concat(x.p.map(function (k) { return P[k].shi; })); Object.keys(KYOKU).forEach(function (kk2) { if (set.every(function (s) { return kk2.indexOf(s) >= 0; })) kk = KYOKU[kk2]; }); } });
-    return kk;
-  }
-  function ringSection(sid, u, title, unitWord, btnLabel, tail) {
-    var dshi = u.k[1], rel = parseIsou(u.isou);
-    h.push('<section id="' + sid + '"><h2>' + title + '</h2><p class="lead">命式の三つの支に、' + unitWord + 'の「' + dshi + '」が加わると、何が起きるか。ボタンで切り替えて見せます。</p>' +
-      '<div class="seg" role="group" aria-label="表示の切り替え"><button type="button" class="b-born" aria-pressed="true">生まれつき</button><button type="button" class="b-un" aria-pressed="false">' + btnLabel + '</button></div>' +
-      '<div class="panel"><svg class="ring kring" viewBox="0 0 360 360" role="img" aria-label="命式の支と' + unitWord + 'の支の関係"><g class="ringK"></g></svg></div><div class="explain">');
-    h.push('<p class="cl"><b>生まれつき</b>：' + (D.isouBorn.length ? D.isouBorn.map(function (x) { return x[0] + 'と' + x[1] + 'が' + esc(x[2]) + '（' + (MEAN[x[2]] || '') + '）'; }).join('。') : '命式の中の位相は出ていません') + '。</p>');
-    rel.forEach(function (x) { h.push('<p class="' + (cls(x.t) === 'joy' ? 'gl' : (cls(x.t) === 'calm' ? 'cl' : 'hl')) + ' later" hidden><b>' + x.p.join('・') + '柱と' + esc(x.t) + '</b>：' + (MEAN[x.t] || '') + '。</p>'); });
-    h.push('<p class="vl later" hidden>' + tail + '</p></div></section>');
-  }
-  if (nowDaiun) ringSection('now', nowDaiun, '今の十年　' + nowDaiun.k, '今の大運', '今の十年（' + nowDaiun.k + '）を足す', '<b>この十年の主星は' + nowDaiun.s + '</b>。年齢は' + nowDaiun.a + '歳です。');
-  var showNen = nowNen && nowNen.isou !== '—' && parseIsou(nowNen.isou).some(function (x) { return x.t !== '干合'; });
-  if (showNen) ringSection('nen', nowNen, '今年　' + nowNen.y + '年 ' + nowNen.k, '今年の年運', '今年（' + nowNen.k + '）を足す', '<b>今年の主星は' + nowNen.s + '</b>。' + nowNen.a + '歳の年です。');
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">五</span><span class="sec-title">守護神と型 ― 決める力を、武器にする</span></div>
+  <div class="card">
+    <p class="lead">守護神 ―― 甲（大樹）と庚（刃）</p>
+    <p><b>第一の守護神は、甲（玉堂星）。</b><span class="hl">「大樹のように真っ直ぐ。リーダー意識。頑固さを活かす」</span>。</p>
+    <p style="margin-bottom:0;"><b>第二の守護神は、庚（司禄星）。</b><span class="hl">「鋭く切る・即断。武断的な強さ。決める力」</span>。これが、<b>持ち替える武器の正体</b>です。LINEでは、違う武器を探して、持ち替えて挑む、ということか、と書いてくれました。新しい何かを探しに行く必要はありません。<b>武器は、もう持っています。向ける先を変える</b>だけです。</p>
+  </div>
+  <div class="card">
+    <p class="lead">無玄の型 ―― 才能は、環境から見えてくる</p>
+    <p>才能の星は<b>石門星</b>。才能の型は<b>無玄の型</b>（剋線の分布 0・0・0・0・0、総剋線0）です。<span class="hl">「剋線ゼロ。豊かな才能があっても、自身では気づきにくい。多様な可能性を秘めるが、凝固しない。他者の反応・環境刺激で、初めて才能が見える。穏やかな環境で伸びる。厳しさで潰されやすい」</span>。</p>
+    <p>席では、求められたことは大概そつなくこなせる、でも興味はあるけれど一つに絞れない、と話してくれました。<b>この型の形そのもの</b>です。</p>
+    <p style="margin-bottom:0;">そして、八門法は<b>白虎型</b>。命式帖には<span class="hl">「厳しい指導で伸びる。専門性追求・目標達成型」</span>と出ています。でも、有紀子さんは、責められると弱い、ダメ出しだとやる気をなくす、と答えてくれました。無玄の型の「厳しさで潰されやすい」と、本人の言葉は一致しています。だから、この鑑定書では、本人の言葉を正にします。<b>厳しい環境ではなく、見てくれる師匠のいる環境</b>。車騎星の陽転にも<span class="hl">「良い師匠につけば技術習得に長ける」</span>とあります。</p>
+  </div>
+  <div class="card">
+    <p class="lead">専門性を磨く人 ―― 白虎型と南天運</p>
+    <p>八門法の白虎型は、<span class="hl">「自尊心が強い。プライド。専門性追求。目標達成型」</span>。向く職業は、<span class="hl">「エンジニア・弁護士・会計士・専門職・職人」</span>。気図法では、<span class="hl">「学問・精神世界に秀でた研究型」</span>で、研究・創作・芸術などのクリエイティブな分野で力を発揮する、と出ています。才能の領域は<b>南天運</b>で、<span class="hl">「現実領域。忍耐強い現実派。理屈より情」</span>です。</p>
+    <p style="margin-bottom:0;">「補佐役・公務員・組織人・管理職・専門職。肩書きで働く」。適職占技の現実適職です。精神適職は、司禄星の<span class="hl">「地道・蓄積的・経理・事務・コツコツ積み上げる仕事」</span>。現実と精神が相生で、<span class="hl">「理想が現実を支える形。悩み少なく自然に適応」</span>。<b>独立して一人で大きく勝負する型ではなく、組織の中の専門職、肩書きで働く型</b>です。</p>
+  </div>
+</div>
 
-  // 大運
-  h.push('<section id="daiun"><h2>大運</h2><p class="lead">10年ごとの大きな流れです（' + esc(D.ritsuun) + '）。</p><div class="rows">');
-  D.daiun.forEach(function (d) {
-    h.push('<div class="row' + (d.now ? ' now' : '') + (d.v ? ' void' : '') + '"><div class="age">' + d.a + '歳</div><div class="kan">' + d.k + '</div><div class="sub"><b>' + d.s + '</b><br>' + (d.now ? '<span class="chip c-now">いまの十年</span>' : '') + (d.v ? '<span class="chip c-void">大運天中殺</span>' : '') + chipsOf(d.isou) + '</div></div>');
-  });
-  h.push('</div></section>');
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">六</span><span class="sec-title">相談への答え ― 辞める、続ける、家、そして恋愛</span></div>
+  <div class="card">
+    <p class="lead">能力が落ちたのでは、ありません</p>
+    <p>LINEでいただいた相談は、会社に行くのがつらくて涙が出る、ということでした。1年半ほど前の部署異動から、これまでのやり方がはまらなくなった。裏目に出て、上司の信頼もなくなったと思う。業績は予算に届かず、毎日残業。処理能力が落ちたのかもしれない、と。</p>
+    <div class="pull">能力が落ちたのではありません。<br>刃の向く先と、場所が、噛み合っていない。</div>
+    <p>車騎星の即断即決の刃は、異動先の合議や調整のやり方とは、合いにくい面があります（僕の見立てです）。一方で、前の部署の3〜4年は、楽しかった、やりがいがあった、と話してくれました。刃そのものは、落ちていません。<b>噛み合わないことと、辞めるべきことは、別の話</b>です。</p>
+    <p style="margin-bottom:0;">さらに、時期の面があります。今は、年の天中殺と、大運の天中殺が重なっています。<b>これまでのやり方が通用しなくなる時期</b>です。やり方の枠が外れる年、と読みます。</p>
+  </div>
+  <div class="card">
+    <p class="lead">辞める道と、場所を変える道</p>
+    <p>道は、二つに分けて考えます。一つ目は、<b>辞める</b>。二つ目は、<b>辞めずに、組織の中で場所を変える</b>。命式帖は、どちらも潰していません。</p>
+    <p><b>辞める道について。</b>大運の天中殺は、止める時期ではありません。枠が外れる時期です。ただし、年の天中殺（2028年の立春まで）の間に避けたほうがいいことの中に、退職・転職があります。「やむを得ない場合を除く」と付いています。涙が出るほどつらい、ということは、やむを得ない側に入り得ます。命式帖は、辞めるな、とは言いません。<b>心と体が先</b>です。準備は、今から動けます。実行の大きな決断を、年の天中殺の間は後ろに置く。それが読みです。</p>
+    <p style="margin-bottom:0;"><b>場所を変える道について。</b>命式帖は、組織の中の専門職、肩書きで働く型でした。異動の希望を出す、専門職のポジションを探す、現場に近い役割に変わる。これは、命式帖がいちばん素直に言っている道です。また、自分から探しに行くより、声がかかる形は、天中殺の間でも動きやすい形です。起業を自分から決めるのは、年の天中殺の間は避けます。</p>
+  </div>
+  <div class="card">
+    <p class="lead">中間の道は、普通に使っていい</p>
+    <p>会社の休職の制度。相談窓口。産業医の面談。こうした中間の道は、命式帖の話とは別に、<b>普通に使っていいもの</b>です。辞めるか、続けるか、の二択にしなくて大丈夫です。休むことは、逃げではありません。車騎星の持続力のなさ、天馳星の「瞬発力はあるが、持続力はない」という作りからも、休みながら進むほうが合っています。</p>
+    <p style="margin-bottom:0;">涙が出るほどつらい状態が続く時は、占いの前に、体と気持ちの確認を先にしてください（十章）。</p>
+  </div>
+  <div class="card">
+    <p class="lead">住む家をローンで買う ―― 順番の話</p>
+    <p>辞める準備として、ローンを組めなくなる前に、まず家を買う。そう考えていた、と書いてくれました。</p>
+    <p>命式帖の読みでは、年の天中殺の間（2028年の立春まで）の、大きな契約・大きな買い物・大きな引っ越しは、避けるのが基本です。月の天中殺は2027年の6月と7月。日の天中殺の日にも、契約は入れません。</p>
+    <p style="margin-bottom:0;">「ローンを組めなくなる前に」という理由は、現実の金融の話です。ここは命式帖では決められません。銀行や、お金の専門家に確かめてください。命式帖でお伝えできるのは、<b>順番</b>です。辞める時期と、家の契約の時期を、並べて、有紀子さんの現実の条件と照らして決める。今、焦って買う必要はありません。天中殺が明けてから買う、という並べ方もあります。</p>
+  </div>
+  <div class="card">
+    <p class="lead">投資は、現金化できる状態で</p>
+    <p>FPから、解約金をファンドなどにまとめる提案があった、と話してくれました。分からないところにお金を預けるべきではない、という感覚は、司禄星の用心深さと合っています。</p>
+    <p style="margin-bottom:0;">投資目的の不動産購入も含めて、<b>今は、現金化できる状態で持つ</b>。大きな動きは、年の天中殺が明けてからで大丈夫です。保険の整理のような、整える動きは、今の時期に向いています。</p>
+  </div>
+  <div class="card">
+    <p class="lead">恋愛について</p>
+    <p>LINEで、恋愛でも打撃があって、心が持っていかれる、と書いてくれました。命式帖には、こう出ています。<b>恋愛傾向（東方・牽牛星）</b>は、<span class="hl">「責任感のある真面目な恋愛。プライドが高い。社会的にしっかりした相手」</span>。<b>結婚相手の特徴（西方・牽牛星）</b>は、<span class="hl">「名誉と品格の家庭。体面重視。厳しい教育。やや堅苦しい面も」</span>。</p>
+    <p style="margin-bottom:0;">誠実に、真剣に向き合う人ほど、傷も深く入ります。これは、僕の見立てです。弱いからではありません。<b>プライドと責任感の星を持つ人の、傷つき方の形</b>です。年の天中殺の間は、結婚や同居のような、後々に大きく影響する決断は、外します。出会いや、人との交流自体は、止めなくて大丈夫です。相手の方の生年月日を使って見る相性は、この鑑定書とは別の見方になります。</p>
+  </div>
+</div>
 
-  // 年運・月運
-  h.push('<section id="toki"><h2>年運と月運</h2><p class="lead">色の見かた：<span class="chip c-hit">動く</span>散法（冲・刑・害・破）　<span class="chip c-joy">まとまる</span>合法　<span class="chip c-calm">節目</span>律音・納音／位相なし　<span class="chip c-void">天中殺</span></p>');
-  if (today) h.push('<div class="today"><span class="kan">' + today.k + '</span><span class="d">' + esc(D.dateText) + '（' + today.w + '）　' + today.s + '</span><span class="s">' + (today.v ? '<span class="chip c-void">日天中殺</span>' : '') + chipsOf(today.isou) + '</span></div>');
-  h.push('<p class="sep">年運</p><div class="rows">');
-  D.nenun.forEach(function (n) {
-    var isEx = tcStart && +n.y === tcStart + 2;
-    h.push('<div class="row' + (n.now ? ' now' : '') + (n.v ? ' void' : '') + (isEx ? ' exit' : '') + '"><div class="age">' + n.y + '<small>' + n.a + '歳</small></div><div class="kan">' + n.k + '</div><div class="sub"><b>' + n.s + '</b><br>' + (n.now ? '<span class="chip c-now">今年</span>' : '') + (n.v ? '<span class="chip c-void">年天中殺</span>' : '') + (isEx ? '<span class="chip c-joy">明け</span>' : '') + chipsOf(n.isou) + '</div></div>');
-  });
-  h.push('</div><p class="sep">月運　（節入りから節入りまで）</p><div class="rows">');
-  D.getsuun.forEach(function (g, i) {
-    var yLab = (i === 0 || g.ym.slice(0, 4) !== D.getsuun[i - 1].ym.slice(0, 4)) ? g.ym.slice(0, 4) + '年' : '';
-    h.push('<div class="mrow' + (g.v ? ' void' : '') + (g.now ? ' now' : '') + '"><div class="dt">' + esc(g.d || g.ym) + '<small>' + (g.now ? '<span class="nowtag">今月</span>' : yLab) + '</small></div><div class="kan">' + g.k + '</div><div class="sub"><b>' + g.s + '</b><br>' + (g.v ? '<span class="chip c-void">月天中殺</span>' : '') + chipsOf(g.isou) + '</div></div>');
-  });
-  var nd = D.nichiun.filter(function (x) { return x.v; }).map(function (x) { return x.d.replace('/', '月') + '日'; });
-  h.push('</div>' + (nd.length ? '<p class="note">これから30日の日の天中殺：' + nd.join('・') + '。大事な連絡や決断は外します。</p>' : '') + '</section>');
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">七</span><span class="sec-title">陽転の三つの条件 ― 足りないのは、向ける先</span></div>
+  <div class="card">
+    <p class="lead">うまく働く条件を、三つに束ねる</p>
+    <div class="three">
+      <div class="m"><b>一　刃を向ける先を、決める</b>午未天中殺の陽転条件「過去のしがらみを断ち切って独自路線に」。車騎星の陽転「物事を引きずらない」。<br>一日に一つだけ、決める。小さくていい。<span class="hl">決めたことに向かう時、刃は実行力になります。</span></div>
+      <div class="m"><b>二　手放すものを、選んで断つ</b>全部を切るのではなく、24年の中で、不要になった「当たり前」を選ぶ。<br>会社の理念への義理、上司の評価、責任の抱えすぎ。<span class="hl">何を手放して、何を残すか</span>を、紙に二列で書いてみてください。</div>
+      <div class="m"><b>三　人とつながって、役に立つ</b>伴星の石門星「人脈が財産になる」。大運天中殺は、誰かのために動くと評価される時期です。<br>話を聞いてくれる人を、一人。<span class="hl">足りないのは、能力ではなくて、向ける先です。</span></div>
+    </div>
+    <p class="soft" style="margin-top:.9rem;margin-bottom:0;">この三つの条件を、場面ごとに「今の出方」と「陽転した姿」で並べた図を、別のページに用意しました。ページの一番下から開けます。</p>
+  </div>
+  <div class="card">
+    <p class="lead">持ち帰る、判断の材料が三つ</p>
+    <div class="three">
+      <div class="m"><b>数字</b>辞めた場合に、何ヶ月暮らせるか。月の支出と、貯蓄を並べて、月数にする。数字にすると不安が小さくなる人です。</div>
+      <div class="m"><b>人</b>話を聞いてくれる人を、一人。相談窓口や産業医も、その一人に数えてかまいません。</div>
+      <div class="m"><b>条件</b>次の場所に求めることを、三つ。肩書きで働けるか。専門性を使えるか。指導の仕方が合うか（見てくれる師匠がいるか）。</div>
+    </div>
+    <p style="margin-bottom:0;margin-top:.9rem;">辞める、辞めないを、急いで決めなくて大丈夫です。<b>決める力は、材料が揃った時に、いちばんきれいに働きます。</b></p>
+  </div>
+</div>
 
-  // 陽転
-  var conds = EX.conds || [
-    { h: D.tenchu.youten, src: D.tenchu.name + 'の陽転条件', p: '' },
-    { h: ((D.sainou.desc.match(/([^。・]+?)が陽転条件/) || [])[1] || ''), src: D.sainou.type + 'の陽転条件', p: '' },
-    { h: ((D.jintai[0].d.match(/使命「(.+?)」/) || [])[1] || D.jintai[0].st), src: '伴星 ' + D.jintai[0].st + 'の使命', p: '' }
-  ];
-  conds = conds.filter(function (c) { return c.h; });
-  var core = EX.core || { g: D.tenchu.honshitsu, s: D.tenchu.name + '／' + D.nikkan.kanshi + '「' + D.nikkan.name + '」' };
-  var exitY = tcStart ? tcStart + 2 : null, exitRow = D.nenun.filter(function (n) { return exitY && +n.y === exitY; })[0];
-  var exit = EX.exit || (D.inTenchu && exitY ? { g: exitY + '年　' + (exitRow ? exitRow.k : ''), s: '天中殺が明ける年' + (exitRow && exitRow.isou !== '—' ? '。' + exitRow.isou.replace(/：/g, 'に').replace(/、/g, '・') : '') } :
-    (tcStart ? { g: '次の年の天中殺は ' + tcStart + '〜' + (tcStart + 1) + '年', s: (D.pastTc.length ? D.pastTc[0] + '〜' + D.pastTc[1] + '年の天中殺を抜けて、' : '') + 'それまでの年が、形を作る期間です' } : null));
-  h.push('<section id="youten"><h2>' + esc(EX.title || '陽転させる条件') + '</h2><p class="lead">命式帳に出ている「うまく働く条件」を、三つに束ねました。</p><div class="eq">');
-  h.push('<div class="core"><span class="g">' + esc(core.g) + '</span><span class="s">' + esc(core.s).replace(/\n/g, '<br>') + '</span></div><div class="arrow">▼　条件は三つ</div><div class="conds">');
-  var NO = ['一','二','三','四','五'];
-  conds.forEach(function (c, i) { h.push('<div class="cond"><span class="no">' + NO[i] + '</span><div><span class="h">' + esc(c.h) + '</span><span class="src">' + esc(c.src) + '</span>' + (c.p ? '<p>' + esc(c.p) + '</p>' : '') + '</div></div>'); });
-  h.push('</div>');
-  if (exit) h.push('<div class="arrow">▼　その先に</div><div class="exitbox"><span class="g">' + esc(exit.g) + '</span><span class="s">' + esc(exit.s).replace(/\n/g, '<br>') + '</span></div>');
-  h.push('</div>');
-  if (EX.taiou && EX.taiou.length) {
-    h.push('<p class="sep">相談と命式の対応</p><div class="taiou">' + EX.taiou.map(function (t) { return '<div><b>' + esc(t.q) + '</b><p>' + esc(t.a) + '</p></div>'; }).join('') + '</div>');
-  }
-  h.push('<footer>出典：命式チェッカー（㐂占）の表示。天中殺の過ごし方と位相の読みは、占い師の見解です。</footer></section>');
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">八</span><span class="sec-title">大運 ― 二十年の大運天中殺</span></div>
+  <div class="card">
+    <p class="lead">天中殺は、止める時期ではなく、枠が外れる時期</p>
+    <p>53歳から72歳までの二十年は、<b>大運の天中殺</b>です。53〜62歳の丙午、63〜72歳の丁未。どちらも、午未の大運です。そこに、2026年と2027年の、年の天中殺が重なっています。二十年の大きな天中殺の中に、二年の天中殺がある形です。</p>
+    <p>炊いたご飯を、そのまま放っておくと、蒸れます。ひっくり返して、蒸気を抜く。大運の天中殺は、<b>人生をひっくり返して、蒸気を抜く時期</b>とも言えます。止める時期ではなく、<span class="hl">枠が外れる時期</span>です。陽転すれば、想定外の飛躍があります。陰転すれば、停滞します。どちらかしかありません。だから、陽転させてください。</p>
+    <p style="margin-bottom:0;">最初の15年（53〜67歳）が、飛躍期か停滞期かが分かれる時期で、最後の5年（68〜72歳）は、本来の枠に戻る収束期です。</p>
+  </div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.7rem;">大運 ― 10年ごとに巡る運気のテーマ（3歳運）</p>
+    <div class="daiun-scroll">
+      <table class="daiun">
+        <thead><tr><th>年齢</th><th>干支</th><th>星</th><th>命式帖との位相</th></tr></thead>
+        <tbody>
+          <tr><td>3〜12</td><td>辛丑</td><td>禄存星</td><td class="isou">月柱と支合／年・月・日柱で方三位</td></tr>
+          <tr><td>13〜22</td><td>壬寅</td><td>牽牛星</td><td class="isou">年柱と支合／日柱と干合・支合</td></tr>
+          <tr><td>23〜32</td><td>癸卯</td><td>車騎星</td><td class="isou">年柱・日柱と半会／月柱と旺刑</td></tr>
+          <tr><td>33〜42</td><td>甲辰</td><td>玉堂星</td><td class="isou">月柱と半会</td></tr>
+          <tr><td>43〜52</td><td>乙巳</td><td>龍高星</td><td class="isou">年柱と天剋地冲／月柱と干合／日柱と対冲</td></tr>
+          <tr class="now-row"><td>53〜62</td><td>丙午</td><td>石門星</td><td class="isou"><span class="now-cell">今ここ</span>　<span class="tc-cell">大運天中殺</span>　年柱と干合／月柱と天剋地冲</td></tr>
+          <tr><td>63〜72</td><td>丁未</td><td>貫索星</td><td class="isou"><span class="tc-cell">大運天中殺</span>　年柱と半会／月柱と害／日柱と大半会</td></tr>
+          <tr><td>73〜82</td><td>戊申</td><td>調舒星</td><td class="isou">年柱と害／月柱と半会／日柱と害</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <p class="lead">これまでの十年 ―― 癸卯・甲辰・乙巳</p>
+    <p>勤続24年は、30歳ごろの入社。<b>23〜32歳・癸卯</b>は、車騎星の十年です。流動占技（年の支を起点に、大運のスタートの形を読む技法）では、<span class="hl">「大発展型。事業拡大・人脈拡大。資金・技術・人脈の3拍子が必須」</span>。新しい会社に飛び込んで、大きく育てていく向きの十年でした。</p>
+    <p><b>33〜42歳・甲辰</b>は、玉堂星の十年。第一の守護神、甲と同じ星です。</p>
+    <p style="margin-bottom:0;"><b>43〜52歳・乙巳</b>は、龍高星の十年。年柱と天剋地冲、日柱と対冲で、変化の大きい十年です。流動占技では<span class="hl">「受動的・手堅く用心深い・単独/受身型業務向き・方針変更注意」</span>。手堅く、守る十年だった、という読みです。</p>
+  </div>
+  <div class="card">
+    <p class="lead">今の十年 ―― 丙午・石門星</p>
+    <p>53〜62歳の大運の主星は<b>石門星</b>。ご先祖様の星で、才能の星と同じです。使命は「人脈が財産になる」。大運天中殺は、自分のためではなく、誰かのために動くと評価される時期です。この十年は、<b>人とのつながりを通して、役に立つことが、運の中心になる</b>十年と、僕は見ています。</p>
+    <p style="margin-bottom:0;">従星は天禄星で、堅実、安定、社会的な信用を築く星です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">これから ―― 丁未、そして戊申</p>
+    <p><b>63〜72歳・丁未</b>。主星は貫索星。年柱と半会、日柱と大半会（律音から二十年・四十年後の合）。月柱とは害が出ます。大運の天中殺の、後半の十年です。</p>
+    <p style="margin-bottom:0;"><b>73〜82歳・戊申</b>。主星は調舒星。害が出ていて、流動占技でも契約管理が大事な十年です。ずっと先の話です。今は、頭の片隅に置いておく程度で大丈夫です。</p>
+  </div>
+</div>
 
-  document.getElementById('app').innerHTML = h.join('');
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">九</span><span class="sec-title">年と月の時間割 ― いつ、どう動くか</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.8rem;">広がる形が出る時期（青い点）、体と気持ちの注意（灰色の点）、天中殺（赤い点）に分けて見てください。月ごとの流れは、運㐂暦に出ます。</p>
+    <div class="tl">
+      <div class="tl-item care">
+        <div class="tl-when">2025年（54歳）乙巳 ・ 龍高星</div>
+        <div class="tl-body">年柱と天剋地冲、日柱と対冲。大きな入れ替わりが出た年です。昨年の部署異動は、この年でした。これまでのやり方がはまらなくなったのは、能力ではなく、<b>入れ替わりの年に、場所が変わった</b>ことの影響です。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">2026年（55歳）丙午 ・ 石門星 ・ 年の天中殺</div>
+        <div class="tl-body">年の天中殺の一年目。年柱と干合、月柱と天剋地冲。大きな契約、大きな買い物、大きな引っ越しは外して、整理の年にします。保険の整理は、この年の動きに合っています。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2026年10月8日〜11月6日 ・ 戊戌（調舒星）</div>
+        <div class="tl-body">位相が出ていない、穏やかな月です。新しいことを探しに行くより、今あるものを整える月。自然体で過ごすのがいちばん合います。</div>
+      </div>
+      <div class="tl-item care">
+        <div class="tl-when">この月の日々 ・ 注意する日</div>
+        <div class="tl-body">10月28日（乙亥）は、年柱・日柱と自刑。自分に厳しくなりやすい日なので、予定を詰めず、自分に優しくする日にします。11月3日（辛巳）は、年柱と対冲、日柱と天剋地冲で、大きく揺れる日。<b>11月4日・5日は、日の天中殺</b>。大事な約束や契約は外します。11月2日（庚辰）は、守護神の庚の日で、決める力が出やすい日です。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">2027年（56歳）丁未 ・ 貫索星 ・ 年の天中殺</div>
+        <div class="tl-body">年の天中殺の二年目。年柱と半会、月柱と害、日柱と大半会。大きな契約や、自分から決める退職・起業は、この年までは外します。<b>準備と材料集めに使う一年</b>です。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">2027年6月6日〜8月7日 ・ 丙午・丁未 ・ 月の天中殺</div>
+        <div class="tl-body">年の天中殺の中の、月の天中殺です。新しい約束や、大きな契約は、置かない月です。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2028年（57歳）戊申 ・ 調舒星</div>
+        <div class="tl-body">2028年の立春（2月）で、年の天中殺が明けます。大きな決断を考え始めるなら、ここからです。年柱と日柱に害が出ているので、体の量を増やさず、契約は慎重に、段階を踏んで。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2029年（58歳）己酉 ・ 鳳閣星</div>
+        <div class="tl-body">位相が出ていない、落ち着いた年です。整えた形を、無理なく外へ出していける年と、僕は見ています。</div>
+      </div>
+    </div>
+    <p class="soft" style="margin-top:1rem;margin-bottom:0;">日の天中殺は12日ごとに二日ずつ巡ります。運㐂暦（日々の運気カレンダー）で確かめられます。大事な約束や決断は、その日を外してください。庚の日は、決める力が出やすい日です。ただし、庚の日が午の日と重なる日は、日の天中殺なので、決めごとは避けます。</p>
+  </div>
+</div>
 
-  // ---- SVG：十二支の輪 ----
-  var SVGNS = 'http://www.w3.org/2000/svg', CX = 180, CY = 180, R = 128;
-  function pos(i) { var a = i * Math.PI / 6; return [CX + R * Math.sin(a), CY - R * Math.cos(a)]; }
-  function el(n, at, par) { var e = document.createElementNS(SVGNS, n); for (var k in at) e.setAttribute(k, at[k]); if (par) par.appendChild(e); return e; }
-  function node(par, i, c, cap, capC) {
-    var p = pos(i), g = el('g', { 'class': c }, par);
-    el('circle', { cx: p[0], cy: p[1], r: 26, 'class': 'base' }, g);
-    el('text', { x: p[0], y: p[1] + 1, 'class': 'lbl' }, g).textContent = BR[i];
-    if (cap) el('text', { x: CX + (p[0] - CX) * 0.62, y: CY + (p[1] - CY) * 0.62 + 4, 'class': 'cap ' + (capC || '') }, par).textContent = cap;
-  }
-  var capOf = {};
-  ['日','月','年'].forEach(function (k) { var s = P[k].shi; capOf[s] = (capOf[s] ? capOf[s] + '・' : '') + k; });
-  function baseRing(par, extraSkip) {
-    for (var i = 0; i < 12; i++) {
-      if (extraSkip === i) continue;
-      var b = BR[i], inTc = TC.indexOf(b) >= 0, mine = capOf[b];
-      node(par, i, mine ? (inTc ? 'vdon' : 'on') : (inTc ? 'vd' : ''), mine || '', inTc ? 'v' : 'h');
-    }
-  }
-  var rt = document.getElementById('ringT');
-  var t1 = pos(BR.indexOf(TC[0])), t2 = pos(BR.indexOf(TC[1]));
-  el('path', { d: 'M' + t1[0] + ' ' + t1[1] + ' A ' + R + ' ' + R + ' 0 0 1 ' + t2[0] + ' ' + t2[1], 'class': 'arc' }, rt);
-  baseRing(rt);
-  el('text', { x: CX, y: CY - 4, 'class': 'center v' }, rt).textContent = TC.join('');
-  el('text', { x: CX, y: CY + 20, 'class': 'center2' }, rt).textContent = '天中殺';
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">十</span><span class="sec-title">体と気持ちとの付き合い方 ― 先に、守る</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.6rem;">診断ではありません。命式帖から読める傾向として、書いています。</p>
+    <p class="lead">自刑と、体のサイン</p>
+    <p>席では、朝早く目が覚める、起きても寝ても眠い、頭痛が日常的にある、泣きそうになる時がある、と話してくれました。食欲はある、とも。</p>
+    <p>日柱と年柱の<b>自刑</b>は、自分を追い込む形で、東洋占術では<span class="hl">頭痛・不眠・自律神経の乱れ</span>の系統として読まれることがあります。僕は、頭痛を、ストレスと自責が体に出た形として見ています。ただ、これは読みのひとつです。<b>医療的な判断は、命式帖ではできません。</b></p>
+    <p style="margin-bottom:0;">早朝に目が覚める。寝ても眠い。頭痛が続く。この三つが続いている時は、占いとは別に、<b>産業医の面談、会社の相談窓口、医療機関</b>を、普通に使ってください。それは、弱いからではなく、体と気持ちを守る、いちばん確かな方法です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">つらさが強くなった時は、先に人へ</p>
+    <p>LINEで、生きることから逃げたくなる、と書いてくれました。その気持ちが、また強くなった時は、占いや暦より先に、人に話してください。身近な人でも、会社の相談窓口でも、医療機関でも、地域の相談窓口でも構いません。厚生労働省の「まもろうよ こころ」という相談窓口の案内にも、一覧があります。</p>
+    <p style="margin-bottom:0;">僕にも、いつでもLINEで送ってください。ここは、占いの話だけをする場所ではありません。</p>
+  </div>
+  <div class="card">
+    <p class="lead">休みを、先に決める</p>
+    <p>天馳星は、瞬発力はあっても、持続力はありません。毎日の残業と休日出勤を続けるのは、星の作りと合っていません。<b>短い集中を、積み重ねる働き方</b>が、陽転した姿です。</p>
+    <p style="margin-bottom:0;">自刑の日（亥の日）は、自分に厳しくなりやすい日。予定を詰めず、自分に優しくする日にします。火を足す、土を足す、といった五行の足し方も、体を守る動きに入ります（二章）。</p>
+  </div>
+</div>
 
-  function drawRing(sid, u, ghostCap, centerSub) {
-    var sec = document.getElementById(sid); if (!sec) return;
-    var rk = sec.querySelector('.ringK'), di = BR.indexOf(u.k[1]), kyoku = kyokuOf(u);
-    function ln(a, b, c) { var pa = pos(a), pb = pos(b); el('line', { x1: pa[0], y1: pa[1], x2: pb[0], y2: pb[1], 'class': 'ln ' + c }, rk); }
-    D.isouBorn.forEach(function (x) { var a = BR.indexOf(P[x[0][0]].shi), b = BR.indexOf(P[x[1][0]].shi); if (a !== b) ln(a, b, LN[cls(x[2])]); });
-    var drawn = {};
-    parseIsou(u.isou).forEach(function (x) {
-      if (x.t === '干合') return;
-      var c = LN[cls(x.t)] + ' later';
-      x.p.forEach(function (k) { var b = BR.indexOf(P[k].shi), key = b + c; if (b !== di && !drawn[key]) { ln(di, b, c); drawn[key] = 1; } });
-      if (x.p.length === 2) { var a2 = BR.indexOf(P[x.p[0]].shi), b2 = BR.indexOf(P[x.p[1]].shi); if (a2 !== b2) ln(a2, b2, c); }
-    });
-    var already = capOf[u.k[1]];
-    baseRing(rk, already ? null : di);
-    if (!already) node(rk, di, 'ghost', ghostCap, 'f');
-    el('text', { x: CX, y: CY - 4, 'class': 'center' }, rk).textContent = kyoku || u.k;
-    el('text', { x: CX, y: CY + 20, 'class': 'center2' }, rk).textContent = kyoku ? Object.keys(KYOKU).filter(function (k) { return KYOKU[k] === kyoku; })[0].split('').join(' ・ ') : centerSub;
-    var kring = sec.querySelector('.kring'), bB = sec.querySelector('.b-born'), bU = sec.querySelector('.b-un');
-    var laters = sec.querySelectorAll('.explain .later');
-    function setK(full) {
-      kring.classList.toggle('full', full);
-      bB.setAttribute('aria-pressed', full ? 'false' : 'true'); bU.setAttribute('aria-pressed', full ? 'true' : 'false');
-      for (var i = 0; i < laters.length; i++) laters[i].hidden = !full;
-    }
-    bB.addEventListener('click', function () { setK(false); }); bU.addEventListener('click', function () { setK(true); });
-  }
-  if (nowDaiun) drawRing('now', nowDaiun, '大運 ' + nowDaiun.k, '今の十年');
-  if (showNen) drawRing('nen', nowNen, '今年 ' + nowNen.k, '今年');
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">十一</span><span class="sec-title">五つの視点 ─ ぐるりと見る</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.8rem;">同じ命式帖を、深さの違う五つの角度から観ます。同じ結論に別の道から辿り着く時、それが本物です。</p>
+    <p class="lead">［壱］ 本質と才能の視点</p>
+    <p>日の宿命は丁亥「湖上の鬼火」。中心は車騎星、第二の守護神は庚、才能の型は無玄の型。<span class="hl">鋭く切る刃と、環境で見えてくる才能</span>を持っています。</p>
+    <p style="margin-bottom:0;"><b>刃は、決めたことに向けて使う。才能は、見てくれる人のいる環境で見えてくる。</b>どちらも、一人で抱えていると、光りにくい作りです。</p>
+  </div>
+  <div class="card">
+    <p class="lead">［弐］ 家系と宿命の視点</p>
+    <p>午未天中殺は「古い流れを断ち、新しく始める」使命。伴星の石門星は「人脈が財産になる」。東と西に、同じ牽牛星があります。</p>
+    <p style="margin-bottom:0;"><b>古い流れを選んで断ち切り、人とのつながりを財産にして、一度リセットして出直す。</b>ご先祖様から渡された向きは、そこを指しています。</p>
+  </div>
+  <div class="card">
+    <p class="lead">［参］ 今の運気の構造から観る視点</p>
+    <p>53〜72歳は大運の天中殺。2026〜2027年は年の天中殺が重なる。2027年6〜7月は月の天中殺。2028年の立春で、年の天中殺が明ける。</p>
+    <p style="margin-bottom:0;"><span class="hl">今は、決めない。整える。材料を集める。</span>2028年以降に、大きな決断を考える。急いで取りに行くより、心と体を先に守る時間です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">［肆］ 関係性と環境の視点</p>
+    <p>人を引き寄せる禄存星。蓄積と誠実の司禄星。責任感の牽牛星。人脈が財産の石門星。</p>
+    <p style="margin-bottom:0;">東洋占術の思想には、関係性の中で自分がどうあるか、という事が大事、サポートを受ける時は受ける、が正解という考え方があります。<b>一人で抱えて、一人で決めるのではなく、話せる人を一人持つ。</b>それが、有紀子さんの星が、いちばん光る形です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">［伍］ 霊魂の設計という視点 ―― 総括</p>
+    <p>壱から肆まで、全部が同じ方向を向いています。<b>鋭く切る刃を、自分ではなく、決めたことに向けて使い、一人で抱えずに、材料を集めながら進む</b>、という構造です。</p>
+    <p>でも、<span class="hl">「天中殺だから、じっとしていればいい」という話ではありません。</span>「我慢して耐えればいい」という話でもありません。</p>
+    <p><b>この命式帖が、今、動ける条件は、一つだけです。</b></p>
+    <div class="pull">自分から探しに行かず、<br>今あるものを整えながら、材料を集めて、<br>決めたことにだけ、刃を向けること。</div>
+    <p>新しい何かを、今から探しに行く必要はありません。保険の整理、お金の整理、数字にする、紙に書く、人に話す。有紀子さんの中から、もう動き始めていることばかりです。年の天中殺の間も、今までやってきたことの延長として、整えて、準備することは、できます。避けるのは、退職の実行、大きな契約、結婚のような、後々に大きく影響する決断だけです。</p>
+    <p style="margin-bottom:0;">そして、向こうから来たご縁や、声がかかった話は、大事に受け取る。石門星を持つ人は、人が運を持ってきます。探さなくていい。でも、来たものは、材料に入れる。選ぶのは、有紀子さんです。</p>
+  </div>
+</div>
 
-  // ---- 人体星図 ----
-  var grid = document.getElementById('jgrid'), det = document.getElementById('jdetail');
-  function show(i) {
-    var it = D.jintai[i];
-    det.innerHTML = '<p class="t">' + esc(it.lb) + '　' + esc(it.st) + '</p><p>' + esc(it.d) + '</p>' +
-      (it.yo ? '<p class="yo"><b>陽転</b>　' + esc(it.yo) + '</p>' : '') + (it['in'] ? '<p class="in"><b>陰転</b>　' + esc(it['in']) + '</p>' : '');
-    for (var n = 0; n < grid.children.length; n++) grid.children[n].setAttribute('aria-pressed', n === i ? 'true' : 'false');
-  }
-  D.jintai.forEach(function (it, i) {
-    var b = document.createElement('button');
-    b.type = 'button'; b.id = 'cell-' + i;
-    b.className = 'cell' + (it.c ? ' center' : '') + (it.ju ? ' ju' : '');
-    b.setAttribute('aria-pressed', 'false');
-    b.innerHTML = '<span class="lb">' + esc(it.lb) + '</span><span class="st">' + esc(it.st) + '</span>';
-    b.addEventListener('click', function () { show(i); });
-    grid.appendChild(b);
-  });
-  show(4);
-})();
-</script>
-<style>
-.tsunagari{max-width:640px;margin:40px auto 56px;padding-top:16px;border-top:1px solid var(--line);font-family:inherit}
-.tsunagari h2{font-size:13px;letter-spacing:.15em;color:var(--ink2);margin:0 0 10px;font-weight:500}
-.tsunagari a,.tsunagari .here{display:block;padding:12px 14px;margin:0 0 8px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);text-decoration:none;line-height:1.5}
-.tsunagari a:hover{border-color:var(--focus)}
-.tsunagari .here{opacity:.55}
-.tsunagari small{display:block;font-size:12px;color:var(--ink2)}
-</style>
-<nav class="tsunagari" aria-label="ほかのページ">
-  <h2>ほかのページ</h2>
-  <div class="here">命式図（いま見ているページ）<small>生年月日から読む、鑑定のページ</small></div>
-  <a href="/yukiko-yoten">陽転図<small>陽転した姿を、場面ごとに</small></a>
-  <a href="/yukiko">運気カレンダー<small>日々の流れを見る暦</small></a>
-  <!-- 鑑定目録：ここに足す -->
-</nav>
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">十二</span><span class="sec-title">深い五つの視点 ― in depth</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.8rem;">通常の読みよりさらに深く、五つの切り口から命式帖を観ます。</p>
+    <p class="lead">陽転の視点</p>
+    <p style="margin-bottom:0;">星は、立場や名乗りが変わることで、陽転していきます。有紀子さんの名乗りは、会社の購買担当、という立場から始まっています。<b>次の名乗りは、専門性を持って、見てくれる人のいる場所で、数字を整える人</b>。在庫がピタッとはまった時の手応えは、その名乗りの種です。名乗りが変わるほど、車騎星の刃は、自責ではなく、実行力として外に出ていきます。</p>
+  </div>
+  <div class="card">
+    <p class="lead">本質の視点</p>
+    <p style="margin-bottom:0;">丁亥は、水の上に浮かぶ灯です。日柱と年柱の蔵干には、<b>甲</b>が入っています。甲は、第一の守護神です。水(壬)に甲(木)が育つ形。<b>水が多いのは、木を育てる水でもある</b>という読み方もできます。灯は、木を得ると、長く燃えます。一人で燃え続けるより、木をくべてくれる人と、いる時に、いちばん長く光る干支です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">お役目の視点</p>
+    <p style="margin-bottom:0;">環境が厳しいほど、特殊な力が磨かれる干支です。現世は、みたま磨きの場です。落差を経験して、何かを磨いていく。<b>苦労は、磨くためにありました。</b>この先のお役目は、磨いた感覚と、決める力を、誰かの役に立てること。石門星の大運は、そのための十年です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">幸福感の視点</p>
+    <p style="margin-bottom:0;">有紀子さんの幸福の源は、<b>ピタッと合った時の手応え</b>、<b>コツコツ積み上げる日常</b>、<b>誰かの相談に乗れた時</b>。社会的な広がりより、自分が納得できる形に整った時に、心が満たされる人です。命式帖の「心を満たす生き方」にも、<span class="hl">「コツコツ蓄積・日常を守る・家族との時間・平和で安定」</span>と出ています。</p>
+  </div>
+  <div class="card">
+    <p class="lead">エネルギーの視点</p>
+    <p style="margin-bottom:0;">水が103、火が7、土が0。水が突出して、火と土が薄い命式帖です。水は、そのままだと流れていきます。<b>火で温め、土で受け止める</b>と、エネルギーが回り出します。キャンドル、暖色の灯り、裸足、陶器。足すものは、手の届くところにあります。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">十三</span><span class="sec-title">ここから動ける処方</span></div>
+  <div class="card recipe">
+    <div class="item"><div class="num">1</div><div class="rbody"><b>体と気持ちを、先に守る。</b><br>早朝に目が覚める、眠い、頭痛が続く時は、産業医・相談窓口・医療機関を、普通に使う。</div></div>
+    <div class="item"><div class="num">2</div><div class="rbody"><b>一日に一つだけ、決める。</b><br>運㐂暦を朝にひらいて、その日の意味を読み、一つだけ決める。小さくていい。</div></div>
+    <div class="item"><div class="num">3</div><div class="rbody"><b>辞めるかどうかを、急いで決めない。</b><br>年の天中殺（2028年の立春まで）は、退職の実行、起業の決断を後ろに置く。準備は、今から動ける。</div></div>
+    <div class="item"><div class="num">4</div><div class="rbody"><b>数字にする。</b><br>辞めた場合に、何ヶ月暮らせるか。</div></div>
+    <div class="item"><div class="num">5</div><div class="rbody"><b>紙に二列で書く。</b><br>24年の中で、手放すもの、残すもの。</div></div>
+    <div class="item"><div class="num">6</div><div class="rbody"><b>次の場所の条件を、三つ書く。</b><br>肩書きで働けるか。専門性を使えるか。見てくれる師匠がいるか。</div></div>
+    <div class="item"><div class="num">7</div><div class="rbody"><b>話を聞いてくれる人を、一人持つ。</b><br>石門星の使命は、人脈が財産になること。</div></div>
+    <div class="item"><div class="num">8</div><div class="rbody"><b>家の契約・投資は、今は動かさない。</b><br>現金化できる状態で持つ。ローンの審査の実務は、銀行や専門家に確かめる。</div></div>
+    <div class="item"><div class="num">9</div><div class="rbody"><b>火と土を足す。</b><br>キャンドルとお香は続ける。裸足で土に立つ。陶器を一つ選ぶ。</div></div>
+    <div class="item"><div class="num">10</div><div class="rbody"><b>亥の日は、予定を詰めず、自分に優しくする。</b><br>自刑の日です。刃を、自分に向けない日にする。</div></div>
+    <div class="item"><div class="num">11</div><div class="rbody"><b>日の天中殺の日は、大事な約束を入れない。</b><br>運㐂暦で、月と日の流れを見ながら。</div></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">付 録</span><span class="sec-title">今回出てきた言葉の小さな辞典</span></div>
+  <div class="card">
+    <dl class="words">
+      <dt>車騎星</dt><dd>中心の星。一本気、即断即決、白黒はっきり。陽転すると正直で引きずらない。良い師匠につくと技術習得に長ける。</dd>
+      <dt>牽牛星</dt><dd>社会と配偶者の位置の星。責任感・プライド・名誉。陽転すると信頼として働く。</dd>
+      <dt>禄存星</dt><dd>目上の位置の星。大きな包容力で、人を引き寄せる。</dd>
+      <dt>司禄星</dt><dd>目下の位置の星。蓄積・誠実・用心深い。第二の守護神、庚と同じ星。</dd>
+      <dt>石門星（伴星）</dt><dd>ご先祖様から渡された使命の星。人とのつながり・和合。人脈が財産になる。</dd>
+      <dt>天報星・天馳星</dt><dd>初年・晩年と、中年の星（十二大従星）。天報星は「変化」の星、天馳星は瞬発力が最強で持続力はない星。</dd>
+      <dt>二度運</dt><dd>東と西に同じ星が入る配置。一度リセットして再出発することで、良い形になることが多い、という読み。</dd>
+      <dt>二連変化</dt><dd>同じ星が二つ重なる時に出る変化。牽牛星が二つで、貫索星のような自分の軸を通す強さが上乗せされる。</dd>
+      <dt>天中殺</dt><dd>運気を守る枠が外れる時期。大運（10年）・年・月・日に、それぞれ巡る。止める時期ではなく、陽転か陰転か、確率が変わる時期。</dd>
+      <dt>無玄の型</dt><dd>剋線がゼロの才能の型。才能が自分では気づきにくく、環境や他者の反応で見えてくる。穏やかな環境で伸びる。</dd>
+      <dt>自刑</dt><dd>同じ支が重なる形。自分を傷つける刑で、自責。頭痛・不眠の系統として読まれることがある。</dd>
+      <dt>半会・大半会・方三位</dt><dd>仲間の支がそろう形。拡大・まとまる。方三位は、同じ季節の三つの支（亥・子・丑など）がそろう形。</dd>
+      <dt>天剋地冲</dt><dd>干も支もぶつかる、強い作り替えの形。</dd>
+      <dt>害・刑</dt><dd>体や気持ちの注意として読む位相。</dd>
+      <dt>大運</dt><dd>10年ごとに巡る、大きな運気の流れ。有紀子さんは3歳から始まる。</dd>
+      <dt>守護神</dt><dd>命式帖を助ける五行。甲（大樹）と庚（刃）。</dd>
+    </dl>
+  </div>
+</div>
+
+<div class="closing">
+  <p>有紀子さんは、<span class="hl">風前の灯火</span>の人です。<br>水の上でも、消えずに光を保つ。</p>
+  <p>24年、会社に恩義を感じて、<br>勤勉実直に、結果を出してきました。<br>刃は、折れていません。</p>
+  <p>警句は、こう示しています。<br>天性の才能を生かし、寛容の気を養えば、<br>必ず一方の長となる。</p>
+  <p class="big">自分への寛容を。<br>刃は、決めたことに向けて。</p>
+  <p>2028年の立春に、年の天中殺が明けます。<br>それまでに集めた材料が、その先の形になります。</p>
+</div>
+
+<a class="koyomi-link" href="/yukiko-yoten">
+  <span class="arrow">▶</span> 陽転図をひらく
+  <small>場面ごとに「今の出方」と「陽転した姿」を並べた、一枚の図です。</small>
+</a>
+
+<a class="koyomi-link" href="/yukiko" style="margin-top:.8rem;">
+  <span class="arrow">▶</span> 運㐂暦（日々の運気カレンダー）をひらく
+  <small>毎日の運気と、月の流れ、天中殺の日が出ます。</small>
+</a>
+
+<!-- 鑑定目録：ここにリンクを足す -->
+
+<footer>
+  <p>いつもおおきにです。ここからがスタートです。ここはどういう意味なのか、動いてみてどうだったか、いつでもLINEで聞いてください。スタンプだけでも大丈夫です。</p>
+  <p class="sig">㐂</p>
+</footer>
+
+</div>
 </body>
 </html>
