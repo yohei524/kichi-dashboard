@@ -75,10 +75,10 @@
   "koyomiOnly": true,
   "koyomiNoDestiny": true,
   "expiresAt": "2026-11-06",
-  "doorHref": "",
-  "doorLabel": "",
-  "doorNote": "",
-  "kanteishoHref": "",
+  "doorHref": "/yukiko-yoten",
+  "doorLabel": "陽転の姿をひらく",
+  "doorNote": "10月28日にお話ししたことを、図にまとめてあります",
+  "kanteishoHref": "/yukiko-kanteisho",
   "plan": null,
   "parts": {}
 }

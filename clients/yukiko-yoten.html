@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>有紀子さんの陽転図</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+/* 構図：水面に浮かぶ灯。左の弱い灯（今）から右の明るい灯（陽転）へ。以降は「今の出方」と「陽転した姿」を並べた行が続く */
+:root{
+  --bg:#eef0f1; --card:#f8f9f9; --ink:#1d2a3a; --muted:#5b6878; --line:#cfd6dc;
+  --water:#2c4a63; --flame:#c9731c; --flame-soft:#f4e0c2; --flame-ink:#7a410a;
+  --font-display:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --font-body:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1a26; --card:#15222f; --ink:#e6ebef; --muted:#93a1b0; --line:#263646;
+    --water:#7fa6c4; --flame:#f0a24a; --flame-soft:#33260f; --flame-ink:#f6c88a; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1a26; --card:#15222f; --ink:#e6ebef; --muted:#93a1b0; --line:#263646;
+  --water:#7fa6c4; --flame:#f0a24a; --flame-soft:#33260f; --flame-ink:#f6c88a; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--ink); font-family:var(--font-body); font-size:16px; line-height:1.85;
+  padding-block:32px 56px;
+  padding-left:max(16px, env(safe-area-inset-left,0px));
+  padding-right:max(16px, env(safe-area-inset-right,0px));
+}
+.wrap{max-width:860px; margin:0 auto; display:flex; flex-direction:column; gap:40px}
+h1,h2{font-family:var(--font-display); font-weight:700; text-wrap:balance; margin:0}
+h1{font-size:clamp(28px,6vw,40px); line-height:1.35; letter-spacing:.04em}
+h2{font-size:clamp(20px,4vw,24px); line-height:1.5}
+p{margin:0}
+.eyebrow{font-size:13px; letter-spacing:.14em; color:var(--muted)}
+.lead{max-width:36em; color:var(--ink)}
+.hero{display:flex; flex-direction:column; gap:20px}
+.hero svg{width:100%; height:auto; max-height:240px; display:block}
+.sv-water{stroke:var(--water); fill:none; stroke-width:1.5; opacity:.55}
+.sv-flame-now{fill:var(--flame); opacity:.35}
+.sv-flame-yo{fill:var(--flame)}
+.sv-glow{fill:var(--flame); opacity:.16}
+.sv-text{fill:var(--muted); font-family:var(--font-body); font-size:13px; letter-spacing:.08em}
+.sv-text-strong{fill:var(--ink); font-family:var(--font-display); font-size:17px; font-weight:700}
+
+.cols-head{display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:13px; letter-spacing:.12em; padding:0 4px}
+.cols-head span:last-child{color:var(--flame-ink); font-weight:700}
+.rows{display:flex; flex-direction:column; gap:20px}
+.row{background:var(--card); border:1px solid var(--line); border-radius:6px; padding:20px; display:flex; flex-direction:column; gap:14px}
+.row-title{display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 12px}
+.row-title h2{font-size:19px}
+.src{font-size:12px; color:var(--muted); letter-spacing:.06em}
+.pair{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+.pair > div{min-width:0}
+.now{color:var(--muted)}
+.yo{background:var(--flame-soft); color:var(--ink); border-radius:4px; padding:12px 14px}
+.lab{display:none; font-size:12px; letter-spacing:.1em; margin-bottom:4px; font-weight:700}
+.tag{display:inline-block; font-size:11px; letter-spacing:.06em; padding:0 8px; border:1px solid var(--line); border-radius:99px; color:var(--muted); margin-left:6px; vertical-align:2px}
+.tag.mitate{border-color:var(--flame); color:var(--flame-ink)}
+
+.three{display:flex; flex-direction:column; gap:14px}
+.three ol{margin:0; padding:0; list-style:none; display:grid; grid-template-columns:repeat(3,1fr); gap:16px; counter-reset:c}
+.three li{counter-increment:c; border-top:2px solid var(--flame); padding-top:12px; min-width:0}
+.three li b{display:block; font-family:var(--font-display); font-size:17px; margin-bottom:4px}
+.three li::before{content:"その" counter(c); display:block; font-size:12px; letter-spacing:.1em; color:var(--flame-ink); font-weight:700}
+.mat{background:var(--card); border:1px solid var(--line); border-radius:6px; padding:20px; display:flex; flex-direction:column; gap:10px}
+.mat ul{margin:0; padding-left:1.2em}
+.close{font-family:var(--font-display); font-size:clamp(18px,3.6vw,22px); line-height:1.9; max-width:30em; text-wrap:balance}
+.note{font-size:13px; color:var(--muted); max-width:44em; border-top:1px solid var(--line); padding-top:14px}
+
+@media (max-width:640px){
+  .cols-head{display:none}
+  .pair{grid-template-columns:1fr; gap:10px}
+  .lab{display:block}
+  .now .lab{color:var(--muted)}
+  .yo .lab{color:var(--flame-ink)}
+  .three ol{grid-template-columns:1fr}
+}
+</style>
+
+<body>
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">紡の席　2026年10月28日　斎藤有紀子さん</p>
+    <h1>有紀子さんの陽転図</h1>
+    <p class="lead">命式帖に出ている陽転の条件を、有紀子さんの暮らしに引き寄せて一枚にしました。左が今の出方、右が陽転したときの姿です。星の言葉は命式帖から、そのほかは僕の見立てです。</p>
+    <svg viewBox="0 0 720 220" role="img" aria-label="水面に浮かぶ弱い灯と、明るい灯">
+      <g>
+        <path class="sv-water" d="M40 170 q40 -8 80 0 t80 0 t80 0"/>
+        <path class="sv-water" d="M60 188 q40 -8 80 0 t80 0"/>
+        <path class="sv-water" d="M80 204 q30 -6 60 0 t60 0"/>
+        <path class="sv-flame-now" d="M140 150 C122 128 128 108 140 88 C152 108 158 128 140 150 Z"/>
+        <text class="sv-text" x="140" y="30" text-anchor="middle">今の出方</text>
+        <text class="sv-text" x="140" y="52" text-anchor="middle">灯が小さく、水が深い</text>
+      </g>
+      <g>
+        <circle class="sv-glow" cx="550" cy="118" r="76"/>
+        <circle class="sv-glow" cx="550" cy="118" r="46"/>
+        <path class="sv-water" d="M420 170 q40 -8 80 0 t80 0 t80 0 t80 0"/>
+        <path class="sv-water" d="M440 188 q40 -8 80 0 t80 0 t80 0"/>
+        <path class="sv-water" d="M470 204 q40 -6 80 0 t80 0"/>
+        <path class="sv-flame-yo" d="M550 152 C524 122 532 92 550 62 C568 92 576 122 550 152 Z"/>
+        <text class="sv-text-strong" x="550" y="30" text-anchor="middle">陽転した姿</text>
+        <text class="sv-text" x="550" y="52" text-anchor="middle">同じ水の上で、灯が遠くまで届く</text>
+      </g>
+      <path d="M250 118 H380" stroke="currentColor" style="color:var(--muted)" stroke-width="1.5" stroke-dasharray="3 5" fill="none"/>
+      <path d="M372 112 L384 118 L372 124" stroke="currentColor" style="color:var(--muted)" stroke-width="1.5" fill="none"/>
+    </svg>
+  </header>
+
+  <section aria-labelledby="h-rows" class="rows">
+    <h2 id="h-rows" style="font-size:20px">六つの場面で見る</h2>
+    <div class="cols-head" aria-hidden="true"><span>今の出方</span><span>陽転した姿</span></div>
+
+    <article class="row">
+      <div class="row-title"><h2>決める力</h2><span class="src">車騎星（中心）／守護神 庚（司禄星）／亥と亥の自刑</span></div>
+      <div class="pair">
+        <div class="now"><div class="lab">今の出方</div><p>即断即決の刃が自分に向いて、自責になって出る。内側で迷い続けて、優柔不断に見える。<span class="tag mitate">見立て</span></p></div>
+        <div class="yo"><div class="lab">陽転した姿</div><p>刃を、決めたことに向ける。小さく一つだけ決めて、実行する。正直で、曲がったことが嫌いで、引きずらない。裏表のない人として、外で切れる。<span class="tag">命式帖</span></p></div>
+      </div>
+    </article>
+
+    <article class="row">
+      <div class="row-title"><h2>責任感</h2><span class="src">牽牛星（社会）</span></div>
+      <div class="pair">
+        <div class="now"><div class="lab">今の出方</div><p>「予算に届かない」を、全部自分の責任として引き受けて苦しくなる。<span class="tag mitate">見立て</span></p></div>
+        <div class="yo"><div class="lab">陽転した姿</div><p>責任感と、プライドと、名誉が、信頼として働く。役割や地位を任されると張り切る人なので、任される場所に立つ。<span class="tag">命式帖</span></p></div>
+      </div>
+    </article>
+
+    <article class="row">
+      <div class="row-title"><h2>天中殺の十年</h2><span class="src">午未天中殺／大運天中殺（53〜72歳）</span></div>
+      <div class="pair">
+        <div class="now"><div class="lab">今の出方</div><p>これまでのやり方が通用しなくなる。枠が外れて、足場が動く感覚になる。年の天中殺は2026年と2027年の二年。<span class="tag">命式帖</span></p></div>
+        <div class="yo"><div class="lab">陽転した姿</div><p>過去のしがらみを、選んで断ち切って、独自路線へ。全部を切らず、不要になった「当たり前」だけを手放す。大運天中殺は、陽転すれば想定外の飛躍がある時期。辞める準備を進めることは止めていません。<span class="tag">命式帖</span></p></div>
+      </div>
+    </article>
+
+    <article class="row">
+      <div class="row-title"><h2>人とのつながり</h2><span class="src">石門星（ご先祖様から渡された星）</span></div>
+      <div class="pair">
+        <div class="now"><div class="lab">今の出方</div><p>丁寧で控えめな分、一人で抱えて決めようとする。<span class="tag mitate">見立て</span></p></div>
+        <div class="yo"><div class="lab">陽転した姿</div><p>人との繋がりが財産になる。話せる人を一人持ち、誰かの役に立つことを一つ見つける。一人で決めない。<span class="tag">命式帖</span></p></div>
+      </div>
+    </article>
+
+    <article class="row">
+      <div class="row-title"><h2>働き方のリズム</h2><span class="src">天馳星（中年運）</span></div>
+      <div class="pair">
+        <div class="now"><div class="lab">今の出方</div><p>瞬発力はあるが持続力がない作りなのに、毎日の残業や休日出勤で続けて消耗する。運気の谷の時期。<span class="tag">命式帖</span></p></div>
+        <div class="yo"><div class="lab">陽転した姿</div><p>短い集中を、積み重ねる働き方。落ちた運気は反動で上がるので、谷の中で短気な行動を起こさない。休むことも、作りに合っている。<span class="tag">命式帖</span></p></div>
+      </div>
+    </article>
+
+    <article class="row">
+      <div class="row-title"><h2>これからの動き方</h2><span class="src">天報星（初年運と晩年運）／牽牛星が東と西に二つ</span></div>
+      <div class="pair">
+        <div class="now"><div class="lab">今の出方</div><p>一念発起で、住まいも仕事も一気に動かしたくなる。晩年は住居の移転や財産の整理が多い作り。<span class="tag">命式帖</span></p></div>
+        <div class="yo"><div class="lab">陽転した姿</div><p>順番を決めて動く。まず材料を集めて、そのあとで決める。一度リセットして出直すことで、より良い形になりやすい配置でもあります。<span class="tag mitate">見立て</span></p></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="three" aria-labelledby="h-three">
+    <h2 id="h-three">陽転の三つの条件</h2>
+    <ol>
+      <li><b>刃を向ける先を決める</b>今日の暦を読んで、今日、一つだけ決める。小さなことで十分です。</li>
+      <li><b>手放すものを選んで断つ</b>24年の中で、不要になった「当たり前」を、選んで手放します。</li>
+      <li><b>人とつながって役に立つ</b>一人で抱えず話す。役に立てることを一つ見つけます。</li>
+    </ol>
+  </section>
+
+  <section class="mat" aria-labelledby="h-mat">
+    <h2 id="h-mat" style="font-size:19px">持ち帰るのは、判断の材料を三つ</h2>
+    <p>辞める、辞めないを、急いで決めなくて大丈夫です。決める力は、材料が揃ったときに、いちばんきれいに働きます。</p>
+    <ul>
+      <li>数字：辞めた場合に、何ヶ月暮らせるか</li>
+      <li>人：話を聞いてくれる人を、一人</li>
+      <li>条件：次の場所に求めることを、三つ</li>
+    </ul>
+  </section>
+
+  <p class="close">天性の才能を生かし、寛容の気を養えば、必ず一方の長となる。その寛容を、まず自分に向けたとき、刃は外で使えるようになる、と僕は見ています。</p>
+
+  <p class="note">星の意味は命式帖の記述です。「見立て」の印は僕の読みで、ほかの読み方もあります。体や心の不調は、占いとは別に、会社の相談窓口や産業医、医療機関も普通に使ってください。</p>
+</div>
+<style>
+.tsunagari{max-width:640px;margin:40px auto 56px;padding-top:16px;border-top:1px solid var(--line);font-family:inherit}
+.tsunagari h2{font-size:13px;letter-spacing:.15em;color:var(--muted);margin:0 0 10px;font-weight:500}
+.tsunagari a,.tsunagari .here{display:block;padding:12px 14px;margin:0 0 8px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);text-decoration:none;line-height:1.5}
+.tsunagari a:hover{border-color:var(--flame)}
+.tsunagari .here{opacity:.55}
+.tsunagari small{display:block;font-size:12px;color:var(--muted)}
+</style>
+<nav class="tsunagari" aria-label="ほかのページ">
+  <h2>ほかのページ</h2>
+  <a href="/yukiko-kanteisho">命式図<small>生年月日から読む、鑑定のページ</small></a>
+  <div class="here">陽転図（いま見ているページ）<small>陽転した姿を、場面ごとに</small></div>
+  <a href="/yukiko">運気カレンダー<small>日々の流れを見る暦</small></a>
+  <!-- 鑑定目録：ここに足す -->
+</nav>
+</body>
+</html>
