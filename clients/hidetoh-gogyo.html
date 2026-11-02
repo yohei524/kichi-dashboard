@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>五行調律鑑定</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night: #F7F1E6; --paper: #FFFCF6; --cream: #F1E8D6; --line: #E0D3BC;
+  --gold: #8F6717; --ink: #3A3228; --sub: #6F6250;
+  --wood: #5F8150; --fire: #C2652F; --earth: #A9834A; --metal: #8D8D8D; --water: #4E7CA6;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--night); }
+body {
+  font-family: 'Noto Serif JP', serif; background: var(--night);
+  background-image: linear-gradient(180deg, #F7F1E6 0%, #FBF6EC 45%, #F1E8D6 100%);
+  color: var(--ink); line-height: 1.95; letter-spacing: .04em; padding-block: 2rem;
+}
+.wrap { max-width: 32rem; margin: 0 auto; padding: 0 16px; }
+header { text-align: center; padding: .5rem 0 1.8rem; }
+header .sub { font-size: .72rem; color: var(--gold); letter-spacing: .3em; margin-bottom: .5rem; }
+header h1 { font-size: 1.55rem; font-weight: 500; }
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 1.5rem 1.25rem; box-shadow: 0 4px 18px rgba(58,50,40,.1); margin-bottom: 1.1rem; }
+h2 { font-size: 1.02rem; font-weight: 500; margin-bottom: .9rem; }
+h2::before { content: "◆"; color: var(--gold); margin-right: .5rem; }
+p { font-size: .93rem; margin-bottom: .85rem; }
+p:last-child { margin-bottom: 0; }
+figure { margin: 1.1rem 0; }
+figure svg { display: block; width: 100%; max-width: 300px; height: auto; margin: 0 auto; }
+figure.wide svg { max-width: 420px; }
+figcaption { text-align: center; font-size: .78rem; color: var(--sub); margin-top: .4rem; }
+.bar-row { display: flex; align-items: center; gap: .7rem; margin-bottom: .6rem; }
+.bar-label { width: 1.4rem; font-size: .9rem; flex-shrink: 0; }
+.bar-track { flex: 1; background: var(--cream); border-radius: 6px; height: 14px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 6px; }
+.bar-num { width: 2rem; text-align: right; font-size: .9rem; flex-shrink: 0; }
+.stars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55rem; margin: 1rem 0; }
+.star { border-radius: 12px; padding: .6rem .7rem; color: #fff; }
+.star b { display: block; font-weight: 500; font-size: .92rem; }
+.star span { font-size: .74rem; }
+.stone { padding: 1.3rem 0; border-top: 1px solid var(--line); }
+.stone:first-of-type { border-top: 0; padding-top: .3rem; }
+.stone img { display: block; width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: 12px; border: 1px solid var(--line); background: var(--cream); margin-bottom: .8rem; }
+.stone h3 { font-size: 1rem; font-weight: 500; }
+.badge { display: inline-block; font-size: .7rem; color: #fff; background: var(--gold); border-radius: 10px; padding: 0 .55rem; margin-left: .4rem; vertical-align: 2px; }
+.meta { font-size: .8rem; color: var(--gold); margin-bottom: .45rem; }
+.table-wrap { overflow-x: auto; margin-top: .4rem; }
+table { border-collapse: collapse; width: 100%; font-size: .8rem; }
+th, td { border-bottom: 1px solid var(--line); padding: .4rem .35rem; text-align: center; white-space: nowrap; font-weight: 400; }
+th:first-child, td:first-child { text-align: left; }
+.credits { font-size: .7rem; color: var(--sub); line-height: 1.7; }
+.credits p { font-size: .7rem; margin-bottom: .3rem; overflow-wrap: anywhere; }
+.credits a { color: var(--sub); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="sub">五行調律鑑定</div>
+  <h1>Hidetoさんへ</h1>
+</header>
+
+<section class="card">
+  <p>おおきにです。五行調律鑑定、お待たせしました。</p>
+  <p>今回は、鑑定書でお伝えした性質の話ではなく、五行のエネルギーだけを見ます。どこが過剰で、どこが足りず、どこで流れが止まっているか。それをどう整えるか。その調律に絞ってお伝えします。</p>
+</section>
+
+<section class="card">
+  <h2>1　五行の量</h2>
+  <div class="bar-row"><div class="bar-label">木</div><div class="bar-track"><div class="bar-fill" style="width:97%;background:var(--wood)"></div></div><div class="bar-num">97</div></div>
+  <div class="bar-row"><div class="bar-label">火</div><div class="bar-track"><div class="bar-fill" style="width:52%;background:var(--fire)"></div></div><div class="bar-num">52</div></div>
+  <div class="bar-row"><div class="bar-label">土</div><div class="bar-track"><div class="bar-fill" style="width:52%;background:var(--earth)"></div></div><div class="bar-num">52</div></div>
+  <div class="bar-row"><div class="bar-label">金</div><div class="bar-track"><div class="bar-fill" style="width:9%;background:var(--metal)"></div></div><div class="bar-num">9</div></div>
+  <div class="bar-row"><div class="bar-label">水</div><div class="bar-track"><div class="bar-fill" style="width:33%;background:var(--water)"></div></div><div class="bar-num">33</div></div>
+  <p style="margin-top:1rem">合計243のうち、木が約4割を占めています。金は4％に届きません。木は金の10倍以上です。五つの中で、この差が一番の問題です。</p>
+  <p>そしてこの金が、Hidetoさんの日干である辛と同じ五行です。自分の核と同じエネルギーが、命式の中で一番少ない形です。</p>
+</section>
+
+<section class="card">
+  <h2>2　エネルギーの流れ</h2>
+  <p>五行は単独では読みません。組み合わせで読みます。Hidetoさんの場合、大事な関係は三つです。</p>
+  <figure>
+    <svg viewBox="0 0 280 260" role="img" aria-label="五行の量を丸の大きさで表し、金から木への剪定と、木から土への抑えを示した図">
+      <defs>
+        <marker id="a4" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#8F6717"/></marker>
+        <marker id="a5" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#C2652F"/></marker>
+      </defs>
+      <line x1="90" y1="205" x2="130" y2="82" stroke="#8F6717" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#a4)"/>
+      <line x1="152" y1="80" x2="186" y2="192" stroke="#C2652F" stroke-width="3.5" marker-end="url(#a5)"/>
+      <circle cx="140" cy="48" r="34" fill="#5F8150"/><circle cx="230.4" cy="110.6" r="24" fill="#C2652F"/><circle cx="195.8" cy="216.9" r="24" fill="#A9834A"/><circle cx="84.2" cy="216.9" r="11" fill="#8D8D8D"/><circle cx="49.6" cy="110.6" r="20" fill="#4E7CA6"/>
+      <g fill="#fff" text-anchor="middle" font-family="'Noto Serif JP',serif"><text x="140" y="55" font-size="20">木</text><text x="230.4" y="116.6" font-size="17">火</text><text x="195.8" y="222.9" font-size="17">土</text><text x="84.2" y="221" font-size="12">金</text><text x="49.6" y="116.6" font-size="17">水</text></g>
+    </svg>
+    <figcaption>丸の大きさが量です。点線が金から木への剪定、太線が木から土への抑えです</figcaption>
+  </figure>
+  <p><b style="font-weight:500">金が木を切れていない。</b>金は木を剪定するエネルギーです。木は金で切られないと伸びすぎます。木が強く金が少ない形は、剪定されずに暴走しやすい組み合わせです。97の木に対して、切る側が9しかありません。</p>
+  <p><b style="font-weight:500">木が土を押さえている。</b>木は土を抑えます。土は金を生む土台です。つまり、多すぎる木が土を押さえ、金が生まれる元まで細くしています。金が少ないだけでなく、育ちにくい形になっています。</p>
+  <p><b style="font-weight:500">金の先の水が細い。</b>金は水を生み、水は木を養います。金が少ないと水も33で止まります。木の強さに対して、潤す水も足りていません。</p>
+</section>
+
+<section class="card">
+  <h2>3　調律の組み立て</h2>
+  <p>調律の主役は金です。一番足りない五行で、しかも日干と同じ五行なので、直接補います。金が増えると、木が剪定され、水も育ちます。一つで三か所に届くのが金です。</p>
+  <p>副は土です。土は金を生む土台なので、ここを底上げすると、金も補われやすくなります。</p>
+  <figure>
+    <svg viewBox="0 0 280 260" role="img" aria-label="土から金、金から水への流れを強調した図">
+      <defs>
+        <marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#D5CAB2"/></marker>
+        <marker id="a3" markerWidth="5" markerHeight="5" refX="3.6" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 z" fill="#8F6717"/></marker>
+      </defs>
+      <g stroke="#D5CAB2" stroke-width="2" marker-end="url(#a2)"><line x1="157.8" y1="57.9" x2="212.6" y2="97.7"/><line x1="223.6" y1="131.5" x2="202.6" y2="196"/><line x1="67.4" y1="97.7" x2="122.2" y2="57.9"/></g>
+      <g stroke="#8F6717" marker-end="url(#a3)"><line x1="173.8" y1="216.9" x2="108" y2="216.9" stroke-width="6"/><line x1="77.4" y1="196" x2="57" y2="133.5" stroke-width="3"/></g>
+      <g><circle cx="140" cy="45" r="20" fill="#D8E0D2"/><circle cx="230.4" cy="110.6" r="20" fill="#EFD6C7"/><circle cx="195.8" cy="216.9" r="20" fill="#A9834A"/><circle cx="84.2" cy="216.9" r="23" fill="#FFFCF6" stroke="#8F6717" stroke-width="2.5"/><circle cx="84.2" cy="216.9" r="17" fill="#8D8D8D"/><circle cx="49.6" cy="110.6" r="20" fill="#4E7CA6"/></g>
+      <g font-size="17" text-anchor="middle" font-family="'Noto Serif JP',serif"><text x="140" y="51" fill="#3A3228">木</text><text x="230.4" y="116.6" fill="#3A3228">火</text><text x="195.8" y="222.9" fill="#fff">土</text><text x="84.2" y="222.9" fill="#fff">金</text><text x="49.6" y="116.6" fill="#fff">水</text></g>
+    </svg>
+    <figcaption>土から金へ太く流し、金から水へつなげていきます</figcaption>
+  </figure>
+  <div class="table-wrap">
+    <table>
+      <tr><th>五行</th><th>色</th><th>今回の扱い</th><th>理由</th></tr>
+      <tr><td>金</td><td>白・金属色</td><td>主役で足す</td><td>一番少ない・日干と同じ</td></tr>
+      <tr><td>土</td><td>黄・茶</td><td>副で足す</td><td>金を生む</td></tr>
+      <tr><td>水</td><td>藍・黒・青</td><td>足さない</td><td>金の力が流れ出る先</td></tr>
+      <tr><td>火</td><td>赤・ピンク・紫</td><td>足さない</td><td>金を剋す</td></tr>
+      <tr><td>木</td><td>緑</td><td>足さない</td><td>すでに過多</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:1rem">補う五行は散らさず、金と土に絞ります。水は金が育てば自然に増えるので、先に足す必要はありません。</p>
+</section>
+
+<section class="card">
+  <h2>4　合う石について</h2>
+  <p>金を補う方向で、候補を五つ選びました。一番の軸は、以前からHidetoさんが気にしていたルチルクオーツです。</p>
+
+  <div class="stone">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Emerald-cut_quartz_with_golden_needle_inclusions.jpg" alt="金色の針状のものが入った水晶" loading="lazy">
+    <h3>ルチルクオーツ<span class="badge">軸</span></h3>
+    <div class="meta">補う五行：金／財・仕事と人間関係に強いとされる石</div>
+    <p>金のエネルギーを補う石で、財産や仕事の運気に強いと言われています。今後の生活や子供たちとの暮らしを支える力として選びました。人間関係にも強いとされているので、今の協議の場面にも合わせています。</p>
+    
+    <p>僕のおすすめは以前お伝えした通りプラチナルチルです。ルチルでなければ駄目ということはありません。写真は金色の針が入った水晶です。</p>
+    <p>ルチルの偽物ってなんやねん、と思うかもしれませんが、ほんまに石っぽく作られたイミテーションがたくさんあります。ガラスの中に金属の線を封じたものや、後から人工的に針を加えたものが出回っていると言われています。それくらい、石の価値が高くなってしまっているということです。ルチル専門店に行くと、10万、20万はざらにします。</p>
+    <p>上質なものの多くはブラジルのミナスジェライス州で採れるとされ、バイーア州も産地として知られています。ゴールドやシルバーという呼び名は金属の種類ではなく、針の色を指しています。針の中身は同じルチルという鉱物です。本物の針は不規則で立体的で、一つとして同じものがありません。逆に、針がきれいに揃いすぎているものや、相場より極端に安いものは注意が必要と言われています。</p>
+  </div>
+
+  <div class="stone">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/MoonstoneGem.jpg" alt="ムーンストーン" loading="lazy">
+    <h3>ムーンストーン</h3>
+    <div class="meta">補う五行：金／愛情と人間関係に強いとされる石</div>
+    <p>同じ金の石の中でも、愛情や人間関係に強いと言われています。お子さんたちとの暮らしを大事にしたい今のHidetoさんに合わせました。</p>
+    <p>長石という鉱物の仲間で、二種類の長石がごく薄い層に重なり、そこで光が散らばることで、あの青白い光が生まれます。今出回っているものはスリランカ産が多いとされています。オパーライトというガラスがムーンストーンのように売られていることもあるので、名前の表示は見ておきたいところです。</p>
+  </div>
+
+  <div class="stone">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Whiteagate_Tugaru_Japan_IMG_8882.jpg" alt="白い瑪瑙" loading="lazy">
+    <h3>ホワイトオニキス</h3>
+    <div class="meta">補う五行：金／身を守るお守りとされる石</div>
+    <p>魔除けや護身のお守りとしても使われてきた白い石です。強い要求を受け続ける場面で、自分を守るお守りとして選びました。写真は同じ白い系統の瑪瑙です。</p>
+    <p>実はオニキスという呼び名には二つの系統があります。本来のオニキスは、瑪瑙の仲間の硬い石です。一方で、方解石というずっと柔らかい石も、市場ではオニキスと呼ばれていることが多いです。見た目が似ていても別の石なので、買う時は何の石かを店に確かめるのが安心です。</p>
+  </div>
+
+  <div class="stone">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Hematite.jpg" alt="ヘマタイト" loading="lazy">
+    <h3>ヘマタイト</h3>
+    <div class="meta">補う五行：金／健康に強いとされる石</div>
+    <p>金の石の中では健康の面に強いと言われています。木の勢いで動きすぎてすり減りやすいHidetoさんの、心身のお守りとして選びました。</p>
+    <p>ヘマタイトは鉄の酸化物で、鉄鉱石として掘られてきた石です。イタリアのエルバ島では、古代エトルリアの時代から採掘されていたと言われています。金属のように見えるのは、そのためです。一つ小話を置くと、磁石にくっつく「磁気ヘマタイト」は、ヘマチンという人工の素材として売られているものです。天然のヘマタイトは、普通の磁石には目立ってくっつきません。</p>
+  </div>
+
+  <div class="stone">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/07/Quartz_-_Tigers-Eye_-_raw_stone_from_Southafrica.jpg" alt="タイガーアイの原石" loading="lazy">
+    <h3>タイガーアイ</h3>
+    <div class="meta">補う五行：土／財・仕事に強いとされる石</div>
+    <p>金を生む土の石で、財や仕事に強いと言われています。金の石と組み合わせる時の土台役として選びました。</p>
+    <p>主な産地は南アフリカの北ケープ州です。昔の西洋ではとても貴重な石でしたが、1880年代に南アフリカで大きな産地が見つかり、値が大きく下がったと言われています。多くは手を加えられていませんが、赤い色のものは染めてあることがあります。</p>
+  </div>
+
+  <h3 style="font-size:.92rem;font-weight:500;margin-top:.6rem">五つの石の比べ方</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>石</th><th>健康</th><th>財・仕事</th><th>人間関係</th><th>魔除け</th><th>愛情</th></tr>
+      <tr><td>ルチルクオーツ</td><td>○</td><td>◎</td><td>◎</td><td>○</td><td></td></tr>
+      <tr><td>ムーンストーン</td><td>○</td><td>○</td><td>◎</td><td></td><td>◎</td></tr>
+      <tr><td>ホワイトオニキス</td><td></td><td></td><td>○</td><td>○</td><td></td></tr>
+      <tr><td>ヘマタイト</td><td>◎</td><td>○</td><td>○</td><td></td><td></td></tr>
+      <tr><td>タイガーアイ</td><td></td><td>◎</td><td>○</td><td>○</td><td></td></tr>
+    </table>
+  </div>
+  <p style="margin-top:1rem">それから、結婚指輪を手放して買ったシルバーとゴールドのアクセサリー。金と銀はどちらも金のエネルギーに属しています。Hidetoさんはもう、ご自身で金を補い始めています。</p>
+</section>
+
+<section class="card">
+  <h2>5　石を手に入れる時の基礎知識</h2>
+  <p>石は見た目だけで本物かどうかを判断するのが難しいものです。プロでも機器を使って確かめる世界です。買う時に見ておくと良いことを置いておきます。</p>
+  <p><b style="font-weight:500">何の石か、手が加えられているか。</b>天然か、人工か、染めや処理がされているか。店に聞いて、はっきり答えてくれるかどうかが一つの目安になります。</p>
+  <p><b style="font-weight:500">鑑別書。</b>石の種類や、天然・合成・模造・処理の有無を検査して示す書類です。高い石を買う時の裏付けになります。ただ、品質の良し悪しを評価するものではありません。</p>
+  <p><b style="font-weight:500">値段。</b>相場より極端に安いものは、理由があると考えた方が安心です。ルチルのように差が大きい石は、専門の店で見てもらうのが確実です。</p>
+  <p><b style="font-weight:500">石屋。</b>どう採掘されたのか、どういう経緯でそこにあるのか。そこまで答えられる石屋のプロから選ぶのが良いです。</p>
+</section>
+
+<section class="card">
+  <h2>6　実例として</h2>
+  <p>僕の場合だと、金性の強い生活を送った時は、体調がかなり良かったです。</p>
+</section>
+
+<section class="card">
+  <h2>最後に</h2>
+  <p>石は答えそのものではなく、足りないエネルギーに意識を向けるきっかけです。どこまでやるか、どこで止めるか迷った時は、その石にふっと目をやってみてほしいです。線を引く感覚を思い出すお守りになります。</p>
+  <p>身につけても、お部屋に置くだけでも構いません。惹かれたものが、今のHidetoさんに要るものです。</p>
+</section>
+
+<section class="card credits">
+  <p>写真：Wikimedia Commons</p>
+  <p>ライセンス：creativecommons.org/licenses/by-sa/4.0/　creativecommons.org/licenses/by-sa/3.0/　creativecommons.org/licenses/by-sa/2.0/</p>
+  <p>金色の針入り水晶　Adam Kelliher / Rubble Rock and Gem　CC BY-SA 4.0　commons.wikimedia.org/wiki/File:Emerald-cut_quartz_with_golden_needle_inclusions.jpg</p>
+  <p>ムーンストーン　Megan Prusynski　CC BY-SA 2.0　commons.wikimedia.org/wiki/File:MoonstoneGem.jpg</p>
+  <p>白瑪瑙　あおもりくま　CC BY-SA 4.0　commons.wikimedia.org/wiki/File:Whiteagate_Tugaru_Japan_IMG_8882.jpg</p>
+  <p>ヘマタイト　DanielCD　CC BY-SA 3.0　commons.wikimedia.org/wiki/File:Hematite.jpg</p>
+  <p>タイガーアイ　Ra'ike　CC BY-SA 3.0　commons.wikimedia.org/wiki/File:Quartz_-_Tigers-Eye_-_raw_stone_from_Southafrica.jpg</p>
+</section>
+
+</div>
+</body>
+</html>
