@@ -343,6 +343,10 @@
       "destination": "/kanteisho.html?c=hidetoh"
     },
     {
+      "source": "/hidetoh-gogyo",
+      "destination": "/clients/hidetoh-gogyo.html"
+    },
+    {
       "source": "/hideto",
       "destination": "/view.html?client=hidetoh"
     },
