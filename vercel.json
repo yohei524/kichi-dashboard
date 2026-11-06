@@ -171,6 +171,10 @@
       "destination": "/view.html?client=noriko"
     },
     {
+      "source": "/tamaki",
+      "destination": "/view.html?client=tamaki"
+    },
+    {
       "source": "/noriko-kanteisho",
       "destination": "/clients/noriko-kanteisho.html"
     },
@@ -345,6 +349,10 @@
     {
       "source": "/hidetoh-gogyo",
       "destination": "/clients/hidetoh-gogyo.html"
+    },
+    {
+      "source": "/hidetoh-jijo-unki",
+      "destination": "/clients/hidetoh-jijo-unki.html"
     },
     {
       "source": "/hideto",
