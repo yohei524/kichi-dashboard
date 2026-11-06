@@ -47,7 +47,8 @@
         7
       ]
     },
-    "birth": "1986-04-17", "sex": "M"
+    "birth": "1986-04-17",
+    "sex": "M"
   },
   "goal": {
     "main": "娘との暮らしを 無理なく積み上げる",
@@ -469,5 +470,32 @@
   },
   "koyomiOnly": true,
   "koyomiNoDestiny": true,
-  "kanteishoHref": "/hidetoh-kanteisho"
+  "kanteishoHref": "/hidetoh-kanteisho",
+  "afterPages": [
+    {
+      "label": "長女さんとの相性鑑定",
+      "href": "https://app.notion.com/p/39ca7c3c48d080bfb1c9f31a089954dc",
+      "note": "丙辛干合・太陽と宝石"
+    },
+    {
+      "label": "次女さんとの相性鑑定",
+      "href": "https://app.notion.com/p/39da7c3c48d080b397eff1bac95a767c",
+      "note": "もう一つの輝き"
+    },
+    {
+      "label": "長女さんのこれからの大運",
+      "href": "https://app.notion.com/p/3c1a7c3c48d08081a283fcf6fad12df3",
+      "note": "30代の飛躍と、40〜50代の節目"
+    },
+    {
+      "label": "五行調律鑑定",
+      "href": "/hidetoh-gogyo",
+      "note": "五行のバランスから選んだ、合う石"
+    },
+    {
+      "label": "次女さんのこれからの大運",
+      "href": "/hidetoh-jijo-unki",
+      "note": "才能が時間をかけて開く流れ"
+    }
+  ]
 }
