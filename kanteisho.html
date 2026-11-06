@@ -349,6 +349,16 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
       h+='</div></div>';
     }
 
+    // 増築：その後にお渡ししたもの（afterPages があるクライアントだけ）
+    if(d.afterPages&&d.afterPages.length){
+      h+='<div class="sec"><div class="sec-head"><span class="sec-no">陸</span><span class="sec-title">その後に お渡ししたもの</span></div>';
+      d.afterPages.forEach(function(p){
+        if(!p||!p.href||!/^(\/|https:\/\/)/.test(p.href))return;
+        h+='<a class="koyomi-link" href="'+esc(p.href)+'"><span class="arrow">▶</span> '+esc(p.label||'')+(p.note?'<small>'+esc(p.note)+'</small>':'')+'</a>';
+      });
+      h+='</div>';
+    }
+
     // 暦リンク＋引き戸
     var koyomiLabel=((d.design&&d.design.headerTitle)||"").trim()||esc(name)+'の暦';
     h+='<a class="koyomi-link" href="/'+esc(c)+'"><span class="arrow">▶</span> '+esc(koyomiLabel)+'（日々の運気）をひらく<small>毎日の運気を、天気予報のように</small></a>';
