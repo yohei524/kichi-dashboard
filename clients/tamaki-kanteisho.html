@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>tamakiさん 鑑定書 ｜ 㐂占</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --night:#0B0F16; --night2:#121823; --sink:#17202D; --panel:#1B2533;
+  --line:#2B3748; --accent:#D9C38F; --accent-soft:#9C8656; --accent-glow:rgba(217,195,143,.14);
+  --gold:#C9A24A; --text:#ECEAE4; --muted:#8A96AC; --muted2:#A9B3C6;
+  --water:#6E9BC4; --fire:#D08A5A; --wood:#7FA86B; --metal:#C4C9D2; --earth:#C9A24A;
+  --bad:#C97A6A; --good:#6E9BC4; --void:#7E8798;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Serif JP',serif; color:var(--text); line-height:1.95; letter-spacing:.045em;
+  background:
+    radial-gradient(1200px 620px at 50% -12%, rgba(217,195,143,.12), transparent 60%),
+    linear-gradient(180deg,#0B0F16 0%,#0D1420 45%,#070A11 100%);
+  background-attachment:fixed; min-height:100vh;
+}
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.05rem 4rem;}
+
+header{text-align:center;padding:3rem 1rem 1.4rem;}
+header .kicker{font-size:.68rem;letter-spacing:.32em;color:var(--accent);opacity:.9;margin-bottom:.9rem;}
+header h1{font-size:1.5rem;font-weight:500;letter-spacing:.08em;margin-bottom:.5rem;}
+header h1 .nm{color:var(--accent);}
+header .tagline{font-size:.8rem;color:var(--muted2);letter-spacing:.1em;line-height:1.7;}
+header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:.12em;}
+
+.profile{
+  background:linear-gradient(180deg,var(--panel),var(--sink));
+  border:1px solid var(--line);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem .8rem;
+}
+.profile div{font-size:.74rem;color:var(--muted);}
+.profile div b{display:block;font-size:.9rem;color:var(--text);font-weight:500;margin-top:.1rem;letter-spacing:.06em;}
+.profile div.full{grid-column:1/3;}
+
+.sec{margin-bottom:1.65rem;}
+.sec-head{display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;padding-bottom:.6rem;border-bottom:1px solid var(--line);}
+.sec-no{font-size:.72rem;color:var(--accent);letter-spacing:.18em;font-weight:600;flex-shrink:0;}
+.sec-title{font-size:1.02rem;font-weight:500;letter-spacing:.08em;}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:1.25rem 1.15rem;box-shadow:0 4px 24px rgba(0,0,0,.32);margin-bottom:1rem;}
+.card p{font-size:.87rem;margin-bottom:.9rem;color:var(--text);}
+.card p:last-child{margin-bottom:0;}
+.card .lead{color:var(--accent);font-size:.9rem;font-weight:500;}
+.hl{color:var(--accent);font-weight:500;}
+.soft{color:var(--muted2);font-size:.8rem;}
+
+.meishiki{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.2rem 0 .3rem;}
+.pillar{background:var(--sink);border:1px solid var(--line);border-radius:12px;padding:.7rem .4rem;text-align:center;}
+.pillar .lbl{font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.55rem;}
+.pillar .yomi{font-size:.58rem;color:var(--muted);letter-spacing:.04em;line-height:1.3;}
+.pillar .kan{font-size:1.85rem;font-weight:600;color:var(--text);line-height:1.15;}
+.pillar .shi{font-size:1.85rem;font-weight:600;color:var(--accent);line-height:1.15;margin-top:.2rem;}
+.pillar .zou{font-size:.62rem;color:var(--muted2);margin-top:.55rem;letter-spacing:.04em;}
+.meishiki-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.5rem;}
+
+.jintai{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;max-width:19rem;margin:.4rem auto .2rem;}
+.jcell{background:var(--sink);border:1px solid var(--line);border-radius:11px;aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;}
+.jcell .pos{font-size:.58rem;color:var(--muted);letter-spacing:.05em;}
+.jcell .star{font-size:.92rem;font-weight:600;color:var(--text);letter-spacing:.03em;}
+.jcell.center{background:linear-gradient(160deg,rgba(217,195,143,.2),var(--sink));border-color:var(--accent-soft);}
+.jcell.center .star{color:var(--accent);}
+.jcell.jusei-cell{background:var(--night2);}
+.jcell .star.gold{color:var(--gold);}
+
+.gogyo{margin-top:.3rem;}
+.gbar{display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem;}
+.gbar .gname{width:2.6rem;font-size:.76rem;color:var(--muted2);flex-shrink:0;}
+.gbar .gtrack{flex:1;height:9px;background:var(--sink);border-radius:5px;overflow:hidden;}
+.gbar .gfill{display:block;height:100%;border-radius:5px;}
+.gbar .gval{width:2.2rem;text-align:right;font-size:.72rem;color:var(--muted);flex-shrink:0;}
+.g-wood .gfill{background:var(--wood);} .g-fire .gfill{background:var(--fire);} .g-earth .gfill{background:var(--earth);} .g-metal .gfill{background:var(--metal);} .g-water .gfill{background:var(--water);}
+
+.ryo svg{width:100%;height:auto;max-width:21rem;display:block;margin:.2rem auto .4rem;}
+.ryo .bx{fill:var(--sink);stroke:var(--line);stroke-width:1.5}
+.ryo .bx.c{fill:rgba(217,195,143,.16);stroke:var(--accent);stroke-width:2.5}
+.ryo .s{fill:var(--text);font-size:16px;font-weight:600;text-anchor:middle}
+.ryo .s.c{fill:var(--accent);font-size:18px}
+.ryo .p{fill:var(--muted);font-size:10.5px;text-anchor:middle}
+.ryo .k{fill:var(--muted2);font-size:12px;text-anchor:middle;font-weight:600}
+.ryo .k.c{fill:var(--accent);font-size:14px}
+
+.daiun-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.daiun{width:100%;border-collapse:collapse;font-size:.78rem;min-width:19rem;}
+.daiun th{font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.05em;padding:.4rem .3rem;border-bottom:1px solid var(--line);text-align:center;}
+.daiun td{padding:.5rem .3rem;text-align:center;border-bottom:1px solid rgba(43,55,72,.5);color:var(--text);}
+.daiun td:first-child{color:var(--muted2);font-size:.72rem;white-space:nowrap;}
+.daiun .tc-cell{color:var(--bad);font-size:.68rem;}
+.daiun .now-row td{background:linear-gradient(90deg,rgba(217,195,143,.14),transparent);}
+.daiun .now-row td:first-child{color:var(--accent);font-weight:600;}
+.daiun .now-cell{color:var(--accent);font-size:.68rem;font-weight:600;}
+.daiun td.isou{font-size:.66rem;color:var(--muted2);text-align:left;line-height:1.5}
+
+.tl{position:relative;padding-left:1.1rem;margin-top:.3rem;}
+.tl::before{content:"";position:absolute;left:3px;top:.4rem;bottom:.4rem;width:2px;background:var(--line);}
+.tl-item{position:relative;margin-bottom:1rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before{content:"";position:absolute;left:-1.1rem;top:.45rem;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--night2);}
+.tl-item.tc::before{background:var(--bad);}
+.tl-item.care::before{background:var(--void);}
+.tl-when{font-size:.76rem;color:var(--accent);font-weight:600;letter-spacing:.06em;}
+.tl-item.tc .tl-when{color:var(--bad);}
+.tl-item.care .tl-when{color:var(--muted2);}
+.tl-body{font-size:.82rem;color:var(--text);margin-top:.15rem;}
+
+.recipe .item{display:flex;gap:.75rem;margin-bottom:1rem;}
+.recipe .item:last-child{margin-bottom:0;}
+.recipe .num{flex-shrink:0;width:1.7rem;height:1.7rem;border-radius:50%;background:linear-gradient(160deg,var(--accent),var(--accent-soft));color:var(--night);font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;}
+.recipe .rbody{font-size:.83rem;}
+.recipe .rbody b{color:var(--accent);font-weight:600;}
+
+.pull{border-left:3px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:1rem 0;font-size:.9rem;color:var(--muted2);}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:.2rem 0 .9rem;}
+.two .m{background:var(--sink);border:1px solid var(--line);border-radius:12px;padding:.8rem .9rem;font-size:.8rem;min-width:0;}
+.two .m b{display:block;font-size:.84rem;margin-bottom:.2rem;letter-spacing:.06em;}
+.two .ok b{color:var(--accent);} .two .ng b{color:var(--void);}
+.three{display:grid;gap:.6rem;margin-top:.2rem}
+.three .m{background:var(--sink);border:1px solid var(--line);border-radius:12px;padding:.8rem .9rem;font-size:.84rem}
+.three .m b{display:block;color:var(--accent);font-size:.9rem;margin-bottom:.15rem;letter-spacing:.06em}
+
+.words dt{color:var(--accent);font-size:.84rem;font-weight:600;margin-top:.8rem;letter-spacing:.06em;}
+.words dt:first-child{margin-top:0;}
+.words dd{font-size:.8rem;color:var(--muted2);line-height:1.8;}
+
+.closing{background:linear-gradient(180deg,var(--panel),var(--sink));border:1px solid var(--accent-soft);border-radius:18px;padding:1.6rem 1.25rem;text-align:center;box-shadow:0 0 30px rgba(217,195,143,.09);}
+.closing p{font-size:.88rem;margin-bottom:.9rem;}
+.closing p:last-child{margin-bottom:0;}
+.closing .big{font-size:1.05rem;color:var(--accent);font-weight:500;letter-spacing:.06em;}
+
+.koyomi-link{display:block;text-align:center;margin-top:1.5rem;padding:1rem;background:var(--night2);border:1px solid var(--line);border-radius:14px;color:var(--text);text-decoration:none;font-size:.86rem;}
+.koyomi-link:hover{border-color:var(--accent-soft);}
+.koyomi-link .arrow{color:var(--accent);}
+.koyomi-link small{display:block;color:var(--muted);font-size:.7rem;margin-top:.3rem;}
+
+footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
+footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
+@media (max-width:380px){ .two{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">㐂占 　 命 術 本鑑定書</p>
+  <h1><span class="nm">tamaki</span> さんへ</h1>
+  <p class="tagline">辛・辛・辛 ―― 一本の芯を、選んだ一つに注ぐ</p>
+  <p class="date">1961年3月19日 生　／　鑑定 2026.11.09</p>
+</header>
+
+<div class="profile">
+  <div class="full">魂の本質（日の宿命）<b>辛亥（かのとい）― 聖水に洗われる玉・水府の珠玉</b></div>
+  <div>中心の星<b>禄存星</b></div>
+  <div>天中殺<b>寅卯（東方）</b></div>
+  <div>才能の型<b>了殿の型</b></div>
+  <div>今の大運<b>丁酉・車騎星（56〜65歳）</b></div>
+  <div class="full">命式の形<b>天干一気格（年・月・日の上の段が、すべて辛）</b></div>
+  <div class="full">宿命の天中殺<b>生月中殺（月の柱に、天中殺の卯がある）</b></div>
+  <div class="full">運気の位置<b>2027年3月19日（66歳）から、守護神の戊が巡る十年（戊戌・玉堂星）に入る。その直前、2027年2月4日〜4月4日は月の天中殺</b></div>
+</div>
+
+<div class="card" style="border-color:var(--accent-soft);">
+  <p>おおきにです、tamakiさん。</p>
+  <p>11月9日にお話ししたことを、一枚にまとめました。Meetの中でtamakiさんの口から出てきた言葉を中心に、話しきれなかった所を、もう一段深く書き足してあります。</p>
+  <p>真ん中に置いたのは、<span class="hl">天干一気格</span>です。年・月・日の上の段が、全部同じ「辛」。tamakiさんの命式帖で、いちばん大きな特徴です。この一本の芯を、これからどう生かすか。そこを中心に読んでください。</p>
+  <p>読む順番は気にしなくて大丈夫です。気になったところから開いてください。巻末には、小さな言葉の辞典を付けました。ここがスタートです。</p>
+</div>
+
+<!-- 命式帖 -->
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">命式帖</span><span class="sec-title">tamakiさんの設計図</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.6rem;">陰占 ― 生まれ持った気の柱</p>
+    <div class="meishiki">
+      <div class="pillar"><div class="lbl">日柱（自分・私生活）</div><div class="yomi">かのと</div><div class="kan">辛</div><div class="shi">亥</div><div class="yomi">い</div><div class="zou">蔵干　壬・甲</div></div>
+      <div class="pillar"><div class="lbl">月柱（目標・仕事）</div><div class="yomi">かのと</div><div class="kan">辛</div><div class="shi">卯</div><div class="yomi">う</div><div class="zou">蔵干　乙</div></div>
+      <div class="pillar"><div class="lbl">年柱（社会・家系）</div><div class="yomi">かのと</div><div class="kan">辛</div><div class="shi">丑</div><div class="yomi">うし</div><div class="zou">蔵干　己・癸・辛</div></div>
+    </div>
+    <p class="meishiki-note">日柱 辛亥 ／ 月柱 辛卯 ／ 年柱 辛丑 ―― 上の段が、すべて辛</p>
+    <div style="height:1px;background:var(--line);margin:1.3rem 0;"></div>
+    <p class="soft" style="margin-bottom:.2rem;">陽占 ― 心のかたち（人体星図）</p>
+    <div class="jintai">
+      <div class="jcell"><span class="pos">伴星（先祖）</span><span class="star">牽牛星</span></div>
+      <div class="jcell"><span class="pos">目上（北）</span><span class="star">貫索星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">初年運</span><span class="star gold">天印星</span></div>
+      <div class="jcell"><span class="pos">配偶者（西）</span><span class="star">調舒星</span></div>
+      <div class="jcell center"><span class="pos">中心・本人</span><span class="star">禄存星</span></div>
+      <div class="jcell"><span class="pos">社会（東）</span><span class="star">龍高星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">晩年運</span><span class="star gold">天恍星</span></div>
+      <div class="jcell"><span class="pos">目下（南）</span><span class="star">貫索星</span></div>
+      <div class="jcell jusei-cell"><span class="pos">中年運</span><span class="star gold">天馳星</span></div>
+    </div>
+    <p class="meishiki-note" style="margin-top:.7rem;">中央が本人。真ん中は、人に尽くして愛と財を引き寄せる禄存星。上と下に、同じ貫索星が二つ。辛が三つそろう形なので、上と下は必ずこの星になります。ご先祖様から渡された使命の星（伴星）は、責任感の牽牛星です</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">一</span><span class="sec-title">天干一気格 ― 一本の芯</span></div>
+  <div class="card">
+    <p>年・月・日、三つの柱の上の段が、すべて<b>辛</b>です。上の段は、その人の心、表に出る精神の場所。そこが三つとも同じ。東洋占術では、この形を<span class="hl">天干一気格</span>と呼びます。辛は金の五行なので、金性の天干一気格です。</p>
+    <p>普通の命式は、上の段に違う干が並びます。木があって、火があって、金があって。その分、心の中に回り道や迷いが生まれます。tamakiさんの場合は、<b>金、金、金</b>。気が一方向にそろって、まっすぐ一本、通っています。</p>
+    <p>一気格について、東洋占術の中では、こういう見方がされています。</p>
+    <div class="pull">一本の芯が通って、ぶれない。<br>流れに乗ると、一気に進む。<br>その代わり、止まるのが苦手で、振れ幅が大きい。</div>
+    <p style="margin-bottom:0;">良い時は一気に良くなり、崩れる時は一気に崩れる。中途半端がいちばん苦しい。生かせた時と、生かせなかった時の差が、はっきり出る形です。だからこそ、<span class="hl">「今は動く時期か、待つ時期か」を見誤らないこと</span>が、何より大事になります。止まれるようになると、一段強くなる。そう言われる形です。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">金性の天干一気格に出やすいこと</p>
+    <p>金は、攻撃本能の五行です。「攻撃」といっても、人を攻めることではありません。<b>正しいことのために、行動する力</b>です。金性の天干一気格には、こういう出方が言われています。</p>
+    <p>行動力があって、<b>参謀や補佐役</b>で力を発揮する。トップに立つと、自分だけ遊離しやすい。普通の会社員の世界より、<b>自営のような、自分で作った場所</b>の方が、力を出し切れる。会社の中にいる人は、時間をかけて、自分の正しさに「松竹梅」をつけるように、妥協点を自分に許していく。</p>
+    <p style="margin-bottom:0;">そして、態度がぶれないので、周りからは安定した人に見えて、<b>まとめ役が回ってきやすい</b>。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">tamakiさんの人生に、どう出ているか</p>
+    <p>Meetで聞いたtamakiさんの歩みは、この形とよく重なっています。</p>
+    <p>営業の仕事、制作の仕事を経て、ITの人材派遣の会社を、小さな所から25年。外注の方も含めて、55名ほどの会社になりました。<b>自分で作った場所</b>で、力を出してきた人です。</p>
+    <p>それでいて、tamakiさん自身は、<span class="hl">「どちらかというと、前に出る方をサポートする方が向いていると思っていた」</span>と話してくれました。社長という立場にいながら、メンバーが自分たちで動き、tamakiさんは「ここは気をつけた方がいい」と、要点を押さえる。<b>トップの席に座りながら、参謀として働いている</b>形です。トップに立った一気格が陥りやすい「遊離」は、tamakiさんの会社には見えません。協力体制で、後継の方々にバトンを渡していく段階にまで来ています。</p>
+    <p style="margin-bottom:0;">そして、振れ幅。40歳前後、お父さんの病気と、北九州の家のこと。40代後半からの、全力疾走。56歳からの十年の、介護と、大切な人との別れ。そして2026年の、思いがけない新しい出会い。<span class="hl">良い時と苦しい時が、はっきりした輪郭で来ている</span>のも、一気格の形です。その全部をくぐって、「悩みはない」と言える場所に、今、立っています。</p>
+  </div>
+
+  <div class="card">
+    <p class="lead">一本の芯が、生きる形・裏に出る形</p>
+    <div class="two">
+      <div class="m ok"><b>生きる形</b>一つに絞って、深くやる。<br>ナンバー2・参謀として、選んだ人に尽くす。<br>狭く深く、丁寧に付き合う。<br>受け継いだものを、次に渡す。<br>流れが止まったら、待つ。</div>
+      <div class="m ng"><b>裏に出る形</b>全部に尽くして、自分が削れる。<br>誰にでも尽くして、利用される。<br>正しさを、タイミングを選ばず押し通す。<br>目的がないまま、流される。<br>止まっている流れを、力で動かそうとする。</div>
+    </div>
+    <p style="margin-bottom:0;">同じ一本の芯が、向きによって両方に出ます。<b>芯の強さは変わりません。変わるのは、向ける先と、時期です。</b>この二つを選べば、一気格は、最短距離で現実を動かす力になります。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">二</span><span class="sec-title">どういう魂か ― 聖水に洗われる玉</span></div>
+  <div class="card">
+    <p>日の宿命「辛亥」には、<span class="hl">「聖水に洗われる玉」</span>という名前がついています。別名は「水府の珠玉」。六十干支の四十八番目です。</p>
+    <p>辛は、金の五行の陰の側。磨かれた宝石、細工された金です。亥は、冬の始まりの水。亥の中には、大河の水「壬」と、大樹の木「甲」が入っています。<b>水に洗われるたびに光る宝石</b>。汚れが残らず、いつも磨き直されている姿です。</p>
+    <p>以下が、辛亥の本質です。<span class="hl">「スタイリッシュで不思議に目立つ。負けず嫌いだがナイーブで身内を大事にする。霊感に近いくらい感覚が鋭く、そのセンスでナンバー2、参謀役で輝く」</span>。</p>
+    <p>性格の面では<span class="hl">「義理人情に厚い親分肌。強そうに見えて寂しがり。駆け引きは苦手だが政治力は高め」</span>。女性の説明には<span class="hl">「純情で情熱的。怖いもの知らず。天真爛漫」</span>と出ています。Meetで、tamakiさんは「その通りだと思います」と答えてくれました。</p>
+    <p style="margin-bottom:0;">自分のための駆け引きは苦手。でも、誰かのためなら、場を動かせる。<b>参謀役で輝く</b>と、同じことを示しています。</p>
+  </div>
+  <div class="card">
+    <p class="lead">見抜く力</p>
+    <p>辛亥には、もう一つの印があります。<span class="hl">「天真爛漫なアーティスト気質。感受性・表現力に優れ、人の気持ちや隠し事を見抜くほどの直観がある」</span>。</p>
+    <p style="margin-bottom:0;">人の気持ちや、隠し事を見抜く。会った瞬間に、大丈夫な相手か、少し危ない相手かが分かる。tamakiさんは、ここも「そうですね」と答えてくれました。会社で「ここは気をつけた方がいい」と言うと、メンバーがその通りに注意して動く。<b>その一言が当たるのは、この直観があるから</b>だと、僕は見ています。霊感・直感と呼ばれる力は、精神性を高める学びで、さらに磨かれていきます（四章）。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">三</span><span class="sec-title">人体星図 ― 場所ごとに出る顔</span></div>
+  <div class="card">
+    <p class="lead">真ん中　禄存星 ― 尽くすことが、そのまま才能</p>
+    <p>真ん中の星は<b>禄存星</b>。<span class="hl">「奉仕精神が旺盛。愛に満ちている。人に尽くす。愛と財を引き寄せる。お金がなくなると入ってくる。回転財」</span>。LINEで「人に尽くすことで、人もお金も引き寄せる人」とお伝えしたのは、この星です。</p>
+    <p><b>陽転すると</b>、<span class="hl">「奉仕精神で人に尽くすことができる。善行を積む。徳が高い」</span>。<b>陰転すると</b>、<span class="hl">「騙されやすい。利用されやすい。八方美人」</span>。尽くす力が強い分、相手を選ばずに尽くすと、利用される側に回ることがあります。ただ、tamakiさんには見抜く直観があるので、騙されにくい作りでもあります。</p>
+    <p style="margin-bottom:0;">そして、この禄存星は、<b>才能の星</b>でもあります。真ん中の星と、才能の星が同じ。<span class="hl">尽くすことが、そのまま才能</span>になっている命式帖です。この星は、尽くす先がカチッと決まった時に、いちばんきれいに働きます。</p>
+  </div>
+  <div class="card">
+    <p class="lead">上と下　貫索星が二つ ― 狭く深く、守る、継承</p>
+    <p>目上（北）と目下（南）に、同じ<b>貫索星</b>。<span class="hl">「頑固・マイペース・単独行動・狭く深い交友・守る・継承」</span>の星です。辛が三つそろう形なので、計算の上でここは必ずこの星になります。一気格の芯が、人との関わり方にも出ている所です。</p>
+    <p><b>目上に出ると</b>、<span class="hl">「夢中になれるものを見つけられるかがカギ」</span>。目的がない時は、平凡に流れやすい。<b>目下に出ると</b>、<span class="hl">「忍耐強い。相手とは揉めないポリシー。部下や後輩、子供には本音を見せることがある。独立心に火が付けばやり抜く」</span>。</p>
+    <p style="margin-bottom:0;">狭く深く。守る。継承。この言葉は、四章の天中殺の使命と、そのまま重なります。</p>
+  </div>
+  <div class="card">
+    <p><b>社会の場所（東）に、龍高星。</b><span class="hl">「改革・国際性・放浪・冒険・破壊と再構築」</span>。<span class="hl">「体制に従わない。自分にしかできないものを探す」</span>。外では、自由に動きたい。ずっと同じ場所にいると、落ち着かなくなる。Meetで「そうなんです」と答えてくれた所です。決められた枠の中より、自分で作った場所が合う。一気格の「自営の世界」と、同じ向きです。</p>
+    <p style="margin-bottom:0;"><b>配偶者・家庭の場所（西）に、調舒星。</b><span class="hl">「独自の世界観が強く出る。人の気持ちの変化に敏感」</span>。身近な人の気持ちの揺れが、よく分かる。分かりすぎて、しんどい時もあったはずです。</p>
+  </div>
+  <div class="card">
+    <p class="lead">伴星　牽牛星 ― ご先祖様から渡された使命</p>
+    <p>左上の伴星は、ご先祖様から渡された使命を表す星です。tamakiさんの伴星は<b>牽牛星</b>。使命は<span class="hl">「皆のお手本になるような生き方をしなさい。人間として守るべきことはきちんと守って、恥ずかしくない生き方をしなさい。責任あるポジションに身を置きなさい」</span>。</p>
+    <p style="margin-bottom:0;">LINEのやり取りは、どれも丁寧で、守るべきことを守る方でした。社長という責任ある場所で、25年。<b>使命を、そのまま生きてこられた</b>と、僕は見ています。ご先祖様の力は、宿命よりもう少し間接的に、いつも背中に吹いている風のように届いています。</p>
+  </div>
+  <div class="card">
+    <p><b>初年運（若い頃）は、天印星。</b>赤ちゃんの星です。<span class="hl">「無邪気で可愛くて人気者。無意識に人を魅了する」</span>。</p>
+    <p><b>中年運は、天馳星。</b><span class="hl">「精神力の強さは最強。寝食を忘れて没頭できる。ハードスケジュールでこそ才能が輝く」</span>。生まれる前の、魂の世界の星です。体を置いて、虫眼鏡で光を集めるように、一点に力を集中させる。瞬間の集中力は、十二の星の中でいちばん強いとされる将軍の星をも超えます。ただ、持続力はありません。乗っている時だけの力です。</p>
+    <p style="margin-bottom:0;"><b>晩年運は、天恍星。</b>思春期の星です。<span class="hl">「肉体的にも精神的にも若々しい晩年期。若い人と一緒でも違和感がない。美意識が高い。女性なら美魔女。男女ともに晩年までモテる」</span>。LINEで「年齢より若く見られる作り」とお伝えしたのは、ここです。天恍星には、<span class="hl">「現状を変えるエネルギーを秘めている。精神的苦労を乗り越えて華やかな人生をつかみ取る」</span>とも出ています。<b>晩年から、華やかになる星</b>。今から、まだ伸びます。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">四</span><span class="sec-title">寅卯天中殺 ― 引き継ぎ・継承の使命</span></div>
+  <div class="card">
+    <p>天中殺は<b>寅卯</b>。本質は<span class="hl">「引き継ぎ・継承の使命」</span>。家系とのつながりでは<span class="hl">「母親・兄弟姉妹より父親との縁が深い。二代運・三代運。既存の事業に入って発展させる」</span>と出ています。</p>
+    <p>陽転の条件は、三つです。<span class="hl">「狭く深い友人関係」「丁寧さ・几帳面さ」「精神性を高める学び」</span>。貫索星の「狭く深く、守る、継承」と、同じことを示しています。丁寧さは、もう十分に満たしています。陽転の条件を満たしてきたから、事業をここまで育てられた、とも言えます。</p>
+    <p style="margin-bottom:0;">精神性を高める学び、は、哲学でも、心の学びでも、見えない世界の学びでもかまいません。tamakiさんの直観を、さらに磨くものです。</p>
+  </div>
+  <div class="card">
+    <p class="lead">生まれ持った天中殺 ― 生月中殺</p>
+    <p>月の柱の「卯」は、寅卯天中殺の卯です。生まれた時から、魂の中に天中殺を一つ持っている形で、<b>生月中殺</b>と呼ばれます。<span class="hl">「家系・親族から離れて生きると陽転。生家との縁が薄い」</span>。</p>
+    <p>月の柱は、仕事や社会の場所です。組織や、生まれた家の後ろ盾に頼らず、自分で道を作った方が開く、という見方ができます。普通の人とは違う視点で世の中が見える。「いろんな発想ができるね」と言われる。Meetで、ここも「そうですね」「客観的に見てもそんな感じ」と答えてくれました。</p>
+    <p style="margin-bottom:0;">北九州から東京へ。生家を離れて、自分の場所で会社を育ててきた。受け継ぐものは受け継いで、育てる場所は、自分の場所。<b>寅卯の「継承」と、生月中殺の「離れて陽転」が、tamakiさんの人生の中で、一つに重なっています。</b></p>
+  </div>
+  <div class="card">
+    <p style="margin-bottom:0;">十二年に二年巡る<b>年の天中殺</b>は、2022年と2023年（61〜62歳）でした。もう明けています。次は2034年と2035年。まだ先です。十二ヶ月に二ヶ月巡る<b>月の天中殺</b>は、毎年2月上旬から4月上旬。次は<b>2027年2月4日〜4月4日</b>です。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">五</span><span class="sec-title">五行・守護神・才能の型</span></div>
+  <div class="card">
+    <p class="lead">五行 ― 金が厚く、火が0</p>
+    <div class="gogyo">
+      <div class="gbar g-wood"><span class="gname">木</span><span class="gtrack"><span class="gfill" style="width:93%"></span></span><span class="gval">52</span></div>
+      <div class="gbar g-fire"><span class="gname">火</span><span class="gtrack"><span class="gfill" style="width:0%"></span></span><span class="gval">0</span></div>
+      <div class="gbar g-earth"><span class="gname">土</span><span class="gtrack"><span class="gfill" style="width:21%"></span></span><span class="gval">12</span></div>
+      <div class="gbar g-metal"><span class="gname">金</span><span class="gtrack"><span class="gfill" style="width:100%"></span></span><span class="gval">56</span></div>
+      <div class="gbar g-water"><span class="gname">水</span><span class="gtrack"><span class="gfill" style="width:93%"></span></span><span class="gval">52</span></div>
+    </div>
+    <p>宝石の金が一番厚く、木と水も同じくらいある。整った並びです。その中で、<b>火が0、土が12</b>。命式帖では、火と土が不足しがちと出ています。</p>
+    <p>火は、発信する、人前に出る、表現する力。土は、地に足をつける、受け止める力です。できないわけではありません。人より、少しエネルギーが要る、ということです。</p>
+    <p style="margin-bottom:0;">宝石は、火で溶けて、形を変える金でもあります。負担にならない範囲で、自分から小さく火を起こす。赤系の色を身につける、キャンドルや暖色の灯りを眺める、表現の時間を持つ。土は、黄土色や茶系、陶器、土の手仕事、地元とのつながり。<b>小さく足すだけで、エネルギーが回り始めます。</b></p>
+  </div>
+  <div class="card">
+    <p class="lead">守護神 ― 壬と戊</p>
+    <p><b>第一の守護神は、壬（調舒星）。</b><span class="hl">「大河のように流れる。大きく動く・運ぶ」</span>。日の柱の亥の中に、もうこの壬が入っています。「聖水に洗われる玉」の聖水は、この壬のことだと、僕は見ています。</p>
+    <p style="margin-bottom:0;"><b>第二の守護神は、戊（玉堂星）。</b><span class="hl">「山のように不動・安定。重厚・信頼。動じない」</span>。そして、<b>2027年3月19日、66歳のお誕生日から始まる十年の運気が、戊戌</b>です。守り神の干が、十年の運気として巡ってきます。tamakiさん自身が、後ろから押されている状態が十年続く、ということです（八章）。</p>
+  </div>
+  <div class="card">
+    <p class="lead">才能の型 ― 了殿の型</p>
+    <p>才能の型は<b>了殿の型</b>（剋線の分布 3・2・1・1・1、総剋線8）。中心の禄存星に、力が集中する型です。<span class="hl">「才能と生命力が反比例しやすい。全力疾走で体を壊す傾向。単価上げて回数減らす設計が合う。ペースを保つことが陽転条件」</span>。</p>
+    <p>出し切ると、自分が削れる。尽くす力が才能の人が、全部に全力で尽くすと、自分の体や時間が先に減っていきます。Meetで、tamakiさんは「ついついぶっ飛ばして仕事をやってきた」「健康管理をしないといけない」と話してくれました。</p>
+    <p style="margin-bottom:0;">答えは、はっきりしています。<b>尽くす量を増やすのではなく、尽くす相手を選んで、一回を深くする。ペースを保つ。</b>才能の領域は東天運で、<span class="hl">「現実重視・成果志向・現場主義・直接売買・臨機応変」</span>。頭の中で考えるより、現場で人と直接やり取りして、結果を出す力です。向いている仕事は<span class="hl">「接客業・営業・経営・自営・人を集める仕事」</span>。禄存星の「人を引き寄せる」と、同じ向きです。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">六</span><span class="sec-title">日柱と月柱の大半会 ― 自分と仕事の、異次元融合</span></div>
+  <div class="card">
+    <p>日の柱（辛亥）と月の柱（辛卯）は、<b>大半会</b>という関係を作っています。亥と卯が半会で、上の段が同じ辛。<span class="hl">「異次元融合。片方が踏み台、片方が大きく飛躍する」</span>。出方は<span class="hl">「仕事・社会の動きに出る」</span>。</p>
+    <p style="margin-bottom:0;">日の柱はtamakiさん自身。月の柱は、仕事と目標の場所。<b>自分と、自分の役目が、強く結びついている命式帖</b>です。お客様に恵まれ、いいご縁ばかりいただいてきた、という言葉は、この結びつきの表れだと見ています。自分を足場に仕事が伸びた時期もあり、仕事を足場に自分が伸びた時期もある。66歳からは、この結びつきを、次の人に渡していく番です。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">七</span><span class="sec-title">これからの使い方 ― 陽転の三つの条件</span></div>
+  <div class="card">
+    <p>一気格の一本の芯。尽くして引き寄せる禄存星。出し切ると削れる了殿の型。全部を合わせると、答えは一つです。</p>
+    <div class="pull">尽くす相手と、量を、絞る。<br>ナンバー2・参謀として、選んだ一つに注ぐ。<br>量ではなく、深さで出す。</div>
+    <p style="margin-bottom:0;">社長として、後継の方々を支えていく。それが今の、いちばん自然な形です。少数の仲間と、選んだ人と、長く。</p>
+  </div>
+  <div class="card">
+    <div class="three">
+      <div class="m"><b>一　絞る・ペースを保つ</b>了殿の型の陽転条件。一気格の「目標を一つに絞ると大きく成す」。回数を減らして、一回を深く。全力で走り切らない。</div>
+      <div class="m"><b>二　狭く深く、丁寧に</b>寅卯天中殺の陽転条件と、上と下の貫索星。広げるより、選んだ人と長く深く。丁寧さは、もう持っています。</div>
+      <div class="m"><b>三　精神性を高める学び</b>寅卯天中殺の陽転条件。66歳からの玉堂星（学びと継承）と、まっすぐつながっています。学んだものは、次の人へ渡す。</div>
+    </div>
+  </div>
+  <div class="card">
+    <p class="lead">持ち帰りのワーク</p>
+    <p>尽くしているもの、引き受けているものを、一度全部、紙に書き出してください。パソコンでもかまいません。</p>
+    <p>その中で、これからも一番大事に続けたいものに、<b>一つだけ丸</b>をつける。丸をつけたものに、来年の一手を注ぎます。4月から形にし始めて、7月に力を集める（九章）。</p>
+    <p style="margin-bottom:0;">丸のつかなかったものは、<b>量を半分にする</b>ことを考えてみてください。ほかに目標の立て方を持っていて、そちらがしっくりくるなら、そちらでかまいません。命式帖からのやり方は、とてもシンプルです。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">八</span><span class="sec-title">大運 ― 十年ごとの流れ</span></div>
+  <div class="card">
+    <div class="daiun-scroll">
+    <table class="daiun">
+      <tr><th>年齢</th><th>干支</th><th>主星</th><th>従星</th><th>位相</th></tr>
+      <tr><td>6〜15</td><td>壬辰</td><td>調舒星</td><td>天庫星</td><td class="isou">月柱：害</td></tr>
+      <tr><td>16〜25</td><td>癸巳</td><td>鳳閣星</td><td>天極星</td><td class="isou">年柱：半会／日柱：対冲</td></tr>
+      <tr><td>26〜35</td><td>甲午</td><td>司禄星</td><td>天胡星</td><td class="isou">年柱：害</td></tr>
+      <tr><td>36〜45</td><td>乙未</td><td>禄存星</td><td>天堂星</td><td class="isou">年柱：庫刑・天剋地冲／月＋日柱：三合会局</td></tr>
+      <tr><td>46〜55</td><td>丙申</td><td>牽牛星</td><td>天将星</td><td class="isou">年・月・日柱：干合／日柱：害</td></tr>
+      <tr class="now-row"><td>56〜65</td><td>丁酉</td><td>車騎星</td><td>天禄星</td><td class="isou">年柱：半会／月柱：天剋地冲</td></tr>
+      <tr><td>66〜75</td><td>戊戌</td><td>玉堂星</td><td>天南星</td><td class="isou">年柱：庫刑／月柱：支合</td></tr>
+      <tr><td>76〜85</td><td>己亥</td><td>龍高星</td><td>天恍星</td><td class="isou">月柱：半会／日柱：自刑</td></tr>
+    </table>
+    </div>
+    <p class="soft" style="margin-top:.6rem;margin-bottom:0;">大運は6歳から始まり、十年ごとに切り替わります。今は56〜65歳の丁酉。2027年3月19日（66歳）から戊戌に入ります。</p>
+  </div>
+  <div class="card">
+    <p><b>36〜45歳・乙未</b>。年の柱（根っこ・家系の場所）と天剋地冲、庫刑。上の段も下の段もぶつかる、いちばん大きな切り替わりの形です。LINEで「40歳前後に、実家や家のことで、根っこから揺れた時期」とお伝えしたのは、ここです。お父さんの病気、北九州の家のこと。その一方で、月の柱と日の柱では<b>三合会局</b>。自分と仕事の方には、力が集まっていた十年でもあります。</p>
+    <p><b>46〜55歳・丙申</b>。年・月・日、三つの柱すべてと干合。人との結びつきが、とても強かった十年です。従星は<b>天将星</b>、エネルギー最強の将軍の星。中年運の天馳星と重なって、<span class="hl">いちばん走っていた時期</span>です。Meetでも「確かにそうですね」と答えてくれました。全力で走っても、回復が早かった。そういう十年です。</p>
+    <p><b>56〜65歳・丁酉</b>（今の十年）。年の柱と半会、月の柱と天剋地冲。年の支を起点にしたスタートの形（流動占技）では<span class="hl">「大発展型。事業拡大・人脈拡大。資金・技術・人脈の3拍子が必須」</span>。広がる力と、仕事の場所の大きな切り替わりが、同時に来る十年です。大運の切り替わりの前後は、前の十年と次の十年の運気が少し重なり、引っ張り合うので、ハードになりやすい。介護と、大切な人との別れをくぐってこられました。本当に、おつかれさまでした。</p>
+    <p><b>66〜75歳・戊戌</b>（2027年3月19日から）。主星は<b>玉堂星</b>、学びと継承の星です。知恵や伝統を受け取って、次に渡す星。寅卯天中殺の「引き継ぎ・継承」と、ここで重なります。干の戊は、第二の守護神。従星は<b>天南星</b>、青年の星で、情熱と、前に進む力、社会に打って出るエネルギーです。月の柱と<b>支合</b>で、仕事と役目の場所と、穏やかに結びつく。年の柱とは<b>庫刑</b>で、家系や自分の根っこの所は、少し揉まれることもあります。スタートの形では<span class="hl">「孤独的な仕事向き」</span>。一人で、自分のペースで、深く取り組む仕事が合う十年です。</p>
+    <p style="margin-bottom:0;"><b>これまで受け取ってきたものを、学び直して、次の人へ渡す十年</b>。経営者として、後継の方々にバトンを渡していく今の動きは、もうこの十年の準備になっています。<b>76〜85歳・己亥</b>は、日の柱と同じ亥が巡り、晩年運と同じ天恍星。まだ現状を変える力がある十年です。日の柱との自刑が出るので、自分で自分を追い込まないことが、その十年の課題になります。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">九</span><span class="sec-title">年と月の時間割 ― いつ、どう動くか</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.8rem;">広がる形が出る時期（金の点）、体と気持ちの注意（灰色の点）、天中殺（赤い点）に分けて見てください。月ごとの流れは、運㐂暦に出ます。</p>
+    <div class="tl">
+      <div class="tl-item care">
+        <div class="tl-when">2025年（64歳）乙巳 ・ 禄存星</div>
+        <div class="tl-body">日の柱と天剋地冲。自分と家のことが、もう一度入れ替わった年です。年の柱とは半会で、根っこの方とは結びついていました。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2026年（65歳）丙午 ・ 牽牛星</div>
+        <div class="tl-body">年・月・日、三つの柱すべてと干合。人との結びつきが、一気に強まる年です。4月に、思いがけず若いメンバーが入ってくれた。<span class="hl">「本当に贈り物をいただいた」</span>という出会いは、この年の運気そのものです。バトンを渡していける、という手応えが深まった年です。</div>
+      </div>
+      <div class="tl-item care">
+        <div class="tl-when">2026年11月7日〜12月6日 ・ 己亥（龍高星）</div>
+        <div class="tl-body">月の柱と半会、日の柱と自刑。自分で自分を追い込みやすい月です。頑張りすぎる前に、眠る時間を先に取ってください。<b>11月12日・13日、24日・25日は、日の天中殺</b>。大事な約束や決めごとは外します。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2026年12月7日〜2027年1月4日 ・ 庚子（石門星）</div>
+        <div class="tl-body">年の柱と支合。年と日の柱で方三位。人との結びつきが整う月です。月の柱には旺刑が出るので、力みすぎないこと。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年（66歳）丁未 ・ 車騎星</div>
+        <div class="tl-body">月の柱と日の柱に、未が加わって<b>三合会局</b>（亥・卯・未）。自分と役目に、力が集まる年です。車騎星は、目標をポンと決めて、そこに走っていけば、ほぼうまくいく星。同じ年に、年の柱とは天剋地冲と庫刑。根っこや外の形は、切り替わる年でもあります。<span class="hl">中身が集まって、外の形が変わる年</span>、と考えてください。</div>
+      </div>
+      <div class="tl-item tc">
+        <div class="tl-when">2027年2月4日〜4月4日 ・ 月の天中殺</div>
+        <div class="tl-body">大きな決めごと、後々に大きく影響することは、外します。準備ができていれば、蛹の時期として、じっくり内側を育てる二ヶ月に。先祖供養やお墓参り、自分の内側を見つめる時間に向いています。どうしても動かす必要があることがあるなら、天中殺に入る前から始めておき、二ヶ月は考えすぎずに、やり続けることです。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年3月19日 ・ 66歳 ・ 大運が戊戌へ</div>
+        <div class="tl-body">月の天中殺の最中に、十年の運気が切り替わります。守護神の戊が巡る十年の始まりです。</div>
+      </div>
+      <div class="tl-item care">
+        <div class="tl-when">2027年4月5日〜6月5日 ・ 甲辰・乙巳</div>
+        <div class="tl-body">大きな一手は、4月5日以降。ただ、4月は月の柱に害が出て、天中殺が明けたばかりなので、思うように進まない所もあります。焦らず、形にし始める月です。5月は日の柱と天剋地冲。小さく、形が切り替わる月です。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年6月6日〜7月6日 ・ 丙午</div>
+        <div class="tl-body">三つの柱すべてと干合。人と結びつく月です。会う人は、広げすぎず、選びながら。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2027年7月7日〜8月7日 ・ 丁未</div>
+        <div class="tl-body">年と同じ丁未の月。月の柱と日の柱の三合会局が、年と月で重なります。<b>力が集まるのは、ここです。</b>4月から形にし始めたものに、この月、力を集めます。</div>
+      </div>
+    </div>
+    <p class="soft" style="margin-top:1rem;margin-bottom:0;">一気格は、良い時と注意する時が、はっきり分かれて出ます。分かっていれば、対策もしやすい形です。日の天中殺は12日ごとに二日ずつ巡ります。2028年以降の流れは、運㐂暦でお伝えしていきます。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">十</span><span class="sec-title">体との付き合い方 ― ペースを、先に守る</span></div>
+  <div class="card">
+    <p>了殿の型は、才能と生命力が反比例しやすい型です。中年運の天馳星は、体を置いて集中する星。一気格は、止まるのが苦手。<b>三つとも、走り続ける方向を向いています。</b>だから、ペースを保つことは、性格の努力ではなく、この命式帖を生かすための、いちばんの条件です。</p>
+    <p>辛亥の印には、<span class="hl">「体にできた傷が痕になりやすいので、怪我や手術の判断は慎重に」</span>とも出ています。傷が残りやすい体です。手術を考える場面が来たら、時期も含めて、いつでも相談してください。</p>
+    <p style="margin-bottom:0;">介護をくぐって、ようやく体が回復してきた所です。今月（己亥）は、日の柱と自刑で、自分を追い込みやすい月。予定を詰めず、眠る時間を先に取る。運㐂暦で、エネルギーの高い日は少し動き、低い日はゆっくりする。<b>メリハリを、暦でつけてください。</b></p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">十一</span><span class="sec-title">五つの視点 ─ ぐるりと見る</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.8rem;">同じ命式帖を、深さの違う五つの角度から観ます。同じ結論に別の道から辿り着く時、それが本物です。</p>
+    <p class="lead">［壱］ 本質と才能の視点</p>
+    <p>日の宿命は辛亥「聖水に洗われる玉」。中心も才能の星も禄存星。才能の型は了殿の型。<span class="hl">磨かれて光る宝石と、尽くすことがそのまま才能になる星</span>を持っています。</p>
+    <p style="margin-bottom:0;"><b>尽くす先を選んだ時に、宝石はいちばん光る。出し切らず、ペースを保つ時に、才能は長く続く。</b></p>
+  </div>
+  <div class="card">
+    <p class="lead">［弐］ 家系と宿命の視点</p>
+    <p>寅卯天中殺は「引き継ぎ・継承」の使命。生月中殺は「生家から離れて陽転」。伴星の牽牛星は「皆のお手本に。責任ある場所に」。</p>
+    <p style="margin-bottom:0;"><b>生まれた家を離れ、自分の場所で育てたものを、責任をもって、次の人に引き継ぐ。</b>ご先祖様から渡された向きは、そこを指しています。後継にバトンを渡す今の動きは、その真ん中です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">［参］ 今の運気の構造から観る視点</p>
+    <p>56〜65歳は丁酉の大発展型と、仕事の場所の天剋地冲。2026年は三つの柱と干合。2027年は三合会局と、年の柱の天剋地冲。2027年2〜3月は月の天中殺。3月19日から、守護神の戊の十年。</p>
+    <p style="margin-bottom:0;"><span class="hl">今は結びつきを育てる時。来年の2月4日から4月4日は止まる時。4月から形にし始めて、7月に力を集める。</span>一気格に大事な「動く時と、待つ時」が、はっきり見えている一年です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">［肆］ 関係性と環境の視点</p>
+    <p>上と下の貫索星は「狭く深い交友」。社会の龍高星は「自分にしかできないものを探す」。家庭の調舒星は「人の気持ちの変化に敏感」。</p>
+    <p style="margin-bottom:0;">東洋占術の思想には、関係性の中で自分がどうあるか、という事が大事、という考え方があります。<b>前に立って引っ張るより、選んだ人の後ろで、要点を押さえて支える。</b>それが、tamakiさんの星がいちばん光る関わり方です。メンバーが自分たちで動き出しているのは、tamakiさんがその位置にいるからです。</p>
+  </div>
+  <div class="card">
+    <p class="lead">［伍］ 霊魂の設計という視点 ―― 総括</p>
+    <p>壱から肆まで、全部が同じ方向を向いています。<b>一本の芯を、選んだ一つに注ぎ、参謀として支え、受け継いだものを次に渡す</b>、という構造です。</p>
+    <p>でも、<span class="hl">「もう宿命どおりに生きているから、このままでいい」という話ではありません。</span>一気格は、流れに乗っている間は強い。けれど、流れが止まった時に、同じ力で押し続けると、一気に削れます。</p>
+    <p><b>この命式帖が、これから動ける条件は、一つだけです。</b></p>
+    <div class="pull">尽くす相手と量を絞り、<br>動く時と待つ時を、暦で見分けて、<br>選んだ一つにだけ、一気に力を注ぐこと。</div>
+    <p>新しく何かを探しに行く必要はありません。後継の方々に同行してもらう、メンバーの話を聞く、書き出して丸をつける。tamakiさんの中で、もう動き始めていることばかりです。月の天中殺の二ヶ月も、今までやってきたことの延長として整えること、準備することはできます。避けるのは、後々に大きく影響する決めごとだけです。</p>
+    <p style="margin-bottom:0;">そして、2026年の新しいメンバーのように、向こうから来たご縁は、大事に受け取る。禄存星を持つ人には、尽くした分だけ、人と縁が回って返ってきます。探さなくていい。でも、来たものは、受け取る。選ぶのは、tamakiさんです。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">十二</span><span class="sec-title">深い五つの視点 ― in depth</span></div>
+  <div class="card">
+    <p class="soft" style="margin-bottom:.8rem;">通常の読みよりさらに深く、五つの切り口から命式帖を観ます。</p>
+    <p class="lead">陽転の視点</p>
+    <p style="margin-bottom:0;">星は、立場や名乗りが変わることで、陽転していきます。tamakiさんの名乗りは、営業・制作の人から、会社を育てる社長へと変わってきました。<b>次の名乗りは、受け継いできたものを渡す人</b>。66歳からの玉堂星は、まさにその名乗りの星です。名乗りが「渡す人」に変わるほど、禄存星の尽くす力は、消耗ではなく、徳として返ってくるようになります。</p>
+  </div>
+  <div class="card">
+    <p class="lead">本質の視点</p>
+    <p style="margin-bottom:0;">辛は、陰の金。磨かれて価値が高まる宝石です。美意識が高く、細やかで、違和感を精密に磨き上げる力がある、と言われる干です。その辛が三つ。そして日の柱の亥には、守護神の壬が入っています。<b>宝石と、それを洗い続ける聖水が、最初から一緒にある命式帖</b>です。濁りが残りにくい。だから、苦しい時期をくぐっても、「悩みはない」と言える透明さが残るのだと、僕は見ています。</p>
+  </div>
+  <div class="card">
+    <p class="lead">お役目の視点</p>
+    <p style="margin-bottom:0;">一気格は、一つの方向に生まれてきた魂です。現世は、魂を磨く場です。tamakiさんの十年ごとの流れには、根っこが揺れる時期、走り切る時期、別れをくぐる時期が、はっきりした輪郭で来ていました。<b>その一つ一つが、磨くためにありました。</b>この先のお役目は、磨いてきたものを、次の世代に手渡すこと。会社を引き継ぐ方々に、仕事だけでなく、要点を見抜く感覚ごと渡していくことです。</p>
+  </div>
+  <div class="card">
+    <p class="lead">幸福感の視点</p>
+    <p style="margin-bottom:0;">tamakiさんの幸福の源は、<b>選んだ人と、長く深くつながること</b>、<b>誰かの後ろで、その人が伸びていくのを支えること</b>、<b>思いがけないご縁を、贈り物として受け取ること</b>。命式帖の「心を満たす生き方」にも、<span class="hl">「自分のペース・専門性を磨く・少数の仲間・自立」</span>と出ています。広さより、深さで満たされる人です。</p>
+  </div>
+  <div class="card">
+    <p class="lead">エネルギーの視点</p>
+    <p style="margin-bottom:0;">金56、木52、水52。三つが厚く、火0、土12。総エネルギーは172で、命式帖では「協調性重視・穏やか」と出ています。<b>動き出す力と、流れる力は十分。足りないのは、温める火と、受け止める土</b>です。走り続けるより、火を灯して温め、土で受け止めて休む。キャンドル、暖色の灯り、陶器、土の手仕事。足すものは、手の届くところにあります。</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">十三</span><span class="sec-title">ここから動ける処方</span></div>
+  <div class="card recipe">
+    <div class="item"><div class="num">1</div><div class="rbody"><b>尽くしているものを、全部書き出す。</b><br>一番大事に続けたいものに、一つだけ丸をつける。</div></div>
+    <div class="item"><div class="num">2</div><div class="rbody"><b>丸のつかなかったものは、量を半分にする。</b><br>出し切らない。了殿の型の陽転条件は、ペースを保つこと。</div></div>
+    <div class="item"><div class="num">3</div><div class="rbody"><b>後継の方々の後ろに回る。</b><br>前に立って引っ張るより、要点を押さえて支える。参謀の位置で、一気格は光ります。</div></div>
+    <div class="item"><div class="num">4</div><div class="rbody"><b>2027年2月4日〜4月4日は、大きく決めない。</b><br>蛹の二ヶ月。準備と、絞り込みと、先祖供養の時間に。</div></div>
+    <div class="item"><div class="num">5</div><div class="rbody"><b>4月から形にし始め、7月に力を集める。</b><br>丸をつけた一つに、来年の一手を注ぐ。</div></div>
+    <div class="item"><div class="num">6</div><div class="rbody"><b>精神性を高める学びを、一つ持つ。</b><br>哲学でも、心の学びでも。直観を磨き、66歳からの「渡す十年」の土台にする。</div></div>
+    <div class="item"><div class="num">7</div><div class="rbody"><b>火と土を、小さく足す。</b><br>暖色の灯り、赤系の色、陶器、土の手仕事、地元とのつながり。</div></div>
+    <div class="item"><div class="num">8</div><div class="rbody"><b>今月は、眠る時間を先に取る。</b><br>己亥の月は、日の柱と自刑。自分を追い込まない月にする。</div></div>
+    <div class="item"><div class="num">9</div><div class="rbody"><b>日の天中殺の日は、大事な約束を入れない。</b><br>運㐂暦で、動く日と休む日のメリハリをつける。</div></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-no">付 録</span><span class="sec-title">小さな言葉の辞典</span></div>
+  <div class="card">
+    <dl class="words">
+      <dt>天干一気格</dt><dd>年・月・日の上の段（天干）が、すべて同じ五行でそろう形。tamakiさんは辛・辛・辛の金性。一本の芯が通り、流れに乗ると一気に進む。止まるのが苦手で、振れ幅が大きい。</dd>
+      <dt>禄存星</dt><dd>中心の星で、才能の星。人に尽くし、愛と財を引き寄せる。回転財。陽転すると徳が高く、陰転すると利用されやすい。</dd>
+      <dt>貫索星</dt><dd>目上と目下の位置の星。頑固・マイペース・狭く深い交友・守る・継承。</dd>
+      <dt>龍高星</dt><dd>社会の位置の星。改革・放浪・冒険。自分にしかできないものを探す。</dd>
+      <dt>調舒星</dt><dd>家庭の位置の星。独自の世界観。人の気持ちの変化に敏感。</dd>
+      <dt>牽牛星（伴星）</dt><dd>ご先祖様から渡された使命の星。責任感・プライド・名誉。皆のお手本になる生き方。</dd>
+      <dt>玉堂星</dt><dd>66歳からの十年の星。学びと、伝統・知恵の継承。第二の守護神、戊と同じ星。</dd>
+      <dt>天印星・天馳星・天恍星</dt><dd>初年・中年・晩年の星（十二大従星）。天印星は赤ちゃんの星、天馳星は瞬間の集中力が最強の星、天恍星は若々しく晩年に華やぐ星。</dd>
+      <dt>寅卯天中殺</dt><dd>引き継ぎ・継承の使命を持つ天中殺。陽転の条件は、狭く深い友人関係、丁寧さ、精神性を高める学び。</dd>
+      <dt>生月中殺</dt><dd>月の柱に天中殺の支がある形。組織や生家の後ろ盾に頼らず、自分の道を作ると陽転する。</dd>
+      <dt>了殿の型</dt><dd>中心の星に力が集中する才能の型。才能と生命力が反比例しやすい。ペースを保つことが陽転条件。</dd>
+      <dt>大半会</dt><dd>半会に、天干の一致が重なる形。異次元融合。片方が踏み台、片方が大きく飛躍する。</dd>
+      <dt>三合会局</dt><dd>三つの支（亥・卯・未など）がそろって、一つの大きな力にまとまる形。</dd>
+      <dt>干合・支合・半会</dt><dd>結びつく形。人や機会との縁が生まれやすい。</dd>
+      <dt>天剋地冲</dt><dd>干も支もぶつかる、強い作り替えの形。</dd>
+      <dt>害・刑・自刑</dt><dd>体や気持ちの注意として読む位相。自刑は、自分で自分を追い込みやすい形。</dd>
+      <dt>天中殺</dt><dd>運気を守る枠が外れる時期。大運・年・月・日に、それぞれ巡る。止める時期ではなく、陽転か陰転か、確率が変わる時期。</dd>
+      <dt>大運</dt><dd>10年ごとに巡る、大きな運気の流れ。tamakiさんは6歳から始まる。</dd>
+      <dt>守護神</dt><dd>命式帖を助ける干。壬（大河）と戊（山）。</dd>
+    </dl>
+  </div>
+</div>
+
+<div class="closing">
+  <p>tamakiさんは、<span class="hl">聖水に洗われる玉</span>の人です。<br>洗われるたびに、光り直す。</p>
+  <p>辛が三つ。一本の芯が、まっすぐ通っています。<br>25年、自分で作った場所で、<br>人に尽くして、人とご縁を引き寄せてきました。</p>
+  <p>警句は、こう示しています。<br>辛抱と熱意をもって人に接することができれば、大成。</p>
+  <p class="big">熱意は、もう持っています。<br>あとは、絞って、続ける辛抱を。</p>
+  <p>2027年3月19日から、守り神の十年が始まります。<br>受け取ってきたものを、次の人へ。</p>
+</div>
+
+<a class="koyomi-link" href="/tamaki">
+  <span class="arrow">▶</span> 運㐂暦（日々の運気カレンダー）をひらく
+  <small>毎日の運気と、月の流れ、天中殺の日が出ます。</small>
+</a>
+
+<!-- 鑑定目録：ここにリンクを足す -->
+
+<footer>
+  <p>いつもおおきにです。ここからがスタートです。ここはどういう意味なのか、動いてみてどうだったか、LINEで聞いてください。スタンプだけでも大丈夫です。</p>
+  <p class="sig">㐂</p>
+</footer>
+
+</div>
+<script src="/seki-nav.js?v=261104b"></script>
+</body>
+</html>

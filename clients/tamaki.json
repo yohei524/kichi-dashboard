@@ -143,15 +143,18 @@
     "needElement": "火・土",
     "needElementNote": "火が0、土も薄い配置（木52／火0／土12／金56／水52・総172）。火は発信・人前に出る・暖色の灯り、土は地に足をつける・陶器や土の手仕事で補います。守護神は壬（大河のように流れる）と戊（山のように不動）です。"
   },
-  "goal": null,
+  "goal": {
+    "main": "尽くす相手と量を絞り、選んだ一つに、参謀として注ぐ",
+    "sub": "尽くしているものを全部書き出して、一つだけ丸をつける。丸のつかなかったものは、量を半分に。\n\n【時期】2027年2月4日〜4月4日は月の天中殺。大きく決めず、準備と絞り込みの二ヶ月。3月19日（66歳）から、守護神の戊が巡る十年（戊戌・玉堂星）。4月から形にし始めて、7月7日からの一ヶ月に力を集める。"
+  },
   "dailyAdvice": {},
   "koyomiOnly": true,
   "koyomiNoDestiny": true,
   "expiresAt": "2026-12-06",
-  "doorHref": "",
-  "doorLabel": "",
-  "doorNote": "",
-  "kanteishoHref": "",
+  "doorHref": "/tamaki-kanteisho",
+  "doorLabel": "鑑定書をひらく",
+  "doorNote": "11月9日にお話ししたことを、まとめてあります",
+  "kanteishoHref": "/tamaki-kanteisho",
   "plan": null,
   "parts": {}
 }

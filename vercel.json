@@ -175,6 +175,10 @@
       "destination": "/view.html?client=tamaki"
     },
     {
+      "source": "/tamaki-kanteisho",
+      "destination": "/clients/tamaki-kanteisho.html"
+    },
+    {
       "source": "/noriko-kanteisho",
       "destination": "/clients/noriko-kanteisho.html"
     },
