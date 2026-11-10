@@ -142,6 +142,79 @@ header .date{font-size:.68rem;color:var(--muted);margin-top:1rem;letter-spacing:
 footer{text-align:center;padding:2.5rem 1rem 1rem;font-size:.72rem;color:var(--muted);}
 footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:.5rem;}
 @media (max-width:380px){ .two{grid-template-columns:1fr;} }
+
+/* ---- 図（命式図から移植・261110） ---- */
+.zu{margin:.2rem 0 1rem;}
+.zu-cap{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.45rem;letter-spacing:.04em;line-height:1.7}
+.zu-cap b{color:var(--accent);font-weight:600}
+.ikki{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;position:relative}
+.ikki .col{text-align:center;min-width:0}
+.ikki .role{font-size:.62rem;color:var(--muted);letter-spacing:.05em}
+.ikki .kan{font-size:3.1rem;font-weight:700;line-height:1.1;color:var(--metal);display:block;position:relative;z-index:1}
+.ikki .shi{font-size:1.5rem;font-weight:600;line-height:1.2;color:var(--muted2);display:block;margin-top:.5rem}
+.ikki .shi.v{color:var(--void)}
+.ikki .band{position:absolute;left:4%;right:4%;top:1.25rem;height:3.4rem;border-radius:14px;background:linear-gradient(90deg,rgba(196,201,210,.10),rgba(217,195,143,.22),rgba(196,201,210,.10));border:1px solid var(--accent-soft)}
+.ikki-lb{text-align:center;font-size:.78rem;color:var(--accent);letter-spacing:.2em;margin-top:.5rem}
+.swing{display:grid;grid-template-columns:repeat(4,1fr);gap:.35rem;align-items:end;height:9.5rem;margin-top:.4rem}
+.swing .b{border-radius:10px 10px 4px 4px;padding:.4rem .2rem;text-align:center;font-size:.62rem;line-height:1.45;color:var(--text);display:flex;flex-direction:column;justify-content:flex-start;min-width:0}
+.swing .b .a{font-weight:600;font-size:.66rem;display:block;color:var(--muted2)}
+.swing .b .k{font-size:1.05rem;font-weight:700;display:block}
+.swing .up{background:linear-gradient(180deg,rgba(217,195,143,.32),rgba(217,195,143,.08));border:1px solid var(--accent-soft)}
+.swing .up .k{color:var(--accent)}
+.swing .dn{background:linear-gradient(180deg,rgba(126,135,152,.32),rgba(126,135,152,.08));border:1px solid var(--line)}
+.swing .nx{background:linear-gradient(180deg,rgba(127,168,107,.30),rgba(127,168,107,.06));border:1px dashed var(--wood)}
+.swing .nx .k{color:var(--wood)}
+.ring{width:100%;max-width:20rem;display:block;margin:0 auto;height:auto}
+.ring .base{fill:var(--sink);stroke:var(--line);stroke-width:1.5}
+.ring .lbl{font-weight:700;font-size:21px;fill:var(--muted);text-anchor:middle;dominant-baseline:central}
+.ring .on circle{fill:rgba(217,195,143,.16);stroke:var(--accent);stroke-width:2.5}
+.ring .on text{fill:var(--accent);font-size:25px}
+.ring .vd circle{fill:rgba(126,135,152,.12);stroke:var(--void);stroke-width:2;stroke-dasharray:4 4}
+.ring .vd text{fill:var(--void)}
+.ring .vdon circle{fill:rgba(126,135,152,.22);stroke:var(--void);stroke-width:3}
+.ring .vdon text{fill:var(--text);font-size:25px}
+.ring .gh circle{fill:rgba(127,168,107,.16);stroke:var(--wood);stroke-width:3}
+.ring .gh text{fill:var(--wood);font-size:25px}
+.ring .arc{fill:none;stroke:var(--void);stroke-width:46;stroke-linecap:round;opacity:.2}
+.ring .ln{stroke-width:3;fill:none}
+.ring .ln.g{stroke:var(--wood)} .ring .ln.b{stroke:var(--bad)}
+.ring .cap{font-size:12px;font-weight:700;text-anchor:middle;fill:var(--accent)}
+.ring .cap.v{fill:var(--void)} .ring .cap.f{fill:var(--wood)}
+.ring .center{font-weight:800;font-size:27px;fill:var(--accent);text-anchor:middle}
+.ring .center.v{fill:var(--void)}
+.ring .center2{font-size:13px;fill:var(--muted2);text-anchor:middle}
+.legend{display:flex;flex-wrap:wrap;gap:.3rem .8rem;justify-content:center;font-size:.66rem;color:var(--muted2);margin-top:.4rem}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:.3rem}
+.tcband{display:grid;grid-template-columns:repeat(6,1fr);gap:.25rem;margin:.6rem 0 .2rem}
+.tcband div{background:var(--sink);border:1px solid var(--line);border-radius:8px;text-align:center;padding:.35rem 0;min-width:0}
+.tcband .y{font-size:.6rem;color:var(--muted);display:block}
+.tcband .k{font-size:1rem;font-weight:700;display:block;line-height:1.3}
+.tcband .t{font-size:.56rem;color:var(--muted);display:block;min-height:1.3em}
+.tcband .v{background:rgba(126,135,152,.2);border-color:var(--void)} .tcband .v .k,.tcband .v .t{color:var(--void)}
+.tcband .ex{border-color:var(--wood)} .tcband .ex .k,.tcband .ex .t{color:var(--wood)}
+.guard{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin:.2rem 0 .9rem}
+.guard div{background:var(--sink);border:1px solid var(--line);border-radius:12px;text-align:center;padding:.7rem .4rem;min-width:0}
+.guard .lb{font-size:.64rem;color:var(--muted)}
+.guard .g{font-size:2.5rem;font-weight:800;line-height:1.15;display:block}
+.guard .m{font-size:.7rem;color:var(--muted2);line-height:1.6}
+.eq{display:grid;gap:.45rem}
+.eq .core{background:linear-gradient(160deg,rgba(217,195,143,.18),var(--sink));border:1.5px solid var(--accent);border-radius:14px;padding:.9rem .8rem;text-align:center}
+.eq .core b{display:block;font-size:1rem;color:var(--accent);line-height:1.6;letter-spacing:.06em}
+.eq .core span{font-size:.72rem;color:var(--muted2)}
+.eq .arrow{text-align:center;font-size:.7rem;color:var(--muted)}
+.eq .exit{background:linear-gradient(160deg,rgba(127,168,107,.18),var(--sink));border:1.5px solid var(--wood);border-radius:14px;padding:.9rem .8rem;text-align:center}
+.eq .exit b{display:block;font-size:.98rem;color:var(--wood);letter-spacing:.06em}
+.eq .exit span{font-size:.72rem;color:var(--muted2);line-height:1.7;display:block}
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:.3rem;margin:.2rem 0 .3rem}
+.mgrid div{background:var(--sink);border:1px solid var(--line);border-radius:9px;text-align:center;padding:.35rem .1rem .4rem;min-width:0}
+.mgrid .m{font-size:.6rem;color:var(--muted);display:block;line-height:1.3}
+.mgrid .k{font-size:1.02rem;font-weight:700;display:block;line-height:1.3}
+.mgrid .t{font-size:.55rem;display:block;line-height:1.35;color:var(--muted2);min-height:1.4em}
+.mgrid .now{outline:2px solid var(--accent);outline-offset:-1px}
+.mgrid .v{background:rgba(201,122,106,.14);border-color:var(--bad)} .mgrid .v .k,.mgrid .v .t{color:var(--bad)}
+.mgrid .big{background:rgba(127,168,107,.18);border-color:var(--wood)} .mgrid .big .k,.mgrid .big .t{color:var(--wood)}
+.mgrid .care{background:rgba(126,135,152,.14)} .mgrid .care .t{color:var(--void)}
+.mgrid .join .k{color:var(--accent)}
 </style>
 </head>
 <body>
@@ -204,6 +277,19 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
 <div class="sec">
   <div class="sec-head"><span class="sec-no">一</span><span class="sec-title">天干一気格 ― 一本の芯</span></div>
   <div class="card">
+    <div class="zu">
+      <div class="ikki">
+        <div class="band"></div>
+        <div class="col"><div class="role">日柱（自分）</div><span class="kan">辛</span><span class="shi">亥</span></div>
+        <div class="col"><div class="role">月柱（仕事）</div><span class="kan">辛</span><span class="shi v">卯</span></div>
+        <div class="col"><div class="role">年柱（社会）</div><span class="kan">辛</span><span class="shi">丑</span></div>
+      </div>
+      <div class="ikki-lb">金 ・ 金 ・ 金 ＝ 一本の芯</div>
+      <p class="zu-cap">上の段（心・精神の場所）が、三つとも<b>辛</b>でそろう形</p>
+    </div>
+  </div>
+
+  <div class="card">
     <p>年・月・日、三つの柱の上の段が、すべて<b>辛</b>です。上の段は、その人の心、表に出る精神の場所。そこが三つとも同じ。東洋占術では、この形を<span class="hl">天干一気格</span>と呼びます。辛は金の五行なので、金性の天干一気格です。</p>
     <p>普通の命式は、上の段に違う干が並びます。木があって、火があって、金があって。その分、心の中に回り道や迷いが生まれます。tamakiさんの場合は、<b>金、金、金</b>。気が一方向にそろって、まっすぐ一本、通っています。</p>
     <p>一気格について、東洋占術の中では、こういう見方がされています。</p>
@@ -223,6 +309,15 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
     <p>Meetで聞いたtamakiさんの歩みは、この形とよく重なっています。</p>
     <p>営業の仕事、制作の仕事を経て、ITの人材派遣の会社を、小さな所から25年。外注の方も含めて、55名ほどの会社になりました。<b>自分で作った場所</b>で、力を出してきた人です。</p>
     <p>それでいて、tamakiさん自身は、<span class="hl">「どちらかというと、前に出る方をサポートする方が向いていると思っていた」</span>と話してくれました。社長という立場にいながら、メンバーが自分たちで動き、tamakiさんは「ここは気をつけた方がいい」と、要点を押さえる。<b>トップの席に座りながら、参謀として働いている</b>形です。トップに立った一気格が陥りやすい「遊離」は、tamakiさんの会社には見えません。協力体制で、後継の方々にバトンを渡していく段階にまで来ています。</p>
+    <div class="zu">
+      <div class="swing">
+        <div class="b dn" style="height:52%"><span class="a">36〜45歳</span><span class="k">乙未</span>父の病気<br>実家のこと</div>
+        <div class="b up" style="height:100%"><span class="a">46〜55歳</span><span class="k">丙申</span>全力疾走<br>天将星</div>
+        <div class="b dn" style="height:44%"><span class="a">56〜65歳</span><span class="k">丁酉</span>介護<br>別れ</div>
+        <div class="b nx" style="height:78%"><span class="a">66歳〜</span><span class="k">戊戌</span>守護神の<br>十年</div>
+      </div>
+      <p class="zu-cap">Meetで聞いた歩みを、十年ごとに並べたもの。<b>良い時と苦しい時が、はっきり分かれて出る</b></p>
+    </div>
     <p style="margin-bottom:0;">そして、振れ幅。40歳前後、お父さんの病気と、北九州の家のこと。40代後半からの、全力疾走。56歳からの十年の、介護と、大切な人との別れ。そして2026年の、思いがけない新しい出会い。<span class="hl">良い時と苦しい時が、はっきりした輪郭で来ている</span>のも、一気格の形です。その全部をくぐって、「悩みはない」と言える場所に、今、立っています。</p>
   </div>
 
@@ -285,6 +380,11 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
 <div class="sec">
   <div class="sec-head"><span class="sec-no">四</span><span class="sec-title">寅卯天中殺 ― 引き継ぎ・継承の使命</span></div>
   <div class="card">
+    <div class="zu"><svg class="ring" data-ring="tc" viewBox="0 0 360 360" role="img" aria-label="十二支の輪と寅卯天中殺"></svg>
+      <p class="zu-cap">十二支の輪のうち、<b>寅と卯</b>が空いている場所（灰色の帯）。<br>月の柱の卯が、その中に入っている＝生月中殺</p></div>
+  </div>
+
+  <div class="card">
     <p>天中殺は<b>寅卯</b>。本質は<span class="hl">「引き継ぎ・継承の使命」</span>。家系とのつながりでは<span class="hl">「母親・兄弟姉妹より父親との縁が深い。二代運・三代運。既存の事業に入って発展させる」</span>と出ています。</p>
     <p>陽転の条件は、三つです。<span class="hl">「狭く深い友人関係」「丁寧さ・几帳面さ」「精神性を高める学び」</span>。貫索星の「狭く深く、守る、継承」と、同じことを示しています。丁寧さは、もう十分に満たしています。陽転の条件を満たしてきたから、事業をここまで育てられた、とも言えます。</p>
     <p style="margin-bottom:0;">精神性を高める学び、は、哲学でも、心の学びでも、見えない世界の学びでもかまいません。tamakiさんの直観を、さらに磨くものです。</p>
@@ -294,6 +394,18 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
     <p>月の柱の「卯」は、寅卯天中殺の卯です。生まれた時から、魂の中に天中殺を一つ持っている形で、<b>生月中殺</b>と呼ばれます。<span class="hl">「家系・親族から離れて生きると陽転。生家との縁が薄い」</span>。</p>
     <p>月の柱は、仕事や社会の場所です。組織や、生まれた家の後ろ盾に頼らず、自分で道を作った方が開く、という見方ができます。普通の人とは違う視点で世の中が見える。「いろんな発想ができるね」と言われる。Meetで、ここも「そうですね」「客観的に見てもそんな感じ」と答えてくれました。</p>
     <p style="margin-bottom:0;">北九州から東京へ。生家を離れて、自分の場所で会社を育ててきた。受け継ぐものは受け継いで、育てる場所は、自分の場所。<b>寅卯の「継承」と、生月中殺の「離れて陽転」が、tamakiさんの人生の中で、一つに重なっています。</b></p>
+  </div>
+  <div class="card">
+    <p class="lead">次の年の天中殺</p>
+    <div class="tcband">
+      <div><span class="y">2032</span><span class="k">壬子</span><span class="t"></span></div>
+      <div><span class="y">2033</span><span class="k">癸丑</span><span class="t"></span></div>
+      <div class="v"><span class="y">2034</span><span class="k">甲寅</span><span class="t">天中殺</span></div>
+      <div class="v"><span class="y">2035</span><span class="k">乙卯</span><span class="t">天中殺</span></div>
+      <div class="ex"><span class="y">2036</span><span class="k">丙辰</span><span class="t">明け</span></div>
+      <div><span class="y">2037</span><span class="k">丁巳</span><span class="t"></span></div>
+    </div>
+    <p class="zu-cap" style="margin-bottom:0;">前回は2022〜2023年。次は2034年2月の立春から、2036年2月の立春まで</p>
   </div>
   <div class="card">
     <p style="margin-bottom:0;">十二年に二年巡る<b>年の天中殺</b>は、2022年と2023年（61〜62歳）でした。もう明けています。次は2034年と2035年。まだ先です。十二ヶ月に二ヶ月巡る<b>月の天中殺</b>は、毎年2月上旬から4月上旬。次は<b>2027年2月4日〜4月4日</b>です。</p>
@@ -317,11 +429,22 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
   </div>
   <div class="card">
     <p class="lead">守護神 ― 壬と戊</p>
+    <div class="guard">
+      <div><span class="lb">第一守護神</span><span class="g" style="color:var(--water)">壬</span><span class="m">大河のように流れる<br>大きく動く・運ぶ</span></div>
+      <div><span class="lb">第二守護神</span><span class="g" style="color:var(--earth)">戊</span><span class="m">山のように不動・安定<br>66歳からの十年に巡る</span></div>
+    </div>
     <p><b>第一の守護神は、壬（調舒星）。</b><span class="hl">「大河のように流れる。大きく動く・運ぶ」</span>。日の柱の亥の中に、もうこの壬が入っています。「聖水に洗われる玉」の聖水は、この壬のことだと、僕は見ています。</p>
     <p style="margin-bottom:0;"><b>第二の守護神は、戊（玉堂星）。</b><span class="hl">「山のように不動・安定。重厚・信頼。動じない」</span>。そして、<b>2027年3月19日、66歳のお誕生日から始まる十年の運気が、戊戌</b>です。守り神の干が、十年の運気として巡ってきます。tamakiさん自身が、後ろから押されている状態が十年続く、ということです（八章）。</p>
   </div>
   <div class="card">
     <p class="lead">才能の型 ― 了殿の型</p>
+    <div class="zu ryo"><svg viewBox="0 0 360 330" role="img" aria-label="才能占技の剋線の分布">
+      <rect class="bx" x="125" y="10" width="110" height="70" rx="10"/><text class="p" x="180" y="27">北　目上</text><text class="s" x="180" y="49">貫索星</text><text class="k" x="180" y="72">剋線 1</text>
+      <rect class="bx" x="10" y="128" width="110" height="74" rx="10"/><text class="p" x="65" y="145">西　家庭</text><text class="s" x="65" y="169">調舒星</text><text class="k" x="65" y="194">剋線 1</text>
+      <rect class="bx c" x="125" y="122" width="110" height="86" rx="10"/><text class="p" x="180" y="139">中心</text><text class="s c" x="180" y="169">禄存星</text><text class="k c" x="180" y="200">剋線 3</text>
+      <rect class="bx" x="240" y="128" width="110" height="74" rx="10"/><text class="p" x="295" y="145">東　社会</text><text class="s" x="295" y="169">龍高星</text><text class="k" x="295" y="194">剋線 2</text>
+      <rect class="bx" x="125" y="250" width="110" height="70" rx="10"/><text class="p" x="180" y="267">南　目下</text><text class="s" x="180" y="289">貫索星</text><text class="k" x="180" y="312">剋線 1</text>
+    </svg><p class="zu-cap">剋線が<b>中心の禄存星に集まる</b>＝了殿の型。尽くす力に、全部が集まる</p></div>
     <p>才能の型は<b>了殿の型</b>（剋線の分布 3・2・1・1・1、総剋線8）。中心の禄存星に、力が集中する型です。<span class="hl">「才能と生命力が反比例しやすい。全力疾走で体を壊す傾向。単価上げて回数減らす設計が合う。ペースを保つことが陽転条件」</span>。</p>
     <p>出し切ると、自分が削れる。尽くす力が才能の人が、全部に全力で尽くすと、自分の体や時間が先に減っていきます。Meetで、tamakiさんは「ついついぶっ飛ばして仕事をやってきた」「健康管理をしないといけない」と話してくれました。</p>
     <p style="margin-bottom:0;">答えは、はっきりしています。<b>尽くす量を増やすのではなく、尽くす相手を選んで、一回を深くする。ペースを保つ。</b>才能の領域は東天運で、<span class="hl">「現実重視・成果志向・現場主義・直接売買・臨機応変」</span>。頭の中で考えるより、現場で人と直接やり取りして、結果を出す力です。向いている仕事は<span class="hl">「接客業・営業・経営・自営・人を集める仕事」</span>。禄存星の「人を引き寄せる」と、同じ向きです。</p>
@@ -331,6 +454,8 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
 <div class="sec">
   <div class="sec-head"><span class="sec-no">六</span><span class="sec-title">日柱と月柱の大半会 ― 自分と仕事の、異次元融合</span></div>
   <div class="card">
+    <div class="zu"><svg class="ring" data-ring="dai" viewBox="0 0 360 360" role="img" aria-label="日柱の亥と月柱の卯の大半会"></svg>
+      <p class="zu-cap">日の柱の<b>亥</b>と、月の柱の<b>卯</b>が結ぶ線＝大半会</p></div>
     <p>日の柱（辛亥）と月の柱（辛卯）は、<b>大半会</b>という関係を作っています。亥と卯が半会で、上の段が同じ辛。<span class="hl">「異次元融合。片方が踏み台、片方が大きく飛躍する」</span>。出方は<span class="hl">「仕事・社会の動きに出る」</span>。</p>
     <p style="margin-bottom:0;">日の柱はtamakiさん自身。月の柱は、仕事と目標の場所。<b>自分と、自分の役目が、強く結びついている命式帖</b>です。お客様に恵まれ、いいご縁ばかりいただいてきた、という言葉は、この結びつきの表れだと見ています。自分を足場に仕事が伸びた時期もあり、仕事を足場に自分が伸びた時期もある。66歳からは、この結びつきを、次の人に渡していく番です。</p>
   </div>
@@ -344,10 +469,18 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
     <p style="margin-bottom:0;">社長として、後継の方々を支えていく。それが今の、いちばん自然な形です。少数の仲間と、選んだ人と、長く。</p>
   </div>
   <div class="card">
+    <div class="eq">
+      <div class="core"><b>一つに絞って、深く。<br>参謀として、選んだ人に注ぐ</b><span>辛・辛・辛の一気格 × 禄存星 × 了殿の型</span></div>
+      <div class="arrow">▼　条件は三つ</div>
+    </div>
     <div class="three">
       <div class="m"><b>一　絞る・ペースを保つ</b>了殿の型の陽転条件。一気格の「目標を一つに絞ると大きく成す」。回数を減らして、一回を深く。全力で走り切らない。</div>
       <div class="m"><b>二　狭く深く、丁寧に</b>寅卯天中殺の陽転条件と、上と下の貫索星。広げるより、選んだ人と長く深く。丁寧さは、もう持っています。</div>
       <div class="m"><b>三　精神性を高める学び</b>寅卯天中殺の陽転条件。66歳からの玉堂星（学びと継承）と、まっすぐつながっています。学んだものは、次の人へ渡す。</div>
+    </div>
+    <div class="eq" style="margin-top:.45rem">
+      <div class="arrow">▼　その先に</div>
+      <div class="exit"><b>2027年4月5日から、大きな一手</b><span>2月4日〜4月4日は月の天中殺。決めごとは外す<br>3月19日（66歳）から戊戌の十年。7月7日からの一ヶ月に力が集まる</span></div>
     </div>
   </div>
   <div class="card">
@@ -377,6 +510,13 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
     <p class="soft" style="margin-top:.6rem;margin-bottom:0;">大運は6歳から始まり、十年ごとに切り替わります。今は56〜65歳の丁酉。2027年3月19日（66歳）から戊戌に入ります。</p>
   </div>
   <div class="card">
+    <p class="lead">66歳からの十年に、戌が加わると</p>
+    <div class="zu"><svg class="ring" data-ring="boju" viewBox="0 0 360 360" role="img" aria-label="大運戊戌の戌と命式の支の関係"></svg>
+      <div class="legend"><span><i style="background:var(--wood)"></i>まとまる（支合）</span><span><i style="background:var(--bad)"></i>動く・詰まる（庫刑）</span></div>
+      <p class="zu-cap">月の柱の卯と<b>支合</b>＝仕事と役目がまとまる。年の柱の丑と庫刑＝根っこの形は作り替わる</p></div>
+  </div>
+
+  <div class="card">
     <p><b>36〜45歳・乙未</b>。年の柱（根っこ・家系の場所）と天剋地冲、庫刑。上の段も下の段もぶつかる、いちばん大きな切り替わりの形です。LINEで「40歳前後に、実家や家のことで、根っこから揺れた時期」とお伝えしたのは、ここです。お父さんの病気、北九州の家のこと。その一方で、月の柱と日の柱では<b>三合会局</b>。自分と仕事の方には、力が集まっていた十年でもあります。</p>
     <p><b>46〜55歳・丙申</b>。年・月・日、三つの柱すべてと干合。人との結びつきが、とても強かった十年です。従星は<b>天将星</b>、エネルギー最強の将軍の星。中年運の天馳星と重なって、<span class="hl">いちばん走っていた時期</span>です。Meetでも「確かにそうですね」と答えてくれました。全力で走っても、回復が早かった。そういう十年です。</p>
     <p><b>56〜65歳・丁酉</b>（今の十年）。年の柱と半会、月の柱と天剋地冲。年の支を起点にしたスタートの形（流動占技）では<span class="hl">「大発展型。事業拡大・人脈拡大。資金・技術・人脈の3拍子が必須」</span>。広がる力と、仕事の場所の大きな切り替わりが、同時に来る十年です。大運の切り替わりの前後は、前の十年と次の十年の運気が少し重なり、引っ張り合うので、ハードになりやすい。介護と、大切な人との別れをくぐってこられました。本当に、おつかれさまでした。</p>
@@ -389,6 +529,26 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
   <div class="sec-head"><span class="sec-no">九</span><span class="sec-title">年と月の時間割 ― いつ、どう動くか</span></div>
   <div class="card">
     <p class="soft" style="margin-bottom:.8rem;">広がる形が出る時期（金の点）、体と気持ちの注意（灰色の点）、天中殺（赤い点）に分けて見てください。月ごとの流れは、運㐂暦に出ます。</p>
+    <div class="zu">
+      <div class="mgrid">
+        <div class="care now"><span class="m">11月</span><span class="k">己亥</span><span class="t">今月・自刑</span></div>
+        <div class="join"><span class="m">12月</span><span class="k">庚子</span><span class="t">支合</span></div>
+        <div><span class="m">1月</span><span class="k">辛丑</span><span class="t">律音</span></div>
+        <div class="v"><span class="m">2月</span><span class="k">壬寅</span><span class="t">天中殺</span></div>
+        <div class="v"><span class="m">3月</span><span class="k">癸卯</span><span class="t">天中殺</span></div>
+        <div class="care"><span class="m">4月</span><span class="k">甲辰</span><span class="t">害</span></div>
+        <div class="care"><span class="m">5月</span><span class="k">乙巳</span><span class="t">天剋地冲</span></div>
+        <div class="join"><span class="m">6月</span><span class="k">丙午</span><span class="t">干合</span></div>
+        <div class="big"><span class="m">7月</span><span class="k">丁未</span><span class="t">三合会局</span></div>
+        <div class="care"><span class="m">8月</span><span class="k">戊申</span><span class="t">害</span></div>
+        <div><span class="m">9月</span><span class="k">己酉</span><span class="t">半会・対冲</span></div>
+        <div class="join"><span class="m">10月</span><span class="k">庚戌</span><span class="t">支合</span></div>
+      </div>
+      <div class="legend"><span><i style="background:var(--bad)"></i>月の天中殺</span><span><i style="background:var(--void)"></i>体と気持ちの注意</span><span><i style="background:var(--accent)"></i>結びつく</span><span><i style="background:var(--wood)"></i>力が集まる</span></div>
+      <p class="zu-cap">2026年11月から2027年10月まで（節入りで区切った月）</p>
+    </div>
+    <div class="zu"><svg class="ring" data-ring="hitsuji" viewBox="0 0 360 360" role="img" aria-label="2027年丁未の未と命式の支の関係"></svg>
+      <p class="zu-cap">2027年と、7月の<b>未</b>が、日の柱の亥・月の柱の卯とそろって<b>三合会局（木局）</b>。<br>年の柱の丑とは、ぶつかる形（天剋地冲）</p></div>
     <div class="tl">
       <div class="tl-item care">
         <div class="tl-when">2025年（64歳）乙巳 ・ 禄存星</div>
@@ -566,6 +726,38 @@ footer .sig{color:var(--accent);font-size:.9rem;letter-spacing:.15em;margin-top:
 </footer>
 
 </div>
+
+<script>
+(function(){
+  var BR='子丑寅卯辰巳午未申酉戌亥'.split(''),NS='http://www.w3.org/2000/svg',CX=180,CY=180,R=128;
+  var MINE={'亥':'日','卯':'月','丑':'年'},TC=['寅','卯'];
+  function pos(i){var a=i*Math.PI/6;return[CX+R*Math.sin(a),CY-R*Math.cos(a)];}
+  function el(n,at,par){var e=document.createElementNS(NS,n);for(var k in at)e.setAttribute(k,at[k]);par.appendChild(e);return e;}
+  function draw(svg,o){
+    if(o.arc){var a=pos(2),b=pos(3);el('path',{d:'M'+a[0]+' '+a[1]+' A '+R+' '+R+' 0 0 1 '+b[0]+' '+b[1],'class':'arc'},svg);}
+    (o.lines||[]).forEach(function(l){var a=pos(BR.indexOf(l[0])),b=pos(BR.indexOf(l[1]));el('line',{x1:a[0],y1:a[1],x2:b[0],y2:b[1],'class':'ln '+l[2]},svg);});
+    for(var i=0;i<12;i++){
+      var z=BR[i],m=MINE[z],v=TC.indexOf(z)>=0,gh=(o.ghost&&o.ghost[0]===z);
+      var c=gh?'gh':(m?(v?'vdon':'on'):(v?'vd':''));
+      var p=pos(i),g=el('g',{'class':c},svg);
+      el('circle',{cx:p[0],cy:p[1],r:26,'class':'base'},g);
+      el('text',{x:p[0],y:p[1]+1,'class':'lbl'},g).textContent=z;
+      var cap=gh?o.ghost[1]:(m?m+'柱':'');
+      if(cap)el('text',{x:CX+(p[0]-CX)*.6,y:CY+(p[1]-CY)*.6+4,'class':'cap'+(gh?' f':(v?' v':''))},svg).textContent=cap;
+    }
+    el('text',{x:CX,y:CY-4,'class':'center'+(o.cv?' v':'')},svg).textContent=o.c1;
+    el('text',{x:CX,y:CY+20,'class':'center2'},svg).textContent=o.c2;
+  }
+  var CONF={
+    tc:{arc:1,c1:'寅卯',c2:'天中殺',cv:1},
+    dai:{lines:[['亥','卯','g']],c1:'大半会',c2:'日の亥 ・ 月の卯'},
+    boju:{ghost:['戌','大運'],lines:[['戌','卯','g'],['戌','丑','b']],c1:'戊戌',c2:'66歳からの十年'},
+    hitsuji:{ghost:['未','2027'],lines:[['未','亥','g'],['未','卯','g'],['亥','卯','g'],['未','丑','b']],c1:'木局',c2:'亥 ・ 卯 ・ 未'}
+  };
+  var ss=document.querySelectorAll('svg[data-ring]');
+  for(var i=0;i<ss.length;i++){var c=CONF[ss[i].getAttribute('data-ring')];if(c)draw(ss[i],c);}
+})();
+</script>
 <script src="/seki-nav.js?v=261104b"></script>
 </body>
 </html>
