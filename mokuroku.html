@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>鑑定目録 ｜ 㐂占</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#FBF8F1;--wrap:#EFE9DD;--sumi:#1E1A16;--soft:#4A4239;--mist:#8C8273;--beni:#B3202E;--rule:#E3DACA;--kiri:#E6D8BC;--kiri2:#CDB88F;
+  --mincho:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;--gothic:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:hidden}
+body{color:var(--sumi);font-family:var(--gothic);letter-spacing:.05em;min-height:100vh;min-height:100dvh;background-color:var(--wrap);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23DCD2BF' stroke-width='1'%3E%3Ccircle cx='0' cy='0' r='28'/%3E%3Ccircle cx='56' cy='0' r='28'/%3E%3Ccircle cx='0' cy='56' r='28'/%3E%3Ccircle cx='56' cy='56' r='28'/%3E%3Ccircle cx='28' cy='28' r='28'/%3E%3C/g%3E%3C/svg%3E");}
+.sheet{position:relative;max-width:440px;margin:0 auto;min-height:100vh;min-height:100dvh;background:var(--paper);
+  padding:calc(10px + env(safe-area-inset-top)) 16px calc(14px + env(safe-area-inset-bottom));display:flex;flex-direction:column;
+  box-shadow:0 0 0 1px rgba(30,26,22,.06),0 18px 40px -24px rgba(30,26,22,.35)}
+/* 掛け紙：水引とのし */
+.kake{position:relative;text-align:center;padding:2px 0 10px}
+.kake .mizuhiki{display:block;width:210px;height:auto;margin:0 auto -6px}
+.kake .noshi{position:absolute;right:4px;top:6px;width:16px;height:auto}
+.kake h1{margin:0;font-family:var(--mincho);font-weight:800;font-size:23px;letter-spacing:.42em;padding-left:.42em}
+.kake .nm{display:block;font-family:var(--mincho);font-size:12.5px;color:var(--soft);letter-spacing:.2em;margin-top:2px;min-height:1em}
+.kake::after{content:"";display:block;width:62%;margin:9px auto 0;border-top:1px solid var(--beni);border-bottom:1px solid var(--beni);height:3px}
+.label{font-family:var(--mincho);font-size:11.5px;color:var(--beni);letter-spacing:.3em;margin:10px 0 6px;text-align:center}
+/* あなたの鑑定：短冊を横に並べる */
+.mine{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 2px 8px;margin:0 -2px;-webkit-overflow-scrolling:touch;justify-content:safe center}
+.mine a{flex:0 0 auto;scroll-snap-align:start;min-width:54px;height:140px;padding-left:9px;padding-right:9px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  text-decoration:none;color:var(--sumi);background:#fff;border:1px solid var(--sumi);outline:1px solid var(--rule);outline-offset:-5px;padding:12px 0 8px;position:relative}
+.mine a::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--beni)}
+.mine a b{writing-mode:vertical-rl;font-family:var(--mincho);font-weight:700;font-size:13px;letter-spacing:.1em;line-height:1.35;max-height:112px}
+.mine a.koyomi{background:var(--sumi);color:var(--paper);outline-color:rgba(251,248,241,.25)}
+/* 桐箱の九つの仕切り */
+.hako{background:var(--kiri);padding:7px;border:1px solid var(--kiri2);box-shadow:inset 0 0 0 1px rgba(255,255,255,.5),0 10px 22px -16px rgba(30,26,22,.5);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.ma{position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;text-decoration:none;color:var(--sumi);
+  background:var(--paper);min-height:94px;padding:16px 3px 8px;box-shadow:inset 0 0 0 1px rgba(30,26,22,.12)}
+.ma::after{content:"";position:absolute;inset:4px;border:1px solid var(--rule);pointer-events:none}
+.ma .in{position:absolute;left:6px;top:6px;width:17px;height:17px;background:var(--beni);color:var(--paper);font-family:var(--mincho);font-weight:800;
+  font-size:11px;line-height:17px;text-align:center;letter-spacing:0;border-radius:2px}
+.ma .na{font-family:var(--mincho);font-weight:800;font-size:15.5px;letter-spacing:.1em;line-height:1.3}
+.ma .hito{font-size:10px;color:var(--soft);line-height:1.45;margin-top:4px;letter-spacing:.02em;padding:0 2px}
+.ma:active{background:#fff}
+.ma.uke{background:transparent;box-shadow:inset 0 0 0 1px rgba(30,26,22,.08)}
+.ma.uke .in{background:var(--mist)}
+.ma.uke .na,.ma.uke .hito{color:var(--mist)}
+.ma.oshi{box-shadow:inset 0 0 0 1.5px var(--beni);background:#fff}
+.ma.oshi.dai{grid-column:1/-1;min-height:104px;flex-direction:column}
+.ma.oshi.dai .na{font-size:19px;letter-spacing:.2em}
+.ma.oshi.dai .hito{font-size:11.5px;color:var(--sumi)}
+.ma.oshi .kome{position:absolute;right:6px;top:6px;font-family:var(--mincho);font-size:10px;color:var(--beni);letter-spacing:.15em}
+/* 帯：申し込み */
+.obi{margin:14px -16px 0;background:var(--beni);color:var(--paper);text-align:center;padding:12px 16px 13px}
+.obi p{margin:0 0 8px;font-family:var(--mincho);font-size:12.5px;letter-spacing:.12em;line-height:1.7}
+.obi a{display:inline-block;color:var(--paper);text-decoration:none;font-family:var(--mincho);font-weight:800;font-size:14px;letter-spacing:.3em;
+  padding:7px 20px 7px 24px;border:1px solid rgba(251,248,241,.8);outline:1px solid rgba(251,248,241,.35);outline-offset:3px}
+@media (max-width:360px){.ma{min-height:88px} .ma .na{font-size:14.5px} .ma .hito{font-size:9.5px}}
+</style>
+</head>
+<body>
+<main class="sheet">
+  <header class="kake">
+    <svg class="mizuhiki" viewBox="0 0 560 132" aria-hidden="true"><g fill="none" stroke-width="2" stroke-linecap="round"><line stroke="#B9B6AE" x1="0" y1="56" x2="262" y2="56"/><line stroke="#B3202E" x1="298" y1="56" x2="560" y2="56"/><line stroke="#B9B6AE" x1="0" y1="61" x2="262" y2="61"/><line stroke="#B3202E" x1="298" y1="61" x2="560" y2="61"/><line stroke="#B9B6AE" x1="0" y1="66" x2="262" y2="66"/><line stroke="#B3202E" x1="298" y1="66" x2="560" y2="66"/><path stroke="#B9B6AE" d="M262 58 C 218 11, 168 23, 196 55 C 212 75, 244 69, 262 58"/><path stroke="#B3202E" d="M298 58 C 342 11, 392 23, 364 55 C 348 75, 316 69, 298 58"/><path stroke="#B9B6AE" d="M267 68 C 259 92, 239 110, 221 126"/><path stroke="#B3202E" d="M287 68 C 295 92, 315 110, 333 126"/><path stroke="#B9B6AE" d="M262 61 C 218 14, 168 26, 196 58 C 212 78, 244 72, 262 61"/><path stroke="#B3202E" d="M298 61 C 342 14, 392 26, 364 58 C 348 78, 316 72, 298 61"/><path stroke="#B9B6AE" d="M270 68 C 262 92, 242 110, 224 126"/><path stroke="#B3202E" d="M290 68 C 298 92, 318 110, 336 126"/><path stroke="#B9B6AE" d="M262 64 C 218 17, 168 29, 196 61 C 212 81, 244 75, 262 64"/><path stroke="#B3202E" d="M298 64 C 342 17, 392 29, 364 61 C 348 81, 316 75, 298 64"/><path stroke="#B9B6AE" d="M273 68 C 265 92, 245 110, 227 126"/><path stroke="#B3202E" d="M293 68 C 301 92, 321 110, 339 126"/><line stroke="#B9B6AE" x1="266.0" y1="49" x2="266.0" y2="73"/><line stroke="#B9B6AE" x1="271.5" y1="49" x2="271.5" y2="73"/><line stroke="#B9B6AE" x1="277.0" y1="49" x2="277.0" y2="73"/><line stroke="#B3202E" x1="282.5" y1="49" x2="282.5" y2="73"/><line stroke="#B3202E" x1="288.0" y1="49" x2="288.0" y2="73"/><line stroke="#B3202E" x1="293.5" y1="49" x2="293.5" y2="73"/></g></svg>
+    <svg class="noshi" viewBox="0 0 30 64" aria-hidden="true"><g transform="rotate(-10 15 32)"><polygon points="15,2 27,12 27,52 15,62 3,52 3,12" fill="#FBF8F1" stroke="#1E1A16" stroke-width=".9"/><polygon points="15,10 21,16 21,48 15,54 9,48 9,16" fill="#B3202E"/><rect x="13.6" y="18" width="2.8" height="28" fill="#FBF8F1"/></g></svg>
+    <h1>鑑定目録</h1>
+    <span class="nm" id="nm"></span>
+  </header>
+
+  <div id="mineWrap">
+    <p class="label">あなたの鑑定</p>
+    <nav class="mine" id="mine"></nav>
+  </div>
+
+  <p class="label">どこを見たいか、選んでください</p>
+  <div class="hako">
+    <a class="ma" href="https://kichi-seki-lp.vercel.app/setsu/"><span class="in">時</span><span class="na">節の席</span><span class="hito">2027年をひと月ずつ</span></a>
+    <a class="ma" href="https://kichi-seki-lp.vercel.app/kita/"><span class="in">北</span><span class="na">北の座</span><span class="hito">親・先輩・上司・先生</span></a>
+    <a class="ma" href="https://kichi-seki-lp.vercel.app/meguri/"><span class="in">金</span><span class="na">巡の席</span><span class="hito">お金と仕事・天命</span></a>
+    <a class="ma" href="https://kichi-seki-lp.vercel.app/nishi/"><span class="in">西</span><span class="na">西の座</span><span class="hito">パートナー</span></a>
+    <a class="ma" href="https://kichi-seki-lp.vercel.app/tsuzuki/"><span class="in">中</span><span class="na">続きの席</span><span class="hito">自分のこと・なんでも</span></a>
+    <a class="ma" href="https://kichi-seki-lp.vercel.app/en/"><span class="in">東</span><span class="na">東の座</span><span class="hito">仕事・社会・恋愛</span></a>
+    <a class="ma" href="https://kichi-seki-lp.vercel.app/shirabe/"><span class="in">整</span><span class="na">調の席</span><span class="hito">五行のエネルギーを整える</span></a>
+    <a class="ma" href="https://kichi-seki-lp.vercel.app/minami/"><span class="in">南</span><span class="na">南の座</span><span class="hito">子ども・部下・後輩</span></a>
+    <div class="ma uke"><span class="in">始</span><span class="na">紡の席</span><span class="hito">受けた席</span></div>
+  </div>
+
+  <div class="obi">
+    <p>受けたい席は、LINEで<br>席の名前を一言送ってください</p>
+    <a href="https://lin.ee/yHO5wZ2">LINEをひらく</a>
+  </div>
+</main>
+<script>
+(function () {
+  var c = new URLSearchParams(location.search).get('c') || '';
+  if (!/^[a-z0-9_-]+$/i.test(c)) c = '';
+  var mine = document.getElementById('mine');
+  function esc(s) { return String(s || '').replace(/[&<>"]/g, function (m) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]; }); }
+  if (c) { document.querySelectorAll('.hako a[href^="https://kichi-seki-lp"]').forEach(function (a) { a.href += '?c=' + encodeURIComponent(c); }); }
+  function draw(name, items) {
+    if (name) document.getElementById('nm').textContent = name;
+    if (!c) { document.getElementById('mineWrap').style.display = 'none'; return; }
+    var h = '<a class="koyomi" href="/' + c + '"><b>運気の暦</b></a>';
+    items.forEach(function (it) { h += '<a href="' + esc(it.href) + '"' + (/^https?:/i.test(it.href || '') ? ' target="_blank" rel="noopener"' : '') + ' title="' + esc(it.note) + '"><b>' + esc(it.label) + '</b></a>'; });
+    mine.innerHTML = h;
+  }
+  if (!c) { draw('', []); return; }
+  fetch('/clients/' + c + '.json').then(function (r) { return r.ok ? r.json() : {}; }).then(function (d) {
+    var items = [];
+    var k = d.kanteishoHref || (/kanteisho/.test(d.doorHref || '') ? d.doorHref : '');
+    if (k) items.push({ label: '鑑定書', href: k, note: 'じっくり読む用' });
+    (d.afterPages || []).forEach(function (p) { if (p && p.href && !p.hidden) items.push(p); });
+    var nm = (d.client && d.client.name) || '';
+    (d.mokurokuOshi || []).slice().reverse().forEach(function (o) {
+      var a = document.querySelector('.hako a[href*="/' + o.seat + '/"]');
+      if (!a) return;
+      a.classList.add('oshi'); if (o.dai) a.classList.add('dai');
+      if (o.hito) a.querySelector('.hito').textContent = o.hito;
+      if (o.kome) { var k = document.createElement('span'); k.className = 'kome'; k.textContent = o.kome; a.appendChild(k); }
+      a.parentNode.insertBefore(a, a.parentNode.firstChild);
+    });
+    draw(nm ? nm.replace(/さん$/, '') + 'さま' : '', items);
+  }).catch(function () { draw('', []); });
+})();
+</script>
+</body>
+</html>

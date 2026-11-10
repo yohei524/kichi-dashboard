@@ -156,5 +156,17 @@
   "doorNote": "11月9日にお話ししたことを、まとめてあります",
   "kanteishoHref": "/tamaki-kanteisho",
   "plan": null,
-  "parts": {}
+  "parts": {},
+  "mokurokuOshi": [
+    {
+      "seat": "minami",
+      "dai": true,
+      "hito": "後継の方・スタッフの方を、一人ずつ見る",
+      "kome": "おすすめ"
+    },
+    {
+      "seat": "en",
+      "hito": "会社の外との関わり・仕事と社会"
+    }
+  ]
 }
