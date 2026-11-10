@@ -119,7 +119,6 @@ body{color:var(--sumi);font-family:var(--gothic);letter-spacing:.05em;min-height
       a.classList.add('oshi'); if (o.dai) a.classList.add('dai');
       if (o.hito) a.querySelector('.hito').textContent = o.hito;
       if (o.kome) { var k = document.createElement('span'); k.className = 'kome'; k.textContent = o.kome; a.appendChild(k); }
-      a.parentNode.insertBefore(a, a.parentNode.firstChild);
     });
     draw(nm ? nm.replace(/さん$/, '') + 'さま' : '', items);
   }).catch(function () { draw('', []); });
