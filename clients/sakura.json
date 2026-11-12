@@ -87,8 +87,8 @@
     }
   ],
   "monthlyTenchuPeriod": {
-    "startMonth": 1,
-    "startDay": 1,
+    "startMonth": 12,
+    "startDay": 7,
     "endMonth": 2,
     "endDay": 3,
     "endYear": 2027

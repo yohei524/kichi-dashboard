@@ -805,10 +805,15 @@ function _findManualMonth(m, d, y) {
 
 function isInTenchuPeriod(m, d, y) {
   if (!D.monthlyTenchuPeriod) return false;
-  if (y !== D.monthlyTenchuPeriod.endYear) return false;
+  // 【261112修正】年をまたぐ期間（子丑天中殺＝12/7〜2/3）を判定できるよう、月日の数字ではなく日付で比べる。
+  //   旧：今年＝endYear の時だけ見て、月×100＋日 の大小で比べていたため、12月も1月も false になっていた。
+  //   開始の年は、開始月＞終了月なら endYear の前年。
   var p = D.monthlyTenchuPeriod;
-  var today = m * 100 + d;
-  return today >= p.startMonth * 100 + p.startDay && today <= p.endMonth * 100 + p.endDay;
+  var sY = (p.startMonth > p.endMonth) ? p.endYear - 1 : p.endYear;
+  var t = new Date(y, m - 1, d).getTime();
+  var s = new Date(sY, p.startMonth - 1, p.startDay).getTime();
+  var e = new Date(p.endYear, p.endMonth - 1, p.endDay).getTime();
+  return t >= s && t <= e;
 }
 
 function getDaysUntil(year, month, day) {
