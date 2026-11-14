@@ -171,6 +171,14 @@
       "destination": "/view.html?client=noriko"
     },
     {
+      "source": "/kojiro",
+      "destination": "/view.html?client=kojiro"
+    },
+    {
+      "source": "/taki",
+      "destination": "/view.html?client=taki"
+    },
+    {
       "source": "/tamaki",
       "destination": "/view.html?client=tamaki"
     },
