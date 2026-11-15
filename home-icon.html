@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>暦をスマホに置く</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-night: #F7F1E6;
+    --color-warm-white: #FFFCF6;
+    --color-beige: #E0D3BC;
+    --color-accent: #B8862C;
+    --color-brown: #8A7B62;
+    --color-brown-dark: #3A3228;
+  }
+  html { background: #F7F1E6; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Serif JP', serif;
+    background-color: #F7F1E6;
+    background-image:
+      radial-gradient(1200px 600px at 50% -10%, rgba(184, 134, 44, 0.08), transparent 60%),
+      linear-gradient(180deg, var(--color-night) 0%, #FBF6EC 45%, #F1E8D6 100%);
+    background-attachment: fixed;
+    color: var(--color-brown-dark);
+    min-height: 100vh;
+    line-height: 1.9;
+    letter-spacing: 0.05em;
+  }
+  .wrap { max-width: 28rem; margin: 0 auto; padding: 56px 20px 80px; }
+  header { text-align: center; margin-bottom: 36px; }
+  header .mark { font-size: 13px; color: var(--color-accent); letter-spacing: 0.3em; margin-bottom: 10px; }
+  header h1 { font-size: 23px; font-weight: 500; margin: 0; letter-spacing: 0.06em; }
+  section { margin-bottom: 36px; }
+  .divider { text-align: center; color: var(--color-accent); font-size: 12px; opacity: 0.6; margin-bottom: 16px; }
+  h2 { font-size: 16px; font-weight: 500; color: var(--color-accent); text-align: center; margin-bottom: 14px; }
+  p.lead { font-size: 15px; text-align: center; }
+  .card {
+    background: var(--color-warm-white);
+    border: 1px solid var(--color-beige);
+    border-radius: 6px;
+    padding: 22px 18px;
+    font-size: 14.5px;
+  }
+  .card + .card { margin-top: 14px; }
+  .card h3 { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+  ol { padding-left: 1.4em; }
+  ol li { margin-bottom: 10px; }
+  ol li:last-child { margin-bottom: 0; }
+  .key {
+    display: inline-block;
+    border: 1px solid var(--color-beige);
+    background: #F7F1E6;
+    border-radius: 4px;
+    padding: 0 6px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .note { font-size: 12.5px; color: var(--color-brown); margin-top: 12px; }
+  .tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+  .tabs button {
+    flex: 1;
+    font: inherit;
+    font-size: 14px;
+    padding: 10px 6px;
+    border: 1px solid var(--color-accent);
+    background: var(--color-warm-white);
+    color: var(--color-accent);
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .tabs button[aria-selected="true"] { background: var(--color-accent); color: #fffaf0; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="mark">㐂占</div>
+    <h1>暦を、スマホに置いておく</h1>
+  </header>
+
+  <section>
+    <p class="lead">
+      運気の暦は<br>
+      アプリのように、スマホのホーム画面に<br>
+      アイコンとして置いておけます<br><br>
+      毎日、ひと押しで開けるので<br>
+      LINEをさかのぼって探さなくて大丈夫です
+    </p>
+  </section>
+
+  <section>
+    <div class="divider">━━━━━━━━━━━</div>
+    <h2>はじめに：LINEの外で開く</h2>
+    <div class="card">
+      LINEの中で開いたままだと、ホーム画面に置けません。<br>
+      まず、㐂から届いた暦のURLを押して開いたら、
+      <ol style="margin-top:10px">
+        <li>画面の右上か右下にある <span class="key">⋮</span> や <span class="key">…</span> のボタンを押す</li>
+        <li>iPhoneは <span class="key">Safariで開く</span>、Androidは <span class="key">ブラウザで開く</span> や <span class="key">Chromeで開く</span> を選ぶ</li>
+      </ol>
+      <p class="note">ボタンの場所や名前は、LINEやスマホの版によって少し違います。</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="divider">━━━━━━━━━━━</div>
+    <h2>ホーム画面に置く</h2>
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-os="ios">iPhone</button>
+      <button role="tab" aria-selected="false" data-os="android">Android</button>
+    </div>
+
+    <div class="card" data-panel="ios">
+      <h3>iPhone（Safari）</h3>
+      <ol>
+        <li>画面の下にある共有ボタン <span class="key">□に↑</span> を押す<br><span class="note">見当たらない時は、右下の <span class="key">…</span> を押すと出てきます</span></li>
+        <li>出てきた一覧を下へ動かして <span class="key">ホーム画面に追加</span> を押す</li>
+        <li>名前を「㐂の暦」など、分かりやすい名前にする</li>
+        <li>右上の <span class="key">追加</span> を押す</li>
+      </ol>
+    </div>
+
+    <div class="card" data-panel="android" hidden>
+      <h3>Android（Chrome）</h3>
+      <ol>
+        <li>画面の右上にある <span class="key">⋮</span> を押す</li>
+        <li><span class="key">ホーム画面に追加</span> を押す</li>
+        <li>名前を「㐂の暦」など、分かりやすい名前にする</li>
+        <li><span class="key">追加</span> を押す（もう一度確認が出たら、もう一度 <span class="key">追加</span>）</li>
+      </ol>
+    </div>
+
+    <p class="note" style="text-align:center">ホーム画面に、アイコンが一つ増えたら完了です</p>
+  </section>
+
+  <section>
+    <div class="divider">━━━━━━━━━━━</div>
+    <h2>ちょっとしたこと</h2>
+    <div class="card">
+      <ol>
+        <li>暦の中身は、こちらで新しくすると、アイコンから開いた時にもそのまま新しくなっています</li>
+        <li>いらなくなったら、アイコンを長押しして削除すれば消えます。暦そのものは消えません</li>
+      </ol>
+      <p class="note">うまくいかない時は、LINEで気軽に聞いてください☺️</p>
+    </div>
+  </section>
+
+</div>
+<script>
+  (function () {
+    var tabs = document.querySelectorAll('.tabs button');
+    var panels = document.querySelectorAll('[data-panel]');
+    function show(os) {
+      tabs.forEach(function (b) { b.setAttribute('aria-selected', String(b.dataset.os === os)); });
+      panels.forEach(function (p) { p.hidden = p.dataset.panel !== os; });
+    }
+    if (/android/i.test(navigator.userAgent)) show('android');
+    tabs.forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.os); }); });
+  })();
+</script>
+</body>
+</html>
