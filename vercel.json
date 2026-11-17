@@ -51,6 +51,14 @@
   ],
   "rewrites": [
     {
+      "source": "/taki-meishikizu",
+      "destination": "/clients/taki-meishikizu.html"
+    },
+    {
+      "source": "/taki-nenpyo",
+      "destination": "/clients/taki-nenpyo.html"
+    },
+    {
       "source": "/home-icon",
       "destination": "/home-icon.html"
     },

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>文子さんの運気の年表</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f1e7;--paper:#fffdf8;--ink:#2b2622;--sub:#6f655b;--line:#ded3c2;
+  --accent:#8a3b2e;--gold:#a8822e;--tc:#5b4a7a;--tcbg:#efeaf6;
+  --musubu:#2f6b55;--musububg:#e4f1ea;--yureru:#9a4a2c;--yurerubg:#f8e7de;--neutral:#5f5a52;--neutralbg:#ece7de;
+  --now:#c8962e;--nowbg:#fff6df;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1b1916;--paper:#24211d;--ink:#eee7dc;--sub:#b3a898;--line:#3d3830;
+  --accent:#e08a74;--gold:#d8b25e;--tc:#c4b2e6;--tcbg:#2f2a3a;
+  --musubu:#8fd0b2;--musububg:#1f3229;--yureru:#f0a685;--yurerubg:#3a2820;--neutral:#c9c1b4;--neutralbg:#302c26;
+  --now:#e6b84e;--nowbg:#3a311c;}}
+:root[data-theme="dark"]{
+  --bg:#1b1916;--paper:#24211d;--ink:#eee7dc;--sub:#b3a898;--line:#3d3830;
+  --accent:#e08a74;--gold:#d8b25e;--tc:#c4b2e6;--tcbg:#2f2a3a;
+  --musubu:#8fd0b2;--musububg:#1f3229;--yureru:#f0a685;--yurerubg:#3a2820;--neutral:#c9c1b4;--neutralbg:#302c26;
+  --now:#e6b84e;--nowbg:#3a311c;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Zen Kaku Gothic New",sans-serif;line-height:1.7;font-size:16px}
+.wrap{max-width:760px;margin:0 auto;padding:28px 16px 80px}
+h1{font-family:"Shippori Mincho",serif;font-size:1.7rem;margin:0 0 4px;letter-spacing:.06em}
+.lead{color:var(--sub);margin:0 0 18px;font-size:.95rem}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.pillars{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.pillars span{background:var(--neutralbg);border-radius:8px;padding:4px 10px;font-weight:500}
+.legend{display:grid;gap:6px;font-size:.88rem;color:var(--sub)}
+.tag{display:inline-block;border-radius:6px;padding:1px 8px;font-size:.8rem;font-weight:500;margin:2px 4px 2px 0;white-space:nowrap}
+.t-musubu{background:var(--musububg);color:var(--musubu)}
+.t-yureru{background:var(--yurerubg);color:var(--yureru)}
+.t-neutral{background:var(--neutralbg);color:var(--neutral)}
+.t-tc{background:var(--tcbg);color:var(--tc);font-weight:700}
+.tools{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0;display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:10px}
+button{font:inherit;font-size:.9rem;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+.daiun{margin:26px 0 8px;padding:14px 16px;border-radius:12px;background:var(--paper);border:1px solid var(--line);border-left:6px solid var(--gold)}
+.daiun.tc{border-left-color:var(--tc);background:linear-gradient(0deg,var(--paper),var(--paper)),var(--tcbg)}
+.daiun .age{font-family:"Shippori Mincho",serif;font-size:1.25rem;font-weight:700}
+.daiun .kanshi{font-family:"Shippori Mincho",serif;font-size:1.25rem;margin-left:8px}
+.daiun .stars{color:var(--sub);margin-left:8px}
+.daiun .note{margin-top:6px;font-size:.95rem}
+.daiun .isou{margin-top:4px}
+.timeline{position:relative;margin-left:8px;padding-left:22px;border-left:2px solid var(--line)}
+.yr{position:relative;padding:10px 0 12px;border-bottom:1px dashed var(--line)}
+.yr:before{content:"";position:absolute;left:-29px;top:16px;width:12px;height:12px;border-radius:50%;background:var(--paper);border:2px solid var(--line)}
+.yr.tc:before{background:var(--tc);border-color:var(--tc)}
+.yr.now{background:var(--nowbg);margin-left:-22px;padding-left:22px;border-radius:8px}
+.yr.now:before{left:-7px;background:var(--now);border-color:var(--now)}
+.yr .head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.yr .y{font-weight:700;font-size:1.05rem;min-width:4.2em}
+.yr .a{color:var(--sub);font-size:.88rem;min-width:6.5em}
+.yr .k{font-family:"Shippori Mincho",serif;font-size:1.1rem;font-weight:700}
+.yr .s{color:var(--sub);font-size:.9rem}
+.yr .badges{margin-top:3px}
+.yr .now-label{color:var(--now);font-weight:700;font-size:.85rem}
+textarea{width:100%;margin-top:6px;font:inherit;font-size:.92rem;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:6px 10px;resize:vertical;min-height:2.4em}
+textarea:focus{outline:2px solid var(--gold);border-color:transparent}
+.foot{color:var(--sub);font-size:.85rem;margin-top:28px}
+@media print{.tools{display:none}textarea{border:none;padding:0;min-height:0}body{background:#fff}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>文子さんの運気の年表</h1>
+  <p class="lead">生まれた年から、十年ごとの運気と、一年ごとの運気を縦に並べました。それぞれの年の欄に、実際にあったことを書き足していくと、文子さんの運気の流れと人生の出来事が一本につながります。</p>
+
+  <div class="card">
+    <div><b>文子さんの命式</b>　1982年11月4日生まれ</div>
+    <div class="pillars"><span>日の柱 辛卯</span><span>月の柱 庚戌</span><span>年の柱 壬戌</span><span>天中殺 午未</span></div>
+  </div>
+
+  <div class="card legend">
+    <div><span class="tag t-tc">天中殺</span>午未の年。決めごと・始めごとを外して、深める年。</div>
+    <div><span class="tag t-musubu">結ぶ形</span>干合・支合・半会・大半会。命式の柱と結びつく年。</div>
+    <div><span class="tag t-yureru">揺れる形</span>対冲・天剋地冲・刑・害・破。命式の柱が揺さぶられる年。</div>
+    <div><span class="tag t-neutral">そのほか</span>律音など。</div>
+    <div>年の柱＝家・目上／月の柱＝仕事・社会／日の柱＝文子さん自身・家庭</div>
+    <div>一年の運気は、毎年2月の立春で切り替わります。年齢は、その年の誕生日（11月4日）で迎える歳です。</div>
+  </div>
+
+  <div class="tools">
+    <button id="toNow">今年へ</button>
+    <button id="toTop">いちばん上へ</button>
+    <button id="print">印刷する</button>
+  </div>
+
+  <div id="list"></div>
+
+  <p class="foot">書き込んだ内容は、このページを開いているブラウザの中に残ります。</p>
+</div>
+
+<script>
+const DATA = {"pillars": ["辛卯", "庚戌", "壬戌"], "tc": "午未", "startAge": 9, "daiun": [{"ageFrom": 0, "ageTo": 8, "kan": "庚", "shi": "戌", "joushou": "", "jushou": "", "isou": [], "pre": true}, {"ageFrom": 9, "ageTo": 18, "kan": "己", "shi": "酉", "joushou": "龍高星", "jushou": "天禄星", "tc": false, "isou": ["年柱：害", "月柱：害", "日柱：対冲"]}, {"ageFrom": 19, "ageTo": 28, "kan": "戊", "shi": "申", "joushou": "玉堂星", "jushou": "天将星", "tc": false, "isou": []}, {"ageFrom": 29, "ageTo": 38, "kan": "丁", "shi": "未", "joushou": "車騎星", "jushou": "天堂星", "tc": true, "isou": ["年柱：干合", "年柱：庫刑", "年柱：破", "月柱：庫刑", "月柱：破", "日柱：半会"]}, {"ageFrom": 39, "ageTo": 48, "kan": "丙", "shi": "午", "joushou": "牽牛星", "jushou": "天胡星", "tc": true, "isou": ["年柱：半会", "月柱：半会", "日柱：干合"]}, {"ageFrom": 49, "ageTo": 58, "kan": "乙", "shi": "巳", "joushou": "禄存星", "jushou": "天極星", "tc": false, "isou": ["月柱：干合"]}, {"ageFrom": 59, "ageTo": 68, "kan": "甲", "shi": "辰", "joushou": "司禄星", "jushou": "天庫星", "tc": false, "isou": ["年柱：対冲", "月柱：天剋地冲", "日柱：害"]}, {"ageFrom": 69, "ageTo": 78, "kan": "癸", "shi": "卯", "joushou": "鳳閣星", "jushou": "天馳星", "tc": false, "isou": ["年柱：支合", "月柱：支合"]}, {"ageFrom": 79, "ageTo": 88, "kan": "壬", "shi": "寅", "joushou": "調舒星", "jushou": "天報星", "tc": false, "isou": ["年柱：大半会", "月柱：半会"]}], "years": [{"y": 1982, "age": 0, "kan": "壬", "shi": "戌", "js": "調舒星", "ju": "天南星", "tc": false, "isou": ["年柱：律音", "日柱：支合"]}, {"y": 1983, "age": 1, "kan": "癸", "shi": "亥", "js": "鳳閣星", "ju": "天恍星", "tc": false, "isou": ["日柱：半会"]}, {"y": 1984, "age": 2, "kan": "甲", "shi": "子", "js": "司禄星", "ju": "天貴星", "tc": false, "isou": ["日柱：旺刑"]}, {"y": 1985, "age": 3, "kan": "乙", "shi": "丑", "js": "禄存星", "ju": "天印星", "tc": false, "isou": ["年柱：庫刑", "月柱：干合", "月柱：庫刑"]}, {"y": 1986, "age": 4, "kan": "丙", "shi": "寅", "js": "牽牛星", "ju": "天報星", "tc": false, "isou": ["年柱：半会", "月柱：半会", "日柱：干合"]}, {"y": 1987, "age": 5, "kan": "丁", "shi": "卯", "js": "車騎星", "ju": "天馳星", "tc": false, "isou": ["年柱：干合", "年柱：支合", "月柱：支合"]}, {"y": 1988, "age": 6, "kan": "戊", "shi": "辰", "js": "玉堂星", "ju": "天庫星", "tc": false, "isou": ["年柱：天剋地冲", "月柱：対冲", "日柱：害"]}, {"y": 1989, "age": 7, "kan": "己", "shi": "巳", "js": "龍高星", "ju": "天極星", "tc": false, "isou": []}, {"y": 1990, "age": 8, "kan": "庚", "shi": "午", "js": "石門星", "ju": "天胡星", "tc": true, "isou": ["年柱：半会", "月柱：大半会"]}, {"y": 1991, "age": 9, "kan": "辛", "shi": "未", "js": "貫索星", "ju": "天堂星", "tc": true, "isou": ["年柱：庫刑", "年柱：破", "月柱：庫刑", "月柱：破", "日柱：大半会"]}, {"y": 1992, "age": 10, "kan": "壬", "shi": "申", "js": "調舒星", "ju": "天将星", "tc": false, "isou": []}, {"y": 1993, "age": 11, "kan": "癸", "shi": "酉", "js": "鳳閣星", "ju": "天禄星", "tc": false, "isou": ["年柱：害", "月柱：害", "日柱：対冲"]}, {"y": 1994, "age": 12, "kan": "甲", "shi": "戌", "js": "司禄星", "ju": "天南星", "tc": false, "isou": ["日柱：支合"]}, {"y": 1995, "age": 13, "kan": "乙", "shi": "亥", "js": "禄存星", "ju": "天恍星", "tc": false, "isou": ["月柱：干合", "日柱：半会"]}, {"y": 1996, "age": 14, "kan": "丙", "shi": "子", "js": "牽牛星", "ju": "天貴星", "tc": false, "isou": ["日柱：干合", "日柱：旺刑"]}, {"y": 1997, "age": 15, "kan": "丁", "shi": "丑", "js": "車騎星", "ju": "天印星", "tc": false, "isou": ["年柱：干合", "年柱：庫刑", "月柱：庫刑"]}, {"y": 1998, "age": 16, "kan": "戊", "shi": "寅", "js": "玉堂星", "ju": "天報星", "tc": false, "isou": ["年柱：半会", "月柱：半会"]}, {"y": 1999, "age": 17, "kan": "己", "shi": "卯", "js": "龍高星", "ju": "天馳星", "tc": false, "isou": ["年柱：支合", "月柱：支合"]}, {"y": 2000, "age": 18, "kan": "庚", "shi": "辰", "js": "石門星", "ju": "天庫星", "tc": false, "isou": ["年柱：対冲", "月柱：対冲", "月柱：納音", "日柱：害"]}, {"y": 2001, "age": 19, "kan": "辛", "shi": "巳", "js": "貫索星", "ju": "天極星", "tc": false, "isou": []}, {"y": 2002, "age": 20, "kan": "壬", "shi": "午", "js": "調舒星", "ju": "天胡星", "tc": true, "isou": ["年柱：大半会", "月柱：半会"]}, {"y": 2003, "age": 21, "kan": "癸", "shi": "未", "js": "鳳閣星", "ju": "天堂星", "tc": true, "isou": ["年柱：庫刑", "年柱：破", "月柱：庫刑", "月柱：破", "日柱：半会"]}, {"y": 2004, "age": 22, "kan": "甲", "shi": "申", "js": "司禄星", "ju": "天将星", "tc": false, "isou": []}, {"y": 2005, "age": 23, "kan": "乙", "shi": "酉", "js": "禄存星", "ju": "天禄星", "tc": false, "isou": ["年柱：害", "月柱：干合", "月柱：害", "日柱：天剋地冲"]}, {"y": 2006, "age": 24, "kan": "丙", "shi": "戌", "js": "牽牛星", "ju": "天南星", "tc": false, "isou": ["日柱：干合", "日柱：支合"]}, {"y": 2007, "age": 25, "kan": "丁", "shi": "亥", "js": "車騎星", "ju": "天恍星", "tc": false, "isou": ["年柱：干合", "日柱：半会"]}, {"y": 2008, "age": 26, "kan": "戊", "shi": "子", "js": "玉堂星", "ju": "天貴星", "tc": false, "isou": ["日柱：旺刑"]}, {"y": 2009, "age": 27, "kan": "己", "shi": "丑", "js": "龍高星", "ju": "天印星", "tc": false, "isou": ["年柱：庫刑", "月柱：庫刑"]}, {"y": 2010, "age": 28, "kan": "庚", "shi": "寅", "js": "石門星", "ju": "天報星", "tc": false, "isou": ["年柱：半会", "月柱：大半会"]}, {"y": 2011, "age": 29, "kan": "辛", "shi": "卯", "js": "貫索星", "ju": "天馳星", "tc": false, "isou": ["年柱：支合", "月柱：支合", "日柱：律音"]}, {"y": 2012, "age": 30, "kan": "壬", "shi": "辰", "js": "調舒星", "ju": "天庫星", "tc": false, "isou": ["年柱：対冲", "年柱：納音", "月柱：対冲", "日柱：害"]}, {"y": 2013, "age": 31, "kan": "癸", "shi": "巳", "js": "鳳閣星", "ju": "天極星", "tc": false, "isou": []}, {"y": 2014, "age": 32, "kan": "甲", "shi": "午", "js": "司禄星", "ju": "天胡星", "tc": true, "isou": ["年柱：半会", "月柱：半会"]}, {"y": 2015, "age": 33, "kan": "乙", "shi": "未", "js": "禄存星", "ju": "天堂星", "tc": true, "isou": ["年柱：庫刑", "年柱：破", "月柱：干合", "月柱：庫刑", "月柱：破", "日柱：半会"]}, {"y": 2016, "age": 34, "kan": "丙", "shi": "申", "js": "牽牛星", "ju": "天将星", "tc": false, "isou": ["日柱：干合"]}, {"y": 2017, "age": 35, "kan": "丁", "shi": "酉", "js": "車騎星", "ju": "天禄星", "tc": false, "isou": ["年柱：干合", "年柱：害", "月柱：害", "日柱：天剋地冲"]}, {"y": 2018, "age": 36, "kan": "戊", "shi": "戌", "js": "玉堂星", "ju": "天南星", "tc": false, "isou": ["日柱：支合"]}, {"y": 2019, "age": 37, "kan": "己", "shi": "亥", "js": "龍高星", "ju": "天恍星", "tc": false, "isou": ["日柱：半会"]}, {"y": 2020, "age": 38, "kan": "庚", "shi": "子", "js": "石門星", "ju": "天貴星", "tc": false, "isou": ["日柱：旺刑"]}, {"y": 2021, "age": 39, "kan": "辛", "shi": "丑", "js": "貫索星", "ju": "天印星", "tc": false, "isou": ["年柱：庫刑", "月柱：庫刑"]}, {"y": 2022, "age": 40, "kan": "壬", "shi": "寅", "js": "調舒星", "ju": "天報星", "tc": false, "isou": ["年柱：大半会", "月柱：半会"]}, {"y": 2023, "age": 41, "kan": "癸", "shi": "卯", "js": "鳳閣星", "ju": "天馳星", "tc": false, "isou": ["年柱：支合", "月柱：支合"]}, {"y": 2024, "age": 42, "kan": "甲", "shi": "辰", "js": "司禄星", "ju": "天庫星", "tc": false, "isou": ["年柱：対冲", "月柱：天剋地冲", "日柱：害"]}, {"y": 2025, "age": 43, "kan": "乙", "shi": "巳", "js": "禄存星", "ju": "天極星", "tc": false, "isou": ["月柱：干合"]}, {"y": 2026, "age": 44, "kan": "丙", "shi": "午", "js": "牽牛星", "ju": "天胡星", "tc": true, "isou": ["年柱：半会", "月柱：半会", "日柱：干合"]}, {"y": 2027, "age": 45, "kan": "丁", "shi": "未", "js": "車騎星", "ju": "天堂星", "tc": true, "isou": ["年柱：干合", "年柱：庫刑", "年柱：破", "月柱：庫刑", "月柱：破", "日柱：半会"]}, {"y": 2028, "age": 46, "kan": "戊", "shi": "申", "js": "玉堂星", "ju": "天将星", "tc": false, "isou": []}, {"y": 2029, "age": 47, "kan": "己", "shi": "酉", "js": "龍高星", "ju": "天禄星", "tc": false, "isou": ["年柱：害", "月柱：害", "日柱：対冲"]}, {"y": 2030, "age": 48, "kan": "庚", "shi": "戌", "js": "石門星", "ju": "天南星", "tc": false, "isou": ["月柱：律音", "日柱：支合"]}, {"y": 2031, "age": 49, "kan": "辛", "shi": "亥", "js": "貫索星", "ju": "天恍星", "tc": false, "isou": ["日柱：大半会"]}, {"y": 2032, "age": 50, "kan": "壬", "shi": "子", "js": "調舒星", "ju": "天貴星", "tc": false, "isou": ["日柱：旺刑"]}, {"y": 2033, "age": 51, "kan": "癸", "shi": "丑", "js": "鳳閣星", "ju": "天印星", "tc": false, "isou": ["年柱：庫刑", "月柱：庫刑"]}, {"y": 2034, "age": 52, "kan": "甲", "shi": "寅", "js": "司禄星", "ju": "天報星", "tc": false, "isou": ["年柱：半会", "月柱：半会"]}, {"y": 2035, "age": 53, "kan": "乙", "shi": "卯", "js": "禄存星", "ju": "天馳星", "tc": false, "isou": ["年柱：支合", "月柱：干合", "月柱：支合"]}, {"y": 2036, "age": 54, "kan": "丙", "shi": "辰", "js": "牽牛星", "ju": "天庫星", "tc": false, "isou": ["年柱：天剋地冲", "月柱：天剋地冲", "日柱：干合", "日柱：害"]}, {"y": 2037, "age": 55, "kan": "丁", "shi": "巳", "js": "車騎星", "ju": "天極星", "tc": false, "isou": ["年柱：干合"]}, {"y": 2038, "age": 56, "kan": "戊", "shi": "午", "js": "玉堂星", "ju": "天胡星", "tc": true, "isou": ["年柱：半会", "月柱：半会"]}, {"y": 2039, "age": 57, "kan": "己", "shi": "未", "js": "龍高星", "ju": "天堂星", "tc": true, "isou": ["年柱：庫刑", "年柱：破", "月柱：庫刑", "月柱：破", "日柱：半会"]}, {"y": 2040, "age": 58, "kan": "庚", "shi": "申", "js": "石門星", "ju": "天将星", "tc": false, "isou": []}, {"y": 2041, "age": 59, "kan": "辛", "shi": "酉", "js": "貫索星", "ju": "天禄星", "tc": false, "isou": ["年柱：害", "月柱：害", "日柱：対冲", "日柱：納音"]}, {"y": 2042, "age": 60, "kan": "壬", "shi": "戌", "js": "調舒星", "ju": "天南星", "tc": false, "isou": ["年柱：律音", "日柱：支合"]}, {"y": 2043, "age": 61, "kan": "癸", "shi": "亥", "js": "鳳閣星", "ju": "天恍星", "tc": false, "isou": ["日柱：半会"]}, {"y": 2044, "age": 62, "kan": "甲", "shi": "子", "js": "司禄星", "ju": "天貴星", "tc": false, "isou": ["日柱：旺刑"]}, {"y": 2045, "age": 63, "kan": "乙", "shi": "丑", "js": "禄存星", "ju": "天印星", "tc": false, "isou": ["年柱：庫刑", "月柱：干合", "月柱：庫刑"]}, {"y": 2046, "age": 64, "kan": "丙", "shi": "寅", "js": "牽牛星", "ju": "天報星", "tc": false, "isou": ["年柱：半会", "月柱：半会", "日柱：干合"]}, {"y": 2047, "age": 65, "kan": "丁", "shi": "卯", "js": "車騎星", "ju": "天馳星", "tc": false, "isou": ["年柱：干合", "年柱：支合", "月柱：支合"]}, {"y": 2048, "age": 66, "kan": "戊", "shi": "辰", "js": "玉堂星", "ju": "天庫星", "tc": false, "isou": ["年柱：天剋地冲", "月柱：対冲", "日柱：害"]}, {"y": 2049, "age": 67, "kan": "己", "shi": "巳", "js": "龍高星", "ju": "天極星", "tc": false, "isou": []}, {"y": 2050, "age": 68, "kan": "庚", "shi": "午", "js": "石門星", "ju": "天胡星", "tc": true, "isou": ["年柱：半会", "月柱：大半会"]}, {"y": 2051, "age": 69, "kan": "辛", "shi": "未", "js": "貫索星", "ju": "天堂星", "tc": true, "isou": ["年柱：庫刑", "年柱：破", "月柱：庫刑", "月柱：破", "日柱：大半会"]}, {"y": 2052, "age": 70, "kan": "壬", "shi": "申", "js": "調舒星", "ju": "天将星", "tc": false, "isou": []}, {"y": 2053, "age": 71, "kan": "癸", "shi": "酉", "js": "鳳閣星", "ju": "天禄星", "tc": false, "isou": ["年柱：害", "月柱：害", "日柱：対冲"]}, {"y": 2054, "age": 72, "kan": "甲", "shi": "戌", "js": "司禄星", "ju": "天南星", "tc": false, "isou": ["日柱：支合"]}, {"y": 2055, "age": 73, "kan": "乙", "shi": "亥", "js": "禄存星", "ju": "天恍星", "tc": false, "isou": ["月柱：干合", "日柱：半会"]}, {"y": 2056, "age": 74, "kan": "丙", "shi": "子", "js": "牽牛星", "ju": "天貴星", "tc": false, "isou": ["日柱：干合", "日柱：旺刑"]}, {"y": 2057, "age": 75, "kan": "丁", "shi": "丑", "js": "車騎星", "ju": "天印星", "tc": false, "isou": ["年柱：干合", "年柱：庫刑", "月柱：庫刑"]}, {"y": 2058, "age": 76, "kan": "戊", "shi": "寅", "js": "玉堂星", "ju": "天報星", "tc": false, "isou": ["年柱：半会", "月柱：半会"]}, {"y": 2059, "age": 77, "kan": "己", "shi": "卯", "js": "龍高星", "ju": "天馳星", "tc": false, "isou": ["年柱：支合", "月柱：支合"]}, {"y": 2060, "age": 78, "kan": "庚", "shi": "辰", "js": "石門星", "ju": "天庫星", "tc": false, "isou": ["年柱：対冲", "月柱：対冲", "月柱：納音", "日柱：害"]}, {"y": 2061, "age": 79, "kan": "辛", "shi": "巳", "js": "貫索星", "ju": "天極星", "tc": false, "isou": []}, {"y": 2062, "age": 80, "kan": "壬", "shi": "午", "js": "調舒星", "ju": "天胡星", "tc": true, "isou": ["年柱：大半会", "月柱：半会"]}, {"y": 2063, "age": 81, "kan": "癸", "shi": "未", "js": "鳳閣星", "ju": "天堂星", "tc": true, "isou": ["年柱：庫刑", "年柱：破", "月柱：庫刑", "月柱：破", "日柱：半会"]}, {"y": 2064, "age": 82, "kan": "甲", "shi": "申", "js": "司禄星", "ju": "天将星", "tc": false, "isou": []}, {"y": 2065, "age": 83, "kan": "乙", "shi": "酉", "js": "禄存星", "ju": "天禄星", "tc": false, "isou": ["年柱：害", "月柱：干合", "月柱：害", "日柱：天剋地冲"]}, {"y": 2066, "age": 84, "kan": "丙", "shi": "戌", "js": "牽牛星", "ju": "天南星", "tc": false, "isou": ["日柱：干合", "日柱：支合"]}, {"y": 2067, "age": 85, "kan": "丁", "shi": "亥", "js": "車騎星", "ju": "天恍星", "tc": false, "isou": ["年柱：干合", "日柱：半会"]}, {"y": 2068, "age": 86, "kan": "戊", "shi": "子", "js": "玉堂星", "ju": "天貴星", "tc": false, "isou": ["日柱：旺刑"]}, {"y": 2069, "age": 87, "kan": "己", "shi": "丑", "js": "龍高星", "ju": "天印星", "tc": false, "isou": ["年柱：庫刑", "月柱：庫刑"]}, {"y": 2070, "age": 88, "kan": "庚", "shi": "寅", "js": "石門星", "ju": "天報星", "tc": false, "isou": ["年柱：半会", "月柱：大半会"]}, {"y": 2071, "age": 89, "kan": "辛", "shi": "卯", "js": "貫索星", "ju": "天馳星", "tc": false, "isou": ["年柱：支合", "月柱：支合", "日柱：律音"]}]};
+const NOTES = {"29": "ここから二十年が、大運天中殺です。自分のために広げるより、誰かのために働くと評価される。今あるものを深めると、本物になる二十年です。", "39": "二十年の後半の十年。本来は人とも仕事とも結びつきが強まる形ですが、大運天中殺の中では思った通りには働きにくい十年です。44歳からの最後の五年は、運気が普通の形に戻っていく時期です。", "49": "2031年11月4日、二十年の大運天中殺が明けます。禄存星は、文子さんの才能の星と同じ星。仕事の柱（月の柱）と結びつく十年です。", "59": "守護神の一つ、甲が巡る十年です。", "79": "守護神の一つ、壬が巡る十年。三合の形で、大きく広がる十年です。"};
+const PREFILL = {"2001": "高校を卒業して、地元のスーパーへ", "2024": "このころから、職場の上司との関係がしんどくなる", "2025": "辞めたいと伝える。それから強い言葉が止む", "2026": "11月17日　紡の席"};
+const NOW_YEAR = 2026;
+const KEY = "taki-nenpyo-v1";
+
+const MUSUBU = ["干合","支合","半会","大半会"];
+const YURERU = ["対冲","天剋地冲","刑","庫刑","害","破","自刑"];
+function tagClass(t){
+  if (MUSUBU.includes(t)) return "t-musubu";
+  if (/刑|冲|害|破/.test(t)) return "t-yureru";
+  return "t-neutral";
+}
+function isouTags(list){
+  return list.map(s => {
+    const [p, t] = s.split("：");
+    const pp = p.replace("年柱","年の柱").replace("月柱","月の柱").replace("日柱","日の柱");
+    return `<span class="tag ${tagClass(t)}">${pp}と${t}</span>`;
+  }).join("");
+}
+let saved = {};
+try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch(e) { saved = {}; }
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch(e) {} }
+
+const list = document.getElementById("list");
+let html = "";
+DATA.daiun.forEach((d, i) => {
+  const note = NOTES[d.ageFrom] || "";
+  if (d.pre) {
+    html += `<div class="daiun"><span class="age">0〜${d.ageTo}歳</span><span class="stars">十年ごとの運気が始まる前</span>${note ? `<div class="note">${note}</div>` : ""}</div>`;
+  } else {
+    html += `<div class="daiun ${d.tc ? "tc" : ""}"><span class="age">${d.ageFrom}〜${d.ageTo}歳</span><span class="kanshi">${d.kan}${d.shi}</span><span class="stars">${d.joushou}・${d.jushou}</span>`
+      + (d.tc ? ` <span class="tag t-tc">大運天中殺</span>` : "")
+      + (d.isou.length ? `<div class="isou">${isouTags(d.isou)}</div>` : "")
+      + (note ? `<div class="note">${note}</div>` : "") + `</div>`;
+  }
+  html += `<div class="timeline">`;
+  DATA.years.filter(y => y.age >= d.ageFrom && y.age <= d.ageTo).forEach(y => {
+    const now = y.y === NOW_YEAR;
+    const val = saved[y.y] !== undefined ? saved[y.y] : (PREFILL[y.y] || "");
+    html += `<div class="yr ${y.tc ? "tc" : ""} ${now ? "now" : ""}" id="y${y.y}">
+      <div class="head"><span class="y">${y.y}年</span><span class="a">${y.age === 0 ? "誕生" : y.age + "歳になる年"}</span>
+      <span class="k">${y.kan}${y.shi}</span><span class="s">${y.js}・${y.ju}</span>${now ? `<span class="now-label">いまここ</span>` : ""}</div>
+      <div class="badges">${y.tc ? `<span class="tag t-tc">天中殺</span>` : ""}${isouTags(y.isou)}</div>
+      <textarea data-y="${y.y}" rows="1" placeholder="この年にあったこと">${val.replace(/</g,"&lt;")}</textarea>
+    </div>`;
+  });
+  html += `</div>`;
+});
+list.innerHTML = html;
+
+list.addEventListener("input", e => {
+  if (e.target.tagName !== "TEXTAREA") return;
+  saved[e.target.dataset.y] = e.target.value;
+  save();
+  e.target.style.height = "auto"; e.target.style.height = e.target.scrollHeight + "px";
+});
+document.querySelectorAll("textarea").forEach(t => { if (t.value) { t.style.height = "auto"; t.style.height = t.scrollHeight + "px"; } });
+document.getElementById("toNow").onclick = () => document.getElementById("y" + NOW_YEAR).scrollIntoView({behavior:"smooth", block:"center"});
+document.getElementById("toTop").onclick = () => window.scrollTo({top:0, behavior:"smooth"});
+document.getElementById("print").onclick = () => window.print();
+</script>
+</body>
+</html>
