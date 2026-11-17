@@ -59,6 +59,10 @@
       "destination": "/clients/taki-nenpyo.html"
     },
     {
+      "source": "/taki-kanteisho",
+      "destination": "/clients/taki-kanteisho.html"
+    },
+    {
       "source": "/home-icon",
       "destination": "/home-icon.html"
     },
