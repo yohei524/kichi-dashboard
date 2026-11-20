@@ -63,6 +63,14 @@
       "destination": "/clients/taki-kanteisho.html"
     },
     {
+      "source": "/kojiro-kanteisho",
+      "destination": "/clients/kojiro-kanteisho.html"
+    },
+    {
+      "source": "/kojiro-meishikizu",
+      "destination": "/clients/kojiro-meishikizu.html"
+    },
+    {
       "source": "/home-icon",
       "destination": "/home-icon.html"
     },
