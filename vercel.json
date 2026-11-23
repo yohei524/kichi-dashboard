@@ -71,6 +71,14 @@
       "destination": "/clients/kojiro-meishikizu.html"
     },
     {
+      "source": "/miwa-kanteisho",
+      "destination": "/clients/miwa-kanteisho.html"
+    },
+    {
+      "source": "/miwa-meishikizu",
+      "destination": "/clients/miwa-meishikizu.html"
+    },
+    {
       "source": "/home-icon",
       "destination": "/home-icon.html"
     },
