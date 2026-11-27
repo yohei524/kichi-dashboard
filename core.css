@@ -222,6 +222,15 @@ header .tagline { font-size: 0.78rem; color: var(--color-brown); letter-spacing:
 .cal-cell.tenchu-day { border-left: 2px solid var(--color-water); }
 
 .cal-legend { display: flex; justify-content: center; gap: 0.75rem; font-size: 0.65rem; color: var(--color-brown); flex-wrap: wrap; margin-top: 0.5rem; }
+/* 暦の見方（凡例）：絵＋マスの色＋名前＋ひとこと（261126） */
+.cal-key { margin-top: 0.6rem; padding: 0.65rem 0.7rem; background: var(--color-cream); border-radius: 6px; color: var(--color-brown-dark); }
+.cal-key .cal-key-lead { font-size: 0.7rem; line-height: 1.7; margin: 0 0 0.45rem; }
+.cal-key ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 0.3rem 0.8rem; }
+@media (min-width: 560px) { .cal-key ul { grid-template-columns: 1fr 1fr; } }
+.cal-key li { display: flex; align-items: center; gap: 0.5rem; font-size: 0.68rem; line-height: 1.55; }
+.cal-key .ck-sw { flex: 0 0 auto; width: 1.7rem; height: 1.7rem; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; font-size: 0.85rem; border: 1px solid rgba(75,45,31,0.15); }
+.cal-key .ck-tx b { font-weight: 700; }
+.cal-key .cal-key-note { font-size: 0.64rem; line-height: 1.7; margin: 0.5rem 0 0; color: var(--color-brown); }
 .cal-month-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
 .cal-month-tab {
   flex: 1; text-align: center; padding: 0.5rem; font-size: 0.75rem;

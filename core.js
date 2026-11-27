@@ -1153,16 +1153,35 @@ function render() {
     html += '<div style="margin-top:.3rem;color:var(--color-brown)">日付をタップすると、お二人それぞれの巡りが見られます。</div>';
     html += '</div>';
   }
-  html += '<div class="cal-legend">';
-  html += '<span>🎵 律音</span>';
-  html += '<span>🔗 干合</span>';
-  html += '<span>🤝 支合</span>';
-  html += '<span>🌼 半会</span>';
-  html += '<span>💫 害</span>';
-  html += '<span>⚡ 刑</span>';
-  html += '<span>🌊 冲</span>';
-  html += '<span>🌀 天中殺</span>';
-  html += '</div>';
+  if (D && D.partner && D.partner.my) {
+    html += '<div class="cal-legend">';
+    html += '<span>🎵 律音</span>';
+    html += '<span>🔗 干合</span>';
+    html += '<span>🤝 支合</span>';
+    html += '<span>🌼 半会</span>';
+    html += '<span>💫 害</span>';
+    html += '<span>⚡ 刑</span>';
+    html += '<span>🌊 天剋地冲</span>';
+    html += '<span>🌀 天中殺</span>';
+    html += '</div>';
+  } else {
+    // 初めて見る人にも分かる凡例（絵・マスの色・ひとこと）。ひとことは位相法の「今日の一言」（ASPECT_ACTION）を短くしたもの
+    var keyRows = [
+      ['rgba(91,143,102,0.15)', '🎵', '律音', '一区切りがつきやすい日'],
+      ['rgba(58,107,71,0.10)', '🔗', '干合', '内側と深く繋がりやすい日。本音で話すのに向く'],
+      ['rgba(58,107,71,0.10)', '🤝', '支合', '人や物事と噛み合いやすい日。人に会う・相談に向く'],
+      ['rgba(143,184,150,0.18)', '🌼', '半会', '物事が広がりやすい、追い風の日'],
+      ['transparent', '💫', '害', '本音を飲み込みやすい日。言いたいことは小出しに'],
+      ['transparent', '⚡', '刑', '「やらなあかん」に追われやすい日。ペースを緩めてよい'],
+      ['rgba(196,122,64,0.15)', '🌊', '天剋地冲', '衝撃的な変化が起きやすい日。大きな判断は一呼吸置く'],
+      ['rgba(74,123,142,0.10)', '🌀', '天中殺', '新しい決断や大きな契約は避け、今あるものを整える日']
+    ];
+    html += '<div class="cal-key"><p class="cal-key-lead">マスの色と絵は、その日の特徴の目印です。日付をタップすると、詳しい読みが出ます。</p><ul>';
+    for (var ki = 0; ki < keyRows.length; ki++) {
+      html += '<li><span class="ck-sw" style="background:' + keyRows[ki][0] + '">' + keyRows[ki][1] + '</span><span class="ck-tx"><b>' + keyRows[ki][2] + '</b>　' + keyRows[ki][3] + '</span></li>';
+    }
+    html += '</ul><p class="cal-key-note">数字の下の「3段」のような表示は、天中殺サイクル（全12段階）の何段目かを示します。枠のあるマスは今日です。</p></div>';
+  }
   html += '<p class="text-xs text-center mt-2" style="color:var(--color-brown);font-size:0.65rem">日付をタップで詳細</p>';
   html += '</div>';
   if (D.partner && D.partner.my && todayF) {
